@@ -1,0 +1,24 @@
+{
+  "name": "3DE",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prisma:generate": "cd packages/shared && npx prisma generate --generator client1 --generator client2 && cd ../.. && pnpm dtos",
+    "prisma:migrate": "cd packages/shared && npx prisma migrate dev --name dev && cd ../..",
+    "prisma:studio": "cd packages/shared && npx prisma studio && cd ../..",
+    "prisma:push": "cd packages/shared && npx prisma db push && cd ../..",
+    "backend:start": "cd apps/backend && npm start -- -H 0.0.0.0 && cd ../..",
+    "backend:build": "cd apps/backend && npm run build",
+    "backend:prod": "cd apps/backend && npm run start:prod",
+    "backend:dev": "cd apps/backend && npm run start:dev",
+    "frontend:dev": "cd apps/frontend && npm run dev",
+    "dtos": "cd apps/backend && node ./generate-dtos.js && cd ../..",
+    "dev": "pnpm prisma:generate && pnpm prisma:migrate && pnpm prisma:push && pnpm backend:dev && pnpm frontend:dev"
+  },
+  "keywords": [ ],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.7.0"
+}

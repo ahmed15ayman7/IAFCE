@@ -1,0 +1,335 @@
+generator client1 {
+    provider = "prisma-client-js"
+    output   = "../../../apps/backend/generated/prisma_client"
+}
+
+generator client2 {
+    provider = "prisma-client-js"
+    output   = "../../../apps/frontend/generated/prisma_client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+    directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+// User and Authentication
+model User {
+    id            String         @id @default(cuid())
+    email         String         @unique
+    password      String
+    firstName     String
+    lastName      String
+    role          UserRole       @default(STUDENT)
+    subRole       String?
+    avatar        String?
+    createdAt     DateTime       @default(now())
+    updatedAt     DateTime       @updatedAt
+    academyId     String?
+    academy       Academy?       @relation(fields: [academyId], references: [id])
+    profile       Profile?
+    enrollments   Enrollment[]
+    achievements  Achievement[]
+    notifications Notification[]
+    messages      Message[]
+    posts         Post[]
+    groups        Group[]
+    channels      Channel[]
+    bookmarks     Bookmark[]
+    Submission    Submission[]
+    Attendance    Attendance[]
+
+    Instructor Instructor[]
+
+    Owner Owner[]
+
+    Admin Admin[]
+
+    Lesson Lesson[]
+
+    Payment Payment[]
+
+    Report Report[]
+}
+
+enum UserRole {
+    STUDENT
+    INSTRUCTOR
+    PARENT
+    ADMIN
+    ACADEMY
+}
+
+model Profile {
+    id          String  @id @default(cuid())
+    userId      String  @unique
+    user        User    @relation(fields: [userId], references: [id])
+    bio         String?
+    phone       String?
+    address     String?
+    preferences Json?
+}
+
+// Academy Management
+model Academy {
+    id          String       @id @default(cuid())
+    name        String
+    description String?
+    logo        String?
+    settings    Json?
+    users       User[]
+    courses     Course[]
+    instructors Instructor[]
+    events      Event[]
+    createdAt   DateTime     @default(now())
+    updatedAt   DateTime     @updatedAt
+}
+
+model Instructor {
+    id        String   @id @default(cuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+    academyId String
+    academy   Academy  @relation(fields: [academyId], references: [id])
+    courses   Course[]
+}
+
+// Course Management
+model Course {
+    id          String       @id @default(cuid())
+    title       String
+    description String
+    academyId   String
+    academy     Academy      @relation(fields: [academyId], references: [id])
+    lessons     Lesson[]
+    enrollments Enrollment[]
+    quizzes     Quiz[]
+    instructors Instructor[]
+    createdAt   DateTime     @default(now())
+    updatedAt   DateTime     @updatedAt
+}
+
+model Lesson {
+    id          String       @id @default(cuid())
+    title       String
+    content     String
+    videoUrl    String?
+    courseId    String
+    course      Course       @relation(fields: [courseId], references: [id])
+    files       File[]
+    quizzes     Quiz[]
+    completedBy User[]
+    createdAt   DateTime     @default(now())
+    updatedAt   DateTime     @updatedAt
+    Attendance  Attendance[]
+}
+
+model File {
+    id        String   @id @default(cuid())
+    name      String
+    url       String
+    type      String
+    lessonId  String
+    lesson    Lesson   @relation(fields: [lessonId], references: [id])
+    createdAt DateTime @default(now())
+}
+
+// Enrollment and Progress
+model Enrollment {
+    id        String   @id @default(cuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+    courseId  String
+    course    Course   @relation(fields: [courseId], references: [id])
+    progress  Float    @default(0)
+    status    String   @default("ACTIVE")
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+// Assessment and Quizzes
+model Quiz {
+    id           String       @id @default(cuid())
+    title        String
+    description  String?
+    lessonId     String
+    lesson       Lesson       @relation(fields: [lessonId], references: [id])
+    questions    Question[]
+    submissions  Submission[]
+    timeLimit    Int?
+    passingScore Int?
+    createdAt    DateTime     @default(now())
+    updatedAt    DateTime     @updatedAt
+
+    Course Course[]
+}
+
+model Question {
+    id         String   @id @default(cuid())
+    text       String
+    type       String
+    options    Json?
+    answer     Json
+    points     Int
+    isAnswered Boolean  @default(false)
+    quizId     String
+    quiz       Quiz     @relation(fields: [quizId], references: [id])
+    createdAt  DateTime @default(now())
+}
+
+model Submission {
+    id        String   @id @default(cuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+    quizId    String
+    quiz      Quiz     @relation(fields: [quizId], references: [id])
+    answers   Json
+    score     Float?
+    feedback  String?
+    passed    Boolean? @default(false)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+// Achievements and Badges
+model Achievement {
+    id        String   @id @default(cuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+    type      String
+    value     Json
+    createdAt DateTime @default(now())
+}
+
+// Notifications
+model Notification {
+    id        String   @id @default(cuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+    type      String
+    message   String
+    title     String
+    read      Boolean  @default(false)
+    createdAt DateTime @default(now())
+}
+
+// Community and Communication
+model Message {
+    id        String   @id @default(cuid())
+    senderId  String
+    sender    User     @relation(fields: [senderId], references: [id])
+    content   String
+    createdAt DateTime @default(now())
+    isRead    Boolean  @default(false)
+
+    Channel Channel[]
+}
+
+model Post {
+    id         String    @id @default(cuid())
+    authorId   String
+    author     User      @relation(fields: [authorId], references: [id])
+    content    String
+    createdAt  DateTime  @default(now())
+    likesCount Int       @default(0)
+    comments   Comment[]
+
+    Group Group[]
+}
+
+model Comment {
+    id        String   @id @default(cuid())
+    postId    String
+    post      Post     @relation(fields: [postId], references: [id])
+    content   String
+    createdAt DateTime @default(now())
+}
+
+model Group {
+    id        String   @id @default(cuid())
+    name      String
+    members   User[]
+    adminId   String
+    posts     Post[]
+    admin     Admin    @relation(fields: [adminId], references: [id])
+    createdAt DateTime @default(now())
+}
+
+model Admin {
+    id        String   @id @default(cuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+    createdAt DateTime @default(now())
+
+    Group Group[]
+}
+
+model Channel {
+    id        String    @id @default(cuid())
+    name      String
+    members   User[]
+    ownerId   String
+    owner     Owner     @relation(fields: [ownerId], references: [id])
+    messages  Message[]
+    createdAt DateTime  @default(now())
+}
+
+model Owner {
+    id        String   @id @default(cuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+    createdAt DateTime @default(now())
+
+    Channel Channel[]
+}
+
+model Bookmark {
+    id        String   @id @default(cuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+    type      String
+    itemId    String
+    createdAt DateTime @default(now())
+}
+
+// Events and Calendar
+model Event {
+    id          String   @id @default(cuid())
+    title       String
+    description String?
+    startTime   DateTime
+    endTime     DateTime
+    academyId   String
+    academy     Academy  @relation(fields: [academyId], references: [id])
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+// Attendance Tracking
+model Attendance {
+    id        String   @id @default(cuid())
+    studentId String
+    student   User     @relation(fields: [studentId], references: [id])
+    lessonId  String
+    lesson    Lesson   @relation(fields: [lessonId], references: [id])
+    status    String // PRESENT, ABSENT, LATE
+    method    String // FACE_ID, QR_CODE
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Payment {
+    id        String   @id @default(cuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+    amount    Float
+    createdAt DateTime @default(now())
+}
+
+model Report {
+    id        String   @id @default(cuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+    createdAt DateTime @default(now())
+}

@@ -1,0 +1,21 @@
+{
+    "name": "@3de/shared",
+    "version": "1.0.0",
+    "private": true,
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc -w",
+        "clean": "rm -rf dist"
+    },
+    "dependencies": {
+        "@prisma/client": "^5.10.0",
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.19",
+        "prisma": "^5.10.0",
+        "typescript": "^5.3.3"
+    }
+}
