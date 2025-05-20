@@ -404,7 +404,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../../packages/shared/.env"
   },
   "relativePath": "../../../../packages/shared/prisma",
