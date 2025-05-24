@@ -12,7 +12,8 @@ export class UsersService {
         return this.prisma.user.create({
             data: {
                 email: data.email,
-                password: await bcrypt.hash(data.password, 10),
+                // password: await bcrypt.hash(data.password, 10),
+                password: data.password,
                 firstName: data.firstName,
                 lastName: data.lastName,
                 role: data.role,
@@ -61,6 +62,7 @@ export class UsersService {
     }
 
     async findByEmail(email: string) {
+        console.log(email);
         return this.prisma.user.findUnique({
             where: { email },
             include: {

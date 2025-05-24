@@ -138,6 +138,31 @@ export type Payment = $Result.DefaultSelection<Prisma.$PaymentPayload>
  * 
  */
 export type Report = $Result.DefaultSelection<Prisma.$ReportPayload>
+/**
+ * Model Badge
+ * 
+ */
+export type Badge = $Result.DefaultSelection<Prisma.$BadgePayload>
+/**
+ * Model Certificate
+ * 
+ */
+export type Certificate = $Result.DefaultSelection<Prisma.$CertificatePayload>
+/**
+ * Model Community
+ * 
+ */
+export type Community = $Result.DefaultSelection<Prisma.$CommunityPayload>
+/**
+ * Model Discussion
+ * 
+ */
+export type Discussion = $Result.DefaultSelection<Prisma.$DiscussionPayload>
+/**
+ * Model LiveRoom
+ * 
+ */
+export type LiveRoom = $Result.DefaultSelection<Prisma.$LiveRoomPayload>
 
 /**
  * Enums
@@ -531,6 +556,56 @@ export class PrismaClient<
     * ```
     */
   get report(): Prisma.ReportDelegate<ExtArgs>;
+
+  /**
+   * `prisma.badge`: Exposes CRUD operations for the **Badge** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Badges
+    * const badges = await prisma.badge.findMany()
+    * ```
+    */
+  get badge(): Prisma.BadgeDelegate<ExtArgs>;
+
+  /**
+   * `prisma.certificate`: Exposes CRUD operations for the **Certificate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Certificates
+    * const certificates = await prisma.certificate.findMany()
+    * ```
+    */
+  get certificate(): Prisma.CertificateDelegate<ExtArgs>;
+
+  /**
+   * `prisma.community`: Exposes CRUD operations for the **Community** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Communities
+    * const communities = await prisma.community.findMany()
+    * ```
+    */
+  get community(): Prisma.CommunityDelegate<ExtArgs>;
+
+  /**
+   * `prisma.discussion`: Exposes CRUD operations for the **Discussion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Discussions
+    * const discussions = await prisma.discussion.findMany()
+    * ```
+    */
+  get discussion(): Prisma.DiscussionDelegate<ExtArgs>;
+
+  /**
+   * `prisma.liveRoom`: Exposes CRUD operations for the **LiveRoom** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LiveRooms
+    * const liveRooms = await prisma.liveRoom.findMany()
+    * ```
+    */
+  get liveRoom(): Prisma.LiveRoomDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -551,7 +626,6 @@ export namespace Prisma {
   export import PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
   export import PrismaClientInitializationError = runtime.PrismaClientInitializationError
   export import PrismaClientValidationError = runtime.PrismaClientValidationError
-  export import NotFoundError = runtime.NotFoundError
 
   /**
    * Re-export of sql-template-tag
@@ -590,8 +664,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.22.0
-   * Query Engine version: 605197351a3c8bdd595af2d2a9bc3025bca48ea2
+   * Prisma Client JS version: 6.1.0
+   * Query Engine version: 11f085a2012c0f4778414c8db2651556ee0ef959
    */
   export type PrismaVersion = {
     client: string
@@ -996,7 +1070,12 @@ export namespace Prisma {
     Event: 'Event',
     Attendance: 'Attendance',
     Payment: 'Payment',
-    Report: 'Report'
+    Report: 'Report',
+    Badge: 'Badge',
+    Certificate: 'Certificate',
+    Community: 'Community',
+    Discussion: 'Discussion',
+    LiveRoom: 'LiveRoom'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1012,7 +1091,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "profile" | "academy" | "instructor" | "course" | "lesson" | "file" | "enrollment" | "quiz" | "question" | "submission" | "achievement" | "notification" | "message" | "post" | "comment" | "group" | "admin" | "channel" | "owner" | "bookmark" | "event" | "attendance" | "payment" | "report"
+      modelProps: "user" | "profile" | "academy" | "instructor" | "course" | "lesson" | "file" | "enrollment" | "quiz" | "question" | "submission" | "achievement" | "notification" | "message" | "post" | "comment" | "group" | "admin" | "channel" | "owner" | "bookmark" | "event" | "attendance" | "payment" | "report" | "badge" | "certificate" | "community" | "discussion" | "liveRoom"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2766,6 +2845,356 @@ export namespace Prisma {
           }
         }
       }
+      Badge: {
+        payload: Prisma.$BadgePayload<ExtArgs>
+        fields: Prisma.BadgeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BadgeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BadgePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BadgeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BadgePayload>
+          }
+          findFirst: {
+            args: Prisma.BadgeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BadgePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BadgeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BadgePayload>
+          }
+          findMany: {
+            args: Prisma.BadgeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BadgePayload>[]
+          }
+          create: {
+            args: Prisma.BadgeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BadgePayload>
+          }
+          createMany: {
+            args: Prisma.BadgeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BadgeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BadgePayload>[]
+          }
+          delete: {
+            args: Prisma.BadgeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BadgePayload>
+          }
+          update: {
+            args: Prisma.BadgeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BadgePayload>
+          }
+          deleteMany: {
+            args: Prisma.BadgeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BadgeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.BadgeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BadgePayload>
+          }
+          aggregate: {
+            args: Prisma.BadgeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBadge>
+          }
+          groupBy: {
+            args: Prisma.BadgeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BadgeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BadgeCountArgs<ExtArgs>
+            result: $Utils.Optional<BadgeCountAggregateOutputType> | number
+          }
+        }
+      }
+      Certificate: {
+        payload: Prisma.$CertificatePayload<ExtArgs>
+        fields: Prisma.CertificateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CertificateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CertificateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          findFirst: {
+            args: Prisma.CertificateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CertificateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          findMany: {
+            args: Prisma.CertificateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>[]
+          }
+          create: {
+            args: Prisma.CertificateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          createMany: {
+            args: Prisma.CertificateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CertificateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>[]
+          }
+          delete: {
+            args: Prisma.CertificateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          update: {
+            args: Prisma.CertificateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          deleteMany: {
+            args: Prisma.CertificateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CertificateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.CertificateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          aggregate: {
+            args: Prisma.CertificateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCertificate>
+          }
+          groupBy: {
+            args: Prisma.CertificateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CertificateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CertificateCountArgs<ExtArgs>
+            result: $Utils.Optional<CertificateCountAggregateOutputType> | number
+          }
+        }
+      }
+      Community: {
+        payload: Prisma.$CommunityPayload<ExtArgs>
+        fields: Prisma.CommunityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CommunityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CommunityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunityPayload>
+          }
+          findFirst: {
+            args: Prisma.CommunityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CommunityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunityPayload>
+          }
+          findMany: {
+            args: Prisma.CommunityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunityPayload>[]
+          }
+          create: {
+            args: Prisma.CommunityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunityPayload>
+          }
+          createMany: {
+            args: Prisma.CommunityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CommunityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunityPayload>[]
+          }
+          delete: {
+            args: Prisma.CommunityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunityPayload>
+          }
+          update: {
+            args: Prisma.CommunityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunityPayload>
+          }
+          deleteMany: {
+            args: Prisma.CommunityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CommunityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.CommunityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunityPayload>
+          }
+          aggregate: {
+            args: Prisma.CommunityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCommunity>
+          }
+          groupBy: {
+            args: Prisma.CommunityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CommunityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CommunityCountArgs<ExtArgs>
+            result: $Utils.Optional<CommunityCountAggregateOutputType> | number
+          }
+        }
+      }
+      Discussion: {
+        payload: Prisma.$DiscussionPayload<ExtArgs>
+        fields: Prisma.DiscussionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DiscussionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DiscussionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionPayload>
+          }
+          findFirst: {
+            args: Prisma.DiscussionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DiscussionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionPayload>
+          }
+          findMany: {
+            args: Prisma.DiscussionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionPayload>[]
+          }
+          create: {
+            args: Prisma.DiscussionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionPayload>
+          }
+          createMany: {
+            args: Prisma.DiscussionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DiscussionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionPayload>[]
+          }
+          delete: {
+            args: Prisma.DiscussionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionPayload>
+          }
+          update: {
+            args: Prisma.DiscussionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionPayload>
+          }
+          deleteMany: {
+            args: Prisma.DiscussionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DiscussionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.DiscussionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscussionPayload>
+          }
+          aggregate: {
+            args: Prisma.DiscussionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDiscussion>
+          }
+          groupBy: {
+            args: Prisma.DiscussionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DiscussionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DiscussionCountArgs<ExtArgs>
+            result: $Utils.Optional<DiscussionCountAggregateOutputType> | number
+          }
+        }
+      }
+      LiveRoom: {
+        payload: Prisma.$LiveRoomPayload<ExtArgs>
+        fields: Prisma.LiveRoomFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LiveRoomFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveRoomPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LiveRoomFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveRoomPayload>
+          }
+          findFirst: {
+            args: Prisma.LiveRoomFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveRoomPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LiveRoomFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveRoomPayload>
+          }
+          findMany: {
+            args: Prisma.LiveRoomFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveRoomPayload>[]
+          }
+          create: {
+            args: Prisma.LiveRoomCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveRoomPayload>
+          }
+          createMany: {
+            args: Prisma.LiveRoomCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LiveRoomCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveRoomPayload>[]
+          }
+          delete: {
+            args: Prisma.LiveRoomDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveRoomPayload>
+          }
+          update: {
+            args: Prisma.LiveRoomUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveRoomPayload>
+          }
+          deleteMany: {
+            args: Prisma.LiveRoomDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LiveRoomUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.LiveRoomUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveRoomPayload>
+          }
+          aggregate: {
+            args: Prisma.LiveRoomAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLiveRoom>
+          }
+          groupBy: {
+            args: Prisma.LiveRoomGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LiveRoomGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LiveRoomCountArgs<ExtArgs>
+            result: $Utils.Optional<LiveRoomCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2943,6 +3372,10 @@ export namespace Prisma {
     Lesson: number
     Payment: number
     Report: number
+    Badge: number
+    Certificate: number
+    Community: number
+    LiveRoom: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2962,6 +3395,10 @@ export namespace Prisma {
     Lesson?: boolean | UserCountOutputTypeCountLessonArgs
     Payment?: boolean | UserCountOutputTypeCountPaymentArgs
     Report?: boolean | UserCountOutputTypeCountReportArgs
+    Badge?: boolean | UserCountOutputTypeCountBadgeArgs
+    Certificate?: boolean | UserCountOutputTypeCountCertificateArgs
+    Community?: boolean | UserCountOutputTypeCountCommunityArgs
+    LiveRoom?: boolean | UserCountOutputTypeCountLiveRoomArgs
   }
 
   // Custom InputTypes
@@ -3087,6 +3524,34 @@ export namespace Prisma {
     where?: ReportWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBadgeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BadgeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCertificateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CertificateWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCommunityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommunityWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountLiveRoomArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LiveRoomWhereInput
+  }
+
 
   /**
    * Count Type AcademyCountOutputType
@@ -3186,6 +3651,7 @@ export namespace Prisma {
     enrollments: number
     quizzes: number
     instructors: number
+    liveRoom: number
   }
 
   export type CourseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3193,6 +3659,7 @@ export namespace Prisma {
     enrollments?: boolean | CourseCountOutputTypeCountEnrollmentsArgs
     quizzes?: boolean | CourseCountOutputTypeCountQuizzesArgs
     instructors?: boolean | CourseCountOutputTypeCountInstructorsArgs
+    liveRoom?: boolean | CourseCountOutputTypeCountLiveRoomArgs
   }
 
   // Custom InputTypes
@@ -3232,6 +3699,13 @@ export namespace Prisma {
    */
   export type CourseCountOutputTypeCountInstructorsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: InstructorWhereInput
+  }
+
+  /**
+   * CourseCountOutputType without action
+   */
+  export type CourseCountOutputTypeCountLiveRoomArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LiveRoomWhereInput
   }
 
 
@@ -3380,11 +3854,15 @@ export namespace Prisma {
   export type PostCountOutputType = {
     comments: number
     Group: number
+    Community: number
+    Discussion: number
   }
 
   export type PostCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comments?: boolean | PostCountOutputTypeCountCommentsArgs
     Group?: boolean | PostCountOutputTypeCountGroupArgs
+    Community?: boolean | PostCountOutputTypeCountCommunityArgs
+    Discussion?: boolean | PostCountOutputTypeCountDiscussionArgs
   }
 
   // Custom InputTypes
@@ -3412,6 +3890,20 @@ export namespace Prisma {
     where?: GroupWhereInput
   }
 
+  /**
+   * PostCountOutputType without action
+   */
+  export type PostCountOutputTypeCountCommunityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommunityWhereInput
+  }
+
+  /**
+   * PostCountOutputType without action
+   */
+  export type PostCountOutputTypeCountDiscussionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DiscussionWhereInput
+  }
+
 
   /**
    * Count Type GroupCountOutputType
@@ -3420,11 +3912,13 @@ export namespace Prisma {
   export type GroupCountOutputType = {
     members: number
     posts: number
+    Community: number
   }
 
   export type GroupCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     members?: boolean | GroupCountOutputTypeCountMembersArgs
     posts?: boolean | GroupCountOutputTypeCountPostsArgs
+    Community?: boolean | GroupCountOutputTypeCountCommunityArgs
   }
 
   // Custom InputTypes
@@ -3450,6 +3944,13 @@ export namespace Prisma {
    */
   export type GroupCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PostWhereInput
+  }
+
+  /**
+   * GroupCountOutputType without action
+   */
+  export type GroupCountOutputTypeCountCommunityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommunityWhereInput
   }
 
 
@@ -3556,6 +4057,104 @@ export namespace Prisma {
 
 
   /**
+   * Count Type CommunityCountOutputType
+   */
+
+  export type CommunityCountOutputType = {
+    groups: number
+    liveRoom: number
+    participants: number
+    posts: number
+    discussions: number
+  }
+
+  export type CommunityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    groups?: boolean | CommunityCountOutputTypeCountGroupsArgs
+    liveRoom?: boolean | CommunityCountOutputTypeCountLiveRoomArgs
+    participants?: boolean | CommunityCountOutputTypeCountParticipantsArgs
+    posts?: boolean | CommunityCountOutputTypeCountPostsArgs
+    discussions?: boolean | CommunityCountOutputTypeCountDiscussionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CommunityCountOutputType without action
+   */
+  export type CommunityCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommunityCountOutputType
+     */
+    select?: CommunityCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CommunityCountOutputType without action
+   */
+  export type CommunityCountOutputTypeCountGroupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GroupWhereInput
+  }
+
+  /**
+   * CommunityCountOutputType without action
+   */
+  export type CommunityCountOutputTypeCountLiveRoomArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LiveRoomWhereInput
+  }
+
+  /**
+   * CommunityCountOutputType without action
+   */
+  export type CommunityCountOutputTypeCountParticipantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
+
+  /**
+   * CommunityCountOutputType without action
+   */
+  export type CommunityCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PostWhereInput
+  }
+
+  /**
+   * CommunityCountOutputType without action
+   */
+  export type CommunityCountOutputTypeCountDiscussionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DiscussionWhereInput
+  }
+
+
+  /**
+   * Count Type LiveRoomCountOutputType
+   */
+
+  export type LiveRoomCountOutputType = {
+    User: number
+  }
+
+  export type LiveRoomCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | LiveRoomCountOutputTypeCountUserArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * LiveRoomCountOutputType without action
+   */
+  export type LiveRoomCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveRoomCountOutputType
+     */
+    select?: LiveRoomCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * LiveRoomCountOutputType without action
+   */
+  export type LiveRoomCountOutputTypeCountUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -3573,6 +4172,7 @@ export namespace Prisma {
     id: string | null
     email: string | null
     password: string | null
+    phone: string | null
     firstName: string | null
     lastName: string | null
     role: $Enums.UserRole | null
@@ -3587,6 +4187,7 @@ export namespace Prisma {
     id: string | null
     email: string | null
     password: string | null
+    phone: string | null
     firstName: string | null
     lastName: string | null
     role: $Enums.UserRole | null
@@ -3601,6 +4202,7 @@ export namespace Prisma {
     id: number
     email: number
     password: number
+    phone: number
     firstName: number
     lastName: number
     role: number
@@ -3617,6 +4219,7 @@ export namespace Prisma {
     id?: true
     email?: true
     password?: true
+    phone?: true
     firstName?: true
     lastName?: true
     role?: true
@@ -3631,6 +4234,7 @@ export namespace Prisma {
     id?: true
     email?: true
     password?: true
+    phone?: true
     firstName?: true
     lastName?: true
     role?: true
@@ -3645,6 +4249,7 @@ export namespace Prisma {
     id?: true
     email?: true
     password?: true
+    phone?: true
     firstName?: true
     lastName?: true
     role?: true
@@ -3732,6 +4337,7 @@ export namespace Prisma {
     id: string
     email: string
     password: string
+    phone: string | null
     firstName: string
     lastName: string
     role: $Enums.UserRole
@@ -3763,6 +4369,7 @@ export namespace Prisma {
     id?: boolean
     email?: boolean
     password?: boolean
+    phone?: boolean
     firstName?: boolean
     lastName?: boolean
     role?: boolean
@@ -3789,6 +4396,10 @@ export namespace Prisma {
     Lesson?: boolean | User$LessonArgs<ExtArgs>
     Payment?: boolean | User$PaymentArgs<ExtArgs>
     Report?: boolean | User$ReportArgs<ExtArgs>
+    Badge?: boolean | User$BadgeArgs<ExtArgs>
+    Certificate?: boolean | User$CertificateArgs<ExtArgs>
+    Community?: boolean | User$CommunityArgs<ExtArgs>
+    LiveRoom?: boolean | User$LiveRoomArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3796,6 +4407,7 @@ export namespace Prisma {
     id?: boolean
     email?: boolean
     password?: boolean
+    phone?: boolean
     firstName?: boolean
     lastName?: boolean
     role?: boolean
@@ -3811,6 +4423,7 @@ export namespace Prisma {
     id?: boolean
     email?: boolean
     password?: boolean
+    phone?: boolean
     firstName?: boolean
     lastName?: boolean
     role?: boolean
@@ -3840,6 +4453,10 @@ export namespace Prisma {
     Lesson?: boolean | User$LessonArgs<ExtArgs>
     Payment?: boolean | User$PaymentArgs<ExtArgs>
     Report?: boolean | User$ReportArgs<ExtArgs>
+    Badge?: boolean | User$BadgeArgs<ExtArgs>
+    Certificate?: boolean | User$CertificateArgs<ExtArgs>
+    Community?: boolean | User$CommunityArgs<ExtArgs>
+    LiveRoom?: boolean | User$LiveRoomArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3867,11 +4484,16 @@ export namespace Prisma {
       Lesson: Prisma.$LessonPayload<ExtArgs>[]
       Payment: Prisma.$PaymentPayload<ExtArgs>[]
       Report: Prisma.$ReportPayload<ExtArgs>[]
+      Badge: Prisma.$BadgePayload<ExtArgs>[]
+      Certificate: Prisma.$CertificatePayload<ExtArgs>[]
+      Community: Prisma.$CommunityPayload<ExtArgs>[]
+      LiveRoom: Prisma.$LiveRoomPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string
       password: string
+      phone: string | null
       firstName: string
       lastName: string
       role: $Enums.UserRole
@@ -4262,6 +4884,10 @@ export namespace Prisma {
     Lesson<T extends User$LessonArgs<ExtArgs> = {}>(args?: Subset<T, User$LessonArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "findMany"> | Null>
     Payment<T extends User$PaymentArgs<ExtArgs> = {}>(args?: Subset<T, User$PaymentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany"> | Null>
     Report<T extends User$ReportArgs<ExtArgs> = {}>(args?: Subset<T, User$ReportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany"> | Null>
+    Badge<T extends User$BadgeArgs<ExtArgs> = {}>(args?: Subset<T, User$BadgeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BadgePayload<ExtArgs>, T, "findMany"> | Null>
+    Certificate<T extends User$CertificateArgs<ExtArgs> = {}>(args?: Subset<T, User$CertificateArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findMany"> | Null>
+    Community<T extends User$CommunityArgs<ExtArgs> = {}>(args?: Subset<T, User$CommunityArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findMany"> | Null>
+    LiveRoom<T extends User$LiveRoomArgs<ExtArgs> = {}>(args?: Subset<T, User$LiveRoomArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveRoomPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4294,6 +4920,7 @@ export namespace Prisma {
     readonly id: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
+    readonly phone: FieldRef<"User", 'String'>
     readonly firstName: FieldRef<"User", 'String'>
     readonly lastName: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'UserRole'>
@@ -4967,6 +5594,86 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReportScalarFieldEnum | ReportScalarFieldEnum[]
+  }
+
+  /**
+   * User.Badge
+   */
+  export type User$BadgeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Badge
+     */
+    select?: BadgeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BadgeInclude<ExtArgs> | null
+    where?: BadgeWhereInput
+    orderBy?: BadgeOrderByWithRelationInput | BadgeOrderByWithRelationInput[]
+    cursor?: BadgeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BadgeScalarFieldEnum | BadgeScalarFieldEnum[]
+  }
+
+  /**
+   * User.Certificate
+   */
+  export type User$CertificateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    where?: CertificateWhereInput
+    orderBy?: CertificateOrderByWithRelationInput | CertificateOrderByWithRelationInput[]
+    cursor?: CertificateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CertificateScalarFieldEnum | CertificateScalarFieldEnum[]
+  }
+
+  /**
+   * User.Community
+   */
+  export type User$CommunityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Community
+     */
+    select?: CommunitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommunityInclude<ExtArgs> | null
+    where?: CommunityWhereInput
+    orderBy?: CommunityOrderByWithRelationInput | CommunityOrderByWithRelationInput[]
+    cursor?: CommunityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommunityScalarFieldEnum | CommunityScalarFieldEnum[]
+  }
+
+  /**
+   * User.LiveRoom
+   */
+  export type User$LiveRoomArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveRoom
+     */
+    select?: LiveRoomSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveRoomInclude<ExtArgs> | null
+    where?: LiveRoomWhereInput
+    orderBy?: LiveRoomOrderByWithRelationInput | LiveRoomOrderByWithRelationInput[]
+    cursor?: LiveRoomWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LiveRoomScalarFieldEnum | LiveRoomScalarFieldEnum[]
   }
 
   /**
@@ -8083,6 +8790,7 @@ export namespace Prisma {
     enrollments?: boolean | Course$enrollmentsArgs<ExtArgs>
     quizzes?: boolean | Course$quizzesArgs<ExtArgs>
     instructors?: boolean | Course$instructorsArgs<ExtArgs>
+    liveRoom?: boolean | Course$liveRoomArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
 
@@ -8111,6 +8819,7 @@ export namespace Prisma {
     enrollments?: boolean | Course$enrollmentsArgs<ExtArgs>
     quizzes?: boolean | Course$quizzesArgs<ExtArgs>
     instructors?: boolean | Course$instructorsArgs<ExtArgs>
+    liveRoom?: boolean | Course$liveRoomArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CourseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8125,6 +8834,7 @@ export namespace Prisma {
       enrollments: Prisma.$EnrollmentPayload<ExtArgs>[]
       quizzes: Prisma.$QuizPayload<ExtArgs>[]
       instructors: Prisma.$InstructorPayload<ExtArgs>[]
+      liveRoom: Prisma.$LiveRoomPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8502,6 +9212,7 @@ export namespace Prisma {
     enrollments<T extends Course$enrollmentsArgs<ExtArgs> = {}>(args?: Subset<T, Course$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnrollmentPayload<ExtArgs>, T, "findMany"> | Null>
     quizzes<T extends Course$quizzesArgs<ExtArgs> = {}>(args?: Subset<T, Course$quizzesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuizPayload<ExtArgs>, T, "findMany"> | Null>
     instructors<T extends Course$instructorsArgs<ExtArgs> = {}>(args?: Subset<T, Course$instructorsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstructorPayload<ExtArgs>, T, "findMany"> | Null>
+    liveRoom<T extends Course$liveRoomArgs<ExtArgs> = {}>(args?: Subset<T, Course$liveRoomArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveRoomPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8932,6 +9643,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: InstructorScalarFieldEnum | InstructorScalarFieldEnum[]
+  }
+
+  /**
+   * Course.liveRoom
+   */
+  export type Course$liveRoomArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveRoom
+     */
+    select?: LiveRoomSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveRoomInclude<ExtArgs> | null
+    where?: LiveRoomWhereInput
+    orderBy?: LiveRoomOrderByWithRelationInput | LiveRoomOrderByWithRelationInput[]
+    cursor?: LiveRoomWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LiveRoomScalarFieldEnum | LiveRoomScalarFieldEnum[]
   }
 
   /**
@@ -11975,6 +12706,8 @@ export namespace Prisma {
     lessonId: string | null
     timeLimit: number | null
     passingScore: number | null
+    upComing: boolean | null
+    isCompleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -11986,6 +12719,8 @@ export namespace Prisma {
     lessonId: string | null
     timeLimit: number | null
     passingScore: number | null
+    upComing: boolean | null
+    isCompleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -11997,6 +12732,8 @@ export namespace Prisma {
     lessonId: number
     timeLimit: number
     passingScore: number
+    upComing: number
+    isCompleted: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -12020,6 +12757,8 @@ export namespace Prisma {
     lessonId?: true
     timeLimit?: true
     passingScore?: true
+    upComing?: true
+    isCompleted?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -12031,6 +12770,8 @@ export namespace Prisma {
     lessonId?: true
     timeLimit?: true
     passingScore?: true
+    upComing?: true
+    isCompleted?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -12042,6 +12783,8 @@ export namespace Prisma {
     lessonId?: true
     timeLimit?: true
     passingScore?: true
+    upComing?: true
+    isCompleted?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -12140,6 +12883,8 @@ export namespace Prisma {
     lessonId: string
     timeLimit: number | null
     passingScore: number | null
+    upComing: boolean
+    isCompleted: boolean
     createdAt: Date
     updatedAt: Date
     _count: QuizCountAggregateOutputType | null
@@ -12170,6 +12915,8 @@ export namespace Prisma {
     lessonId?: boolean
     timeLimit?: boolean
     passingScore?: boolean
+    upComing?: boolean
+    isCompleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     lesson?: boolean | LessonDefaultArgs<ExtArgs>
@@ -12186,6 +12933,8 @@ export namespace Prisma {
     lessonId?: boolean
     timeLimit?: boolean
     passingScore?: boolean
+    upComing?: boolean
+    isCompleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     lesson?: boolean | LessonDefaultArgs<ExtArgs>
@@ -12198,6 +12947,8 @@ export namespace Prisma {
     lessonId?: boolean
     timeLimit?: boolean
     passingScore?: boolean
+    upComing?: boolean
+    isCompleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -12228,6 +12979,8 @@ export namespace Prisma {
       lessonId: string
       timeLimit: number | null
       passingScore: number | null
+      upComing: boolean
+      isCompleted: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["quiz"]>
@@ -12633,6 +13386,8 @@ export namespace Prisma {
     readonly lessonId: FieldRef<"Quiz", 'String'>
     readonly timeLimit: FieldRef<"Quiz", 'Int'>
     readonly passingScore: FieldRef<"Quiz", 'Int'>
+    readonly upComing: FieldRef<"Quiz", 'Boolean'>
+    readonly isCompleted: FieldRef<"Quiz", 'Boolean'>
     readonly createdAt: FieldRef<"Quiz", 'DateTime'>
     readonly updatedAt: FieldRef<"Quiz", 'DateTime'>
   }
@@ -15065,6 +15820,7 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     type: string | null
+    isNew: boolean | null
     createdAt: Date | null
   }
 
@@ -15072,6 +15828,7 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     type: string | null
+    isNew: boolean | null
     createdAt: Date | null
   }
 
@@ -15080,6 +15837,7 @@ export namespace Prisma {
     userId: number
     type: number
     value: number
+    isNew: number
     createdAt: number
     _all: number
   }
@@ -15089,6 +15847,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     type?: true
+    isNew?: true
     createdAt?: true
   }
 
@@ -15096,6 +15855,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     type?: true
+    isNew?: true
     createdAt?: true
   }
 
@@ -15104,6 +15864,7 @@ export namespace Prisma {
     userId?: true
     type?: true
     value?: true
+    isNew?: true
     createdAt?: true
     _all?: true
   }
@@ -15185,6 +15946,7 @@ export namespace Prisma {
     userId: string
     type: string
     value: JsonValue
+    isNew: boolean
     createdAt: Date
     _count: AchievementCountAggregateOutputType | null
     _min: AchievementMinAggregateOutputType | null
@@ -15210,6 +15972,7 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     value?: boolean
+    isNew?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["achievement"]>
@@ -15219,6 +15982,7 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     value?: boolean
+    isNew?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["achievement"]>
@@ -15228,6 +15992,7 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     value?: boolean
+    isNew?: boolean
     createdAt?: boolean
   }
 
@@ -15248,6 +16013,7 @@ export namespace Prisma {
       userId: string
       type: string
       value: Prisma.JsonValue
+      isNew: boolean
       createdAt: Date
     }, ExtArgs["result"]["achievement"]>
     composites: {}
@@ -15647,6 +16413,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"Achievement", 'String'>
     readonly type: FieldRef<"Achievement", 'String'>
     readonly value: FieldRef<"Achievement", 'Json'>
+    readonly isNew: FieldRef<"Achievement", 'Boolean'>
     readonly createdAt: FieldRef<"Achievement", 'DateTime'>
   }
     
@@ -17920,6 +18687,7 @@ export namespace Prisma {
     id: string | null
     authorId: string | null
     content: string | null
+    title: string | null
     createdAt: Date | null
     likesCount: number | null
   }
@@ -17928,6 +18696,7 @@ export namespace Prisma {
     id: string | null
     authorId: string | null
     content: string | null
+    title: string | null
     createdAt: Date | null
     likesCount: number | null
   }
@@ -17936,6 +18705,7 @@ export namespace Prisma {
     id: number
     authorId: number
     content: number
+    title: number
     createdAt: number
     likesCount: number
     _all: number
@@ -17954,6 +18724,7 @@ export namespace Prisma {
     id?: true
     authorId?: true
     content?: true
+    title?: true
     createdAt?: true
     likesCount?: true
   }
@@ -17962,6 +18733,7 @@ export namespace Prisma {
     id?: true
     authorId?: true
     content?: true
+    title?: true
     createdAt?: true
     likesCount?: true
   }
@@ -17970,6 +18742,7 @@ export namespace Prisma {
     id?: true
     authorId?: true
     content?: true
+    title?: true
     createdAt?: true
     likesCount?: true
     _all?: true
@@ -18065,6 +18838,7 @@ export namespace Prisma {
     id: string
     authorId: string
     content: string
+    title: string
     createdAt: Date
     likesCount: number
     _count: PostCountAggregateOutputType | null
@@ -18092,11 +18866,14 @@ export namespace Prisma {
     id?: boolean
     authorId?: boolean
     content?: boolean
+    title?: boolean
     createdAt?: boolean
     likesCount?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
     comments?: boolean | Post$commentsArgs<ExtArgs>
     Group?: boolean | Post$GroupArgs<ExtArgs>
+    Community?: boolean | Post$CommunityArgs<ExtArgs>
+    Discussion?: boolean | Post$DiscussionArgs<ExtArgs>
     _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
@@ -18104,6 +18881,7 @@ export namespace Prisma {
     id?: boolean
     authorId?: boolean
     content?: boolean
+    title?: boolean
     createdAt?: boolean
     likesCount?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -18113,6 +18891,7 @@ export namespace Prisma {
     id?: boolean
     authorId?: boolean
     content?: boolean
+    title?: boolean
     createdAt?: boolean
     likesCount?: boolean
   }
@@ -18121,6 +18900,8 @@ export namespace Prisma {
     author?: boolean | UserDefaultArgs<ExtArgs>
     comments?: boolean | Post$commentsArgs<ExtArgs>
     Group?: boolean | Post$GroupArgs<ExtArgs>
+    Community?: boolean | Post$CommunityArgs<ExtArgs>
+    Discussion?: boolean | Post$DiscussionArgs<ExtArgs>
     _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -18133,11 +18914,14 @@ export namespace Prisma {
       author: Prisma.$UserPayload<ExtArgs>
       comments: Prisma.$CommentPayload<ExtArgs>[]
       Group: Prisma.$GroupPayload<ExtArgs>[]
+      Community: Prisma.$CommunityPayload<ExtArgs>[]
+      Discussion: Prisma.$DiscussionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       authorId: string
       content: string
+      title: string
       createdAt: Date
       likesCount: number
     }, ExtArgs["result"]["post"]>
@@ -18507,6 +19291,8 @@ export namespace Prisma {
     author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     comments<T extends Post$commentsArgs<ExtArgs> = {}>(args?: Subset<T, Post$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany"> | Null>
     Group<T extends Post$GroupArgs<ExtArgs> = {}>(args?: Subset<T, Post$GroupArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "findMany"> | Null>
+    Community<T extends Post$CommunityArgs<ExtArgs> = {}>(args?: Subset<T, Post$CommunityArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findMany"> | Null>
+    Discussion<T extends Post$DiscussionArgs<ExtArgs> = {}>(args?: Subset<T, Post$DiscussionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscussionPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -18539,6 +19325,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Post", 'String'>
     readonly authorId: FieldRef<"Post", 'String'>
     readonly content: FieldRef<"Post", 'String'>
+    readonly title: FieldRef<"Post", 'String'>
     readonly createdAt: FieldRef<"Post", 'DateTime'>
     readonly likesCount: FieldRef<"Post", 'Int'>
   }
@@ -18896,6 +19683,46 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: GroupScalarFieldEnum | GroupScalarFieldEnum[]
+  }
+
+  /**
+   * Post.Community
+   */
+  export type Post$CommunityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Community
+     */
+    select?: CommunitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommunityInclude<ExtArgs> | null
+    where?: CommunityWhereInput
+    orderBy?: CommunityOrderByWithRelationInput | CommunityOrderByWithRelationInput[]
+    cursor?: CommunityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommunityScalarFieldEnum | CommunityScalarFieldEnum[]
+  }
+
+  /**
+   * Post.Discussion
+   */
+  export type Post$DiscussionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussion
+     */
+    select?: DiscussionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionInclude<ExtArgs> | null
+    where?: DiscussionWhereInput
+    orderBy?: DiscussionOrderByWithRelationInput | DiscussionOrderByWithRelationInput[]
+    cursor?: DiscussionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DiscussionScalarFieldEnum | DiscussionScalarFieldEnum[]
   }
 
   /**
@@ -19847,6 +20674,8 @@ export namespace Prisma {
   export type GroupMinAggregateOutputType = {
     id: string | null
     name: string | null
+    subject: string | null
+    image: string | null
     adminId: string | null
     createdAt: Date | null
   }
@@ -19854,6 +20683,8 @@ export namespace Prisma {
   export type GroupMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    subject: string | null
+    image: string | null
     adminId: string | null
     createdAt: Date | null
   }
@@ -19861,6 +20692,8 @@ export namespace Prisma {
   export type GroupCountAggregateOutputType = {
     id: number
     name: number
+    subject: number
+    image: number
     adminId: number
     createdAt: number
     _all: number
@@ -19870,6 +20703,8 @@ export namespace Prisma {
   export type GroupMinAggregateInputType = {
     id?: true
     name?: true
+    subject?: true
+    image?: true
     adminId?: true
     createdAt?: true
   }
@@ -19877,6 +20712,8 @@ export namespace Prisma {
   export type GroupMaxAggregateInputType = {
     id?: true
     name?: true
+    subject?: true
+    image?: true
     adminId?: true
     createdAt?: true
   }
@@ -19884,6 +20721,8 @@ export namespace Prisma {
   export type GroupCountAggregateInputType = {
     id?: true
     name?: true
+    subject?: true
+    image?: true
     adminId?: true
     createdAt?: true
     _all?: true
@@ -19964,6 +20803,8 @@ export namespace Prisma {
   export type GroupGroupByOutputType = {
     id: string
     name: string
+    subject: string
+    image: string | null
     adminId: string
     createdAt: Date
     _count: GroupCountAggregateOutputType | null
@@ -19988,17 +20829,22 @@ export namespace Prisma {
   export type GroupSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    subject?: boolean
+    image?: boolean
     adminId?: boolean
     createdAt?: boolean
     members?: boolean | Group$membersArgs<ExtArgs>
     posts?: boolean | Group$postsArgs<ExtArgs>
     admin?: boolean | AdminDefaultArgs<ExtArgs>
+    Community?: boolean | Group$CommunityArgs<ExtArgs>
     _count?: boolean | GroupCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["group"]>
 
   export type GroupSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    subject?: boolean
+    image?: boolean
     adminId?: boolean
     createdAt?: boolean
     admin?: boolean | AdminDefaultArgs<ExtArgs>
@@ -20007,6 +20853,8 @@ export namespace Prisma {
   export type GroupSelectScalar = {
     id?: boolean
     name?: boolean
+    subject?: boolean
+    image?: boolean
     adminId?: boolean
     createdAt?: boolean
   }
@@ -20015,6 +20863,7 @@ export namespace Prisma {
     members?: boolean | Group$membersArgs<ExtArgs>
     posts?: boolean | Group$postsArgs<ExtArgs>
     admin?: boolean | AdminDefaultArgs<ExtArgs>
+    Community?: boolean | Group$CommunityArgs<ExtArgs>
     _count?: boolean | GroupCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type GroupIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -20027,10 +20876,13 @@ export namespace Prisma {
       members: Prisma.$UserPayload<ExtArgs>[]
       posts: Prisma.$PostPayload<ExtArgs>[]
       admin: Prisma.$AdminPayload<ExtArgs>
+      Community: Prisma.$CommunityPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      subject: string
+      image: string | null
       adminId: string
       createdAt: Date
     }, ExtArgs["result"]["group"]>
@@ -20400,6 +21252,7 @@ export namespace Prisma {
     members<T extends Group$membersArgs<ExtArgs> = {}>(args?: Subset<T, Group$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany"> | Null>
     posts<T extends Group$postsArgs<ExtArgs> = {}>(args?: Subset<T, Group$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany"> | Null>
     admin<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    Community<T extends Group$CommunityArgs<ExtArgs> = {}>(args?: Subset<T, Group$CommunityArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -20431,6 +21284,8 @@ export namespace Prisma {
   interface GroupFieldRefs {
     readonly id: FieldRef<"Group", 'String'>
     readonly name: FieldRef<"Group", 'String'>
+    readonly subject: FieldRef<"Group", 'String'>
+    readonly image: FieldRef<"Group", 'String'>
     readonly adminId: FieldRef<"Group", 'String'>
     readonly createdAt: FieldRef<"Group", 'DateTime'>
   }
@@ -20788,6 +21643,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+  }
+
+  /**
+   * Group.Community
+   */
+  export type Group$CommunityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Community
+     */
+    select?: CommunitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommunityInclude<ExtArgs> | null
+    where?: CommunityWhereInput
+    orderBy?: CommunityOrderByWithRelationInput | CommunityOrderByWithRelationInput[]
+    cursor?: CommunityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommunityScalarFieldEnum | CommunityScalarFieldEnum[]
   }
 
   /**
@@ -28376,6 +29251,5306 @@ export namespace Prisma {
 
 
   /**
+   * Model Badge
+   */
+
+  export type AggregateBadge = {
+    _count: BadgeCountAggregateOutputType | null
+    _avg: BadgeAvgAggregateOutputType | null
+    _sum: BadgeSumAggregateOutputType | null
+    _min: BadgeMinAggregateOutputType | null
+    _max: BadgeMaxAggregateOutputType | null
+  }
+
+  export type BadgeAvgAggregateOutputType = {
+    points: number | null
+  }
+
+  export type BadgeSumAggregateOutputType = {
+    points: number | null
+  }
+
+  export type BadgeMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    title: string | null
+    description: string | null
+    image: string | null
+    points: number | null
+    type: string | null
+    earnedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type BadgeMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    title: string | null
+    description: string | null
+    image: string | null
+    points: number | null
+    type: string | null
+    earnedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type BadgeCountAggregateOutputType = {
+    id: number
+    userId: number
+    title: number
+    description: number
+    image: number
+    points: number
+    type: number
+    earnedAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type BadgeAvgAggregateInputType = {
+    points?: true
+  }
+
+  export type BadgeSumAggregateInputType = {
+    points?: true
+  }
+
+  export type BadgeMinAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    description?: true
+    image?: true
+    points?: true
+    type?: true
+    earnedAt?: true
+    createdAt?: true
+  }
+
+  export type BadgeMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    description?: true
+    image?: true
+    points?: true
+    type?: true
+    earnedAt?: true
+    createdAt?: true
+  }
+
+  export type BadgeCountAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    description?: true
+    image?: true
+    points?: true
+    type?: true
+    earnedAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type BadgeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Badge to aggregate.
+     */
+    where?: BadgeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Badges to fetch.
+     */
+    orderBy?: BadgeOrderByWithRelationInput | BadgeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BadgeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Badges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Badges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Badges
+    **/
+    _count?: true | BadgeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BadgeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BadgeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BadgeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BadgeMaxAggregateInputType
+  }
+
+  export type GetBadgeAggregateType<T extends BadgeAggregateArgs> = {
+        [P in keyof T & keyof AggregateBadge]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBadge[P]>
+      : GetScalarType<T[P], AggregateBadge[P]>
+  }
+
+
+
+
+  export type BadgeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BadgeWhereInput
+    orderBy?: BadgeOrderByWithAggregationInput | BadgeOrderByWithAggregationInput[]
+    by: BadgeScalarFieldEnum[] | BadgeScalarFieldEnum
+    having?: BadgeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BadgeCountAggregateInputType | true
+    _avg?: BadgeAvgAggregateInputType
+    _sum?: BadgeSumAggregateInputType
+    _min?: BadgeMinAggregateInputType
+    _max?: BadgeMaxAggregateInputType
+  }
+
+  export type BadgeGroupByOutputType = {
+    id: string
+    userId: string
+    title: string
+    description: string | null
+    image: string | null
+    points: number
+    type: string
+    earnedAt: Date
+    createdAt: Date
+    _count: BadgeCountAggregateOutputType | null
+    _avg: BadgeAvgAggregateOutputType | null
+    _sum: BadgeSumAggregateOutputType | null
+    _min: BadgeMinAggregateOutputType | null
+    _max: BadgeMaxAggregateOutputType | null
+  }
+
+  type GetBadgeGroupByPayload<T extends BadgeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BadgeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BadgeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BadgeGroupByOutputType[P]>
+            : GetScalarType<T[P], BadgeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BadgeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    description?: boolean
+    image?: boolean
+    points?: boolean
+    type?: boolean
+    earnedAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["badge"]>
+
+  export type BadgeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    description?: boolean
+    image?: boolean
+    points?: boolean
+    type?: boolean
+    earnedAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["badge"]>
+
+  export type BadgeSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    description?: boolean
+    image?: boolean
+    points?: boolean
+    type?: boolean
+    earnedAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type BadgeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BadgeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $BadgePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Badge"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      title: string
+      description: string | null
+      image: string | null
+      points: number
+      type: string
+      earnedAt: Date
+      createdAt: Date
+    }, ExtArgs["result"]["badge"]>
+    composites: {}
+  }
+
+  type BadgeGetPayload<S extends boolean | null | undefined | BadgeDefaultArgs> = $Result.GetResult<Prisma.$BadgePayload, S>
+
+  type BadgeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<BadgeFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: BadgeCountAggregateInputType | true
+    }
+
+  export interface BadgeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Badge'], meta: { name: 'Badge' } }
+    /**
+     * Find zero or one Badge that matches the filter.
+     * @param {BadgeFindUniqueArgs} args - Arguments to find a Badge
+     * @example
+     * // Get one Badge
+     * const badge = await prisma.badge.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BadgeFindUniqueArgs>(args: SelectSubset<T, BadgeFindUniqueArgs<ExtArgs>>): Prisma__BadgeClient<$Result.GetResult<Prisma.$BadgePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Badge that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {BadgeFindUniqueOrThrowArgs} args - Arguments to find a Badge
+     * @example
+     * // Get one Badge
+     * const badge = await prisma.badge.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BadgeFindUniqueOrThrowArgs>(args: SelectSubset<T, BadgeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BadgeClient<$Result.GetResult<Prisma.$BadgePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Badge that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BadgeFindFirstArgs} args - Arguments to find a Badge
+     * @example
+     * // Get one Badge
+     * const badge = await prisma.badge.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BadgeFindFirstArgs>(args?: SelectSubset<T, BadgeFindFirstArgs<ExtArgs>>): Prisma__BadgeClient<$Result.GetResult<Prisma.$BadgePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Badge that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BadgeFindFirstOrThrowArgs} args - Arguments to find a Badge
+     * @example
+     * // Get one Badge
+     * const badge = await prisma.badge.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BadgeFindFirstOrThrowArgs>(args?: SelectSubset<T, BadgeFindFirstOrThrowArgs<ExtArgs>>): Prisma__BadgeClient<$Result.GetResult<Prisma.$BadgePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Badges that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BadgeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Badges
+     * const badges = await prisma.badge.findMany()
+     * 
+     * // Get first 10 Badges
+     * const badges = await prisma.badge.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const badgeWithIdOnly = await prisma.badge.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BadgeFindManyArgs>(args?: SelectSubset<T, BadgeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BadgePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Badge.
+     * @param {BadgeCreateArgs} args - Arguments to create a Badge.
+     * @example
+     * // Create one Badge
+     * const Badge = await prisma.badge.create({
+     *   data: {
+     *     // ... data to create a Badge
+     *   }
+     * })
+     * 
+     */
+    create<T extends BadgeCreateArgs>(args: SelectSubset<T, BadgeCreateArgs<ExtArgs>>): Prisma__BadgeClient<$Result.GetResult<Prisma.$BadgePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Badges.
+     * @param {BadgeCreateManyArgs} args - Arguments to create many Badges.
+     * @example
+     * // Create many Badges
+     * const badge = await prisma.badge.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BadgeCreateManyArgs>(args?: SelectSubset<T, BadgeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Badges and returns the data saved in the database.
+     * @param {BadgeCreateManyAndReturnArgs} args - Arguments to create many Badges.
+     * @example
+     * // Create many Badges
+     * const badge = await prisma.badge.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Badges and only return the `id`
+     * const badgeWithIdOnly = await prisma.badge.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BadgeCreateManyAndReturnArgs>(args?: SelectSubset<T, BadgeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BadgePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Badge.
+     * @param {BadgeDeleteArgs} args - Arguments to delete one Badge.
+     * @example
+     * // Delete one Badge
+     * const Badge = await prisma.badge.delete({
+     *   where: {
+     *     // ... filter to delete one Badge
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BadgeDeleteArgs>(args: SelectSubset<T, BadgeDeleteArgs<ExtArgs>>): Prisma__BadgeClient<$Result.GetResult<Prisma.$BadgePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Badge.
+     * @param {BadgeUpdateArgs} args - Arguments to update one Badge.
+     * @example
+     * // Update one Badge
+     * const badge = await prisma.badge.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BadgeUpdateArgs>(args: SelectSubset<T, BadgeUpdateArgs<ExtArgs>>): Prisma__BadgeClient<$Result.GetResult<Prisma.$BadgePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Badges.
+     * @param {BadgeDeleteManyArgs} args - Arguments to filter Badges to delete.
+     * @example
+     * // Delete a few Badges
+     * const { count } = await prisma.badge.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BadgeDeleteManyArgs>(args?: SelectSubset<T, BadgeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Badges.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BadgeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Badges
+     * const badge = await prisma.badge.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BadgeUpdateManyArgs>(args: SelectSubset<T, BadgeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Badge.
+     * @param {BadgeUpsertArgs} args - Arguments to update or create a Badge.
+     * @example
+     * // Update or create a Badge
+     * const badge = await prisma.badge.upsert({
+     *   create: {
+     *     // ... data to create a Badge
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Badge we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BadgeUpsertArgs>(args: SelectSubset<T, BadgeUpsertArgs<ExtArgs>>): Prisma__BadgeClient<$Result.GetResult<Prisma.$BadgePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Badges.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BadgeCountArgs} args - Arguments to filter Badges to count.
+     * @example
+     * // Count the number of Badges
+     * const count = await prisma.badge.count({
+     *   where: {
+     *     // ... the filter for the Badges we want to count
+     *   }
+     * })
+    **/
+    count<T extends BadgeCountArgs>(
+      args?: Subset<T, BadgeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BadgeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Badge.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BadgeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BadgeAggregateArgs>(args: Subset<T, BadgeAggregateArgs>): Prisma.PrismaPromise<GetBadgeAggregateType<T>>
+
+    /**
+     * Group by Badge.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BadgeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BadgeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BadgeGroupByArgs['orderBy'] }
+        : { orderBy?: BadgeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BadgeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBadgeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Badge model
+   */
+  readonly fields: BadgeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Badge.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BadgeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Badge model
+   */ 
+  interface BadgeFieldRefs {
+    readonly id: FieldRef<"Badge", 'String'>
+    readonly userId: FieldRef<"Badge", 'String'>
+    readonly title: FieldRef<"Badge", 'String'>
+    readonly description: FieldRef<"Badge", 'String'>
+    readonly image: FieldRef<"Badge", 'String'>
+    readonly points: FieldRef<"Badge", 'Int'>
+    readonly type: FieldRef<"Badge", 'String'>
+    readonly earnedAt: FieldRef<"Badge", 'DateTime'>
+    readonly createdAt: FieldRef<"Badge", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Badge findUnique
+   */
+  export type BadgeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Badge
+     */
+    select?: BadgeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BadgeInclude<ExtArgs> | null
+    /**
+     * Filter, which Badge to fetch.
+     */
+    where: BadgeWhereUniqueInput
+  }
+
+  /**
+   * Badge findUniqueOrThrow
+   */
+  export type BadgeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Badge
+     */
+    select?: BadgeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BadgeInclude<ExtArgs> | null
+    /**
+     * Filter, which Badge to fetch.
+     */
+    where: BadgeWhereUniqueInput
+  }
+
+  /**
+   * Badge findFirst
+   */
+  export type BadgeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Badge
+     */
+    select?: BadgeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BadgeInclude<ExtArgs> | null
+    /**
+     * Filter, which Badge to fetch.
+     */
+    where?: BadgeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Badges to fetch.
+     */
+    orderBy?: BadgeOrderByWithRelationInput | BadgeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Badges.
+     */
+    cursor?: BadgeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Badges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Badges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Badges.
+     */
+    distinct?: BadgeScalarFieldEnum | BadgeScalarFieldEnum[]
+  }
+
+  /**
+   * Badge findFirstOrThrow
+   */
+  export type BadgeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Badge
+     */
+    select?: BadgeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BadgeInclude<ExtArgs> | null
+    /**
+     * Filter, which Badge to fetch.
+     */
+    where?: BadgeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Badges to fetch.
+     */
+    orderBy?: BadgeOrderByWithRelationInput | BadgeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Badges.
+     */
+    cursor?: BadgeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Badges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Badges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Badges.
+     */
+    distinct?: BadgeScalarFieldEnum | BadgeScalarFieldEnum[]
+  }
+
+  /**
+   * Badge findMany
+   */
+  export type BadgeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Badge
+     */
+    select?: BadgeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BadgeInclude<ExtArgs> | null
+    /**
+     * Filter, which Badges to fetch.
+     */
+    where?: BadgeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Badges to fetch.
+     */
+    orderBy?: BadgeOrderByWithRelationInput | BadgeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Badges.
+     */
+    cursor?: BadgeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Badges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Badges.
+     */
+    skip?: number
+    distinct?: BadgeScalarFieldEnum | BadgeScalarFieldEnum[]
+  }
+
+  /**
+   * Badge create
+   */
+  export type BadgeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Badge
+     */
+    select?: BadgeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BadgeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Badge.
+     */
+    data: XOR<BadgeCreateInput, BadgeUncheckedCreateInput>
+  }
+
+  /**
+   * Badge createMany
+   */
+  export type BadgeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Badges.
+     */
+    data: BadgeCreateManyInput | BadgeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Badge createManyAndReturn
+   */
+  export type BadgeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Badge
+     */
+    select?: BadgeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Badges.
+     */
+    data: BadgeCreateManyInput | BadgeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BadgeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Badge update
+   */
+  export type BadgeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Badge
+     */
+    select?: BadgeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BadgeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Badge.
+     */
+    data: XOR<BadgeUpdateInput, BadgeUncheckedUpdateInput>
+    /**
+     * Choose, which Badge to update.
+     */
+    where: BadgeWhereUniqueInput
+  }
+
+  /**
+   * Badge updateMany
+   */
+  export type BadgeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Badges.
+     */
+    data: XOR<BadgeUpdateManyMutationInput, BadgeUncheckedUpdateManyInput>
+    /**
+     * Filter which Badges to update
+     */
+    where?: BadgeWhereInput
+  }
+
+  /**
+   * Badge upsert
+   */
+  export type BadgeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Badge
+     */
+    select?: BadgeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BadgeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Badge to update in case it exists.
+     */
+    where: BadgeWhereUniqueInput
+    /**
+     * In case the Badge found by the `where` argument doesn't exist, create a new Badge with this data.
+     */
+    create: XOR<BadgeCreateInput, BadgeUncheckedCreateInput>
+    /**
+     * In case the Badge was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BadgeUpdateInput, BadgeUncheckedUpdateInput>
+  }
+
+  /**
+   * Badge delete
+   */
+  export type BadgeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Badge
+     */
+    select?: BadgeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BadgeInclude<ExtArgs> | null
+    /**
+     * Filter which Badge to delete.
+     */
+    where: BadgeWhereUniqueInput
+  }
+
+  /**
+   * Badge deleteMany
+   */
+  export type BadgeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Badges to delete
+     */
+    where?: BadgeWhereInput
+  }
+
+  /**
+   * Badge without action
+   */
+  export type BadgeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Badge
+     */
+    select?: BadgeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BadgeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Certificate
+   */
+
+  export type AggregateCertificate = {
+    _count: CertificateCountAggregateOutputType | null
+    _avg: CertificateAvgAggregateOutputType | null
+    _sum: CertificateSumAggregateOutputType | null
+    _min: CertificateMinAggregateOutputType | null
+    _max: CertificateMaxAggregateOutputType | null
+  }
+
+  export type CertificateAvgAggregateOutputType = {
+    points: number | null
+  }
+
+  export type CertificateSumAggregateOutputType = {
+    points: number | null
+  }
+
+  export type CertificateMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    address: string | null
+    phone: string | null
+    notes: string | null
+    userId: string | null
+    title: string | null
+    description: string | null
+    url: string | null
+    image: string | null
+    points: number | null
+    type: string | null
+    earnedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type CertificateMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    address: string | null
+    phone: string | null
+    notes: string | null
+    userId: string | null
+    title: string | null
+    description: string | null
+    url: string | null
+    image: string | null
+    points: number | null
+    type: string | null
+    earnedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type CertificateCountAggregateOutputType = {
+    id: number
+    name: number
+    address: number
+    phone: number
+    notes: number
+    userId: number
+    title: number
+    description: number
+    url: number
+    image: number
+    points: number
+    type: number
+    earnedAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type CertificateAvgAggregateInputType = {
+    points?: true
+  }
+
+  export type CertificateSumAggregateInputType = {
+    points?: true
+  }
+
+  export type CertificateMinAggregateInputType = {
+    id?: true
+    name?: true
+    address?: true
+    phone?: true
+    notes?: true
+    userId?: true
+    title?: true
+    description?: true
+    url?: true
+    image?: true
+    points?: true
+    type?: true
+    earnedAt?: true
+    createdAt?: true
+  }
+
+  export type CertificateMaxAggregateInputType = {
+    id?: true
+    name?: true
+    address?: true
+    phone?: true
+    notes?: true
+    userId?: true
+    title?: true
+    description?: true
+    url?: true
+    image?: true
+    points?: true
+    type?: true
+    earnedAt?: true
+    createdAt?: true
+  }
+
+  export type CertificateCountAggregateInputType = {
+    id?: true
+    name?: true
+    address?: true
+    phone?: true
+    notes?: true
+    userId?: true
+    title?: true
+    description?: true
+    url?: true
+    image?: true
+    points?: true
+    type?: true
+    earnedAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type CertificateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Certificate to aggregate.
+     */
+    where?: CertificateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Certificates to fetch.
+     */
+    orderBy?: CertificateOrderByWithRelationInput | CertificateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CertificateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Certificates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Certificates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Certificates
+    **/
+    _count?: true | CertificateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CertificateAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CertificateSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CertificateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CertificateMaxAggregateInputType
+  }
+
+  export type GetCertificateAggregateType<T extends CertificateAggregateArgs> = {
+        [P in keyof T & keyof AggregateCertificate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCertificate[P]>
+      : GetScalarType<T[P], AggregateCertificate[P]>
+  }
+
+
+
+
+  export type CertificateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CertificateWhereInput
+    orderBy?: CertificateOrderByWithAggregationInput | CertificateOrderByWithAggregationInput[]
+    by: CertificateScalarFieldEnum[] | CertificateScalarFieldEnum
+    having?: CertificateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CertificateCountAggregateInputType | true
+    _avg?: CertificateAvgAggregateInputType
+    _sum?: CertificateSumAggregateInputType
+    _min?: CertificateMinAggregateInputType
+    _max?: CertificateMaxAggregateInputType
+  }
+
+  export type CertificateGroupByOutputType = {
+    id: string
+    name: string
+    address: string
+    phone: string
+    notes: string
+    userId: string
+    title: string
+    description: string | null
+    url: string | null
+    image: string | null
+    points: number
+    type: string
+    earnedAt: Date
+    createdAt: Date
+    _count: CertificateCountAggregateOutputType | null
+    _avg: CertificateAvgAggregateOutputType | null
+    _sum: CertificateSumAggregateOutputType | null
+    _min: CertificateMinAggregateOutputType | null
+    _max: CertificateMaxAggregateOutputType | null
+  }
+
+  type GetCertificateGroupByPayload<T extends CertificateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CertificateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CertificateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CertificateGroupByOutputType[P]>
+            : GetScalarType<T[P], CertificateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CertificateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    address?: boolean
+    phone?: boolean
+    notes?: boolean
+    userId?: boolean
+    title?: boolean
+    description?: boolean
+    url?: boolean
+    image?: boolean
+    points?: boolean
+    type?: boolean
+    earnedAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["certificate"]>
+
+  export type CertificateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    address?: boolean
+    phone?: boolean
+    notes?: boolean
+    userId?: boolean
+    title?: boolean
+    description?: boolean
+    url?: boolean
+    image?: boolean
+    points?: boolean
+    type?: boolean
+    earnedAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["certificate"]>
+
+  export type CertificateSelectScalar = {
+    id?: boolean
+    name?: boolean
+    address?: boolean
+    phone?: boolean
+    notes?: boolean
+    userId?: boolean
+    title?: boolean
+    description?: boolean
+    url?: boolean
+    image?: boolean
+    points?: boolean
+    type?: boolean
+    earnedAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type CertificateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CertificateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $CertificatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Certificate"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      address: string
+      phone: string
+      notes: string
+      userId: string
+      title: string
+      description: string | null
+      url: string | null
+      image: string | null
+      points: number
+      type: string
+      earnedAt: Date
+      createdAt: Date
+    }, ExtArgs["result"]["certificate"]>
+    composites: {}
+  }
+
+  type CertificateGetPayload<S extends boolean | null | undefined | CertificateDefaultArgs> = $Result.GetResult<Prisma.$CertificatePayload, S>
+
+  type CertificateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<CertificateFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: CertificateCountAggregateInputType | true
+    }
+
+  export interface CertificateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Certificate'], meta: { name: 'Certificate' } }
+    /**
+     * Find zero or one Certificate that matches the filter.
+     * @param {CertificateFindUniqueArgs} args - Arguments to find a Certificate
+     * @example
+     * // Get one Certificate
+     * const certificate = await prisma.certificate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CertificateFindUniqueArgs>(args: SelectSubset<T, CertificateFindUniqueArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Certificate that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {CertificateFindUniqueOrThrowArgs} args - Arguments to find a Certificate
+     * @example
+     * // Get one Certificate
+     * const certificate = await prisma.certificate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CertificateFindUniqueOrThrowArgs>(args: SelectSubset<T, CertificateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Certificate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateFindFirstArgs} args - Arguments to find a Certificate
+     * @example
+     * // Get one Certificate
+     * const certificate = await prisma.certificate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CertificateFindFirstArgs>(args?: SelectSubset<T, CertificateFindFirstArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Certificate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateFindFirstOrThrowArgs} args - Arguments to find a Certificate
+     * @example
+     * // Get one Certificate
+     * const certificate = await prisma.certificate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CertificateFindFirstOrThrowArgs>(args?: SelectSubset<T, CertificateFindFirstOrThrowArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Certificates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Certificates
+     * const certificates = await prisma.certificate.findMany()
+     * 
+     * // Get first 10 Certificates
+     * const certificates = await prisma.certificate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const certificateWithIdOnly = await prisma.certificate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CertificateFindManyArgs>(args?: SelectSubset<T, CertificateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Certificate.
+     * @param {CertificateCreateArgs} args - Arguments to create a Certificate.
+     * @example
+     * // Create one Certificate
+     * const Certificate = await prisma.certificate.create({
+     *   data: {
+     *     // ... data to create a Certificate
+     *   }
+     * })
+     * 
+     */
+    create<T extends CertificateCreateArgs>(args: SelectSubset<T, CertificateCreateArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Certificates.
+     * @param {CertificateCreateManyArgs} args - Arguments to create many Certificates.
+     * @example
+     * // Create many Certificates
+     * const certificate = await prisma.certificate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CertificateCreateManyArgs>(args?: SelectSubset<T, CertificateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Certificates and returns the data saved in the database.
+     * @param {CertificateCreateManyAndReturnArgs} args - Arguments to create many Certificates.
+     * @example
+     * // Create many Certificates
+     * const certificate = await prisma.certificate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Certificates and only return the `id`
+     * const certificateWithIdOnly = await prisma.certificate.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CertificateCreateManyAndReturnArgs>(args?: SelectSubset<T, CertificateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Certificate.
+     * @param {CertificateDeleteArgs} args - Arguments to delete one Certificate.
+     * @example
+     * // Delete one Certificate
+     * const Certificate = await prisma.certificate.delete({
+     *   where: {
+     *     // ... filter to delete one Certificate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CertificateDeleteArgs>(args: SelectSubset<T, CertificateDeleteArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Certificate.
+     * @param {CertificateUpdateArgs} args - Arguments to update one Certificate.
+     * @example
+     * // Update one Certificate
+     * const certificate = await prisma.certificate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CertificateUpdateArgs>(args: SelectSubset<T, CertificateUpdateArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Certificates.
+     * @param {CertificateDeleteManyArgs} args - Arguments to filter Certificates to delete.
+     * @example
+     * // Delete a few Certificates
+     * const { count } = await prisma.certificate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CertificateDeleteManyArgs>(args?: SelectSubset<T, CertificateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Certificates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Certificates
+     * const certificate = await prisma.certificate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CertificateUpdateManyArgs>(args: SelectSubset<T, CertificateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Certificate.
+     * @param {CertificateUpsertArgs} args - Arguments to update or create a Certificate.
+     * @example
+     * // Update or create a Certificate
+     * const certificate = await prisma.certificate.upsert({
+     *   create: {
+     *     // ... data to create a Certificate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Certificate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CertificateUpsertArgs>(args: SelectSubset<T, CertificateUpsertArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Certificates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateCountArgs} args - Arguments to filter Certificates to count.
+     * @example
+     * // Count the number of Certificates
+     * const count = await prisma.certificate.count({
+     *   where: {
+     *     // ... the filter for the Certificates we want to count
+     *   }
+     * })
+    **/
+    count<T extends CertificateCountArgs>(
+      args?: Subset<T, CertificateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CertificateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Certificate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CertificateAggregateArgs>(args: Subset<T, CertificateAggregateArgs>): Prisma.PrismaPromise<GetCertificateAggregateType<T>>
+
+    /**
+     * Group by Certificate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CertificateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CertificateGroupByArgs['orderBy'] }
+        : { orderBy?: CertificateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CertificateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCertificateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Certificate model
+   */
+  readonly fields: CertificateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Certificate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CertificateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Certificate model
+   */ 
+  interface CertificateFieldRefs {
+    readonly id: FieldRef<"Certificate", 'String'>
+    readonly name: FieldRef<"Certificate", 'String'>
+    readonly address: FieldRef<"Certificate", 'String'>
+    readonly phone: FieldRef<"Certificate", 'String'>
+    readonly notes: FieldRef<"Certificate", 'String'>
+    readonly userId: FieldRef<"Certificate", 'String'>
+    readonly title: FieldRef<"Certificate", 'String'>
+    readonly description: FieldRef<"Certificate", 'String'>
+    readonly url: FieldRef<"Certificate", 'String'>
+    readonly image: FieldRef<"Certificate", 'String'>
+    readonly points: FieldRef<"Certificate", 'Int'>
+    readonly type: FieldRef<"Certificate", 'String'>
+    readonly earnedAt: FieldRef<"Certificate", 'DateTime'>
+    readonly createdAt: FieldRef<"Certificate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Certificate findUnique
+   */
+  export type CertificateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificate to fetch.
+     */
+    where: CertificateWhereUniqueInput
+  }
+
+  /**
+   * Certificate findUniqueOrThrow
+   */
+  export type CertificateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificate to fetch.
+     */
+    where: CertificateWhereUniqueInput
+  }
+
+  /**
+   * Certificate findFirst
+   */
+  export type CertificateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificate to fetch.
+     */
+    where?: CertificateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Certificates to fetch.
+     */
+    orderBy?: CertificateOrderByWithRelationInput | CertificateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Certificates.
+     */
+    cursor?: CertificateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Certificates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Certificates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Certificates.
+     */
+    distinct?: CertificateScalarFieldEnum | CertificateScalarFieldEnum[]
+  }
+
+  /**
+   * Certificate findFirstOrThrow
+   */
+  export type CertificateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificate to fetch.
+     */
+    where?: CertificateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Certificates to fetch.
+     */
+    orderBy?: CertificateOrderByWithRelationInput | CertificateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Certificates.
+     */
+    cursor?: CertificateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Certificates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Certificates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Certificates.
+     */
+    distinct?: CertificateScalarFieldEnum | CertificateScalarFieldEnum[]
+  }
+
+  /**
+   * Certificate findMany
+   */
+  export type CertificateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificates to fetch.
+     */
+    where?: CertificateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Certificates to fetch.
+     */
+    orderBy?: CertificateOrderByWithRelationInput | CertificateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Certificates.
+     */
+    cursor?: CertificateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Certificates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Certificates.
+     */
+    skip?: number
+    distinct?: CertificateScalarFieldEnum | CertificateScalarFieldEnum[]
+  }
+
+  /**
+   * Certificate create
+   */
+  export type CertificateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Certificate.
+     */
+    data: XOR<CertificateCreateInput, CertificateUncheckedCreateInput>
+  }
+
+  /**
+   * Certificate createMany
+   */
+  export type CertificateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Certificates.
+     */
+    data: CertificateCreateManyInput | CertificateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Certificate createManyAndReturn
+   */
+  export type CertificateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Certificates.
+     */
+    data: CertificateCreateManyInput | CertificateCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Certificate update
+   */
+  export type CertificateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Certificate.
+     */
+    data: XOR<CertificateUpdateInput, CertificateUncheckedUpdateInput>
+    /**
+     * Choose, which Certificate to update.
+     */
+    where: CertificateWhereUniqueInput
+  }
+
+  /**
+   * Certificate updateMany
+   */
+  export type CertificateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Certificates.
+     */
+    data: XOR<CertificateUpdateManyMutationInput, CertificateUncheckedUpdateManyInput>
+    /**
+     * Filter which Certificates to update
+     */
+    where?: CertificateWhereInput
+  }
+
+  /**
+   * Certificate upsert
+   */
+  export type CertificateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Certificate to update in case it exists.
+     */
+    where: CertificateWhereUniqueInput
+    /**
+     * In case the Certificate found by the `where` argument doesn't exist, create a new Certificate with this data.
+     */
+    create: XOR<CertificateCreateInput, CertificateUncheckedCreateInput>
+    /**
+     * In case the Certificate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CertificateUpdateInput, CertificateUncheckedUpdateInput>
+  }
+
+  /**
+   * Certificate delete
+   */
+  export type CertificateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter which Certificate to delete.
+     */
+    where: CertificateWhereUniqueInput
+  }
+
+  /**
+   * Certificate deleteMany
+   */
+  export type CertificateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Certificates to delete
+     */
+    where?: CertificateWhereInput
+  }
+
+  /**
+   * Certificate without action
+   */
+  export type CertificateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Community
+   */
+
+  export type AggregateCommunity = {
+    _count: CommunityCountAggregateOutputType | null
+    _avg: CommunityAvgAggregateOutputType | null
+    _sum: CommunitySumAggregateOutputType | null
+    _min: CommunityMinAggregateOutputType | null
+    _max: CommunityMaxAggregateOutputType | null
+  }
+
+  export type CommunityAvgAggregateOutputType = {
+    likes: number | null
+    dislikes: number | null
+    views: number | null
+  }
+
+  export type CommunitySumAggregateOutputType = {
+    likes: number | null
+    dislikes: number | null
+    views: number | null
+  }
+
+  export type CommunityMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    image: string | null
+    description: string | null
+    type: string | null
+    likes: number | null
+    dislikes: number | null
+    views: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CommunityMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    image: string | null
+    description: string | null
+    type: string | null
+    likes: number | null
+    dislikes: number | null
+    views: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CommunityCountAggregateOutputType = {
+    id: number
+    name: number
+    image: number
+    description: number
+    type: number
+    likes: number
+    dislikes: number
+    views: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CommunityAvgAggregateInputType = {
+    likes?: true
+    dislikes?: true
+    views?: true
+  }
+
+  export type CommunitySumAggregateInputType = {
+    likes?: true
+    dislikes?: true
+    views?: true
+  }
+
+  export type CommunityMinAggregateInputType = {
+    id?: true
+    name?: true
+    image?: true
+    description?: true
+    type?: true
+    likes?: true
+    dislikes?: true
+    views?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CommunityMaxAggregateInputType = {
+    id?: true
+    name?: true
+    image?: true
+    description?: true
+    type?: true
+    likes?: true
+    dislikes?: true
+    views?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CommunityCountAggregateInputType = {
+    id?: true
+    name?: true
+    image?: true
+    description?: true
+    type?: true
+    likes?: true
+    dislikes?: true
+    views?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CommunityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Community to aggregate.
+     */
+    where?: CommunityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Communities to fetch.
+     */
+    orderBy?: CommunityOrderByWithRelationInput | CommunityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CommunityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Communities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Communities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Communities
+    **/
+    _count?: true | CommunityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CommunityAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CommunitySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CommunityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CommunityMaxAggregateInputType
+  }
+
+  export type GetCommunityAggregateType<T extends CommunityAggregateArgs> = {
+        [P in keyof T & keyof AggregateCommunity]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCommunity[P]>
+      : GetScalarType<T[P], AggregateCommunity[P]>
+  }
+
+
+
+
+  export type CommunityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommunityWhereInput
+    orderBy?: CommunityOrderByWithAggregationInput | CommunityOrderByWithAggregationInput[]
+    by: CommunityScalarFieldEnum[] | CommunityScalarFieldEnum
+    having?: CommunityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CommunityCountAggregateInputType | true
+    _avg?: CommunityAvgAggregateInputType
+    _sum?: CommunitySumAggregateInputType
+    _min?: CommunityMinAggregateInputType
+    _max?: CommunityMaxAggregateInputType
+  }
+
+  export type CommunityGroupByOutputType = {
+    id: string
+    name: string
+    image: string | null
+    description: string | null
+    type: string
+    likes: number
+    dislikes: number
+    views: number
+    createdAt: Date
+    updatedAt: Date
+    _count: CommunityCountAggregateOutputType | null
+    _avg: CommunityAvgAggregateOutputType | null
+    _sum: CommunitySumAggregateOutputType | null
+    _min: CommunityMinAggregateOutputType | null
+    _max: CommunityMaxAggregateOutputType | null
+  }
+
+  type GetCommunityGroupByPayload<T extends CommunityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CommunityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CommunityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CommunityGroupByOutputType[P]>
+            : GetScalarType<T[P], CommunityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CommunitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    image?: boolean
+    description?: boolean
+    type?: boolean
+    likes?: boolean
+    dislikes?: boolean
+    views?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    groups?: boolean | Community$groupsArgs<ExtArgs>
+    liveRoom?: boolean | Community$liveRoomArgs<ExtArgs>
+    participants?: boolean | Community$participantsArgs<ExtArgs>
+    posts?: boolean | Community$postsArgs<ExtArgs>
+    discussions?: boolean | Community$discussionsArgs<ExtArgs>
+    _count?: boolean | CommunityCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["community"]>
+
+  export type CommunitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    image?: boolean
+    description?: boolean
+    type?: boolean
+    likes?: boolean
+    dislikes?: boolean
+    views?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["community"]>
+
+  export type CommunitySelectScalar = {
+    id?: boolean
+    name?: boolean
+    image?: boolean
+    description?: boolean
+    type?: boolean
+    likes?: boolean
+    dislikes?: boolean
+    views?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CommunityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    groups?: boolean | Community$groupsArgs<ExtArgs>
+    liveRoom?: boolean | Community$liveRoomArgs<ExtArgs>
+    participants?: boolean | Community$participantsArgs<ExtArgs>
+    posts?: boolean | Community$postsArgs<ExtArgs>
+    discussions?: boolean | Community$discussionsArgs<ExtArgs>
+    _count?: boolean | CommunityCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CommunityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $CommunityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Community"
+    objects: {
+      groups: Prisma.$GroupPayload<ExtArgs>[]
+      liveRoom: Prisma.$LiveRoomPayload<ExtArgs>[]
+      participants: Prisma.$UserPayload<ExtArgs>[]
+      posts: Prisma.$PostPayload<ExtArgs>[]
+      discussions: Prisma.$DiscussionPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      image: string | null
+      description: string | null
+      type: string
+      likes: number
+      dislikes: number
+      views: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["community"]>
+    composites: {}
+  }
+
+  type CommunityGetPayload<S extends boolean | null | undefined | CommunityDefaultArgs> = $Result.GetResult<Prisma.$CommunityPayload, S>
+
+  type CommunityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<CommunityFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: CommunityCountAggregateInputType | true
+    }
+
+  export interface CommunityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Community'], meta: { name: 'Community' } }
+    /**
+     * Find zero or one Community that matches the filter.
+     * @param {CommunityFindUniqueArgs} args - Arguments to find a Community
+     * @example
+     * // Get one Community
+     * const community = await prisma.community.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CommunityFindUniqueArgs>(args: SelectSubset<T, CommunityFindUniqueArgs<ExtArgs>>): Prisma__CommunityClient<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Community that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {CommunityFindUniqueOrThrowArgs} args - Arguments to find a Community
+     * @example
+     * // Get one Community
+     * const community = await prisma.community.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CommunityFindUniqueOrThrowArgs>(args: SelectSubset<T, CommunityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CommunityClient<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Community that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommunityFindFirstArgs} args - Arguments to find a Community
+     * @example
+     * // Get one Community
+     * const community = await prisma.community.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CommunityFindFirstArgs>(args?: SelectSubset<T, CommunityFindFirstArgs<ExtArgs>>): Prisma__CommunityClient<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Community that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommunityFindFirstOrThrowArgs} args - Arguments to find a Community
+     * @example
+     * // Get one Community
+     * const community = await prisma.community.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CommunityFindFirstOrThrowArgs>(args?: SelectSubset<T, CommunityFindFirstOrThrowArgs<ExtArgs>>): Prisma__CommunityClient<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Communities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommunityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Communities
+     * const communities = await prisma.community.findMany()
+     * 
+     * // Get first 10 Communities
+     * const communities = await prisma.community.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const communityWithIdOnly = await prisma.community.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CommunityFindManyArgs>(args?: SelectSubset<T, CommunityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Community.
+     * @param {CommunityCreateArgs} args - Arguments to create a Community.
+     * @example
+     * // Create one Community
+     * const Community = await prisma.community.create({
+     *   data: {
+     *     // ... data to create a Community
+     *   }
+     * })
+     * 
+     */
+    create<T extends CommunityCreateArgs>(args: SelectSubset<T, CommunityCreateArgs<ExtArgs>>): Prisma__CommunityClient<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Communities.
+     * @param {CommunityCreateManyArgs} args - Arguments to create many Communities.
+     * @example
+     * // Create many Communities
+     * const community = await prisma.community.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CommunityCreateManyArgs>(args?: SelectSubset<T, CommunityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Communities and returns the data saved in the database.
+     * @param {CommunityCreateManyAndReturnArgs} args - Arguments to create many Communities.
+     * @example
+     * // Create many Communities
+     * const community = await prisma.community.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Communities and only return the `id`
+     * const communityWithIdOnly = await prisma.community.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CommunityCreateManyAndReturnArgs>(args?: SelectSubset<T, CommunityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Community.
+     * @param {CommunityDeleteArgs} args - Arguments to delete one Community.
+     * @example
+     * // Delete one Community
+     * const Community = await prisma.community.delete({
+     *   where: {
+     *     // ... filter to delete one Community
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CommunityDeleteArgs>(args: SelectSubset<T, CommunityDeleteArgs<ExtArgs>>): Prisma__CommunityClient<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Community.
+     * @param {CommunityUpdateArgs} args - Arguments to update one Community.
+     * @example
+     * // Update one Community
+     * const community = await prisma.community.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CommunityUpdateArgs>(args: SelectSubset<T, CommunityUpdateArgs<ExtArgs>>): Prisma__CommunityClient<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Communities.
+     * @param {CommunityDeleteManyArgs} args - Arguments to filter Communities to delete.
+     * @example
+     * // Delete a few Communities
+     * const { count } = await prisma.community.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CommunityDeleteManyArgs>(args?: SelectSubset<T, CommunityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Communities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommunityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Communities
+     * const community = await prisma.community.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CommunityUpdateManyArgs>(args: SelectSubset<T, CommunityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Community.
+     * @param {CommunityUpsertArgs} args - Arguments to update or create a Community.
+     * @example
+     * // Update or create a Community
+     * const community = await prisma.community.upsert({
+     *   create: {
+     *     // ... data to create a Community
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Community we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CommunityUpsertArgs>(args: SelectSubset<T, CommunityUpsertArgs<ExtArgs>>): Prisma__CommunityClient<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Communities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommunityCountArgs} args - Arguments to filter Communities to count.
+     * @example
+     * // Count the number of Communities
+     * const count = await prisma.community.count({
+     *   where: {
+     *     // ... the filter for the Communities we want to count
+     *   }
+     * })
+    **/
+    count<T extends CommunityCountArgs>(
+      args?: Subset<T, CommunityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CommunityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Community.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommunityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CommunityAggregateArgs>(args: Subset<T, CommunityAggregateArgs>): Prisma.PrismaPromise<GetCommunityAggregateType<T>>
+
+    /**
+     * Group by Community.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommunityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CommunityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CommunityGroupByArgs['orderBy'] }
+        : { orderBy?: CommunityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CommunityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCommunityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Community model
+   */
+  readonly fields: CommunityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Community.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CommunityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    groups<T extends Community$groupsArgs<ExtArgs> = {}>(args?: Subset<T, Community$groupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "findMany"> | Null>
+    liveRoom<T extends Community$liveRoomArgs<ExtArgs> = {}>(args?: Subset<T, Community$liveRoomArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveRoomPayload<ExtArgs>, T, "findMany"> | Null>
+    participants<T extends Community$participantsArgs<ExtArgs> = {}>(args?: Subset<T, Community$participantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany"> | Null>
+    posts<T extends Community$postsArgs<ExtArgs> = {}>(args?: Subset<T, Community$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany"> | Null>
+    discussions<T extends Community$discussionsArgs<ExtArgs> = {}>(args?: Subset<T, Community$discussionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscussionPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Community model
+   */ 
+  interface CommunityFieldRefs {
+    readonly id: FieldRef<"Community", 'String'>
+    readonly name: FieldRef<"Community", 'String'>
+    readonly image: FieldRef<"Community", 'String'>
+    readonly description: FieldRef<"Community", 'String'>
+    readonly type: FieldRef<"Community", 'String'>
+    readonly likes: FieldRef<"Community", 'Int'>
+    readonly dislikes: FieldRef<"Community", 'Int'>
+    readonly views: FieldRef<"Community", 'Int'>
+    readonly createdAt: FieldRef<"Community", 'DateTime'>
+    readonly updatedAt: FieldRef<"Community", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Community findUnique
+   */
+  export type CommunityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Community
+     */
+    select?: CommunitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommunityInclude<ExtArgs> | null
+    /**
+     * Filter, which Community to fetch.
+     */
+    where: CommunityWhereUniqueInput
+  }
+
+  /**
+   * Community findUniqueOrThrow
+   */
+  export type CommunityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Community
+     */
+    select?: CommunitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommunityInclude<ExtArgs> | null
+    /**
+     * Filter, which Community to fetch.
+     */
+    where: CommunityWhereUniqueInput
+  }
+
+  /**
+   * Community findFirst
+   */
+  export type CommunityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Community
+     */
+    select?: CommunitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommunityInclude<ExtArgs> | null
+    /**
+     * Filter, which Community to fetch.
+     */
+    where?: CommunityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Communities to fetch.
+     */
+    orderBy?: CommunityOrderByWithRelationInput | CommunityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Communities.
+     */
+    cursor?: CommunityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Communities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Communities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Communities.
+     */
+    distinct?: CommunityScalarFieldEnum | CommunityScalarFieldEnum[]
+  }
+
+  /**
+   * Community findFirstOrThrow
+   */
+  export type CommunityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Community
+     */
+    select?: CommunitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommunityInclude<ExtArgs> | null
+    /**
+     * Filter, which Community to fetch.
+     */
+    where?: CommunityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Communities to fetch.
+     */
+    orderBy?: CommunityOrderByWithRelationInput | CommunityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Communities.
+     */
+    cursor?: CommunityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Communities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Communities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Communities.
+     */
+    distinct?: CommunityScalarFieldEnum | CommunityScalarFieldEnum[]
+  }
+
+  /**
+   * Community findMany
+   */
+  export type CommunityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Community
+     */
+    select?: CommunitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommunityInclude<ExtArgs> | null
+    /**
+     * Filter, which Communities to fetch.
+     */
+    where?: CommunityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Communities to fetch.
+     */
+    orderBy?: CommunityOrderByWithRelationInput | CommunityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Communities.
+     */
+    cursor?: CommunityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Communities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Communities.
+     */
+    skip?: number
+    distinct?: CommunityScalarFieldEnum | CommunityScalarFieldEnum[]
+  }
+
+  /**
+   * Community create
+   */
+  export type CommunityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Community
+     */
+    select?: CommunitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommunityInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Community.
+     */
+    data: XOR<CommunityCreateInput, CommunityUncheckedCreateInput>
+  }
+
+  /**
+   * Community createMany
+   */
+  export type CommunityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Communities.
+     */
+    data: CommunityCreateManyInput | CommunityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Community createManyAndReturn
+   */
+  export type CommunityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Community
+     */
+    select?: CommunitySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Communities.
+     */
+    data: CommunityCreateManyInput | CommunityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Community update
+   */
+  export type CommunityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Community
+     */
+    select?: CommunitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommunityInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Community.
+     */
+    data: XOR<CommunityUpdateInput, CommunityUncheckedUpdateInput>
+    /**
+     * Choose, which Community to update.
+     */
+    where: CommunityWhereUniqueInput
+  }
+
+  /**
+   * Community updateMany
+   */
+  export type CommunityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Communities.
+     */
+    data: XOR<CommunityUpdateManyMutationInput, CommunityUncheckedUpdateManyInput>
+    /**
+     * Filter which Communities to update
+     */
+    where?: CommunityWhereInput
+  }
+
+  /**
+   * Community upsert
+   */
+  export type CommunityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Community
+     */
+    select?: CommunitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommunityInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Community to update in case it exists.
+     */
+    where: CommunityWhereUniqueInput
+    /**
+     * In case the Community found by the `where` argument doesn't exist, create a new Community with this data.
+     */
+    create: XOR<CommunityCreateInput, CommunityUncheckedCreateInput>
+    /**
+     * In case the Community was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CommunityUpdateInput, CommunityUncheckedUpdateInput>
+  }
+
+  /**
+   * Community delete
+   */
+  export type CommunityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Community
+     */
+    select?: CommunitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommunityInclude<ExtArgs> | null
+    /**
+     * Filter which Community to delete.
+     */
+    where: CommunityWhereUniqueInput
+  }
+
+  /**
+   * Community deleteMany
+   */
+  export type CommunityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Communities to delete
+     */
+    where?: CommunityWhereInput
+  }
+
+  /**
+   * Community.groups
+   */
+  export type Community$groupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Group
+     */
+    select?: GroupSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GroupInclude<ExtArgs> | null
+    where?: GroupWhereInput
+    orderBy?: GroupOrderByWithRelationInput | GroupOrderByWithRelationInput[]
+    cursor?: GroupWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GroupScalarFieldEnum | GroupScalarFieldEnum[]
+  }
+
+  /**
+   * Community.liveRoom
+   */
+  export type Community$liveRoomArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveRoom
+     */
+    select?: LiveRoomSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveRoomInclude<ExtArgs> | null
+    where?: LiveRoomWhereInput
+    orderBy?: LiveRoomOrderByWithRelationInput | LiveRoomOrderByWithRelationInput[]
+    cursor?: LiveRoomWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LiveRoomScalarFieldEnum | LiveRoomScalarFieldEnum[]
+  }
+
+  /**
+   * Community.participants
+   */
+  export type Community$participantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * Community.posts
+   */
+  export type Community$postsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
+    where?: PostWhereInput
+    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
+    cursor?: PostWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+  }
+
+  /**
+   * Community.discussions
+   */
+  export type Community$discussionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussion
+     */
+    select?: DiscussionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionInclude<ExtArgs> | null
+    where?: DiscussionWhereInput
+    orderBy?: DiscussionOrderByWithRelationInput | DiscussionOrderByWithRelationInput[]
+    cursor?: DiscussionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DiscussionScalarFieldEnum | DiscussionScalarFieldEnum[]
+  }
+
+  /**
+   * Community without action
+   */
+  export type CommunityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Community
+     */
+    select?: CommunitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommunityInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Discussion
+   */
+
+  export type AggregateDiscussion = {
+    _count: DiscussionCountAggregateOutputType | null
+    _min: DiscussionMinAggregateOutputType | null
+    _max: DiscussionMaxAggregateOutputType | null
+  }
+
+  export type DiscussionMinAggregateOutputType = {
+    id: string | null
+    communityId: string | null
+    postId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DiscussionMaxAggregateOutputType = {
+    id: string | null
+    communityId: string | null
+    postId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DiscussionCountAggregateOutputType = {
+    id: number
+    communityId: number
+    postId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DiscussionMinAggregateInputType = {
+    id?: true
+    communityId?: true
+    postId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DiscussionMaxAggregateInputType = {
+    id?: true
+    communityId?: true
+    postId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DiscussionCountAggregateInputType = {
+    id?: true
+    communityId?: true
+    postId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DiscussionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Discussion to aggregate.
+     */
+    where?: DiscussionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Discussions to fetch.
+     */
+    orderBy?: DiscussionOrderByWithRelationInput | DiscussionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DiscussionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Discussions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Discussions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Discussions
+    **/
+    _count?: true | DiscussionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DiscussionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DiscussionMaxAggregateInputType
+  }
+
+  export type GetDiscussionAggregateType<T extends DiscussionAggregateArgs> = {
+        [P in keyof T & keyof AggregateDiscussion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDiscussion[P]>
+      : GetScalarType<T[P], AggregateDiscussion[P]>
+  }
+
+
+
+
+  export type DiscussionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DiscussionWhereInput
+    orderBy?: DiscussionOrderByWithAggregationInput | DiscussionOrderByWithAggregationInput[]
+    by: DiscussionScalarFieldEnum[] | DiscussionScalarFieldEnum
+    having?: DiscussionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DiscussionCountAggregateInputType | true
+    _min?: DiscussionMinAggregateInputType
+    _max?: DiscussionMaxAggregateInputType
+  }
+
+  export type DiscussionGroupByOutputType = {
+    id: string
+    communityId: string
+    postId: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: DiscussionCountAggregateOutputType | null
+    _min: DiscussionMinAggregateOutputType | null
+    _max: DiscussionMaxAggregateOutputType | null
+  }
+
+  type GetDiscussionGroupByPayload<T extends DiscussionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DiscussionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DiscussionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DiscussionGroupByOutputType[P]>
+            : GetScalarType<T[P], DiscussionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DiscussionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    communityId?: boolean
+    postId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    community?: boolean | CommunityDefaultArgs<ExtArgs>
+    post?: boolean | Discussion$postArgs<ExtArgs>
+  }, ExtArgs["result"]["discussion"]>
+
+  export type DiscussionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    communityId?: boolean
+    postId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    community?: boolean | CommunityDefaultArgs<ExtArgs>
+    post?: boolean | Discussion$postArgs<ExtArgs>
+  }, ExtArgs["result"]["discussion"]>
+
+  export type DiscussionSelectScalar = {
+    id?: boolean
+    communityId?: boolean
+    postId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DiscussionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    community?: boolean | CommunityDefaultArgs<ExtArgs>
+    post?: boolean | Discussion$postArgs<ExtArgs>
+  }
+  export type DiscussionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    community?: boolean | CommunityDefaultArgs<ExtArgs>
+    post?: boolean | Discussion$postArgs<ExtArgs>
+  }
+
+  export type $DiscussionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Discussion"
+    objects: {
+      community: Prisma.$CommunityPayload<ExtArgs>
+      post: Prisma.$PostPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      communityId: string
+      postId: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["discussion"]>
+    composites: {}
+  }
+
+  type DiscussionGetPayload<S extends boolean | null | undefined | DiscussionDefaultArgs> = $Result.GetResult<Prisma.$DiscussionPayload, S>
+
+  type DiscussionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<DiscussionFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: DiscussionCountAggregateInputType | true
+    }
+
+  export interface DiscussionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Discussion'], meta: { name: 'Discussion' } }
+    /**
+     * Find zero or one Discussion that matches the filter.
+     * @param {DiscussionFindUniqueArgs} args - Arguments to find a Discussion
+     * @example
+     * // Get one Discussion
+     * const discussion = await prisma.discussion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DiscussionFindUniqueArgs>(args: SelectSubset<T, DiscussionFindUniqueArgs<ExtArgs>>): Prisma__DiscussionClient<$Result.GetResult<Prisma.$DiscussionPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Discussion that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {DiscussionFindUniqueOrThrowArgs} args - Arguments to find a Discussion
+     * @example
+     * // Get one Discussion
+     * const discussion = await prisma.discussion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DiscussionFindUniqueOrThrowArgs>(args: SelectSubset<T, DiscussionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DiscussionClient<$Result.GetResult<Prisma.$DiscussionPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Discussion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscussionFindFirstArgs} args - Arguments to find a Discussion
+     * @example
+     * // Get one Discussion
+     * const discussion = await prisma.discussion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DiscussionFindFirstArgs>(args?: SelectSubset<T, DiscussionFindFirstArgs<ExtArgs>>): Prisma__DiscussionClient<$Result.GetResult<Prisma.$DiscussionPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Discussion that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscussionFindFirstOrThrowArgs} args - Arguments to find a Discussion
+     * @example
+     * // Get one Discussion
+     * const discussion = await prisma.discussion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DiscussionFindFirstOrThrowArgs>(args?: SelectSubset<T, DiscussionFindFirstOrThrowArgs<ExtArgs>>): Prisma__DiscussionClient<$Result.GetResult<Prisma.$DiscussionPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Discussions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscussionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Discussions
+     * const discussions = await prisma.discussion.findMany()
+     * 
+     * // Get first 10 Discussions
+     * const discussions = await prisma.discussion.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const discussionWithIdOnly = await prisma.discussion.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DiscussionFindManyArgs>(args?: SelectSubset<T, DiscussionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscussionPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Discussion.
+     * @param {DiscussionCreateArgs} args - Arguments to create a Discussion.
+     * @example
+     * // Create one Discussion
+     * const Discussion = await prisma.discussion.create({
+     *   data: {
+     *     // ... data to create a Discussion
+     *   }
+     * })
+     * 
+     */
+    create<T extends DiscussionCreateArgs>(args: SelectSubset<T, DiscussionCreateArgs<ExtArgs>>): Prisma__DiscussionClient<$Result.GetResult<Prisma.$DiscussionPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Discussions.
+     * @param {DiscussionCreateManyArgs} args - Arguments to create many Discussions.
+     * @example
+     * // Create many Discussions
+     * const discussion = await prisma.discussion.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DiscussionCreateManyArgs>(args?: SelectSubset<T, DiscussionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Discussions and returns the data saved in the database.
+     * @param {DiscussionCreateManyAndReturnArgs} args - Arguments to create many Discussions.
+     * @example
+     * // Create many Discussions
+     * const discussion = await prisma.discussion.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Discussions and only return the `id`
+     * const discussionWithIdOnly = await prisma.discussion.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DiscussionCreateManyAndReturnArgs>(args?: SelectSubset<T, DiscussionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscussionPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Discussion.
+     * @param {DiscussionDeleteArgs} args - Arguments to delete one Discussion.
+     * @example
+     * // Delete one Discussion
+     * const Discussion = await prisma.discussion.delete({
+     *   where: {
+     *     // ... filter to delete one Discussion
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DiscussionDeleteArgs>(args: SelectSubset<T, DiscussionDeleteArgs<ExtArgs>>): Prisma__DiscussionClient<$Result.GetResult<Prisma.$DiscussionPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Discussion.
+     * @param {DiscussionUpdateArgs} args - Arguments to update one Discussion.
+     * @example
+     * // Update one Discussion
+     * const discussion = await prisma.discussion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DiscussionUpdateArgs>(args: SelectSubset<T, DiscussionUpdateArgs<ExtArgs>>): Prisma__DiscussionClient<$Result.GetResult<Prisma.$DiscussionPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Discussions.
+     * @param {DiscussionDeleteManyArgs} args - Arguments to filter Discussions to delete.
+     * @example
+     * // Delete a few Discussions
+     * const { count } = await prisma.discussion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DiscussionDeleteManyArgs>(args?: SelectSubset<T, DiscussionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Discussions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscussionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Discussions
+     * const discussion = await prisma.discussion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DiscussionUpdateManyArgs>(args: SelectSubset<T, DiscussionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Discussion.
+     * @param {DiscussionUpsertArgs} args - Arguments to update or create a Discussion.
+     * @example
+     * // Update or create a Discussion
+     * const discussion = await prisma.discussion.upsert({
+     *   create: {
+     *     // ... data to create a Discussion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Discussion we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DiscussionUpsertArgs>(args: SelectSubset<T, DiscussionUpsertArgs<ExtArgs>>): Prisma__DiscussionClient<$Result.GetResult<Prisma.$DiscussionPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Discussions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscussionCountArgs} args - Arguments to filter Discussions to count.
+     * @example
+     * // Count the number of Discussions
+     * const count = await prisma.discussion.count({
+     *   where: {
+     *     // ... the filter for the Discussions we want to count
+     *   }
+     * })
+    **/
+    count<T extends DiscussionCountArgs>(
+      args?: Subset<T, DiscussionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DiscussionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Discussion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscussionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DiscussionAggregateArgs>(args: Subset<T, DiscussionAggregateArgs>): Prisma.PrismaPromise<GetDiscussionAggregateType<T>>
+
+    /**
+     * Group by Discussion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DiscussionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DiscussionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DiscussionGroupByArgs['orderBy'] }
+        : { orderBy?: DiscussionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DiscussionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDiscussionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Discussion model
+   */
+  readonly fields: DiscussionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Discussion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DiscussionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    community<T extends CommunityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CommunityDefaultArgs<ExtArgs>>): Prisma__CommunityClient<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    post<T extends Discussion$postArgs<ExtArgs> = {}>(args?: Subset<T, Discussion$postArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Discussion model
+   */ 
+  interface DiscussionFieldRefs {
+    readonly id: FieldRef<"Discussion", 'String'>
+    readonly communityId: FieldRef<"Discussion", 'String'>
+    readonly postId: FieldRef<"Discussion", 'String'>
+    readonly createdAt: FieldRef<"Discussion", 'DateTime'>
+    readonly updatedAt: FieldRef<"Discussion", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Discussion findUnique
+   */
+  export type DiscussionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussion
+     */
+    select?: DiscussionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionInclude<ExtArgs> | null
+    /**
+     * Filter, which Discussion to fetch.
+     */
+    where: DiscussionWhereUniqueInput
+  }
+
+  /**
+   * Discussion findUniqueOrThrow
+   */
+  export type DiscussionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussion
+     */
+    select?: DiscussionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionInclude<ExtArgs> | null
+    /**
+     * Filter, which Discussion to fetch.
+     */
+    where: DiscussionWhereUniqueInput
+  }
+
+  /**
+   * Discussion findFirst
+   */
+  export type DiscussionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussion
+     */
+    select?: DiscussionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionInclude<ExtArgs> | null
+    /**
+     * Filter, which Discussion to fetch.
+     */
+    where?: DiscussionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Discussions to fetch.
+     */
+    orderBy?: DiscussionOrderByWithRelationInput | DiscussionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Discussions.
+     */
+    cursor?: DiscussionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Discussions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Discussions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Discussions.
+     */
+    distinct?: DiscussionScalarFieldEnum | DiscussionScalarFieldEnum[]
+  }
+
+  /**
+   * Discussion findFirstOrThrow
+   */
+  export type DiscussionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussion
+     */
+    select?: DiscussionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionInclude<ExtArgs> | null
+    /**
+     * Filter, which Discussion to fetch.
+     */
+    where?: DiscussionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Discussions to fetch.
+     */
+    orderBy?: DiscussionOrderByWithRelationInput | DiscussionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Discussions.
+     */
+    cursor?: DiscussionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Discussions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Discussions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Discussions.
+     */
+    distinct?: DiscussionScalarFieldEnum | DiscussionScalarFieldEnum[]
+  }
+
+  /**
+   * Discussion findMany
+   */
+  export type DiscussionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussion
+     */
+    select?: DiscussionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionInclude<ExtArgs> | null
+    /**
+     * Filter, which Discussions to fetch.
+     */
+    where?: DiscussionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Discussions to fetch.
+     */
+    orderBy?: DiscussionOrderByWithRelationInput | DiscussionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Discussions.
+     */
+    cursor?: DiscussionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Discussions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Discussions.
+     */
+    skip?: number
+    distinct?: DiscussionScalarFieldEnum | DiscussionScalarFieldEnum[]
+  }
+
+  /**
+   * Discussion create
+   */
+  export type DiscussionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussion
+     */
+    select?: DiscussionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Discussion.
+     */
+    data: XOR<DiscussionCreateInput, DiscussionUncheckedCreateInput>
+  }
+
+  /**
+   * Discussion createMany
+   */
+  export type DiscussionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Discussions.
+     */
+    data: DiscussionCreateManyInput | DiscussionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Discussion createManyAndReturn
+   */
+  export type DiscussionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussion
+     */
+    select?: DiscussionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Discussions.
+     */
+    data: DiscussionCreateManyInput | DiscussionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Discussion update
+   */
+  export type DiscussionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussion
+     */
+    select?: DiscussionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Discussion.
+     */
+    data: XOR<DiscussionUpdateInput, DiscussionUncheckedUpdateInput>
+    /**
+     * Choose, which Discussion to update.
+     */
+    where: DiscussionWhereUniqueInput
+  }
+
+  /**
+   * Discussion updateMany
+   */
+  export type DiscussionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Discussions.
+     */
+    data: XOR<DiscussionUpdateManyMutationInput, DiscussionUncheckedUpdateManyInput>
+    /**
+     * Filter which Discussions to update
+     */
+    where?: DiscussionWhereInput
+  }
+
+  /**
+   * Discussion upsert
+   */
+  export type DiscussionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussion
+     */
+    select?: DiscussionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Discussion to update in case it exists.
+     */
+    where: DiscussionWhereUniqueInput
+    /**
+     * In case the Discussion found by the `where` argument doesn't exist, create a new Discussion with this data.
+     */
+    create: XOR<DiscussionCreateInput, DiscussionUncheckedCreateInput>
+    /**
+     * In case the Discussion was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DiscussionUpdateInput, DiscussionUncheckedUpdateInput>
+  }
+
+  /**
+   * Discussion delete
+   */
+  export type DiscussionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussion
+     */
+    select?: DiscussionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionInclude<ExtArgs> | null
+    /**
+     * Filter which Discussion to delete.
+     */
+    where: DiscussionWhereUniqueInput
+  }
+
+  /**
+   * Discussion deleteMany
+   */
+  export type DiscussionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Discussions to delete
+     */
+    where?: DiscussionWhereInput
+  }
+
+  /**
+   * Discussion.post
+   */
+  export type Discussion$postArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
+    where?: PostWhereInput
+  }
+
+  /**
+   * Discussion without action
+   */
+  export type DiscussionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussion
+     */
+    select?: DiscussionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscussionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model LiveRoom
+   */
+
+  export type AggregateLiveRoom = {
+    _count: LiveRoomCountAggregateOutputType | null
+    _avg: LiveRoomAvgAggregateOutputType | null
+    _sum: LiveRoomSumAggregateOutputType | null
+    _min: LiveRoomMinAggregateOutputType | null
+    _max: LiveRoomMaxAggregateOutputType | null
+  }
+
+  export type LiveRoomAvgAggregateOutputType = {
+    participants: number | null
+  }
+
+  export type LiveRoomSumAggregateOutputType = {
+    participants: number | null
+  }
+
+  export type LiveRoomMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    topic: string | null
+    participants: number | null
+    isLive: boolean | null
+    isActive: boolean | null
+    isPublic: boolean | null
+    isPrivate: boolean | null
+    isPasswordProtected: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    communityId: string | null
+    courseId: string | null
+  }
+
+  export type LiveRoomMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    topic: string | null
+    participants: number | null
+    isLive: boolean | null
+    isActive: boolean | null
+    isPublic: boolean | null
+    isPrivate: boolean | null
+    isPasswordProtected: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    communityId: string | null
+    courseId: string | null
+  }
+
+  export type LiveRoomCountAggregateOutputType = {
+    id: number
+    title: number
+    topic: number
+    participants: number
+    isLive: number
+    isActive: number
+    isPublic: number
+    isPrivate: number
+    isPasswordProtected: number
+    createdAt: number
+    updatedAt: number
+    communityId: number
+    courseId: number
+    _all: number
+  }
+
+
+  export type LiveRoomAvgAggregateInputType = {
+    participants?: true
+  }
+
+  export type LiveRoomSumAggregateInputType = {
+    participants?: true
+  }
+
+  export type LiveRoomMinAggregateInputType = {
+    id?: true
+    title?: true
+    topic?: true
+    participants?: true
+    isLive?: true
+    isActive?: true
+    isPublic?: true
+    isPrivate?: true
+    isPasswordProtected?: true
+    createdAt?: true
+    updatedAt?: true
+    communityId?: true
+    courseId?: true
+  }
+
+  export type LiveRoomMaxAggregateInputType = {
+    id?: true
+    title?: true
+    topic?: true
+    participants?: true
+    isLive?: true
+    isActive?: true
+    isPublic?: true
+    isPrivate?: true
+    isPasswordProtected?: true
+    createdAt?: true
+    updatedAt?: true
+    communityId?: true
+    courseId?: true
+  }
+
+  export type LiveRoomCountAggregateInputType = {
+    id?: true
+    title?: true
+    topic?: true
+    participants?: true
+    isLive?: true
+    isActive?: true
+    isPublic?: true
+    isPrivate?: true
+    isPasswordProtected?: true
+    createdAt?: true
+    updatedAt?: true
+    communityId?: true
+    courseId?: true
+    _all?: true
+  }
+
+  export type LiveRoomAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LiveRoom to aggregate.
+     */
+    where?: LiveRoomWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LiveRooms to fetch.
+     */
+    orderBy?: LiveRoomOrderByWithRelationInput | LiveRoomOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LiveRoomWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LiveRooms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LiveRooms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LiveRooms
+    **/
+    _count?: true | LiveRoomCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LiveRoomAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LiveRoomSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LiveRoomMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LiveRoomMaxAggregateInputType
+  }
+
+  export type GetLiveRoomAggregateType<T extends LiveRoomAggregateArgs> = {
+        [P in keyof T & keyof AggregateLiveRoom]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLiveRoom[P]>
+      : GetScalarType<T[P], AggregateLiveRoom[P]>
+  }
+
+
+
+
+  export type LiveRoomGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LiveRoomWhereInput
+    orderBy?: LiveRoomOrderByWithAggregationInput | LiveRoomOrderByWithAggregationInput[]
+    by: LiveRoomScalarFieldEnum[] | LiveRoomScalarFieldEnum
+    having?: LiveRoomScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LiveRoomCountAggregateInputType | true
+    _avg?: LiveRoomAvgAggregateInputType
+    _sum?: LiveRoomSumAggregateInputType
+    _min?: LiveRoomMinAggregateInputType
+    _max?: LiveRoomMaxAggregateInputType
+  }
+
+  export type LiveRoomGroupByOutputType = {
+    id: string
+    title: string
+    topic: string | null
+    participants: number
+    isLive: boolean
+    isActive: boolean
+    isPublic: boolean
+    isPrivate: boolean
+    isPasswordProtected: boolean
+    createdAt: Date
+    updatedAt: Date
+    communityId: string
+    courseId: string | null
+    _count: LiveRoomCountAggregateOutputType | null
+    _avg: LiveRoomAvgAggregateOutputType | null
+    _sum: LiveRoomSumAggregateOutputType | null
+    _min: LiveRoomMinAggregateOutputType | null
+    _max: LiveRoomMaxAggregateOutputType | null
+  }
+
+  type GetLiveRoomGroupByPayload<T extends LiveRoomGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LiveRoomGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LiveRoomGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LiveRoomGroupByOutputType[P]>
+            : GetScalarType<T[P], LiveRoomGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LiveRoomSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    topic?: boolean
+    participants?: boolean
+    isLive?: boolean
+    isActive?: boolean
+    isPublic?: boolean
+    isPrivate?: boolean
+    isPasswordProtected?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    communityId?: boolean
+    courseId?: boolean
+    community?: boolean | CommunityDefaultArgs<ExtArgs>
+    User?: boolean | LiveRoom$UserArgs<ExtArgs>
+    course?: boolean | LiveRoom$courseArgs<ExtArgs>
+    _count?: boolean | LiveRoomCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["liveRoom"]>
+
+  export type LiveRoomSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    topic?: boolean
+    participants?: boolean
+    isLive?: boolean
+    isActive?: boolean
+    isPublic?: boolean
+    isPrivate?: boolean
+    isPasswordProtected?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    communityId?: boolean
+    courseId?: boolean
+    community?: boolean | CommunityDefaultArgs<ExtArgs>
+    course?: boolean | LiveRoom$courseArgs<ExtArgs>
+  }, ExtArgs["result"]["liveRoom"]>
+
+  export type LiveRoomSelectScalar = {
+    id?: boolean
+    title?: boolean
+    topic?: boolean
+    participants?: boolean
+    isLive?: boolean
+    isActive?: boolean
+    isPublic?: boolean
+    isPrivate?: boolean
+    isPasswordProtected?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    communityId?: boolean
+    courseId?: boolean
+  }
+
+  export type LiveRoomInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    community?: boolean | CommunityDefaultArgs<ExtArgs>
+    User?: boolean | LiveRoom$UserArgs<ExtArgs>
+    course?: boolean | LiveRoom$courseArgs<ExtArgs>
+    _count?: boolean | LiveRoomCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type LiveRoomIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    community?: boolean | CommunityDefaultArgs<ExtArgs>
+    course?: boolean | LiveRoom$courseArgs<ExtArgs>
+  }
+
+  export type $LiveRoomPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LiveRoom"
+    objects: {
+      community: Prisma.$CommunityPayload<ExtArgs>
+      User: Prisma.$UserPayload<ExtArgs>[]
+      course: Prisma.$CoursePayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      topic: string | null
+      participants: number
+      isLive: boolean
+      isActive: boolean
+      isPublic: boolean
+      isPrivate: boolean
+      isPasswordProtected: boolean
+      createdAt: Date
+      updatedAt: Date
+      communityId: string
+      courseId: string | null
+    }, ExtArgs["result"]["liveRoom"]>
+    composites: {}
+  }
+
+  type LiveRoomGetPayload<S extends boolean | null | undefined | LiveRoomDefaultArgs> = $Result.GetResult<Prisma.$LiveRoomPayload, S>
+
+  type LiveRoomCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<LiveRoomFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: LiveRoomCountAggregateInputType | true
+    }
+
+  export interface LiveRoomDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LiveRoom'], meta: { name: 'LiveRoom' } }
+    /**
+     * Find zero or one LiveRoom that matches the filter.
+     * @param {LiveRoomFindUniqueArgs} args - Arguments to find a LiveRoom
+     * @example
+     * // Get one LiveRoom
+     * const liveRoom = await prisma.liveRoom.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LiveRoomFindUniqueArgs>(args: SelectSubset<T, LiveRoomFindUniqueArgs<ExtArgs>>): Prisma__LiveRoomClient<$Result.GetResult<Prisma.$LiveRoomPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one LiveRoom that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {LiveRoomFindUniqueOrThrowArgs} args - Arguments to find a LiveRoom
+     * @example
+     * // Get one LiveRoom
+     * const liveRoom = await prisma.liveRoom.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LiveRoomFindUniqueOrThrowArgs>(args: SelectSubset<T, LiveRoomFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LiveRoomClient<$Result.GetResult<Prisma.$LiveRoomPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first LiveRoom that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveRoomFindFirstArgs} args - Arguments to find a LiveRoom
+     * @example
+     * // Get one LiveRoom
+     * const liveRoom = await prisma.liveRoom.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LiveRoomFindFirstArgs>(args?: SelectSubset<T, LiveRoomFindFirstArgs<ExtArgs>>): Prisma__LiveRoomClient<$Result.GetResult<Prisma.$LiveRoomPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first LiveRoom that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveRoomFindFirstOrThrowArgs} args - Arguments to find a LiveRoom
+     * @example
+     * // Get one LiveRoom
+     * const liveRoom = await prisma.liveRoom.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LiveRoomFindFirstOrThrowArgs>(args?: SelectSubset<T, LiveRoomFindFirstOrThrowArgs<ExtArgs>>): Prisma__LiveRoomClient<$Result.GetResult<Prisma.$LiveRoomPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more LiveRooms that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveRoomFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LiveRooms
+     * const liveRooms = await prisma.liveRoom.findMany()
+     * 
+     * // Get first 10 LiveRooms
+     * const liveRooms = await prisma.liveRoom.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const liveRoomWithIdOnly = await prisma.liveRoom.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LiveRoomFindManyArgs>(args?: SelectSubset<T, LiveRoomFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveRoomPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a LiveRoom.
+     * @param {LiveRoomCreateArgs} args - Arguments to create a LiveRoom.
+     * @example
+     * // Create one LiveRoom
+     * const LiveRoom = await prisma.liveRoom.create({
+     *   data: {
+     *     // ... data to create a LiveRoom
+     *   }
+     * })
+     * 
+     */
+    create<T extends LiveRoomCreateArgs>(args: SelectSubset<T, LiveRoomCreateArgs<ExtArgs>>): Prisma__LiveRoomClient<$Result.GetResult<Prisma.$LiveRoomPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many LiveRooms.
+     * @param {LiveRoomCreateManyArgs} args - Arguments to create many LiveRooms.
+     * @example
+     * // Create many LiveRooms
+     * const liveRoom = await prisma.liveRoom.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LiveRoomCreateManyArgs>(args?: SelectSubset<T, LiveRoomCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LiveRooms and returns the data saved in the database.
+     * @param {LiveRoomCreateManyAndReturnArgs} args - Arguments to create many LiveRooms.
+     * @example
+     * // Create many LiveRooms
+     * const liveRoom = await prisma.liveRoom.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LiveRooms and only return the `id`
+     * const liveRoomWithIdOnly = await prisma.liveRoom.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LiveRoomCreateManyAndReturnArgs>(args?: SelectSubset<T, LiveRoomCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveRoomPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a LiveRoom.
+     * @param {LiveRoomDeleteArgs} args - Arguments to delete one LiveRoom.
+     * @example
+     * // Delete one LiveRoom
+     * const LiveRoom = await prisma.liveRoom.delete({
+     *   where: {
+     *     // ... filter to delete one LiveRoom
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LiveRoomDeleteArgs>(args: SelectSubset<T, LiveRoomDeleteArgs<ExtArgs>>): Prisma__LiveRoomClient<$Result.GetResult<Prisma.$LiveRoomPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one LiveRoom.
+     * @param {LiveRoomUpdateArgs} args - Arguments to update one LiveRoom.
+     * @example
+     * // Update one LiveRoom
+     * const liveRoom = await prisma.liveRoom.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LiveRoomUpdateArgs>(args: SelectSubset<T, LiveRoomUpdateArgs<ExtArgs>>): Prisma__LiveRoomClient<$Result.GetResult<Prisma.$LiveRoomPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more LiveRooms.
+     * @param {LiveRoomDeleteManyArgs} args - Arguments to filter LiveRooms to delete.
+     * @example
+     * // Delete a few LiveRooms
+     * const { count } = await prisma.liveRoom.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LiveRoomDeleteManyArgs>(args?: SelectSubset<T, LiveRoomDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LiveRooms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveRoomUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LiveRooms
+     * const liveRoom = await prisma.liveRoom.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LiveRoomUpdateManyArgs>(args: SelectSubset<T, LiveRoomUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one LiveRoom.
+     * @param {LiveRoomUpsertArgs} args - Arguments to update or create a LiveRoom.
+     * @example
+     * // Update or create a LiveRoom
+     * const liveRoom = await prisma.liveRoom.upsert({
+     *   create: {
+     *     // ... data to create a LiveRoom
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LiveRoom we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LiveRoomUpsertArgs>(args: SelectSubset<T, LiveRoomUpsertArgs<ExtArgs>>): Prisma__LiveRoomClient<$Result.GetResult<Prisma.$LiveRoomPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of LiveRooms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveRoomCountArgs} args - Arguments to filter LiveRooms to count.
+     * @example
+     * // Count the number of LiveRooms
+     * const count = await prisma.liveRoom.count({
+     *   where: {
+     *     // ... the filter for the LiveRooms we want to count
+     *   }
+     * })
+    **/
+    count<T extends LiveRoomCountArgs>(
+      args?: Subset<T, LiveRoomCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LiveRoomCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LiveRoom.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveRoomAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LiveRoomAggregateArgs>(args: Subset<T, LiveRoomAggregateArgs>): Prisma.PrismaPromise<GetLiveRoomAggregateType<T>>
+
+    /**
+     * Group by LiveRoom.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveRoomGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LiveRoomGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LiveRoomGroupByArgs['orderBy'] }
+        : { orderBy?: LiveRoomGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LiveRoomGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLiveRoomGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LiveRoom model
+   */
+  readonly fields: LiveRoomFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LiveRoom.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LiveRoomClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    community<T extends CommunityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CommunityDefaultArgs<ExtArgs>>): Prisma__CommunityClient<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    User<T extends LiveRoom$UserArgs<ExtArgs> = {}>(args?: Subset<T, LiveRoom$UserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany"> | Null>
+    course<T extends LiveRoom$courseArgs<ExtArgs> = {}>(args?: Subset<T, LiveRoom$courseArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LiveRoom model
+   */ 
+  interface LiveRoomFieldRefs {
+    readonly id: FieldRef<"LiveRoom", 'String'>
+    readonly title: FieldRef<"LiveRoom", 'String'>
+    readonly topic: FieldRef<"LiveRoom", 'String'>
+    readonly participants: FieldRef<"LiveRoom", 'Int'>
+    readonly isLive: FieldRef<"LiveRoom", 'Boolean'>
+    readonly isActive: FieldRef<"LiveRoom", 'Boolean'>
+    readonly isPublic: FieldRef<"LiveRoom", 'Boolean'>
+    readonly isPrivate: FieldRef<"LiveRoom", 'Boolean'>
+    readonly isPasswordProtected: FieldRef<"LiveRoom", 'Boolean'>
+    readonly createdAt: FieldRef<"LiveRoom", 'DateTime'>
+    readonly updatedAt: FieldRef<"LiveRoom", 'DateTime'>
+    readonly communityId: FieldRef<"LiveRoom", 'String'>
+    readonly courseId: FieldRef<"LiveRoom", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LiveRoom findUnique
+   */
+  export type LiveRoomFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveRoom
+     */
+    select?: LiveRoomSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveRoomInclude<ExtArgs> | null
+    /**
+     * Filter, which LiveRoom to fetch.
+     */
+    where: LiveRoomWhereUniqueInput
+  }
+
+  /**
+   * LiveRoom findUniqueOrThrow
+   */
+  export type LiveRoomFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveRoom
+     */
+    select?: LiveRoomSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveRoomInclude<ExtArgs> | null
+    /**
+     * Filter, which LiveRoom to fetch.
+     */
+    where: LiveRoomWhereUniqueInput
+  }
+
+  /**
+   * LiveRoom findFirst
+   */
+  export type LiveRoomFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveRoom
+     */
+    select?: LiveRoomSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveRoomInclude<ExtArgs> | null
+    /**
+     * Filter, which LiveRoom to fetch.
+     */
+    where?: LiveRoomWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LiveRooms to fetch.
+     */
+    orderBy?: LiveRoomOrderByWithRelationInput | LiveRoomOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LiveRooms.
+     */
+    cursor?: LiveRoomWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LiveRooms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LiveRooms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LiveRooms.
+     */
+    distinct?: LiveRoomScalarFieldEnum | LiveRoomScalarFieldEnum[]
+  }
+
+  /**
+   * LiveRoom findFirstOrThrow
+   */
+  export type LiveRoomFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveRoom
+     */
+    select?: LiveRoomSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveRoomInclude<ExtArgs> | null
+    /**
+     * Filter, which LiveRoom to fetch.
+     */
+    where?: LiveRoomWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LiveRooms to fetch.
+     */
+    orderBy?: LiveRoomOrderByWithRelationInput | LiveRoomOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LiveRooms.
+     */
+    cursor?: LiveRoomWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LiveRooms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LiveRooms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LiveRooms.
+     */
+    distinct?: LiveRoomScalarFieldEnum | LiveRoomScalarFieldEnum[]
+  }
+
+  /**
+   * LiveRoom findMany
+   */
+  export type LiveRoomFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveRoom
+     */
+    select?: LiveRoomSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveRoomInclude<ExtArgs> | null
+    /**
+     * Filter, which LiveRooms to fetch.
+     */
+    where?: LiveRoomWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LiveRooms to fetch.
+     */
+    orderBy?: LiveRoomOrderByWithRelationInput | LiveRoomOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LiveRooms.
+     */
+    cursor?: LiveRoomWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LiveRooms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LiveRooms.
+     */
+    skip?: number
+    distinct?: LiveRoomScalarFieldEnum | LiveRoomScalarFieldEnum[]
+  }
+
+  /**
+   * LiveRoom create
+   */
+  export type LiveRoomCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveRoom
+     */
+    select?: LiveRoomSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveRoomInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LiveRoom.
+     */
+    data: XOR<LiveRoomCreateInput, LiveRoomUncheckedCreateInput>
+  }
+
+  /**
+   * LiveRoom createMany
+   */
+  export type LiveRoomCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LiveRooms.
+     */
+    data: LiveRoomCreateManyInput | LiveRoomCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LiveRoom createManyAndReturn
+   */
+  export type LiveRoomCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveRoom
+     */
+    select?: LiveRoomSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many LiveRooms.
+     */
+    data: LiveRoomCreateManyInput | LiveRoomCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveRoomIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LiveRoom update
+   */
+  export type LiveRoomUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveRoom
+     */
+    select?: LiveRoomSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveRoomInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LiveRoom.
+     */
+    data: XOR<LiveRoomUpdateInput, LiveRoomUncheckedUpdateInput>
+    /**
+     * Choose, which LiveRoom to update.
+     */
+    where: LiveRoomWhereUniqueInput
+  }
+
+  /**
+   * LiveRoom updateMany
+   */
+  export type LiveRoomUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LiveRooms.
+     */
+    data: XOR<LiveRoomUpdateManyMutationInput, LiveRoomUncheckedUpdateManyInput>
+    /**
+     * Filter which LiveRooms to update
+     */
+    where?: LiveRoomWhereInput
+  }
+
+  /**
+   * LiveRoom upsert
+   */
+  export type LiveRoomUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveRoom
+     */
+    select?: LiveRoomSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveRoomInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LiveRoom to update in case it exists.
+     */
+    where: LiveRoomWhereUniqueInput
+    /**
+     * In case the LiveRoom found by the `where` argument doesn't exist, create a new LiveRoom with this data.
+     */
+    create: XOR<LiveRoomCreateInput, LiveRoomUncheckedCreateInput>
+    /**
+     * In case the LiveRoom was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LiveRoomUpdateInput, LiveRoomUncheckedUpdateInput>
+  }
+
+  /**
+   * LiveRoom delete
+   */
+  export type LiveRoomDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveRoom
+     */
+    select?: LiveRoomSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveRoomInclude<ExtArgs> | null
+    /**
+     * Filter which LiveRoom to delete.
+     */
+    where: LiveRoomWhereUniqueInput
+  }
+
+  /**
+   * LiveRoom deleteMany
+   */
+  export type LiveRoomDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LiveRooms to delete
+     */
+    where?: LiveRoomWhereInput
+  }
+
+  /**
+   * LiveRoom.User
+   */
+  export type LiveRoom$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * LiveRoom.course
+   */
+  export type LiveRoom$courseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: CourseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourseInclude<ExtArgs> | null
+    where?: CourseWhereInput
+  }
+
+  /**
+   * LiveRoom without action
+   */
+  export type LiveRoomDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveRoom
+     */
+    select?: LiveRoomSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveRoomInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -28393,6 +34568,7 @@ export namespace Prisma {
     id: 'id',
     email: 'email',
     password: 'password',
+    phone: 'phone',
     firstName: 'firstName',
     lastName: 'lastName',
     role: 'role',
@@ -28497,6 +34673,8 @@ export namespace Prisma {
     lessonId: 'lessonId',
     timeLimit: 'timeLimit',
     passingScore: 'passingScore',
+    upComing: 'upComing',
+    isCompleted: 'isCompleted',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -28539,6 +34717,7 @@ export namespace Prisma {
     userId: 'userId',
     type: 'type',
     value: 'value',
+    isNew: 'isNew',
     createdAt: 'createdAt'
   };
 
@@ -28573,6 +34752,7 @@ export namespace Prisma {
     id: 'id',
     authorId: 'authorId',
     content: 'content',
+    title: 'title',
     createdAt: 'createdAt',
     likesCount: 'likesCount'
   };
@@ -28593,6 +34773,8 @@ export namespace Prisma {
   export const GroupScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    subject: 'subject',
+    image: 'image',
     adminId: 'adminId',
     createdAt: 'createdAt'
   };
@@ -28683,6 +34865,87 @@ export namespace Prisma {
   };
 
   export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
+
+
+  export const BadgeScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    title: 'title',
+    description: 'description',
+    image: 'image',
+    points: 'points',
+    type: 'type',
+    earnedAt: 'earnedAt',
+    createdAt: 'createdAt'
+  };
+
+  export type BadgeScalarFieldEnum = (typeof BadgeScalarFieldEnum)[keyof typeof BadgeScalarFieldEnum]
+
+
+  export const CertificateScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    address: 'address',
+    phone: 'phone',
+    notes: 'notes',
+    userId: 'userId',
+    title: 'title',
+    description: 'description',
+    url: 'url',
+    image: 'image',
+    points: 'points',
+    type: 'type',
+    earnedAt: 'earnedAt',
+    createdAt: 'createdAt'
+  };
+
+  export type CertificateScalarFieldEnum = (typeof CertificateScalarFieldEnum)[keyof typeof CertificateScalarFieldEnum]
+
+
+  export const CommunityScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    image: 'image',
+    description: 'description',
+    type: 'type',
+    likes: 'likes',
+    dislikes: 'dislikes',
+    views: 'views',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CommunityScalarFieldEnum = (typeof CommunityScalarFieldEnum)[keyof typeof CommunityScalarFieldEnum]
+
+
+  export const DiscussionScalarFieldEnum: {
+    id: 'id',
+    communityId: 'communityId',
+    postId: 'postId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DiscussionScalarFieldEnum = (typeof DiscussionScalarFieldEnum)[keyof typeof DiscussionScalarFieldEnum]
+
+
+  export const LiveRoomScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    topic: 'topic',
+    participants: 'participants',
+    isLive: 'isLive',
+    isActive: 'isActive',
+    isPublic: 'isPublic',
+    isPrivate: 'isPrivate',
+    isPasswordProtected: 'isPasswordProtected',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    communityId: 'communityId',
+    courseId: 'courseId'
+  };
+
+  export type LiveRoomScalarFieldEnum = (typeof LiveRoomScalarFieldEnum)[keyof typeof LiveRoomScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -28832,6 +35095,7 @@ export namespace Prisma {
     id?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
+    phone?: StringNullableFilter<"User"> | string | null
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
@@ -28840,8 +35104,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     academyId?: StringNullableFilter<"User"> | string | null
-    academy?: XOR<AcademyNullableRelationFilter, AcademyWhereInput> | null
-    profile?: XOR<ProfileNullableRelationFilter, ProfileWhereInput> | null
+    academy?: XOR<AcademyNullableScalarRelationFilter, AcademyWhereInput> | null
+    profile?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
     enrollments?: EnrollmentListRelationFilter
     achievements?: AchievementListRelationFilter
     notifications?: NotificationListRelationFilter
@@ -28858,12 +35122,17 @@ export namespace Prisma {
     Lesson?: LessonListRelationFilter
     Payment?: PaymentListRelationFilter
     Report?: ReportListRelationFilter
+    Badge?: BadgeListRelationFilter
+    Certificate?: CertificateListRelationFilter
+    Community?: CommunityListRelationFilter
+    LiveRoom?: LiveRoomListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    phone?: SortOrderInput | SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     role?: SortOrder
@@ -28890,6 +35159,10 @@ export namespace Prisma {
     Lesson?: LessonOrderByRelationAggregateInput
     Payment?: PaymentOrderByRelationAggregateInput
     Report?: ReportOrderByRelationAggregateInput
+    Badge?: BadgeOrderByRelationAggregateInput
+    Certificate?: CertificateOrderByRelationAggregateInput
+    Community?: CommunityOrderByRelationAggregateInput
+    LiveRoom?: LiveRoomOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -28899,6 +35172,7 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
+    phone?: StringNullableFilter<"User"> | string | null
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
@@ -28907,8 +35181,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     academyId?: StringNullableFilter<"User"> | string | null
-    academy?: XOR<AcademyNullableRelationFilter, AcademyWhereInput> | null
-    profile?: XOR<ProfileNullableRelationFilter, ProfileWhereInput> | null
+    academy?: XOR<AcademyNullableScalarRelationFilter, AcademyWhereInput> | null
+    profile?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
     enrollments?: EnrollmentListRelationFilter
     achievements?: AchievementListRelationFilter
     notifications?: NotificationListRelationFilter
@@ -28925,12 +35199,17 @@ export namespace Prisma {
     Lesson?: LessonListRelationFilter
     Payment?: PaymentListRelationFilter
     Report?: ReportListRelationFilter
+    Badge?: BadgeListRelationFilter
+    Certificate?: CertificateListRelationFilter
+    Community?: CommunityListRelationFilter
+    LiveRoom?: LiveRoomListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    phone?: SortOrderInput | SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     role?: SortOrder
@@ -28951,6 +35230,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
+    phone?: StringNullableWithAggregatesFilter<"User"> | string | null
     firstName?: StringWithAggregatesFilter<"User"> | string
     lastName?: StringWithAggregatesFilter<"User"> | string
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
@@ -28971,7 +35251,7 @@ export namespace Prisma {
     phone?: StringNullableFilter<"Profile"> | string | null
     address?: StringNullableFilter<"Profile"> | string | null
     preferences?: JsonNullableFilter<"Profile">
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type ProfileOrderByWithRelationInput = {
@@ -28994,7 +35274,7 @@ export namespace Prisma {
     phone?: StringNullableFilter<"Profile"> | string | null
     address?: StringNullableFilter<"Profile"> | string | null
     preferences?: JsonNullableFilter<"Profile">
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "userId">
 
   export type ProfileOrderByWithAggregationInput = {
@@ -29102,8 +35382,8 @@ export namespace Prisma {
     id?: StringFilter<"Instructor"> | string
     userId?: StringFilter<"Instructor"> | string
     academyId?: StringFilter<"Instructor"> | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
-    academy?: XOR<AcademyRelationFilter, AcademyWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    academy?: XOR<AcademyScalarRelationFilter, AcademyWhereInput>
     courses?: CourseListRelationFilter
   }
 
@@ -29123,8 +35403,8 @@ export namespace Prisma {
     NOT?: InstructorWhereInput | InstructorWhereInput[]
     userId?: StringFilter<"Instructor"> | string
     academyId?: StringFilter<"Instructor"> | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
-    academy?: XOR<AcademyRelationFilter, AcademyWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    academy?: XOR<AcademyScalarRelationFilter, AcademyWhereInput>
     courses?: CourseListRelationFilter
   }, "id">
 
@@ -29156,11 +35436,12 @@ export namespace Prisma {
     academyId?: StringFilter<"Course"> | string
     createdAt?: DateTimeFilter<"Course"> | Date | string
     updatedAt?: DateTimeFilter<"Course"> | Date | string
-    academy?: XOR<AcademyRelationFilter, AcademyWhereInput>
+    academy?: XOR<AcademyScalarRelationFilter, AcademyWhereInput>
     lessons?: LessonListRelationFilter
     enrollments?: EnrollmentListRelationFilter
     quizzes?: QuizListRelationFilter
     instructors?: InstructorListRelationFilter
+    liveRoom?: LiveRoomListRelationFilter
   }
 
   export type CourseOrderByWithRelationInput = {
@@ -29175,6 +35456,7 @@ export namespace Prisma {
     enrollments?: EnrollmentOrderByRelationAggregateInput
     quizzes?: QuizOrderByRelationAggregateInput
     instructors?: InstructorOrderByRelationAggregateInput
+    liveRoom?: LiveRoomOrderByRelationAggregateInput
   }
 
   export type CourseWhereUniqueInput = Prisma.AtLeast<{
@@ -29187,11 +35469,12 @@ export namespace Prisma {
     academyId?: StringFilter<"Course"> | string
     createdAt?: DateTimeFilter<"Course"> | Date | string
     updatedAt?: DateTimeFilter<"Course"> | Date | string
-    academy?: XOR<AcademyRelationFilter, AcademyWhereInput>
+    academy?: XOR<AcademyScalarRelationFilter, AcademyWhereInput>
     lessons?: LessonListRelationFilter
     enrollments?: EnrollmentListRelationFilter
     quizzes?: QuizListRelationFilter
     instructors?: InstructorListRelationFilter
+    liveRoom?: LiveRoomListRelationFilter
   }, "id">
 
   export type CourseOrderByWithAggregationInput = {
@@ -29229,7 +35512,7 @@ export namespace Prisma {
     courseId?: StringFilter<"Lesson"> | string
     createdAt?: DateTimeFilter<"Lesson"> | Date | string
     updatedAt?: DateTimeFilter<"Lesson"> | Date | string
-    course?: XOR<CourseRelationFilter, CourseWhereInput>
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     files?: FileListRelationFilter
     quizzes?: QuizListRelationFilter
     completedBy?: UserListRelationFilter
@@ -29262,7 +35545,7 @@ export namespace Prisma {
     courseId?: StringFilter<"Lesson"> | string
     createdAt?: DateTimeFilter<"Lesson"> | Date | string
     updatedAt?: DateTimeFilter<"Lesson"> | Date | string
-    course?: XOR<CourseRelationFilter, CourseWhereInput>
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     files?: FileListRelationFilter
     quizzes?: QuizListRelationFilter
     completedBy?: UserListRelationFilter
@@ -29305,7 +35588,7 @@ export namespace Prisma {
     type?: StringFilter<"File"> | string
     lessonId?: StringFilter<"File"> | string
     createdAt?: DateTimeFilter<"File"> | Date | string
-    lesson?: XOR<LessonRelationFilter, LessonWhereInput>
+    lesson?: XOR<LessonScalarRelationFilter, LessonWhereInput>
   }
 
   export type FileOrderByWithRelationInput = {
@@ -29328,7 +35611,7 @@ export namespace Prisma {
     type?: StringFilter<"File"> | string
     lessonId?: StringFilter<"File"> | string
     createdAt?: DateTimeFilter<"File"> | Date | string
-    lesson?: XOR<LessonRelationFilter, LessonWhereInput>
+    lesson?: XOR<LessonScalarRelationFilter, LessonWhereInput>
   }, "id">
 
   export type FileOrderByWithAggregationInput = {
@@ -29366,8 +35649,8 @@ export namespace Prisma {
     status?: StringFilter<"Enrollment"> | string
     createdAt?: DateTimeFilter<"Enrollment"> | Date | string
     updatedAt?: DateTimeFilter<"Enrollment"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
-    course?: XOR<CourseRelationFilter, CourseWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
   }
 
   export type EnrollmentOrderByWithRelationInput = {
@@ -29393,8 +35676,8 @@ export namespace Prisma {
     status?: StringFilter<"Enrollment"> | string
     createdAt?: DateTimeFilter<"Enrollment"> | Date | string
     updatedAt?: DateTimeFilter<"Enrollment"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
-    course?: XOR<CourseRelationFilter, CourseWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
   }, "id">
 
   export type EnrollmentOrderByWithAggregationInput = {
@@ -29435,9 +35718,11 @@ export namespace Prisma {
     lessonId?: StringFilter<"Quiz"> | string
     timeLimit?: IntNullableFilter<"Quiz"> | number | null
     passingScore?: IntNullableFilter<"Quiz"> | number | null
+    upComing?: BoolFilter<"Quiz"> | boolean
+    isCompleted?: BoolFilter<"Quiz"> | boolean
     createdAt?: DateTimeFilter<"Quiz"> | Date | string
     updatedAt?: DateTimeFilter<"Quiz"> | Date | string
-    lesson?: XOR<LessonRelationFilter, LessonWhereInput>
+    lesson?: XOR<LessonScalarRelationFilter, LessonWhereInput>
     questions?: QuestionListRelationFilter
     submissions?: SubmissionListRelationFilter
     Course?: CourseListRelationFilter
@@ -29450,6 +35735,8 @@ export namespace Prisma {
     lessonId?: SortOrder
     timeLimit?: SortOrderInput | SortOrder
     passingScore?: SortOrderInput | SortOrder
+    upComing?: SortOrder
+    isCompleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     lesson?: LessonOrderByWithRelationInput
@@ -29468,9 +35755,11 @@ export namespace Prisma {
     lessonId?: StringFilter<"Quiz"> | string
     timeLimit?: IntNullableFilter<"Quiz"> | number | null
     passingScore?: IntNullableFilter<"Quiz"> | number | null
+    upComing?: BoolFilter<"Quiz"> | boolean
+    isCompleted?: BoolFilter<"Quiz"> | boolean
     createdAt?: DateTimeFilter<"Quiz"> | Date | string
     updatedAt?: DateTimeFilter<"Quiz"> | Date | string
-    lesson?: XOR<LessonRelationFilter, LessonWhereInput>
+    lesson?: XOR<LessonScalarRelationFilter, LessonWhereInput>
     questions?: QuestionListRelationFilter
     submissions?: SubmissionListRelationFilter
     Course?: CourseListRelationFilter
@@ -29483,6 +35772,8 @@ export namespace Prisma {
     lessonId?: SortOrder
     timeLimit?: SortOrderInput | SortOrder
     passingScore?: SortOrderInput | SortOrder
+    upComing?: SortOrder
+    isCompleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: QuizCountOrderByAggregateInput
@@ -29502,6 +35793,8 @@ export namespace Prisma {
     lessonId?: StringWithAggregatesFilter<"Quiz"> | string
     timeLimit?: IntNullableWithAggregatesFilter<"Quiz"> | number | null
     passingScore?: IntNullableWithAggregatesFilter<"Quiz"> | number | null
+    upComing?: BoolWithAggregatesFilter<"Quiz"> | boolean
+    isCompleted?: BoolWithAggregatesFilter<"Quiz"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Quiz"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Quiz"> | Date | string
   }
@@ -29519,7 +35812,7 @@ export namespace Prisma {
     isAnswered?: BoolFilter<"Question"> | boolean
     quizId?: StringFilter<"Question"> | string
     createdAt?: DateTimeFilter<"Question"> | Date | string
-    quiz?: XOR<QuizRelationFilter, QuizWhereInput>
+    quiz?: XOR<QuizScalarRelationFilter, QuizWhereInput>
   }
 
   export type QuestionOrderByWithRelationInput = {
@@ -29548,7 +35841,7 @@ export namespace Prisma {
     isAnswered?: BoolFilter<"Question"> | boolean
     quizId?: StringFilter<"Question"> | string
     createdAt?: DateTimeFilter<"Question"> | Date | string
-    quiz?: XOR<QuizRelationFilter, QuizWhereInput>
+    quiz?: XOR<QuizScalarRelationFilter, QuizWhereInput>
   }, "id">
 
   export type QuestionOrderByWithAggregationInput = {
@@ -29596,8 +35889,8 @@ export namespace Prisma {
     passed?: BoolNullableFilter<"Submission"> | boolean | null
     createdAt?: DateTimeFilter<"Submission"> | Date | string
     updatedAt?: DateTimeFilter<"Submission"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
-    quiz?: XOR<QuizRelationFilter, QuizWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    quiz?: XOR<QuizScalarRelationFilter, QuizWhereInput>
   }
 
   export type SubmissionOrderByWithRelationInput = {
@@ -29627,8 +35920,8 @@ export namespace Prisma {
     passed?: BoolNullableFilter<"Submission"> | boolean | null
     createdAt?: DateTimeFilter<"Submission"> | Date | string
     updatedAt?: DateTimeFilter<"Submission"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
-    quiz?: XOR<QuizRelationFilter, QuizWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    quiz?: XOR<QuizScalarRelationFilter, QuizWhereInput>
   }, "id">
 
   export type SubmissionOrderByWithAggregationInput = {
@@ -29671,8 +35964,9 @@ export namespace Prisma {
     userId?: StringFilter<"Achievement"> | string
     type?: StringFilter<"Achievement"> | string
     value?: JsonFilter<"Achievement">
+    isNew?: BoolFilter<"Achievement"> | boolean
     createdAt?: DateTimeFilter<"Achievement"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type AchievementOrderByWithRelationInput = {
@@ -29680,6 +35974,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     value?: SortOrder
+    isNew?: SortOrder
     createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
@@ -29692,8 +35987,9 @@ export namespace Prisma {
     userId?: StringFilter<"Achievement"> | string
     type?: StringFilter<"Achievement"> | string
     value?: JsonFilter<"Achievement">
+    isNew?: BoolFilter<"Achievement"> | boolean
     createdAt?: DateTimeFilter<"Achievement"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type AchievementOrderByWithAggregationInput = {
@@ -29701,6 +35997,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     value?: SortOrder
+    isNew?: SortOrder
     createdAt?: SortOrder
     _count?: AchievementCountOrderByAggregateInput
     _max?: AchievementMaxOrderByAggregateInput
@@ -29715,6 +36012,7 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Achievement"> | string
     type?: StringWithAggregatesFilter<"Achievement"> | string
     value?: JsonWithAggregatesFilter<"Achievement">
+    isNew?: BoolWithAggregatesFilter<"Achievement"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Achievement"> | Date | string
   }
 
@@ -29729,7 +36027,7 @@ export namespace Prisma {
     title?: StringFilter<"Notification"> | string
     read?: BoolFilter<"Notification"> | boolean
     createdAt?: DateTimeFilter<"Notification"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type NotificationOrderByWithRelationInput = {
@@ -29754,7 +36052,7 @@ export namespace Prisma {
     title?: StringFilter<"Notification"> | string
     read?: BoolFilter<"Notification"> | boolean
     createdAt?: DateTimeFilter<"Notification"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type NotificationOrderByWithAggregationInput = {
@@ -29792,7 +36090,7 @@ export namespace Prisma {
     content?: StringFilter<"Message"> | string
     createdAt?: DateTimeFilter<"Message"> | Date | string
     isRead?: BoolFilter<"Message"> | boolean
-    sender?: XOR<UserRelationFilter, UserWhereInput>
+    sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     Channel?: ChannelListRelationFilter
   }
 
@@ -29815,7 +36113,7 @@ export namespace Prisma {
     content?: StringFilter<"Message"> | string
     createdAt?: DateTimeFilter<"Message"> | Date | string
     isRead?: BoolFilter<"Message"> | boolean
-    sender?: XOR<UserRelationFilter, UserWhereInput>
+    sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     Channel?: ChannelListRelationFilter
   }, "id">
 
@@ -29848,22 +36146,28 @@ export namespace Prisma {
     id?: StringFilter<"Post"> | string
     authorId?: StringFilter<"Post"> | string
     content?: StringFilter<"Post"> | string
+    title?: StringFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
     likesCount?: IntFilter<"Post"> | number
-    author?: XOR<UserRelationFilter, UserWhereInput>
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
     comments?: CommentListRelationFilter
     Group?: GroupListRelationFilter
+    Community?: CommunityListRelationFilter
+    Discussion?: DiscussionListRelationFilter
   }
 
   export type PostOrderByWithRelationInput = {
     id?: SortOrder
     authorId?: SortOrder
     content?: SortOrder
+    title?: SortOrder
     createdAt?: SortOrder
     likesCount?: SortOrder
     author?: UserOrderByWithRelationInput
     comments?: CommentOrderByRelationAggregateInput
     Group?: GroupOrderByRelationAggregateInput
+    Community?: CommunityOrderByRelationAggregateInput
+    Discussion?: DiscussionOrderByRelationAggregateInput
   }
 
   export type PostWhereUniqueInput = Prisma.AtLeast<{
@@ -29873,17 +36177,21 @@ export namespace Prisma {
     NOT?: PostWhereInput | PostWhereInput[]
     authorId?: StringFilter<"Post"> | string
     content?: StringFilter<"Post"> | string
+    title?: StringFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
     likesCount?: IntFilter<"Post"> | number
-    author?: XOR<UserRelationFilter, UserWhereInput>
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
     comments?: CommentListRelationFilter
     Group?: GroupListRelationFilter
+    Community?: CommunityListRelationFilter
+    Discussion?: DiscussionListRelationFilter
   }, "id">
 
   export type PostOrderByWithAggregationInput = {
     id?: SortOrder
     authorId?: SortOrder
     content?: SortOrder
+    title?: SortOrder
     createdAt?: SortOrder
     likesCount?: SortOrder
     _count?: PostCountOrderByAggregateInput
@@ -29900,6 +36208,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Post"> | string
     authorId?: StringWithAggregatesFilter<"Post"> | string
     content?: StringWithAggregatesFilter<"Post"> | string
+    title?: StringWithAggregatesFilter<"Post"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
     likesCount?: IntWithAggregatesFilter<"Post"> | number
   }
@@ -29912,7 +36221,7 @@ export namespace Prisma {
     postId?: StringFilter<"Comment"> | string
     content?: StringFilter<"Comment"> | string
     createdAt?: DateTimeFilter<"Comment"> | Date | string
-    post?: XOR<PostRelationFilter, PostWhereInput>
+    post?: XOR<PostScalarRelationFilter, PostWhereInput>
   }
 
   export type CommentOrderByWithRelationInput = {
@@ -29931,7 +36240,7 @@ export namespace Prisma {
     postId?: StringFilter<"Comment"> | string
     content?: StringFilter<"Comment"> | string
     createdAt?: DateTimeFilter<"Comment"> | Date | string
-    post?: XOR<PostRelationFilter, PostWhereInput>
+    post?: XOR<PostScalarRelationFilter, PostWhereInput>
   }, "id">
 
   export type CommentOrderByWithAggregationInput = {
@@ -29960,21 +36269,27 @@ export namespace Prisma {
     NOT?: GroupWhereInput | GroupWhereInput[]
     id?: StringFilter<"Group"> | string
     name?: StringFilter<"Group"> | string
+    subject?: StringFilter<"Group"> | string
+    image?: StringNullableFilter<"Group"> | string | null
     adminId?: StringFilter<"Group"> | string
     createdAt?: DateTimeFilter<"Group"> | Date | string
     members?: UserListRelationFilter
     posts?: PostListRelationFilter
-    admin?: XOR<AdminRelationFilter, AdminWhereInput>
+    admin?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+    Community?: CommunityListRelationFilter
   }
 
   export type GroupOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    subject?: SortOrder
+    image?: SortOrderInput | SortOrder
     adminId?: SortOrder
     createdAt?: SortOrder
     members?: UserOrderByRelationAggregateInput
     posts?: PostOrderByRelationAggregateInput
     admin?: AdminOrderByWithRelationInput
+    Community?: CommunityOrderByRelationAggregateInput
   }
 
   export type GroupWhereUniqueInput = Prisma.AtLeast<{
@@ -29983,16 +36298,21 @@ export namespace Prisma {
     OR?: GroupWhereInput[]
     NOT?: GroupWhereInput | GroupWhereInput[]
     name?: StringFilter<"Group"> | string
+    subject?: StringFilter<"Group"> | string
+    image?: StringNullableFilter<"Group"> | string | null
     adminId?: StringFilter<"Group"> | string
     createdAt?: DateTimeFilter<"Group"> | Date | string
     members?: UserListRelationFilter
     posts?: PostListRelationFilter
-    admin?: XOR<AdminRelationFilter, AdminWhereInput>
+    admin?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+    Community?: CommunityListRelationFilter
   }, "id">
 
   export type GroupOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    subject?: SortOrder
+    image?: SortOrderInput | SortOrder
     adminId?: SortOrder
     createdAt?: SortOrder
     _count?: GroupCountOrderByAggregateInput
@@ -30006,6 +36326,8 @@ export namespace Prisma {
     NOT?: GroupScalarWhereWithAggregatesInput | GroupScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Group"> | string
     name?: StringWithAggregatesFilter<"Group"> | string
+    subject?: StringWithAggregatesFilter<"Group"> | string
+    image?: StringNullableWithAggregatesFilter<"Group"> | string | null
     adminId?: StringWithAggregatesFilter<"Group"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Group"> | Date | string
   }
@@ -30017,7 +36339,7 @@ export namespace Prisma {
     id?: StringFilter<"Admin"> | string
     userId?: StringFilter<"Admin"> | string
     createdAt?: DateTimeFilter<"Admin"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     Group?: GroupListRelationFilter
   }
 
@@ -30036,7 +36358,7 @@ export namespace Prisma {
     NOT?: AdminWhereInput | AdminWhereInput[]
     userId?: StringFilter<"Admin"> | string
     createdAt?: DateTimeFilter<"Admin"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     Group?: GroupListRelationFilter
   }, "id">
 
@@ -30067,7 +36389,7 @@ export namespace Prisma {
     ownerId?: StringFilter<"Channel"> | string
     createdAt?: DateTimeFilter<"Channel"> | Date | string
     members?: UserListRelationFilter
-    owner?: XOR<OwnerRelationFilter, OwnerWhereInput>
+    owner?: XOR<OwnerScalarRelationFilter, OwnerWhereInput>
     messages?: MessageListRelationFilter
   }
 
@@ -30090,7 +36412,7 @@ export namespace Prisma {
     ownerId?: StringFilter<"Channel"> | string
     createdAt?: DateTimeFilter<"Channel"> | Date | string
     members?: UserListRelationFilter
-    owner?: XOR<OwnerRelationFilter, OwnerWhereInput>
+    owner?: XOR<OwnerScalarRelationFilter, OwnerWhereInput>
     messages?: MessageListRelationFilter
   }, "id">
 
@@ -30121,7 +36443,7 @@ export namespace Prisma {
     id?: StringFilter<"Owner"> | string
     userId?: StringFilter<"Owner"> | string
     createdAt?: DateTimeFilter<"Owner"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     Channel?: ChannelListRelationFilter
   }
 
@@ -30140,7 +36462,7 @@ export namespace Prisma {
     NOT?: OwnerWhereInput | OwnerWhereInput[]
     userId?: StringFilter<"Owner"> | string
     createdAt?: DateTimeFilter<"Owner"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     Channel?: ChannelListRelationFilter
   }, "id">
 
@@ -30171,7 +36493,7 @@ export namespace Prisma {
     type?: StringFilter<"Bookmark"> | string
     itemId?: StringFilter<"Bookmark"> | string
     createdAt?: DateTimeFilter<"Bookmark"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type BookmarkOrderByWithRelationInput = {
@@ -30192,7 +36514,7 @@ export namespace Prisma {
     type?: StringFilter<"Bookmark"> | string
     itemId?: StringFilter<"Bookmark"> | string
     createdAt?: DateTimeFilter<"Bookmark"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type BookmarkOrderByWithAggregationInput = {
@@ -30229,7 +36551,7 @@ export namespace Prisma {
     academyId?: StringFilter<"Event"> | string
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
-    academy?: XOR<AcademyRelationFilter, AcademyWhereInput>
+    academy?: XOR<AcademyScalarRelationFilter, AcademyWhereInput>
   }
 
   export type EventOrderByWithRelationInput = {
@@ -30256,7 +36578,7 @@ export namespace Prisma {
     academyId?: StringFilter<"Event"> | string
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
-    academy?: XOR<AcademyRelationFilter, AcademyWhereInput>
+    academy?: XOR<AcademyScalarRelationFilter, AcademyWhereInput>
   }, "id">
 
   export type EventOrderByWithAggregationInput = {
@@ -30298,8 +36620,8 @@ export namespace Prisma {
     method?: StringFilter<"Attendance"> | string
     createdAt?: DateTimeFilter<"Attendance"> | Date | string
     updatedAt?: DateTimeFilter<"Attendance"> | Date | string
-    student?: XOR<UserRelationFilter, UserWhereInput>
-    lesson?: XOR<LessonRelationFilter, LessonWhereInput>
+    student?: XOR<UserScalarRelationFilter, UserWhereInput>
+    lesson?: XOR<LessonScalarRelationFilter, LessonWhereInput>
   }
 
   export type AttendanceOrderByWithRelationInput = {
@@ -30325,8 +36647,8 @@ export namespace Prisma {
     method?: StringFilter<"Attendance"> | string
     createdAt?: DateTimeFilter<"Attendance"> | Date | string
     updatedAt?: DateTimeFilter<"Attendance"> | Date | string
-    student?: XOR<UserRelationFilter, UserWhereInput>
-    lesson?: XOR<LessonRelationFilter, LessonWhereInput>
+    student?: XOR<UserScalarRelationFilter, UserWhereInput>
+    lesson?: XOR<LessonScalarRelationFilter, LessonWhereInput>
   }, "id">
 
   export type AttendanceOrderByWithAggregationInput = {
@@ -30363,7 +36685,7 @@ export namespace Prisma {
     userId?: StringFilter<"Payment"> | string
     amount?: FloatFilter<"Payment"> | number
     createdAt?: DateTimeFilter<"Payment"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type PaymentOrderByWithRelationInput = {
@@ -30382,7 +36704,7 @@ export namespace Prisma {
     userId?: StringFilter<"Payment"> | string
     amount?: FloatFilter<"Payment"> | number
     createdAt?: DateTimeFilter<"Payment"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type PaymentOrderByWithAggregationInput = {
@@ -30414,7 +36736,7 @@ export namespace Prisma {
     id?: StringFilter<"Report"> | string
     userId?: StringFilter<"Report"> | string
     createdAt?: DateTimeFilter<"Report"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type ReportOrderByWithRelationInput = {
@@ -30431,7 +36753,7 @@ export namespace Prisma {
     NOT?: ReportWhereInput | ReportWhereInput[]
     userId?: StringFilter<"Report"> | string
     createdAt?: DateTimeFilter<"Report"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type ReportOrderByWithAggregationInput = {
@@ -30452,10 +36774,445 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Report"> | Date | string
   }
 
+  export type BadgeWhereInput = {
+    AND?: BadgeWhereInput | BadgeWhereInput[]
+    OR?: BadgeWhereInput[]
+    NOT?: BadgeWhereInput | BadgeWhereInput[]
+    id?: StringFilter<"Badge"> | string
+    userId?: StringFilter<"Badge"> | string
+    title?: StringFilter<"Badge"> | string
+    description?: StringNullableFilter<"Badge"> | string | null
+    image?: StringNullableFilter<"Badge"> | string | null
+    points?: IntFilter<"Badge"> | number
+    type?: StringFilter<"Badge"> | string
+    earnedAt?: DateTimeFilter<"Badge"> | Date | string
+    createdAt?: DateTimeFilter<"Badge"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type BadgeOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    points?: SortOrder
+    type?: SortOrder
+    earnedAt?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type BadgeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BadgeWhereInput | BadgeWhereInput[]
+    OR?: BadgeWhereInput[]
+    NOT?: BadgeWhereInput | BadgeWhereInput[]
+    userId?: StringFilter<"Badge"> | string
+    title?: StringFilter<"Badge"> | string
+    description?: StringNullableFilter<"Badge"> | string | null
+    image?: StringNullableFilter<"Badge"> | string | null
+    points?: IntFilter<"Badge"> | number
+    type?: StringFilter<"Badge"> | string
+    earnedAt?: DateTimeFilter<"Badge"> | Date | string
+    createdAt?: DateTimeFilter<"Badge"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type BadgeOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    points?: SortOrder
+    type?: SortOrder
+    earnedAt?: SortOrder
+    createdAt?: SortOrder
+    _count?: BadgeCountOrderByAggregateInput
+    _avg?: BadgeAvgOrderByAggregateInput
+    _max?: BadgeMaxOrderByAggregateInput
+    _min?: BadgeMinOrderByAggregateInput
+    _sum?: BadgeSumOrderByAggregateInput
+  }
+
+  export type BadgeScalarWhereWithAggregatesInput = {
+    AND?: BadgeScalarWhereWithAggregatesInput | BadgeScalarWhereWithAggregatesInput[]
+    OR?: BadgeScalarWhereWithAggregatesInput[]
+    NOT?: BadgeScalarWhereWithAggregatesInput | BadgeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Badge"> | string
+    userId?: StringWithAggregatesFilter<"Badge"> | string
+    title?: StringWithAggregatesFilter<"Badge"> | string
+    description?: StringNullableWithAggregatesFilter<"Badge"> | string | null
+    image?: StringNullableWithAggregatesFilter<"Badge"> | string | null
+    points?: IntWithAggregatesFilter<"Badge"> | number
+    type?: StringWithAggregatesFilter<"Badge"> | string
+    earnedAt?: DateTimeWithAggregatesFilter<"Badge"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"Badge"> | Date | string
+  }
+
+  export type CertificateWhereInput = {
+    AND?: CertificateWhereInput | CertificateWhereInput[]
+    OR?: CertificateWhereInput[]
+    NOT?: CertificateWhereInput | CertificateWhereInput[]
+    id?: StringFilter<"Certificate"> | string
+    name?: StringFilter<"Certificate"> | string
+    address?: StringFilter<"Certificate"> | string
+    phone?: StringFilter<"Certificate"> | string
+    notes?: StringFilter<"Certificate"> | string
+    userId?: StringFilter<"Certificate"> | string
+    title?: StringFilter<"Certificate"> | string
+    description?: StringNullableFilter<"Certificate"> | string | null
+    url?: StringNullableFilter<"Certificate"> | string | null
+    image?: StringNullableFilter<"Certificate"> | string | null
+    points?: IntFilter<"Certificate"> | number
+    type?: StringFilter<"Certificate"> | string
+    earnedAt?: DateTimeFilter<"Certificate"> | Date | string
+    createdAt?: DateTimeFilter<"Certificate"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type CertificateOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    address?: SortOrder
+    phone?: SortOrder
+    notes?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    url?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    points?: SortOrder
+    type?: SortOrder
+    earnedAt?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type CertificateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CertificateWhereInput | CertificateWhereInput[]
+    OR?: CertificateWhereInput[]
+    NOT?: CertificateWhereInput | CertificateWhereInput[]
+    name?: StringFilter<"Certificate"> | string
+    address?: StringFilter<"Certificate"> | string
+    phone?: StringFilter<"Certificate"> | string
+    notes?: StringFilter<"Certificate"> | string
+    userId?: StringFilter<"Certificate"> | string
+    title?: StringFilter<"Certificate"> | string
+    description?: StringNullableFilter<"Certificate"> | string | null
+    url?: StringNullableFilter<"Certificate"> | string | null
+    image?: StringNullableFilter<"Certificate"> | string | null
+    points?: IntFilter<"Certificate"> | number
+    type?: StringFilter<"Certificate"> | string
+    earnedAt?: DateTimeFilter<"Certificate"> | Date | string
+    createdAt?: DateTimeFilter<"Certificate"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type CertificateOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    address?: SortOrder
+    phone?: SortOrder
+    notes?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    url?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    points?: SortOrder
+    type?: SortOrder
+    earnedAt?: SortOrder
+    createdAt?: SortOrder
+    _count?: CertificateCountOrderByAggregateInput
+    _avg?: CertificateAvgOrderByAggregateInput
+    _max?: CertificateMaxOrderByAggregateInput
+    _min?: CertificateMinOrderByAggregateInput
+    _sum?: CertificateSumOrderByAggregateInput
+  }
+
+  export type CertificateScalarWhereWithAggregatesInput = {
+    AND?: CertificateScalarWhereWithAggregatesInput | CertificateScalarWhereWithAggregatesInput[]
+    OR?: CertificateScalarWhereWithAggregatesInput[]
+    NOT?: CertificateScalarWhereWithAggregatesInput | CertificateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Certificate"> | string
+    name?: StringWithAggregatesFilter<"Certificate"> | string
+    address?: StringWithAggregatesFilter<"Certificate"> | string
+    phone?: StringWithAggregatesFilter<"Certificate"> | string
+    notes?: StringWithAggregatesFilter<"Certificate"> | string
+    userId?: StringWithAggregatesFilter<"Certificate"> | string
+    title?: StringWithAggregatesFilter<"Certificate"> | string
+    description?: StringNullableWithAggregatesFilter<"Certificate"> | string | null
+    url?: StringNullableWithAggregatesFilter<"Certificate"> | string | null
+    image?: StringNullableWithAggregatesFilter<"Certificate"> | string | null
+    points?: IntWithAggregatesFilter<"Certificate"> | number
+    type?: StringWithAggregatesFilter<"Certificate"> | string
+    earnedAt?: DateTimeWithAggregatesFilter<"Certificate"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"Certificate"> | Date | string
+  }
+
+  export type CommunityWhereInput = {
+    AND?: CommunityWhereInput | CommunityWhereInput[]
+    OR?: CommunityWhereInput[]
+    NOT?: CommunityWhereInput | CommunityWhereInput[]
+    id?: StringFilter<"Community"> | string
+    name?: StringFilter<"Community"> | string
+    image?: StringNullableFilter<"Community"> | string | null
+    description?: StringNullableFilter<"Community"> | string | null
+    type?: StringFilter<"Community"> | string
+    likes?: IntFilter<"Community"> | number
+    dislikes?: IntFilter<"Community"> | number
+    views?: IntFilter<"Community"> | number
+    createdAt?: DateTimeFilter<"Community"> | Date | string
+    updatedAt?: DateTimeFilter<"Community"> | Date | string
+    groups?: GroupListRelationFilter
+    liveRoom?: LiveRoomListRelationFilter
+    participants?: UserListRelationFilter
+    posts?: PostListRelationFilter
+    discussions?: DiscussionListRelationFilter
+  }
+
+  export type CommunityOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    image?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    type?: SortOrder
+    likes?: SortOrder
+    dislikes?: SortOrder
+    views?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    groups?: GroupOrderByRelationAggregateInput
+    liveRoom?: LiveRoomOrderByRelationAggregateInput
+    participants?: UserOrderByRelationAggregateInput
+    posts?: PostOrderByRelationAggregateInput
+    discussions?: DiscussionOrderByRelationAggregateInput
+  }
+
+  export type CommunityWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CommunityWhereInput | CommunityWhereInput[]
+    OR?: CommunityWhereInput[]
+    NOT?: CommunityWhereInput | CommunityWhereInput[]
+    name?: StringFilter<"Community"> | string
+    image?: StringNullableFilter<"Community"> | string | null
+    description?: StringNullableFilter<"Community"> | string | null
+    type?: StringFilter<"Community"> | string
+    likes?: IntFilter<"Community"> | number
+    dislikes?: IntFilter<"Community"> | number
+    views?: IntFilter<"Community"> | number
+    createdAt?: DateTimeFilter<"Community"> | Date | string
+    updatedAt?: DateTimeFilter<"Community"> | Date | string
+    groups?: GroupListRelationFilter
+    liveRoom?: LiveRoomListRelationFilter
+    participants?: UserListRelationFilter
+    posts?: PostListRelationFilter
+    discussions?: DiscussionListRelationFilter
+  }, "id">
+
+  export type CommunityOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    image?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    type?: SortOrder
+    likes?: SortOrder
+    dislikes?: SortOrder
+    views?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CommunityCountOrderByAggregateInput
+    _avg?: CommunityAvgOrderByAggregateInput
+    _max?: CommunityMaxOrderByAggregateInput
+    _min?: CommunityMinOrderByAggregateInput
+    _sum?: CommunitySumOrderByAggregateInput
+  }
+
+  export type CommunityScalarWhereWithAggregatesInput = {
+    AND?: CommunityScalarWhereWithAggregatesInput | CommunityScalarWhereWithAggregatesInput[]
+    OR?: CommunityScalarWhereWithAggregatesInput[]
+    NOT?: CommunityScalarWhereWithAggregatesInput | CommunityScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Community"> | string
+    name?: StringWithAggregatesFilter<"Community"> | string
+    image?: StringNullableWithAggregatesFilter<"Community"> | string | null
+    description?: StringNullableWithAggregatesFilter<"Community"> | string | null
+    type?: StringWithAggregatesFilter<"Community"> | string
+    likes?: IntWithAggregatesFilter<"Community"> | number
+    dislikes?: IntWithAggregatesFilter<"Community"> | number
+    views?: IntWithAggregatesFilter<"Community"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Community"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Community"> | Date | string
+  }
+
+  export type DiscussionWhereInput = {
+    AND?: DiscussionWhereInput | DiscussionWhereInput[]
+    OR?: DiscussionWhereInput[]
+    NOT?: DiscussionWhereInput | DiscussionWhereInput[]
+    id?: StringFilter<"Discussion"> | string
+    communityId?: StringFilter<"Discussion"> | string
+    postId?: StringNullableFilter<"Discussion"> | string | null
+    createdAt?: DateTimeFilter<"Discussion"> | Date | string
+    updatedAt?: DateTimeFilter<"Discussion"> | Date | string
+    community?: XOR<CommunityScalarRelationFilter, CommunityWhereInput>
+    post?: XOR<PostNullableScalarRelationFilter, PostWhereInput> | null
+  }
+
+  export type DiscussionOrderByWithRelationInput = {
+    id?: SortOrder
+    communityId?: SortOrder
+    postId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    community?: CommunityOrderByWithRelationInput
+    post?: PostOrderByWithRelationInput
+  }
+
+  export type DiscussionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DiscussionWhereInput | DiscussionWhereInput[]
+    OR?: DiscussionWhereInput[]
+    NOT?: DiscussionWhereInput | DiscussionWhereInput[]
+    communityId?: StringFilter<"Discussion"> | string
+    postId?: StringNullableFilter<"Discussion"> | string | null
+    createdAt?: DateTimeFilter<"Discussion"> | Date | string
+    updatedAt?: DateTimeFilter<"Discussion"> | Date | string
+    community?: XOR<CommunityScalarRelationFilter, CommunityWhereInput>
+    post?: XOR<PostNullableScalarRelationFilter, PostWhereInput> | null
+  }, "id">
+
+  export type DiscussionOrderByWithAggregationInput = {
+    id?: SortOrder
+    communityId?: SortOrder
+    postId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DiscussionCountOrderByAggregateInput
+    _max?: DiscussionMaxOrderByAggregateInput
+    _min?: DiscussionMinOrderByAggregateInput
+  }
+
+  export type DiscussionScalarWhereWithAggregatesInput = {
+    AND?: DiscussionScalarWhereWithAggregatesInput | DiscussionScalarWhereWithAggregatesInput[]
+    OR?: DiscussionScalarWhereWithAggregatesInput[]
+    NOT?: DiscussionScalarWhereWithAggregatesInput | DiscussionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Discussion"> | string
+    communityId?: StringWithAggregatesFilter<"Discussion"> | string
+    postId?: StringNullableWithAggregatesFilter<"Discussion"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Discussion"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Discussion"> | Date | string
+  }
+
+  export type LiveRoomWhereInput = {
+    AND?: LiveRoomWhereInput | LiveRoomWhereInput[]
+    OR?: LiveRoomWhereInput[]
+    NOT?: LiveRoomWhereInput | LiveRoomWhereInput[]
+    id?: StringFilter<"LiveRoom"> | string
+    title?: StringFilter<"LiveRoom"> | string
+    topic?: StringNullableFilter<"LiveRoom"> | string | null
+    participants?: IntFilter<"LiveRoom"> | number
+    isLive?: BoolFilter<"LiveRoom"> | boolean
+    isActive?: BoolFilter<"LiveRoom"> | boolean
+    isPublic?: BoolFilter<"LiveRoom"> | boolean
+    isPrivate?: BoolFilter<"LiveRoom"> | boolean
+    isPasswordProtected?: BoolFilter<"LiveRoom"> | boolean
+    createdAt?: DateTimeFilter<"LiveRoom"> | Date | string
+    updatedAt?: DateTimeFilter<"LiveRoom"> | Date | string
+    communityId?: StringFilter<"LiveRoom"> | string
+    courseId?: StringNullableFilter<"LiveRoom"> | string | null
+    community?: XOR<CommunityScalarRelationFilter, CommunityWhereInput>
+    User?: UserListRelationFilter
+    course?: XOR<CourseNullableScalarRelationFilter, CourseWhereInput> | null
+  }
+
+  export type LiveRoomOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    topic?: SortOrderInput | SortOrder
+    participants?: SortOrder
+    isLive?: SortOrder
+    isActive?: SortOrder
+    isPublic?: SortOrder
+    isPrivate?: SortOrder
+    isPasswordProtected?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    communityId?: SortOrder
+    courseId?: SortOrderInput | SortOrder
+    community?: CommunityOrderByWithRelationInput
+    User?: UserOrderByRelationAggregateInput
+    course?: CourseOrderByWithRelationInput
+  }
+
+  export type LiveRoomWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: LiveRoomWhereInput | LiveRoomWhereInput[]
+    OR?: LiveRoomWhereInput[]
+    NOT?: LiveRoomWhereInput | LiveRoomWhereInput[]
+    title?: StringFilter<"LiveRoom"> | string
+    topic?: StringNullableFilter<"LiveRoom"> | string | null
+    participants?: IntFilter<"LiveRoom"> | number
+    isLive?: BoolFilter<"LiveRoom"> | boolean
+    isActive?: BoolFilter<"LiveRoom"> | boolean
+    isPublic?: BoolFilter<"LiveRoom"> | boolean
+    isPrivate?: BoolFilter<"LiveRoom"> | boolean
+    isPasswordProtected?: BoolFilter<"LiveRoom"> | boolean
+    createdAt?: DateTimeFilter<"LiveRoom"> | Date | string
+    updatedAt?: DateTimeFilter<"LiveRoom"> | Date | string
+    communityId?: StringFilter<"LiveRoom"> | string
+    courseId?: StringNullableFilter<"LiveRoom"> | string | null
+    community?: XOR<CommunityScalarRelationFilter, CommunityWhereInput>
+    User?: UserListRelationFilter
+    course?: XOR<CourseNullableScalarRelationFilter, CourseWhereInput> | null
+  }, "id">
+
+  export type LiveRoomOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    topic?: SortOrderInput | SortOrder
+    participants?: SortOrder
+    isLive?: SortOrder
+    isActive?: SortOrder
+    isPublic?: SortOrder
+    isPrivate?: SortOrder
+    isPasswordProtected?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    communityId?: SortOrder
+    courseId?: SortOrderInput | SortOrder
+    _count?: LiveRoomCountOrderByAggregateInput
+    _avg?: LiveRoomAvgOrderByAggregateInput
+    _max?: LiveRoomMaxOrderByAggregateInput
+    _min?: LiveRoomMinOrderByAggregateInput
+    _sum?: LiveRoomSumOrderByAggregateInput
+  }
+
+  export type LiveRoomScalarWhereWithAggregatesInput = {
+    AND?: LiveRoomScalarWhereWithAggregatesInput | LiveRoomScalarWhereWithAggregatesInput[]
+    OR?: LiveRoomScalarWhereWithAggregatesInput[]
+    NOT?: LiveRoomScalarWhereWithAggregatesInput | LiveRoomScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"LiveRoom"> | string
+    title?: StringWithAggregatesFilter<"LiveRoom"> | string
+    topic?: StringNullableWithAggregatesFilter<"LiveRoom"> | string | null
+    participants?: IntWithAggregatesFilter<"LiveRoom"> | number
+    isLive?: BoolWithAggregatesFilter<"LiveRoom"> | boolean
+    isActive?: BoolWithAggregatesFilter<"LiveRoom"> | boolean
+    isPublic?: BoolWithAggregatesFilter<"LiveRoom"> | boolean
+    isPrivate?: BoolWithAggregatesFilter<"LiveRoom"> | boolean
+    isPasswordProtected?: BoolWithAggregatesFilter<"LiveRoom"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"LiveRoom"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"LiveRoom"> | Date | string
+    communityId?: StringWithAggregatesFilter<"LiveRoom"> | string
+    courseId?: StringNullableWithAggregatesFilter<"LiveRoom"> | string | null
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -30481,12 +37238,17 @@ export namespace Prisma {
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -30512,12 +37274,17 @@ export namespace Prisma {
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -30543,12 +37310,17 @@ export namespace Prisma {
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -30574,12 +37346,17 @@ export namespace Prisma {
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -30594,6 +37371,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -30607,6 +37385,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -30820,6 +37599,7 @@ export namespace Prisma {
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
     quizzes?: QuizCreateNestedManyWithoutCourseInput
     instructors?: InstructorCreateNestedManyWithoutCoursesInput
+    liveRoom?: LiveRoomCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateInput = {
@@ -30833,6 +37613,7 @@ export namespace Prisma {
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutCoursesInput
+    liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUpdateInput = {
@@ -30846,6 +37627,7 @@ export namespace Prisma {
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUpdateManyWithoutCoursesNestedInput
+    liveRoom?: LiveRoomUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateInput = {
@@ -30859,6 +37641,7 @@ export namespace Prisma {
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutCoursesNestedInput
+    liveRoom?: LiveRoomUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseCreateManyInput = {
@@ -31108,6 +37891,8 @@ export namespace Prisma {
     description?: string | null
     timeLimit?: number | null
     passingScore?: number | null
+    upComing?: boolean
+    isCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     lesson: LessonCreateNestedOneWithoutQuizzesInput
@@ -31123,6 +37908,8 @@ export namespace Prisma {
     lessonId: string
     timeLimit?: number | null
     passingScore?: number | null
+    upComing?: boolean
+    isCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutQuizInput
@@ -31136,6 +37923,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     timeLimit?: NullableIntFieldUpdateOperationsInput | number | null
     passingScore?: NullableIntFieldUpdateOperationsInput | number | null
+    upComing?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lesson?: LessonUpdateOneRequiredWithoutQuizzesNestedInput
@@ -31151,6 +37940,8 @@ export namespace Prisma {
     lessonId?: StringFieldUpdateOperationsInput | string
     timeLimit?: NullableIntFieldUpdateOperationsInput | number | null
     passingScore?: NullableIntFieldUpdateOperationsInput | number | null
+    upComing?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutQuizNestedInput
@@ -31165,6 +37956,8 @@ export namespace Prisma {
     lessonId: string
     timeLimit?: number | null
     passingScore?: number | null
+    upComing?: boolean
+    isCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -31175,6 +37968,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     timeLimit?: NullableIntFieldUpdateOperationsInput | number | null
     passingScore?: NullableIntFieldUpdateOperationsInput | number | null
+    upComing?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31186,6 +37981,8 @@ export namespace Prisma {
     lessonId?: StringFieldUpdateOperationsInput | string
     timeLimit?: NullableIntFieldUpdateOperationsInput | number | null
     passingScore?: NullableIntFieldUpdateOperationsInput | number | null
+    upComing?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31359,6 +38156,7 @@ export namespace Prisma {
     id?: string
     type: string
     value: JsonNullValueInput | InputJsonValue
+    isNew?: boolean
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutAchievementsInput
   }
@@ -31368,6 +38166,7 @@ export namespace Prisma {
     userId: string
     type: string
     value: JsonNullValueInput | InputJsonValue
+    isNew?: boolean
     createdAt?: Date | string
   }
 
@@ -31375,6 +38174,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     value?: JsonNullValueInput | InputJsonValue
+    isNew?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutAchievementsNestedInput
   }
@@ -31384,6 +38184,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     value?: JsonNullValueInput | InputJsonValue
+    isNew?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -31392,6 +38193,7 @@ export namespace Prisma {
     userId: string
     type: string
     value: JsonNullValueInput | InputJsonValue
+    isNew?: boolean
     createdAt?: Date | string
   }
 
@@ -31399,6 +38201,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     value?: JsonNullValueInput | InputJsonValue
+    isNew?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -31407,6 +38210,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     value?: JsonNullValueInput | InputJsonValue
+    isNew?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -31541,47 +38345,60 @@ export namespace Prisma {
   export type PostCreateInput = {
     id?: string
     content: string
+    title: string
     createdAt?: Date | string
     likesCount?: number
     author: UserCreateNestedOneWithoutPostsInput
     comments?: CommentCreateNestedManyWithoutPostInput
     Group?: GroupCreateNestedManyWithoutPostsInput
+    Community?: CommunityCreateNestedManyWithoutPostsInput
+    Discussion?: DiscussionCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateInput = {
     id?: string
     authorId: string
     content: string
+    title: string
     createdAt?: Date | string
     likesCount?: number
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     Group?: GroupUncheckedCreateNestedManyWithoutPostsInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutPostsInput
+    Discussion?: DiscussionUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likesCount?: IntFieldUpdateOperationsInput | number
     author?: UserUpdateOneRequiredWithoutPostsNestedInput
     comments?: CommentUpdateManyWithoutPostNestedInput
     Group?: GroupUpdateManyWithoutPostsNestedInput
+    Community?: CommunityUpdateManyWithoutPostsNestedInput
+    Discussion?: DiscussionUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likesCount?: IntFieldUpdateOperationsInput | number
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     Group?: GroupUncheckedUpdateManyWithoutPostsNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutPostsNestedInput
+    Discussion?: DiscussionUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type PostCreateManyInput = {
     id?: string
     authorId: string
     content: string
+    title: string
     createdAt?: Date | string
     likesCount?: number
   }
@@ -31589,6 +38406,7 @@ export namespace Prisma {
   export type PostUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likesCount?: IntFieldUpdateOperationsInput | number
   }
@@ -31597,6 +38415,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likesCount?: IntFieldUpdateOperationsInput | number
   }
@@ -31652,42 +38471,56 @@ export namespace Prisma {
   export type GroupCreateInput = {
     id?: string
     name: string
+    subject: string
+    image?: string | null
     createdAt?: Date | string
     members?: UserCreateNestedManyWithoutGroupsInput
     posts?: PostCreateNestedManyWithoutGroupInput
     admin: AdminCreateNestedOneWithoutGroupInput
+    Community?: CommunityCreateNestedManyWithoutGroupsInput
   }
 
   export type GroupUncheckedCreateInput = {
     id?: string
     name: string
+    subject: string
+    image?: string | null
     adminId: string
     createdAt?: Date | string
     members?: UserUncheckedCreateNestedManyWithoutGroupsInput
     posts?: PostUncheckedCreateNestedManyWithoutGroupInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutGroupsInput
   }
 
   export type GroupUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUpdateManyWithoutGroupsNestedInput
     posts?: PostUpdateManyWithoutGroupNestedInput
     admin?: AdminUpdateOneRequiredWithoutGroupNestedInput
+    Community?: CommunityUpdateManyWithoutGroupsNestedInput
   }
 
   export type GroupUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     adminId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUncheckedUpdateManyWithoutGroupsNestedInput
     posts?: PostUncheckedUpdateManyWithoutGroupNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutGroupsNestedInput
   }
 
   export type GroupCreateManyInput = {
     id?: string
     name: string
+    subject: string
+    image?: string | null
     adminId: string
     createdAt?: Date | string
   }
@@ -31695,12 +38528,16 @@ export namespace Prisma {
   export type GroupUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GroupUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     adminId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -32139,6 +38976,486 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BadgeCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    image?: string | null
+    points: number
+    type: string
+    earnedAt: Date | string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutBadgeInput
+  }
+
+  export type BadgeUncheckedCreateInput = {
+    id?: string
+    userId: string
+    title: string
+    description?: string | null
+    image?: string | null
+    points: number
+    type: string
+    earnedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type BadgeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    points?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBadgeNestedInput
+  }
+
+  export type BadgeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    points?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BadgeCreateManyInput = {
+    id?: string
+    userId: string
+    title: string
+    description?: string | null
+    image?: string | null
+    points: number
+    type: string
+    earnedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type BadgeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    points?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BadgeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    points?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificateCreateInput = {
+    id?: string
+    name: string
+    address: string
+    phone: string
+    notes: string
+    title: string
+    description?: string | null
+    url?: string | null
+    image?: string | null
+    points: number
+    type: string
+    earnedAt: Date | string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutCertificateInput
+  }
+
+  export type CertificateUncheckedCreateInput = {
+    id?: string
+    name: string
+    address: string
+    phone: string
+    notes: string
+    userId: string
+    title: string
+    description?: string | null
+    url?: string | null
+    image?: string | null
+    points: number
+    type: string
+    earnedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type CertificateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    points?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCertificateNestedInput
+  }
+
+  export type CertificateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    points?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificateCreateManyInput = {
+    id?: string
+    name: string
+    address: string
+    phone: string
+    notes: string
+    userId: string
+    title: string
+    description?: string | null
+    url?: string | null
+    image?: string | null
+    points: number
+    type: string
+    earnedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type CertificateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    points?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    points?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommunityCreateInput = {
+    id?: string
+    name: string
+    image?: string | null
+    description?: string | null
+    type: string
+    likes?: number
+    dislikes?: number
+    views?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: GroupCreateNestedManyWithoutCommunityInput
+    liveRoom?: LiveRoomCreateNestedManyWithoutCommunityInput
+    participants?: UserCreateNestedManyWithoutCommunityInput
+    posts?: PostCreateNestedManyWithoutCommunityInput
+    discussions?: DiscussionCreateNestedManyWithoutCommunityInput
+  }
+
+  export type CommunityUncheckedCreateInput = {
+    id?: string
+    name: string
+    image?: string | null
+    description?: string | null
+    type: string
+    likes?: number
+    dislikes?: number
+    views?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: GroupUncheckedCreateNestedManyWithoutCommunityInput
+    liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCommunityInput
+    participants?: UserUncheckedCreateNestedManyWithoutCommunityInput
+    posts?: PostUncheckedCreateNestedManyWithoutCommunityInput
+    discussions?: DiscussionUncheckedCreateNestedManyWithoutCommunityInput
+  }
+
+  export type CommunityUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: GroupUpdateManyWithoutCommunityNestedInput
+    liveRoom?: LiveRoomUpdateManyWithoutCommunityNestedInput
+    participants?: UserUpdateManyWithoutCommunityNestedInput
+    posts?: PostUpdateManyWithoutCommunityNestedInput
+    discussions?: DiscussionUpdateManyWithoutCommunityNestedInput
+  }
+
+  export type CommunityUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: GroupUncheckedUpdateManyWithoutCommunityNestedInput
+    liveRoom?: LiveRoomUncheckedUpdateManyWithoutCommunityNestedInput
+    participants?: UserUncheckedUpdateManyWithoutCommunityNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCommunityNestedInput
+    discussions?: DiscussionUncheckedUpdateManyWithoutCommunityNestedInput
+  }
+
+  export type CommunityCreateManyInput = {
+    id?: string
+    name: string
+    image?: string | null
+    description?: string | null
+    type: string
+    likes?: number
+    dislikes?: number
+    views?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommunityUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommunityUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DiscussionCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    community: CommunityCreateNestedOneWithoutDiscussionsInput
+    post?: PostCreateNestedOneWithoutDiscussionInput
+  }
+
+  export type DiscussionUncheckedCreateInput = {
+    id?: string
+    communityId: string
+    postId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DiscussionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    community?: CommunityUpdateOneRequiredWithoutDiscussionsNestedInput
+    post?: PostUpdateOneWithoutDiscussionNestedInput
+  }
+
+  export type DiscussionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    communityId?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DiscussionCreateManyInput = {
+    id?: string
+    communityId: string
+    postId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DiscussionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DiscussionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    communityId?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveRoomCreateInput = {
+    id?: string
+    title: string
+    topic?: string | null
+    participants?: number
+    isLive?: boolean
+    isActive?: boolean
+    isPublic?: boolean
+    isPrivate?: boolean
+    isPasswordProtected?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    community: CommunityCreateNestedOneWithoutLiveRoomInput
+    User?: UserCreateNestedManyWithoutLiveRoomInput
+    course?: CourseCreateNestedOneWithoutLiveRoomInput
+  }
+
+  export type LiveRoomUncheckedCreateInput = {
+    id?: string
+    title: string
+    topic?: string | null
+    participants?: number
+    isLive?: boolean
+    isActive?: boolean
+    isPublic?: boolean
+    isPrivate?: boolean
+    isPasswordProtected?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    communityId: string
+    courseId?: string | null
+    User?: UserUncheckedCreateNestedManyWithoutLiveRoomInput
+  }
+
+  export type LiveRoomUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    participants?: IntFieldUpdateOperationsInput | number
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isPasswordProtected?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    community?: CommunityUpdateOneRequiredWithoutLiveRoomNestedInput
+    User?: UserUpdateManyWithoutLiveRoomNestedInput
+    course?: CourseUpdateOneWithoutLiveRoomNestedInput
+  }
+
+  export type LiveRoomUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    participants?: IntFieldUpdateOperationsInput | number
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isPasswordProtected?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    communityId?: StringFieldUpdateOperationsInput | string
+    courseId?: NullableStringFieldUpdateOperationsInput | string | null
+    User?: UserUncheckedUpdateManyWithoutLiveRoomNestedInput
+  }
+
+  export type LiveRoomCreateManyInput = {
+    id?: string
+    title: string
+    topic?: string | null
+    participants?: number
+    isLive?: boolean
+    isActive?: boolean
+    isPublic?: boolean
+    isPrivate?: boolean
+    isPasswordProtected?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    communityId: string
+    courseId?: string | null
+  }
+
+  export type LiveRoomUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    participants?: IntFieldUpdateOperationsInput | number
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isPasswordProtected?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveRoomUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    participants?: IntFieldUpdateOperationsInput | number
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isPasswordProtected?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    communityId?: StringFieldUpdateOperationsInput | string
+    courseId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -32152,13 +39469,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type EnumUserRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -32176,6 +39486,13 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type EnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -32187,12 +39504,12 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type AcademyNullableRelationFilter = {
+  export type AcademyNullableScalarRelationFilter = {
     is?: AcademyWhereInput | null
     isNot?: AcademyWhereInput | null
   }
 
-  export type ProfileNullableRelationFilter = {
+  export type ProfileNullableScalarRelationFilter = {
     is?: ProfileWhereInput | null
     isNot?: ProfileWhereInput | null
   }
@@ -32293,6 +39610,30 @@ export namespace Prisma {
     none?: ReportWhereInput
   }
 
+  export type BadgeListRelationFilter = {
+    every?: BadgeWhereInput
+    some?: BadgeWhereInput
+    none?: BadgeWhereInput
+  }
+
+  export type CertificateListRelationFilter = {
+    every?: CertificateWhereInput
+    some?: CertificateWhereInput
+    none?: CertificateWhereInput
+  }
+
+  export type CommunityListRelationFilter = {
+    every?: CommunityWhereInput
+    some?: CommunityWhereInput
+    none?: CommunityWhereInput
+  }
+
+  export type LiveRoomListRelationFilter = {
+    every?: LiveRoomWhereInput
+    some?: LiveRoomWhereInput
+    none?: LiveRoomWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -32362,10 +39703,27 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type BadgeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CertificateOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CommunityOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LiveRoomOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    phone?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     role?: SortOrder
@@ -32380,6 +39738,7 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    phone?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     role?: SortOrder
@@ -32394,6 +39753,7 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    phone?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     role?: SortOrder
@@ -32422,16 +39782,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type EnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumUserRoleFilter<$PrismaModel>
-    _max?: NestedEnumUserRoleFilter<$PrismaModel>
-  }
-
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -32448,6 +39798,16 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type EnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -32486,7 +39846,7 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type UserRelationFilter = {
+  export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
   }
@@ -32599,7 +39959,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type AcademyRelationFilter = {
+  export type AcademyScalarRelationFilter = {
     is?: AcademyWhereInput
     isNot?: AcademyWhereInput
   }
@@ -32659,7 +40019,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type CourseRelationFilter = {
+  export type CourseScalarRelationFilter = {
     is?: CourseWhereInput
     isNot?: CourseWhereInput
   }
@@ -32704,7 +40064,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type LessonRelationFilter = {
+  export type LessonScalarRelationFilter = {
     is?: LessonWhereInput
     isNot?: LessonWhereInput
   }
@@ -32812,6 +40172,11 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type QuestionListRelationFilter = {
     every?: QuestionWhereInput
     some?: QuestionWhereInput
@@ -32829,6 +40194,8 @@ export namespace Prisma {
     lessonId?: SortOrder
     timeLimit?: SortOrder
     passingScore?: SortOrder
+    upComing?: SortOrder
+    isCompleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -32845,6 +40212,8 @@ export namespace Prisma {
     lessonId?: SortOrder
     timeLimit?: SortOrder
     passingScore?: SortOrder
+    upComing?: SortOrder
+    isCompleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -32856,6 +40225,8 @@ export namespace Prisma {
     lessonId?: SortOrder
     timeLimit?: SortOrder
     passingScore?: SortOrder
+    upComing?: SortOrder
+    isCompleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -32879,6 +40250,14 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
   export type JsonFilter<$PrismaModel = never> = 
     | PatchUndefined<
@@ -32914,12 +40293,7 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type QuizRelationFilter = {
+  export type QuizScalarRelationFilter = {
     is?: QuizWhereInput
     isNot?: QuizWhereInput
   }
@@ -33003,14 +40377,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type FloatNullableFilter<$PrismaModel = never> = {
@@ -33100,6 +40466,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     value?: SortOrder
+    isNew?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -33107,6 +40474,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     type?: SortOrder
+    isNew?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -33114,6 +40482,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     type?: SortOrder
+    isNew?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -33177,7 +40546,17 @@ export namespace Prisma {
     none?: CommentWhereInput
   }
 
+  export type DiscussionListRelationFilter = {
+    every?: DiscussionWhereInput
+    some?: DiscussionWhereInput
+    none?: DiscussionWhereInput
+  }
+
   export type CommentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DiscussionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -33185,6 +40564,7 @@ export namespace Prisma {
     id?: SortOrder
     authorId?: SortOrder
     content?: SortOrder
+    title?: SortOrder
     createdAt?: SortOrder
     likesCount?: SortOrder
   }
@@ -33197,6 +40577,7 @@ export namespace Prisma {
     id?: SortOrder
     authorId?: SortOrder
     content?: SortOrder
+    title?: SortOrder
     createdAt?: SortOrder
     likesCount?: SortOrder
   }
@@ -33205,6 +40586,7 @@ export namespace Prisma {
     id?: SortOrder
     authorId?: SortOrder
     content?: SortOrder
+    title?: SortOrder
     createdAt?: SortOrder
     likesCount?: SortOrder
   }
@@ -33213,7 +40595,7 @@ export namespace Prisma {
     likesCount?: SortOrder
   }
 
-  export type PostRelationFilter = {
+  export type PostScalarRelationFilter = {
     is?: PostWhereInput
     isNot?: PostWhereInput
   }
@@ -33239,7 +40621,7 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type AdminRelationFilter = {
+  export type AdminScalarRelationFilter = {
     is?: AdminWhereInput
     isNot?: AdminWhereInput
   }
@@ -33247,6 +40629,8 @@ export namespace Prisma {
   export type GroupCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    subject?: SortOrder
+    image?: SortOrder
     adminId?: SortOrder
     createdAt?: SortOrder
   }
@@ -33254,6 +40638,8 @@ export namespace Prisma {
   export type GroupMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    subject?: SortOrder
+    image?: SortOrder
     adminId?: SortOrder
     createdAt?: SortOrder
   }
@@ -33261,6 +40647,8 @@ export namespace Prisma {
   export type GroupMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    subject?: SortOrder
+    image?: SortOrder
     adminId?: SortOrder
     createdAt?: SortOrder
   }
@@ -33283,7 +40671,7 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type OwnerRelationFilter = {
+  export type OwnerScalarRelationFilter = {
     is?: OwnerWhereInput
     isNot?: OwnerWhereInput
   }
@@ -33461,6 +40849,255 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type BadgeCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
+    points?: SortOrder
+    type?: SortOrder
+    earnedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BadgeAvgOrderByAggregateInput = {
+    points?: SortOrder
+  }
+
+  export type BadgeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
+    points?: SortOrder
+    type?: SortOrder
+    earnedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BadgeMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
+    points?: SortOrder
+    type?: SortOrder
+    earnedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BadgeSumOrderByAggregateInput = {
+    points?: SortOrder
+  }
+
+  export type CertificateCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    address?: SortOrder
+    phone?: SortOrder
+    notes?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    url?: SortOrder
+    image?: SortOrder
+    points?: SortOrder
+    type?: SortOrder
+    earnedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CertificateAvgOrderByAggregateInput = {
+    points?: SortOrder
+  }
+
+  export type CertificateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    address?: SortOrder
+    phone?: SortOrder
+    notes?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    url?: SortOrder
+    image?: SortOrder
+    points?: SortOrder
+    type?: SortOrder
+    earnedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CertificateMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    address?: SortOrder
+    phone?: SortOrder
+    notes?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    url?: SortOrder
+    image?: SortOrder
+    points?: SortOrder
+    type?: SortOrder
+    earnedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CertificateSumOrderByAggregateInput = {
+    points?: SortOrder
+  }
+
+  export type CommunityCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    image?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    likes?: SortOrder
+    dislikes?: SortOrder
+    views?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CommunityAvgOrderByAggregateInput = {
+    likes?: SortOrder
+    dislikes?: SortOrder
+    views?: SortOrder
+  }
+
+  export type CommunityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    image?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    likes?: SortOrder
+    dislikes?: SortOrder
+    views?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CommunityMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    image?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    likes?: SortOrder
+    dislikes?: SortOrder
+    views?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CommunitySumOrderByAggregateInput = {
+    likes?: SortOrder
+    dislikes?: SortOrder
+    views?: SortOrder
+  }
+
+  export type CommunityScalarRelationFilter = {
+    is?: CommunityWhereInput
+    isNot?: CommunityWhereInput
+  }
+
+  export type PostNullableScalarRelationFilter = {
+    is?: PostWhereInput | null
+    isNot?: PostWhereInput | null
+  }
+
+  export type DiscussionCountOrderByAggregateInput = {
+    id?: SortOrder
+    communityId?: SortOrder
+    postId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DiscussionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    communityId?: SortOrder
+    postId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DiscussionMinOrderByAggregateInput = {
+    id?: SortOrder
+    communityId?: SortOrder
+    postId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CourseNullableScalarRelationFilter = {
+    is?: CourseWhereInput | null
+    isNot?: CourseWhereInput | null
+  }
+
+  export type LiveRoomCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    topic?: SortOrder
+    participants?: SortOrder
+    isLive?: SortOrder
+    isActive?: SortOrder
+    isPublic?: SortOrder
+    isPrivate?: SortOrder
+    isPasswordProtected?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    communityId?: SortOrder
+    courseId?: SortOrder
+  }
+
+  export type LiveRoomAvgOrderByAggregateInput = {
+    participants?: SortOrder
+  }
+
+  export type LiveRoomMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    topic?: SortOrder
+    participants?: SortOrder
+    isLive?: SortOrder
+    isActive?: SortOrder
+    isPublic?: SortOrder
+    isPrivate?: SortOrder
+    isPasswordProtected?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    communityId?: SortOrder
+    courseId?: SortOrder
+  }
+
+  export type LiveRoomMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    topic?: SortOrder
+    participants?: SortOrder
+    isLive?: SortOrder
+    isActive?: SortOrder
+    isPublic?: SortOrder
+    isPrivate?: SortOrder
+    isPasswordProtected?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    communityId?: SortOrder
+    courseId?: SortOrder
+  }
+
+  export type LiveRoomSumOrderByAggregateInput = {
+    participants?: SortOrder
+  }
+
   export type AcademyCreateNestedOneWithoutUsersInput = {
     create?: XOR<AcademyCreateWithoutUsersInput, AcademyUncheckedCreateWithoutUsersInput>
     connectOrCreate?: AcademyCreateOrConnectWithoutUsersInput
@@ -33582,6 +41219,32 @@ export namespace Prisma {
     connect?: ReportWhereUniqueInput | ReportWhereUniqueInput[]
   }
 
+  export type BadgeCreateNestedManyWithoutUserInput = {
+    create?: XOR<BadgeCreateWithoutUserInput, BadgeUncheckedCreateWithoutUserInput> | BadgeCreateWithoutUserInput[] | BadgeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BadgeCreateOrConnectWithoutUserInput | BadgeCreateOrConnectWithoutUserInput[]
+    createMany?: BadgeCreateManyUserInputEnvelope
+    connect?: BadgeWhereUniqueInput | BadgeWhereUniqueInput[]
+  }
+
+  export type CertificateCreateNestedManyWithoutUserInput = {
+    create?: XOR<CertificateCreateWithoutUserInput, CertificateUncheckedCreateWithoutUserInput> | CertificateCreateWithoutUserInput[] | CertificateUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CertificateCreateOrConnectWithoutUserInput | CertificateCreateOrConnectWithoutUserInput[]
+    createMany?: CertificateCreateManyUserInputEnvelope
+    connect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+  }
+
+  export type CommunityCreateNestedManyWithoutParticipantsInput = {
+    create?: XOR<CommunityCreateWithoutParticipantsInput, CommunityUncheckedCreateWithoutParticipantsInput> | CommunityCreateWithoutParticipantsInput[] | CommunityUncheckedCreateWithoutParticipantsInput[]
+    connectOrCreate?: CommunityCreateOrConnectWithoutParticipantsInput | CommunityCreateOrConnectWithoutParticipantsInput[]
+    connect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+  }
+
+  export type LiveRoomCreateNestedManyWithoutUserInput = {
+    create?: XOR<LiveRoomCreateWithoutUserInput, LiveRoomUncheckedCreateWithoutUserInput> | LiveRoomCreateWithoutUserInput[] | LiveRoomUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LiveRoomCreateOrConnectWithoutUserInput | LiveRoomCreateOrConnectWithoutUserInput[]
+    connect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+  }
+
   export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -33697,16 +41360,42 @@ export namespace Prisma {
     connect?: ReportWhereUniqueInput | ReportWhereUniqueInput[]
   }
 
+  export type BadgeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<BadgeCreateWithoutUserInput, BadgeUncheckedCreateWithoutUserInput> | BadgeCreateWithoutUserInput[] | BadgeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BadgeCreateOrConnectWithoutUserInput | BadgeCreateOrConnectWithoutUserInput[]
+    createMany?: BadgeCreateManyUserInputEnvelope
+    connect?: BadgeWhereUniqueInput | BadgeWhereUniqueInput[]
+  }
+
+  export type CertificateUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CertificateCreateWithoutUserInput, CertificateUncheckedCreateWithoutUserInput> | CertificateCreateWithoutUserInput[] | CertificateUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CertificateCreateOrConnectWithoutUserInput | CertificateCreateOrConnectWithoutUserInput[]
+    createMany?: CertificateCreateManyUserInputEnvelope
+    connect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+  }
+
+  export type CommunityUncheckedCreateNestedManyWithoutParticipantsInput = {
+    create?: XOR<CommunityCreateWithoutParticipantsInput, CommunityUncheckedCreateWithoutParticipantsInput> | CommunityCreateWithoutParticipantsInput[] | CommunityUncheckedCreateWithoutParticipantsInput[]
+    connectOrCreate?: CommunityCreateOrConnectWithoutParticipantsInput | CommunityCreateOrConnectWithoutParticipantsInput[]
+    connect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+  }
+
+  export type LiveRoomUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<LiveRoomCreateWithoutUserInput, LiveRoomUncheckedCreateWithoutUserInput> | LiveRoomCreateWithoutUserInput[] | LiveRoomUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LiveRoomCreateOrConnectWithoutUserInput | LiveRoomCreateOrConnectWithoutUserInput[]
+    connect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
-  export type EnumUserRoleFieldUpdateOperationsInput = {
-    set?: $Enums.UserRole
-  }
-
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type EnumUserRoleFieldUpdateOperationsInput = {
+    set?: $Enums.UserRole
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -33954,6 +41643,60 @@ export namespace Prisma {
     deleteMany?: ReportScalarWhereInput | ReportScalarWhereInput[]
   }
 
+  export type BadgeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BadgeCreateWithoutUserInput, BadgeUncheckedCreateWithoutUserInput> | BadgeCreateWithoutUserInput[] | BadgeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BadgeCreateOrConnectWithoutUserInput | BadgeCreateOrConnectWithoutUserInput[]
+    upsert?: BadgeUpsertWithWhereUniqueWithoutUserInput | BadgeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BadgeCreateManyUserInputEnvelope
+    set?: BadgeWhereUniqueInput | BadgeWhereUniqueInput[]
+    disconnect?: BadgeWhereUniqueInput | BadgeWhereUniqueInput[]
+    delete?: BadgeWhereUniqueInput | BadgeWhereUniqueInput[]
+    connect?: BadgeWhereUniqueInput | BadgeWhereUniqueInput[]
+    update?: BadgeUpdateWithWhereUniqueWithoutUserInput | BadgeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BadgeUpdateManyWithWhereWithoutUserInput | BadgeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BadgeScalarWhereInput | BadgeScalarWhereInput[]
+  }
+
+  export type CertificateUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CertificateCreateWithoutUserInput, CertificateUncheckedCreateWithoutUserInput> | CertificateCreateWithoutUserInput[] | CertificateUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CertificateCreateOrConnectWithoutUserInput | CertificateCreateOrConnectWithoutUserInput[]
+    upsert?: CertificateUpsertWithWhereUniqueWithoutUserInput | CertificateUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CertificateCreateManyUserInputEnvelope
+    set?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    disconnect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    delete?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    connect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    update?: CertificateUpdateWithWhereUniqueWithoutUserInput | CertificateUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CertificateUpdateManyWithWhereWithoutUserInput | CertificateUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CertificateScalarWhereInput | CertificateScalarWhereInput[]
+  }
+
+  export type CommunityUpdateManyWithoutParticipantsNestedInput = {
+    create?: XOR<CommunityCreateWithoutParticipantsInput, CommunityUncheckedCreateWithoutParticipantsInput> | CommunityCreateWithoutParticipantsInput[] | CommunityUncheckedCreateWithoutParticipantsInput[]
+    connectOrCreate?: CommunityCreateOrConnectWithoutParticipantsInput | CommunityCreateOrConnectWithoutParticipantsInput[]
+    upsert?: CommunityUpsertWithWhereUniqueWithoutParticipantsInput | CommunityUpsertWithWhereUniqueWithoutParticipantsInput[]
+    set?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    disconnect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    delete?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    connect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    update?: CommunityUpdateWithWhereUniqueWithoutParticipantsInput | CommunityUpdateWithWhereUniqueWithoutParticipantsInput[]
+    updateMany?: CommunityUpdateManyWithWhereWithoutParticipantsInput | CommunityUpdateManyWithWhereWithoutParticipantsInput[]
+    deleteMany?: CommunityScalarWhereInput | CommunityScalarWhereInput[]
+  }
+
+  export type LiveRoomUpdateManyWithoutUserNestedInput = {
+    create?: XOR<LiveRoomCreateWithoutUserInput, LiveRoomUncheckedCreateWithoutUserInput> | LiveRoomCreateWithoutUserInput[] | LiveRoomUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LiveRoomCreateOrConnectWithoutUserInput | LiveRoomCreateOrConnectWithoutUserInput[]
+    upsert?: LiveRoomUpsertWithWhereUniqueWithoutUserInput | LiveRoomUpsertWithWhereUniqueWithoutUserInput[]
+    set?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    disconnect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    delete?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    connect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    update?: LiveRoomUpdateWithWhereUniqueWithoutUserInput | LiveRoomUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: LiveRoomUpdateManyWithWhereWithoutUserInput | LiveRoomUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: LiveRoomScalarWhereInput | LiveRoomScalarWhereInput[]
+  }
+
   export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -34183,6 +41926,60 @@ export namespace Prisma {
     update?: ReportUpdateWithWhereUniqueWithoutUserInput | ReportUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ReportUpdateManyWithWhereWithoutUserInput | ReportUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ReportScalarWhereInput | ReportScalarWhereInput[]
+  }
+
+  export type BadgeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BadgeCreateWithoutUserInput, BadgeUncheckedCreateWithoutUserInput> | BadgeCreateWithoutUserInput[] | BadgeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BadgeCreateOrConnectWithoutUserInput | BadgeCreateOrConnectWithoutUserInput[]
+    upsert?: BadgeUpsertWithWhereUniqueWithoutUserInput | BadgeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BadgeCreateManyUserInputEnvelope
+    set?: BadgeWhereUniqueInput | BadgeWhereUniqueInput[]
+    disconnect?: BadgeWhereUniqueInput | BadgeWhereUniqueInput[]
+    delete?: BadgeWhereUniqueInput | BadgeWhereUniqueInput[]
+    connect?: BadgeWhereUniqueInput | BadgeWhereUniqueInput[]
+    update?: BadgeUpdateWithWhereUniqueWithoutUserInput | BadgeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BadgeUpdateManyWithWhereWithoutUserInput | BadgeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BadgeScalarWhereInput | BadgeScalarWhereInput[]
+  }
+
+  export type CertificateUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CertificateCreateWithoutUserInput, CertificateUncheckedCreateWithoutUserInput> | CertificateCreateWithoutUserInput[] | CertificateUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CertificateCreateOrConnectWithoutUserInput | CertificateCreateOrConnectWithoutUserInput[]
+    upsert?: CertificateUpsertWithWhereUniqueWithoutUserInput | CertificateUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CertificateCreateManyUserInputEnvelope
+    set?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    disconnect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    delete?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    connect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    update?: CertificateUpdateWithWhereUniqueWithoutUserInput | CertificateUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CertificateUpdateManyWithWhereWithoutUserInput | CertificateUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CertificateScalarWhereInput | CertificateScalarWhereInput[]
+  }
+
+  export type CommunityUncheckedUpdateManyWithoutParticipantsNestedInput = {
+    create?: XOR<CommunityCreateWithoutParticipantsInput, CommunityUncheckedCreateWithoutParticipantsInput> | CommunityCreateWithoutParticipantsInput[] | CommunityUncheckedCreateWithoutParticipantsInput[]
+    connectOrCreate?: CommunityCreateOrConnectWithoutParticipantsInput | CommunityCreateOrConnectWithoutParticipantsInput[]
+    upsert?: CommunityUpsertWithWhereUniqueWithoutParticipantsInput | CommunityUpsertWithWhereUniqueWithoutParticipantsInput[]
+    set?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    disconnect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    delete?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    connect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    update?: CommunityUpdateWithWhereUniqueWithoutParticipantsInput | CommunityUpdateWithWhereUniqueWithoutParticipantsInput[]
+    updateMany?: CommunityUpdateManyWithWhereWithoutParticipantsInput | CommunityUpdateManyWithWhereWithoutParticipantsInput[]
+    deleteMany?: CommunityScalarWhereInput | CommunityScalarWhereInput[]
+  }
+
+  export type LiveRoomUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<LiveRoomCreateWithoutUserInput, LiveRoomUncheckedCreateWithoutUserInput> | LiveRoomCreateWithoutUserInput[] | LiveRoomUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LiveRoomCreateOrConnectWithoutUserInput | LiveRoomCreateOrConnectWithoutUserInput[]
+    upsert?: LiveRoomUpsertWithWhereUniqueWithoutUserInput | LiveRoomUpsertWithWhereUniqueWithoutUserInput[]
+    set?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    disconnect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    delete?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    connect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    update?: LiveRoomUpdateWithWhereUniqueWithoutUserInput | LiveRoomUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: LiveRoomUpdateManyWithWhereWithoutUserInput | LiveRoomUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: LiveRoomScalarWhereInput | LiveRoomScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutProfileInput = {
@@ -34465,6 +42262,13 @@ export namespace Prisma {
     connect?: InstructorWhereUniqueInput | InstructorWhereUniqueInput[]
   }
 
+  export type LiveRoomCreateNestedManyWithoutCourseInput = {
+    create?: XOR<LiveRoomCreateWithoutCourseInput, LiveRoomUncheckedCreateWithoutCourseInput> | LiveRoomCreateWithoutCourseInput[] | LiveRoomUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: LiveRoomCreateOrConnectWithoutCourseInput | LiveRoomCreateOrConnectWithoutCourseInput[]
+    createMany?: LiveRoomCreateManyCourseInputEnvelope
+    connect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+  }
+
   export type LessonUncheckedCreateNestedManyWithoutCourseInput = {
     create?: XOR<LessonCreateWithoutCourseInput, LessonUncheckedCreateWithoutCourseInput> | LessonCreateWithoutCourseInput[] | LessonUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: LessonCreateOrConnectWithoutCourseInput | LessonCreateOrConnectWithoutCourseInput[]
@@ -34489,6 +42293,13 @@ export namespace Prisma {
     create?: XOR<InstructorCreateWithoutCoursesInput, InstructorUncheckedCreateWithoutCoursesInput> | InstructorCreateWithoutCoursesInput[] | InstructorUncheckedCreateWithoutCoursesInput[]
     connectOrCreate?: InstructorCreateOrConnectWithoutCoursesInput | InstructorCreateOrConnectWithoutCoursesInput[]
     connect?: InstructorWhereUniqueInput | InstructorWhereUniqueInput[]
+  }
+
+  export type LiveRoomUncheckedCreateNestedManyWithoutCourseInput = {
+    create?: XOR<LiveRoomCreateWithoutCourseInput, LiveRoomUncheckedCreateWithoutCourseInput> | LiveRoomCreateWithoutCourseInput[] | LiveRoomUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: LiveRoomCreateOrConnectWithoutCourseInput | LiveRoomCreateOrConnectWithoutCourseInput[]
+    createMany?: LiveRoomCreateManyCourseInputEnvelope
+    connect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
   }
 
   export type AcademyUpdateOneRequiredWithoutCoursesNestedInput = {
@@ -34553,6 +42364,20 @@ export namespace Prisma {
     deleteMany?: InstructorScalarWhereInput | InstructorScalarWhereInput[]
   }
 
+  export type LiveRoomUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<LiveRoomCreateWithoutCourseInput, LiveRoomUncheckedCreateWithoutCourseInput> | LiveRoomCreateWithoutCourseInput[] | LiveRoomUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: LiveRoomCreateOrConnectWithoutCourseInput | LiveRoomCreateOrConnectWithoutCourseInput[]
+    upsert?: LiveRoomUpsertWithWhereUniqueWithoutCourseInput | LiveRoomUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: LiveRoomCreateManyCourseInputEnvelope
+    set?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    disconnect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    delete?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    connect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    update?: LiveRoomUpdateWithWhereUniqueWithoutCourseInput | LiveRoomUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: LiveRoomUpdateManyWithWhereWithoutCourseInput | LiveRoomUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: LiveRoomScalarWhereInput | LiveRoomScalarWhereInput[]
+  }
+
   export type LessonUncheckedUpdateManyWithoutCourseNestedInput = {
     create?: XOR<LessonCreateWithoutCourseInput, LessonUncheckedCreateWithoutCourseInput> | LessonCreateWithoutCourseInput[] | LessonUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: LessonCreateOrConnectWithoutCourseInput | LessonCreateOrConnectWithoutCourseInput[]
@@ -34605,6 +42430,20 @@ export namespace Prisma {
     update?: InstructorUpdateWithWhereUniqueWithoutCoursesInput | InstructorUpdateWithWhereUniqueWithoutCoursesInput[]
     updateMany?: InstructorUpdateManyWithWhereWithoutCoursesInput | InstructorUpdateManyWithWhereWithoutCoursesInput[]
     deleteMany?: InstructorScalarWhereInput | InstructorScalarWhereInput[]
+  }
+
+  export type LiveRoomUncheckedUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<LiveRoomCreateWithoutCourseInput, LiveRoomUncheckedCreateWithoutCourseInput> | LiveRoomCreateWithoutCourseInput[] | LiveRoomUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: LiveRoomCreateOrConnectWithoutCourseInput | LiveRoomCreateOrConnectWithoutCourseInput[]
+    upsert?: LiveRoomUpsertWithWhereUniqueWithoutCourseInput | LiveRoomUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: LiveRoomCreateManyCourseInputEnvelope
+    set?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    disconnect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    delete?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    connect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    update?: LiveRoomUpdateWithWhereUniqueWithoutCourseInput | LiveRoomUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: LiveRoomUpdateManyWithWhereWithoutCourseInput | LiveRoomUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: LiveRoomScalarWhereInput | LiveRoomScalarWhereInput[]
   }
 
   export type CourseCreateNestedOneWithoutLessonsInput = {
@@ -34889,6 +42728,10 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type LessonUpdateOneRequiredWithoutQuizzesNestedInput = {
     create?: XOR<LessonCreateWithoutQuizzesInput, LessonUncheckedCreateWithoutQuizzesInput>
     connectOrCreate?: LessonCreateOrConnectWithoutQuizzesInput
@@ -34991,10 +42834,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type QuizUpdateOneRequiredWithoutQuestionsNestedInput = {
@@ -35144,6 +42983,19 @@ export namespace Prisma {
     connect?: GroupWhereUniqueInput | GroupWhereUniqueInput[]
   }
 
+  export type CommunityCreateNestedManyWithoutPostsInput = {
+    create?: XOR<CommunityCreateWithoutPostsInput, CommunityUncheckedCreateWithoutPostsInput> | CommunityCreateWithoutPostsInput[] | CommunityUncheckedCreateWithoutPostsInput[]
+    connectOrCreate?: CommunityCreateOrConnectWithoutPostsInput | CommunityCreateOrConnectWithoutPostsInput[]
+    connect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+  }
+
+  export type DiscussionCreateNestedManyWithoutPostInput = {
+    create?: XOR<DiscussionCreateWithoutPostInput, DiscussionUncheckedCreateWithoutPostInput> | DiscussionCreateWithoutPostInput[] | DiscussionUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: DiscussionCreateOrConnectWithoutPostInput | DiscussionCreateOrConnectWithoutPostInput[]
+    createMany?: DiscussionCreateManyPostInputEnvelope
+    connect?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+  }
+
   export type CommentUncheckedCreateNestedManyWithoutPostInput = {
     create?: XOR<CommentCreateWithoutPostInput, CommentUncheckedCreateWithoutPostInput> | CommentCreateWithoutPostInput[] | CommentUncheckedCreateWithoutPostInput[]
     connectOrCreate?: CommentCreateOrConnectWithoutPostInput | CommentCreateOrConnectWithoutPostInput[]
@@ -35155,6 +43007,19 @@ export namespace Prisma {
     create?: XOR<GroupCreateWithoutPostsInput, GroupUncheckedCreateWithoutPostsInput> | GroupCreateWithoutPostsInput[] | GroupUncheckedCreateWithoutPostsInput[]
     connectOrCreate?: GroupCreateOrConnectWithoutPostsInput | GroupCreateOrConnectWithoutPostsInput[]
     connect?: GroupWhereUniqueInput | GroupWhereUniqueInput[]
+  }
+
+  export type CommunityUncheckedCreateNestedManyWithoutPostsInput = {
+    create?: XOR<CommunityCreateWithoutPostsInput, CommunityUncheckedCreateWithoutPostsInput> | CommunityCreateWithoutPostsInput[] | CommunityUncheckedCreateWithoutPostsInput[]
+    connectOrCreate?: CommunityCreateOrConnectWithoutPostsInput | CommunityCreateOrConnectWithoutPostsInput[]
+    connect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+  }
+
+  export type DiscussionUncheckedCreateNestedManyWithoutPostInput = {
+    create?: XOR<DiscussionCreateWithoutPostInput, DiscussionUncheckedCreateWithoutPostInput> | DiscussionCreateWithoutPostInput[] | DiscussionUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: DiscussionCreateOrConnectWithoutPostInput | DiscussionCreateOrConnectWithoutPostInput[]
+    createMany?: DiscussionCreateManyPostInputEnvelope
+    connect?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutPostsNestedInput = {
@@ -35192,6 +43057,33 @@ export namespace Prisma {
     deleteMany?: GroupScalarWhereInput | GroupScalarWhereInput[]
   }
 
+  export type CommunityUpdateManyWithoutPostsNestedInput = {
+    create?: XOR<CommunityCreateWithoutPostsInput, CommunityUncheckedCreateWithoutPostsInput> | CommunityCreateWithoutPostsInput[] | CommunityUncheckedCreateWithoutPostsInput[]
+    connectOrCreate?: CommunityCreateOrConnectWithoutPostsInput | CommunityCreateOrConnectWithoutPostsInput[]
+    upsert?: CommunityUpsertWithWhereUniqueWithoutPostsInput | CommunityUpsertWithWhereUniqueWithoutPostsInput[]
+    set?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    disconnect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    delete?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    connect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    update?: CommunityUpdateWithWhereUniqueWithoutPostsInput | CommunityUpdateWithWhereUniqueWithoutPostsInput[]
+    updateMany?: CommunityUpdateManyWithWhereWithoutPostsInput | CommunityUpdateManyWithWhereWithoutPostsInput[]
+    deleteMany?: CommunityScalarWhereInput | CommunityScalarWhereInput[]
+  }
+
+  export type DiscussionUpdateManyWithoutPostNestedInput = {
+    create?: XOR<DiscussionCreateWithoutPostInput, DiscussionUncheckedCreateWithoutPostInput> | DiscussionCreateWithoutPostInput[] | DiscussionUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: DiscussionCreateOrConnectWithoutPostInput | DiscussionCreateOrConnectWithoutPostInput[]
+    upsert?: DiscussionUpsertWithWhereUniqueWithoutPostInput | DiscussionUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: DiscussionCreateManyPostInputEnvelope
+    set?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+    disconnect?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+    delete?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+    connect?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+    update?: DiscussionUpdateWithWhereUniqueWithoutPostInput | DiscussionUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: DiscussionUpdateManyWithWhereWithoutPostInput | DiscussionUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: DiscussionScalarWhereInput | DiscussionScalarWhereInput[]
+  }
+
   export type CommentUncheckedUpdateManyWithoutPostNestedInput = {
     create?: XOR<CommentCreateWithoutPostInput, CommentUncheckedCreateWithoutPostInput> | CommentCreateWithoutPostInput[] | CommentUncheckedCreateWithoutPostInput[]
     connectOrCreate?: CommentCreateOrConnectWithoutPostInput | CommentCreateOrConnectWithoutPostInput[]
@@ -35217,6 +43109,33 @@ export namespace Prisma {
     update?: GroupUpdateWithWhereUniqueWithoutPostsInput | GroupUpdateWithWhereUniqueWithoutPostsInput[]
     updateMany?: GroupUpdateManyWithWhereWithoutPostsInput | GroupUpdateManyWithWhereWithoutPostsInput[]
     deleteMany?: GroupScalarWhereInput | GroupScalarWhereInput[]
+  }
+
+  export type CommunityUncheckedUpdateManyWithoutPostsNestedInput = {
+    create?: XOR<CommunityCreateWithoutPostsInput, CommunityUncheckedCreateWithoutPostsInput> | CommunityCreateWithoutPostsInput[] | CommunityUncheckedCreateWithoutPostsInput[]
+    connectOrCreate?: CommunityCreateOrConnectWithoutPostsInput | CommunityCreateOrConnectWithoutPostsInput[]
+    upsert?: CommunityUpsertWithWhereUniqueWithoutPostsInput | CommunityUpsertWithWhereUniqueWithoutPostsInput[]
+    set?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    disconnect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    delete?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    connect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    update?: CommunityUpdateWithWhereUniqueWithoutPostsInput | CommunityUpdateWithWhereUniqueWithoutPostsInput[]
+    updateMany?: CommunityUpdateManyWithWhereWithoutPostsInput | CommunityUpdateManyWithWhereWithoutPostsInput[]
+    deleteMany?: CommunityScalarWhereInput | CommunityScalarWhereInput[]
+  }
+
+  export type DiscussionUncheckedUpdateManyWithoutPostNestedInput = {
+    create?: XOR<DiscussionCreateWithoutPostInput, DiscussionUncheckedCreateWithoutPostInput> | DiscussionCreateWithoutPostInput[] | DiscussionUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: DiscussionCreateOrConnectWithoutPostInput | DiscussionCreateOrConnectWithoutPostInput[]
+    upsert?: DiscussionUpsertWithWhereUniqueWithoutPostInput | DiscussionUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: DiscussionCreateManyPostInputEnvelope
+    set?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+    disconnect?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+    delete?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+    connect?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+    update?: DiscussionUpdateWithWhereUniqueWithoutPostInput | DiscussionUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: DiscussionUpdateManyWithWhereWithoutPostInput | DiscussionUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: DiscussionScalarWhereInput | DiscussionScalarWhereInput[]
   }
 
   export type PostCreateNestedOneWithoutCommentsInput = {
@@ -35251,6 +43170,12 @@ export namespace Prisma {
     connect?: AdminWhereUniqueInput
   }
 
+  export type CommunityCreateNestedManyWithoutGroupsInput = {
+    create?: XOR<CommunityCreateWithoutGroupsInput, CommunityUncheckedCreateWithoutGroupsInput> | CommunityCreateWithoutGroupsInput[] | CommunityUncheckedCreateWithoutGroupsInput[]
+    connectOrCreate?: CommunityCreateOrConnectWithoutGroupsInput | CommunityCreateOrConnectWithoutGroupsInput[]
+    connect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutGroupsInput = {
     create?: XOR<UserCreateWithoutGroupsInput, UserUncheckedCreateWithoutGroupsInput> | UserCreateWithoutGroupsInput[] | UserUncheckedCreateWithoutGroupsInput[]
     connectOrCreate?: UserCreateOrConnectWithoutGroupsInput | UserCreateOrConnectWithoutGroupsInput[]
@@ -35261,6 +43186,12 @@ export namespace Prisma {
     create?: XOR<PostCreateWithoutGroupInput, PostUncheckedCreateWithoutGroupInput> | PostCreateWithoutGroupInput[] | PostUncheckedCreateWithoutGroupInput[]
     connectOrCreate?: PostCreateOrConnectWithoutGroupInput | PostCreateOrConnectWithoutGroupInput[]
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type CommunityUncheckedCreateNestedManyWithoutGroupsInput = {
+    create?: XOR<CommunityCreateWithoutGroupsInput, CommunityUncheckedCreateWithoutGroupsInput> | CommunityCreateWithoutGroupsInput[] | CommunityUncheckedCreateWithoutGroupsInput[]
+    connectOrCreate?: CommunityCreateOrConnectWithoutGroupsInput | CommunityCreateOrConnectWithoutGroupsInput[]
+    connect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
   }
 
   export type UserUpdateManyWithoutGroupsNestedInput = {
@@ -35297,6 +43228,19 @@ export namespace Prisma {
     update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutGroupInput, AdminUpdateWithoutGroupInput>, AdminUncheckedUpdateWithoutGroupInput>
   }
 
+  export type CommunityUpdateManyWithoutGroupsNestedInput = {
+    create?: XOR<CommunityCreateWithoutGroupsInput, CommunityUncheckedCreateWithoutGroupsInput> | CommunityCreateWithoutGroupsInput[] | CommunityUncheckedCreateWithoutGroupsInput[]
+    connectOrCreate?: CommunityCreateOrConnectWithoutGroupsInput | CommunityCreateOrConnectWithoutGroupsInput[]
+    upsert?: CommunityUpsertWithWhereUniqueWithoutGroupsInput | CommunityUpsertWithWhereUniqueWithoutGroupsInput[]
+    set?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    disconnect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    delete?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    connect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    update?: CommunityUpdateWithWhereUniqueWithoutGroupsInput | CommunityUpdateWithWhereUniqueWithoutGroupsInput[]
+    updateMany?: CommunityUpdateManyWithWhereWithoutGroupsInput | CommunityUpdateManyWithWhereWithoutGroupsInput[]
+    deleteMany?: CommunityScalarWhereInput | CommunityScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutGroupsNestedInput = {
     create?: XOR<UserCreateWithoutGroupsInput, UserUncheckedCreateWithoutGroupsInput> | UserCreateWithoutGroupsInput[] | UserUncheckedCreateWithoutGroupsInput[]
     connectOrCreate?: UserCreateOrConnectWithoutGroupsInput | UserCreateOrConnectWithoutGroupsInput[]
@@ -35321,6 +43265,19 @@ export namespace Prisma {
     update?: PostUpdateWithWhereUniqueWithoutGroupInput | PostUpdateWithWhereUniqueWithoutGroupInput[]
     updateMany?: PostUpdateManyWithWhereWithoutGroupInput | PostUpdateManyWithWhereWithoutGroupInput[]
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type CommunityUncheckedUpdateManyWithoutGroupsNestedInput = {
+    create?: XOR<CommunityCreateWithoutGroupsInput, CommunityUncheckedCreateWithoutGroupsInput> | CommunityCreateWithoutGroupsInput[] | CommunityUncheckedCreateWithoutGroupsInput[]
+    connectOrCreate?: CommunityCreateOrConnectWithoutGroupsInput | CommunityCreateOrConnectWithoutGroupsInput[]
+    upsert?: CommunityUpsertWithWhereUniqueWithoutGroupsInput | CommunityUpsertWithWhereUniqueWithoutGroupsInput[]
+    set?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    disconnect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    delete?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    connect?: CommunityWhereUniqueInput | CommunityWhereUniqueInput[]
+    update?: CommunityUpdateWithWhereUniqueWithoutGroupsInput | CommunityUpdateWithWhereUniqueWithoutGroupsInput[]
+    updateMany?: CommunityUpdateManyWithWhereWithoutGroupsInput | CommunityUpdateManyWithWhereWithoutGroupsInput[]
+    deleteMany?: CommunityScalarWhereInput | CommunityScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAdminInput = {
@@ -35609,6 +43566,330 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReportInput, UserUpdateWithoutReportInput>, UserUncheckedUpdateWithoutReportInput>
   }
 
+  export type UserCreateNestedOneWithoutBadgeInput = {
+    create?: XOR<UserCreateWithoutBadgeInput, UserUncheckedCreateWithoutBadgeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBadgeInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutBadgeNestedInput = {
+    create?: XOR<UserCreateWithoutBadgeInput, UserUncheckedCreateWithoutBadgeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBadgeInput
+    upsert?: UserUpsertWithoutBadgeInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBadgeInput, UserUpdateWithoutBadgeInput>, UserUncheckedUpdateWithoutBadgeInput>
+  }
+
+  export type UserCreateNestedOneWithoutCertificateInput = {
+    create?: XOR<UserCreateWithoutCertificateInput, UserUncheckedCreateWithoutCertificateInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCertificateInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutCertificateNestedInput = {
+    create?: XOR<UserCreateWithoutCertificateInput, UserUncheckedCreateWithoutCertificateInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCertificateInput
+    upsert?: UserUpsertWithoutCertificateInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCertificateInput, UserUpdateWithoutCertificateInput>, UserUncheckedUpdateWithoutCertificateInput>
+  }
+
+  export type GroupCreateNestedManyWithoutCommunityInput = {
+    create?: XOR<GroupCreateWithoutCommunityInput, GroupUncheckedCreateWithoutCommunityInput> | GroupCreateWithoutCommunityInput[] | GroupUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: GroupCreateOrConnectWithoutCommunityInput | GroupCreateOrConnectWithoutCommunityInput[]
+    connect?: GroupWhereUniqueInput | GroupWhereUniqueInput[]
+  }
+
+  export type LiveRoomCreateNestedManyWithoutCommunityInput = {
+    create?: XOR<LiveRoomCreateWithoutCommunityInput, LiveRoomUncheckedCreateWithoutCommunityInput> | LiveRoomCreateWithoutCommunityInput[] | LiveRoomUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: LiveRoomCreateOrConnectWithoutCommunityInput | LiveRoomCreateOrConnectWithoutCommunityInput[]
+    createMany?: LiveRoomCreateManyCommunityInputEnvelope
+    connect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedManyWithoutCommunityInput = {
+    create?: XOR<UserCreateWithoutCommunityInput, UserUncheckedCreateWithoutCommunityInput> | UserCreateWithoutCommunityInput[] | UserUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCommunityInput | UserCreateOrConnectWithoutCommunityInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type PostCreateNestedManyWithoutCommunityInput = {
+    create?: XOR<PostCreateWithoutCommunityInput, PostUncheckedCreateWithoutCommunityInput> | PostCreateWithoutCommunityInput[] | PostUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutCommunityInput | PostCreateOrConnectWithoutCommunityInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type DiscussionCreateNestedManyWithoutCommunityInput = {
+    create?: XOR<DiscussionCreateWithoutCommunityInput, DiscussionUncheckedCreateWithoutCommunityInput> | DiscussionCreateWithoutCommunityInput[] | DiscussionUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: DiscussionCreateOrConnectWithoutCommunityInput | DiscussionCreateOrConnectWithoutCommunityInput[]
+    createMany?: DiscussionCreateManyCommunityInputEnvelope
+    connect?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+  }
+
+  export type GroupUncheckedCreateNestedManyWithoutCommunityInput = {
+    create?: XOR<GroupCreateWithoutCommunityInput, GroupUncheckedCreateWithoutCommunityInput> | GroupCreateWithoutCommunityInput[] | GroupUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: GroupCreateOrConnectWithoutCommunityInput | GroupCreateOrConnectWithoutCommunityInput[]
+    connect?: GroupWhereUniqueInput | GroupWhereUniqueInput[]
+  }
+
+  export type LiveRoomUncheckedCreateNestedManyWithoutCommunityInput = {
+    create?: XOR<LiveRoomCreateWithoutCommunityInput, LiveRoomUncheckedCreateWithoutCommunityInput> | LiveRoomCreateWithoutCommunityInput[] | LiveRoomUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: LiveRoomCreateOrConnectWithoutCommunityInput | LiveRoomCreateOrConnectWithoutCommunityInput[]
+    createMany?: LiveRoomCreateManyCommunityInputEnvelope
+    connect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutCommunityInput = {
+    create?: XOR<UserCreateWithoutCommunityInput, UserUncheckedCreateWithoutCommunityInput> | UserCreateWithoutCommunityInput[] | UserUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCommunityInput | UserCreateOrConnectWithoutCommunityInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type PostUncheckedCreateNestedManyWithoutCommunityInput = {
+    create?: XOR<PostCreateWithoutCommunityInput, PostUncheckedCreateWithoutCommunityInput> | PostCreateWithoutCommunityInput[] | PostUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutCommunityInput | PostCreateOrConnectWithoutCommunityInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type DiscussionUncheckedCreateNestedManyWithoutCommunityInput = {
+    create?: XOR<DiscussionCreateWithoutCommunityInput, DiscussionUncheckedCreateWithoutCommunityInput> | DiscussionCreateWithoutCommunityInput[] | DiscussionUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: DiscussionCreateOrConnectWithoutCommunityInput | DiscussionCreateOrConnectWithoutCommunityInput[]
+    createMany?: DiscussionCreateManyCommunityInputEnvelope
+    connect?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+  }
+
+  export type GroupUpdateManyWithoutCommunityNestedInput = {
+    create?: XOR<GroupCreateWithoutCommunityInput, GroupUncheckedCreateWithoutCommunityInput> | GroupCreateWithoutCommunityInput[] | GroupUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: GroupCreateOrConnectWithoutCommunityInput | GroupCreateOrConnectWithoutCommunityInput[]
+    upsert?: GroupUpsertWithWhereUniqueWithoutCommunityInput | GroupUpsertWithWhereUniqueWithoutCommunityInput[]
+    set?: GroupWhereUniqueInput | GroupWhereUniqueInput[]
+    disconnect?: GroupWhereUniqueInput | GroupWhereUniqueInput[]
+    delete?: GroupWhereUniqueInput | GroupWhereUniqueInput[]
+    connect?: GroupWhereUniqueInput | GroupWhereUniqueInput[]
+    update?: GroupUpdateWithWhereUniqueWithoutCommunityInput | GroupUpdateWithWhereUniqueWithoutCommunityInput[]
+    updateMany?: GroupUpdateManyWithWhereWithoutCommunityInput | GroupUpdateManyWithWhereWithoutCommunityInput[]
+    deleteMany?: GroupScalarWhereInput | GroupScalarWhereInput[]
+  }
+
+  export type LiveRoomUpdateManyWithoutCommunityNestedInput = {
+    create?: XOR<LiveRoomCreateWithoutCommunityInput, LiveRoomUncheckedCreateWithoutCommunityInput> | LiveRoomCreateWithoutCommunityInput[] | LiveRoomUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: LiveRoomCreateOrConnectWithoutCommunityInput | LiveRoomCreateOrConnectWithoutCommunityInput[]
+    upsert?: LiveRoomUpsertWithWhereUniqueWithoutCommunityInput | LiveRoomUpsertWithWhereUniqueWithoutCommunityInput[]
+    createMany?: LiveRoomCreateManyCommunityInputEnvelope
+    set?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    disconnect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    delete?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    connect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    update?: LiveRoomUpdateWithWhereUniqueWithoutCommunityInput | LiveRoomUpdateWithWhereUniqueWithoutCommunityInput[]
+    updateMany?: LiveRoomUpdateManyWithWhereWithoutCommunityInput | LiveRoomUpdateManyWithWhereWithoutCommunityInput[]
+    deleteMany?: LiveRoomScalarWhereInput | LiveRoomScalarWhereInput[]
+  }
+
+  export type UserUpdateManyWithoutCommunityNestedInput = {
+    create?: XOR<UserCreateWithoutCommunityInput, UserUncheckedCreateWithoutCommunityInput> | UserCreateWithoutCommunityInput[] | UserUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCommunityInput | UserCreateOrConnectWithoutCommunityInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutCommunityInput | UserUpsertWithWhereUniqueWithoutCommunityInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutCommunityInput | UserUpdateWithWhereUniqueWithoutCommunityInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutCommunityInput | UserUpdateManyWithWhereWithoutCommunityInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type PostUpdateManyWithoutCommunityNestedInput = {
+    create?: XOR<PostCreateWithoutCommunityInput, PostUncheckedCreateWithoutCommunityInput> | PostCreateWithoutCommunityInput[] | PostUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutCommunityInput | PostCreateOrConnectWithoutCommunityInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutCommunityInput | PostUpsertWithWhereUniqueWithoutCommunityInput[]
+    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    update?: PostUpdateWithWhereUniqueWithoutCommunityInput | PostUpdateWithWhereUniqueWithoutCommunityInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutCommunityInput | PostUpdateManyWithWhereWithoutCommunityInput[]
+    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type DiscussionUpdateManyWithoutCommunityNestedInput = {
+    create?: XOR<DiscussionCreateWithoutCommunityInput, DiscussionUncheckedCreateWithoutCommunityInput> | DiscussionCreateWithoutCommunityInput[] | DiscussionUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: DiscussionCreateOrConnectWithoutCommunityInput | DiscussionCreateOrConnectWithoutCommunityInput[]
+    upsert?: DiscussionUpsertWithWhereUniqueWithoutCommunityInput | DiscussionUpsertWithWhereUniqueWithoutCommunityInput[]
+    createMany?: DiscussionCreateManyCommunityInputEnvelope
+    set?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+    disconnect?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+    delete?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+    connect?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+    update?: DiscussionUpdateWithWhereUniqueWithoutCommunityInput | DiscussionUpdateWithWhereUniqueWithoutCommunityInput[]
+    updateMany?: DiscussionUpdateManyWithWhereWithoutCommunityInput | DiscussionUpdateManyWithWhereWithoutCommunityInput[]
+    deleteMany?: DiscussionScalarWhereInput | DiscussionScalarWhereInput[]
+  }
+
+  export type GroupUncheckedUpdateManyWithoutCommunityNestedInput = {
+    create?: XOR<GroupCreateWithoutCommunityInput, GroupUncheckedCreateWithoutCommunityInput> | GroupCreateWithoutCommunityInput[] | GroupUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: GroupCreateOrConnectWithoutCommunityInput | GroupCreateOrConnectWithoutCommunityInput[]
+    upsert?: GroupUpsertWithWhereUniqueWithoutCommunityInput | GroupUpsertWithWhereUniqueWithoutCommunityInput[]
+    set?: GroupWhereUniqueInput | GroupWhereUniqueInput[]
+    disconnect?: GroupWhereUniqueInput | GroupWhereUniqueInput[]
+    delete?: GroupWhereUniqueInput | GroupWhereUniqueInput[]
+    connect?: GroupWhereUniqueInput | GroupWhereUniqueInput[]
+    update?: GroupUpdateWithWhereUniqueWithoutCommunityInput | GroupUpdateWithWhereUniqueWithoutCommunityInput[]
+    updateMany?: GroupUpdateManyWithWhereWithoutCommunityInput | GroupUpdateManyWithWhereWithoutCommunityInput[]
+    deleteMany?: GroupScalarWhereInput | GroupScalarWhereInput[]
+  }
+
+  export type LiveRoomUncheckedUpdateManyWithoutCommunityNestedInput = {
+    create?: XOR<LiveRoomCreateWithoutCommunityInput, LiveRoomUncheckedCreateWithoutCommunityInput> | LiveRoomCreateWithoutCommunityInput[] | LiveRoomUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: LiveRoomCreateOrConnectWithoutCommunityInput | LiveRoomCreateOrConnectWithoutCommunityInput[]
+    upsert?: LiveRoomUpsertWithWhereUniqueWithoutCommunityInput | LiveRoomUpsertWithWhereUniqueWithoutCommunityInput[]
+    createMany?: LiveRoomCreateManyCommunityInputEnvelope
+    set?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    disconnect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    delete?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    connect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+    update?: LiveRoomUpdateWithWhereUniqueWithoutCommunityInput | LiveRoomUpdateWithWhereUniqueWithoutCommunityInput[]
+    updateMany?: LiveRoomUpdateManyWithWhereWithoutCommunityInput | LiveRoomUpdateManyWithWhereWithoutCommunityInput[]
+    deleteMany?: LiveRoomScalarWhereInput | LiveRoomScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutCommunityNestedInput = {
+    create?: XOR<UserCreateWithoutCommunityInput, UserUncheckedCreateWithoutCommunityInput> | UserCreateWithoutCommunityInput[] | UserUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCommunityInput | UserCreateOrConnectWithoutCommunityInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutCommunityInput | UserUpsertWithWhereUniqueWithoutCommunityInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutCommunityInput | UserUpdateWithWhereUniqueWithoutCommunityInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutCommunityInput | UserUpdateManyWithWhereWithoutCommunityInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type PostUncheckedUpdateManyWithoutCommunityNestedInput = {
+    create?: XOR<PostCreateWithoutCommunityInput, PostUncheckedCreateWithoutCommunityInput> | PostCreateWithoutCommunityInput[] | PostUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutCommunityInput | PostCreateOrConnectWithoutCommunityInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutCommunityInput | PostUpsertWithWhereUniqueWithoutCommunityInput[]
+    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    update?: PostUpdateWithWhereUniqueWithoutCommunityInput | PostUpdateWithWhereUniqueWithoutCommunityInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutCommunityInput | PostUpdateManyWithWhereWithoutCommunityInput[]
+    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type DiscussionUncheckedUpdateManyWithoutCommunityNestedInput = {
+    create?: XOR<DiscussionCreateWithoutCommunityInput, DiscussionUncheckedCreateWithoutCommunityInput> | DiscussionCreateWithoutCommunityInput[] | DiscussionUncheckedCreateWithoutCommunityInput[]
+    connectOrCreate?: DiscussionCreateOrConnectWithoutCommunityInput | DiscussionCreateOrConnectWithoutCommunityInput[]
+    upsert?: DiscussionUpsertWithWhereUniqueWithoutCommunityInput | DiscussionUpsertWithWhereUniqueWithoutCommunityInput[]
+    createMany?: DiscussionCreateManyCommunityInputEnvelope
+    set?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+    disconnect?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+    delete?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+    connect?: DiscussionWhereUniqueInput | DiscussionWhereUniqueInput[]
+    update?: DiscussionUpdateWithWhereUniqueWithoutCommunityInput | DiscussionUpdateWithWhereUniqueWithoutCommunityInput[]
+    updateMany?: DiscussionUpdateManyWithWhereWithoutCommunityInput | DiscussionUpdateManyWithWhereWithoutCommunityInput[]
+    deleteMany?: DiscussionScalarWhereInput | DiscussionScalarWhereInput[]
+  }
+
+  export type CommunityCreateNestedOneWithoutDiscussionsInput = {
+    create?: XOR<CommunityCreateWithoutDiscussionsInput, CommunityUncheckedCreateWithoutDiscussionsInput>
+    connectOrCreate?: CommunityCreateOrConnectWithoutDiscussionsInput
+    connect?: CommunityWhereUniqueInput
+  }
+
+  export type PostCreateNestedOneWithoutDiscussionInput = {
+    create?: XOR<PostCreateWithoutDiscussionInput, PostUncheckedCreateWithoutDiscussionInput>
+    connectOrCreate?: PostCreateOrConnectWithoutDiscussionInput
+    connect?: PostWhereUniqueInput
+  }
+
+  export type CommunityUpdateOneRequiredWithoutDiscussionsNestedInput = {
+    create?: XOR<CommunityCreateWithoutDiscussionsInput, CommunityUncheckedCreateWithoutDiscussionsInput>
+    connectOrCreate?: CommunityCreateOrConnectWithoutDiscussionsInput
+    upsert?: CommunityUpsertWithoutDiscussionsInput
+    connect?: CommunityWhereUniqueInput
+    update?: XOR<XOR<CommunityUpdateToOneWithWhereWithoutDiscussionsInput, CommunityUpdateWithoutDiscussionsInput>, CommunityUncheckedUpdateWithoutDiscussionsInput>
+  }
+
+  export type PostUpdateOneWithoutDiscussionNestedInput = {
+    create?: XOR<PostCreateWithoutDiscussionInput, PostUncheckedCreateWithoutDiscussionInput>
+    connectOrCreate?: PostCreateOrConnectWithoutDiscussionInput
+    upsert?: PostUpsertWithoutDiscussionInput
+    disconnect?: PostWhereInput | boolean
+    delete?: PostWhereInput | boolean
+    connect?: PostWhereUniqueInput
+    update?: XOR<XOR<PostUpdateToOneWithWhereWithoutDiscussionInput, PostUpdateWithoutDiscussionInput>, PostUncheckedUpdateWithoutDiscussionInput>
+  }
+
+  export type CommunityCreateNestedOneWithoutLiveRoomInput = {
+    create?: XOR<CommunityCreateWithoutLiveRoomInput, CommunityUncheckedCreateWithoutLiveRoomInput>
+    connectOrCreate?: CommunityCreateOrConnectWithoutLiveRoomInput
+    connect?: CommunityWhereUniqueInput
+  }
+
+  export type UserCreateNestedManyWithoutLiveRoomInput = {
+    create?: XOR<UserCreateWithoutLiveRoomInput, UserUncheckedCreateWithoutLiveRoomInput> | UserCreateWithoutLiveRoomInput[] | UserUncheckedCreateWithoutLiveRoomInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutLiveRoomInput | UserCreateOrConnectWithoutLiveRoomInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type CourseCreateNestedOneWithoutLiveRoomInput = {
+    create?: XOR<CourseCreateWithoutLiveRoomInput, CourseUncheckedCreateWithoutLiveRoomInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutLiveRoomInput
+    connect?: CourseWhereUniqueInput
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutLiveRoomInput = {
+    create?: XOR<UserCreateWithoutLiveRoomInput, UserUncheckedCreateWithoutLiveRoomInput> | UserCreateWithoutLiveRoomInput[] | UserUncheckedCreateWithoutLiveRoomInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutLiveRoomInput | UserCreateOrConnectWithoutLiveRoomInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type CommunityUpdateOneRequiredWithoutLiveRoomNestedInput = {
+    create?: XOR<CommunityCreateWithoutLiveRoomInput, CommunityUncheckedCreateWithoutLiveRoomInput>
+    connectOrCreate?: CommunityCreateOrConnectWithoutLiveRoomInput
+    upsert?: CommunityUpsertWithoutLiveRoomInput
+    connect?: CommunityWhereUniqueInput
+    update?: XOR<XOR<CommunityUpdateToOneWithWhereWithoutLiveRoomInput, CommunityUpdateWithoutLiveRoomInput>, CommunityUncheckedUpdateWithoutLiveRoomInput>
+  }
+
+  export type UserUpdateManyWithoutLiveRoomNestedInput = {
+    create?: XOR<UserCreateWithoutLiveRoomInput, UserUncheckedCreateWithoutLiveRoomInput> | UserCreateWithoutLiveRoomInput[] | UserUncheckedCreateWithoutLiveRoomInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutLiveRoomInput | UserCreateOrConnectWithoutLiveRoomInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutLiveRoomInput | UserUpsertWithWhereUniqueWithoutLiveRoomInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutLiveRoomInput | UserUpdateWithWhereUniqueWithoutLiveRoomInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutLiveRoomInput | UserUpdateManyWithWhereWithoutLiveRoomInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type CourseUpdateOneWithoutLiveRoomNestedInput = {
+    create?: XOR<CourseCreateWithoutLiveRoomInput, CourseUncheckedCreateWithoutLiveRoomInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutLiveRoomInput
+    upsert?: CourseUpsertWithoutLiveRoomInput
+    disconnect?: CourseWhereInput | boolean
+    delete?: CourseWhereInput | boolean
+    connect?: CourseWhereUniqueInput
+    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutLiveRoomInput, CourseUpdateWithoutLiveRoomInput>, CourseUncheckedUpdateWithoutLiveRoomInput>
+  }
+
+  export type UserUncheckedUpdateManyWithoutLiveRoomNestedInput = {
+    create?: XOR<UserCreateWithoutLiveRoomInput, UserUncheckedCreateWithoutLiveRoomInput> | UserCreateWithoutLiveRoomInput[] | UserUncheckedCreateWithoutLiveRoomInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutLiveRoomInput | UserCreateOrConnectWithoutLiveRoomInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutLiveRoomInput | UserUpsertWithWhereUniqueWithoutLiveRoomInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutLiveRoomInput | UserUpdateWithWhereUniqueWithoutLiveRoomInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutLiveRoomInput | UserUpdateManyWithWhereWithoutLiveRoomInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -35623,13 +43904,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedEnumUserRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
-  }
-
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -35642,6 +43916,13 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedEnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -35683,16 +43964,6 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedEnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumUserRoleFilter<$PrismaModel>
-    _max?: NestedEnumUserRoleFilter<$PrismaModel>
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -35719,6 +43990,16 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -35784,6 +44065,11 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -35811,9 +44097,12 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
   export type NestedJsonFilter<$PrismaModel = never> = 
     | PatchUndefined<
@@ -35852,14 +44141,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedBoolNullableFilter<$PrismaModel = never> = {
@@ -35975,6 +44256,7 @@ export namespace Prisma {
     id?: string
     type: string
     value: JsonNullValueInput | InputJsonValue
+    isNew?: boolean
     createdAt?: Date | string
   }
 
@@ -35982,6 +44264,7 @@ export namespace Prisma {
     id?: string
     type: string
     value: JsonNullValueInput | InputJsonValue
+    isNew?: boolean
     createdAt?: Date | string
   }
 
@@ -36052,19 +44335,25 @@ export namespace Prisma {
   export type PostCreateWithoutAuthorInput = {
     id?: string
     content: string
+    title: string
     createdAt?: Date | string
     likesCount?: number
     comments?: CommentCreateNestedManyWithoutPostInput
     Group?: GroupCreateNestedManyWithoutPostsInput
+    Community?: CommunityCreateNestedManyWithoutPostsInput
+    Discussion?: DiscussionCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateWithoutAuthorInput = {
     id?: string
     content: string
+    title: string
     createdAt?: Date | string
     likesCount?: number
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     Group?: GroupUncheckedCreateNestedManyWithoutPostsInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutPostsInput
+    Discussion?: DiscussionUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostCreateOrConnectWithoutAuthorInput = {
@@ -36080,17 +44369,23 @@ export namespace Prisma {
   export type GroupCreateWithoutMembersInput = {
     id?: string
     name: string
+    subject: string
+    image?: string | null
     createdAt?: Date | string
     posts?: PostCreateNestedManyWithoutGroupInput
     admin: AdminCreateNestedOneWithoutGroupInput
+    Community?: CommunityCreateNestedManyWithoutGroupsInput
   }
 
   export type GroupUncheckedCreateWithoutMembersInput = {
     id?: string
     name: string
+    subject: string
+    image?: string | null
     adminId: string
     createdAt?: Date | string
     posts?: PostUncheckedCreateNestedManyWithoutGroupInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutGroupsInput
   }
 
   export type GroupCreateOrConnectWithoutMembersInput = {
@@ -36342,6 +44637,156 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type BadgeCreateWithoutUserInput = {
+    id?: string
+    title: string
+    description?: string | null
+    image?: string | null
+    points: number
+    type: string
+    earnedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type BadgeUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    description?: string | null
+    image?: string | null
+    points: number
+    type: string
+    earnedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type BadgeCreateOrConnectWithoutUserInput = {
+    where: BadgeWhereUniqueInput
+    create: XOR<BadgeCreateWithoutUserInput, BadgeUncheckedCreateWithoutUserInput>
+  }
+
+  export type BadgeCreateManyUserInputEnvelope = {
+    data: BadgeCreateManyUserInput | BadgeCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CertificateCreateWithoutUserInput = {
+    id?: string
+    name: string
+    address: string
+    phone: string
+    notes: string
+    title: string
+    description?: string | null
+    url?: string | null
+    image?: string | null
+    points: number
+    type: string
+    earnedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type CertificateUncheckedCreateWithoutUserInput = {
+    id?: string
+    name: string
+    address: string
+    phone: string
+    notes: string
+    title: string
+    description?: string | null
+    url?: string | null
+    image?: string | null
+    points: number
+    type: string
+    earnedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type CertificateCreateOrConnectWithoutUserInput = {
+    where: CertificateWhereUniqueInput
+    create: XOR<CertificateCreateWithoutUserInput, CertificateUncheckedCreateWithoutUserInput>
+  }
+
+  export type CertificateCreateManyUserInputEnvelope = {
+    data: CertificateCreateManyUserInput | CertificateCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CommunityCreateWithoutParticipantsInput = {
+    id?: string
+    name: string
+    image?: string | null
+    description?: string | null
+    type: string
+    likes?: number
+    dislikes?: number
+    views?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: GroupCreateNestedManyWithoutCommunityInput
+    liveRoom?: LiveRoomCreateNestedManyWithoutCommunityInput
+    posts?: PostCreateNestedManyWithoutCommunityInput
+    discussions?: DiscussionCreateNestedManyWithoutCommunityInput
+  }
+
+  export type CommunityUncheckedCreateWithoutParticipantsInput = {
+    id?: string
+    name: string
+    image?: string | null
+    description?: string | null
+    type: string
+    likes?: number
+    dislikes?: number
+    views?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: GroupUncheckedCreateNestedManyWithoutCommunityInput
+    liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCommunityInput
+    posts?: PostUncheckedCreateNestedManyWithoutCommunityInput
+    discussions?: DiscussionUncheckedCreateNestedManyWithoutCommunityInput
+  }
+
+  export type CommunityCreateOrConnectWithoutParticipantsInput = {
+    where: CommunityWhereUniqueInput
+    create: XOR<CommunityCreateWithoutParticipantsInput, CommunityUncheckedCreateWithoutParticipantsInput>
+  }
+
+  export type LiveRoomCreateWithoutUserInput = {
+    id?: string
+    title: string
+    topic?: string | null
+    participants?: number
+    isLive?: boolean
+    isActive?: boolean
+    isPublic?: boolean
+    isPrivate?: boolean
+    isPasswordProtected?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    community: CommunityCreateNestedOneWithoutLiveRoomInput
+    course?: CourseCreateNestedOneWithoutLiveRoomInput
+  }
+
+  export type LiveRoomUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    topic?: string | null
+    participants?: number
+    isLive?: boolean
+    isActive?: boolean
+    isPublic?: boolean
+    isPrivate?: boolean
+    isPasswordProtected?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    communityId: string
+    courseId?: string | null
+  }
+
+  export type LiveRoomCreateOrConnectWithoutUserInput = {
+    where: LiveRoomWhereUniqueInput
+    create: XOR<LiveRoomCreateWithoutUserInput, LiveRoomUncheckedCreateWithoutUserInput>
+  }
+
   export type AcademyUpsertWithoutUsersInput = {
     update: XOR<AcademyUpdateWithoutUsersInput, AcademyUncheckedUpdateWithoutUsersInput>
     create: XOR<AcademyCreateWithoutUsersInput, AcademyUncheckedCreateWithoutUsersInput>
@@ -36459,6 +44904,7 @@ export namespace Prisma {
     userId?: StringFilter<"Achievement"> | string
     type?: StringFilter<"Achievement"> | string
     value?: JsonFilter<"Achievement">
+    isNew?: BoolFilter<"Achievement"> | boolean
     createdAt?: DateTimeFilter<"Achievement"> | Date | string
   }
 
@@ -36541,6 +44987,7 @@ export namespace Prisma {
     id?: StringFilter<"Post"> | string
     authorId?: StringFilter<"Post"> | string
     content?: StringFilter<"Post"> | string
+    title?: StringFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
     likesCount?: IntFilter<"Post"> | number
   }
@@ -36567,6 +45014,8 @@ export namespace Prisma {
     NOT?: GroupScalarWhereInput | GroupScalarWhereInput[]
     id?: StringFilter<"Group"> | string
     name?: StringFilter<"Group"> | string
+    subject?: StringFilter<"Group"> | string
+    image?: StringNullableFilter<"Group"> | string | null
     adminId?: StringFilter<"Group"> | string
     createdAt?: DateTimeFilter<"Group"> | Date | string
   }
@@ -36839,10 +45288,145 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Report"> | Date | string
   }
 
+  export type BadgeUpsertWithWhereUniqueWithoutUserInput = {
+    where: BadgeWhereUniqueInput
+    update: XOR<BadgeUpdateWithoutUserInput, BadgeUncheckedUpdateWithoutUserInput>
+    create: XOR<BadgeCreateWithoutUserInput, BadgeUncheckedCreateWithoutUserInput>
+  }
+
+  export type BadgeUpdateWithWhereUniqueWithoutUserInput = {
+    where: BadgeWhereUniqueInput
+    data: XOR<BadgeUpdateWithoutUserInput, BadgeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BadgeUpdateManyWithWhereWithoutUserInput = {
+    where: BadgeScalarWhereInput
+    data: XOR<BadgeUpdateManyMutationInput, BadgeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type BadgeScalarWhereInput = {
+    AND?: BadgeScalarWhereInput | BadgeScalarWhereInput[]
+    OR?: BadgeScalarWhereInput[]
+    NOT?: BadgeScalarWhereInput | BadgeScalarWhereInput[]
+    id?: StringFilter<"Badge"> | string
+    userId?: StringFilter<"Badge"> | string
+    title?: StringFilter<"Badge"> | string
+    description?: StringNullableFilter<"Badge"> | string | null
+    image?: StringNullableFilter<"Badge"> | string | null
+    points?: IntFilter<"Badge"> | number
+    type?: StringFilter<"Badge"> | string
+    earnedAt?: DateTimeFilter<"Badge"> | Date | string
+    createdAt?: DateTimeFilter<"Badge"> | Date | string
+  }
+
+  export type CertificateUpsertWithWhereUniqueWithoutUserInput = {
+    where: CertificateWhereUniqueInput
+    update: XOR<CertificateUpdateWithoutUserInput, CertificateUncheckedUpdateWithoutUserInput>
+    create: XOR<CertificateCreateWithoutUserInput, CertificateUncheckedCreateWithoutUserInput>
+  }
+
+  export type CertificateUpdateWithWhereUniqueWithoutUserInput = {
+    where: CertificateWhereUniqueInput
+    data: XOR<CertificateUpdateWithoutUserInput, CertificateUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CertificateUpdateManyWithWhereWithoutUserInput = {
+    where: CertificateScalarWhereInput
+    data: XOR<CertificateUpdateManyMutationInput, CertificateUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CertificateScalarWhereInput = {
+    AND?: CertificateScalarWhereInput | CertificateScalarWhereInput[]
+    OR?: CertificateScalarWhereInput[]
+    NOT?: CertificateScalarWhereInput | CertificateScalarWhereInput[]
+    id?: StringFilter<"Certificate"> | string
+    name?: StringFilter<"Certificate"> | string
+    address?: StringFilter<"Certificate"> | string
+    phone?: StringFilter<"Certificate"> | string
+    notes?: StringFilter<"Certificate"> | string
+    userId?: StringFilter<"Certificate"> | string
+    title?: StringFilter<"Certificate"> | string
+    description?: StringNullableFilter<"Certificate"> | string | null
+    url?: StringNullableFilter<"Certificate"> | string | null
+    image?: StringNullableFilter<"Certificate"> | string | null
+    points?: IntFilter<"Certificate"> | number
+    type?: StringFilter<"Certificate"> | string
+    earnedAt?: DateTimeFilter<"Certificate"> | Date | string
+    createdAt?: DateTimeFilter<"Certificate"> | Date | string
+  }
+
+  export type CommunityUpsertWithWhereUniqueWithoutParticipantsInput = {
+    where: CommunityWhereUniqueInput
+    update: XOR<CommunityUpdateWithoutParticipantsInput, CommunityUncheckedUpdateWithoutParticipantsInput>
+    create: XOR<CommunityCreateWithoutParticipantsInput, CommunityUncheckedCreateWithoutParticipantsInput>
+  }
+
+  export type CommunityUpdateWithWhereUniqueWithoutParticipantsInput = {
+    where: CommunityWhereUniqueInput
+    data: XOR<CommunityUpdateWithoutParticipantsInput, CommunityUncheckedUpdateWithoutParticipantsInput>
+  }
+
+  export type CommunityUpdateManyWithWhereWithoutParticipantsInput = {
+    where: CommunityScalarWhereInput
+    data: XOR<CommunityUpdateManyMutationInput, CommunityUncheckedUpdateManyWithoutParticipantsInput>
+  }
+
+  export type CommunityScalarWhereInput = {
+    AND?: CommunityScalarWhereInput | CommunityScalarWhereInput[]
+    OR?: CommunityScalarWhereInput[]
+    NOT?: CommunityScalarWhereInput | CommunityScalarWhereInput[]
+    id?: StringFilter<"Community"> | string
+    name?: StringFilter<"Community"> | string
+    image?: StringNullableFilter<"Community"> | string | null
+    description?: StringNullableFilter<"Community"> | string | null
+    type?: StringFilter<"Community"> | string
+    likes?: IntFilter<"Community"> | number
+    dislikes?: IntFilter<"Community"> | number
+    views?: IntFilter<"Community"> | number
+    createdAt?: DateTimeFilter<"Community"> | Date | string
+    updatedAt?: DateTimeFilter<"Community"> | Date | string
+  }
+
+  export type LiveRoomUpsertWithWhereUniqueWithoutUserInput = {
+    where: LiveRoomWhereUniqueInput
+    update: XOR<LiveRoomUpdateWithoutUserInput, LiveRoomUncheckedUpdateWithoutUserInput>
+    create: XOR<LiveRoomCreateWithoutUserInput, LiveRoomUncheckedCreateWithoutUserInput>
+  }
+
+  export type LiveRoomUpdateWithWhereUniqueWithoutUserInput = {
+    where: LiveRoomWhereUniqueInput
+    data: XOR<LiveRoomUpdateWithoutUserInput, LiveRoomUncheckedUpdateWithoutUserInput>
+  }
+
+  export type LiveRoomUpdateManyWithWhereWithoutUserInput = {
+    where: LiveRoomScalarWhereInput
+    data: XOR<LiveRoomUpdateManyMutationInput, LiveRoomUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type LiveRoomScalarWhereInput = {
+    AND?: LiveRoomScalarWhereInput | LiveRoomScalarWhereInput[]
+    OR?: LiveRoomScalarWhereInput[]
+    NOT?: LiveRoomScalarWhereInput | LiveRoomScalarWhereInput[]
+    id?: StringFilter<"LiveRoom"> | string
+    title?: StringFilter<"LiveRoom"> | string
+    topic?: StringNullableFilter<"LiveRoom"> | string | null
+    participants?: IntFilter<"LiveRoom"> | number
+    isLive?: BoolFilter<"LiveRoom"> | boolean
+    isActive?: BoolFilter<"LiveRoom"> | boolean
+    isPublic?: BoolFilter<"LiveRoom"> | boolean
+    isPrivate?: BoolFilter<"LiveRoom"> | boolean
+    isPasswordProtected?: BoolFilter<"LiveRoom"> | boolean
+    createdAt?: DateTimeFilter<"LiveRoom"> | Date | string
+    updatedAt?: DateTimeFilter<"LiveRoom"> | Date | string
+    communityId?: StringFilter<"LiveRoom"> | string
+    courseId?: StringNullableFilter<"LiveRoom"> | string | null
+  }
+
   export type UserCreateWithoutProfileInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -36867,12 +45451,17 @@ export namespace Prisma {
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProfileInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -36897,6 +45486,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProfileInput = {
@@ -36919,6 +45512,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -36943,12 +45537,17 @@ export namespace Prisma {
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfileInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -36973,12 +45572,17 @@ export namespace Prisma {
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAcademyInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -37003,12 +45607,17 @@ export namespace Prisma {
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAcademyInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -37033,6 +45642,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAcademyInput = {
@@ -37055,6 +45668,7 @@ export namespace Prisma {
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
     quizzes?: QuizCreateNestedManyWithoutCourseInput
     instructors?: InstructorCreateNestedManyWithoutCoursesInput
+    liveRoom?: LiveRoomCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutAcademyInput = {
@@ -37067,6 +45681,7 @@ export namespace Prisma {
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutCoursesInput
+    liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutAcademyInput = {
@@ -37154,6 +45769,7 @@ export namespace Prisma {
     id?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
+    phone?: StringNullableFilter<"User"> | string | null
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
@@ -37242,6 +45858,7 @@ export namespace Prisma {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -37266,12 +45883,17 @@ export namespace Prisma {
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutInstructorInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -37296,6 +45918,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutInstructorInput = {
@@ -37344,6 +45970,7 @@ export namespace Prisma {
     lessons?: LessonCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
     quizzes?: QuizCreateNestedManyWithoutCourseInput
+    liveRoom?: LiveRoomCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutInstructorsInput = {
@@ -37356,6 +45983,7 @@ export namespace Prisma {
     lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
+    liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutInstructorsInput = {
@@ -37378,6 +46006,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -37402,12 +46031,17 @@ export namespace Prisma {
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInstructorInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -37432,6 +46066,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AcademyUpsertWithoutInstructorsInput = {
@@ -37588,6 +46226,8 @@ export namespace Prisma {
     description?: string | null
     timeLimit?: number | null
     passingScore?: number | null
+    upComing?: boolean
+    isCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     lesson: LessonCreateNestedOneWithoutQuizzesInput
@@ -37602,6 +46242,8 @@ export namespace Prisma {
     lessonId: string
     timeLimit?: number | null
     passingScore?: number | null
+    upComing?: boolean
+    isCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutQuizInput
@@ -37628,6 +46270,48 @@ export namespace Prisma {
   export type InstructorCreateOrConnectWithoutCoursesInput = {
     where: InstructorWhereUniqueInput
     create: XOR<InstructorCreateWithoutCoursesInput, InstructorUncheckedCreateWithoutCoursesInput>
+  }
+
+  export type LiveRoomCreateWithoutCourseInput = {
+    id?: string
+    title: string
+    topic?: string | null
+    participants?: number
+    isLive?: boolean
+    isActive?: boolean
+    isPublic?: boolean
+    isPrivate?: boolean
+    isPasswordProtected?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    community: CommunityCreateNestedOneWithoutLiveRoomInput
+    User?: UserCreateNestedManyWithoutLiveRoomInput
+  }
+
+  export type LiveRoomUncheckedCreateWithoutCourseInput = {
+    id?: string
+    title: string
+    topic?: string | null
+    participants?: number
+    isLive?: boolean
+    isActive?: boolean
+    isPublic?: boolean
+    isPrivate?: boolean
+    isPasswordProtected?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    communityId: string
+    User?: UserUncheckedCreateNestedManyWithoutLiveRoomInput
+  }
+
+  export type LiveRoomCreateOrConnectWithoutCourseInput = {
+    where: LiveRoomWhereUniqueInput
+    create: XOR<LiveRoomCreateWithoutCourseInput, LiveRoomUncheckedCreateWithoutCourseInput>
+  }
+
+  export type LiveRoomCreateManyCourseInputEnvelope = {
+    data: LiveRoomCreateManyCourseInput | LiveRoomCreateManyCourseInput[]
+    skipDuplicates?: boolean
   }
 
   export type AcademyUpsertWithoutCoursesInput = {
@@ -37725,6 +46409,8 @@ export namespace Prisma {
     lessonId?: StringFilter<"Quiz"> | string
     timeLimit?: IntNullableFilter<"Quiz"> | number | null
     passingScore?: IntNullableFilter<"Quiz"> | number | null
+    upComing?: BoolFilter<"Quiz"> | boolean
+    isCompleted?: BoolFilter<"Quiz"> | boolean
     createdAt?: DateTimeFilter<"Quiz"> | Date | string
     updatedAt?: DateTimeFilter<"Quiz"> | Date | string
   }
@@ -37745,6 +46431,22 @@ export namespace Prisma {
     data: XOR<InstructorUpdateManyMutationInput, InstructorUncheckedUpdateManyWithoutCoursesInput>
   }
 
+  export type LiveRoomUpsertWithWhereUniqueWithoutCourseInput = {
+    where: LiveRoomWhereUniqueInput
+    update: XOR<LiveRoomUpdateWithoutCourseInput, LiveRoomUncheckedUpdateWithoutCourseInput>
+    create: XOR<LiveRoomCreateWithoutCourseInput, LiveRoomUncheckedCreateWithoutCourseInput>
+  }
+
+  export type LiveRoomUpdateWithWhereUniqueWithoutCourseInput = {
+    where: LiveRoomWhereUniqueInput
+    data: XOR<LiveRoomUpdateWithoutCourseInput, LiveRoomUncheckedUpdateWithoutCourseInput>
+  }
+
+  export type LiveRoomUpdateManyWithWhereWithoutCourseInput = {
+    where: LiveRoomScalarWhereInput
+    data: XOR<LiveRoomUpdateManyMutationInput, LiveRoomUncheckedUpdateManyWithoutCourseInput>
+  }
+
   export type CourseCreateWithoutLessonsInput = {
     id?: string
     title: string
@@ -37755,6 +46457,7 @@ export namespace Prisma {
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
     quizzes?: QuizCreateNestedManyWithoutCourseInput
     instructors?: InstructorCreateNestedManyWithoutCoursesInput
+    liveRoom?: LiveRoomCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutLessonsInput = {
@@ -37767,6 +46470,7 @@ export namespace Prisma {
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutCoursesInput
+    liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutLessonsInput = {
@@ -37806,6 +46510,8 @@ export namespace Prisma {
     description?: string | null
     timeLimit?: number | null
     passingScore?: number | null
+    upComing?: boolean
+    isCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     questions?: QuestionCreateNestedManyWithoutQuizInput
@@ -37819,6 +46525,8 @@ export namespace Prisma {
     description?: string | null
     timeLimit?: number | null
     passingScore?: number | null
+    upComing?: boolean
+    isCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutQuizInput
@@ -37840,6 +46548,7 @@ export namespace Prisma {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -37864,12 +46573,17 @@ export namespace Prisma {
     Admin?: AdminCreateNestedManyWithoutUserInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLessonInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -37894,6 +46608,10 @@ export namespace Prisma {
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLessonInput = {
@@ -37950,6 +46668,7 @@ export namespace Prisma {
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUpdateManyWithoutCoursesNestedInput
+    liveRoom?: LiveRoomUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutLessonsInput = {
@@ -37962,6 +46681,7 @@ export namespace Prisma {
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutCoursesNestedInput
+    liveRoom?: LiveRoomUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type FileUpsertWithWhereUniqueWithoutLessonInput = {
@@ -38112,6 +46832,7 @@ export namespace Prisma {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -38136,12 +46857,17 @@ export namespace Prisma {
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEnrollmentsInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -38166,6 +46892,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEnrollmentsInput = {
@@ -38183,6 +46913,7 @@ export namespace Prisma {
     lessons?: LessonCreateNestedManyWithoutCourseInput
     quizzes?: QuizCreateNestedManyWithoutCourseInput
     instructors?: InstructorCreateNestedManyWithoutCoursesInput
+    liveRoom?: LiveRoomCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutEnrollmentsInput = {
@@ -38195,6 +46926,7 @@ export namespace Prisma {
     lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutCoursesInput
+    liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutEnrollmentsInput = {
@@ -38217,6 +46949,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -38241,12 +46974,17 @@ export namespace Prisma {
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEnrollmentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -38271,6 +47009,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CourseUpsertWithoutEnrollmentsInput = {
@@ -38294,6 +47036,7 @@ export namespace Prisma {
     lessons?: LessonUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUpdateManyWithoutCoursesNestedInput
+    liveRoom?: LiveRoomUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutEnrollmentsInput = {
@@ -38306,6 +47049,7 @@ export namespace Prisma {
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutCoursesNestedInput
+    liveRoom?: LiveRoomUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type LessonCreateWithoutQuizzesInput = {
@@ -38413,6 +47157,7 @@ export namespace Prisma {
     lessons?: LessonCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
     instructors?: InstructorCreateNestedManyWithoutCoursesInput
+    liveRoom?: LiveRoomCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutQuizzesInput = {
@@ -38425,6 +47170,7 @@ export namespace Prisma {
     lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutCoursesInput
+    liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutQuizzesInput = {
@@ -38538,6 +47284,8 @@ export namespace Prisma {
     description?: string | null
     timeLimit?: number | null
     passingScore?: number | null
+    upComing?: boolean
+    isCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     lesson: LessonCreateNestedOneWithoutQuizzesInput
@@ -38552,6 +47300,8 @@ export namespace Prisma {
     lessonId: string
     timeLimit?: number | null
     passingScore?: number | null
+    upComing?: boolean
+    isCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     submissions?: SubmissionUncheckedCreateNestedManyWithoutQuizInput
@@ -38580,6 +47330,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     timeLimit?: NullableIntFieldUpdateOperationsInput | number | null
     passingScore?: NullableIntFieldUpdateOperationsInput | number | null
+    upComing?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lesson?: LessonUpdateOneRequiredWithoutQuizzesNestedInput
@@ -38594,6 +47346,8 @@ export namespace Prisma {
     lessonId?: StringFieldUpdateOperationsInput | string
     timeLimit?: NullableIntFieldUpdateOperationsInput | number | null
     passingScore?: NullableIntFieldUpdateOperationsInput | number | null
+    upComing?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     submissions?: SubmissionUncheckedUpdateManyWithoutQuizNestedInput
@@ -38604,6 +47358,7 @@ export namespace Prisma {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -38628,12 +47383,17 @@ export namespace Prisma {
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSubmissionInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -38658,6 +47418,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSubmissionInput = {
@@ -38671,6 +47435,8 @@ export namespace Prisma {
     description?: string | null
     timeLimit?: number | null
     passingScore?: number | null
+    upComing?: boolean
+    isCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     lesson: LessonCreateNestedOneWithoutQuizzesInput
@@ -38685,6 +47451,8 @@ export namespace Prisma {
     lessonId: string
     timeLimit?: number | null
     passingScore?: number | null
+    upComing?: boolean
+    isCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutQuizInput
@@ -38711,6 +47479,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -38735,12 +47504,17 @@ export namespace Prisma {
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubmissionInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -38765,6 +47539,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type QuizUpsertWithoutSubmissionsInput = {
@@ -38784,6 +47562,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     timeLimit?: NullableIntFieldUpdateOperationsInput | number | null
     passingScore?: NullableIntFieldUpdateOperationsInput | number | null
+    upComing?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lesson?: LessonUpdateOneRequiredWithoutQuizzesNestedInput
@@ -38798,6 +47578,8 @@ export namespace Prisma {
     lessonId?: StringFieldUpdateOperationsInput | string
     timeLimit?: NullableIntFieldUpdateOperationsInput | number | null
     passingScore?: NullableIntFieldUpdateOperationsInput | number | null
+    upComing?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutQuizNestedInput
@@ -38808,6 +47590,7 @@ export namespace Prisma {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -38832,12 +47615,17 @@ export namespace Prisma {
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAchievementsInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -38862,6 +47650,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAchievementsInput = {
@@ -38884,6 +47676,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -38908,12 +47701,17 @@ export namespace Prisma {
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAchievementsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -38938,12 +47736,17 @@ export namespace Prisma {
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutNotificationsInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -38968,12 +47771,17 @@ export namespace Prisma {
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -38998,6 +47806,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -39020,6 +47832,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -39044,12 +47857,17 @@ export namespace Prisma {
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -39074,12 +47892,17 @@ export namespace Prisma {
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutMessagesInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -39104,12 +47927,17 @@ export namespace Prisma {
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMessagesInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -39134,6 +47962,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMessagesInput = {
@@ -39177,6 +48009,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -39201,12 +48034,17 @@ export namespace Prisma {
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -39231,6 +48069,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ChannelUpsertWithWhereUniqueWithoutMessagesInput = {
@@ -39253,6 +48095,7 @@ export namespace Prisma {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -39277,12 +48120,17 @@ export namespace Prisma {
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -39307,6 +48155,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -39339,22 +48191,91 @@ export namespace Prisma {
   export type GroupCreateWithoutPostsInput = {
     id?: string
     name: string
+    subject: string
+    image?: string | null
     createdAt?: Date | string
     members?: UserCreateNestedManyWithoutGroupsInput
     admin: AdminCreateNestedOneWithoutGroupInput
+    Community?: CommunityCreateNestedManyWithoutGroupsInput
   }
 
   export type GroupUncheckedCreateWithoutPostsInput = {
     id?: string
     name: string
+    subject: string
+    image?: string | null
     adminId: string
     createdAt?: Date | string
     members?: UserUncheckedCreateNestedManyWithoutGroupsInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutGroupsInput
   }
 
   export type GroupCreateOrConnectWithoutPostsInput = {
     where: GroupWhereUniqueInput
     create: XOR<GroupCreateWithoutPostsInput, GroupUncheckedCreateWithoutPostsInput>
+  }
+
+  export type CommunityCreateWithoutPostsInput = {
+    id?: string
+    name: string
+    image?: string | null
+    description?: string | null
+    type: string
+    likes?: number
+    dislikes?: number
+    views?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: GroupCreateNestedManyWithoutCommunityInput
+    liveRoom?: LiveRoomCreateNestedManyWithoutCommunityInput
+    participants?: UserCreateNestedManyWithoutCommunityInput
+    discussions?: DiscussionCreateNestedManyWithoutCommunityInput
+  }
+
+  export type CommunityUncheckedCreateWithoutPostsInput = {
+    id?: string
+    name: string
+    image?: string | null
+    description?: string | null
+    type: string
+    likes?: number
+    dislikes?: number
+    views?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: GroupUncheckedCreateNestedManyWithoutCommunityInput
+    liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCommunityInput
+    participants?: UserUncheckedCreateNestedManyWithoutCommunityInput
+    discussions?: DiscussionUncheckedCreateNestedManyWithoutCommunityInput
+  }
+
+  export type CommunityCreateOrConnectWithoutPostsInput = {
+    where: CommunityWhereUniqueInput
+    create: XOR<CommunityCreateWithoutPostsInput, CommunityUncheckedCreateWithoutPostsInput>
+  }
+
+  export type DiscussionCreateWithoutPostInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    community: CommunityCreateNestedOneWithoutDiscussionsInput
+  }
+
+  export type DiscussionUncheckedCreateWithoutPostInput = {
+    id?: string
+    communityId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DiscussionCreateOrConnectWithoutPostInput = {
+    where: DiscussionWhereUniqueInput
+    create: XOR<DiscussionCreateWithoutPostInput, DiscussionUncheckedCreateWithoutPostInput>
+  }
+
+  export type DiscussionCreateManyPostInputEnvelope = {
+    data: DiscussionCreateManyPostInput | DiscussionCreateManyPostInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutPostsInput = {
@@ -39372,6 +48293,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -39396,12 +48318,17 @@ export namespace Prisma {
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -39426,6 +48353,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CommentUpsertWithWhereUniqueWithoutPostInput = {
@@ -39470,22 +48401,71 @@ export namespace Prisma {
     data: XOR<GroupUpdateManyMutationInput, GroupUncheckedUpdateManyWithoutPostsInput>
   }
 
+  export type CommunityUpsertWithWhereUniqueWithoutPostsInput = {
+    where: CommunityWhereUniqueInput
+    update: XOR<CommunityUpdateWithoutPostsInput, CommunityUncheckedUpdateWithoutPostsInput>
+    create: XOR<CommunityCreateWithoutPostsInput, CommunityUncheckedCreateWithoutPostsInput>
+  }
+
+  export type CommunityUpdateWithWhereUniqueWithoutPostsInput = {
+    where: CommunityWhereUniqueInput
+    data: XOR<CommunityUpdateWithoutPostsInput, CommunityUncheckedUpdateWithoutPostsInput>
+  }
+
+  export type CommunityUpdateManyWithWhereWithoutPostsInput = {
+    where: CommunityScalarWhereInput
+    data: XOR<CommunityUpdateManyMutationInput, CommunityUncheckedUpdateManyWithoutPostsInput>
+  }
+
+  export type DiscussionUpsertWithWhereUniqueWithoutPostInput = {
+    where: DiscussionWhereUniqueInput
+    update: XOR<DiscussionUpdateWithoutPostInput, DiscussionUncheckedUpdateWithoutPostInput>
+    create: XOR<DiscussionCreateWithoutPostInput, DiscussionUncheckedCreateWithoutPostInput>
+  }
+
+  export type DiscussionUpdateWithWhereUniqueWithoutPostInput = {
+    where: DiscussionWhereUniqueInput
+    data: XOR<DiscussionUpdateWithoutPostInput, DiscussionUncheckedUpdateWithoutPostInput>
+  }
+
+  export type DiscussionUpdateManyWithWhereWithoutPostInput = {
+    where: DiscussionScalarWhereInput
+    data: XOR<DiscussionUpdateManyMutationInput, DiscussionUncheckedUpdateManyWithoutPostInput>
+  }
+
+  export type DiscussionScalarWhereInput = {
+    AND?: DiscussionScalarWhereInput | DiscussionScalarWhereInput[]
+    OR?: DiscussionScalarWhereInput[]
+    NOT?: DiscussionScalarWhereInput | DiscussionScalarWhereInput[]
+    id?: StringFilter<"Discussion"> | string
+    communityId?: StringFilter<"Discussion"> | string
+    postId?: StringNullableFilter<"Discussion"> | string | null
+    createdAt?: DateTimeFilter<"Discussion"> | Date | string
+    updatedAt?: DateTimeFilter<"Discussion"> | Date | string
+  }
+
   export type PostCreateWithoutCommentsInput = {
     id?: string
     content: string
+    title: string
     createdAt?: Date | string
     likesCount?: number
     author: UserCreateNestedOneWithoutPostsInput
     Group?: GroupCreateNestedManyWithoutPostsInput
+    Community?: CommunityCreateNestedManyWithoutPostsInput
+    Discussion?: DiscussionCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateWithoutCommentsInput = {
     id?: string
     authorId: string
     content: string
+    title: string
     createdAt?: Date | string
     likesCount?: number
     Group?: GroupUncheckedCreateNestedManyWithoutPostsInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutPostsInput
+    Discussion?: DiscussionUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostCreateOrConnectWithoutCommentsInput = {
@@ -39507,25 +48487,32 @@ export namespace Prisma {
   export type PostUpdateWithoutCommentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likesCount?: IntFieldUpdateOperationsInput | number
     author?: UserUpdateOneRequiredWithoutPostsNestedInput
     Group?: GroupUpdateManyWithoutPostsNestedInput
+    Community?: CommunityUpdateManyWithoutPostsNestedInput
+    Discussion?: DiscussionUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateWithoutCommentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likesCount?: IntFieldUpdateOperationsInput | number
     Group?: GroupUncheckedUpdateManyWithoutPostsNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutPostsNestedInput
+    Discussion?: DiscussionUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type UserCreateWithoutGroupsInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -39550,12 +48537,17 @@ export namespace Prisma {
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGroupsInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -39580,6 +48572,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGroupsInput = {
@@ -39590,19 +48586,25 @@ export namespace Prisma {
   export type PostCreateWithoutGroupInput = {
     id?: string
     content: string
+    title: string
     createdAt?: Date | string
     likesCount?: number
     author: UserCreateNestedOneWithoutPostsInput
     comments?: CommentCreateNestedManyWithoutPostInput
+    Community?: CommunityCreateNestedManyWithoutPostsInput
+    Discussion?: DiscussionCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateWithoutGroupInput = {
     id?: string
     authorId: string
     content: string
+    title: string
     createdAt?: Date | string
     likesCount?: number
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutPostsInput
+    Discussion?: DiscussionUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostCreateOrConnectWithoutGroupInput = {
@@ -39625,6 +48627,45 @@ export namespace Prisma {
   export type AdminCreateOrConnectWithoutGroupInput = {
     where: AdminWhereUniqueInput
     create: XOR<AdminCreateWithoutGroupInput, AdminUncheckedCreateWithoutGroupInput>
+  }
+
+  export type CommunityCreateWithoutGroupsInput = {
+    id?: string
+    name: string
+    image?: string | null
+    description?: string | null
+    type: string
+    likes?: number
+    dislikes?: number
+    views?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    liveRoom?: LiveRoomCreateNestedManyWithoutCommunityInput
+    participants?: UserCreateNestedManyWithoutCommunityInput
+    posts?: PostCreateNestedManyWithoutCommunityInput
+    discussions?: DiscussionCreateNestedManyWithoutCommunityInput
+  }
+
+  export type CommunityUncheckedCreateWithoutGroupsInput = {
+    id?: string
+    name: string
+    image?: string | null
+    description?: string | null
+    type: string
+    likes?: number
+    dislikes?: number
+    views?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCommunityInput
+    participants?: UserUncheckedCreateNestedManyWithoutCommunityInput
+    posts?: PostUncheckedCreateNestedManyWithoutCommunityInput
+    discussions?: DiscussionUncheckedCreateNestedManyWithoutCommunityInput
+  }
+
+  export type CommunityCreateOrConnectWithoutGroupsInput = {
+    where: CommunityWhereUniqueInput
+    create: XOR<CommunityCreateWithoutGroupsInput, CommunityUncheckedCreateWithoutGroupsInput>
   }
 
   export type UserUpsertWithWhereUniqueWithoutGroupsInput = {
@@ -39682,10 +48723,27 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CommunityUpsertWithWhereUniqueWithoutGroupsInput = {
+    where: CommunityWhereUniqueInput
+    update: XOR<CommunityUpdateWithoutGroupsInput, CommunityUncheckedUpdateWithoutGroupsInput>
+    create: XOR<CommunityCreateWithoutGroupsInput, CommunityUncheckedCreateWithoutGroupsInput>
+  }
+
+  export type CommunityUpdateWithWhereUniqueWithoutGroupsInput = {
+    where: CommunityWhereUniqueInput
+    data: XOR<CommunityUpdateWithoutGroupsInput, CommunityUncheckedUpdateWithoutGroupsInput>
+  }
+
+  export type CommunityUpdateManyWithWhereWithoutGroupsInput = {
+    where: CommunityScalarWhereInput
+    data: XOR<CommunityUpdateManyMutationInput, CommunityUncheckedUpdateManyWithoutGroupsInput>
+  }
+
   export type UserCreateWithoutAdminInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -39710,12 +48768,17 @@ export namespace Prisma {
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAdminInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -39740,6 +48803,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAdminInput = {
@@ -39750,17 +48817,23 @@ export namespace Prisma {
   export type GroupCreateWithoutAdminInput = {
     id?: string
     name: string
+    subject: string
+    image?: string | null
     createdAt?: Date | string
     members?: UserCreateNestedManyWithoutGroupsInput
     posts?: PostCreateNestedManyWithoutGroupInput
+    Community?: CommunityCreateNestedManyWithoutGroupsInput
   }
 
   export type GroupUncheckedCreateWithoutAdminInput = {
     id?: string
     name: string
+    subject: string
+    image?: string | null
     createdAt?: Date | string
     members?: UserUncheckedCreateNestedManyWithoutGroupsInput
     posts?: PostUncheckedCreateNestedManyWithoutGroupInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutGroupsInput
   }
 
   export type GroupCreateOrConnectWithoutAdminInput = {
@@ -39788,6 +48861,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -39812,12 +48886,17 @@ export namespace Prisma {
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdminInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -39842,6 +48921,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GroupUpsertWithWhereUniqueWithoutAdminInput = {
@@ -39864,6 +48947,7 @@ export namespace Prisma {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -39888,12 +48972,17 @@ export namespace Prisma {
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChannelsInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -39918,6 +49007,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChannelsInput = {
@@ -40022,6 +49115,7 @@ export namespace Prisma {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -40046,12 +49140,17 @@ export namespace Prisma {
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOwnerInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -40076,6 +49175,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOwnerInput = {
@@ -40124,6 +49227,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -40148,12 +49252,17 @@ export namespace Prisma {
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -40178,6 +49287,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ChannelUpsertWithWhereUniqueWithoutOwnerInput = {
@@ -40200,6 +49313,7 @@ export namespace Prisma {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -40224,12 +49338,17 @@ export namespace Prisma {
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBookmarksInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -40254,6 +49373,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBookmarksInput = {
@@ -40276,6 +49399,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -40300,12 +49424,17 @@ export namespace Prisma {
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBookmarksInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -40330,6 +49459,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AcademyCreateWithoutEventsInput = {
@@ -40404,6 +49537,7 @@ export namespace Prisma {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -40428,12 +49562,17 @@ export namespace Prisma {
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAttendanceInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -40458,6 +49597,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAttendanceInput = {
@@ -40511,6 +49654,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -40535,12 +49679,17 @@ export namespace Prisma {
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAttendanceInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -40565,6 +49714,10 @@ export namespace Prisma {
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type LessonUpsertWithoutAttendanceInput = {
@@ -40608,6 +49761,7 @@ export namespace Prisma {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -40632,12 +49786,17 @@ export namespace Prisma {
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -40662,6 +49821,10 @@ export namespace Prisma {
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentInput = {
@@ -40684,6 +49847,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -40708,12 +49872,17 @@ export namespace Prisma {
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -40738,12 +49907,17 @@ export namespace Prisma {
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutReportInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -40768,12 +49942,17 @@ export namespace Prisma {
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReportInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -40798,6 +49977,10 @@ export namespace Prisma {
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
     Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReportInput = {
@@ -40820,6 +50003,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -40844,12 +50028,17 @@ export namespace Prisma {
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReportInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -40874,6 +50063,990 @@ export namespace Prisma {
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutBadgeInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academy?: AcademyCreateNestedOneWithoutUsersInput
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    groups?: GroupCreateNestedManyWithoutMembersInput
+    channels?: ChannelCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    Submission?: SubmissionCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorCreateNestedManyWithoutUserInput
+    Owner?: OwnerCreateNestedManyWithoutUserInput
+    Admin?: AdminCreateNestedManyWithoutUserInput
+    Lesson?: LessonCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentCreateNestedManyWithoutUserInput
+    Report?: ReportCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBadgeInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academyId?: string | null
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    groups?: GroupUncheckedCreateNestedManyWithoutMembersInput
+    channels?: ChannelUncheckedCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
+    Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
+    Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
+    Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBadgeInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBadgeInput, UserUncheckedCreateWithoutBadgeInput>
+  }
+
+  export type UserUpsertWithoutBadgeInput = {
+    update: XOR<UserUpdateWithoutBadgeInput, UserUncheckedUpdateWithoutBadgeInput>
+    create: XOR<UserCreateWithoutBadgeInput, UserUncheckedCreateWithoutBadgeInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBadgeInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBadgeInput, UserUncheckedUpdateWithoutBadgeInput>
+  }
+
+  export type UserUpdateWithoutBadgeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academy?: AcademyUpdateOneWithoutUsersNestedInput
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUpdateManyWithoutUserNestedInput
+    Admin?: AdminUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUpdateManyWithoutUserNestedInput
+    Report?: ReportUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBadgeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUncheckedUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUncheckedUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
+    Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutCertificateInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academy?: AcademyCreateNestedOneWithoutUsersInput
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    groups?: GroupCreateNestedManyWithoutMembersInput
+    channels?: ChannelCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    Submission?: SubmissionCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorCreateNestedManyWithoutUserInput
+    Owner?: OwnerCreateNestedManyWithoutUserInput
+    Admin?: AdminCreateNestedManyWithoutUserInput
+    Lesson?: LessonCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentCreateNestedManyWithoutUserInput
+    Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCertificateInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academyId?: string | null
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    groups?: GroupUncheckedCreateNestedManyWithoutMembersInput
+    channels?: ChannelUncheckedCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
+    Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
+    Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
+    Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCertificateInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCertificateInput, UserUncheckedCreateWithoutCertificateInput>
+  }
+
+  export type UserUpsertWithoutCertificateInput = {
+    update: XOR<UserUpdateWithoutCertificateInput, UserUncheckedUpdateWithoutCertificateInput>
+    create: XOR<UserCreateWithoutCertificateInput, UserUncheckedCreateWithoutCertificateInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCertificateInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCertificateInput, UserUncheckedUpdateWithoutCertificateInput>
+  }
+
+  export type UserUpdateWithoutCertificateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academy?: AcademyUpdateOneWithoutUsersNestedInput
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUpdateManyWithoutUserNestedInput
+    Admin?: AdminUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUpdateManyWithoutUserNestedInput
+    Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCertificateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUncheckedUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUncheckedUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
+    Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type GroupCreateWithoutCommunityInput = {
+    id?: string
+    name: string
+    subject: string
+    image?: string | null
+    createdAt?: Date | string
+    members?: UserCreateNestedManyWithoutGroupsInput
+    posts?: PostCreateNestedManyWithoutGroupInput
+    admin: AdminCreateNestedOneWithoutGroupInput
+  }
+
+  export type GroupUncheckedCreateWithoutCommunityInput = {
+    id?: string
+    name: string
+    subject: string
+    image?: string | null
+    adminId: string
+    createdAt?: Date | string
+    members?: UserUncheckedCreateNestedManyWithoutGroupsInput
+    posts?: PostUncheckedCreateNestedManyWithoutGroupInput
+  }
+
+  export type GroupCreateOrConnectWithoutCommunityInput = {
+    where: GroupWhereUniqueInput
+    create: XOR<GroupCreateWithoutCommunityInput, GroupUncheckedCreateWithoutCommunityInput>
+  }
+
+  export type LiveRoomCreateWithoutCommunityInput = {
+    id?: string
+    title: string
+    topic?: string | null
+    participants?: number
+    isLive?: boolean
+    isActive?: boolean
+    isPublic?: boolean
+    isPrivate?: boolean
+    isPasswordProtected?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    User?: UserCreateNestedManyWithoutLiveRoomInput
+    course?: CourseCreateNestedOneWithoutLiveRoomInput
+  }
+
+  export type LiveRoomUncheckedCreateWithoutCommunityInput = {
+    id?: string
+    title: string
+    topic?: string | null
+    participants?: number
+    isLive?: boolean
+    isActive?: boolean
+    isPublic?: boolean
+    isPrivate?: boolean
+    isPasswordProtected?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    courseId?: string | null
+    User?: UserUncheckedCreateNestedManyWithoutLiveRoomInput
+  }
+
+  export type LiveRoomCreateOrConnectWithoutCommunityInput = {
+    where: LiveRoomWhereUniqueInput
+    create: XOR<LiveRoomCreateWithoutCommunityInput, LiveRoomUncheckedCreateWithoutCommunityInput>
+  }
+
+  export type LiveRoomCreateManyCommunityInputEnvelope = {
+    data: LiveRoomCreateManyCommunityInput | LiveRoomCreateManyCommunityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserCreateWithoutCommunityInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academy?: AcademyCreateNestedOneWithoutUsersInput
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    groups?: GroupCreateNestedManyWithoutMembersInput
+    channels?: ChannelCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    Submission?: SubmissionCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorCreateNestedManyWithoutUserInput
+    Owner?: OwnerCreateNestedManyWithoutUserInput
+    Admin?: AdminCreateNestedManyWithoutUserInput
+    Lesson?: LessonCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentCreateNestedManyWithoutUserInput
+    Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCommunityInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academyId?: string | null
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    groups?: GroupUncheckedCreateNestedManyWithoutMembersInput
+    channels?: ChannelUncheckedCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
+    Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
+    Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
+    Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCommunityInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCommunityInput, UserUncheckedCreateWithoutCommunityInput>
+  }
+
+  export type PostCreateWithoutCommunityInput = {
+    id?: string
+    content: string
+    title: string
+    createdAt?: Date | string
+    likesCount?: number
+    author: UserCreateNestedOneWithoutPostsInput
+    comments?: CommentCreateNestedManyWithoutPostInput
+    Group?: GroupCreateNestedManyWithoutPostsInput
+    Discussion?: DiscussionCreateNestedManyWithoutPostInput
+  }
+
+  export type PostUncheckedCreateWithoutCommunityInput = {
+    id?: string
+    authorId: string
+    content: string
+    title: string
+    createdAt?: Date | string
+    likesCount?: number
+    comments?: CommentUncheckedCreateNestedManyWithoutPostInput
+    Group?: GroupUncheckedCreateNestedManyWithoutPostsInput
+    Discussion?: DiscussionUncheckedCreateNestedManyWithoutPostInput
+  }
+
+  export type PostCreateOrConnectWithoutCommunityInput = {
+    where: PostWhereUniqueInput
+    create: XOR<PostCreateWithoutCommunityInput, PostUncheckedCreateWithoutCommunityInput>
+  }
+
+  export type DiscussionCreateWithoutCommunityInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    post?: PostCreateNestedOneWithoutDiscussionInput
+  }
+
+  export type DiscussionUncheckedCreateWithoutCommunityInput = {
+    id?: string
+    postId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DiscussionCreateOrConnectWithoutCommunityInput = {
+    where: DiscussionWhereUniqueInput
+    create: XOR<DiscussionCreateWithoutCommunityInput, DiscussionUncheckedCreateWithoutCommunityInput>
+  }
+
+  export type DiscussionCreateManyCommunityInputEnvelope = {
+    data: DiscussionCreateManyCommunityInput | DiscussionCreateManyCommunityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GroupUpsertWithWhereUniqueWithoutCommunityInput = {
+    where: GroupWhereUniqueInput
+    update: XOR<GroupUpdateWithoutCommunityInput, GroupUncheckedUpdateWithoutCommunityInput>
+    create: XOR<GroupCreateWithoutCommunityInput, GroupUncheckedCreateWithoutCommunityInput>
+  }
+
+  export type GroupUpdateWithWhereUniqueWithoutCommunityInput = {
+    where: GroupWhereUniqueInput
+    data: XOR<GroupUpdateWithoutCommunityInput, GroupUncheckedUpdateWithoutCommunityInput>
+  }
+
+  export type GroupUpdateManyWithWhereWithoutCommunityInput = {
+    where: GroupScalarWhereInput
+    data: XOR<GroupUpdateManyMutationInput, GroupUncheckedUpdateManyWithoutCommunityInput>
+  }
+
+  export type LiveRoomUpsertWithWhereUniqueWithoutCommunityInput = {
+    where: LiveRoomWhereUniqueInput
+    update: XOR<LiveRoomUpdateWithoutCommunityInput, LiveRoomUncheckedUpdateWithoutCommunityInput>
+    create: XOR<LiveRoomCreateWithoutCommunityInput, LiveRoomUncheckedCreateWithoutCommunityInput>
+  }
+
+  export type LiveRoomUpdateWithWhereUniqueWithoutCommunityInput = {
+    where: LiveRoomWhereUniqueInput
+    data: XOR<LiveRoomUpdateWithoutCommunityInput, LiveRoomUncheckedUpdateWithoutCommunityInput>
+  }
+
+  export type LiveRoomUpdateManyWithWhereWithoutCommunityInput = {
+    where: LiveRoomScalarWhereInput
+    data: XOR<LiveRoomUpdateManyMutationInput, LiveRoomUncheckedUpdateManyWithoutCommunityInput>
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutCommunityInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutCommunityInput, UserUncheckedUpdateWithoutCommunityInput>
+    create: XOR<UserCreateWithoutCommunityInput, UserUncheckedCreateWithoutCommunityInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutCommunityInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutCommunityInput, UserUncheckedUpdateWithoutCommunityInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutCommunityInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutCommunityInput>
+  }
+
+  export type PostUpsertWithWhereUniqueWithoutCommunityInput = {
+    where: PostWhereUniqueInput
+    update: XOR<PostUpdateWithoutCommunityInput, PostUncheckedUpdateWithoutCommunityInput>
+    create: XOR<PostCreateWithoutCommunityInput, PostUncheckedCreateWithoutCommunityInput>
+  }
+
+  export type PostUpdateWithWhereUniqueWithoutCommunityInput = {
+    where: PostWhereUniqueInput
+    data: XOR<PostUpdateWithoutCommunityInput, PostUncheckedUpdateWithoutCommunityInput>
+  }
+
+  export type PostUpdateManyWithWhereWithoutCommunityInput = {
+    where: PostScalarWhereInput
+    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutCommunityInput>
+  }
+
+  export type DiscussionUpsertWithWhereUniqueWithoutCommunityInput = {
+    where: DiscussionWhereUniqueInput
+    update: XOR<DiscussionUpdateWithoutCommunityInput, DiscussionUncheckedUpdateWithoutCommunityInput>
+    create: XOR<DiscussionCreateWithoutCommunityInput, DiscussionUncheckedCreateWithoutCommunityInput>
+  }
+
+  export type DiscussionUpdateWithWhereUniqueWithoutCommunityInput = {
+    where: DiscussionWhereUniqueInput
+    data: XOR<DiscussionUpdateWithoutCommunityInput, DiscussionUncheckedUpdateWithoutCommunityInput>
+  }
+
+  export type DiscussionUpdateManyWithWhereWithoutCommunityInput = {
+    where: DiscussionScalarWhereInput
+    data: XOR<DiscussionUpdateManyMutationInput, DiscussionUncheckedUpdateManyWithoutCommunityInput>
+  }
+
+  export type CommunityCreateWithoutDiscussionsInput = {
+    id?: string
+    name: string
+    image?: string | null
+    description?: string | null
+    type: string
+    likes?: number
+    dislikes?: number
+    views?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: GroupCreateNestedManyWithoutCommunityInput
+    liveRoom?: LiveRoomCreateNestedManyWithoutCommunityInput
+    participants?: UserCreateNestedManyWithoutCommunityInput
+    posts?: PostCreateNestedManyWithoutCommunityInput
+  }
+
+  export type CommunityUncheckedCreateWithoutDiscussionsInput = {
+    id?: string
+    name: string
+    image?: string | null
+    description?: string | null
+    type: string
+    likes?: number
+    dislikes?: number
+    views?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: GroupUncheckedCreateNestedManyWithoutCommunityInput
+    liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCommunityInput
+    participants?: UserUncheckedCreateNestedManyWithoutCommunityInput
+    posts?: PostUncheckedCreateNestedManyWithoutCommunityInput
+  }
+
+  export type CommunityCreateOrConnectWithoutDiscussionsInput = {
+    where: CommunityWhereUniqueInput
+    create: XOR<CommunityCreateWithoutDiscussionsInput, CommunityUncheckedCreateWithoutDiscussionsInput>
+  }
+
+  export type PostCreateWithoutDiscussionInput = {
+    id?: string
+    content: string
+    title: string
+    createdAt?: Date | string
+    likesCount?: number
+    author: UserCreateNestedOneWithoutPostsInput
+    comments?: CommentCreateNestedManyWithoutPostInput
+    Group?: GroupCreateNestedManyWithoutPostsInput
+    Community?: CommunityCreateNestedManyWithoutPostsInput
+  }
+
+  export type PostUncheckedCreateWithoutDiscussionInput = {
+    id?: string
+    authorId: string
+    content: string
+    title: string
+    createdAt?: Date | string
+    likesCount?: number
+    comments?: CommentUncheckedCreateNestedManyWithoutPostInput
+    Group?: GroupUncheckedCreateNestedManyWithoutPostsInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutPostsInput
+  }
+
+  export type PostCreateOrConnectWithoutDiscussionInput = {
+    where: PostWhereUniqueInput
+    create: XOR<PostCreateWithoutDiscussionInput, PostUncheckedCreateWithoutDiscussionInput>
+  }
+
+  export type CommunityUpsertWithoutDiscussionsInput = {
+    update: XOR<CommunityUpdateWithoutDiscussionsInput, CommunityUncheckedUpdateWithoutDiscussionsInput>
+    create: XOR<CommunityCreateWithoutDiscussionsInput, CommunityUncheckedCreateWithoutDiscussionsInput>
+    where?: CommunityWhereInput
+  }
+
+  export type CommunityUpdateToOneWithWhereWithoutDiscussionsInput = {
+    where?: CommunityWhereInput
+    data: XOR<CommunityUpdateWithoutDiscussionsInput, CommunityUncheckedUpdateWithoutDiscussionsInput>
+  }
+
+  export type CommunityUpdateWithoutDiscussionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: GroupUpdateManyWithoutCommunityNestedInput
+    liveRoom?: LiveRoomUpdateManyWithoutCommunityNestedInput
+    participants?: UserUpdateManyWithoutCommunityNestedInput
+    posts?: PostUpdateManyWithoutCommunityNestedInput
+  }
+
+  export type CommunityUncheckedUpdateWithoutDiscussionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: GroupUncheckedUpdateManyWithoutCommunityNestedInput
+    liveRoom?: LiveRoomUncheckedUpdateManyWithoutCommunityNestedInput
+    participants?: UserUncheckedUpdateManyWithoutCommunityNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCommunityNestedInput
+  }
+
+  export type PostUpsertWithoutDiscussionInput = {
+    update: XOR<PostUpdateWithoutDiscussionInput, PostUncheckedUpdateWithoutDiscussionInput>
+    create: XOR<PostCreateWithoutDiscussionInput, PostUncheckedCreateWithoutDiscussionInput>
+    where?: PostWhereInput
+  }
+
+  export type PostUpdateToOneWithWhereWithoutDiscussionInput = {
+    where?: PostWhereInput
+    data: XOR<PostUpdateWithoutDiscussionInput, PostUncheckedUpdateWithoutDiscussionInput>
+  }
+
+  export type PostUpdateWithoutDiscussionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    likesCount?: IntFieldUpdateOperationsInput | number
+    author?: UserUpdateOneRequiredWithoutPostsNestedInput
+    comments?: CommentUpdateManyWithoutPostNestedInput
+    Group?: GroupUpdateManyWithoutPostsNestedInput
+    Community?: CommunityUpdateManyWithoutPostsNestedInput
+  }
+
+  export type PostUncheckedUpdateWithoutDiscussionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    likesCount?: IntFieldUpdateOperationsInput | number
+    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
+    Group?: GroupUncheckedUpdateManyWithoutPostsNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutPostsNestedInput
+  }
+
+  export type CommunityCreateWithoutLiveRoomInput = {
+    id?: string
+    name: string
+    image?: string | null
+    description?: string | null
+    type: string
+    likes?: number
+    dislikes?: number
+    views?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: GroupCreateNestedManyWithoutCommunityInput
+    participants?: UserCreateNestedManyWithoutCommunityInput
+    posts?: PostCreateNestedManyWithoutCommunityInput
+    discussions?: DiscussionCreateNestedManyWithoutCommunityInput
+  }
+
+  export type CommunityUncheckedCreateWithoutLiveRoomInput = {
+    id?: string
+    name: string
+    image?: string | null
+    description?: string | null
+    type: string
+    likes?: number
+    dislikes?: number
+    views?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: GroupUncheckedCreateNestedManyWithoutCommunityInput
+    participants?: UserUncheckedCreateNestedManyWithoutCommunityInput
+    posts?: PostUncheckedCreateNestedManyWithoutCommunityInput
+    discussions?: DiscussionUncheckedCreateNestedManyWithoutCommunityInput
+  }
+
+  export type CommunityCreateOrConnectWithoutLiveRoomInput = {
+    where: CommunityWhereUniqueInput
+    create: XOR<CommunityCreateWithoutLiveRoomInput, CommunityUncheckedCreateWithoutLiveRoomInput>
+  }
+
+  export type UserCreateWithoutLiveRoomInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academy?: AcademyCreateNestedOneWithoutUsersInput
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    groups?: GroupCreateNestedManyWithoutMembersInput
+    channels?: ChannelCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    Submission?: SubmissionCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorCreateNestedManyWithoutUserInput
+    Owner?: OwnerCreateNestedManyWithoutUserInput
+    Admin?: AdminCreateNestedManyWithoutUserInput
+    Lesson?: LessonCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentCreateNestedManyWithoutUserInput
+    Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+  }
+
+  export type UserUncheckedCreateWithoutLiveRoomInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academyId?: string | null
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    groups?: GroupUncheckedCreateNestedManyWithoutMembersInput
+    channels?: ChannelUncheckedCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
+    Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
+    Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
+    Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+  }
+
+  export type UserCreateOrConnectWithoutLiveRoomInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutLiveRoomInput, UserUncheckedCreateWithoutLiveRoomInput>
+  }
+
+  export type CourseCreateWithoutLiveRoomInput = {
+    id?: string
+    title: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academy: AcademyCreateNestedOneWithoutCoursesInput
+    lessons?: LessonCreateNestedManyWithoutCourseInput
+    enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
+    quizzes?: QuizCreateNestedManyWithoutCourseInput
+    instructors?: InstructorCreateNestedManyWithoutCoursesInput
+  }
+
+  export type CourseUncheckedCreateWithoutLiveRoomInput = {
+    id?: string
+    title: string
+    description: string
+    academyId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
+    quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
+    instructors?: InstructorUncheckedCreateNestedManyWithoutCoursesInput
+  }
+
+  export type CourseCreateOrConnectWithoutLiveRoomInput = {
+    where: CourseWhereUniqueInput
+    create: XOR<CourseCreateWithoutLiveRoomInput, CourseUncheckedCreateWithoutLiveRoomInput>
+  }
+
+  export type CommunityUpsertWithoutLiveRoomInput = {
+    update: XOR<CommunityUpdateWithoutLiveRoomInput, CommunityUncheckedUpdateWithoutLiveRoomInput>
+    create: XOR<CommunityCreateWithoutLiveRoomInput, CommunityUncheckedCreateWithoutLiveRoomInput>
+    where?: CommunityWhereInput
+  }
+
+  export type CommunityUpdateToOneWithWhereWithoutLiveRoomInput = {
+    where?: CommunityWhereInput
+    data: XOR<CommunityUpdateWithoutLiveRoomInput, CommunityUncheckedUpdateWithoutLiveRoomInput>
+  }
+
+  export type CommunityUpdateWithoutLiveRoomInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: GroupUpdateManyWithoutCommunityNestedInput
+    participants?: UserUpdateManyWithoutCommunityNestedInput
+    posts?: PostUpdateManyWithoutCommunityNestedInput
+    discussions?: DiscussionUpdateManyWithoutCommunityNestedInput
+  }
+
+  export type CommunityUncheckedUpdateWithoutLiveRoomInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: GroupUncheckedUpdateManyWithoutCommunityNestedInput
+    participants?: UserUncheckedUpdateManyWithoutCommunityNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCommunityNestedInput
+    discussions?: DiscussionUncheckedUpdateManyWithoutCommunityNestedInput
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutLiveRoomInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutLiveRoomInput, UserUncheckedUpdateWithoutLiveRoomInput>
+    create: XOR<UserCreateWithoutLiveRoomInput, UserUncheckedCreateWithoutLiveRoomInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutLiveRoomInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutLiveRoomInput, UserUncheckedUpdateWithoutLiveRoomInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutLiveRoomInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutLiveRoomInput>
+  }
+
+  export type CourseUpsertWithoutLiveRoomInput = {
+    update: XOR<CourseUpdateWithoutLiveRoomInput, CourseUncheckedUpdateWithoutLiveRoomInput>
+    create: XOR<CourseCreateWithoutLiveRoomInput, CourseUncheckedCreateWithoutLiveRoomInput>
+    where?: CourseWhereInput
+  }
+
+  export type CourseUpdateToOneWithWhereWithoutLiveRoomInput = {
+    where?: CourseWhereInput
+    data: XOR<CourseUpdateWithoutLiveRoomInput, CourseUncheckedUpdateWithoutLiveRoomInput>
+  }
+
+  export type CourseUpdateWithoutLiveRoomInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academy?: AcademyUpdateOneRequiredWithoutCoursesNestedInput
+    lessons?: LessonUpdateManyWithoutCourseNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
+    quizzes?: QuizUpdateManyWithoutCourseNestedInput
+    instructors?: InstructorUpdateManyWithoutCoursesNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutLiveRoomInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    academyId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
+    quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
+    instructors?: InstructorUncheckedUpdateManyWithoutCoursesNestedInput
   }
 
   export type EnrollmentCreateManyUserInput = {
@@ -40889,6 +51062,7 @@ export namespace Prisma {
     id?: string
     type: string
     value: JsonNullValueInput | InputJsonValue
+    isNew?: boolean
     createdAt?: Date | string
   }
 
@@ -40911,6 +51085,7 @@ export namespace Prisma {
   export type PostCreateManyAuthorInput = {
     id?: string
     content: string
+    title: string
     createdAt?: Date | string
     likesCount?: number
   }
@@ -40968,6 +51143,33 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type BadgeCreateManyUserInput = {
+    id?: string
+    title: string
+    description?: string | null
+    image?: string | null
+    points: number
+    type: string
+    earnedAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type CertificateCreateManyUserInput = {
+    id?: string
+    name: string
+    address: string
+    phone: string
+    notes: string
+    title: string
+    description?: string | null
+    url?: string | null
+    image?: string | null
+    points: number
+    type: string
+    earnedAt: Date | string
+    createdAt?: Date | string
+  }
+
   export type EnrollmentUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     progress?: FloatFieldUpdateOperationsInput | number
@@ -40999,6 +51201,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     value?: JsonNullValueInput | InputJsonValue
+    isNew?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -41006,6 +51209,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     value?: JsonNullValueInput | InputJsonValue
+    isNew?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -41013,6 +51217,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     value?: JsonNullValueInput | InputJsonValue
+    isNew?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -41069,24 +51274,31 @@ export namespace Prisma {
   export type PostUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likesCount?: IntFieldUpdateOperationsInput | number
     comments?: CommentUpdateManyWithoutPostNestedInput
     Group?: GroupUpdateManyWithoutPostsNestedInput
+    Community?: CommunityUpdateManyWithoutPostsNestedInput
+    Discussion?: DiscussionUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likesCount?: IntFieldUpdateOperationsInput | number
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     Group?: GroupUncheckedUpdateManyWithoutPostsNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutPostsNestedInput
+    Discussion?: DiscussionUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateManyWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likesCount?: IntFieldUpdateOperationsInput | number
   }
@@ -41094,22 +51306,30 @@ export namespace Prisma {
   export type GroupUpdateWithoutMembersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUpdateManyWithoutGroupNestedInput
     admin?: AdminUpdateOneRequiredWithoutGroupNestedInput
+    Community?: CommunityUpdateManyWithoutGroupsNestedInput
   }
 
   export type GroupUncheckedUpdateWithoutMembersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     adminId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUncheckedUpdateManyWithoutGroupNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutGroupsNestedInput
   }
 
   export type GroupUncheckedUpdateManyWithoutMembersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     adminId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -41338,10 +51558,187 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BadgeUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    points?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BadgeUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    points?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BadgeUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    points?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificateUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    points?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificateUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    points?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificateUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    points?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    earnedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommunityUpdateWithoutParticipantsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: GroupUpdateManyWithoutCommunityNestedInput
+    liveRoom?: LiveRoomUpdateManyWithoutCommunityNestedInput
+    posts?: PostUpdateManyWithoutCommunityNestedInput
+    discussions?: DiscussionUpdateManyWithoutCommunityNestedInput
+  }
+
+  export type CommunityUncheckedUpdateWithoutParticipantsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: GroupUncheckedUpdateManyWithoutCommunityNestedInput
+    liveRoom?: LiveRoomUncheckedUpdateManyWithoutCommunityNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCommunityNestedInput
+    discussions?: DiscussionUncheckedUpdateManyWithoutCommunityNestedInput
+  }
+
+  export type CommunityUncheckedUpdateManyWithoutParticipantsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveRoomUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    participants?: IntFieldUpdateOperationsInput | number
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isPasswordProtected?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    community?: CommunityUpdateOneRequiredWithoutLiveRoomNestedInput
+    course?: CourseUpdateOneWithoutLiveRoomNestedInput
+  }
+
+  export type LiveRoomUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    participants?: IntFieldUpdateOperationsInput | number
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isPasswordProtected?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    communityId?: StringFieldUpdateOperationsInput | string
+    courseId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type LiveRoomUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    participants?: IntFieldUpdateOperationsInput | number
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isPasswordProtected?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    communityId?: StringFieldUpdateOperationsInput | string
+    courseId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type UserCreateManyAcademyInput = {
     id?: string
     email: string
     password: string
+    phone?: string | null
     firstName: string
     lastName: string
     role?: $Enums.UserRole
@@ -41378,6 +51775,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -41402,12 +51800,17 @@ export namespace Prisma {
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAcademyInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -41432,12 +51835,17 @@ export namespace Prisma {
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutAcademyInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -41457,6 +51865,7 @@ export namespace Prisma {
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUpdateManyWithoutCoursesNestedInput
+    liveRoom?: LiveRoomUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutAcademyInput = {
@@ -41469,6 +51878,7 @@ export namespace Prisma {
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutCoursesNestedInput
+    liveRoom?: LiveRoomUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateManyWithoutAcademyInput = {
@@ -41536,6 +51946,7 @@ export namespace Prisma {
     lessons?: LessonUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUpdateManyWithoutCourseNestedInput
+    liveRoom?: LiveRoomUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutInstructorsInput = {
@@ -41548,6 +51959,7 @@ export namespace Prisma {
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
+    liveRoom?: LiveRoomUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateManyWithoutInstructorsInput = {
@@ -41575,6 +51987,21 @@ export namespace Prisma {
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type LiveRoomCreateManyCourseInput = {
+    id?: string
+    title: string
+    topic?: string | null
+    participants?: number
+    isLive?: boolean
+    isActive?: boolean
+    isPublic?: boolean
+    isPrivate?: boolean
+    isPasswordProtected?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    communityId: string
   }
 
   export type LessonUpdateWithoutCourseInput = {
@@ -41645,6 +52072,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     timeLimit?: NullableIntFieldUpdateOperationsInput | number | null
     passingScore?: NullableIntFieldUpdateOperationsInput | number | null
+    upComing?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lesson?: LessonUpdateOneRequiredWithoutQuizzesNestedInput
@@ -41659,6 +52088,8 @@ export namespace Prisma {
     lessonId?: StringFieldUpdateOperationsInput | string
     timeLimit?: NullableIntFieldUpdateOperationsInput | number | null
     passingScore?: NullableIntFieldUpdateOperationsInput | number | null
+    upComing?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutQuizNestedInput
@@ -41672,6 +52103,8 @@ export namespace Prisma {
     lessonId?: StringFieldUpdateOperationsInput | string
     timeLimit?: NullableIntFieldUpdateOperationsInput | number | null
     passingScore?: NullableIntFieldUpdateOperationsInput | number | null
+    upComing?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -41694,6 +52127,53 @@ export namespace Prisma {
     academyId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type LiveRoomUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    participants?: IntFieldUpdateOperationsInput | number
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isPasswordProtected?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    community?: CommunityUpdateOneRequiredWithoutLiveRoomNestedInput
+    User?: UserUpdateManyWithoutLiveRoomNestedInput
+  }
+
+  export type LiveRoomUncheckedUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    participants?: IntFieldUpdateOperationsInput | number
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isPasswordProtected?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    communityId?: StringFieldUpdateOperationsInput | string
+    User?: UserUncheckedUpdateManyWithoutLiveRoomNestedInput
+  }
+
+  export type LiveRoomUncheckedUpdateManyWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    participants?: IntFieldUpdateOperationsInput | number
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isPasswordProtected?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    communityId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type FileCreateManyLessonInput = {
     id?: string
     name: string
@@ -41708,6 +52188,8 @@ export namespace Prisma {
     description?: string | null
     timeLimit?: number | null
     passingScore?: number | null
+    upComing?: boolean
+    isCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -41751,6 +52233,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     timeLimit?: NullableIntFieldUpdateOperationsInput | number | null
     passingScore?: NullableIntFieldUpdateOperationsInput | number | null
+    upComing?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUpdateManyWithoutQuizNestedInput
@@ -41764,6 +52248,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     timeLimit?: NullableIntFieldUpdateOperationsInput | number | null
     passingScore?: NullableIntFieldUpdateOperationsInput | number | null
+    upComing?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutQuizNestedInput
@@ -41777,6 +52263,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     timeLimit?: NullableIntFieldUpdateOperationsInput | number | null
     passingScore?: NullableIntFieldUpdateOperationsInput | number | null
+    upComing?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -41785,6 +52273,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -41809,12 +52298,17 @@ export namespace Prisma {
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLessonInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -41839,12 +52333,17 @@ export namespace Prisma {
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutLessonInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -41980,6 +52479,7 @@ export namespace Prisma {
     lessons?: LessonUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUpdateManyWithoutCoursesNestedInput
+    liveRoom?: LiveRoomUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutQuizzesInput = {
@@ -41992,6 +52492,7 @@ export namespace Prisma {
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutCoursesNestedInput
+    liveRoom?: LiveRoomUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateManyWithoutQuizzesInput = {
@@ -42032,6 +52533,13 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type DiscussionCreateManyPostInput = {
+    id?: string
+    communityId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type CommentUpdateWithoutPostInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -42053,30 +52561,107 @@ export namespace Prisma {
   export type GroupUpdateWithoutPostsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUpdateManyWithoutGroupsNestedInput
     admin?: AdminUpdateOneRequiredWithoutGroupNestedInput
+    Community?: CommunityUpdateManyWithoutGroupsNestedInput
   }
 
   export type GroupUncheckedUpdateWithoutPostsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     adminId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUncheckedUpdateManyWithoutGroupsNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutGroupsNestedInput
   }
 
   export type GroupUncheckedUpdateManyWithoutPostsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     adminId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommunityUpdateWithoutPostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: GroupUpdateManyWithoutCommunityNestedInput
+    liveRoom?: LiveRoomUpdateManyWithoutCommunityNestedInput
+    participants?: UserUpdateManyWithoutCommunityNestedInput
+    discussions?: DiscussionUpdateManyWithoutCommunityNestedInput
+  }
+
+  export type CommunityUncheckedUpdateWithoutPostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: GroupUncheckedUpdateManyWithoutCommunityNestedInput
+    liveRoom?: LiveRoomUncheckedUpdateManyWithoutCommunityNestedInput
+    participants?: UserUncheckedUpdateManyWithoutCommunityNestedInput
+    discussions?: DiscussionUncheckedUpdateManyWithoutCommunityNestedInput
+  }
+
+  export type CommunityUncheckedUpdateManyWithoutPostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DiscussionUpdateWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    community?: CommunityUpdateOneRequiredWithoutDiscussionsNestedInput
+  }
+
+  export type DiscussionUncheckedUpdateWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    communityId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DiscussionUncheckedUpdateManyWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    communityId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUpdateWithoutGroupsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -42101,12 +52686,17 @@ export namespace Prisma {
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGroupsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -42131,12 +52721,17 @@ export namespace Prisma {
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutGroupsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -42150,54 +52745,118 @@ export namespace Prisma {
   export type PostUpdateWithoutGroupInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likesCount?: IntFieldUpdateOperationsInput | number
     author?: UserUpdateOneRequiredWithoutPostsNestedInput
     comments?: CommentUpdateManyWithoutPostNestedInput
+    Community?: CommunityUpdateManyWithoutPostsNestedInput
+    Discussion?: DiscussionUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateWithoutGroupInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likesCount?: IntFieldUpdateOperationsInput | number
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutPostsNestedInput
+    Discussion?: DiscussionUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateManyWithoutGroupInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likesCount?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CommunityUpdateWithoutGroupsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    liveRoom?: LiveRoomUpdateManyWithoutCommunityNestedInput
+    participants?: UserUpdateManyWithoutCommunityNestedInput
+    posts?: PostUpdateManyWithoutCommunityNestedInput
+    discussions?: DiscussionUpdateManyWithoutCommunityNestedInput
+  }
+
+  export type CommunityUncheckedUpdateWithoutGroupsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    liveRoom?: LiveRoomUncheckedUpdateManyWithoutCommunityNestedInput
+    participants?: UserUncheckedUpdateManyWithoutCommunityNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCommunityNestedInput
+    discussions?: DiscussionUncheckedUpdateManyWithoutCommunityNestedInput
+  }
+
+  export type CommunityUncheckedUpdateManyWithoutGroupsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    likes?: IntFieldUpdateOperationsInput | number
+    dislikes?: IntFieldUpdateOperationsInput | number
+    views?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GroupCreateManyAdminInput = {
     id?: string
     name: string
+    subject: string
+    image?: string | null
     createdAt?: Date | string
   }
 
   export type GroupUpdateWithoutAdminInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUpdateManyWithoutGroupsNestedInput
     posts?: PostUpdateManyWithoutGroupNestedInput
+    Community?: CommunityUpdateManyWithoutGroupsNestedInput
   }
 
   export type GroupUncheckedUpdateWithoutAdminInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUncheckedUpdateManyWithoutGroupsNestedInput
     posts?: PostUncheckedUpdateManyWithoutGroupNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutGroupsNestedInput
   }
 
   export type GroupUncheckedUpdateManyWithoutAdminInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -42205,6 +52864,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -42229,12 +52889,17 @@ export namespace Prisma {
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChannelsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -42259,12 +52924,17 @@ export namespace Prisma {
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
     Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutChannelsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -42327,159 +52997,331 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type LiveRoomCreateManyCommunityInput = {
+    id?: string
+    title: string
+    topic?: string | null
+    participants?: number
+    isLive?: boolean
+    isActive?: boolean
+    isPublic?: boolean
+    isPrivate?: boolean
+    isPasswordProtected?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    courseId?: string | null
+  }
+
+  export type DiscussionCreateManyCommunityInput = {
+    id?: string
+    postId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GroupUpdateWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: UserUpdateManyWithoutGroupsNestedInput
+    posts?: PostUpdateManyWithoutGroupNestedInput
+    admin?: AdminUpdateOneRequiredWithoutGroupNestedInput
+  }
+
+  export type GroupUncheckedUpdateWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: UserUncheckedUpdateManyWithoutGroupsNestedInput
+    posts?: PostUncheckedUpdateManyWithoutGroupNestedInput
+  }
+
+  export type GroupUncheckedUpdateManyWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveRoomUpdateWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    participants?: IntFieldUpdateOperationsInput | number
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isPasswordProtected?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    User?: UserUpdateManyWithoutLiveRoomNestedInput
+    course?: CourseUpdateOneWithoutLiveRoomNestedInput
+  }
+
+  export type LiveRoomUncheckedUpdateWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    participants?: IntFieldUpdateOperationsInput | number
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isPasswordProtected?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    courseId?: NullableStringFieldUpdateOperationsInput | string | null
+    User?: UserUncheckedUpdateManyWithoutLiveRoomNestedInput
+  }
+
+  export type LiveRoomUncheckedUpdateManyWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    topic?: NullableStringFieldUpdateOperationsInput | string | null
+    participants?: IntFieldUpdateOperationsInput | number
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isPasswordProtected?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    courseId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserUpdateWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academy?: AcademyUpdateOneWithoutUsersNestedInput
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUpdateManyWithoutUserNestedInput
+    Admin?: AdminUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUpdateManyWithoutUserNestedInput
+    Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUncheckedUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUncheckedUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
+    Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academyId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PostUpdateWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    likesCount?: IntFieldUpdateOperationsInput | number
+    author?: UserUpdateOneRequiredWithoutPostsNestedInput
+    comments?: CommentUpdateManyWithoutPostNestedInput
+    Group?: GroupUpdateManyWithoutPostsNestedInput
+    Discussion?: DiscussionUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    likesCount?: IntFieldUpdateOperationsInput | number
+    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
+    Group?: GroupUncheckedUpdateManyWithoutPostsNestedInput
+    Discussion?: DiscussionUncheckedUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateManyWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    likesCount?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type DiscussionUpdateWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post?: PostUpdateOneWithoutDiscussionNestedInput
+  }
+
+  export type DiscussionUncheckedUpdateWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DiscussionUncheckedUpdateManyWithoutCommunityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpdateWithoutLiveRoomInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academy?: AcademyUpdateOneWithoutUsersNestedInput
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUpdateManyWithoutUserNestedInput
+    Admin?: AdminUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUpdateManyWithoutUserNestedInput
+    Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutLiveRoomInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUncheckedUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUncheckedUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
+    Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutLiveRoomInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academyId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
 
 
-  /**
-   * Aliases for legacy arg types
-   */
-    /**
-     * @deprecated Use UserCountOutputTypeDefaultArgs instead
-     */
-    export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use AcademyCountOutputTypeDefaultArgs instead
-     */
-    export type AcademyCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AcademyCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use InstructorCountOutputTypeDefaultArgs instead
-     */
-    export type InstructorCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = InstructorCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use CourseCountOutputTypeDefaultArgs instead
-     */
-    export type CourseCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CourseCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use LessonCountOutputTypeDefaultArgs instead
-     */
-    export type LessonCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = LessonCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use QuizCountOutputTypeDefaultArgs instead
-     */
-    export type QuizCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = QuizCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use MessageCountOutputTypeDefaultArgs instead
-     */
-    export type MessageCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MessageCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use PostCountOutputTypeDefaultArgs instead
-     */
-    export type PostCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PostCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use GroupCountOutputTypeDefaultArgs instead
-     */
-    export type GroupCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = GroupCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use AdminCountOutputTypeDefaultArgs instead
-     */
-    export type AdminCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AdminCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use ChannelCountOutputTypeDefaultArgs instead
-     */
-    export type ChannelCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ChannelCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use OwnerCountOutputTypeDefaultArgs instead
-     */
-    export type OwnerCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = OwnerCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use UserDefaultArgs instead
-     */
-    export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use ProfileDefaultArgs instead
-     */
-    export type ProfileArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ProfileDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use AcademyDefaultArgs instead
-     */
-    export type AcademyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AcademyDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use InstructorDefaultArgs instead
-     */
-    export type InstructorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = InstructorDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use CourseDefaultArgs instead
-     */
-    export type CourseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CourseDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use LessonDefaultArgs instead
-     */
-    export type LessonArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = LessonDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use FileDefaultArgs instead
-     */
-    export type FileArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = FileDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use EnrollmentDefaultArgs instead
-     */
-    export type EnrollmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EnrollmentDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use QuizDefaultArgs instead
-     */
-    export type QuizArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = QuizDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use QuestionDefaultArgs instead
-     */
-    export type QuestionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = QuestionDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use SubmissionDefaultArgs instead
-     */
-    export type SubmissionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SubmissionDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use AchievementDefaultArgs instead
-     */
-    export type AchievementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AchievementDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use NotificationDefaultArgs instead
-     */
-    export type NotificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = NotificationDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use MessageDefaultArgs instead
-     */
-    export type MessageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MessageDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use PostDefaultArgs instead
-     */
-    export type PostArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PostDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use CommentDefaultArgs instead
-     */
-    export type CommentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CommentDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use GroupDefaultArgs instead
-     */
-    export type GroupArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = GroupDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use AdminDefaultArgs instead
-     */
-    export type AdminArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AdminDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use ChannelDefaultArgs instead
-     */
-    export type ChannelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ChannelDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use OwnerDefaultArgs instead
-     */
-    export type OwnerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = OwnerDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use BookmarkDefaultArgs instead
-     */
-    export type BookmarkArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = BookmarkDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use EventDefaultArgs instead
-     */
-    export type EventArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EventDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use AttendanceDefaultArgs instead
-     */
-    export type AttendanceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AttendanceDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use PaymentDefaultArgs instead
-     */
-    export type PaymentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PaymentDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use ReportDefaultArgs instead
-     */
-    export type ReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ReportDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

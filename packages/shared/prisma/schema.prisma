@@ -9,8 +9,8 @@ generator client2 {
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+    provider  = "postgresql"
+    url       = env("DATABASE_URL")
     directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
@@ -19,6 +19,7 @@ model User {
     id            String         @id @default(cuid())
     email         String         @unique
     password      String
+    phone         String?
     firstName     String
     lastName      String
     role          UserRole       @default(STUDENT)
@@ -51,6 +52,14 @@ model User {
     Payment Payment[]
 
     Report Report[]
+
+    Badge Badge[]
+
+    Certificate Certificate[]
+
+    Community Community[]
+
+    LiveRoom LiveRoom[]
 }
 
 enum UserRole {
@@ -106,6 +115,7 @@ model Course {
     enrollments Enrollment[]
     quizzes     Quiz[]
     instructors Instructor[]
+    liveRoom    LiveRoom[]
     createdAt   DateTime     @default(now())
     updatedAt   DateTime     @updatedAt
 }
@@ -159,6 +169,8 @@ model Quiz {
     submissions  Submission[]
     timeLimit    Int?
     passingScore Int?
+    upComing     Boolean      @default(false)
+    isCompleted  Boolean      @default(false)
     createdAt    DateTime     @default(now())
     updatedAt    DateTime     @updatedAt
 
@@ -199,6 +211,7 @@ model Achievement {
     user      User     @relation(fields: [userId], references: [id])
     type      String
     value     Json
+    isNew     Boolean  @default(false)
     createdAt DateTime @default(now())
 }
 
@@ -231,11 +244,16 @@ model Post {
     authorId   String
     author     User      @relation(fields: [authorId], references: [id])
     content    String
+    title      String
     createdAt  DateTime  @default(now())
     likesCount Int       @default(0)
     comments   Comment[]
 
     Group Group[]
+
+    Community Community[]
+
+    Discussion Discussion[]
 }
 
 model Comment {
@@ -249,11 +267,15 @@ model Comment {
 model Group {
     id        String   @id @default(cuid())
     name      String
+    subject   String
+    image     String?
     members   User[]
     adminId   String
     posts     Post[]
     admin     Admin    @relation(fields: [adminId], references: [id])
     createdAt DateTime @default(now())
+
+    Community Community[]
 }
 
 model Admin {
@@ -332,4 +354,82 @@ model Report {
     userId    String
     user      User     @relation(fields: [userId], references: [id])
     createdAt DateTime @default(now())
+}
+
+model Badge {
+    id          String   @id @default(cuid())
+    userId      String
+    user        User     @relation(fields: [userId], references: [id])
+    title       String
+    description String?
+    image       String?
+    points      Int
+    type        String
+    earnedAt    DateTime
+    createdAt   DateTime @default(now())
+}
+
+model Certificate {
+    id          String   @id @default(cuid())
+    name        String
+    address     String
+    phone       String
+    notes       String
+    userId      String
+    user        User     @relation(fields: [userId], references: [id])
+    title       String
+    description String?
+    url         String?
+    image       String?
+    points      Int
+    type        String
+    earnedAt    DateTime
+    createdAt   DateTime @default(now())
+}
+
+model Community {
+    id           String       @id @default(cuid())
+    name         String
+    image        String?
+    description  String?
+    type         String
+    groups       Group[]
+    liveRoom     LiveRoom[]
+    participants User[]
+    posts        Post[]
+    discussions  Discussion[]
+    likes        Int          @default(0)
+    dislikes     Int          @default(0)
+    views        Int          @default(0)
+    createdAt    DateTime     @default(now())
+    updatedAt    DateTime     @updatedAt
+}
+
+model Discussion {
+    id          String    @id @default(cuid())
+    communityId String
+    community   Community @relation(fields: [communityId], references: [id])
+    postId      String?
+    post        Post?     @relation(fields: [postId], references: [id])
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+}
+
+model LiveRoom {
+    id                  String    @id @default(cuid())
+    title               String
+    topic               String?
+    participants        Int       @default(0)
+    isLive              Boolean   @default(false)
+    isActive            Boolean   @default(false)
+    isPublic            Boolean   @default(false)
+    isPrivate           Boolean   @default(false)
+    isPasswordProtected Boolean   @default(false)
+    createdAt           DateTime  @default(now())
+    updatedAt           DateTime  @updatedAt
+    communityId         String
+    community           Community @relation(fields: [communityId], references: [id])
+    User                User[]
+    courseId            String?
+    course              Course?   @relation(fields: [courseId], references: [id])
 }

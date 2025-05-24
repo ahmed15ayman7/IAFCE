@@ -15,7 +15,7 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["./*"],
       "@shared/prisma": ["./generated/prisma_client"],
     },
     "plugins": [

@@ -13,6 +13,7 @@ export class AcademiesResolver {
         return this.academiesService.create(createAcademyInput);
     }
 
+
     @Query(() => [AcademyEntity], { name: 'academies' })
     findAll() {
         return this.academiesService.findAll();

@@ -20,6 +20,11 @@ export class UpdateAchievementDto {
   @Column()
   value: object;
 
+  @ApiProperty({ type: "boolean" })
+  // Field: isNew, Type: boolean
+  @Column()
+  isNew: boolean;
+
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date
   @Column()

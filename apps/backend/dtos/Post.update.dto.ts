@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { User, Comment, Group } from "@shared/prisma";
+import { User, Comment, Group, Community, Discussion } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -14,6 +14,11 @@ export class UpdatePostDto {
   // Field: content, Type: string
   @Column()
   content: string;
+
+  @ApiProperty({ type: "string" })
+  // Field: title, Type: string
+  @Column()
+  title: string;
 
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date

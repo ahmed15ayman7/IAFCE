@@ -4,7 +4,8 @@ import { CreateAchievementDto } from '../../dtos/Achievement.create.dto';
 import { UpdateAchievementDto } from '../../dtos/Achievement.update.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Achievement } from '@shared/prisma';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('الانجازات')
 @Controller('achievements')
 @UseGuards(JwtAuthGuard)
 export class AchievementsController {

@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { User, Post, Admin } from "@shared/prisma";
+import { User, Post, Admin, Community } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -9,6 +9,16 @@ export class UpdateGroupDto {
   // Field: name, Type: string
   @Column()
   name: string;
+
+  @ApiProperty({ type: "string" })
+  // Field: subject, Type: string
+  @Column()
+  subject: string;
+
+  @ApiProperty({ type: "string", nullable: true })
+  // Field: image, Type: string
+  @Column()
+  image?: string;
 
   @ApiProperty({ type: "string" })
   // Field: adminId, Type: string

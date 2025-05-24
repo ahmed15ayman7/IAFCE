@@ -19,6 +19,10 @@ import {
   Lesson,
   Payment,
   Report,
+  Badge,
+  Certificate,
+  Community,
+  LiveRoom,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -34,6 +38,11 @@ export class UpdateUserDto {
   // Field: password, Type: string
   @Column()
   password: string;
+
+  @ApiProperty({ type: "string", nullable: true })
+  // Field: phone, Type: string
+  @Column()
+  phone?: string;
 
   @ApiProperty({ type: "string" })
   // Field: firstName, Type: string

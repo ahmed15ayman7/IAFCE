@@ -29,6 +29,8 @@ import { GroupsModule } from './groups/groups.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { QuestionsModule } from './questions/questions.module';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { BadgesModule } from './badges/badges.module';
+import { CertificateModule } from './certificates/certificate.module';
 @Module({
     imports: [
         ConfigModule.forRoot({
@@ -67,12 +69,14 @@ import { ThrottlerModule } from '@nestjs/throttler';
         GroupsModule,
         ProfilesModule,
         QuestionsModule,
+        BadgesModule,
+        CertificateModule,
     ],
-    providers: [
-        {
-            provide: APP_GUARD,
-            useClass: AuthGuard,
-        },
-    ],
+    // providers: [
+    //     {
+    //         provide: APP_GUARD,
+    //         useClass: AuthGuard,
+    //     },
+    // ],
 })
 export class AppModule { } 

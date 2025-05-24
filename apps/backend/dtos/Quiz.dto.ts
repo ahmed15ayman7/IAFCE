@@ -54,6 +54,16 @@ export class QuizDto {
   @Column()
   passingScore?: number;
 
+  @ApiProperty({ type: "boolean" })
+  // Field: upComing, Type: boolean
+  @Column()
+  upComing: boolean;
+
+  @ApiProperty({ type: "boolean" })
+  // Field: isCompleted, Type: boolean
+  @Column()
+  isCompleted: boolean;
+
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date
   @Column()

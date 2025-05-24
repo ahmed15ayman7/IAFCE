@@ -2,7 +2,9 @@ import { ApiProperty } from "@nestjs/swagger";
 import { UserEntity } from "./User.entity";
 import { CommentEntity } from "./Comment.entity";
 import { GroupEntity } from "./Group.entity";
-import { User, Comment, Group } from "@shared/prisma";
+import { CommunityEntity } from "./Community.entity";
+import { DiscussionEntity } from "./Discussion.entity";
+import { User, Comment, Group, Community, Discussion } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -28,6 +30,11 @@ export class PostEntity {
   @Column()
   content: string;
 
+  @ApiProperty({ type: "string" })
+  // Field: title, Type: string
+  @Column()
+  title: string;
+
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date
   @Column()
@@ -47,4 +54,14 @@ export class PostEntity {
   // Field: Group, Type: Group[]
   @Column()
   Group: Group[];
+
+  @ApiProperty({ type: CommunityEntity })
+  // Field: Community, Type: Community[]
+  @Column()
+  Community: Community[];
+
+  @ApiProperty({ type: DiscussionEntity })
+  // Field: Discussion, Type: Discussion[]
+  @Column()
+  Discussion: Discussion[];
 }

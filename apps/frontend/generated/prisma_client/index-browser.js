@@ -17,12 +17,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.22.0
- * Query Engine version: 605197351a3c8bdd595af2d2a9bc3025bca48ea2
+ * Prisma Client JS version: 6.1.0
+ * Query Engine version: 11f085a2012c0f4778414c8db2651556ee0ef959
  */
 Prisma.prismaVersion = {
-  client: "5.22.0",
-  engine: "605197351a3c8bdd595af2d2a9bc3025bca48ea2"
+  client: "6.1.0",
+  engine: "11f085a2012c0f4778414c8db2651556ee0ef959"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -48,11 +48,6 @@ In case this error is unexpected for you, please report it in https://pris.ly/pr
 Prisma.PrismaClientValidationError = () => {
   const runtimeName = getRuntime().prettyName;
   throw new Error(`PrismaClientValidationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.NotFoundError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`NotFoundError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
 In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
 )}
 Prisma.Decimal = Decimal
@@ -126,6 +121,7 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   password: 'password',
+  phone: 'phone',
   firstName: 'firstName',
   lastName: 'lastName',
   role: 'role',
@@ -206,6 +202,8 @@ exports.Prisma.QuizScalarFieldEnum = {
   lessonId: 'lessonId',
   timeLimit: 'timeLimit',
   passingScore: 'passingScore',
+  upComing: 'upComing',
+  isCompleted: 'isCompleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -239,6 +237,7 @@ exports.Prisma.AchievementScalarFieldEnum = {
   userId: 'userId',
   type: 'type',
   value: 'value',
+  isNew: 'isNew',
   createdAt: 'createdAt'
 };
 
@@ -264,6 +263,7 @@ exports.Prisma.PostScalarFieldEnum = {
   id: 'id',
   authorId: 'authorId',
   content: 'content',
+  title: 'title',
   createdAt: 'createdAt',
   likesCount: 'likesCount'
 };
@@ -278,6 +278,8 @@ exports.Prisma.CommentScalarFieldEnum = {
 exports.Prisma.GroupScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  subject: 'subject',
+  image: 'image',
   adminId: 'adminId',
   createdAt: 'createdAt'
 };
@@ -343,6 +345,72 @@ exports.Prisma.ReportScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.BadgeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  description: 'description',
+  image: 'image',
+  points: 'points',
+  type: 'type',
+  earnedAt: 'earnedAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.CertificateScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  address: 'address',
+  phone: 'phone',
+  notes: 'notes',
+  userId: 'userId',
+  title: 'title',
+  description: 'description',
+  url: 'url',
+  image: 'image',
+  points: 'points',
+  type: 'type',
+  earnedAt: 'earnedAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.CommunityScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  image: 'image',
+  description: 'description',
+  type: 'type',
+  likes: 'likes',
+  dislikes: 'dislikes',
+  views: 'views',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DiscussionScalarFieldEnum = {
+  id: 'id',
+  communityId: 'communityId',
+  postId: 'postId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.LiveRoomScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  topic: 'topic',
+  participants: 'participants',
+  isLive: 'isLive',
+  isActive: 'isActive',
+  isPublic: 'isPublic',
+  isPrivate: 'isPrivate',
+  isPasswordProtected: 'isPasswordProtected',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  communityId: 'communityId',
+  courseId: 'courseId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -405,7 +473,12 @@ exports.Prisma.ModelName = {
   Event: 'Event',
   Attendance: 'Attendance',
   Payment: 'Payment',
-  Report: 'Report'
+  Report: 'Report',
+  Badge: 'Badge',
+  Certificate: 'Certificate',
+  Community: 'Community',
+  Discussion: 'Discussion',
+  LiveRoom: 'LiveRoom'
 };
 
 /**

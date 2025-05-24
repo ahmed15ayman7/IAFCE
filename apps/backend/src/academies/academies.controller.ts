@@ -4,6 +4,8 @@ import { CreateAcademyDto } from '../../dtos/Academy.create.dto';
 import { UpdateAcademyDto } from '../../dtos/Academy.update.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Academy } from '@shared/prisma';
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('الاكاديميات')
 @Controller('academies')
 @UseGuards(JwtAuthGuard)
 export class AcademiesController {

@@ -27,6 +27,7 @@ export class AuthService {
             throw new UnauthorizedException();
         }
     }
+
     private generateRefreshToken(payload: any): string {
         return this.jwtService.sign(payload, {
             secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
@@ -35,8 +36,10 @@ export class AuthService {
     }
     async validateUser(email: string, password: string): Promise<any> {
         const user = await this.usersService.findByEmail(email);
-        if (user && (await bcrypt.compare(password, user.password))) {
-            const { password, ...result } = user;
+        let verify = await bcrypt.compare(password, user?.password);
+        console.log(verify);
+        if (user && verify) {
+            const { password: _, ...result } = user;
             return result;
         }
         return null;
@@ -46,12 +49,13 @@ export class AuthService {
         const payload = { email: user.email, sub: user.id, role: user.role };
         return {
             access_token: this.jwtService.sign(payload),
+            refreshToken: this.generateRefreshToken(payload),
             user: {
                 id: user.id,
                 email: user.email,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                role: user.role,
+                firstName: user?.firstName,
+                lastName: user?.lastName,
+                role: user?.role,
             },
         };
     }
@@ -64,13 +68,14 @@ export class AuthService {
         });
         return this.login(user);
     }
-    async forgotPassword(email: string) {
+    async forgotPassword(email: string,) {
         const user = await this.usersService.findByEmail(email);
         if (!user) {
             throw new NotFoundException('User not found');
         }
+        console.log(user);
         const token = await this.jwtService.signAsync({ email: user.email }, { expiresIn: '1h' });
-        const resetPasswordUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
+        const resetPasswordUrl = `/reset-password?token=${token}`;
         return resetPasswordUrl;
     }
     async resetPassword(token: string, password: string) {
@@ -81,5 +86,6 @@ export class AuthService {
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         await this.usersService.update(user.id, { password: hashedPassword } as UpdateUserDto);
+        return { message: 'Password reset successfully' };
     }
 } 

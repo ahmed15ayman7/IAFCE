@@ -17,6 +17,10 @@ import { AdminEntity } from "./Admin.entity";
 import { LessonEntity } from "./Lesson.entity";
 import { PaymentEntity } from "./Payment.entity";
 import { ReportEntity } from "./Report.entity";
+import { BadgeEntity } from "./Badge.entity";
+import { CertificateEntity } from "./Certificate.entity";
+import { CommunityEntity } from "./Community.entity";
+import { LiveRoomEntity } from "./LiveRoom.entity";
 import {
   UserRole,
   Academy,
@@ -37,6 +41,10 @@ import {
   Lesson,
   Payment,
   Report,
+  Badge,
+  Certificate,
+  Community,
+  LiveRoom,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -57,6 +65,11 @@ export class UserDto {
   // Field: password, Type: string
   @Column()
   password: string;
+
+  @ApiProperty({ type: "string", nullable: true })
+  // Field: phone, Type: string
+  @Column()
+  phone?: string;
 
   @ApiProperty({ type: "string" })
   // Field: firstName, Type: string
@@ -187,4 +200,24 @@ export class UserDto {
   // Field: Report, Type: Report[]
   @Column()
   Report: Report[];
+
+  @ApiProperty({ type: BadgeEntity })
+  // Field: Badge, Type: Badge[]
+  @Column()
+  Badge: Badge[];
+
+  @ApiProperty({ type: CertificateEntity })
+  // Field: Certificate, Type: Certificate[]
+  @Column()
+  Certificate: Certificate[];
+
+  @ApiProperty({ type: CommunityEntity })
+  // Field: Community, Type: Community[]
+  @Column()
+  Community: Community[];
+
+  @ApiProperty({ type: LiveRoomEntity })
+  // Field: LiveRoom, Type: LiveRoom[]
+  @Column()
+  LiveRoom: LiveRoom[];
 }

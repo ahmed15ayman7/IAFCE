@@ -4,7 +4,15 @@ import { LessonEntity } from "./Lesson.entity";
 import { EnrollmentEntity } from "./Enrollment.entity";
 import { QuizEntity } from "./Quiz.entity";
 import { InstructorEntity } from "./Instructor.entity";
-import { Academy, Lesson, Enrollment, Quiz, Instructor } from "@shared/prisma";
+import { LiveRoomEntity } from "./LiveRoom.entity";
+import {
+  Academy,
+  Lesson,
+  Enrollment,
+  Quiz,
+  Instructor,
+  LiveRoom,
+} from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -54,6 +62,11 @@ export class CourseEntity {
   // Field: instructors, Type: Instructor[]
   @Column()
   instructors: Instructor[];
+
+  @ApiProperty({ type: LiveRoomEntity })
+  // Field: liveRoom, Type: LiveRoom[]
+  @Column()
+  liveRoom: LiveRoom[];
 
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date

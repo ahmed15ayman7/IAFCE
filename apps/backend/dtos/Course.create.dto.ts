@@ -1,5 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Academy, Lesson, Enrollment, Quiz, Instructor } from "@shared/prisma";
+import {
+  Academy,
+  Lesson,
+  Enrollment,
+  Quiz,
+  Instructor,
+  LiveRoom,
+} from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()

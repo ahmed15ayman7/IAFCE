@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateCourseDto } from 'dtos/Course.create.dto';
 import { UpdateCourseDto } from 'dtos/Course.update.dto';
+import { Course } from '@shared/prisma';
 
 @Injectable()
 export class CoursesService {
@@ -128,6 +129,36 @@ export class CoursesService {
             },
         });
     }
+    async unenrollStudent(courseId: string, studentId: string) {
+        const course = await this.findOne(courseId);
+        if (!course) {
+            throw new NotFoundException('Course not found');
+        }
+        return this.prisma.course.update({
+            where: { id: courseId },
+            data: { enrollments: { disconnect: { id: studentId } } },
+        });
+    }
+    async addInstructor(courseId: string, instructorId: string) {
+        const course = await this.findOne(courseId);
+        if (!course) {
+            throw new NotFoundException('Course not found');
+        }
+        return this.prisma.course.update({
+            where: { id: courseId },
+            data: { instructors: { connect: { id: instructorId } } },
+        });
+    }
+    async removeInstructor(courseId: string, instructorId: string) {
+        const course = await this.findOne(courseId);
+        if (!course) {
+            throw new NotFoundException('Course not found');
+        }
+        return this.prisma.course.update({
+            where: { id: courseId },
+            data: { instructors: { disconnect: { id: instructorId } } },
+        });
+    }
 
     async getCourseLessons(courseId: string) {
         await this.findOne(courseId);
@@ -160,4 +191,78 @@ export class CoursesService {
             },
         });
     }
+    async getCourseInstructors(courseId: string) {
+        await this.findOne(courseId);
+        return this.prisma.instructor.findMany({
+            where: { courses: { some: { id: courseId } } },
+        });
+    }
+    async getCoursesByStudentId(studentId: string) {
+        const student = await this.prisma.user.findUnique({
+            where: { id: studentId },
+            include: {
+                enrollments: true,
+            },
+        });
+        if (!student) {
+            throw new NotFoundException('Student not found');
+        }
+        return this.prisma.course.findMany({
+            where: { enrollments: { some: { userId: studentId } } },
+            include: {
+                instructors: {
+                    include: {
+                        user: true,
+                    },
+                },
+                enrollments: {
+                    include: {
+                        user: true,
+                    },
+                },
+                lessons: true,
+            },
+        });
+    }
+    async getCoursesByAcademyId(academyId: string): Promise<Course[]> {
+        const academy = await this.prisma.academy.findUnique({
+            where: { id: academyId },
+            include: {
+                courses: true,
+            },
+        });
+        if (!academy) {
+            throw new NotFoundException('Academy not found');
+        }
+        return academy.courses;
+    }
+    async getCoursesByInstructorId(instructorId: string): Promise<Course[]> {
+        const instructor = await this.prisma.instructor.findUnique({
+            where: { id: instructorId },
+            include: {
+                user: true,
+            },
+        });
+        if (!instructor) {
+            throw new NotFoundException('Instructor not found');
+        }
+        return this.prisma.course.findMany({
+            where: { instructors: { some: { id: instructorId } } },
+            include: {
+                instructors: {
+                    include: {
+                        user: true,
+                    },
+                },
+                enrollments: {
+                    include: {
+                        user: true,
+                    },
+                },
+                lessons: true,
+                quizzes: true,
+            },
+        });
+    }
+
 } 
