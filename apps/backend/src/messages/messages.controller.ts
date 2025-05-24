@@ -4,6 +4,8 @@ import { CreateMessageDto } from '../../dtos/Message.create.dto';
 import { UpdateMessageDto } from '../../dtos/Message.update.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Message } from '@shared/prisma';
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('الرسائل')
 @Controller('messages')
 @UseGuards(JwtAuthGuard)
 export class MessagesController {

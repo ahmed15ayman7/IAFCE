@@ -5,6 +5,8 @@ import { UpdateGroupDto } from '../../dtos/Group.update.dto';
 import { GroupDto } from '../../dtos/Group.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Group, Post as PostEntity } from '@shared/prisma';
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('المجموعات')
 @Controller('groups')
 @UseGuards(JwtAuthGuard)
 export class GroupsController {

@@ -5,7 +5,8 @@ import { UpdateChannelDto } from '../../dtos/Channel.update.dto';
 import { ChannelDto } from '../../dtos/Channel.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Channel } from '@shared/prisma';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('القنوات')
 @Controller('channels')
 @UseGuards(JwtAuthGuard)
 export class ChannelsController {

@@ -5,7 +5,8 @@ import { UpdateEnrollmentDto } from '../../dtos/Enrollment.update.dto';
 import { EnrollmentDto } from '../../dtos/Enrollment.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Enrollment } from '@shared/prisma';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('التسجيلات')
 @Controller('enrollments')
 @UseGuards(JwtAuthGuard)
 export class EnrollmentsController {

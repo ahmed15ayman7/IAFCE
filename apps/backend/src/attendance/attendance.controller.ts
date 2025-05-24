@@ -4,6 +4,8 @@ import { CreateAttendanceDto } from '../../dtos/Attendance.create.dto';
 import { UpdateAttendanceDto } from '../../dtos/Attendance.update.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Attendance } from '@shared/prisma';
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('الحضور والانصراف')
 @Controller('attendance')
 @UseGuards(JwtAuthGuard)
 export class AttendanceController {

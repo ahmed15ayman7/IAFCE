@@ -2,11 +2,10 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, Req } from 
 import { QuizzesService } from './quizzes.service';
 import { CreateQuizDto } from 'dtos/Quiz.create.dto';
 import { UpdateQuizDto } from 'dtos/Quiz.update.dto';
-import { CreateQuestionDto } from 'dtos/Question.create.dto';
 import { CreateSubmissionDto } from 'dtos/Submission.create.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Request } from 'express';
-
+import { ApiTags } from '@nestjs/swagger';
 interface UserPayload {
     id: string;
     email: string;
@@ -17,6 +16,7 @@ interface RequestWithUser extends Request {
     user: UserPayload;
 }
 
+@ApiTags('الاختبارات')
 @Controller('quizzes')
 @UseGuards(JwtAuthGuard)
 export class QuizzesController {

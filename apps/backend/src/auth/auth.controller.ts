@@ -7,7 +7,7 @@ import { RefreshTokenDto } from './dto/refreshToken.dto';
 import { ForgotPasswordDto } from './dto/forgotPassword.dto';
 import { ResetPasswordDto } from './dto/resetPassword.dto';
 import { ApiTags } from '@nestjs/swagger';
-@ApiTags('auth')
+@ApiTags('عمليات التسجيل والتحقق')
 @Controller('auth')
 export class AuthController {
     constructor(private readonly authService: AuthService) { }

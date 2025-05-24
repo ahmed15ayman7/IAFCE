@@ -5,6 +5,8 @@ import { UpdateFileDto } from '../../dtos/File.update.dto';
 import { FileDto } from '../../dtos/File.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { File } from '@shared/prisma';
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('الملفات')
 @Controller('files')
 @UseGuards(JwtAuthGuard)
 export class FilesController {

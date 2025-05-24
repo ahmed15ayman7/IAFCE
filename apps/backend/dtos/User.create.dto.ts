@@ -23,6 +23,7 @@ import {
   Certificate,
   Community,
   LiveRoom,
+  NotificationSettings,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";

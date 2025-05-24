@@ -60,6 +60,8 @@ model User {
   Community Community[]
 
   LiveRoom LiveRoom[]
+
+  NotificationSettings NotificationSettings[]
 }
 
 enum UserRole {
@@ -217,14 +219,39 @@ model Achievement {
 
 // Notifications
 model Notification {
-  id        String   @id @default(cuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  type      String
-  message   String
-  title     String
-  read      Boolean  @default(false)
-  createdAt DateTime @default(now())
+  id          String           @id @default(cuid())
+  userId      String
+  user        User             @relation(fields: [userId], references: [id])
+  type        NotificationType @default(MESSAGE)
+  message     String
+  isImportant Boolean          @default(false)
+  urgent      Boolean          @default(false)
+  title       String
+  actionUrl   String?
+  read        Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+}
+
+enum NotificationType {
+  ASSIGNMENT
+  GRADE
+  MESSAGE
+  ACHIEVEMENT
+  URGENT
+}
+
+model NotificationSettings {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  assignments  Boolean  @default(true)
+  grades       Boolean  @default(true)
+  messages     Boolean  @default(true)
+  achievements Boolean  @default(true)
+  urgent       Boolean  @default(true)
+  email        Boolean  @default(true)
+  push         Boolean  @default(true)
+  createdAt    DateTime @default(now())
 }
 
 // Community and Communication

@@ -246,8 +246,24 @@ exports.Prisma.NotificationScalarFieldEnum = {
   userId: 'userId',
   type: 'type',
   message: 'message',
+  isImportant: 'isImportant',
+  urgent: 'urgent',
   title: 'title',
+  actionUrl: 'actionUrl',
   read: 'read',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.NotificationSettingsScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  assignments: 'assignments',
+  grades: 'grades',
+  messages: 'messages',
+  achievements: 'achievements',
+  urgent: 'urgent',
+  email: 'email',
+  push: 'push',
   createdAt: 'createdAt'
 };
 
@@ -448,6 +464,14 @@ exports.UserRole = exports.$Enums.UserRole = {
   ACADEMY: 'ACADEMY'
 };
 
+exports.NotificationType = exports.$Enums.NotificationType = {
+  ASSIGNMENT: 'ASSIGNMENT',
+  GRADE: 'GRADE',
+  MESSAGE: 'MESSAGE',
+  ACHIEVEMENT: 'ACHIEVEMENT',
+  URGENT: 'URGENT'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Profile: 'Profile',
@@ -462,6 +486,7 @@ exports.Prisma.ModelName = {
   Submission: 'Submission',
   Achievement: 'Achievement',
   Notification: 'Notification',
+  NotificationSettings: 'NotificationSettings',
   Message: 'Message',
   Post: 'Post',
   Comment: 'Comment',

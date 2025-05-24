@@ -21,6 +21,7 @@ import { BadgeEntity } from "./Badge.entity";
 import { CertificateEntity } from "./Certificate.entity";
 import { CommunityEntity } from "./Community.entity";
 import { LiveRoomEntity } from "./LiveRoom.entity";
+import { NotificationSettingsEntity } from "./NotificationSettings.entity";
 import {
   UserRole,
   Academy,
@@ -45,6 +46,7 @@ import {
   Certificate,
   Community,
   LiveRoom,
+  NotificationSettings,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -220,4 +222,9 @@ export class UserDto {
   // Field: LiveRoom, Type: LiveRoom[]
   @Column()
   LiveRoom: LiveRoom[];
+
+  @ApiProperty({ type: NotificationSettingsEntity })
+  // Field: NotificationSettings, Type: NotificationSettings[]
+  @Column()
+  NotificationSettings: NotificationSettings[];
 }

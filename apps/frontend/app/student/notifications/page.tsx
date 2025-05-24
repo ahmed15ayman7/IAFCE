@@ -1,21 +1,19 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import {
-    Card,
-    Badge,
-    Alert,
-    Button,
-    Tabs,
-    Skeleton,
-    EmptyState,
-    Tooltip,
-    Modal,
-    Switch,
-    Checkbox
-} from '@/components/common';
-import { notificationsApi } from '@/lib/api';
+import Card from '@/components/common/Card';
+import Badge from '@/components/common/Badge';
+import Button from '@/components/common/Button';
+import Tabs from '@/components/common/Tabs';
+import Skeleton from '@/components/common/Skeleton';
+import EmptyState from '@/components/common/EmptyState';
+import Tooltip from '@/components/common/Tooltip';
+import Modal from '@/components/common/Modal';
+import { Switch, Alert } from '@mui/material';
+
+
+import { notificationApi } from '@/lib/api';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
@@ -26,13 +24,47 @@ import {
     FaTrophy,
     FaEnvelope,
     FaCog,
-    FaArrowRight
+    FaArrowRight,
+    FaExclamation
 } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
+import { Notification, NotificationSettings } from '@shared/prisma';
+import { useUser } from '@/hooks/useUser';
+
+let initialNotifications: Notification[] = [
+    {
+        id: '1',
+        title: 'الواجب الأول',
+        message: 'الواجب الأول هو الواجب الأول',
+        userId: '1',
+        type: 'ASSIGNMENT',
+        isImportant: false,
+        urgent: false,
+        read: false,
+        createdAt: new Date(),
+        actionUrl: null,
+    },
+    {
+        id: '2',
+        title: 'الواجب الثاني',
+        message: 'الواجب الثاني هو الواجب الثاني',
+        userId: '1',
+        type: 'GRADE',
+        isImportant: false,
+        urgent: false,
+        read: false,
+        createdAt: new Date(),
+        actionUrl: null,
+    }
+]
 
 export default function StudentNotifications() {
-    const [activeTab, setActiveTab] = useState('all');
+    const [activeTab, setActiveTab] = useState(0);
     const [showSettings, setShowSettings] = useState(false);
-    const [settings, setSettings] = useState({
+    const [settings, setSettings] = useState<NotificationSettings>({
+        id: '',
+        userId: '',
+        createdAt: new Date(),
         assignments: true,
         grades: true,
         messages: true,
@@ -41,25 +73,31 @@ export default function StudentNotifications() {
         email: false,
         push: true
     });
+    let router = useRouter();
+    let { user, status } = useUser();
 
     // استعلامات البيانات
     const { data: notifications, isLoading: isLoadingNotifications } = useQuery({
         queryKey: ['notifications'],
-        queryFn: () => notificationsApi.getByStudent(),
+        queryFn: () => notificationApi.getAllByUserId(user?.id || ''),
+    });
+    let { data: notificationsSettings, isLoading: isLoadingNotificationsSettings } = useQuery({
+        queryKey: ['notificationsSettings'],
+        queryFn: () => notificationApi.getSettingsByUserId(user?.id || ''),
     });
 
     // طلب تحديث حالة الإشعار
     const { mutate: markAsRead } = useMutation({
-        mutationFn: (id) => notificationsApi.markAsRead(id),
+        mutationFn: (id: string) => notificationApi.markAsRead(id),
     });
 
     // طلب تحديث الإعدادات
     const { mutate: updateSettings } = useMutation({
-        mutationFn: (data) => notificationsApi.updateSettings(data),
+        mutationFn: (data: NotificationSettings) => notificationsSettings ? notificationApi.updateSettings(data) : notificationApi.createSettings(data),
         onSuccess: () => setShowSettings(false)
     });
 
-    if (isLoadingNotifications) {
+    if (isLoadingNotifications || isLoadingNotificationsSettings || status === "loading") {
         return (
             <div className="space-y-6">
                 <Skeleton height={40} width={300} />
@@ -71,24 +109,116 @@ export default function StudentNotifications() {
             </div>
         );
     }
+    useEffect(() => {
+        if (notificationsSettings) {
+            setSettings({
+                id: notificationsSettings.id,
+                userId: notificationsSettings.userId,
+                createdAt: notificationsSettings.createdAt,
+                assignments: notificationsSettings.assignments,
+                grades: notificationsSettings.grades,
+                messages: notificationsSettings.messages,
+                achievements: notificationsSettings.achievements,
+                urgent: notificationsSettings.urgent,
+                email: notificationsSettings.email,
+                push: notificationsSettings.push
+            });
+        } else {
+            setSettings((prev) => ({
+                ...prev,
+                userId: user?.id || '',
+            }));
+        }
+    }, [notificationsSettings, user?.id]);
 
     // تصفية الإشعارات حسب التبويب النشط
-    const filteredNotifications = notifications?.filter(notification => {
+    const filteredNotifications = (notifications || initialNotifications)?.filter(notification => {
         switch (activeTab) {
-            case 'unread':
+            case 1:
                 return !notification.read;
-            case 'read':
+            case 2:
                 return notification.read;
-            case 'important':
-                return notification.important;
+            case 3:
+                return notification.isImportant;
             default:
                 return true;
         }
     });
 
     // الحصول على الإشعار العاجل
-    const urgentNotification = notifications?.find(n => n.urgent && !n.read);
-
+    const urgentNotification = (notifications || initialNotifications)?.find(n => n.urgent && !n.read);
+    let filteredNotificationsDesign = <div className="space-y-4">
+        {filteredNotifications?.length === 0 ? (
+            <EmptyState
+                icon={<FaBell className="text-gray-400 text-4xl" />}
+                title="لا توجد إشعارات"
+                description="لا توجد إشعارات جديدة لعرضها"
+            />
+        ) : (
+            filteredNotifications?.map((notification, index) => (
+                <motion.div
+                    key={notification.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                    <Card title={notification.title} className={`${!notification.read ? 'border-l-4 border-primary-500' : ''}`}>
+                        <div className="flex items-start space-x-4">
+                            <div className={`p-3 rounded-full ${notification.type === 'ASSIGNMENT' ? 'bg-blue-100' :
+                                notification.type === 'GRADE' ? 'bg-green-100' :
+                                    notification.type === 'MESSAGE' ? 'bg-purple-100' :
+                                        'bg-yellow-100'
+                                }`}>
+                                {notification.type === 'ASSIGNMENT' ? <FaExclamationTriangle className="text-blue-500" /> :
+                                    notification.type === 'GRADE' ? <FaTrophy className="text-green-500" /> :
+                                        notification.type === 'MESSAGE' ? <FaEnvelope className="text-purple-500" /> :
+                                            <FaBell className="text-yellow-500" />
+                                }
+                            </div>
+                            <div className="flex-1">
+                                <div className="flex items-center justify-between">
+                                    <h3 className="text-lg font-bold">{notification.title}</h3>
+                                    {!notification.read && (
+                                        <Badge variant="dot">
+                                            <span>جديد</span>
+                                        </Badge>
+                                    )}
+                                </div>
+                                <p className="text-gray-600 mt-2">{notification.message}</p>
+                                <div className="flex items-center justify-between mt-4">
+                                    <span className="text-sm text-gray-500">
+                                        {format(new Date(notification.createdAt), 'd MMMM yyyy - h:mm a', { locale: ar })}
+                                    </span>
+                                    <div className="flex items-center space-x-2">
+                                        {!notification.read && (
+                                            <Button
+                                                variant="text"
+                                                size="small"
+                                                onClick={() => markAsRead(notification.id)}
+                                            >
+                                                <FaCheck className="ml-2" />
+                                                تم
+                                            </Button>
+                                        )}
+                                        {notification.actionUrl && (
+                                            <Button
+                                                variant="contained"
+                                                size="small"
+                                                onClick={() => router.push(notification.actionUrl || '')}
+                                            >
+                                                اذهب للمهمة
+                                                <FaArrowRight className="mr-2" />
+                                            </Button>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Card>
+                </motion.div>
+            ))
+        )}
+    </div>;
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -105,7 +235,7 @@ export default function StudentNotifications() {
                     </p>
                 </div>
                 <Button
-                    variant="ghost"
+                    variant="text"
                     onClick={() => setShowSettings(true)}
                 >
                     <FaCog className="ml-2" />
@@ -115,18 +245,18 @@ export default function StudentNotifications() {
 
             {/* الإشعار العاجل */}
             {urgentNotification && (
-                <Alert variant="warning">
+                <Alert variant="filled" severity="warning">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
                             <FaExclamationTriangle className="text-yellow-500 text-xl" />
                             <div>
                                 <p className="font-medium">{urgentNotification.title}</p>
-                                <p className="text-sm text-gray-600">{urgentNotification.content}</p>
+                                <p className="text-sm text-gray-600">{urgentNotification.message}</p>
                             </div>
                         </div>
                         <Button
-                            variant="primary"
-                            size="sm"
+                            variant="contained"
+                            size="small"
                             onClick={() => markAsRead(urgentNotification.id)}
                         >
                             تم
@@ -139,90 +269,21 @@ export default function StudentNotifications() {
             <Tabs
                 value={activeTab}
                 onChange={setActiveTab}
-                items={[
-                    { value: 'all', label: 'كل الإشعارات' },
-                    { value: 'unread', label: 'غير مقروء' },
-                    { value: 'read', label: 'تم القراءة' },
-                    { value: 'important', label: 'مهم' },
+                tabs={[
+                    { value: 0, label: 'كل الإشعارات', icon: <FaBell className="text-gray-400 text-4xl" />, content: filteredNotificationsDesign },
+                    { value: 1, label: 'غير مقروء', icon: <FaExclamationTriangle className="text-gray-400 text-4xl" />, content: filteredNotificationsDesign },
+                    { value: 2, label: 'تم القراءة', icon: <FaCheck className="text-gray-400 text-4xl" />, content: filteredNotificationsDesign },
+                    { value: 3, label: 'مهم', icon: <FaExclamation className="text-gray-400 text-4xl" />, content: filteredNotificationsDesign },
                 ]}
             />
 
             {/* قائمة الإشعارات */}
-            <div className="space-y-4">
-                {filteredNotifications?.length === 0 ? (
-                    <EmptyState
-                        icon={<FaBell className="text-gray-400 text-4xl" />}
-                        title="لا توجد إشعارات"
-                        description="لا توجد إشعارات جديدة لعرضها"
-                    />
-                ) : (
-                    filteredNotifications?.map((notification, index) => (
-                        <motion.div
-                            key={notification.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                        >
-                            <Card className={`${!notification.read ? 'border-l-4 border-primary-500' : ''}`}>
-                                <div className="flex items-start space-x-4">
-                                    <div className={`p-3 rounded-full ${notification.type === 'assignment' ? 'bg-blue-100' :
-                                            notification.type === 'grade' ? 'bg-green-100' :
-                                                notification.type === 'message' ? 'bg-purple-100' :
-                                                    'bg-yellow-100'
-                                        }`}>
-                                        {notification.type === 'assignment' ? <FaExclamationTriangle className="text-blue-500" /> :
-                                            notification.type === 'grade' ? <FaTrophy className="text-green-500" /> :
-                                                notification.type === 'message' ? <FaEnvelope className="text-purple-500" /> :
-                                                    <FaBell className="text-yellow-500" />
-                                        }
-                                    </div>
-                                    <div className="flex-1">
-                                        <div className="flex items-center justify-between">
-                                            <h3 className="text-lg font-bold">{notification.title}</h3>
-                                            {!notification.read && (
-                                                <Badge variant="primary">جديد</Badge>
-                                            )}
-                                        </div>
-                                        <p className="text-gray-600 mt-2">{notification.content}</p>
-                                        <div className="flex items-center justify-between mt-4">
-                                            <span className="text-sm text-gray-500">
-                                                {format(new Date(notification.createdAt), 'd MMMM yyyy - h:mm a', { locale: ar })}
-                                            </span>
-                                            <div className="flex items-center space-x-2">
-                                                {!notification.read && (
-                                                    <Button
-                                                        variant="ghost"
-                                                        size="sm"
-                                                        onClick={() => markAsRead(notification.id)}
-                                                    >
-                                                        <FaCheck className="ml-2" />
-                                                        تم
-                                                    </Button>
-                                                )}
-                                                {notification.actionUrl && (
-                                                    <Button
-                                                        variant="primary"
-                                                        size="sm"
-                                                        onClick={() => window.location.href = notification.actionUrl}
-                                                    >
-                                                        اذهب للمهمة
-                                                        <FaArrowRight className="mr-2" />
-                                                    </Button>
-                                                )}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Card>
-                        </motion.div>
-                    ))
-                )}
-            </div>
+
 
             {/* إعدادات الإشعارات */}
             {showSettings && (
                 <Modal
-                    isOpen={showSettings}
+                    open={showSettings}
                     onClose={() => setShowSettings(false)}
                     title="إعدادات الإشعارات"
                 >
@@ -234,35 +295,35 @@ export default function StudentNotifications() {
                                     <span>الواجبات والمواعيد النهائية</span>
                                     <Switch
                                         checked={settings.assignments}
-                                        onChange={(checked) => setSettings({ ...settings, assignments: checked })}
+                                        onChange={(checked) => setSettings({ ...settings, assignments: checked.target.checked })}
                                     />
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span>الدرجات والنتائج</span>
                                     <Switch
                                         checked={settings.grades}
-                                        onChange={(checked) => setSettings({ ...settings, grades: checked })}
+                                        onChange={(checked) => setSettings({ ...settings, grades: checked.target.checked })}
                                     />
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span>الرسائل الإدارية</span>
                                     <Switch
                                         checked={settings.messages}
-                                        onChange={(checked) => setSettings({ ...settings, messages: checked })}
+                                        onChange={(checked) => setSettings({ ...settings, messages: checked.target.checked })}
                                     />
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span>الإنجازات والشارات</span>
                                     <Switch
                                         checked={settings.achievements}
-                                        onChange={(checked) => setSettings({ ...settings, achievements: checked })}
+                                        onChange={(checked) => setSettings({ ...settings, achievements: checked.target.checked })}
                                     />
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span>الإشعارات العاجلة</span>
                                     <Switch
                                         checked={settings.urgent}
-                                        onChange={(checked) => setSettings({ ...settings, urgent: checked })}
+                                        onChange={(checked) => setSettings({ ...settings, urgent: checked.target.checked })}
                                     />
                                 </div>
                             </div>
@@ -275,14 +336,14 @@ export default function StudentNotifications() {
                                     <span>البريد الإلكتروني</span>
                                     <Switch
                                         checked={settings.email}
-                                        onChange={(checked) => setSettings({ ...settings, email: checked })}
+                                        onChange={(checked) => setSettings({ ...settings, email: checked.target.checked })}
                                     />
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span>إشعارات التطبيق</span>
                                     <Switch
                                         checked={settings.push}
-                                        onChange={(checked) => setSettings({ ...settings, push: checked })}
+                                        onChange={(checked) => setSettings({ ...settings, push: checked.target.checked })}
                                     />
                                 </div>
                             </div>
@@ -290,13 +351,13 @@ export default function StudentNotifications() {
 
                         <div className="flex justify-end space-x-2">
                             <Button
-                                variant="ghost"
+                                variant="text"
                                 onClick={() => setShowSettings(false)}
                             >
                                 إلغاء
                             </Button>
                             <Button
-                                variant="primary"
+                                variant="contained"
                                 onClick={() => updateSettings(settings)}
                             >
                                 حفظ التغييرات

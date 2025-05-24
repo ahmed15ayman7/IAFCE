@@ -79,6 +79,11 @@ export type Achievement = $Result.DefaultSelection<Prisma.$AchievementPayload>
  */
 export type Notification = $Result.DefaultSelection<Prisma.$NotificationPayload>
 /**
+ * Model NotificationSettings
+ * 
+ */
+export type NotificationSettings = $Result.DefaultSelection<Prisma.$NotificationSettingsPayload>
+/**
  * Model Message
  * 
  */
@@ -178,11 +183,26 @@ export namespace $Enums {
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
+
+export const NotificationType: {
+  ASSIGNMENT: 'ASSIGNMENT',
+  GRADE: 'GRADE',
+  MESSAGE: 'MESSAGE',
+  ACHIEVEMENT: 'ACHIEVEMENT',
+  URGENT: 'URGENT'
+};
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+
 }
 
 export type UserRole = $Enums.UserRole
 
 export const UserRole: typeof $Enums.UserRole
+
+export type NotificationType = $Enums.NotificationType
+
+export const NotificationType: typeof $Enums.NotificationType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -436,6 +456,16 @@ export class PrismaClient<
     * ```
     */
   get notification(): Prisma.NotificationDelegate<ExtArgs>;
+
+  /**
+   * `prisma.notificationSettings`: Exposes CRUD operations for the **NotificationSettings** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NotificationSettings
+    * const notificationSettings = await prisma.notificationSettings.findMany()
+    * ```
+    */
+  get notificationSettings(): Prisma.NotificationSettingsDelegate<ExtArgs>;
 
   /**
    * `prisma.message`: Exposes CRUD operations for the **Message** model.
@@ -1059,6 +1089,7 @@ export namespace Prisma {
     Submission: 'Submission',
     Achievement: 'Achievement',
     Notification: 'Notification',
+    NotificationSettings: 'NotificationSettings',
     Message: 'Message',
     Post: 'Post',
     Comment: 'Comment',
@@ -1091,7 +1122,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "profile" | "academy" | "instructor" | "course" | "lesson" | "file" | "enrollment" | "quiz" | "question" | "submission" | "achievement" | "notification" | "message" | "post" | "comment" | "group" | "admin" | "channel" | "owner" | "bookmark" | "event" | "attendance" | "payment" | "report" | "badge" | "certificate" | "community" | "discussion" | "liveRoom"
+      modelProps: "user" | "profile" | "academy" | "instructor" | "course" | "lesson" | "file" | "enrollment" | "quiz" | "question" | "submission" | "achievement" | "notification" | "notificationSettings" | "message" | "post" | "comment" | "group" | "admin" | "channel" | "owner" | "bookmark" | "event" | "attendance" | "payment" | "report" | "badge" | "certificate" | "community" | "discussion" | "liveRoom"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2002,6 +2033,76 @@ export namespace Prisma {
           count: {
             args: Prisma.NotificationCountArgs<ExtArgs>
             result: $Utils.Optional<NotificationCountAggregateOutputType> | number
+          }
+        }
+      }
+      NotificationSettings: {
+        payload: Prisma.$NotificationSettingsPayload<ExtArgs>
+        fields: Prisma.NotificationSettingsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NotificationSettingsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NotificationSettingsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>
+          }
+          findFirst: {
+            args: Prisma.NotificationSettingsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NotificationSettingsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>
+          }
+          findMany: {
+            args: Prisma.NotificationSettingsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>[]
+          }
+          create: {
+            args: Prisma.NotificationSettingsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>
+          }
+          createMany: {
+            args: Prisma.NotificationSettingsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NotificationSettingsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>[]
+          }
+          delete: {
+            args: Prisma.NotificationSettingsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>
+          }
+          update: {
+            args: Prisma.NotificationSettingsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>
+          }
+          deleteMany: {
+            args: Prisma.NotificationSettingsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NotificationSettingsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.NotificationSettingsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>
+          }
+          aggregate: {
+            args: Prisma.NotificationSettingsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNotificationSettings>
+          }
+          groupBy: {
+            args: Prisma.NotificationSettingsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NotificationSettingsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NotificationSettingsCountArgs<ExtArgs>
+            result: $Utils.Optional<NotificationSettingsCountAggregateOutputType> | number
           }
         }
       }
@@ -3376,6 +3477,7 @@ export namespace Prisma {
     Certificate: number
     Community: number
     LiveRoom: number
+    NotificationSettings: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3399,6 +3501,7 @@ export namespace Prisma {
     Certificate?: boolean | UserCountOutputTypeCountCertificateArgs
     Community?: boolean | UserCountOutputTypeCountCommunityArgs
     LiveRoom?: boolean | UserCountOutputTypeCountLiveRoomArgs
+    NotificationSettings?: boolean | UserCountOutputTypeCountNotificationSettingsArgs
   }
 
   // Custom InputTypes
@@ -3550,6 +3653,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountLiveRoomArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LiveRoomWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountNotificationSettingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationSettingsWhereInput
   }
 
 
@@ -4400,6 +4510,7 @@ export namespace Prisma {
     Certificate?: boolean | User$CertificateArgs<ExtArgs>
     Community?: boolean | User$CommunityArgs<ExtArgs>
     LiveRoom?: boolean | User$LiveRoomArgs<ExtArgs>
+    NotificationSettings?: boolean | User$NotificationSettingsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4457,6 +4568,7 @@ export namespace Prisma {
     Certificate?: boolean | User$CertificateArgs<ExtArgs>
     Community?: boolean | User$CommunityArgs<ExtArgs>
     LiveRoom?: boolean | User$LiveRoomArgs<ExtArgs>
+    NotificationSettings?: boolean | User$NotificationSettingsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4488,6 +4600,7 @@ export namespace Prisma {
       Certificate: Prisma.$CertificatePayload<ExtArgs>[]
       Community: Prisma.$CommunityPayload<ExtArgs>[]
       LiveRoom: Prisma.$LiveRoomPayload<ExtArgs>[]
+      NotificationSettings: Prisma.$NotificationSettingsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4888,6 +5001,7 @@ export namespace Prisma {
     Certificate<T extends User$CertificateArgs<ExtArgs> = {}>(args?: Subset<T, User$CertificateArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findMany"> | Null>
     Community<T extends User$CommunityArgs<ExtArgs> = {}>(args?: Subset<T, User$CommunityArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findMany"> | Null>
     LiveRoom<T extends User$LiveRoomArgs<ExtArgs> = {}>(args?: Subset<T, User$LiveRoomArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveRoomPayload<ExtArgs>, T, "findMany"> | Null>
+    NotificationSettings<T extends User$NotificationSettingsArgs<ExtArgs> = {}>(args?: Subset<T, User$NotificationSettingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5674,6 +5788,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: LiveRoomScalarFieldEnum | LiveRoomScalarFieldEnum[]
+  }
+
+  /**
+   * User.NotificationSettings
+   */
+  export type User$NotificationSettingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    where?: NotificationSettingsWhereInput
+    orderBy?: NotificationSettingsOrderByWithRelationInput | NotificationSettingsOrderByWithRelationInput[]
+    cursor?: NotificationSettingsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NotificationSettingsScalarFieldEnum | NotificationSettingsScalarFieldEnum[]
   }
 
   /**
@@ -16760,9 +16894,12 @@ export namespace Prisma {
   export type NotificationMinAggregateOutputType = {
     id: string | null
     userId: string | null
-    type: string | null
+    type: $Enums.NotificationType | null
     message: string | null
+    isImportant: boolean | null
+    urgent: boolean | null
     title: string | null
+    actionUrl: string | null
     read: boolean | null
     createdAt: Date | null
   }
@@ -16770,9 +16907,12 @@ export namespace Prisma {
   export type NotificationMaxAggregateOutputType = {
     id: string | null
     userId: string | null
-    type: string | null
+    type: $Enums.NotificationType | null
     message: string | null
+    isImportant: boolean | null
+    urgent: boolean | null
     title: string | null
+    actionUrl: string | null
     read: boolean | null
     createdAt: Date | null
   }
@@ -16782,7 +16922,10 @@ export namespace Prisma {
     userId: number
     type: number
     message: number
+    isImportant: number
+    urgent: number
     title: number
+    actionUrl: number
     read: number
     createdAt: number
     _all: number
@@ -16794,7 +16937,10 @@ export namespace Prisma {
     userId?: true
     type?: true
     message?: true
+    isImportant?: true
+    urgent?: true
     title?: true
+    actionUrl?: true
     read?: true
     createdAt?: true
   }
@@ -16804,7 +16950,10 @@ export namespace Prisma {
     userId?: true
     type?: true
     message?: true
+    isImportant?: true
+    urgent?: true
     title?: true
+    actionUrl?: true
     read?: true
     createdAt?: true
   }
@@ -16814,7 +16963,10 @@ export namespace Prisma {
     userId?: true
     type?: true
     message?: true
+    isImportant?: true
+    urgent?: true
     title?: true
+    actionUrl?: true
     read?: true
     createdAt?: true
     _all?: true
@@ -16895,9 +17047,12 @@ export namespace Prisma {
   export type NotificationGroupByOutputType = {
     id: string
     userId: string
-    type: string
+    type: $Enums.NotificationType
     message: string
+    isImportant: boolean
+    urgent: boolean
     title: string
+    actionUrl: string | null
     read: boolean
     createdAt: Date
     _count: NotificationCountAggregateOutputType | null
@@ -16924,7 +17079,10 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     message?: boolean
+    isImportant?: boolean
+    urgent?: boolean
     title?: boolean
+    actionUrl?: boolean
     read?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -16935,7 +17093,10 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     message?: boolean
+    isImportant?: boolean
+    urgent?: boolean
     title?: boolean
+    actionUrl?: boolean
     read?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -16946,7 +17107,10 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     message?: boolean
+    isImportant?: boolean
+    urgent?: boolean
     title?: boolean
+    actionUrl?: boolean
     read?: boolean
     createdAt?: boolean
   }
@@ -16966,9 +17130,12 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
-      type: string
+      type: $Enums.NotificationType
       message: string
+      isImportant: boolean
+      urgent: boolean
       title: string
+      actionUrl: string | null
       read: boolean
       createdAt: Date
     }, ExtArgs["result"]["notification"]>
@@ -17367,9 +17534,12 @@ export namespace Prisma {
   interface NotificationFieldRefs {
     readonly id: FieldRef<"Notification", 'String'>
     readonly userId: FieldRef<"Notification", 'String'>
-    readonly type: FieldRef<"Notification", 'String'>
+    readonly type: FieldRef<"Notification", 'NotificationType'>
     readonly message: FieldRef<"Notification", 'String'>
+    readonly isImportant: FieldRef<"Notification", 'Boolean'>
+    readonly urgent: FieldRef<"Notification", 'Boolean'>
     readonly title: FieldRef<"Notification", 'String'>
+    readonly actionUrl: FieldRef<"Notification", 'String'>
     readonly read: FieldRef<"Notification", 'Boolean'>
     readonly createdAt: FieldRef<"Notification", 'DateTime'>
   }
@@ -17701,6 +17871,999 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: NotificationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model NotificationSettings
+   */
+
+  export type AggregateNotificationSettings = {
+    _count: NotificationSettingsCountAggregateOutputType | null
+    _min: NotificationSettingsMinAggregateOutputType | null
+    _max: NotificationSettingsMaxAggregateOutputType | null
+  }
+
+  export type NotificationSettingsMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    assignments: boolean | null
+    grades: boolean | null
+    messages: boolean | null
+    achievements: boolean | null
+    urgent: boolean | null
+    email: boolean | null
+    push: boolean | null
+    createdAt: Date | null
+  }
+
+  export type NotificationSettingsMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    assignments: boolean | null
+    grades: boolean | null
+    messages: boolean | null
+    achievements: boolean | null
+    urgent: boolean | null
+    email: boolean | null
+    push: boolean | null
+    createdAt: Date | null
+  }
+
+  export type NotificationSettingsCountAggregateOutputType = {
+    id: number
+    userId: number
+    assignments: number
+    grades: number
+    messages: number
+    achievements: number
+    urgent: number
+    email: number
+    push: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type NotificationSettingsMinAggregateInputType = {
+    id?: true
+    userId?: true
+    assignments?: true
+    grades?: true
+    messages?: true
+    achievements?: true
+    urgent?: true
+    email?: true
+    push?: true
+    createdAt?: true
+  }
+
+  export type NotificationSettingsMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    assignments?: true
+    grades?: true
+    messages?: true
+    achievements?: true
+    urgent?: true
+    email?: true
+    push?: true
+    createdAt?: true
+  }
+
+  export type NotificationSettingsCountAggregateInputType = {
+    id?: true
+    userId?: true
+    assignments?: true
+    grades?: true
+    messages?: true
+    achievements?: true
+    urgent?: true
+    email?: true
+    push?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type NotificationSettingsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NotificationSettings to aggregate.
+     */
+    where?: NotificationSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NotificationSettings to fetch.
+     */
+    orderBy?: NotificationSettingsOrderByWithRelationInput | NotificationSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NotificationSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NotificationSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NotificationSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned NotificationSettings
+    **/
+    _count?: true | NotificationSettingsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NotificationSettingsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NotificationSettingsMaxAggregateInputType
+  }
+
+  export type GetNotificationSettingsAggregateType<T extends NotificationSettingsAggregateArgs> = {
+        [P in keyof T & keyof AggregateNotificationSettings]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNotificationSettings[P]>
+      : GetScalarType<T[P], AggregateNotificationSettings[P]>
+  }
+
+
+
+
+  export type NotificationSettingsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationSettingsWhereInput
+    orderBy?: NotificationSettingsOrderByWithAggregationInput | NotificationSettingsOrderByWithAggregationInput[]
+    by: NotificationSettingsScalarFieldEnum[] | NotificationSettingsScalarFieldEnum
+    having?: NotificationSettingsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NotificationSettingsCountAggregateInputType | true
+    _min?: NotificationSettingsMinAggregateInputType
+    _max?: NotificationSettingsMaxAggregateInputType
+  }
+
+  export type NotificationSettingsGroupByOutputType = {
+    id: string
+    userId: string
+    assignments: boolean
+    grades: boolean
+    messages: boolean
+    achievements: boolean
+    urgent: boolean
+    email: boolean
+    push: boolean
+    createdAt: Date
+    _count: NotificationSettingsCountAggregateOutputType | null
+    _min: NotificationSettingsMinAggregateOutputType | null
+    _max: NotificationSettingsMaxAggregateOutputType | null
+  }
+
+  type GetNotificationSettingsGroupByPayload<T extends NotificationSettingsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NotificationSettingsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NotificationSettingsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NotificationSettingsGroupByOutputType[P]>
+            : GetScalarType<T[P], NotificationSettingsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NotificationSettingsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    assignments?: boolean
+    grades?: boolean
+    messages?: boolean
+    achievements?: boolean
+    urgent?: boolean
+    email?: boolean
+    push?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["notificationSettings"]>
+
+  export type NotificationSettingsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    assignments?: boolean
+    grades?: boolean
+    messages?: boolean
+    achievements?: boolean
+    urgent?: boolean
+    email?: boolean
+    push?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["notificationSettings"]>
+
+  export type NotificationSettingsSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    assignments?: boolean
+    grades?: boolean
+    messages?: boolean
+    achievements?: boolean
+    urgent?: boolean
+    email?: boolean
+    push?: boolean
+    createdAt?: boolean
+  }
+
+  export type NotificationSettingsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type NotificationSettingsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $NotificationSettingsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "NotificationSettings"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      assignments: boolean
+      grades: boolean
+      messages: boolean
+      achievements: boolean
+      urgent: boolean
+      email: boolean
+      push: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["notificationSettings"]>
+    composites: {}
+  }
+
+  type NotificationSettingsGetPayload<S extends boolean | null | undefined | NotificationSettingsDefaultArgs> = $Result.GetResult<Prisma.$NotificationSettingsPayload, S>
+
+  type NotificationSettingsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<NotificationSettingsFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: NotificationSettingsCountAggregateInputType | true
+    }
+
+  export interface NotificationSettingsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NotificationSettings'], meta: { name: 'NotificationSettings' } }
+    /**
+     * Find zero or one NotificationSettings that matches the filter.
+     * @param {NotificationSettingsFindUniqueArgs} args - Arguments to find a NotificationSettings
+     * @example
+     * // Get one NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NotificationSettingsFindUniqueArgs>(args: SelectSubset<T, NotificationSettingsFindUniqueArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one NotificationSettings that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {NotificationSettingsFindUniqueOrThrowArgs} args - Arguments to find a NotificationSettings
+     * @example
+     * // Get one NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NotificationSettingsFindUniqueOrThrowArgs>(args: SelectSubset<T, NotificationSettingsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first NotificationSettings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationSettingsFindFirstArgs} args - Arguments to find a NotificationSettings
+     * @example
+     * // Get one NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NotificationSettingsFindFirstArgs>(args?: SelectSubset<T, NotificationSettingsFindFirstArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first NotificationSettings that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationSettingsFindFirstOrThrowArgs} args - Arguments to find a NotificationSettings
+     * @example
+     * // Get one NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NotificationSettingsFindFirstOrThrowArgs>(args?: SelectSubset<T, NotificationSettingsFindFirstOrThrowArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more NotificationSettings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationSettingsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.findMany()
+     * 
+     * // Get first 10 NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const notificationSettingsWithIdOnly = await prisma.notificationSettings.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NotificationSettingsFindManyArgs>(args?: SelectSubset<T, NotificationSettingsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a NotificationSettings.
+     * @param {NotificationSettingsCreateArgs} args - Arguments to create a NotificationSettings.
+     * @example
+     * // Create one NotificationSettings
+     * const NotificationSettings = await prisma.notificationSettings.create({
+     *   data: {
+     *     // ... data to create a NotificationSettings
+     *   }
+     * })
+     * 
+     */
+    create<T extends NotificationSettingsCreateArgs>(args: SelectSubset<T, NotificationSettingsCreateArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many NotificationSettings.
+     * @param {NotificationSettingsCreateManyArgs} args - Arguments to create many NotificationSettings.
+     * @example
+     * // Create many NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NotificationSettingsCreateManyArgs>(args?: SelectSubset<T, NotificationSettingsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many NotificationSettings and returns the data saved in the database.
+     * @param {NotificationSettingsCreateManyAndReturnArgs} args - Arguments to create many NotificationSettings.
+     * @example
+     * // Create many NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many NotificationSettings and only return the `id`
+     * const notificationSettingsWithIdOnly = await prisma.notificationSettings.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NotificationSettingsCreateManyAndReturnArgs>(args?: SelectSubset<T, NotificationSettingsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a NotificationSettings.
+     * @param {NotificationSettingsDeleteArgs} args - Arguments to delete one NotificationSettings.
+     * @example
+     * // Delete one NotificationSettings
+     * const NotificationSettings = await prisma.notificationSettings.delete({
+     *   where: {
+     *     // ... filter to delete one NotificationSettings
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NotificationSettingsDeleteArgs>(args: SelectSubset<T, NotificationSettingsDeleteArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one NotificationSettings.
+     * @param {NotificationSettingsUpdateArgs} args - Arguments to update one NotificationSettings.
+     * @example
+     * // Update one NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NotificationSettingsUpdateArgs>(args: SelectSubset<T, NotificationSettingsUpdateArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more NotificationSettings.
+     * @param {NotificationSettingsDeleteManyArgs} args - Arguments to filter NotificationSettings to delete.
+     * @example
+     * // Delete a few NotificationSettings
+     * const { count } = await prisma.notificationSettings.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NotificationSettingsDeleteManyArgs>(args?: SelectSubset<T, NotificationSettingsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NotificationSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationSettingsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NotificationSettingsUpdateManyArgs>(args: SelectSubset<T, NotificationSettingsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one NotificationSettings.
+     * @param {NotificationSettingsUpsertArgs} args - Arguments to update or create a NotificationSettings.
+     * @example
+     * // Update or create a NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.upsert({
+     *   create: {
+     *     // ... data to create a NotificationSettings
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NotificationSettings we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NotificationSettingsUpsertArgs>(args: SelectSubset<T, NotificationSettingsUpsertArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of NotificationSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationSettingsCountArgs} args - Arguments to filter NotificationSettings to count.
+     * @example
+     * // Count the number of NotificationSettings
+     * const count = await prisma.notificationSettings.count({
+     *   where: {
+     *     // ... the filter for the NotificationSettings we want to count
+     *   }
+     * })
+    **/
+    count<T extends NotificationSettingsCountArgs>(
+      args?: Subset<T, NotificationSettingsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NotificationSettingsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NotificationSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationSettingsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NotificationSettingsAggregateArgs>(args: Subset<T, NotificationSettingsAggregateArgs>): Prisma.PrismaPromise<GetNotificationSettingsAggregateType<T>>
+
+    /**
+     * Group by NotificationSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationSettingsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NotificationSettingsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NotificationSettingsGroupByArgs['orderBy'] }
+        : { orderBy?: NotificationSettingsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NotificationSettingsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNotificationSettingsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the NotificationSettings model
+   */
+  readonly fields: NotificationSettingsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for NotificationSettings.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NotificationSettingsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the NotificationSettings model
+   */ 
+  interface NotificationSettingsFieldRefs {
+    readonly id: FieldRef<"NotificationSettings", 'String'>
+    readonly userId: FieldRef<"NotificationSettings", 'String'>
+    readonly assignments: FieldRef<"NotificationSettings", 'Boolean'>
+    readonly grades: FieldRef<"NotificationSettings", 'Boolean'>
+    readonly messages: FieldRef<"NotificationSettings", 'Boolean'>
+    readonly achievements: FieldRef<"NotificationSettings", 'Boolean'>
+    readonly urgent: FieldRef<"NotificationSettings", 'Boolean'>
+    readonly email: FieldRef<"NotificationSettings", 'Boolean'>
+    readonly push: FieldRef<"NotificationSettings", 'Boolean'>
+    readonly createdAt: FieldRef<"NotificationSettings", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * NotificationSettings findUnique
+   */
+  export type NotificationSettingsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which NotificationSettings to fetch.
+     */
+    where: NotificationSettingsWhereUniqueInput
+  }
+
+  /**
+   * NotificationSettings findUniqueOrThrow
+   */
+  export type NotificationSettingsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which NotificationSettings to fetch.
+     */
+    where: NotificationSettingsWhereUniqueInput
+  }
+
+  /**
+   * NotificationSettings findFirst
+   */
+  export type NotificationSettingsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which NotificationSettings to fetch.
+     */
+    where?: NotificationSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NotificationSettings to fetch.
+     */
+    orderBy?: NotificationSettingsOrderByWithRelationInput | NotificationSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NotificationSettings.
+     */
+    cursor?: NotificationSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NotificationSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NotificationSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NotificationSettings.
+     */
+    distinct?: NotificationSettingsScalarFieldEnum | NotificationSettingsScalarFieldEnum[]
+  }
+
+  /**
+   * NotificationSettings findFirstOrThrow
+   */
+  export type NotificationSettingsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which NotificationSettings to fetch.
+     */
+    where?: NotificationSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NotificationSettings to fetch.
+     */
+    orderBy?: NotificationSettingsOrderByWithRelationInput | NotificationSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NotificationSettings.
+     */
+    cursor?: NotificationSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NotificationSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NotificationSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NotificationSettings.
+     */
+    distinct?: NotificationSettingsScalarFieldEnum | NotificationSettingsScalarFieldEnum[]
+  }
+
+  /**
+   * NotificationSettings findMany
+   */
+  export type NotificationSettingsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which NotificationSettings to fetch.
+     */
+    where?: NotificationSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NotificationSettings to fetch.
+     */
+    orderBy?: NotificationSettingsOrderByWithRelationInput | NotificationSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing NotificationSettings.
+     */
+    cursor?: NotificationSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NotificationSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NotificationSettings.
+     */
+    skip?: number
+    distinct?: NotificationSettingsScalarFieldEnum | NotificationSettingsScalarFieldEnum[]
+  }
+
+  /**
+   * NotificationSettings create
+   */
+  export type NotificationSettingsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a NotificationSettings.
+     */
+    data: XOR<NotificationSettingsCreateInput, NotificationSettingsUncheckedCreateInput>
+  }
+
+  /**
+   * NotificationSettings createMany
+   */
+  export type NotificationSettingsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many NotificationSettings.
+     */
+    data: NotificationSettingsCreateManyInput | NotificationSettingsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * NotificationSettings createManyAndReturn
+   */
+  export type NotificationSettingsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many NotificationSettings.
+     */
+    data: NotificationSettingsCreateManyInput | NotificationSettingsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NotificationSettings update
+   */
+  export type NotificationSettingsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a NotificationSettings.
+     */
+    data: XOR<NotificationSettingsUpdateInput, NotificationSettingsUncheckedUpdateInput>
+    /**
+     * Choose, which NotificationSettings to update.
+     */
+    where: NotificationSettingsWhereUniqueInput
+  }
+
+  /**
+   * NotificationSettings updateMany
+   */
+  export type NotificationSettingsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update NotificationSettings.
+     */
+    data: XOR<NotificationSettingsUpdateManyMutationInput, NotificationSettingsUncheckedUpdateManyInput>
+    /**
+     * Filter which NotificationSettings to update
+     */
+    where?: NotificationSettingsWhereInput
+  }
+
+  /**
+   * NotificationSettings upsert
+   */
+  export type NotificationSettingsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the NotificationSettings to update in case it exists.
+     */
+    where: NotificationSettingsWhereUniqueInput
+    /**
+     * In case the NotificationSettings found by the `where` argument doesn't exist, create a new NotificationSettings with this data.
+     */
+    create: XOR<NotificationSettingsCreateInput, NotificationSettingsUncheckedCreateInput>
+    /**
+     * In case the NotificationSettings was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NotificationSettingsUpdateInput, NotificationSettingsUncheckedUpdateInput>
+  }
+
+  /**
+   * NotificationSettings delete
+   */
+  export type NotificationSettingsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * Filter which NotificationSettings to delete.
+     */
+    where: NotificationSettingsWhereUniqueInput
+  }
+
+  /**
+   * NotificationSettings deleteMany
+   */
+  export type NotificationSettingsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NotificationSettings to delete
+     */
+    where?: NotificationSettingsWhereInput
+  }
+
+  /**
+   * NotificationSettings without action
+   */
+  export type NotificationSettingsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
   }
 
 
@@ -34729,12 +35892,31 @@ export namespace Prisma {
     userId: 'userId',
     type: 'type',
     message: 'message',
+    isImportant: 'isImportant',
+    urgent: 'urgent',
     title: 'title',
+    actionUrl: 'actionUrl',
     read: 'read',
     createdAt: 'createdAt'
   };
 
   export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+  export const NotificationSettingsScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    assignments: 'assignments',
+    grades: 'grades',
+    messages: 'messages',
+    achievements: 'achievements',
+    urgent: 'urgent',
+    email: 'email',
+    push: 'push',
+    createdAt: 'createdAt'
+  };
+
+  export type NotificationSettingsScalarFieldEnum = (typeof NotificationSettingsScalarFieldEnum)[keyof typeof NotificationSettingsScalarFieldEnum]
 
 
   export const MessageScalarFieldEnum: {
@@ -35083,6 +36265,20 @@ export namespace Prisma {
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
+
+
+  /**
+   * Reference to a field of type 'NotificationType'
+   */
+  export type EnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationType'>
+    
+
+
+  /**
+   * Reference to a field of type 'NotificationType[]'
+   */
+  export type ListEnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationType[]'>
+    
   /**
    * Deep Input Types
    */
@@ -35126,6 +36322,7 @@ export namespace Prisma {
     Certificate?: CertificateListRelationFilter
     Community?: CommunityListRelationFilter
     LiveRoom?: LiveRoomListRelationFilter
+    NotificationSettings?: NotificationSettingsListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -35163,6 +36360,7 @@ export namespace Prisma {
     Certificate?: CertificateOrderByRelationAggregateInput
     Community?: CommunityOrderByRelationAggregateInput
     LiveRoom?: LiveRoomOrderByRelationAggregateInput
+    NotificationSettings?: NotificationSettingsOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -35203,6 +36401,7 @@ export namespace Prisma {
     Certificate?: CertificateListRelationFilter
     Community?: CommunityListRelationFilter
     LiveRoom?: LiveRoomListRelationFilter
+    NotificationSettings?: NotificationSettingsListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -36022,9 +37221,12 @@ export namespace Prisma {
     NOT?: NotificationWhereInput | NotificationWhereInput[]
     id?: StringFilter<"Notification"> | string
     userId?: StringFilter<"Notification"> | string
-    type?: StringFilter<"Notification"> | string
+    type?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
     message?: StringFilter<"Notification"> | string
+    isImportant?: BoolFilter<"Notification"> | boolean
+    urgent?: BoolFilter<"Notification"> | boolean
     title?: StringFilter<"Notification"> | string
+    actionUrl?: StringNullableFilter<"Notification"> | string | null
     read?: BoolFilter<"Notification"> | boolean
     createdAt?: DateTimeFilter<"Notification"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -36035,7 +37237,10 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     message?: SortOrder
+    isImportant?: SortOrder
+    urgent?: SortOrder
     title?: SortOrder
+    actionUrl?: SortOrderInput | SortOrder
     read?: SortOrder
     createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -36047,9 +37252,12 @@ export namespace Prisma {
     OR?: NotificationWhereInput[]
     NOT?: NotificationWhereInput | NotificationWhereInput[]
     userId?: StringFilter<"Notification"> | string
-    type?: StringFilter<"Notification"> | string
+    type?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
     message?: StringFilter<"Notification"> | string
+    isImportant?: BoolFilter<"Notification"> | boolean
+    urgent?: BoolFilter<"Notification"> | boolean
     title?: StringFilter<"Notification"> | string
+    actionUrl?: StringNullableFilter<"Notification"> | string | null
     read?: BoolFilter<"Notification"> | boolean
     createdAt?: DateTimeFilter<"Notification"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -36060,7 +37268,10 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     message?: SortOrder
+    isImportant?: SortOrder
+    urgent?: SortOrder
     title?: SortOrder
+    actionUrl?: SortOrderInput | SortOrder
     read?: SortOrder
     createdAt?: SortOrder
     _count?: NotificationCountOrderByAggregateInput
@@ -36074,11 +37285,94 @@ export namespace Prisma {
     NOT?: NotificationScalarWhereWithAggregatesInput | NotificationScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Notification"> | string
     userId?: StringWithAggregatesFilter<"Notification"> | string
-    type?: StringWithAggregatesFilter<"Notification"> | string
+    type?: EnumNotificationTypeWithAggregatesFilter<"Notification"> | $Enums.NotificationType
     message?: StringWithAggregatesFilter<"Notification"> | string
+    isImportant?: BoolWithAggregatesFilter<"Notification"> | boolean
+    urgent?: BoolWithAggregatesFilter<"Notification"> | boolean
     title?: StringWithAggregatesFilter<"Notification"> | string
+    actionUrl?: StringNullableWithAggregatesFilter<"Notification"> | string | null
     read?: BoolWithAggregatesFilter<"Notification"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Notification"> | Date | string
+  }
+
+  export type NotificationSettingsWhereInput = {
+    AND?: NotificationSettingsWhereInput | NotificationSettingsWhereInput[]
+    OR?: NotificationSettingsWhereInput[]
+    NOT?: NotificationSettingsWhereInput | NotificationSettingsWhereInput[]
+    id?: StringFilter<"NotificationSettings"> | string
+    userId?: StringFilter<"NotificationSettings"> | string
+    assignments?: BoolFilter<"NotificationSettings"> | boolean
+    grades?: BoolFilter<"NotificationSettings"> | boolean
+    messages?: BoolFilter<"NotificationSettings"> | boolean
+    achievements?: BoolFilter<"NotificationSettings"> | boolean
+    urgent?: BoolFilter<"NotificationSettings"> | boolean
+    email?: BoolFilter<"NotificationSettings"> | boolean
+    push?: BoolFilter<"NotificationSettings"> | boolean
+    createdAt?: DateTimeFilter<"NotificationSettings"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type NotificationSettingsOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    assignments?: SortOrder
+    grades?: SortOrder
+    messages?: SortOrder
+    achievements?: SortOrder
+    urgent?: SortOrder
+    email?: SortOrder
+    push?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type NotificationSettingsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: NotificationSettingsWhereInput | NotificationSettingsWhereInput[]
+    OR?: NotificationSettingsWhereInput[]
+    NOT?: NotificationSettingsWhereInput | NotificationSettingsWhereInput[]
+    userId?: StringFilter<"NotificationSettings"> | string
+    assignments?: BoolFilter<"NotificationSettings"> | boolean
+    grades?: BoolFilter<"NotificationSettings"> | boolean
+    messages?: BoolFilter<"NotificationSettings"> | boolean
+    achievements?: BoolFilter<"NotificationSettings"> | boolean
+    urgent?: BoolFilter<"NotificationSettings"> | boolean
+    email?: BoolFilter<"NotificationSettings"> | boolean
+    push?: BoolFilter<"NotificationSettings"> | boolean
+    createdAt?: DateTimeFilter<"NotificationSettings"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type NotificationSettingsOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    assignments?: SortOrder
+    grades?: SortOrder
+    messages?: SortOrder
+    achievements?: SortOrder
+    urgent?: SortOrder
+    email?: SortOrder
+    push?: SortOrder
+    createdAt?: SortOrder
+    _count?: NotificationSettingsCountOrderByAggregateInput
+    _max?: NotificationSettingsMaxOrderByAggregateInput
+    _min?: NotificationSettingsMinOrderByAggregateInput
+  }
+
+  export type NotificationSettingsScalarWhereWithAggregatesInput = {
+    AND?: NotificationSettingsScalarWhereWithAggregatesInput | NotificationSettingsScalarWhereWithAggregatesInput[]
+    OR?: NotificationSettingsScalarWhereWithAggregatesInput[]
+    NOT?: NotificationSettingsScalarWhereWithAggregatesInput | NotificationSettingsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"NotificationSettings"> | string
+    userId?: StringWithAggregatesFilter<"NotificationSettings"> | string
+    assignments?: BoolWithAggregatesFilter<"NotificationSettings"> | boolean
+    grades?: BoolWithAggregatesFilter<"NotificationSettings"> | boolean
+    messages?: BoolWithAggregatesFilter<"NotificationSettings"> | boolean
+    achievements?: BoolWithAggregatesFilter<"NotificationSettings"> | boolean
+    urgent?: BoolWithAggregatesFilter<"NotificationSettings"> | boolean
+    email?: BoolWithAggregatesFilter<"NotificationSettings"> | boolean
+    push?: BoolWithAggregatesFilter<"NotificationSettings"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"NotificationSettings"> | Date | string
   }
 
   export type MessageWhereInput = {
@@ -37242,6 +38536,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -37278,6 +38573,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -37314,6 +38610,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -37350,6 +38647,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -38216,9 +39514,12 @@ export namespace Prisma {
 
   export type NotificationCreateInput = {
     id?: string
-    type: string
+    type?: $Enums.NotificationType
     message: string
+    isImportant?: boolean
+    urgent?: boolean
     title: string
+    actionUrl?: string | null
     read?: boolean
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutNotificationsInput
@@ -38227,18 +39528,24 @@ export namespace Prisma {
   export type NotificationUncheckedCreateInput = {
     id?: string
     userId: string
-    type: string
+    type?: $Enums.NotificationType
     message: string
+    isImportant?: boolean
+    urgent?: boolean
     title: string
+    actionUrl?: string | null
     read?: boolean
     createdAt?: Date | string
   }
 
   export type NotificationUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     message?: StringFieldUpdateOperationsInput | string
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
+    urgent?: BoolFieldUpdateOperationsInput | boolean
     title?: StringFieldUpdateOperationsInput | string
+    actionUrl?: NullableStringFieldUpdateOperationsInput | string | null
     read?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutNotificationsNestedInput
@@ -38247,9 +39554,12 @@ export namespace Prisma {
   export type NotificationUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     message?: StringFieldUpdateOperationsInput | string
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
+    urgent?: BoolFieldUpdateOperationsInput | boolean
     title?: StringFieldUpdateOperationsInput | string
+    actionUrl?: NullableStringFieldUpdateOperationsInput | string | null
     read?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -38257,18 +39567,24 @@ export namespace Prisma {
   export type NotificationCreateManyInput = {
     id?: string
     userId: string
-    type: string
+    type?: $Enums.NotificationType
     message: string
+    isImportant?: boolean
+    urgent?: boolean
     title: string
+    actionUrl?: string | null
     read?: boolean
     createdAt?: Date | string
   }
 
   export type NotificationUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     message?: StringFieldUpdateOperationsInput | string
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
+    urgent?: BoolFieldUpdateOperationsInput | boolean
     title?: StringFieldUpdateOperationsInput | string
+    actionUrl?: NullableStringFieldUpdateOperationsInput | string | null
     read?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -38276,10 +39592,103 @@ export namespace Prisma {
   export type NotificationUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     message?: StringFieldUpdateOperationsInput | string
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
+    urgent?: BoolFieldUpdateOperationsInput | boolean
     title?: StringFieldUpdateOperationsInput | string
+    actionUrl?: NullableStringFieldUpdateOperationsInput | string | null
     read?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationSettingsCreateInput = {
+    id?: string
+    assignments?: boolean
+    grades?: boolean
+    messages?: boolean
+    achievements?: boolean
+    urgent?: boolean
+    email?: boolean
+    push?: boolean
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutNotificationSettingsInput
+  }
+
+  export type NotificationSettingsUncheckedCreateInput = {
+    id?: string
+    userId: string
+    assignments?: boolean
+    grades?: boolean
+    messages?: boolean
+    achievements?: boolean
+    urgent?: boolean
+    email?: boolean
+    push?: boolean
+    createdAt?: Date | string
+  }
+
+  export type NotificationSettingsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assignments?: BoolFieldUpdateOperationsInput | boolean
+    grades?: BoolFieldUpdateOperationsInput | boolean
+    messages?: BoolFieldUpdateOperationsInput | boolean
+    achievements?: BoolFieldUpdateOperationsInput | boolean
+    urgent?: BoolFieldUpdateOperationsInput | boolean
+    email?: BoolFieldUpdateOperationsInput | boolean
+    push?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutNotificationSettingsNestedInput
+  }
+
+  export type NotificationSettingsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    assignments?: BoolFieldUpdateOperationsInput | boolean
+    grades?: BoolFieldUpdateOperationsInput | boolean
+    messages?: BoolFieldUpdateOperationsInput | boolean
+    achievements?: BoolFieldUpdateOperationsInput | boolean
+    urgent?: BoolFieldUpdateOperationsInput | boolean
+    email?: BoolFieldUpdateOperationsInput | boolean
+    push?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationSettingsCreateManyInput = {
+    id?: string
+    userId: string
+    assignments?: boolean
+    grades?: boolean
+    messages?: boolean
+    achievements?: boolean
+    urgent?: boolean
+    email?: boolean
+    push?: boolean
+    createdAt?: Date | string
+  }
+
+  export type NotificationSettingsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assignments?: BoolFieldUpdateOperationsInput | boolean
+    grades?: BoolFieldUpdateOperationsInput | boolean
+    messages?: BoolFieldUpdateOperationsInput | boolean
+    achievements?: BoolFieldUpdateOperationsInput | boolean
+    urgent?: BoolFieldUpdateOperationsInput | boolean
+    email?: BoolFieldUpdateOperationsInput | boolean
+    push?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationSettingsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    assignments?: BoolFieldUpdateOperationsInput | boolean
+    grades?: BoolFieldUpdateOperationsInput | boolean
+    messages?: BoolFieldUpdateOperationsInput | boolean
+    achievements?: BoolFieldUpdateOperationsInput | boolean
+    urgent?: BoolFieldUpdateOperationsInput | boolean
+    email?: BoolFieldUpdateOperationsInput | boolean
+    push?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -39634,6 +41043,12 @@ export namespace Prisma {
     none?: LiveRoomWhereInput
   }
 
+  export type NotificationSettingsListRelationFilter = {
+    every?: NotificationSettingsWhereInput
+    some?: NotificationSettingsWhereInput
+    none?: NotificationSettingsWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -39716,6 +41131,10 @@ export namespace Prisma {
   }
 
   export type LiveRoomOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NotificationSettingsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -40486,12 +41905,22 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type EnumNotificationTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationTypeFilter<$PrismaModel> | $Enums.NotificationType
+  }
+
   export type NotificationCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     type?: SortOrder
     message?: SortOrder
+    isImportant?: SortOrder
+    urgent?: SortOrder
     title?: SortOrder
+    actionUrl?: SortOrder
     read?: SortOrder
     createdAt?: SortOrder
   }
@@ -40501,7 +41930,10 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     message?: SortOrder
+    isImportant?: SortOrder
+    urgent?: SortOrder
     title?: SortOrder
+    actionUrl?: SortOrder
     read?: SortOrder
     createdAt?: SortOrder
   }
@@ -40511,8 +41943,60 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     message?: SortOrder
+    isImportant?: SortOrder
+    urgent?: SortOrder
     title?: SortOrder
+    actionUrl?: SortOrder
     read?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnumNotificationTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationTypeWithAggregatesFilter<$PrismaModel> | $Enums.NotificationType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNotificationTypeFilter<$PrismaModel>
+    _max?: NestedEnumNotificationTypeFilter<$PrismaModel>
+  }
+
+  export type NotificationSettingsCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    assignments?: SortOrder
+    grades?: SortOrder
+    messages?: SortOrder
+    achievements?: SortOrder
+    urgent?: SortOrder
+    email?: SortOrder
+    push?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type NotificationSettingsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    assignments?: SortOrder
+    grades?: SortOrder
+    messages?: SortOrder
+    achievements?: SortOrder
+    urgent?: SortOrder
+    email?: SortOrder
+    push?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type NotificationSettingsMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    assignments?: SortOrder
+    grades?: SortOrder
+    messages?: SortOrder
+    achievements?: SortOrder
+    urgent?: SortOrder
+    email?: SortOrder
+    push?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -41245,6 +42729,13 @@ export namespace Prisma {
     connect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
   }
 
+  export type NotificationSettingsCreateNestedManyWithoutUserInput = {
+    create?: XOR<NotificationSettingsCreateWithoutUserInput, NotificationSettingsUncheckedCreateWithoutUserInput> | NotificationSettingsCreateWithoutUserInput[] | NotificationSettingsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationSettingsCreateOrConnectWithoutUserInput | NotificationSettingsCreateOrConnectWithoutUserInput[]
+    createMany?: NotificationSettingsCreateManyUserInputEnvelope
+    connect?: NotificationSettingsWhereUniqueInput | NotificationSettingsWhereUniqueInput[]
+  }
+
   export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -41384,6 +42875,13 @@ export namespace Prisma {
     create?: XOR<LiveRoomCreateWithoutUserInput, LiveRoomUncheckedCreateWithoutUserInput> | LiveRoomCreateWithoutUserInput[] | LiveRoomUncheckedCreateWithoutUserInput[]
     connectOrCreate?: LiveRoomCreateOrConnectWithoutUserInput | LiveRoomCreateOrConnectWithoutUserInput[]
     connect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+  }
+
+  export type NotificationSettingsUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<NotificationSettingsCreateWithoutUserInput, NotificationSettingsUncheckedCreateWithoutUserInput> | NotificationSettingsCreateWithoutUserInput[] | NotificationSettingsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationSettingsCreateOrConnectWithoutUserInput | NotificationSettingsCreateOrConnectWithoutUserInput[]
+    createMany?: NotificationSettingsCreateManyUserInputEnvelope
+    connect?: NotificationSettingsWhereUniqueInput | NotificationSettingsWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -41697,6 +43195,20 @@ export namespace Prisma {
     deleteMany?: LiveRoomScalarWhereInput | LiveRoomScalarWhereInput[]
   }
 
+  export type NotificationSettingsUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NotificationSettingsCreateWithoutUserInput, NotificationSettingsUncheckedCreateWithoutUserInput> | NotificationSettingsCreateWithoutUserInput[] | NotificationSettingsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationSettingsCreateOrConnectWithoutUserInput | NotificationSettingsCreateOrConnectWithoutUserInput[]
+    upsert?: NotificationSettingsUpsertWithWhereUniqueWithoutUserInput | NotificationSettingsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NotificationSettingsCreateManyUserInputEnvelope
+    set?: NotificationSettingsWhereUniqueInput | NotificationSettingsWhereUniqueInput[]
+    disconnect?: NotificationSettingsWhereUniqueInput | NotificationSettingsWhereUniqueInput[]
+    delete?: NotificationSettingsWhereUniqueInput | NotificationSettingsWhereUniqueInput[]
+    connect?: NotificationSettingsWhereUniqueInput | NotificationSettingsWhereUniqueInput[]
+    update?: NotificationSettingsUpdateWithWhereUniqueWithoutUserInput | NotificationSettingsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NotificationSettingsUpdateManyWithWhereWithoutUserInput | NotificationSettingsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NotificationSettingsScalarWhereInput | NotificationSettingsScalarWhereInput[]
+  }
+
   export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -41980,6 +43492,20 @@ export namespace Prisma {
     update?: LiveRoomUpdateWithWhereUniqueWithoutUserInput | LiveRoomUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: LiveRoomUpdateManyWithWhereWithoutUserInput | LiveRoomUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: LiveRoomScalarWhereInput | LiveRoomScalarWhereInput[]
+  }
+
+  export type NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NotificationSettingsCreateWithoutUserInput, NotificationSettingsUncheckedCreateWithoutUserInput> | NotificationSettingsCreateWithoutUserInput[] | NotificationSettingsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationSettingsCreateOrConnectWithoutUserInput | NotificationSettingsCreateOrConnectWithoutUserInput[]
+    upsert?: NotificationSettingsUpsertWithWhereUniqueWithoutUserInput | NotificationSettingsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NotificationSettingsCreateManyUserInputEnvelope
+    set?: NotificationSettingsWhereUniqueInput | NotificationSettingsWhereUniqueInput[]
+    disconnect?: NotificationSettingsWhereUniqueInput | NotificationSettingsWhereUniqueInput[]
+    delete?: NotificationSettingsWhereUniqueInput | NotificationSettingsWhereUniqueInput[]
+    connect?: NotificationSettingsWhereUniqueInput | NotificationSettingsWhereUniqueInput[]
+    update?: NotificationSettingsUpdateWithWhereUniqueWithoutUserInput | NotificationSettingsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NotificationSettingsUpdateManyWithWhereWithoutUserInput | NotificationSettingsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NotificationSettingsScalarWhereInput | NotificationSettingsScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutProfileInput = {
@@ -42904,12 +44430,30 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type EnumNotificationTypeFieldUpdateOperationsInput = {
+    set?: $Enums.NotificationType
+  }
+
   export type UserUpdateOneRequiredWithoutNotificationsNestedInput = {
     create?: XOR<UserCreateWithoutNotificationsInput, UserUncheckedCreateWithoutNotificationsInput>
     connectOrCreate?: UserCreateOrConnectWithoutNotificationsInput
     upsert?: UserUpsertWithoutNotificationsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNotificationsInput, UserUpdateWithoutNotificationsInput>, UserUncheckedUpdateWithoutNotificationsInput>
+  }
+
+  export type UserCreateNestedOneWithoutNotificationSettingsInput = {
+    create?: XOR<UserCreateWithoutNotificationSettingsInput, UserUncheckedCreateWithoutNotificationSettingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNotificationSettingsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutNotificationSettingsNestedInput = {
+    create?: XOR<UserCreateWithoutNotificationSettingsInput, UserUncheckedCreateWithoutNotificationSettingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNotificationSettingsInput
+    upsert?: UserUpsertWithoutNotificationSettingsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNotificationSettingsInput, UserUpdateWithoutNotificationSettingsInput>, UserUncheckedUpdateWithoutNotificationSettingsInput>
   }
 
   export type UserCreateNestedOneWithoutMessagesInput = {
@@ -44172,6 +45716,23 @@ export namespace Prisma {
     _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumNotificationTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationTypeFilter<$PrismaModel> | $Enums.NotificationType
+  }
+
+  export type NestedEnumNotificationTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationTypeWithAggregatesFilter<$PrismaModel> | $Enums.NotificationType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNotificationTypeFilter<$PrismaModel>
+    _max?: NestedEnumNotificationTypeFilter<$PrismaModel>
+  }
+
   export type AcademyCreateWithoutUsersInput = {
     id?: string
     name: string
@@ -44280,18 +45841,24 @@ export namespace Prisma {
 
   export type NotificationCreateWithoutUserInput = {
     id?: string
-    type: string
+    type?: $Enums.NotificationType
     message: string
+    isImportant?: boolean
+    urgent?: boolean
     title: string
+    actionUrl?: string | null
     read?: boolean
     createdAt?: Date | string
   }
 
   export type NotificationUncheckedCreateWithoutUserInput = {
     id?: string
-    type: string
+    type?: $Enums.NotificationType
     message: string
+    isImportant?: boolean
+    urgent?: boolean
     title: string
+    actionUrl?: string | null
     read?: boolean
     createdAt?: Date | string
   }
@@ -44787,6 +46354,40 @@ export namespace Prisma {
     create: XOR<LiveRoomCreateWithoutUserInput, LiveRoomUncheckedCreateWithoutUserInput>
   }
 
+  export type NotificationSettingsCreateWithoutUserInput = {
+    id?: string
+    assignments?: boolean
+    grades?: boolean
+    messages?: boolean
+    achievements?: boolean
+    urgent?: boolean
+    email?: boolean
+    push?: boolean
+    createdAt?: Date | string
+  }
+
+  export type NotificationSettingsUncheckedCreateWithoutUserInput = {
+    id?: string
+    assignments?: boolean
+    grades?: boolean
+    messages?: boolean
+    achievements?: boolean
+    urgent?: boolean
+    email?: boolean
+    push?: boolean
+    createdAt?: Date | string
+  }
+
+  export type NotificationSettingsCreateOrConnectWithoutUserInput = {
+    where: NotificationSettingsWhereUniqueInput
+    create: XOR<NotificationSettingsCreateWithoutUserInput, NotificationSettingsUncheckedCreateWithoutUserInput>
+  }
+
+  export type NotificationSettingsCreateManyUserInputEnvelope = {
+    data: NotificationSettingsCreateManyUserInput | NotificationSettingsCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AcademyUpsertWithoutUsersInput = {
     update: XOR<AcademyUpdateWithoutUsersInput, AcademyUncheckedUpdateWithoutUsersInput>
     create: XOR<AcademyCreateWithoutUsersInput, AcademyUncheckedCreateWithoutUsersInput>
@@ -44930,9 +46531,12 @@ export namespace Prisma {
     NOT?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
     id?: StringFilter<"Notification"> | string
     userId?: StringFilter<"Notification"> | string
-    type?: StringFilter<"Notification"> | string
+    type?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
     message?: StringFilter<"Notification"> | string
+    isImportant?: BoolFilter<"Notification"> | boolean
+    urgent?: BoolFilter<"Notification"> | boolean
     title?: StringFilter<"Notification"> | string
+    actionUrl?: StringNullableFilter<"Notification"> | string | null
     read?: BoolFilter<"Notification"> | boolean
     createdAt?: DateTimeFilter<"Notification"> | Date | string
   }
@@ -45422,6 +47026,38 @@ export namespace Prisma {
     courseId?: StringNullableFilter<"LiveRoom"> | string | null
   }
 
+  export type NotificationSettingsUpsertWithWhereUniqueWithoutUserInput = {
+    where: NotificationSettingsWhereUniqueInput
+    update: XOR<NotificationSettingsUpdateWithoutUserInput, NotificationSettingsUncheckedUpdateWithoutUserInput>
+    create: XOR<NotificationSettingsCreateWithoutUserInput, NotificationSettingsUncheckedCreateWithoutUserInput>
+  }
+
+  export type NotificationSettingsUpdateWithWhereUniqueWithoutUserInput = {
+    where: NotificationSettingsWhereUniqueInput
+    data: XOR<NotificationSettingsUpdateWithoutUserInput, NotificationSettingsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type NotificationSettingsUpdateManyWithWhereWithoutUserInput = {
+    where: NotificationSettingsScalarWhereInput
+    data: XOR<NotificationSettingsUpdateManyMutationInput, NotificationSettingsUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type NotificationSettingsScalarWhereInput = {
+    AND?: NotificationSettingsScalarWhereInput | NotificationSettingsScalarWhereInput[]
+    OR?: NotificationSettingsScalarWhereInput[]
+    NOT?: NotificationSettingsScalarWhereInput | NotificationSettingsScalarWhereInput[]
+    id?: StringFilter<"NotificationSettings"> | string
+    userId?: StringFilter<"NotificationSettings"> | string
+    assignments?: BoolFilter<"NotificationSettings"> | boolean
+    grades?: BoolFilter<"NotificationSettings"> | boolean
+    messages?: BoolFilter<"NotificationSettings"> | boolean
+    achievements?: BoolFilter<"NotificationSettings"> | boolean
+    urgent?: BoolFilter<"NotificationSettings"> | boolean
+    email?: BoolFilter<"NotificationSettings"> | boolean
+    push?: BoolFilter<"NotificationSettings"> | boolean
+    createdAt?: DateTimeFilter<"NotificationSettings"> | Date | string
+  }
+
   export type UserCreateWithoutProfileInput = {
     id?: string
     email: string
@@ -45455,6 +47091,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProfileInput = {
@@ -45490,6 +47127,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProfileInput = {
@@ -45541,6 +47179,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfileInput = {
@@ -45576,6 +47215,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAcademyInput = {
@@ -45611,6 +47251,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAcademyInput = {
@@ -45646,6 +47287,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAcademyInput = {
@@ -45887,6 +47529,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutInstructorInput = {
@@ -45922,6 +47565,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutInstructorInput = {
@@ -46035,6 +47679,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInstructorInput = {
@@ -46070,6 +47715,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AcademyUpsertWithoutInstructorsInput = {
@@ -46577,6 +48223,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLessonInput = {
@@ -46612,6 +48259,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLessonInput = {
@@ -46861,6 +48509,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEnrollmentsInput = {
@@ -46896,6 +48545,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEnrollmentsInput = {
@@ -46978,6 +48628,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEnrollmentsInput = {
@@ -47013,6 +48664,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CourseUpsertWithoutEnrollmentsInput = {
@@ -47387,6 +49039,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSubmissionInput = {
@@ -47422,6 +49075,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSubmissionInput = {
@@ -47508,6 +49162,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubmissionInput = {
@@ -47543,6 +49198,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type QuizUpsertWithoutSubmissionsInput = {
@@ -47619,6 +49275,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAchievementsInput = {
@@ -47654,6 +49311,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAchievementsInput = {
@@ -47705,6 +49363,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAchievementsInput = {
@@ -47740,6 +49399,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutNotificationsInput = {
@@ -47775,6 +49435,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -47810,6 +49471,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -47861,6 +49523,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -47879,6 +49542,167 @@ export namespace Prisma {
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUncheckedUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUncheckedUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
+    Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutNotificationSettingsInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academy?: AcademyCreateNestedOneWithoutUsersInput
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    groups?: GroupCreateNestedManyWithoutMembersInput
+    channels?: ChannelCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    Submission?: SubmissionCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorCreateNestedManyWithoutUserInput
+    Owner?: OwnerCreateNestedManyWithoutUserInput
+    Admin?: AdminCreateNestedManyWithoutUserInput
+    Lesson?: LessonCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentCreateNestedManyWithoutUserInput
+    Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutNotificationSettingsInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academyId?: string | null
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    groups?: GroupUncheckedCreateNestedManyWithoutMembersInput
+    channels?: ChannelUncheckedCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
+    Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
+    Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
+    Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutNotificationSettingsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutNotificationSettingsInput, UserUncheckedCreateWithoutNotificationSettingsInput>
+  }
+
+  export type UserUpsertWithoutNotificationSettingsInput = {
+    update: XOR<UserUpdateWithoutNotificationSettingsInput, UserUncheckedUpdateWithoutNotificationSettingsInput>
+    create: XOR<UserCreateWithoutNotificationSettingsInput, UserUncheckedCreateWithoutNotificationSettingsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutNotificationSettingsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutNotificationSettingsInput, UserUncheckedUpdateWithoutNotificationSettingsInput>
+  }
+
+  export type UserUpdateWithoutNotificationSettingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academy?: AcademyUpdateOneWithoutUsersNestedInput
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUpdateManyWithoutUserNestedInput
+    Admin?: AdminUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUpdateManyWithoutUserNestedInput
+    Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutNotificationSettingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     groups?: GroupUncheckedUpdateManyWithoutMembersNestedInput
@@ -47931,6 +49755,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMessagesInput = {
@@ -47966,6 +49791,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMessagesInput = {
@@ -48038,6 +49864,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessagesInput = {
@@ -48073,6 +49900,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ChannelUpsertWithWhereUniqueWithoutMessagesInput = {
@@ -48124,6 +49952,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -48159,6 +49988,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -48322,6 +50152,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -48357,6 +50188,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CommentUpsertWithWhereUniqueWithoutPostInput = {
@@ -48541,6 +50373,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGroupsInput = {
@@ -48576,6 +50409,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGroupsInput = {
@@ -48772,6 +50606,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAdminInput = {
@@ -48807,6 +50642,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAdminInput = {
@@ -48890,6 +50726,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdminInput = {
@@ -48925,6 +50762,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GroupUpsertWithWhereUniqueWithoutAdminInput = {
@@ -48976,6 +50814,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChannelsInput = {
@@ -49011,6 +50850,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChannelsInput = {
@@ -49144,6 +50984,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOwnerInput = {
@@ -49179,6 +51020,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOwnerInput = {
@@ -49256,6 +51098,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOwnerInput = {
@@ -49291,6 +51134,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ChannelUpsertWithWhereUniqueWithoutOwnerInput = {
@@ -49342,6 +51186,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBookmarksInput = {
@@ -49377,6 +51222,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBookmarksInput = {
@@ -49428,6 +51274,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBookmarksInput = {
@@ -49463,6 +51310,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AcademyCreateWithoutEventsInput = {
@@ -49566,6 +51414,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAttendanceInput = {
@@ -49601,6 +51450,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAttendanceInput = {
@@ -49683,6 +51533,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAttendanceInput = {
@@ -49718,6 +51569,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type LessonUpsertWithoutAttendanceInput = {
@@ -49790,6 +51642,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentInput = {
@@ -49825,6 +51678,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentInput = {
@@ -49876,6 +51730,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentInput = {
@@ -49911,6 +51766,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutReportInput = {
@@ -49946,6 +51802,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReportInput = {
@@ -49981,6 +51838,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReportInput = {
@@ -50032,6 +51890,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReportInput = {
@@ -50067,6 +51926,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutBadgeInput = {
@@ -50102,6 +51962,7 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBadgeInput = {
@@ -50137,6 +51998,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBadgeInput = {
@@ -50188,6 +52050,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBadgeInput = {
@@ -50223,6 +52086,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutCertificateInput = {
@@ -50258,6 +52122,7 @@ export namespace Prisma {
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCertificateInput = {
@@ -50293,6 +52158,7 @@ export namespace Prisma {
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCertificateInput = {
@@ -50344,6 +52210,7 @@ export namespace Prisma {
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCertificateInput = {
@@ -50379,6 +52246,7 @@ export namespace Prisma {
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GroupCreateWithoutCommunityInput = {
@@ -50483,6 +52351,7 @@ export namespace Prisma {
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommunityInput = {
@@ -50518,6 +52387,7 @@ export namespace Prisma {
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommunityInput = {
@@ -50878,6 +52748,7 @@ export namespace Prisma {
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLiveRoomInput = {
@@ -50913,6 +52784,7 @@ export namespace Prisma {
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLiveRoomInput = {
@@ -51068,9 +52940,12 @@ export namespace Prisma {
 
   export type NotificationCreateManyUserInput = {
     id?: string
-    type: string
+    type?: $Enums.NotificationType
     message: string
+    isImportant?: boolean
+    urgent?: boolean
     title: string
+    actionUrl?: string | null
     read?: boolean
     createdAt?: Date | string
   }
@@ -51170,6 +53045,18 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type NotificationSettingsCreateManyUserInput = {
+    id?: string
+    assignments?: boolean
+    grades?: boolean
+    messages?: boolean
+    achievements?: boolean
+    urgent?: boolean
+    email?: boolean
+    push?: boolean
+    createdAt?: Date | string
+  }
+
   export type EnrollmentUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     progress?: FloatFieldUpdateOperationsInput | number
@@ -51223,27 +53110,36 @@ export namespace Prisma {
 
   export type NotificationUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     message?: StringFieldUpdateOperationsInput | string
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
+    urgent?: BoolFieldUpdateOperationsInput | boolean
     title?: StringFieldUpdateOperationsInput | string
+    actionUrl?: NullableStringFieldUpdateOperationsInput | string | null
     read?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotificationUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     message?: StringFieldUpdateOperationsInput | string
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
+    urgent?: BoolFieldUpdateOperationsInput | boolean
     title?: StringFieldUpdateOperationsInput | string
+    actionUrl?: NullableStringFieldUpdateOperationsInput | string | null
     read?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotificationUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     message?: StringFieldUpdateOperationsInput | string
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
+    urgent?: BoolFieldUpdateOperationsInput | boolean
     title?: StringFieldUpdateOperationsInput | string
+    actionUrl?: NullableStringFieldUpdateOperationsInput | string | null
     read?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -51734,6 +53630,42 @@ export namespace Prisma {
     courseId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type NotificationSettingsUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assignments?: BoolFieldUpdateOperationsInput | boolean
+    grades?: BoolFieldUpdateOperationsInput | boolean
+    messages?: BoolFieldUpdateOperationsInput | boolean
+    achievements?: BoolFieldUpdateOperationsInput | boolean
+    urgent?: BoolFieldUpdateOperationsInput | boolean
+    email?: BoolFieldUpdateOperationsInput | boolean
+    push?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationSettingsUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assignments?: BoolFieldUpdateOperationsInput | boolean
+    grades?: BoolFieldUpdateOperationsInput | boolean
+    messages?: BoolFieldUpdateOperationsInput | boolean
+    achievements?: BoolFieldUpdateOperationsInput | boolean
+    urgent?: BoolFieldUpdateOperationsInput | boolean
+    email?: BoolFieldUpdateOperationsInput | boolean
+    push?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationSettingsUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assignments?: BoolFieldUpdateOperationsInput | boolean
+    grades?: BoolFieldUpdateOperationsInput | boolean
+    messages?: BoolFieldUpdateOperationsInput | boolean
+    achievements?: BoolFieldUpdateOperationsInput | boolean
+    urgent?: BoolFieldUpdateOperationsInput | boolean
+    email?: BoolFieldUpdateOperationsInput | boolean
+    push?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateManyAcademyInput = {
     id?: string
     email: string
@@ -51804,6 +53736,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAcademyInput = {
@@ -51839,6 +53772,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutAcademyInput = {
@@ -52302,6 +54236,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLessonInput = {
@@ -52337,6 +54272,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutLessonInput = {
@@ -52690,6 +54626,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGroupsInput = {
@@ -52725,6 +54662,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutGroupsInput = {
@@ -52893,6 +54831,7 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChannelsInput = {
@@ -52928,6 +54867,7 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutChannelsInput = {
@@ -53130,6 +55070,7 @@ export namespace Prisma {
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommunityInput = {
@@ -53165,6 +55106,7 @@ export namespace Prisma {
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutCommunityInput = {
@@ -53269,6 +55211,7 @@ export namespace Prisma {
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLiveRoomInput = {
@@ -53304,6 +55247,7 @@ export namespace Prisma {
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutLiveRoomInput = {

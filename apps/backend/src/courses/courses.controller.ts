@@ -4,7 +4,8 @@ import { CreateCourseDto } from '../../dtos/Course.create.dto';
 import { UpdateCourseDto } from '../../dtos/Course.update.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Course, Instructor, Lesson, Quiz, User } from '@shared/prisma';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('الكورسات')
 @Controller('courses')
 @UseGuards(JwtAuthGuard)
 export class CoursesController {
@@ -37,35 +38,35 @@ export class CoursesController {
     async remove(@Param('id') id: string): Promise<Course> {
         return this.coursesService.remove(id);
     }
-    @Post('enroll/:id')
+    @Post(':id/enroll')
     async enrollStudent(@Param('id') id: string, @Body() body: { studentId: string }): Promise<Course> {
         return this.coursesService.enrollStudent(id, body.studentId);
     }
-    @Post('unenroll/:id')
+    @Post(':id/unenroll')
     async unenrollStudent(@Param('id') id: string, @Body() body: { studentId: string }): Promise<Course> {
         return this.coursesService.unenrollStudent(id, body.studentId);
     }
-    @Post('add-instructor/:id')
+    @Post(':id/add-instructor')
     async addInstructor(@Param('id') id: string, @Body() body: { instructorId: string }): Promise<Course> {
         return this.coursesService.addInstructor(id, body.instructorId);
     }
-    @Post('remove-instructor/:id')
+    @Post(':id/remove-instructor')
     async removeInstructor(@Param('id') id: string, @Body() body: { instructorId: string }): Promise<Course> {
         return this.coursesService.removeInstructor(id, body.instructorId);
     }
-    @Get('lessons/:id')
+    @Get(':id/lessons')
     async getCourseLessons(@Param('id') id: string): Promise<Lesson[]> {
         return this.coursesService.getCourseLessons(id);
     }
-    @Get('quizzes/:id')
+    @Get(':id/quizzes')
     async getCourseQuizzes(@Param('id') id: string): Promise<Quiz[]> {
         return this.coursesService.getCourseQuizzes(id);
     }
-    @Get('students/:id')
+    @Get(':id/students')
     async getCourseStudents(@Param('id') id: string): Promise<User[]> {
         return this.coursesService.getCourseStudents(id);
     }
-    @Get('instructors/:id')
+    @Get(':id/instructors')
     async getCourseInstructors(@Param('id') id: string): Promise<Instructor[]> {
         return this.coursesService.getCourseInstructors(id);
     }

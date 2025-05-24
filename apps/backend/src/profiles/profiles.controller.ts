@@ -4,7 +4,8 @@ import { CreateProfileDto } from '../../dtos/Profile.create.dto';
 import { UpdateProfileDto } from '../../dtos/Profile.update.dto';
 import { Profile } from '@shared/prisma';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('الملفات الشخصية')
 @Controller('profiles')
 @UseGuards(JwtAuthGuard)
 export class ProfilesController {

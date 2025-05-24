@@ -1,11 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { UserEntity } from "./User.entity";
-import { User, NotificationType } from "@shared/prisma";
+import { User } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
-// This is the  Entity for Notification
-export class NotificationEntity {
+// This is the  Entity for NotificationSettings
+export class NotificationSettingsDto {
   @ApiProperty({ type: "string" })
   // Field: id, Type: string
   @Column()
@@ -21,40 +21,40 @@ export class NotificationEntity {
   @Column()
   user: User;
 
-  @ApiProperty({ enum: NotificationType })
-  // Field: type, Type: NotificationType
+  @ApiProperty({ type: "boolean" })
+  // Field: assignments, Type: boolean
   @Column()
-  type: NotificationType;
-
-  @ApiProperty({ type: "string" })
-  // Field: message, Type: string
-  @Column()
-  message: string;
+  assignments: boolean;
 
   @ApiProperty({ type: "boolean" })
-  // Field: isImportant, Type: boolean
+  // Field: grades, Type: boolean
   @Column()
-  isImportant: boolean;
+  grades: boolean;
+
+  @ApiProperty({ type: "boolean" })
+  // Field: messages, Type: boolean
+  @Column()
+  messages: boolean;
+
+  @ApiProperty({ type: "boolean" })
+  // Field: achievements, Type: boolean
+  @Column()
+  achievements: boolean;
 
   @ApiProperty({ type: "boolean" })
   // Field: urgent, Type: boolean
   @Column()
   urgent: boolean;
 
-  @ApiProperty({ type: "string" })
-  // Field: title, Type: string
+  @ApiProperty({ type: "boolean" })
+  // Field: email, Type: boolean
   @Column()
-  title: string;
-
-  @ApiProperty({ type: "string", nullable: true })
-  // Field: actionUrl, Type: string
-  @Column()
-  actionUrl?: string;
+  email: boolean;
 
   @ApiProperty({ type: "boolean" })
-  // Field: read, Type: boolean
+  // Field: push, Type: boolean
   @Column()
-  read: boolean;
+  push: boolean;
 
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date

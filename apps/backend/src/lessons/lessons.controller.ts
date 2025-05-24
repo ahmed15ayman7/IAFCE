@@ -4,6 +4,8 @@ import { CreateLessonDto } from '../../dtos/Lesson.create.dto';
 import { UpdateLessonDto } from '../../dtos/Lesson.update.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Lesson } from '@shared/prisma';
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('الدروس')
 @Controller('lessons')
 @UseGuards(JwtAuthGuard)
 export class LessonsController {

@@ -6,7 +6,8 @@ import { Comment, Post as PostModel } from '@shared/prisma';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CreateCommentDto } from 'dtos/Comment.create.dto';
 import { UpdateCommentDto } from 'dtos/Comment.update.dto';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('المنشورات')
 @Controller('posts')
 @UseGuards(JwtAuthGuard)
 export class PostsController {

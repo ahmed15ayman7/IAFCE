@@ -3,8 +3,10 @@ import { CertificateService } from './certificate.service';
 import { CreateCertificateDto } from '../../dtos/Certificate.create.dto';
 import { UpdateCertificateDto } from '../../dtos/Certificate.update.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { Academy, Certificate } from '@shared/prisma';
-@Controller('academies')
+import { Certificate } from '@shared/prisma';
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('الشهادات')
+@Controller('certificates')
 @UseGuards(JwtAuthGuard)
 export class CertificateController {
     constructor(private readonly certificateService: CertificateService) { }

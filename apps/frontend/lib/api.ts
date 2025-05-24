@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 import authService from './auth.service';
-import { Achievement, Badge, Certificate, Community, Course, Discussion, Enrollment, Group, LiveRoom, Notification, Post, Quiz, User } from '@shared/prisma';
+import { Achievement, Badge, Certificate, Community, Course, Discussion, Enrollment, Group, LiveRoom, Notification, NotificationSettings, Post, Quiz, User } from '@shared/prisma';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
@@ -152,10 +152,16 @@ export const courseApi = {
     }) => api.patch(`/courses/${id}`, data),
     delete: (id: string) => api.delete(`/courses/${id}`),
     enroll: (courseId: string) => api.post(`/courses/${courseId}/enroll`),
-    getEnrolledCourses: () => api.get('/courses/enrolled'),
-    getStudents: (courseId: string) => api.get(`/courses/${courseId}/students`),
+    unenroll: (courseId: string) => api.post(`/courses/${courseId}/unenroll`),
+    addInstructor: (courseId: string, instructorId: string) => api.post(`/courses/${courseId}/add-instructor`, { instructorId }),
+    removeInstructor: (courseId: string, instructorId: string) => api.post(`/courses/${courseId}/remove-instructor`, { instructorId }),
     getLessons: (courseId: string) => api.get(`/courses/${courseId}/lessons`),
-    getProgress: (courseId: string) => api.get(`/courses/${courseId}/progress`),
+    getQuizzes: (courseId: string) => api.get(`/courses/${courseId}/quizzes`),
+    getStudents: (courseId: string) => api.get(`/courses/${courseId}/students`),
+    getInstructors: (courseId: string) => api.get(`/courses/${courseId}/instructors`),
+    getByStudentId: (studentId: string) => api.get(`/courses/by-student/${studentId}`),
+    getByInstructorId: (instructorId: string) => api.get(`/courses/by-instructor/${instructorId}`),
+    getByAcademyId: (academyId: string) => api.get(`/courses/by-academy/${academyId}`),
 };
 
 // Lesson APIs
@@ -231,7 +237,8 @@ export const attendanceApi = {
 
 // Notification APIs
 export const notificationApi = {
-    getAll: () => api.get('/notifications'),
+    getAll: (): Promise<Notification[]> => api.get(`/notifications`),
+    getAllByUserId: (userId: string): Promise<Notification[]> => api.get(`/notifications/user/${userId}`),
     getUnread: () => api.get('/notifications/unread'),
     markAsRead: (id: string) => api.patch(`/notifications/${id}/read`),
     markAllAsRead: () => api.patch('/notifications/read-all'),
@@ -239,8 +246,39 @@ export const notificationApi = {
         userId: string;
         type: string;
         message: string;
+        actionUrl?: string;
+        title?: string;
+        urgent?: boolean;
+        isImportant?: boolean;
     }) => api.post('/notifications', data),
+    update: (id: string, data: {
+        message?: string;
+        actionUrl?: string;
+        title?: string;
+        urgent?: boolean;
+        isImportant?: boolean;
+    }) => api.patch(`/notifications/${id}`, data),
     delete: (id: string) => api.delete(`/notifications/${id}`),
+    getSettings: () => api.get('/notifications/settings'),
+    getSettingsByUserId: (userId: string): Promise<NotificationSettings> => api.get(`/notifications/settings/user/${userId}`),
+    updateSettings: (data: {
+        assignments: boolean;
+        grades: boolean;
+        messages: boolean;
+        achievements: boolean;
+        urgent: boolean;
+        email: boolean;
+        push: boolean;
+    }) => api.patch('/notifications/settings', data),
+    createSettings: (data: {
+        assignments: boolean;
+        grades: boolean;
+        messages: boolean;
+        achievements: boolean;
+        urgent: boolean;
+        email: boolean;
+        push: boolean;
+    }) => api.post('/notifications/settings', data),
 };
 
 // File APIs

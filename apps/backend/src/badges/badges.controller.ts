@@ -4,7 +4,9 @@ import { CreateBadgeDto } from '../../dtos/Badge.create.dto';
 import { UpdateBadgeDto } from '../../dtos/Badge.update.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Academy, Badge } from '@shared/prisma';
-@Controller('academies')
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('البطاقات')
+@Controller('badges')
 @UseGuards(JwtAuthGuard)
 export class BadgesController {
     constructor(private readonly badgesService: BadgesService) { }

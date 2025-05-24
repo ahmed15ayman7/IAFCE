@@ -3,7 +3,8 @@ import { SubmissionsService } from './submissions.service';
 import { JwtAuthGuard } from '@/auth/guards/jwt-auth.guard';
 import { CreateSubmissionDto } from 'dtos/Submission.create.dto';
 import { UpdateSubmissionDto } from 'dtos/Submission.update.dto';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('الاجابات')
 @Controller('submissions')
 export class SubmissionsController {
     constructor(private readonly submissionsService: SubmissionsService) { }

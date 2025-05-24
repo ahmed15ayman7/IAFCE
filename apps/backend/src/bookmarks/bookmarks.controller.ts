@@ -4,6 +4,8 @@ import { CreateBookmarkDto } from '../../dtos/Bookmark.create.dto';
 import { UpdateBookmarkDto } from '../../dtos/Bookmark.update.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Bookmark } from '@shared/prisma';
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('المفضلة')
 @Controller('bookmarks')
 @UseGuards(JwtAuthGuard)
 export class BookmarksController {

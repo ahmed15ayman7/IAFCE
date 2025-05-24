@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { UserEntity } from "./User.entity";
-import { User } from "@shared/prisma";
+import { User, NotificationType } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -21,20 +21,35 @@ export class NotificationDto {
   @Column()
   user: User;
 
-  @ApiProperty({ type: "string" })
-  // Field: type, Type: string
+  @ApiProperty({ enum: NotificationType })
+  // Field: type, Type: NotificationType
   @Column()
-  type: string;
+  type: NotificationType;
 
   @ApiProperty({ type: "string" })
   // Field: message, Type: string
   @Column()
   message: string;
 
+  @ApiProperty({ type: "boolean" })
+  // Field: isImportant, Type: boolean
+  @Column()
+  isImportant: boolean;
+
+  @ApiProperty({ type: "boolean" })
+  // Field: urgent, Type: boolean
+  @Column()
+  urgent: boolean;
+
   @ApiProperty({ type: "string" })
   // Field: title, Type: string
   @Column()
   title: string;
+
+  @ApiProperty({ type: "string", nullable: true })
+  // Field: actionUrl, Type: string
+  @Column()
+  actionUrl?: string;
 
   @ApiProperty({ type: "boolean" })
   // Field: read, Type: boolean

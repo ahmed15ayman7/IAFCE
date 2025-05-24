@@ -5,6 +5,8 @@ import { UpdateEventDto } from '../../dtos/Event.update.dto';
 import { EventDto } from '../../dtos/Event.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Event } from '@shared/prisma';
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('الفعاليات')
 @Controller('events')
 @UseGuards(JwtAuthGuard)
 export class EventsController {
