@@ -4,6 +4,7 @@ import * as bcrypt from 'bcryptjs';
 import { UserRole } from '@shared/prisma';
 import { CreateUserDto } from 'dtos/User.create.dto';
 import { UpdateUserDto } from 'dtos/User.update.dto';
+import { UpdateTwoFactorDto } from 'dtos/TwoFactor.update.dto';
 @Injectable()
 export class UsersService {
     constructor(private prisma: PrismaService) { }
@@ -125,6 +126,37 @@ export class UsersService {
     async getCreatedCourses(userId: string) {
         return this.prisma.course.findMany({
             where: { academyId: userId },
+        });
+    }
+
+    async getLoginHistory(userId: string) {
+        return this.prisma.loginHistory.findMany({
+            where: { userId },
+        });
+    }
+
+    async getTwoFactor(userId: string) {
+        return this.prisma.twoFactor.findFirst({
+            where: { userId },
+        });
+    }
+    async updateTwoFactor(userId: string, data: UpdateTwoFactorDto) {
+        const twoFactor = await this.getTwoFactor(userId);
+        if (!twoFactor) {
+            if (data.authenticator || data.email || data.sms) {
+                const secret = await bcrypt.hash(data.secret, 10);
+                return this.prisma.twoFactor.create({
+                    data: {
+                        ...data,
+                        userId,
+                        secret,
+                    },
+                });
+            }
+        }
+        return this.prisma.twoFactor.update({
+            where: { id: twoFactor.id },
+            data,
         });
     }
 

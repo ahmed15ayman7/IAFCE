@@ -129,7 +129,33 @@ exports.Prisma.UserScalarFieldEnum = {
   avatar: 'avatar',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  academyId: 'academyId'
+  academyId: 'academyId',
+  isOnline: 'isOnline',
+  isVerified: 'isVerified',
+  age: 'age'
+};
+
+exports.Prisma.LoginHistoryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  success: 'success',
+  ip: 'ip',
+  device: 'device',
+  location: 'location',
+  browser: 'browser',
+  os: 'os',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.TwoFactorScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  email: 'email',
+  sms: 'sms',
+  authenticator: 'authenticator',
+  secret: 'secret',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ProfileScalarFieldEnum = {
@@ -162,8 +188,33 @@ exports.Prisma.CourseScalarFieldEnum = {
   title: 'title',
   description: 'description',
   academyId: 'academyId',
+  image: 'image',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PathScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  level: 'level',
+  completedTasks: 'completedTasks',
+  remainingTime: 'remainingTime',
+  studyTime: 'studyTime',
+  totalTasks: 'totalTasks',
+  progress: 'progress',
+  engagement: 'engagement',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MilestoneScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  status: 'status',
+  pathId: 'pathId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.LessonScalarFieldEnum = {
@@ -464,6 +515,19 @@ exports.UserRole = exports.$Enums.UserRole = {
   ACADEMY: 'ACADEMY'
 };
 
+exports.LoginDevice = exports.$Enums.LoginDevice = {
+  DESKTOP: 'DESKTOP',
+  MOBILE: 'MOBILE',
+  TABLET: 'TABLET',
+  LAPTOP: 'LAPTOP'
+};
+
+exports.MilestoneStatus = exports.$Enums.MilestoneStatus = {
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  NOT_STARTED: 'NOT_STARTED'
+};
+
 exports.NotificationType = exports.$Enums.NotificationType = {
   ASSIGNMENT: 'ASSIGNMENT',
   GRADE: 'GRADE',
@@ -474,10 +538,14 @@ exports.NotificationType = exports.$Enums.NotificationType = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  LoginHistory: 'LoginHistory',
+  TwoFactor: 'TwoFactor',
   Profile: 'Profile',
   Academy: 'Academy',
   Instructor: 'Instructor',
   Course: 'Course',
+  Path: 'Path',
+  Milestone: 'Milestone',
   Lesson: 'Lesson',
   File: 'File',
   Enrollment: 'Enrollment',

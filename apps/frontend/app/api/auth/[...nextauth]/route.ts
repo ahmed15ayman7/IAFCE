@@ -28,7 +28,6 @@ const handler = NextAuth({
                         email: credentials?.identifier!,
                         password: credentials?.password!
                     })
-                    console.log("response", response)
 
                     if (response) {
                         return response

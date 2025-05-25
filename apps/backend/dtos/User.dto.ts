@@ -22,6 +22,9 @@ import { CertificateEntity } from "./Certificate.entity";
 import { CommunityEntity } from "./Community.entity";
 import { LiveRoomEntity } from "./LiveRoom.entity";
 import { NotificationSettingsEntity } from "./NotificationSettings.entity";
+import { PathEntity } from "./Path.entity";
+import { LoginHistoryEntity } from "./LoginHistory.entity";
+import { TwoFactorEntity } from "./TwoFactor.entity";
 import {
   UserRole,
   Academy,
@@ -47,6 +50,9 @@ import {
   Community,
   LiveRoom,
   NotificationSettings,
+  Path,
+  LoginHistory,
+  TwoFactor,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -112,6 +118,21 @@ export class UserDto {
   // Field: academyId, Type: string
   @Column()
   academyId?: string;
+
+  @ApiProperty({ type: "boolean" })
+  // Field: isOnline, Type: boolean
+  @Column()
+  isOnline: boolean;
+
+  @ApiProperty({ type: "boolean" })
+  // Field: isVerified, Type: boolean
+  @Column()
+  isVerified: boolean;
+
+  @ApiProperty({ type: "number", nullable: true })
+  // Field: age, Type: number
+  @Column()
+  age?: number;
 
   @ApiProperty({ type: AcademyEntity, nullable: true })
   // Field: academy, Type: Academy
@@ -227,4 +248,19 @@ export class UserDto {
   // Field: NotificationSettings, Type: NotificationSettings[]
   @Column()
   NotificationSettings: NotificationSettings[];
+
+  @ApiProperty({ type: PathEntity })
+  // Field: Path, Type: Path[]
+  @Column()
+  Path: Path[];
+
+  @ApiProperty({ type: LoginHistoryEntity })
+  // Field: LoginHistory, Type: LoginHistory[]
+  @Column()
+  LoginHistory: LoginHistory[];
+
+  @ApiProperty({ type: TwoFactorEntity })
+  // Field: TwoFactor, Type: TwoFactor[]
+  @Column()
+  TwoFactor: TwoFactor[];
 }

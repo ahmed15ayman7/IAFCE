@@ -28,6 +28,9 @@ model User {
     createdAt     DateTime       @default(now())
     updatedAt     DateTime       @updatedAt
     academyId     String?
+    isOnline      Boolean        @default(false)
+    isVerified    Boolean        @default(false)
+    age           Int?
     academy       Academy?       @relation(fields: [academyId], references: [id])
     profile       Profile?
     enrollments   Enrollment[]
@@ -62,6 +65,44 @@ model User {
     LiveRoom LiveRoom[]
 
     NotificationSettings NotificationSettings[]
+
+    Path Path[]
+
+    LoginHistory LoginHistory[]
+
+    TwoFactor TwoFactor[]
+}
+
+model LoginHistory {
+    id        String       @id @default(cuid())
+    userId    String
+    user      User         @relation(fields: [userId], references: [id])
+    success   Boolean      @default(false)
+    ip        String?
+    device    LoginDevice?
+    location  String?
+    browser   String?
+    os        String?
+    createdAt DateTime     @default(now())
+}
+
+model TwoFactor {
+    id            String   @id @default(cuid())
+    userId        String
+    user          User     @relation(fields: [userId], references: [id])
+    email         Boolean  @default(false)
+    sms           Boolean  @default(false)
+    authenticator Boolean  @default(false)
+    secret        String?
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+}
+
+enum LoginDevice {
+    DESKTOP
+    MOBILE
+    TABLET
+    LAPTOP
 }
 
 enum UserRole {
@@ -112,6 +153,7 @@ model Course {
     title       String
     description String
     academyId   String
+    image       String?
     academy     Academy      @relation(fields: [academyId], references: [id])
     lessons     Lesson[]
     enrollments Enrollment[]
@@ -120,6 +162,42 @@ model Course {
     liveRoom    LiveRoom[]
     createdAt   DateTime     @default(now())
     updatedAt   DateTime     @updatedAt
+
+    Path Path[]
+}
+
+model Path {
+    id             String      @id @default(cuid())
+    title          String
+    milestones     Milestone[]
+    description    String?
+    level          String
+    completedTasks Int         @default(0)
+    courses        Course[]
+    peers          User[]
+    remainingTime  Int         @default(0)
+    studyTime      Int         @default(0)
+    totalTasks     Int         @default(0)
+    progress       Float       @default(0)
+    engagement     Float       @default(0)
+    createdAt      DateTime    @default(now())
+    updatedAt      DateTime    @updatedAt
+}
+
+model Milestone {
+    id          String          @id @default(cuid())
+    title       String
+    description String?
+    status      MilestoneStatus @default(IN_PROGRESS)
+    pathId      String
+    path        Path            @relation(fields: [pathId], references: [id])
+    createdAt   DateTime        @default(now())
+}
+
+enum MilestoneStatus {
+    IN_PROGRESS
+    COMPLETED
+    NOT_STARTED
 }
 
 model Lesson {
@@ -241,17 +319,17 @@ enum NotificationType {
 }
 
 model NotificationSettings {
-    id        String   @id @default(cuid())
-    userId    String
-    user      User     @relation(fields: [userId], references: [id])
-    assignments Boolean  @default(true)
-    grades      Boolean  @default(true)
-    messages    Boolean  @default(true)
+    id           String   @id @default(cuid())
+    userId       String
+    user         User     @relation(fields: [userId], references: [id])
+    assignments  Boolean  @default(true)
+    grades       Boolean  @default(true)
+    messages     Boolean  @default(true)
     achievements Boolean  @default(true)
-    urgent      Boolean  @default(true)
-    email       Boolean  @default(true)
-    push        Boolean  @default(true)
-    createdAt DateTime @default(now())
+    urgent       Boolean  @default(true)
+    email        Boolean  @default(true)
+    push         Boolean  @default(true)
+    createdAt    DateTime @default(now())
 }
 
 // Community and Communication

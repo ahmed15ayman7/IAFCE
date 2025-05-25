@@ -3,7 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { NotificationsService } from '../notifications/notifications.service';
 import { CreateAttendanceDto } from 'dtos/Attendance.create.dto';
 import { UpdateAttendanceDto } from 'dtos/Attendance.update.dto';
-import { Attendance } from '@shared/prisma';
+import { Attendance, NotificationType } from '@shared/prisma';
 @Injectable()
 export class AttendanceService {
     constructor(
@@ -22,9 +22,11 @@ export class AttendanceService {
                 title: 'غياب الطالب',
                 message: `تم تسجيل غياب الطالب في الدرس ${createAttendanceInput.lessonId}`,
                 userId: createAttendanceInput.studentId,
-                type: 'ATTENDANCE',
+                type: 'ATTENDANCE' as NotificationType,
                 read: false,
-                createdAt: new Date()
+                createdAt: new Date(),
+                isImportant: false,
+                urgent: false
             });
         }
 

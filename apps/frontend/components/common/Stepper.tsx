@@ -5,9 +5,8 @@ import {
     StepLabel as MuiStepLabel,
     StepContent as MuiStepContent,
     Box,
-    useTheme,
 } from '@mui/material';
-import { useTranslation } from 'next-i18next';
+
 
 interface Step {
     label: string;
@@ -38,8 +37,6 @@ const Stepper: React.FC<StepperProps> = ({
     color = 'primary',
     className = '',
 }) => {
-    const theme = useTheme();
-    const { t } = useTranslation();
 
     const getColorClass = () => {
         switch (color) {
@@ -93,16 +90,16 @@ const Stepper: React.FC<StepperProps> = ({
                     disabled={step.disabled}
                 >
                     <MuiStepLabel
-                        optional={step.optional ? t('stepper.optional') : undefined}
+                        optional={step.optional ? 'optional' : undefined}
                         icon={step.icon}
                         className={`
               ${step.disabled ? 'opacity-50 cursor-not-allowed' : ''}
             `}
                     >
-                        {t(step.label)}
+                        {step.label}
                         {step.description && (
                             <Box className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                {t(step.description)}
+                                {step.description}
                             </Box>
                         )}
                     </MuiStepLabel>

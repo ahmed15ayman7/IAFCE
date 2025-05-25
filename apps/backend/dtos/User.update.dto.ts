@@ -24,6 +24,9 @@ import {
   Community,
   LiveRoom,
   NotificationSettings,
+  Path,
+  LoginHistory,
+  TwoFactor,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -84,4 +87,19 @@ export class UpdateUserDto {
   // Field: academyId, Type: string
   @Column()
   academyId?: string;
+
+  @ApiProperty({ type: "boolean" })
+  // Field: isOnline, Type: boolean
+  @Column()
+  isOnline: boolean;
+
+  @ApiProperty({ type: "boolean" })
+  // Field: isVerified, Type: boolean
+  @Column()
+  isVerified: boolean;
+
+  @ApiProperty({ type: "number", nullable: true })
+  // Field: age, Type: number
+  @Column()
+  age?: number;
 }

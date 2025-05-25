@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 import authService from './auth.service';
-import { Achievement, Badge, Certificate, Community, Course, Discussion, Enrollment, Group, LiveRoom, Notification, NotificationSettings, Post, Quiz, User } from '@shared/prisma';
+import { Achievement, Badge, Certificate, Community, Course, Discussion, Enrollment, Group, LiveRoom, LoginHistory, Milestone, Notification, NotificationSettings, Path, Post, Quiz, TwoFactor, User } from '@shared/prisma';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
@@ -63,11 +63,10 @@ export const authApi = {
     login: async (credentials: { email: string; password: string }) => {
         try {
 
-            console.log(credentials)
             const response = await api.post('/auth/login', credentials);
-            console.log(response)
             const { access_token, refreshToken } = response.data;
 
+            console.log("access_token", access_token, " refreshToken", refreshToken)
             authService.setTokens(access_token, refreshToken);
 
 
@@ -119,7 +118,7 @@ export const authApi = {
 
 // User APIs
 export const userApi = {
-    getProfile: (id: string): Promise<User> => api.get(`/users/${id}`),
+    getProfile: (id: string): Promise<User & { loginHistory: LoginHistory[], twoFactor: TwoFactor, createdCourses: Course[], enrollments: Enrollment[], achievements: Achievement[], notifications: Notification[] }> => api.get(`/users/${id}`),
     updateProfile: (data: {
         firstName?: string;
         lastName?: string;
@@ -135,6 +134,11 @@ export const userApi = {
     getNotifications: (id: string): Promise<Notification[]> => api.get(`/users/notifications/${id}`),
     getSubmissions: () => api.get('/users/submissions'),
     getAttendance: () => api.get('/users/attendance'),
+    getTwoFactor: (id: string): Promise<TwoFactor> => api.get(`/users/${id}/two-factor`),
+    updateTwoFactor: (id: string, data: TwoFactor) => api.post(`/users/${id}/two-factor`, data),
+    getLoginHistory: (id: string): Promise<LoginHistory[]> => api.get(`/users/${id}/login-history`),
+    getCreatedCourses: (id: string): Promise<Course[]> => api.get(`/users/${id}/created-courses`),
+    getEnrollments: (id: string): Promise<Enrollment[]> => api.get(`/users/${id}/enrollments`),
 };
 
 // Course APIs
@@ -562,6 +566,16 @@ export const communityApi = {
     addGroup: (id: string, groupId: string) => api.post(`/communities/${id}/groups`, { groupId }),
     removeGroup: (id: string, groupId: string) => api.delete(`/communities/${id}/groups/${groupId}`),
     getGroup: (id: string, groupId: string) => api.get(`/communities/${id}/groups/${groupId}`),
-    getPosts: (id: string): Promise<Post[]> => api.get(`/communities/${id}/posts`),
+    getPosts: (id: string): Promise<(Post & { author: User, comments: Comment[] })[]> => api.get(`/communities/${id}/posts`),
+};
+
+// Path APIs
+export const pathApi = {
+    getAll: (): Promise<(Path & { courses: Course[], milestones: Milestone[], peers: User[] })[]> => api.get('/paths'),
+    getById: (id: string): Promise<(Path & { courses: Course[], milestones: Milestone[], peers: User[] })> => api.get(`/paths/${id}`),
+    getByCourse: (courseId: string): Promise<(Path & { courses: Course[], milestones: Milestone[], peers: User[] })[]> => api.get(`/paths/course/${courseId}`),
+    create: (data: Path) => api.post('/paths', data),
+    update: (id: string, data: Path) => api.patch(`/paths/${id}`, data),
+    delete: (id: string) => api.delete(`/paths/${id}`),
 };
 export default api; 

@@ -28,6 +28,7 @@ export default function StudentLayout({
             <Navbar
                 links={layoutConfig.navbarLinks}
                 user={user}
+                role={user.role}
                 showNotifications={layoutConfig.showNotifications ?? false}
                 showProfile={layoutConfig.showProfile ?? false}
                 showSearch={layoutConfig.showSearch ?? false}

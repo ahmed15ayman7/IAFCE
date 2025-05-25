@@ -1,6 +1,8 @@
+"use client"
 import React from 'react';
 import Card from '@/components/common/Card';
 import DataGrid from '@/components/common/DataGrid';
+import { GridRenderCellParams } from '@mui/x-data-grid';
 
 export default function StudentCourses() {
 
@@ -30,6 +32,7 @@ export default function StudentCourses() {
             instructor: 'محمد علي',
             completionDate: '2024-03-15',
             grade: '95%',
+            certificate: 'https://marketplace.canva.com/EAFlVDzb7sA/3/0/1600w/canva-white-gold-elegant-modern-certificate-of-participation-Qn4Rei141MM.jpg',
         },
         {
             id: 4,
@@ -37,6 +40,7 @@ export default function StudentCourses() {
             instructor: 'فاطمة حسن',
             completionDate: '2024-03-30',
             grade: '88%',
+            certificate: 'https://marketplace.canva.com/EAFlVDzb7sA/3/0/1600w/canva-white-gold-elegant-modern-certificate-of-participation-Qn4Rei141MM.jpg',
         },
     ];
 
@@ -53,6 +57,11 @@ export default function StudentCourses() {
         { field: 'instructor', headerName: 'المحاضر', width: 150 },
         { field: 'completionDate', headerName: 'تاريخ الإكمال', width: 150 },
         { field: 'grade', headerName: 'الدرجة', width: 100 },
+        {
+            field: 'certificate', headerName: 'الشهادة', width: 400, renderCell: (params: GridRenderCellParams) => {
+                return <img src={params.row.certificate} alt="certificate" className="w-16 h-16 border border-primary-main p-1" onClick={()=>{}} />
+            }
+        },
     ];
 
     return (
@@ -78,7 +87,7 @@ export default function StudentCourses() {
                                 </div>
                                 <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                                     <div
-                                        className="bg-primary-500 h-2 rounded-full"
+                                        className="bg-primary-main h-2 rounded-full"
                                         style={{ width: `${course.progress}%` }}
                                     />
                                 </div>

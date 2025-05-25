@@ -31,6 +31,8 @@ import { QuestionsModule } from './questions/questions.module';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { BadgesModule } from './badges/badges.module';
 import { CertificateModule } from './certificates/certificate.module';
+import { PathsModule } from './paths/paths.module';
+import { CommunitiesModule } from './communities/communities.module';
 @Module({
     imports: [
         ConfigModule.forRoot({
@@ -71,6 +73,8 @@ import { CertificateModule } from './certificates/certificate.module';
         QuestionsModule,
         BadgesModule,
         CertificateModule,
+        PathsModule,
+        CommunitiesModule,
     ],
     // providers: [
     //     {

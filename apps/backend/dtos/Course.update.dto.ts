@@ -6,6 +6,7 @@ import {
   Quiz,
   Instructor,
   LiveRoom,
+  Path,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -26,6 +27,11 @@ export class UpdateCourseDto {
   // Field: academyId, Type: string
   @Column()
   academyId: string;
+
+  @ApiProperty({ type: "string", nullable: true })
+  // Field: image, Type: string
+  @Column()
+  image?: string;
 
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date

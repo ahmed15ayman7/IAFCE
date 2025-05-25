@@ -5,6 +5,7 @@ import { EnrollmentEntity } from "./Enrollment.entity";
 import { QuizEntity } from "./Quiz.entity";
 import { InstructorEntity } from "./Instructor.entity";
 import { LiveRoomEntity } from "./LiveRoom.entity";
+import { PathEntity } from "./Path.entity";
 import {
   Academy,
   Lesson,
@@ -12,6 +13,7 @@ import {
   Quiz,
   Instructor,
   LiveRoom,
+  Path,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -37,6 +39,11 @@ export class CourseEntity {
   // Field: academyId, Type: string
   @Column()
   academyId: string;
+
+  @ApiProperty({ type: "string", nullable: true })
+  // Field: image, Type: string
+  @Column()
+  image?: string;
 
   @ApiProperty({ type: AcademyEntity })
   // Field: academy, Type: Academy
@@ -77,4 +84,9 @@ export class CourseEntity {
   // Field: updatedAt, Type: Date
   @Column()
   updatedAt: Date;
+
+  @ApiProperty({ type: PathEntity })
+  // Field: Path, Type: Path[]
+  @Column()
+  Path: Path[];
 }

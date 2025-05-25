@@ -2,59 +2,98 @@
 
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import {
-    Card,
-    Badge,
-    Alert,
-    Button,
-    Tabs,
-    Skeleton,
-    EmptyState,
-    Tooltip,
-    Modal,
-    Input,
-    Select,
-    Switch,
-    Avatar,
-    QRCode
-} from '@/components/common';
-import { profileApi } from '@/lib/api';
+import Card from '@/components/common/Card';
+import Badge from '@/components/common/Badge';
+import Button from '@/components/common/Button';
+import Tabs from '@/components/common/Tabs';
+import Skeleton from '@/components/common/Skeleton';
+import Tooltip from '@/components/common/Tooltip';
+import Modal from '@/components/common/Modal';
+import Input from '@/components/common/Input';
+import Avatar from '@/components/common/Avatar';
+import { Switch, Select, Alert } from "@mui/material"
+
+
+import { profileApi, userApi } from '@/lib/api';
 import { motion } from 'framer-motion';
-import { useTranslation } from 'next-i18next';
 import { FaUser, FaLock, FaShieldAlt, FaCog, FaQrcode, FaCheck, FaTimes, FaUpload, FaGlobe, FaMoon, FaSun } from 'react-icons/fa';
+import { QRCodeSVG } from 'qrcode.react';
+import { LoginDevice, LoginHistory, Profile, TwoFactor, User, UserRole } from '@shared/prisma';
+import { useUser } from '@/hooks/useUser';
+import { frontendUrl } from '@/constant';
 
 export default function StudentProfile() {
-    const { t, i18n } = useTranslation();
-    const [activeTab, setActiveTab] = useState('general');
+    const [activeTab, setActiveTab] = useState(0);
     const [showPasswordModal, setShowPasswordModal] = useState(false);
     const [show2FAModal, setShow2FAModal] = useState(false);
     const [theme, setTheme] = useState('light');
     const [showNightModeTrial, setShowNightModeTrial] = useState(false);
+    let [profileData, setProfileData] = useState<User & { loginHistory: LoginHistory[], twoFactor: TwoFactor }>({
+        id: '',
+        email: '',
+        password: '',
+        phone: '',
+        firstName: '',
+        lastName: '',
+        role: UserRole.STUDENT,
+        subRole: '',
+        avatar: '',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        academyId: '',
+        isOnline: false,
+        isVerified: false,
+        age: 0,
+        loginHistory: [
+            {
+                id: '',
+                createdAt: new Date(),
+                userId: '',
+                ip: '',
+                success: false,
+                device: LoginDevice.LAPTOP,
+                location: 'الرياض',
+                browser: 'Chrome',
+                os: 'Windows',
+            }
+        ],
+        twoFactor: {
+            id: '',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            userId: '',
+            email: false,
+            sms: false,
+            authenticator: false,
+            secret: '',
+        },
+    });
+    let { user, status } = useUser();
 
     // استعلامات البيانات
     const { data: profile, isLoading: isLoadingProfile } = useQuery({
         queryKey: ['profile'],
-        queryFn: () => profileApi.getProfile(),
+        queryFn: () => userApi.getProfile(user?.id),
     });
 
     // طلب تحديث البيانات
     const { mutate: updateProfile } = useMutation({
-        mutationFn: (data) => profileApi.updateProfile(data),
+        mutationFn: (data: any) => userApi.updateProfile(data),
     });
 
     // طلب تغيير كلمة المرور
     const { mutate: changePassword } = useMutation({
-        mutationFn: (data) => profileApi.changePassword(data),
+        mutationFn: (data: any) => userApi.changePassword(data),
         onSuccess: () => setShowPasswordModal(false)
     });
 
     // طلب تحديث التحقق الثنائي
     const { mutate: update2FA } = useMutation({
-        mutationFn: (data) => profileApi.update2FA(data),
+        mutationFn: (data: any) => userApi.updateTwoFactor(user?.id, data),
         onSuccess: () => setShow2FAModal(false)
     });
 
-    if (isLoadingProfile) {
+    if (isLoadingProfile || status) {
         return (
             <div className="space-y-6">
                 <Skeleton height={200} />
@@ -74,43 +113,48 @@ export default function StudentProfile() {
             className="space-y-6"
         >
             {/* ملخص الحساب */}
-            <Card>
+            <Card title="ملخص الحساب">
                 <div className="flex items-center space-x-6">
                     <div className="relative">
-                        <Avatar src={profile?.avatar} size="xl" />
+                        <Avatar src={profile?.avatar || ''} size="xl" />
                         <Badge
-                            variant={profile?.active ? 'success' : 'warning'}
+                            variant={profile?.isOnline ? 'standard' : 'dot'}
+                            color={profile?.isOnline ? 'success' : 'primary'}
                             className="absolute -bottom-2 -right-2"
                         >
-                            {profile?.active ? 'نشط' : 'غير نشط'}
+                            <span className="text-xs">
+                                {profile?.isOnline ? 'نشط' : 'غير نشط'}
+                            </span>
                         </Badge>
                     </div>
                     <div className="flex-1">
                         <div className="flex items-center space-x-4">
                             <h1 className="text-2xl font-bold">
-                                {profile?.name}
-                                {profile?.nickname && (
+                                {profile?.firstName} {profile?.lastName}
+                                {profile?.subRole && (
                                     <span className="text-gray-500 text-lg">
-                                        ({profile.nickname})
+                                        ({profile.subRole})
                                     </span>
                                 )}
                             </h1>
-                            {profile?.verified && (
-                                <Tooltip content="حساب موثق">
-                                    <Badge variant="success">
-                                        <FaCheck className="ml-2" />
-                                        موثق
+                            {profile?.isVerified && (
+                                <Tooltip title="حساب موثق">
+                                    <Badge variant="standard" color="success">
+                                        <span className="text-xs">
+                                            <FaCheck className="ml-2" />
+                                            موثق
+                                        </span>
                                     </Badge>
                                 </Tooltip>
                             )}
                         </div>
                         <p className="text-gray-600 mt-2">
-                            رقم الطالب: {profile?.academicId}
+                            رقم الطالب: {profile?.id}
                         </p>
                     </div>
                     <div className="flex items-center space-x-4">
-                        <QRCode value={profile?.academicId} size={100} />
-                        <Button variant="ghost" size="sm">
+                        <QRCodeSVG value={`${frontendUrl}/profiles/${profile?.id}`} size={100} />
+                        <Button variant="text" size="small">
                             <FaQrcode className="ml-2" />
                             تحميل
                         </Button>
@@ -121,62 +165,48 @@ export default function StudentProfile() {
             {/* التبويبات */}
             <Tabs
                 value={activeTab}
-                onChange={setActiveTab}
-                items={[
-                    { value: 'general', label: 'البيانات الشخصية', icon: <FaUser /> },
-                    { value: 'security', label: 'الأمان', icon: <FaLock /> },
-                    { value: 'preferences', label: 'التفضيلات', icon: <FaCog /> },
+                onChange={(value) => setActiveTab(value)}
+                tabs={[
+                    { value: 0, label: 'البيانات الشخصية', icon: <FaUser />, content: <></> },
+                    { value: 1, label: 'الأمان', icon: <FaLock />, content: <></> },
+                    { value: 2, label: 'التفضيلات', icon: <FaCog />, content: <></> },
                 ]}
             />
 
             {/* محتوى التبويبات */}
-            {activeTab === 'general' && (
-                <Card>
+            {activeTab === 0 && (
+                <Card title="البيانات الشخصية">
                     <div className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <Input
                                 label="الاسم الكامل"
-                                value={profile?.name}
-                                onChange={(e) => updateProfile({ name: e.target.value })}
+                                value={profileData?.firstName + ' ' + profileData?.lastName}
+                                onChange={(e) => setProfileData(prev => ({ ...prev, firstName: e.target.value.split(' ')[0], lastName: e.target.value.split(' ')[1] || '' }))}
                                 required
                             />
-                            <Input
-                                label="اسم الشهرة"
-                                value={profile?.nickname}
-                                onChange={(e) => updateProfile({ nickname: e.target.value })}
-                            />
+
                             <Input
                                 label="البريد الإلكتروني"
                                 value={profile?.email}
-                                onChange={(e) => updateProfile({ email: e.target.value })}
+                                onChange={(e) => setProfileData(prev => ({ ...prev, email: e.target.value }))}
                                 required
                                 type="email"
                             />
                             <Input
                                 label="رقم الهاتف"
-                                value={profile?.phone}
-                                onChange={(e) => updateProfile({ phone: e.target.value })}
+                                value={profile?.phone || ''}
+                                onChange={(e) => setProfileData(prev => ({ ...prev, phone: e.target.value }))}
                                 type="tel"
                             />
                             <Input
                                 label="العمر"
-                                value={profile?.age}
-                                onChange={(e) => updateProfile({ age: e.target.value })}
+                                value={profile?.age?.toString() || ''}
+                                onChange={(e) => setProfileData(prev => ({ ...prev, age: +e.target.value }))}
                                 type="number"
-                            />
-                            <Select
-                                label="الفئة/الصف"
-                                value={profile?.grade}
-                                onChange={(value) => updateProfile({ grade: value })}
-                                options={[
-                                    { value: '1', label: 'الصف الأول' },
-                                    { value: '2', label: 'الصف الثاني' },
-                                    { value: '3', label: 'الصف الثالث' },
-                                ]}
                             />
                         </div>
                         <div className="flex justify-center">
-                            <Button variant="primary" size="lg">
+                            <Button variant="contained" size="large" onClick={() => updateProfile(profileData)}>
                                 حفظ التغييرات
                             </Button>
                         </div>
@@ -184,16 +214,16 @@ export default function StudentProfile() {
                 </Card>
             )}
 
-            {activeTab === 'security' && (
+            {activeTab === 1 && (
                 <div className="space-y-6">
-                    <Card>
+                    <Card title="الأمان">
                         <div className="flex items-center justify-between">
                             <div>
                                 <h3 className="text-lg font-bold">كلمة المرور</h3>
                                 <p className="text-gray-600">قم بتغيير كلمة المرور الخاصة بك</p>
                             </div>
                             <Button
-                                variant="primary"
+                                variant="contained"
                                 onClick={() => setShowPasswordModal(true)}
                             >
                                 تغيير كلمة المرور
@@ -201,14 +231,14 @@ export default function StudentProfile() {
                         </div>
                     </Card>
 
-                    <Card>
+                    <Card title="التحقق الثنائي">
                         <div className="flex items-center justify-between">
                             <div>
                                 <h3 className="text-lg font-bold">التحقق الثنائي</h3>
                                 <p className="text-gray-600">قم بتفعيل التحقق الثنائي لحماية حسابك</p>
                             </div>
                             <Button
-                                variant="primary"
+                                variant="contained"
                                 onClick={() => setShow2FAModal(true)}
                             >
                                 إعداد التحقق الثنائي
@@ -216,17 +246,19 @@ export default function StudentProfile() {
                         </div>
                     </Card>
 
-                    <Card>
+                    <Card title="سجل الدخول">
                         <h3 className="text-lg font-bold mb-4">سجل الدخول</h3>
                         <div className="space-y-4">
                             {profile?.loginHistory?.map((login, index) => (
                                 <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                                     <div>
                                         <p className="font-medium">{login.ip}</p>
-                                        <p className="text-sm text-gray-600">{login.date}</p>
+                                        <p className="text-sm text-gray-600">{login.createdAt.toLocaleString()}</p>
                                     </div>
-                                    <Badge variant={login.success ? 'success' : 'danger'}>
-                                        {login.success ? 'ناجح' : 'فاشل'}
+                                    <Badge variant={login.success ? 'standard' : 'dot'} color={login.success ? 'success' : 'error'}>
+                                        <span className="text-xs">
+                                            {login.success ? 'ناجح' : 'فاشل'}
+                                        </span>
                                     </Badge>
                                 </div>
                             ))}
@@ -235,26 +267,26 @@ export default function StudentProfile() {
                 </div>
             )}
 
-            {activeTab === 'preferences' && (
+            {activeTab === 2 && (
                 <div className="space-y-6">
-                    <Card>
+                    {/* <Card title="التفضيلات">
                         <div className="flex items-center justify-between">
                             <div>
                                 <h3 className="text-lg font-bold">اللغة</h3>
                                 <p className="text-gray-600">اختر لغة واجهة التطبيق</p>
                             </div>
                             <Select
-                                value={i18n.language}
-                                onChange={(value) => i18n.changeLanguage(value)}
+                                value={profile?.language}
+                                onChange={(value) => updateProfile({ language: value })}
                                 options={[
                                     { value: 'ar', label: 'العربية' },
                                     { value: 'en', label: 'English' },
                                 ]}
                             />
                         </div>
-                    </Card>
+                    </Card> */}
 
-                    <Card>
+                    <Card title="المظهر">
                         <div className="flex items-center justify-between">
                             <div>
                                 <h3 className="text-lg font-bold">المظهر</h3>
@@ -262,21 +294,21 @@ export default function StudentProfile() {
                             </div>
                             <div className="flex items-center space-x-4">
                                 <Button
-                                    variant={theme === 'light' ? 'primary' : 'ghost'}
+                                    variant={theme === 'light' ? 'contained' : 'outlined'}
                                     onClick={() => setTheme('light')}
                                 >
                                     <FaSun className="ml-2" />
                                     فاتح
                                 </Button>
                                 <Button
-                                    variant={theme === 'dark' ? 'primary' : 'ghost'}
+                                    variant={theme === 'dark' ? 'contained' : 'outlined'}
                                     onClick={() => setTheme('dark')}
                                 >
                                     <FaMoon className="ml-2" />
                                     داكن
                                 </Button>
                                 <Button
-                                    variant="ghost"
+                                    variant="outlined"
                                     onClick={() => setShowNightModeTrial(true)}
                                 >
                                     تجربة الوضع الليلي
@@ -290,7 +322,7 @@ export default function StudentProfile() {
             {/* نافذة تغيير كلمة المرور */}
             {showPasswordModal && (
                 <Modal
-                    isOpen={showPasswordModal}
+                    open={showPasswordModal}
                     onClose={() => setShowPasswordModal(false)}
                     title="تغيير كلمة المرور"
                 >
@@ -312,12 +344,12 @@ export default function StudentProfile() {
                         />
                         <div className="flex justify-end space-x-2">
                             <Button
-                                variant="ghost"
+                                variant="outlined"
                                 onClick={() => setShowPasswordModal(false)}
                             >
                                 إلغاء
                             </Button>
-                            <Button variant="primary">
+                            <Button variant="contained">
                                 حفظ التغييرات
                             </Button>
                         </div>
@@ -328,7 +360,7 @@ export default function StudentProfile() {
             {/* نافذة التحقق الثنائي */}
             {show2FAModal && (
                 <Modal
-                    isOpen={show2FAModal}
+                    open={show2FAModal}
                     onClose={() => setShow2FAModal(false)}
                     title="إعداد التحقق الثنائي"
                 >
@@ -338,32 +370,32 @@ export default function StudentProfile() {
                                 <span>البريد الإلكتروني</span>
                                 <Switch
                                     checked={profile?.twoFactor?.email}
-                                    onChange={(checked) => update2FA({ email: checked })}
+                                    onChange={(checked) => update2FA({ email: checked.target.checked })}
                                 />
                             </div>
                             <div className="flex items-center justify-between">
                                 <span>رسالة SMS</span>
                                 <Switch
                                     checked={profile?.twoFactor?.sms}
-                                    onChange={(checked) => update2FA({ sms: checked })}
+                                    onChange={(checked) => update2FA({ sms: checked.target.checked })}
                                 />
                             </div>
                             <div className="flex items-center justify-between">
                                 <span>Google Authenticator</span>
                                 <Switch
                                     checked={profile?.twoFactor?.authenticator}
-                                    onChange={(checked) => update2FA({ authenticator: checked })}
+                                    onChange={(checked) => update2FA({ authenticator: checked.target.checked })}
                                 />
                             </div>
                         </div>
                         <div className="flex justify-end space-x-2">
                             <Button
-                                variant="ghost"
+                                variant="outlined"
                                 onClick={() => setShow2FAModal(false)}
                             >
                                 إلغاء
                             </Button>
-                            <Button variant="primary">
+                            <Button variant="contained">
                                 حفظ التغييرات
                             </Button>
                         </div>
@@ -373,7 +405,7 @@ export default function StudentProfile() {
 
             {/* تجربة الوضع الليلي */}
             {showNightModeTrial && (
-                <Alert variant="info">
+                <Alert variant="standard" color="info">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
                             <FaMoon className="text-primary-500 text-xl" />
@@ -385,8 +417,8 @@ export default function StudentProfile() {
                             </div>
                         </div>
                         <Button
-                            variant="ghost"
-                            size="sm"
+                            variant="outlined"
+                            size="small"
                             onClick={() => setShowNightModeTrial(false)}
                         >
                             إلغاء التجربة

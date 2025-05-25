@@ -29,10 +29,9 @@ import {
     Person as PersonIcon,
     Settings as SettingsIcon,
     Logout as LogoutIcon,
-} from '@mui/icons-material';
-import { useRouter } from 'next/navigation';
+} from '@mui/icons-material'
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 interface NavbarProps {
     user?: {
         id: string;
@@ -41,6 +40,7 @@ interface NavbarProps {
         avatar?: string;
         role: string;
     };
+    role: string;
     notifications?: Array<{
         id: string;
         title: string;
@@ -67,6 +67,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({
     user,
+    role,
     notifications = [],
     showNotifications = false,
     showProfile = false,
@@ -84,7 +85,7 @@ const Navbar: React.FC<NavbarProps> = ({
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const pathname = usePathname();
-
+    const router = useRouter();
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -98,7 +99,11 @@ const Navbar: React.FC<NavbarProps> = ({
     };
 
     const handleNotificationsClick = (event: React.MouseEvent<HTMLElement>) => {
-        setNotificationsAnchor(event.currentTarget);
+        if (role === 'STUDENT') {
+            router.push('/student/notifications');
+        } else {
+            setNotificationsAnchor(event.currentTarget);
+        }
     };
 
     const handleMessagesClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -127,7 +132,7 @@ const Navbar: React.FC<NavbarProps> = ({
             ))}
             {user && (
                 <>
-                    <ListItem button component={Link} href="/profile">
+                    <ListItem button component={Link} href={`${role === 'ADMIN' ? '/admin' : role === 'INSTRUCTOR' ? '/instructor' : role === 'STUDENT' ? '/student' : role === "PARENT" ? '/parent' : ''}/profile`}>
                         <ListItemIcon>
                             <PersonIcon />
                         </ListItemIcon>
@@ -173,7 +178,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
                 <Box className="hidden md:flex flex-1 justify-center gap-8 rtl:space-x-reverse">
                     {links.map((link) => (
-                        <Link href={link.href} className={`text-secondary-dark hover:text-secondary-main border-b-2 border-transparent px-4 py-2 ${pathname === link.href || (pathname.startsWith(link.href) && link.href !== '/') ? 'border-secondary-main' : ''}`}>
+                        <Link href={link.href} className={`  hover:underline border-2 rounded-lg  px-4 py-2 ${pathname === link.href || (pathname.startsWith(link.href) && link.href !== '/') ? 'bg-secondary-main/80 text-white' : 'border-transparent text-secondary-main hover:text-secondary-light '}`}>
                             {link.label}
                         </Link>
                     ))}
@@ -187,7 +192,7 @@ const Navbar: React.FC<NavbarProps> = ({
                         className="relative"
                     >
                         <Badge badgeContent={notifications.filter(n => !n.read).length} color="primary">
-                            <NotificationsIcon />
+                            <NotificationsIcon className={`hover:text-white ${pathname === '/notifications' ? 'text-white' : 'text-secondary-main'}`} />
                         </Badge>
                     </IconButton>
                     }
@@ -197,17 +202,17 @@ const Navbar: React.FC<NavbarProps> = ({
                         className="relative"
                     >
                         <Badge badgeContent={messages.filter(m => !m.read).length} color="primary">
-                            <MessageIcon />
+                            <MessageIcon className={`hover:text-white text-secondary-main`} />
                         </Badge>
                     </IconButton>
-
+                    {/* 
                     <IconButton color="inherit" onClick={onToggleLanguage}>
                         <LanguageIcon />
                     </IconButton>
 
                     <IconButton color="inherit" onClick={onToggleTheme}>
                         {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
-                    </IconButton>
+                    </IconButton> */}
 
                     {user ? (
                         <IconButton
@@ -240,7 +245,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     open={Boolean(anchorEl)}
                     onClose={handleMenuClose}
                 >
-                    <MenuItem onClick={handleMenuClose} component={Link} href="/profile">
+                    <MenuItem onClick={handleMenuClose} component={Link} href={`${role === 'ADMIN' ? '/admin' : role === 'INSTRUCTOR' ? '/instructor' : role === 'STUDENT' ? '/student' : role === "PARENT" ? '/parent' : ''}/profile/`}>
                         <ListItemIcon>
                             <PersonIcon fontSize="small" />
                         </ListItemIcon>

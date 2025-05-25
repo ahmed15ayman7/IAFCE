@@ -23,6 +23,7 @@ import Tooltip from '@/components/common/Tooltip';
 import Modal from '@/components/common/Modal';
 import Autocomplete from '@mui/material/Autocomplete';
 import { years } from '@/constant';
+import { Comment, Discussion, Group, LiveRoom, Post, User } from '@shared/prisma';
 const getCourses = async () => {
     let res = await courseApi.getAll();
     return res.map((course) => ({
@@ -30,9 +31,288 @@ const getCourses = async () => {
         label: course.title
     }));
 }
+const initialDiscussions: (Discussion & { post: Post & { author: User, comments: Comment[] } })[] = [{
+    id: "1",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    communityId: "1",
+    postId: "1",
+    post: {
+        id: "1",
+        title: "المناقشة",
+        content: "المناقشة",
+        createdAt: new Date(),
+        authorId: "1",
+        likesCount: 0,
+        comments: [
+            {
+                id: "1",
+                content: "التعليق",
+                createdAt: new Date(),
+                postId: "1",
+                // author: {
+                //     id: "1",
+                //     firstName: "أحمد",
+                //     lastName: "محمد",
+                //     avatar: "https://via.placeholder.com/150",
+                //     email: "ahmed@gmail.com",
+                //     password: "123456",
+                //     phone: "01234567890",
+                //     role: "STUDENT",
+                //     subRole: "STUDENT",
+                //     academyId: "1",
+                //     createdAt: new Date(),
+                //     updatedAt: new Date(),
+                // }
+            }
+        ],
+        author: {
+            id: "1",
+            firstName: "أحمد",
+            lastName: "محمد",
+            avatar: "https://via.placeholder.com/150",
+            email: "ahmed@gmail.com",
+            password: "123456",
+            phone: "01234567890",
+            role: "STUDENT",
+            subRole: "STUDENT",
+            academyId: "1",
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        }
+    }
+},
+{
+    id: "2",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    communityId: "1",
+    postId: "2",
+    post: {
+        id: "2",
+        title: "المناقشة",
+        content: "المناقشة",
+        createdAt: new Date(),
+        authorId: "1",
+        likesCount: 0,
+        comments: [],
+        author: {
+            id: "1",
+            firstName: "أحمد",
+            lastName: "محمد",
+            avatar: "https://via.placeholder.com/150",
+            email: "ahmed@gmail.com",
+            password: "123456",
+            phone: "01234567890",
+            role: "STUDENT",
+            subRole: "STUDENT",
+            academyId: "1",
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        }
+    }
+},
+];
+const initialLiveRooms: LiveRoom[] = [{
+    id: "1",
+    title: "الغرفة المباشرة",
+    topic: "البرمجة",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    participants: 0,
+    isLive: false,
+    isActive: false,
+    isPublic: false,
+    isPrivate: false,
+    isPasswordProtected: false,
+    communityId: "1",
+    courseId: null,
+}];
+const initialGroups: (Group & { members: User[] })[] = [
+    {
+        id: "1",
+        name: "حلقة المجتمع التعليمي",
+        subject: "البرمجة",
+        image: "https://via.placeholder.com/150",
+        adminId: "1",
+        createdAt: new Date(),
+        members: [
+            {
+                id: "1",
+                firstName: "أحمد",
+                lastName: "محمد",
+                avatar: "https://via.placeholder.com/150",
+                email: "ahmed@gmail.com",
+                password: "123456",
+                phone: "01234567890",
+                role: "STUDENT",
+                subRole: "STUDENT",
+                academyId: "1",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                id: "2",
+                firstName: "محمد",
+                lastName: "علي",
+                avatar: "https://via.placeholder.com/150",
+                email: "ali@gmail.com",
+                password: "123456",
+                phone: "01234567890",
+                role: "STUDENT",
+                subRole: "STUDENT",
+                academyId: "1",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+        ],
+    },
+    {
+        id: "2",
+        name: "حلقة المجتمع التعليمي",
+        subject: "البرمجة",
+        image: "https://via.placeholder.com/150",
+        adminId: "1",
+        createdAt: new Date(),
+        members: [],
+    }, {
+        id: "1",
+        name: "حلقة المجتمع التعليمي",
+        subject: "البرمجة",
+        image: "https://via.placeholder.com/150",
+        adminId: "1",
+        createdAt: new Date(),
+        members: [
+            {
+                id: "1",
+                firstName: "أحمد",
+                lastName: "محمد",
+                avatar: "https://via.placeholder.com/150",
+                email: "ahmed@gmail.com",
+                password: "123456",
+                phone: "01234567890",
+                role: "STUDENT",
+                subRole: "STUDENT",
+                academyId: "1",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                id: "2",
+                firstName: "محمد",
+                lastName: "علي",
+                avatar: "https://via.placeholder.com/150",
+                email: "ali@gmail.com",
+                password: "123456",
+                phone: "01234567890",
+                role: "STUDENT",
+                subRole: "STUDENT",
+                academyId: "1",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+        ],
+    }, {
+        id: "1",
+        name: "حلقة المجتمع التعليمي",
+        subject: "البرمجة",
+        image: "https://via.placeholder.com/150",
+        adminId: "1",
+        createdAt: new Date(),
+        members: [
+            {
+                id: "1",
+                firstName: "أحمد",
+                lastName: "محمد",
+                avatar: "https://via.placeholder.com/150",
+                email: "ahmed@gmail.com",
+                password: "123456",
+                phone: "01234567890",
+                role: "STUDENT",
+                subRole: "STUDENT",
+                academyId: "1",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                id: "2",
+                firstName: "محمد",
+                lastName: "علي",
+                avatar: "https://via.placeholder.com/150",
+                email: "ali@gmail.com",
+                password: "123456",
+                phone: "01234567890",
+                role: "STUDENT",
+                subRole: "STUDENT",
+                academyId: "1",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+        ],
+    },
+]
+const initialCourses: { label: string, value: string }[] = [
+    {
+        label: 'البرمجة بلغة Python',
+        value: '1',
+    },
+    {
+        label: 'تطوير تطبيقات الويب',
+        value: '2',
+    },
+];
+const initialMyPosts: (Post & { author: User, comments: Comment[] })[] = [
+    {
+        id: "1",
+        title: "المناقشة",
+        content: "المناقشة",
+        createdAt: new Date(),
+        authorId: "1",
+        likesCount: 0,
+        comments: [],
+        author: {
+            id: "1",
+            firstName: "أحمد",
+            lastName: "محمد",
+            avatar: "https://via.placeholder.com/150",
+            email: "ahmed@gmail.com",
+            password: "123456",
+            phone: "01234567890",
+            role: "STUDENT",
+            subRole: "STUDENT",
+            academyId: "1",
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        }
+    },
+    {
+        id: "2",
+        title: "المناقشة",
+        content: "المناقشة",
+        createdAt: new Date(),
+        authorId: "1",
+        likesCount: 0,
+        comments: [],
+        author: {
+            id: "1",
+            firstName: "أحمد",
+            lastName: "محمد",
+            avatar: "https://via.placeholder.com/150",
+            email: "ahmed@gmail.com",
+            password: "123456",
+            phone: "01234567890",
+            role: "STUDENT",
+            subRole: "STUDENT",
+            academyId: "1",
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        }
+    }
+];
 
-export default function StudentCommunity({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = use(params);
+
+export default function StudentCommunity({ params }: { params: { id: string } }) {
+    const { id } = params;
     const [activeTab, setActiveTab] = useState(0);
     const [showNewQuestionModal, setShowNewQuestionModal] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -124,7 +404,7 @@ export default function StudentCommunity({ params }: { params: Promise<{ id: str
                         getOptionLabel={(option) => option.label}
                         getOptionKey={(option) => option.value}
                         onChange={(event, value) => setFilters({ ...filters, subject: value?.value || "" })}
-                        options={courses ?? []}
+                        options={courses ?? initialCourses}
                         renderInput={(params) => <Input {...params} label="المادة" />}
                     />
                     <Autocomplete
@@ -171,7 +451,7 @@ export default function StudentCommunity({ params }: { params: Promise<{ id: str
                 tabs={[
                     {
                         value: 0, label: 'المناقشات', icon: <FaComments />, content: <div className="space-y-4">
-                            {discussions?.map((discussion, index) => (
+                            {(discussions ?? initialDiscussions).map((discussion, index) => (
                                 <motion.div
                                     key={discussion.id}
                                     initial={{ opacity: 0, y: 20 }}
@@ -219,7 +499,7 @@ export default function StudentCommunity({ params }: { params: Promise<{ id: str
                     },
                     {
                         value: 1, label: 'المجموعات', icon: <FaUsers />, content: <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {groups?.map((group, index) => (
+                            {(groups ?? initialGroups).map((group, index) => (
                                 <motion.div
                                     key={group.id}
                                     initial={{ opacity: 0, y: 20 }}
@@ -252,38 +532,61 @@ export default function StudentCommunity({ params }: { params: Promise<{ id: str
                             ))}
                         </div>
                     },
-                    // {
-                    //     value: 2, label: 'مشاركاتي', icon: <FaThumbsUp />, content: <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    //         <Card title='إحصائيات مشاركاتي'>
-                    //             <div className="grid grid-cols-3 gap-4">
-                    //                 <div className="text-center">
-                    //                     <p className="text-2xl font-bold">{myPosts?.questions}</p>
-                    //                     <p className="text-gray-600">أسئلة</p>
-                    //                 </div>
-                    //                 <div className="text-center">
-                    //                     <p className="text-2xl font-bold">{myPosts?.answers}</p>
-                    //                     <p className="text-gray-600">إجابات</p>
-                    //                 </div>
-                    //                 <div className="text-center">
-                    //                     <p className="text-2xl font-bold">{myPosts?.likes}</p>
-                    //                     <p className="text-gray-600">إعجابات</p>
-                    //                 </div>
-                    //             </div>
-                    //         </Card>
-                    //         <Card title='آخر مشاركاتي'>
-                    //             <div className="space-y-4">
-                    //                 {myPosts?.recent.map((post, index) => (
-                    //                     <Alert key={index} variant="outlined" title={post.title} message={format(new Date(post.createdAt), 'd MMMM yyyy', { locale: ar })}>
-                    //                         {/* <p className="font-medium">{post.title}</p>
-                    //                     <p className="text-sm text-gray-600">
-                    //                         {format(new Date(post.createdAt), 'd MMMM yyyy', { locale: ar })}
-                    //                     </p> */}
-                    //                     </Alert>
-                    //                 ))}
-                    //             </div>
-                    //         </Card>
-                    //     </div>
-                    // },
+                    {
+                        value: 2, label: 'مشاركاتي', icon: <FaThumbsUp />, content: <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {(myPosts ?? initialMyPosts).map((post, index) => (
+                                <motion.div
+                                    key={post.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                >
+                                    <Card title={post.title}>
+                                        <p className="text-gray-600">{post.content}</p>
+                                        <div className="flex items-center justify-between mt-4">
+                                            <div className="flex items-center space-x-4">
+                                                <span className="text-sm text-gray-500">{post.author.firstName} {post.author.lastName}</span>
+                                            </div>
+                                            <div className="flex items-center space-x-4">
+                                                <Button variant="contained" size="small">
+                                                    <FaThumbsUp className="ml-2" />
+                                                    {post.likesCount}
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </Card>
+                                </motion.div>
+                            ))}
+                            {/* <Card title='إحصائيات مشاركاتي'>
+                                <div className="grid grid-cols-3 gap-4">
+                                    <div className="text-center">
+                                        <p className="text-2xl font-bold">{myPosts?.questions}</p>
+                                        <p className="text-gray-600">أسئلة</p>
+                                    </div>
+                                    <div className="text-center">
+                                        <p className="text-2xl font-bold">{myPosts?.answers}</p>
+                                        <p className="text-gray-600">إجابات</p>
+                                    </div>
+                                    <div className="text-center">
+                                        <p className="text-2xl font-bold">{myPosts?.likes}</p>
+                                        <p className="text-gray-600">إعجابات</p>
+                                    </div>
+                                </div>
+                            </Card> */}
+                            {/* <Card title='آخر مشاركاتي'>
+                                <div className="space-y-4">
+                                    {myPosts?.recent.map((post, index) => (
+                                        <Alert key={index} variant="outlined" title={post.title} message={format(new Date(post.createdAt), 'd MMMM yyyy', { locale: ar })}>
+                                            <p className="font-medium">{post.title}</p>
+                                        <p className="text-sm text-gray-600">
+                                            {format(new Date(post.createdAt), 'd MMMM yyyy', { locale: ar })}
+                                        </p> 
+                                        </Alert>
+                                    ))}
+                                </div>
+                            </Card> */}
+                        </div>
+                    },
                     // {
                     //     value: 2, label: 'قائمة المتصدرين', icon: <FaTrophy />, content: <Card title='قائمة المتصدرين'>
                     //         <div className="space-y-4">
@@ -321,8 +624,8 @@ export default function StudentCommunity({ params }: { params: Promise<{ id: str
                     //     </Card>
                     // },
                     {
-                        value: 2, label: 'الغرف المباشرة', icon: <FaVideo />, content: <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {liveRooms?.map((room, index) => (
+                        value: 3, label: 'الغرف المباشرة', icon: <FaVideo />, content: <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {(liveRooms ?? initialLiveRooms).map((room, index) => (
                                 <motion.div
                                     key={room.id}
                                     initial={{ opacity: 0, y: 20 }}
@@ -376,7 +679,7 @@ export default function StudentCommunity({ params }: { params: Promise<{ id: str
                                 getOptionLabel={(option) => option.label}
                                 getOptionKey={(option) => option.value}
                                 onChange={(event, value) => setFilters({ ...filters, subject: value?.value || "" })}
-                                options={courses ?? []}
+                                options={courses ?? initialCourses}
                                 renderInput={(params) => <Input {...params} label="المادة" />}
                             />
                             <Input

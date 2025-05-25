@@ -96,19 +96,6 @@ export default function StudentNotifications() {
         mutationFn: (data: NotificationSettings) => notificationsSettings ? notificationApi.updateSettings(data) : notificationApi.createSettings(data),
         onSuccess: () => setShowSettings(false)
     });
-
-    if (isLoadingNotifications || isLoadingNotificationsSettings || status === "loading") {
-        return (
-            <div className="space-y-6">
-                <Skeleton height={40} width={300} />
-                <div className="space-y-4">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                        <Skeleton key={i} height={100} />
-                    ))}
-                </div>
-            </div>
-        );
-    }
     useEffect(() => {
         if (notificationsSettings) {
             setSettings({
@@ -131,6 +118,20 @@ export default function StudentNotifications() {
         }
     }, [notificationsSettings, user?.id]);
 
+
+    if (isLoadingNotifications || isLoadingNotificationsSettings || status === "loading") {
+        return (
+            <div className="space-y-6">
+                <Skeleton height={40} width={300} />
+                <div className="space-y-4">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                        <Skeleton key={i} height={100} />
+                    ))}
+                </div>
+            </div>
+        );
+    }
+   
     // تصفية الإشعارات حسب التبويب النشط
     const filteredNotifications = (notifications || initialNotifications)?.filter(notification => {
         switch (activeTab) {

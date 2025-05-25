@@ -19,6 +19,16 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model LoginHistory
+ * 
+ */
+export type LoginHistory = $Result.DefaultSelection<Prisma.$LoginHistoryPayload>
+/**
+ * Model TwoFactor
+ * 
+ */
+export type TwoFactor = $Result.DefaultSelection<Prisma.$TwoFactorPayload>
+/**
  * Model Profile
  * 
  */
@@ -38,6 +48,16 @@ export type Instructor = $Result.DefaultSelection<Prisma.$InstructorPayload>
  * 
  */
 export type Course = $Result.DefaultSelection<Prisma.$CoursePayload>
+/**
+ * Model Path
+ * 
+ */
+export type Path = $Result.DefaultSelection<Prisma.$PathPayload>
+/**
+ * Model Milestone
+ * 
+ */
+export type Milestone = $Result.DefaultSelection<Prisma.$MilestonePayload>
 /**
  * Model Lesson
  * 
@@ -173,7 +193,17 @@ export type LiveRoom = $Result.DefaultSelection<Prisma.$LiveRoomPayload>
  * Enums
  */
 export namespace $Enums {
-  export const UserRole: {
+  export const LoginDevice: {
+  DESKTOP: 'DESKTOP',
+  MOBILE: 'MOBILE',
+  TABLET: 'TABLET',
+  LAPTOP: 'LAPTOP'
+};
+
+export type LoginDevice = (typeof LoginDevice)[keyof typeof LoginDevice]
+
+
+export const UserRole: {
   STUDENT: 'STUDENT',
   INSTRUCTOR: 'INSTRUCTOR',
   PARENT: 'PARENT',
@@ -182,6 +212,15 @@ export namespace $Enums {
 };
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+
+export const MilestoneStatus: {
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  NOT_STARTED: 'NOT_STARTED'
+};
+
+export type MilestoneStatus = (typeof MilestoneStatus)[keyof typeof MilestoneStatus]
 
 
 export const NotificationType: {
@@ -196,9 +235,17 @@ export type NotificationType = (typeof NotificationType)[keyof typeof Notificati
 
 }
 
+export type LoginDevice = $Enums.LoginDevice
+
+export const LoginDevice: typeof $Enums.LoginDevice
+
 export type UserRole = $Enums.UserRole
 
 export const UserRole: typeof $Enums.UserRole
+
+export type MilestoneStatus = $Enums.MilestoneStatus
+
+export const MilestoneStatus: typeof $Enums.MilestoneStatus
 
 export type NotificationType = $Enums.NotificationType
 
@@ -338,6 +385,26 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs>;
 
   /**
+   * `prisma.loginHistory`: Exposes CRUD operations for the **LoginHistory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LoginHistories
+    * const loginHistories = await prisma.loginHistory.findMany()
+    * ```
+    */
+  get loginHistory(): Prisma.LoginHistoryDelegate<ExtArgs>;
+
+  /**
+   * `prisma.twoFactor`: Exposes CRUD operations for the **TwoFactor** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TwoFactors
+    * const twoFactors = await prisma.twoFactor.findMany()
+    * ```
+    */
+  get twoFactor(): Prisma.TwoFactorDelegate<ExtArgs>;
+
+  /**
    * `prisma.profile`: Exposes CRUD operations for the **Profile** model.
     * Example usage:
     * ```ts
@@ -376,6 +443,26 @@ export class PrismaClient<
     * ```
     */
   get course(): Prisma.CourseDelegate<ExtArgs>;
+
+  /**
+   * `prisma.path`: Exposes CRUD operations for the **Path** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Paths
+    * const paths = await prisma.path.findMany()
+    * ```
+    */
+  get path(): Prisma.PathDelegate<ExtArgs>;
+
+  /**
+   * `prisma.milestone`: Exposes CRUD operations for the **Milestone** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Milestones
+    * const milestones = await prisma.milestone.findMany()
+    * ```
+    */
+  get milestone(): Prisma.MilestoneDelegate<ExtArgs>;
 
   /**
    * `prisma.lesson`: Exposes CRUD operations for the **Lesson** model.
@@ -1077,10 +1164,14 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    LoginHistory: 'LoginHistory',
+    TwoFactor: 'TwoFactor',
     Profile: 'Profile',
     Academy: 'Academy',
     Instructor: 'Instructor',
     Course: 'Course',
+    Path: 'Path',
+    Milestone: 'Milestone',
     Lesson: 'Lesson',
     File: 'File',
     Enrollment: 'Enrollment',
@@ -1122,7 +1213,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "profile" | "academy" | "instructor" | "course" | "lesson" | "file" | "enrollment" | "quiz" | "question" | "submission" | "achievement" | "notification" | "notificationSettings" | "message" | "post" | "comment" | "group" | "admin" | "channel" | "owner" | "bookmark" | "event" | "attendance" | "payment" | "report" | "badge" | "certificate" | "community" | "discussion" | "liveRoom"
+      modelProps: "user" | "loginHistory" | "twoFactor" | "profile" | "academy" | "instructor" | "course" | "path" | "milestone" | "lesson" | "file" | "enrollment" | "quiz" | "question" | "submission" | "achievement" | "notification" | "notificationSettings" | "message" | "post" | "comment" | "group" | "admin" | "channel" | "owner" | "bookmark" | "event" | "attendance" | "payment" | "report" | "badge" | "certificate" | "community" | "discussion" | "liveRoom"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1193,6 +1284,146 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      LoginHistory: {
+        payload: Prisma.$LoginHistoryPayload<ExtArgs>
+        fields: Prisma.LoginHistoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LoginHistoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoginHistoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LoginHistoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoginHistoryPayload>
+          }
+          findFirst: {
+            args: Prisma.LoginHistoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoginHistoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LoginHistoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoginHistoryPayload>
+          }
+          findMany: {
+            args: Prisma.LoginHistoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoginHistoryPayload>[]
+          }
+          create: {
+            args: Prisma.LoginHistoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoginHistoryPayload>
+          }
+          createMany: {
+            args: Prisma.LoginHistoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LoginHistoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoginHistoryPayload>[]
+          }
+          delete: {
+            args: Prisma.LoginHistoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoginHistoryPayload>
+          }
+          update: {
+            args: Prisma.LoginHistoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoginHistoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.LoginHistoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LoginHistoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.LoginHistoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoginHistoryPayload>
+          }
+          aggregate: {
+            args: Prisma.LoginHistoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLoginHistory>
+          }
+          groupBy: {
+            args: Prisma.LoginHistoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LoginHistoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LoginHistoryCountArgs<ExtArgs>
+            result: $Utils.Optional<LoginHistoryCountAggregateOutputType> | number
+          }
+        }
+      }
+      TwoFactor: {
+        payload: Prisma.$TwoFactorPayload<ExtArgs>
+        fields: Prisma.TwoFactorFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TwoFactorFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TwoFactorPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TwoFactorFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TwoFactorPayload>
+          }
+          findFirst: {
+            args: Prisma.TwoFactorFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TwoFactorPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TwoFactorFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TwoFactorPayload>
+          }
+          findMany: {
+            args: Prisma.TwoFactorFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TwoFactorPayload>[]
+          }
+          create: {
+            args: Prisma.TwoFactorCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TwoFactorPayload>
+          }
+          createMany: {
+            args: Prisma.TwoFactorCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TwoFactorCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TwoFactorPayload>[]
+          }
+          delete: {
+            args: Prisma.TwoFactorDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TwoFactorPayload>
+          }
+          update: {
+            args: Prisma.TwoFactorUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TwoFactorPayload>
+          }
+          deleteMany: {
+            args: Prisma.TwoFactorDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TwoFactorUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.TwoFactorUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TwoFactorPayload>
+          }
+          aggregate: {
+            args: Prisma.TwoFactorAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTwoFactor>
+          }
+          groupBy: {
+            args: Prisma.TwoFactorGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TwoFactorGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TwoFactorCountArgs<ExtArgs>
+            result: $Utils.Optional<TwoFactorCountAggregateOutputType> | number
           }
         }
       }
@@ -1473,6 +1704,146 @@ export namespace Prisma {
           count: {
             args: Prisma.CourseCountArgs<ExtArgs>
             result: $Utils.Optional<CourseCountAggregateOutputType> | number
+          }
+        }
+      }
+      Path: {
+        payload: Prisma.$PathPayload<ExtArgs>
+        fields: Prisma.PathFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PathFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PathFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathPayload>
+          }
+          findFirst: {
+            args: Prisma.PathFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PathFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathPayload>
+          }
+          findMany: {
+            args: Prisma.PathFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathPayload>[]
+          }
+          create: {
+            args: Prisma.PathCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathPayload>
+          }
+          createMany: {
+            args: Prisma.PathCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PathCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathPayload>[]
+          }
+          delete: {
+            args: Prisma.PathDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathPayload>
+          }
+          update: {
+            args: Prisma.PathUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathPayload>
+          }
+          deleteMany: {
+            args: Prisma.PathDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PathUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.PathUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PathPayload>
+          }
+          aggregate: {
+            args: Prisma.PathAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePath>
+          }
+          groupBy: {
+            args: Prisma.PathGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PathGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PathCountArgs<ExtArgs>
+            result: $Utils.Optional<PathCountAggregateOutputType> | number
+          }
+        }
+      }
+      Milestone: {
+        payload: Prisma.$MilestonePayload<ExtArgs>
+        fields: Prisma.MilestoneFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MilestoneFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MilestonePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MilestoneFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MilestonePayload>
+          }
+          findFirst: {
+            args: Prisma.MilestoneFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MilestonePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MilestoneFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MilestonePayload>
+          }
+          findMany: {
+            args: Prisma.MilestoneFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MilestonePayload>[]
+          }
+          create: {
+            args: Prisma.MilestoneCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MilestonePayload>
+          }
+          createMany: {
+            args: Prisma.MilestoneCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MilestoneCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MilestonePayload>[]
+          }
+          delete: {
+            args: Prisma.MilestoneDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MilestonePayload>
+          }
+          update: {
+            args: Prisma.MilestoneUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MilestonePayload>
+          }
+          deleteMany: {
+            args: Prisma.MilestoneDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MilestoneUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.MilestoneUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MilestonePayload>
+          }
+          aggregate: {
+            args: Prisma.MilestoneAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMilestone>
+          }
+          groupBy: {
+            args: Prisma.MilestoneGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MilestoneGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MilestoneCountArgs<ExtArgs>
+            result: $Utils.Optional<MilestoneCountAggregateOutputType> | number
           }
         }
       }
@@ -3478,6 +3849,9 @@ export namespace Prisma {
     Community: number
     LiveRoom: number
     NotificationSettings: number
+    Path: number
+    LoginHistory: number
+    TwoFactor: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3502,6 +3876,9 @@ export namespace Prisma {
     Community?: boolean | UserCountOutputTypeCountCommunityArgs
     LiveRoom?: boolean | UserCountOutputTypeCountLiveRoomArgs
     NotificationSettings?: boolean | UserCountOutputTypeCountNotificationSettingsArgs
+    Path?: boolean | UserCountOutputTypeCountPathArgs
+    LoginHistory?: boolean | UserCountOutputTypeCountLoginHistoryArgs
+    TwoFactor?: boolean | UserCountOutputTypeCountTwoFactorArgs
   }
 
   // Custom InputTypes
@@ -3662,6 +4039,27 @@ export namespace Prisma {
     where?: NotificationSettingsWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPathArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PathWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountLoginHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LoginHistoryWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountTwoFactorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TwoFactorWhereInput
+  }
+
 
   /**
    * Count Type AcademyCountOutputType
@@ -3762,6 +4160,7 @@ export namespace Prisma {
     quizzes: number
     instructors: number
     liveRoom: number
+    Path: number
   }
 
   export type CourseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3770,6 +4169,7 @@ export namespace Prisma {
     quizzes?: boolean | CourseCountOutputTypeCountQuizzesArgs
     instructors?: boolean | CourseCountOutputTypeCountInstructorsArgs
     liveRoom?: boolean | CourseCountOutputTypeCountLiveRoomArgs
+    Path?: boolean | CourseCountOutputTypeCountPathArgs
   }
 
   // Custom InputTypes
@@ -3816,6 +4216,62 @@ export namespace Prisma {
    */
   export type CourseCountOutputTypeCountLiveRoomArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LiveRoomWhereInput
+  }
+
+  /**
+   * CourseCountOutputType without action
+   */
+  export type CourseCountOutputTypeCountPathArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PathWhereInput
+  }
+
+
+  /**
+   * Count Type PathCountOutputType
+   */
+
+  export type PathCountOutputType = {
+    milestones: number
+    courses: number
+    peers: number
+  }
+
+  export type PathCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    milestones?: boolean | PathCountOutputTypeCountMilestonesArgs
+    courses?: boolean | PathCountOutputTypeCountCoursesArgs
+    peers?: boolean | PathCountOutputTypeCountPeersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PathCountOutputType without action
+   */
+  export type PathCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PathCountOutputType
+     */
+    select?: PathCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PathCountOutputType without action
+   */
+  export type PathCountOutputTypeCountMilestonesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MilestoneWhereInput
+  }
+
+  /**
+   * PathCountOutputType without action
+   */
+  export type PathCountOutputTypeCountCoursesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CourseWhereInput
+  }
+
+  /**
+   * PathCountOutputType without action
+   */
+  export type PathCountOutputTypeCountPeersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
   }
 
 
@@ -4274,8 +4730,18 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserAvgAggregateOutputType = {
+    age: number | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    age: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -4291,6 +4757,9 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     academyId: string | null
+    isOnline: boolean | null
+    isVerified: boolean | null
+    age: number | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -4306,6 +4775,9 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     academyId: string | null
+    isOnline: boolean | null
+    isVerified: boolean | null
+    age: number | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -4321,9 +4793,20 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     academyId: number
+    isOnline: number
+    isVerified: number
+    age: number
     _all: number
   }
 
+
+  export type UserAvgAggregateInputType = {
+    age?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    age?: true
+  }
 
   export type UserMinAggregateInputType = {
     id?: true
@@ -4338,6 +4821,9 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     academyId?: true
+    isOnline?: true
+    isVerified?: true
+    age?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -4353,6 +4839,9 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     academyId?: true
+    isOnline?: true
+    isVerified?: true
+    age?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -4368,6 +4857,9 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     academyId?: true
+    isOnline?: true
+    isVerified?: true
+    age?: true
     _all?: true
   }
 
@@ -4409,6 +4901,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -4439,6 +4943,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
@@ -4456,7 +4962,12 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     academyId: string | null
+    isOnline: boolean
+    isVerified: boolean
+    age: number | null
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -4488,6 +4999,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     academyId?: boolean
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: boolean
     academy?: boolean | User$academyArgs<ExtArgs>
     profile?: boolean | User$profileArgs<ExtArgs>
     enrollments?: boolean | User$enrollmentsArgs<ExtArgs>
@@ -4511,6 +5025,9 @@ export namespace Prisma {
     Community?: boolean | User$CommunityArgs<ExtArgs>
     LiveRoom?: boolean | User$LiveRoomArgs<ExtArgs>
     NotificationSettings?: boolean | User$NotificationSettingsArgs<ExtArgs>
+    Path?: boolean | User$PathArgs<ExtArgs>
+    LoginHistory?: boolean | User$LoginHistoryArgs<ExtArgs>
+    TwoFactor?: boolean | User$TwoFactorArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4527,6 +5044,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     academyId?: boolean
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: boolean
     academy?: boolean | User$academyArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4543,6 +5063,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     academyId?: boolean
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: boolean
   }
 
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4569,6 +5092,9 @@ export namespace Prisma {
     Community?: boolean | User$CommunityArgs<ExtArgs>
     LiveRoom?: boolean | User$LiveRoomArgs<ExtArgs>
     NotificationSettings?: boolean | User$NotificationSettingsArgs<ExtArgs>
+    Path?: boolean | User$PathArgs<ExtArgs>
+    LoginHistory?: boolean | User$LoginHistoryArgs<ExtArgs>
+    TwoFactor?: boolean | User$TwoFactorArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4601,6 +5127,9 @@ export namespace Prisma {
       Community: Prisma.$CommunityPayload<ExtArgs>[]
       LiveRoom: Prisma.$LiveRoomPayload<ExtArgs>[]
       NotificationSettings: Prisma.$NotificationSettingsPayload<ExtArgs>[]
+      Path: Prisma.$PathPayload<ExtArgs>[]
+      LoginHistory: Prisma.$LoginHistoryPayload<ExtArgs>[]
+      TwoFactor: Prisma.$TwoFactorPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4615,6 +5144,9 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       academyId: string | null
+      isOnline: boolean
+      isVerified: boolean
+      age: number | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -5002,6 +5534,9 @@ export namespace Prisma {
     Community<T extends User$CommunityArgs<ExtArgs> = {}>(args?: Subset<T, User$CommunityArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findMany"> | Null>
     LiveRoom<T extends User$LiveRoomArgs<ExtArgs> = {}>(args?: Subset<T, User$LiveRoomArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveRoomPayload<ExtArgs>, T, "findMany"> | Null>
     NotificationSettings<T extends User$NotificationSettingsArgs<ExtArgs> = {}>(args?: Subset<T, User$NotificationSettingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "findMany"> | Null>
+    Path<T extends User$PathArgs<ExtArgs> = {}>(args?: Subset<T, User$PathArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathPayload<ExtArgs>, T, "findMany"> | Null>
+    LoginHistory<T extends User$LoginHistoryArgs<ExtArgs> = {}>(args?: Subset<T, User$LoginHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LoginHistoryPayload<ExtArgs>, T, "findMany"> | Null>
+    TwoFactor<T extends User$TwoFactorArgs<ExtArgs> = {}>(args?: Subset<T, User$TwoFactorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TwoFactorPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5043,6 +5578,9 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly academyId: FieldRef<"User", 'String'>
+    readonly isOnline: FieldRef<"User", 'Boolean'>
+    readonly isVerified: FieldRef<"User", 'Boolean'>
+    readonly age: FieldRef<"User", 'Int'>
   }
     
 
@@ -5811,6 +6349,66 @@ export namespace Prisma {
   }
 
   /**
+   * User.Path
+   */
+  export type User$PathArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Path
+     */
+    select?: PathSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathInclude<ExtArgs> | null
+    where?: PathWhereInput
+    orderBy?: PathOrderByWithRelationInput | PathOrderByWithRelationInput[]
+    cursor?: PathWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PathScalarFieldEnum | PathScalarFieldEnum[]
+  }
+
+  /**
+   * User.LoginHistory
+   */
+  export type User$LoginHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoginHistory
+     */
+    select?: LoginHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoginHistoryInclude<ExtArgs> | null
+    where?: LoginHistoryWhereInput
+    orderBy?: LoginHistoryOrderByWithRelationInput | LoginHistoryOrderByWithRelationInput[]
+    cursor?: LoginHistoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LoginHistoryScalarFieldEnum | LoginHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * User.TwoFactor
+   */
+  export type User$TwoFactorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TwoFactor
+     */
+    select?: TwoFactorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TwoFactorInclude<ExtArgs> | null
+    where?: TwoFactorWhereInput
+    orderBy?: TwoFactorOrderByWithRelationInput | TwoFactorOrderByWithRelationInput[]
+    cursor?: TwoFactorWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TwoFactorScalarFieldEnum | TwoFactorScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5822,6 +6420,1956 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model LoginHistory
+   */
+
+  export type AggregateLoginHistory = {
+    _count: LoginHistoryCountAggregateOutputType | null
+    _min: LoginHistoryMinAggregateOutputType | null
+    _max: LoginHistoryMaxAggregateOutputType | null
+  }
+
+  export type LoginHistoryMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    success: boolean | null
+    ip: string | null
+    device: $Enums.LoginDevice | null
+    location: string | null
+    browser: string | null
+    os: string | null
+    createdAt: Date | null
+  }
+
+  export type LoginHistoryMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    success: boolean | null
+    ip: string | null
+    device: $Enums.LoginDevice | null
+    location: string | null
+    browser: string | null
+    os: string | null
+    createdAt: Date | null
+  }
+
+  export type LoginHistoryCountAggregateOutputType = {
+    id: number
+    userId: number
+    success: number
+    ip: number
+    device: number
+    location: number
+    browser: number
+    os: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type LoginHistoryMinAggregateInputType = {
+    id?: true
+    userId?: true
+    success?: true
+    ip?: true
+    device?: true
+    location?: true
+    browser?: true
+    os?: true
+    createdAt?: true
+  }
+
+  export type LoginHistoryMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    success?: true
+    ip?: true
+    device?: true
+    location?: true
+    browser?: true
+    os?: true
+    createdAt?: true
+  }
+
+  export type LoginHistoryCountAggregateInputType = {
+    id?: true
+    userId?: true
+    success?: true
+    ip?: true
+    device?: true
+    location?: true
+    browser?: true
+    os?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type LoginHistoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LoginHistory to aggregate.
+     */
+    where?: LoginHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LoginHistories to fetch.
+     */
+    orderBy?: LoginHistoryOrderByWithRelationInput | LoginHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LoginHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LoginHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LoginHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LoginHistories
+    **/
+    _count?: true | LoginHistoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LoginHistoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LoginHistoryMaxAggregateInputType
+  }
+
+  export type GetLoginHistoryAggregateType<T extends LoginHistoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateLoginHistory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLoginHistory[P]>
+      : GetScalarType<T[P], AggregateLoginHistory[P]>
+  }
+
+
+
+
+  export type LoginHistoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LoginHistoryWhereInput
+    orderBy?: LoginHistoryOrderByWithAggregationInput | LoginHistoryOrderByWithAggregationInput[]
+    by: LoginHistoryScalarFieldEnum[] | LoginHistoryScalarFieldEnum
+    having?: LoginHistoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LoginHistoryCountAggregateInputType | true
+    _min?: LoginHistoryMinAggregateInputType
+    _max?: LoginHistoryMaxAggregateInputType
+  }
+
+  export type LoginHistoryGroupByOutputType = {
+    id: string
+    userId: string
+    success: boolean
+    ip: string | null
+    device: $Enums.LoginDevice | null
+    location: string | null
+    browser: string | null
+    os: string | null
+    createdAt: Date
+    _count: LoginHistoryCountAggregateOutputType | null
+    _min: LoginHistoryMinAggregateOutputType | null
+    _max: LoginHistoryMaxAggregateOutputType | null
+  }
+
+  type GetLoginHistoryGroupByPayload<T extends LoginHistoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LoginHistoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LoginHistoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LoginHistoryGroupByOutputType[P]>
+            : GetScalarType<T[P], LoginHistoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LoginHistorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    success?: boolean
+    ip?: boolean
+    device?: boolean
+    location?: boolean
+    browser?: boolean
+    os?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["loginHistory"]>
+
+  export type LoginHistorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    success?: boolean
+    ip?: boolean
+    device?: boolean
+    location?: boolean
+    browser?: boolean
+    os?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["loginHistory"]>
+
+  export type LoginHistorySelectScalar = {
+    id?: boolean
+    userId?: boolean
+    success?: boolean
+    ip?: boolean
+    device?: boolean
+    location?: boolean
+    browser?: boolean
+    os?: boolean
+    createdAt?: boolean
+  }
+
+  export type LoginHistoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type LoginHistoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $LoginHistoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LoginHistory"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      success: boolean
+      ip: string | null
+      device: $Enums.LoginDevice | null
+      location: string | null
+      browser: string | null
+      os: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["loginHistory"]>
+    composites: {}
+  }
+
+  type LoginHistoryGetPayload<S extends boolean | null | undefined | LoginHistoryDefaultArgs> = $Result.GetResult<Prisma.$LoginHistoryPayload, S>
+
+  type LoginHistoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<LoginHistoryFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: LoginHistoryCountAggregateInputType | true
+    }
+
+  export interface LoginHistoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LoginHistory'], meta: { name: 'LoginHistory' } }
+    /**
+     * Find zero or one LoginHistory that matches the filter.
+     * @param {LoginHistoryFindUniqueArgs} args - Arguments to find a LoginHistory
+     * @example
+     * // Get one LoginHistory
+     * const loginHistory = await prisma.loginHistory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LoginHistoryFindUniqueArgs>(args: SelectSubset<T, LoginHistoryFindUniqueArgs<ExtArgs>>): Prisma__LoginHistoryClient<$Result.GetResult<Prisma.$LoginHistoryPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one LoginHistory that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {LoginHistoryFindUniqueOrThrowArgs} args - Arguments to find a LoginHistory
+     * @example
+     * // Get one LoginHistory
+     * const loginHistory = await prisma.loginHistory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LoginHistoryFindUniqueOrThrowArgs>(args: SelectSubset<T, LoginHistoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LoginHistoryClient<$Result.GetResult<Prisma.$LoginHistoryPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first LoginHistory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoginHistoryFindFirstArgs} args - Arguments to find a LoginHistory
+     * @example
+     * // Get one LoginHistory
+     * const loginHistory = await prisma.loginHistory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LoginHistoryFindFirstArgs>(args?: SelectSubset<T, LoginHistoryFindFirstArgs<ExtArgs>>): Prisma__LoginHistoryClient<$Result.GetResult<Prisma.$LoginHistoryPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first LoginHistory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoginHistoryFindFirstOrThrowArgs} args - Arguments to find a LoginHistory
+     * @example
+     * // Get one LoginHistory
+     * const loginHistory = await prisma.loginHistory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LoginHistoryFindFirstOrThrowArgs>(args?: SelectSubset<T, LoginHistoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__LoginHistoryClient<$Result.GetResult<Prisma.$LoginHistoryPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more LoginHistories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoginHistoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LoginHistories
+     * const loginHistories = await prisma.loginHistory.findMany()
+     * 
+     * // Get first 10 LoginHistories
+     * const loginHistories = await prisma.loginHistory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const loginHistoryWithIdOnly = await prisma.loginHistory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LoginHistoryFindManyArgs>(args?: SelectSubset<T, LoginHistoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LoginHistoryPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a LoginHistory.
+     * @param {LoginHistoryCreateArgs} args - Arguments to create a LoginHistory.
+     * @example
+     * // Create one LoginHistory
+     * const LoginHistory = await prisma.loginHistory.create({
+     *   data: {
+     *     // ... data to create a LoginHistory
+     *   }
+     * })
+     * 
+     */
+    create<T extends LoginHistoryCreateArgs>(args: SelectSubset<T, LoginHistoryCreateArgs<ExtArgs>>): Prisma__LoginHistoryClient<$Result.GetResult<Prisma.$LoginHistoryPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many LoginHistories.
+     * @param {LoginHistoryCreateManyArgs} args - Arguments to create many LoginHistories.
+     * @example
+     * // Create many LoginHistories
+     * const loginHistory = await prisma.loginHistory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LoginHistoryCreateManyArgs>(args?: SelectSubset<T, LoginHistoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LoginHistories and returns the data saved in the database.
+     * @param {LoginHistoryCreateManyAndReturnArgs} args - Arguments to create many LoginHistories.
+     * @example
+     * // Create many LoginHistories
+     * const loginHistory = await prisma.loginHistory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LoginHistories and only return the `id`
+     * const loginHistoryWithIdOnly = await prisma.loginHistory.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LoginHistoryCreateManyAndReturnArgs>(args?: SelectSubset<T, LoginHistoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LoginHistoryPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a LoginHistory.
+     * @param {LoginHistoryDeleteArgs} args - Arguments to delete one LoginHistory.
+     * @example
+     * // Delete one LoginHistory
+     * const LoginHistory = await prisma.loginHistory.delete({
+     *   where: {
+     *     // ... filter to delete one LoginHistory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LoginHistoryDeleteArgs>(args: SelectSubset<T, LoginHistoryDeleteArgs<ExtArgs>>): Prisma__LoginHistoryClient<$Result.GetResult<Prisma.$LoginHistoryPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one LoginHistory.
+     * @param {LoginHistoryUpdateArgs} args - Arguments to update one LoginHistory.
+     * @example
+     * // Update one LoginHistory
+     * const loginHistory = await prisma.loginHistory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LoginHistoryUpdateArgs>(args: SelectSubset<T, LoginHistoryUpdateArgs<ExtArgs>>): Prisma__LoginHistoryClient<$Result.GetResult<Prisma.$LoginHistoryPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more LoginHistories.
+     * @param {LoginHistoryDeleteManyArgs} args - Arguments to filter LoginHistories to delete.
+     * @example
+     * // Delete a few LoginHistories
+     * const { count } = await prisma.loginHistory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LoginHistoryDeleteManyArgs>(args?: SelectSubset<T, LoginHistoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LoginHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoginHistoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LoginHistories
+     * const loginHistory = await prisma.loginHistory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LoginHistoryUpdateManyArgs>(args: SelectSubset<T, LoginHistoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one LoginHistory.
+     * @param {LoginHistoryUpsertArgs} args - Arguments to update or create a LoginHistory.
+     * @example
+     * // Update or create a LoginHistory
+     * const loginHistory = await prisma.loginHistory.upsert({
+     *   create: {
+     *     // ... data to create a LoginHistory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LoginHistory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LoginHistoryUpsertArgs>(args: SelectSubset<T, LoginHistoryUpsertArgs<ExtArgs>>): Prisma__LoginHistoryClient<$Result.GetResult<Prisma.$LoginHistoryPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of LoginHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoginHistoryCountArgs} args - Arguments to filter LoginHistories to count.
+     * @example
+     * // Count the number of LoginHistories
+     * const count = await prisma.loginHistory.count({
+     *   where: {
+     *     // ... the filter for the LoginHistories we want to count
+     *   }
+     * })
+    **/
+    count<T extends LoginHistoryCountArgs>(
+      args?: Subset<T, LoginHistoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LoginHistoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LoginHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoginHistoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LoginHistoryAggregateArgs>(args: Subset<T, LoginHistoryAggregateArgs>): Prisma.PrismaPromise<GetLoginHistoryAggregateType<T>>
+
+    /**
+     * Group by LoginHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoginHistoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LoginHistoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LoginHistoryGroupByArgs['orderBy'] }
+        : { orderBy?: LoginHistoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LoginHistoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLoginHistoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LoginHistory model
+   */
+  readonly fields: LoginHistoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LoginHistory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LoginHistoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LoginHistory model
+   */ 
+  interface LoginHistoryFieldRefs {
+    readonly id: FieldRef<"LoginHistory", 'String'>
+    readonly userId: FieldRef<"LoginHistory", 'String'>
+    readonly success: FieldRef<"LoginHistory", 'Boolean'>
+    readonly ip: FieldRef<"LoginHistory", 'String'>
+    readonly device: FieldRef<"LoginHistory", 'LoginDevice'>
+    readonly location: FieldRef<"LoginHistory", 'String'>
+    readonly browser: FieldRef<"LoginHistory", 'String'>
+    readonly os: FieldRef<"LoginHistory", 'String'>
+    readonly createdAt: FieldRef<"LoginHistory", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LoginHistory findUnique
+   */
+  export type LoginHistoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoginHistory
+     */
+    select?: LoginHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoginHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which LoginHistory to fetch.
+     */
+    where: LoginHistoryWhereUniqueInput
+  }
+
+  /**
+   * LoginHistory findUniqueOrThrow
+   */
+  export type LoginHistoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoginHistory
+     */
+    select?: LoginHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoginHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which LoginHistory to fetch.
+     */
+    where: LoginHistoryWhereUniqueInput
+  }
+
+  /**
+   * LoginHistory findFirst
+   */
+  export type LoginHistoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoginHistory
+     */
+    select?: LoginHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoginHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which LoginHistory to fetch.
+     */
+    where?: LoginHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LoginHistories to fetch.
+     */
+    orderBy?: LoginHistoryOrderByWithRelationInput | LoginHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LoginHistories.
+     */
+    cursor?: LoginHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LoginHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LoginHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LoginHistories.
+     */
+    distinct?: LoginHistoryScalarFieldEnum | LoginHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * LoginHistory findFirstOrThrow
+   */
+  export type LoginHistoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoginHistory
+     */
+    select?: LoginHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoginHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which LoginHistory to fetch.
+     */
+    where?: LoginHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LoginHistories to fetch.
+     */
+    orderBy?: LoginHistoryOrderByWithRelationInput | LoginHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LoginHistories.
+     */
+    cursor?: LoginHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LoginHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LoginHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LoginHistories.
+     */
+    distinct?: LoginHistoryScalarFieldEnum | LoginHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * LoginHistory findMany
+   */
+  export type LoginHistoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoginHistory
+     */
+    select?: LoginHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoginHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which LoginHistories to fetch.
+     */
+    where?: LoginHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LoginHistories to fetch.
+     */
+    orderBy?: LoginHistoryOrderByWithRelationInput | LoginHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LoginHistories.
+     */
+    cursor?: LoginHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LoginHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LoginHistories.
+     */
+    skip?: number
+    distinct?: LoginHistoryScalarFieldEnum | LoginHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * LoginHistory create
+   */
+  export type LoginHistoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoginHistory
+     */
+    select?: LoginHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoginHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LoginHistory.
+     */
+    data: XOR<LoginHistoryCreateInput, LoginHistoryUncheckedCreateInput>
+  }
+
+  /**
+   * LoginHistory createMany
+   */
+  export type LoginHistoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LoginHistories.
+     */
+    data: LoginHistoryCreateManyInput | LoginHistoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LoginHistory createManyAndReturn
+   */
+  export type LoginHistoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoginHistory
+     */
+    select?: LoginHistorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many LoginHistories.
+     */
+    data: LoginHistoryCreateManyInput | LoginHistoryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoginHistoryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LoginHistory update
+   */
+  export type LoginHistoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoginHistory
+     */
+    select?: LoginHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoginHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LoginHistory.
+     */
+    data: XOR<LoginHistoryUpdateInput, LoginHistoryUncheckedUpdateInput>
+    /**
+     * Choose, which LoginHistory to update.
+     */
+    where: LoginHistoryWhereUniqueInput
+  }
+
+  /**
+   * LoginHistory updateMany
+   */
+  export type LoginHistoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LoginHistories.
+     */
+    data: XOR<LoginHistoryUpdateManyMutationInput, LoginHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which LoginHistories to update
+     */
+    where?: LoginHistoryWhereInput
+  }
+
+  /**
+   * LoginHistory upsert
+   */
+  export type LoginHistoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoginHistory
+     */
+    select?: LoginHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoginHistoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LoginHistory to update in case it exists.
+     */
+    where: LoginHistoryWhereUniqueInput
+    /**
+     * In case the LoginHistory found by the `where` argument doesn't exist, create a new LoginHistory with this data.
+     */
+    create: XOR<LoginHistoryCreateInput, LoginHistoryUncheckedCreateInput>
+    /**
+     * In case the LoginHistory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LoginHistoryUpdateInput, LoginHistoryUncheckedUpdateInput>
+  }
+
+  /**
+   * LoginHistory delete
+   */
+  export type LoginHistoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoginHistory
+     */
+    select?: LoginHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoginHistoryInclude<ExtArgs> | null
+    /**
+     * Filter which LoginHistory to delete.
+     */
+    where: LoginHistoryWhereUniqueInput
+  }
+
+  /**
+   * LoginHistory deleteMany
+   */
+  export type LoginHistoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LoginHistories to delete
+     */
+    where?: LoginHistoryWhereInput
+  }
+
+  /**
+   * LoginHistory without action
+   */
+  export type LoginHistoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoginHistory
+     */
+    select?: LoginHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoginHistoryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TwoFactor
+   */
+
+  export type AggregateTwoFactor = {
+    _count: TwoFactorCountAggregateOutputType | null
+    _min: TwoFactorMinAggregateOutputType | null
+    _max: TwoFactorMaxAggregateOutputType | null
+  }
+
+  export type TwoFactorMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    email: boolean | null
+    sms: boolean | null
+    authenticator: boolean | null
+    secret: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TwoFactorMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    email: boolean | null
+    sms: boolean | null
+    authenticator: boolean | null
+    secret: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TwoFactorCountAggregateOutputType = {
+    id: number
+    userId: number
+    email: number
+    sms: number
+    authenticator: number
+    secret: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TwoFactorMinAggregateInputType = {
+    id?: true
+    userId?: true
+    email?: true
+    sms?: true
+    authenticator?: true
+    secret?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TwoFactorMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    email?: true
+    sms?: true
+    authenticator?: true
+    secret?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TwoFactorCountAggregateInputType = {
+    id?: true
+    userId?: true
+    email?: true
+    sms?: true
+    authenticator?: true
+    secret?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TwoFactorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TwoFactor to aggregate.
+     */
+    where?: TwoFactorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TwoFactors to fetch.
+     */
+    orderBy?: TwoFactorOrderByWithRelationInput | TwoFactorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TwoFactorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TwoFactors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TwoFactors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TwoFactors
+    **/
+    _count?: true | TwoFactorCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TwoFactorMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TwoFactorMaxAggregateInputType
+  }
+
+  export type GetTwoFactorAggregateType<T extends TwoFactorAggregateArgs> = {
+        [P in keyof T & keyof AggregateTwoFactor]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTwoFactor[P]>
+      : GetScalarType<T[P], AggregateTwoFactor[P]>
+  }
+
+
+
+
+  export type TwoFactorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TwoFactorWhereInput
+    orderBy?: TwoFactorOrderByWithAggregationInput | TwoFactorOrderByWithAggregationInput[]
+    by: TwoFactorScalarFieldEnum[] | TwoFactorScalarFieldEnum
+    having?: TwoFactorScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TwoFactorCountAggregateInputType | true
+    _min?: TwoFactorMinAggregateInputType
+    _max?: TwoFactorMaxAggregateInputType
+  }
+
+  export type TwoFactorGroupByOutputType = {
+    id: string
+    userId: string
+    email: boolean
+    sms: boolean
+    authenticator: boolean
+    secret: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: TwoFactorCountAggregateOutputType | null
+    _min: TwoFactorMinAggregateOutputType | null
+    _max: TwoFactorMaxAggregateOutputType | null
+  }
+
+  type GetTwoFactorGroupByPayload<T extends TwoFactorGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TwoFactorGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TwoFactorGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TwoFactorGroupByOutputType[P]>
+            : GetScalarType<T[P], TwoFactorGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TwoFactorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    email?: boolean
+    sms?: boolean
+    authenticator?: boolean
+    secret?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["twoFactor"]>
+
+  export type TwoFactorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    email?: boolean
+    sms?: boolean
+    authenticator?: boolean
+    secret?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["twoFactor"]>
+
+  export type TwoFactorSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    email?: boolean
+    sms?: boolean
+    authenticator?: boolean
+    secret?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TwoFactorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type TwoFactorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $TwoFactorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TwoFactor"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      email: boolean
+      sms: boolean
+      authenticator: boolean
+      secret: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["twoFactor"]>
+    composites: {}
+  }
+
+  type TwoFactorGetPayload<S extends boolean | null | undefined | TwoFactorDefaultArgs> = $Result.GetResult<Prisma.$TwoFactorPayload, S>
+
+  type TwoFactorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<TwoFactorFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: TwoFactorCountAggregateInputType | true
+    }
+
+  export interface TwoFactorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TwoFactor'], meta: { name: 'TwoFactor' } }
+    /**
+     * Find zero or one TwoFactor that matches the filter.
+     * @param {TwoFactorFindUniqueArgs} args - Arguments to find a TwoFactor
+     * @example
+     * // Get one TwoFactor
+     * const twoFactor = await prisma.twoFactor.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TwoFactorFindUniqueArgs>(args: SelectSubset<T, TwoFactorFindUniqueArgs<ExtArgs>>): Prisma__TwoFactorClient<$Result.GetResult<Prisma.$TwoFactorPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one TwoFactor that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {TwoFactorFindUniqueOrThrowArgs} args - Arguments to find a TwoFactor
+     * @example
+     * // Get one TwoFactor
+     * const twoFactor = await prisma.twoFactor.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TwoFactorFindUniqueOrThrowArgs>(args: SelectSubset<T, TwoFactorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TwoFactorClient<$Result.GetResult<Prisma.$TwoFactorPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first TwoFactor that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TwoFactorFindFirstArgs} args - Arguments to find a TwoFactor
+     * @example
+     * // Get one TwoFactor
+     * const twoFactor = await prisma.twoFactor.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TwoFactorFindFirstArgs>(args?: SelectSubset<T, TwoFactorFindFirstArgs<ExtArgs>>): Prisma__TwoFactorClient<$Result.GetResult<Prisma.$TwoFactorPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first TwoFactor that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TwoFactorFindFirstOrThrowArgs} args - Arguments to find a TwoFactor
+     * @example
+     * // Get one TwoFactor
+     * const twoFactor = await prisma.twoFactor.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TwoFactorFindFirstOrThrowArgs>(args?: SelectSubset<T, TwoFactorFindFirstOrThrowArgs<ExtArgs>>): Prisma__TwoFactorClient<$Result.GetResult<Prisma.$TwoFactorPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more TwoFactors that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TwoFactorFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TwoFactors
+     * const twoFactors = await prisma.twoFactor.findMany()
+     * 
+     * // Get first 10 TwoFactors
+     * const twoFactors = await prisma.twoFactor.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const twoFactorWithIdOnly = await prisma.twoFactor.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TwoFactorFindManyArgs>(args?: SelectSubset<T, TwoFactorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TwoFactorPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a TwoFactor.
+     * @param {TwoFactorCreateArgs} args - Arguments to create a TwoFactor.
+     * @example
+     * // Create one TwoFactor
+     * const TwoFactor = await prisma.twoFactor.create({
+     *   data: {
+     *     // ... data to create a TwoFactor
+     *   }
+     * })
+     * 
+     */
+    create<T extends TwoFactorCreateArgs>(args: SelectSubset<T, TwoFactorCreateArgs<ExtArgs>>): Prisma__TwoFactorClient<$Result.GetResult<Prisma.$TwoFactorPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many TwoFactors.
+     * @param {TwoFactorCreateManyArgs} args - Arguments to create many TwoFactors.
+     * @example
+     * // Create many TwoFactors
+     * const twoFactor = await prisma.twoFactor.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TwoFactorCreateManyArgs>(args?: SelectSubset<T, TwoFactorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TwoFactors and returns the data saved in the database.
+     * @param {TwoFactorCreateManyAndReturnArgs} args - Arguments to create many TwoFactors.
+     * @example
+     * // Create many TwoFactors
+     * const twoFactor = await prisma.twoFactor.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TwoFactors and only return the `id`
+     * const twoFactorWithIdOnly = await prisma.twoFactor.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TwoFactorCreateManyAndReturnArgs>(args?: SelectSubset<T, TwoFactorCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TwoFactorPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a TwoFactor.
+     * @param {TwoFactorDeleteArgs} args - Arguments to delete one TwoFactor.
+     * @example
+     * // Delete one TwoFactor
+     * const TwoFactor = await prisma.twoFactor.delete({
+     *   where: {
+     *     // ... filter to delete one TwoFactor
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TwoFactorDeleteArgs>(args: SelectSubset<T, TwoFactorDeleteArgs<ExtArgs>>): Prisma__TwoFactorClient<$Result.GetResult<Prisma.$TwoFactorPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one TwoFactor.
+     * @param {TwoFactorUpdateArgs} args - Arguments to update one TwoFactor.
+     * @example
+     * // Update one TwoFactor
+     * const twoFactor = await prisma.twoFactor.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TwoFactorUpdateArgs>(args: SelectSubset<T, TwoFactorUpdateArgs<ExtArgs>>): Prisma__TwoFactorClient<$Result.GetResult<Prisma.$TwoFactorPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more TwoFactors.
+     * @param {TwoFactorDeleteManyArgs} args - Arguments to filter TwoFactors to delete.
+     * @example
+     * // Delete a few TwoFactors
+     * const { count } = await prisma.twoFactor.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TwoFactorDeleteManyArgs>(args?: SelectSubset<T, TwoFactorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TwoFactors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TwoFactorUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TwoFactors
+     * const twoFactor = await prisma.twoFactor.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TwoFactorUpdateManyArgs>(args: SelectSubset<T, TwoFactorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one TwoFactor.
+     * @param {TwoFactorUpsertArgs} args - Arguments to update or create a TwoFactor.
+     * @example
+     * // Update or create a TwoFactor
+     * const twoFactor = await prisma.twoFactor.upsert({
+     *   create: {
+     *     // ... data to create a TwoFactor
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TwoFactor we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TwoFactorUpsertArgs>(args: SelectSubset<T, TwoFactorUpsertArgs<ExtArgs>>): Prisma__TwoFactorClient<$Result.GetResult<Prisma.$TwoFactorPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of TwoFactors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TwoFactorCountArgs} args - Arguments to filter TwoFactors to count.
+     * @example
+     * // Count the number of TwoFactors
+     * const count = await prisma.twoFactor.count({
+     *   where: {
+     *     // ... the filter for the TwoFactors we want to count
+     *   }
+     * })
+    **/
+    count<T extends TwoFactorCountArgs>(
+      args?: Subset<T, TwoFactorCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TwoFactorCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TwoFactor.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TwoFactorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TwoFactorAggregateArgs>(args: Subset<T, TwoFactorAggregateArgs>): Prisma.PrismaPromise<GetTwoFactorAggregateType<T>>
+
+    /**
+     * Group by TwoFactor.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TwoFactorGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TwoFactorGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TwoFactorGroupByArgs['orderBy'] }
+        : { orderBy?: TwoFactorGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TwoFactorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTwoFactorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TwoFactor model
+   */
+  readonly fields: TwoFactorFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TwoFactor.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TwoFactorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TwoFactor model
+   */ 
+  interface TwoFactorFieldRefs {
+    readonly id: FieldRef<"TwoFactor", 'String'>
+    readonly userId: FieldRef<"TwoFactor", 'String'>
+    readonly email: FieldRef<"TwoFactor", 'Boolean'>
+    readonly sms: FieldRef<"TwoFactor", 'Boolean'>
+    readonly authenticator: FieldRef<"TwoFactor", 'Boolean'>
+    readonly secret: FieldRef<"TwoFactor", 'String'>
+    readonly createdAt: FieldRef<"TwoFactor", 'DateTime'>
+    readonly updatedAt: FieldRef<"TwoFactor", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TwoFactor findUnique
+   */
+  export type TwoFactorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TwoFactor
+     */
+    select?: TwoFactorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TwoFactorInclude<ExtArgs> | null
+    /**
+     * Filter, which TwoFactor to fetch.
+     */
+    where: TwoFactorWhereUniqueInput
+  }
+
+  /**
+   * TwoFactor findUniqueOrThrow
+   */
+  export type TwoFactorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TwoFactor
+     */
+    select?: TwoFactorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TwoFactorInclude<ExtArgs> | null
+    /**
+     * Filter, which TwoFactor to fetch.
+     */
+    where: TwoFactorWhereUniqueInput
+  }
+
+  /**
+   * TwoFactor findFirst
+   */
+  export type TwoFactorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TwoFactor
+     */
+    select?: TwoFactorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TwoFactorInclude<ExtArgs> | null
+    /**
+     * Filter, which TwoFactor to fetch.
+     */
+    where?: TwoFactorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TwoFactors to fetch.
+     */
+    orderBy?: TwoFactorOrderByWithRelationInput | TwoFactorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TwoFactors.
+     */
+    cursor?: TwoFactorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TwoFactors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TwoFactors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TwoFactors.
+     */
+    distinct?: TwoFactorScalarFieldEnum | TwoFactorScalarFieldEnum[]
+  }
+
+  /**
+   * TwoFactor findFirstOrThrow
+   */
+  export type TwoFactorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TwoFactor
+     */
+    select?: TwoFactorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TwoFactorInclude<ExtArgs> | null
+    /**
+     * Filter, which TwoFactor to fetch.
+     */
+    where?: TwoFactorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TwoFactors to fetch.
+     */
+    orderBy?: TwoFactorOrderByWithRelationInput | TwoFactorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TwoFactors.
+     */
+    cursor?: TwoFactorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TwoFactors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TwoFactors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TwoFactors.
+     */
+    distinct?: TwoFactorScalarFieldEnum | TwoFactorScalarFieldEnum[]
+  }
+
+  /**
+   * TwoFactor findMany
+   */
+  export type TwoFactorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TwoFactor
+     */
+    select?: TwoFactorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TwoFactorInclude<ExtArgs> | null
+    /**
+     * Filter, which TwoFactors to fetch.
+     */
+    where?: TwoFactorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TwoFactors to fetch.
+     */
+    orderBy?: TwoFactorOrderByWithRelationInput | TwoFactorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TwoFactors.
+     */
+    cursor?: TwoFactorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TwoFactors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TwoFactors.
+     */
+    skip?: number
+    distinct?: TwoFactorScalarFieldEnum | TwoFactorScalarFieldEnum[]
+  }
+
+  /**
+   * TwoFactor create
+   */
+  export type TwoFactorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TwoFactor
+     */
+    select?: TwoFactorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TwoFactorInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TwoFactor.
+     */
+    data: XOR<TwoFactorCreateInput, TwoFactorUncheckedCreateInput>
+  }
+
+  /**
+   * TwoFactor createMany
+   */
+  export type TwoFactorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TwoFactors.
+     */
+    data: TwoFactorCreateManyInput | TwoFactorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TwoFactor createManyAndReturn
+   */
+  export type TwoFactorCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TwoFactor
+     */
+    select?: TwoFactorSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many TwoFactors.
+     */
+    data: TwoFactorCreateManyInput | TwoFactorCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TwoFactorIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TwoFactor update
+   */
+  export type TwoFactorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TwoFactor
+     */
+    select?: TwoFactorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TwoFactorInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TwoFactor.
+     */
+    data: XOR<TwoFactorUpdateInput, TwoFactorUncheckedUpdateInput>
+    /**
+     * Choose, which TwoFactor to update.
+     */
+    where: TwoFactorWhereUniqueInput
+  }
+
+  /**
+   * TwoFactor updateMany
+   */
+  export type TwoFactorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TwoFactors.
+     */
+    data: XOR<TwoFactorUpdateManyMutationInput, TwoFactorUncheckedUpdateManyInput>
+    /**
+     * Filter which TwoFactors to update
+     */
+    where?: TwoFactorWhereInput
+  }
+
+  /**
+   * TwoFactor upsert
+   */
+  export type TwoFactorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TwoFactor
+     */
+    select?: TwoFactorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TwoFactorInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TwoFactor to update in case it exists.
+     */
+    where: TwoFactorWhereUniqueInput
+    /**
+     * In case the TwoFactor found by the `where` argument doesn't exist, create a new TwoFactor with this data.
+     */
+    create: XOR<TwoFactorCreateInput, TwoFactorUncheckedCreateInput>
+    /**
+     * In case the TwoFactor was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TwoFactorUpdateInput, TwoFactorUncheckedUpdateInput>
+  }
+
+  /**
+   * TwoFactor delete
+   */
+  export type TwoFactorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TwoFactor
+     */
+    select?: TwoFactorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TwoFactorInclude<ExtArgs> | null
+    /**
+     * Filter which TwoFactor to delete.
+     */
+    where: TwoFactorWhereUniqueInput
+  }
+
+  /**
+   * TwoFactor deleteMany
+   */
+  export type TwoFactorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TwoFactors to delete
+     */
+    where?: TwoFactorWhereInput
+  }
+
+  /**
+   * TwoFactor without action
+   */
+  export type TwoFactorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TwoFactor
+     */
+    select?: TwoFactorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TwoFactorInclude<ExtArgs> | null
   }
 
 
@@ -8762,6 +11310,7 @@ export namespace Prisma {
     title: string | null
     description: string | null
     academyId: string | null
+    image: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -8771,6 +11320,7 @@ export namespace Prisma {
     title: string | null
     description: string | null
     academyId: string | null
+    image: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -8780,6 +11330,7 @@ export namespace Prisma {
     title: number
     description: number
     academyId: number
+    image: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -8791,6 +11342,7 @@ export namespace Prisma {
     title?: true
     description?: true
     academyId?: true
+    image?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -8800,6 +11352,7 @@ export namespace Prisma {
     title?: true
     description?: true
     academyId?: true
+    image?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -8809,6 +11362,7 @@ export namespace Prisma {
     title?: true
     description?: true
     academyId?: true
+    image?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -8891,6 +11445,7 @@ export namespace Prisma {
     title: string
     description: string
     academyId: string
+    image: string | null
     createdAt: Date
     updatedAt: Date
     _count: CourseCountAggregateOutputType | null
@@ -8917,6 +11472,7 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     academyId?: boolean
+    image?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     academy?: boolean | AcademyDefaultArgs<ExtArgs>
@@ -8925,6 +11481,7 @@ export namespace Prisma {
     quizzes?: boolean | Course$quizzesArgs<ExtArgs>
     instructors?: boolean | Course$instructorsArgs<ExtArgs>
     liveRoom?: boolean | Course$liveRoomArgs<ExtArgs>
+    Path?: boolean | Course$PathArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
 
@@ -8933,6 +11490,7 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     academyId?: boolean
+    image?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     academy?: boolean | AcademyDefaultArgs<ExtArgs>
@@ -8943,6 +11501,7 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     academyId?: boolean
+    image?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -8954,6 +11513,7 @@ export namespace Prisma {
     quizzes?: boolean | Course$quizzesArgs<ExtArgs>
     instructors?: boolean | Course$instructorsArgs<ExtArgs>
     liveRoom?: boolean | Course$liveRoomArgs<ExtArgs>
+    Path?: boolean | Course$PathArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CourseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8969,12 +11529,14 @@ export namespace Prisma {
       quizzes: Prisma.$QuizPayload<ExtArgs>[]
       instructors: Prisma.$InstructorPayload<ExtArgs>[]
       liveRoom: Prisma.$LiveRoomPayload<ExtArgs>[]
+      Path: Prisma.$PathPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
       description: string
       academyId: string
+      image: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["course"]>
@@ -9347,6 +11909,7 @@ export namespace Prisma {
     quizzes<T extends Course$quizzesArgs<ExtArgs> = {}>(args?: Subset<T, Course$quizzesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuizPayload<ExtArgs>, T, "findMany"> | Null>
     instructors<T extends Course$instructorsArgs<ExtArgs> = {}>(args?: Subset<T, Course$instructorsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstructorPayload<ExtArgs>, T, "findMany"> | Null>
     liveRoom<T extends Course$liveRoomArgs<ExtArgs> = {}>(args?: Subset<T, Course$liveRoomArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveRoomPayload<ExtArgs>, T, "findMany"> | Null>
+    Path<T extends Course$PathArgs<ExtArgs> = {}>(args?: Subset<T, Course$PathArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9380,6 +11943,7 @@ export namespace Prisma {
     readonly title: FieldRef<"Course", 'String'>
     readonly description: FieldRef<"Course", 'String'>
     readonly academyId: FieldRef<"Course", 'String'>
+    readonly image: FieldRef<"Course", 'String'>
     readonly createdAt: FieldRef<"Course", 'DateTime'>
     readonly updatedAt: FieldRef<"Course", 'DateTime'>
   }
@@ -9800,6 +12364,26 @@ export namespace Prisma {
   }
 
   /**
+   * Course.Path
+   */
+  export type Course$PathArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Path
+     */
+    select?: PathSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathInclude<ExtArgs> | null
+    where?: PathWhereInput
+    orderBy?: PathOrderByWithRelationInput | PathOrderByWithRelationInput[]
+    cursor?: PathWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PathScalarFieldEnum | PathScalarFieldEnum[]
+  }
+
+  /**
    * Course without action
    */
   export type CourseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9811,6 +12395,2085 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: CourseInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Path
+   */
+
+  export type AggregatePath = {
+    _count: PathCountAggregateOutputType | null
+    _avg: PathAvgAggregateOutputType | null
+    _sum: PathSumAggregateOutputType | null
+    _min: PathMinAggregateOutputType | null
+    _max: PathMaxAggregateOutputType | null
+  }
+
+  export type PathAvgAggregateOutputType = {
+    completedTasks: number | null
+    remainingTime: number | null
+    studyTime: number | null
+    totalTasks: number | null
+    progress: number | null
+    engagement: number | null
+  }
+
+  export type PathSumAggregateOutputType = {
+    completedTasks: number | null
+    remainingTime: number | null
+    studyTime: number | null
+    totalTasks: number | null
+    progress: number | null
+    engagement: number | null
+  }
+
+  export type PathMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    level: string | null
+    completedTasks: number | null
+    remainingTime: number | null
+    studyTime: number | null
+    totalTasks: number | null
+    progress: number | null
+    engagement: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PathMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    level: string | null
+    completedTasks: number | null
+    remainingTime: number | null
+    studyTime: number | null
+    totalTasks: number | null
+    progress: number | null
+    engagement: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PathCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    level: number
+    completedTasks: number
+    remainingTime: number
+    studyTime: number
+    totalTasks: number
+    progress: number
+    engagement: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PathAvgAggregateInputType = {
+    completedTasks?: true
+    remainingTime?: true
+    studyTime?: true
+    totalTasks?: true
+    progress?: true
+    engagement?: true
+  }
+
+  export type PathSumAggregateInputType = {
+    completedTasks?: true
+    remainingTime?: true
+    studyTime?: true
+    totalTasks?: true
+    progress?: true
+    engagement?: true
+  }
+
+  export type PathMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    level?: true
+    completedTasks?: true
+    remainingTime?: true
+    studyTime?: true
+    totalTasks?: true
+    progress?: true
+    engagement?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PathMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    level?: true
+    completedTasks?: true
+    remainingTime?: true
+    studyTime?: true
+    totalTasks?: true
+    progress?: true
+    engagement?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PathCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    level?: true
+    completedTasks?: true
+    remainingTime?: true
+    studyTime?: true
+    totalTasks?: true
+    progress?: true
+    engagement?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PathAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Path to aggregate.
+     */
+    where?: PathWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Paths to fetch.
+     */
+    orderBy?: PathOrderByWithRelationInput | PathOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PathWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Paths from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Paths.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Paths
+    **/
+    _count?: true | PathCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PathAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PathSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PathMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PathMaxAggregateInputType
+  }
+
+  export type GetPathAggregateType<T extends PathAggregateArgs> = {
+        [P in keyof T & keyof AggregatePath]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePath[P]>
+      : GetScalarType<T[P], AggregatePath[P]>
+  }
+
+
+
+
+  export type PathGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PathWhereInput
+    orderBy?: PathOrderByWithAggregationInput | PathOrderByWithAggregationInput[]
+    by: PathScalarFieldEnum[] | PathScalarFieldEnum
+    having?: PathScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PathCountAggregateInputType | true
+    _avg?: PathAvgAggregateInputType
+    _sum?: PathSumAggregateInputType
+    _min?: PathMinAggregateInputType
+    _max?: PathMaxAggregateInputType
+  }
+
+  export type PathGroupByOutputType = {
+    id: string
+    title: string
+    description: string | null
+    level: string
+    completedTasks: number
+    remainingTime: number
+    studyTime: number
+    totalTasks: number
+    progress: number
+    engagement: number
+    createdAt: Date
+    updatedAt: Date
+    _count: PathCountAggregateOutputType | null
+    _avg: PathAvgAggregateOutputType | null
+    _sum: PathSumAggregateOutputType | null
+    _min: PathMinAggregateOutputType | null
+    _max: PathMaxAggregateOutputType | null
+  }
+
+  type GetPathGroupByPayload<T extends PathGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PathGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PathGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PathGroupByOutputType[P]>
+            : GetScalarType<T[P], PathGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PathSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    level?: boolean
+    completedTasks?: boolean
+    remainingTime?: boolean
+    studyTime?: boolean
+    totalTasks?: boolean
+    progress?: boolean
+    engagement?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    milestones?: boolean | Path$milestonesArgs<ExtArgs>
+    courses?: boolean | Path$coursesArgs<ExtArgs>
+    peers?: boolean | Path$peersArgs<ExtArgs>
+    _count?: boolean | PathCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["path"]>
+
+  export type PathSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    level?: boolean
+    completedTasks?: boolean
+    remainingTime?: boolean
+    studyTime?: boolean
+    totalTasks?: boolean
+    progress?: boolean
+    engagement?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["path"]>
+
+  export type PathSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    level?: boolean
+    completedTasks?: boolean
+    remainingTime?: boolean
+    studyTime?: boolean
+    totalTasks?: boolean
+    progress?: boolean
+    engagement?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PathInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    milestones?: boolean | Path$milestonesArgs<ExtArgs>
+    courses?: boolean | Path$coursesArgs<ExtArgs>
+    peers?: boolean | Path$peersArgs<ExtArgs>
+    _count?: boolean | PathCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PathIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $PathPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Path"
+    objects: {
+      milestones: Prisma.$MilestonePayload<ExtArgs>[]
+      courses: Prisma.$CoursePayload<ExtArgs>[]
+      peers: Prisma.$UserPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      description: string | null
+      level: string
+      completedTasks: number
+      remainingTime: number
+      studyTime: number
+      totalTasks: number
+      progress: number
+      engagement: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["path"]>
+    composites: {}
+  }
+
+  type PathGetPayload<S extends boolean | null | undefined | PathDefaultArgs> = $Result.GetResult<Prisma.$PathPayload, S>
+
+  type PathCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<PathFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: PathCountAggregateInputType | true
+    }
+
+  export interface PathDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Path'], meta: { name: 'Path' } }
+    /**
+     * Find zero or one Path that matches the filter.
+     * @param {PathFindUniqueArgs} args - Arguments to find a Path
+     * @example
+     * // Get one Path
+     * const path = await prisma.path.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PathFindUniqueArgs>(args: SelectSubset<T, PathFindUniqueArgs<ExtArgs>>): Prisma__PathClient<$Result.GetResult<Prisma.$PathPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Path that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {PathFindUniqueOrThrowArgs} args - Arguments to find a Path
+     * @example
+     * // Get one Path
+     * const path = await prisma.path.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PathFindUniqueOrThrowArgs>(args: SelectSubset<T, PathFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PathClient<$Result.GetResult<Prisma.$PathPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Path that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PathFindFirstArgs} args - Arguments to find a Path
+     * @example
+     * // Get one Path
+     * const path = await prisma.path.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PathFindFirstArgs>(args?: SelectSubset<T, PathFindFirstArgs<ExtArgs>>): Prisma__PathClient<$Result.GetResult<Prisma.$PathPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Path that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PathFindFirstOrThrowArgs} args - Arguments to find a Path
+     * @example
+     * // Get one Path
+     * const path = await prisma.path.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PathFindFirstOrThrowArgs>(args?: SelectSubset<T, PathFindFirstOrThrowArgs<ExtArgs>>): Prisma__PathClient<$Result.GetResult<Prisma.$PathPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Paths that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PathFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Paths
+     * const paths = await prisma.path.findMany()
+     * 
+     * // Get first 10 Paths
+     * const paths = await prisma.path.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pathWithIdOnly = await prisma.path.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PathFindManyArgs>(args?: SelectSubset<T, PathFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Path.
+     * @param {PathCreateArgs} args - Arguments to create a Path.
+     * @example
+     * // Create one Path
+     * const Path = await prisma.path.create({
+     *   data: {
+     *     // ... data to create a Path
+     *   }
+     * })
+     * 
+     */
+    create<T extends PathCreateArgs>(args: SelectSubset<T, PathCreateArgs<ExtArgs>>): Prisma__PathClient<$Result.GetResult<Prisma.$PathPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Paths.
+     * @param {PathCreateManyArgs} args - Arguments to create many Paths.
+     * @example
+     * // Create many Paths
+     * const path = await prisma.path.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PathCreateManyArgs>(args?: SelectSubset<T, PathCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Paths and returns the data saved in the database.
+     * @param {PathCreateManyAndReturnArgs} args - Arguments to create many Paths.
+     * @example
+     * // Create many Paths
+     * const path = await prisma.path.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Paths and only return the `id`
+     * const pathWithIdOnly = await prisma.path.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PathCreateManyAndReturnArgs>(args?: SelectSubset<T, PathCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Path.
+     * @param {PathDeleteArgs} args - Arguments to delete one Path.
+     * @example
+     * // Delete one Path
+     * const Path = await prisma.path.delete({
+     *   where: {
+     *     // ... filter to delete one Path
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PathDeleteArgs>(args: SelectSubset<T, PathDeleteArgs<ExtArgs>>): Prisma__PathClient<$Result.GetResult<Prisma.$PathPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Path.
+     * @param {PathUpdateArgs} args - Arguments to update one Path.
+     * @example
+     * // Update one Path
+     * const path = await prisma.path.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PathUpdateArgs>(args: SelectSubset<T, PathUpdateArgs<ExtArgs>>): Prisma__PathClient<$Result.GetResult<Prisma.$PathPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Paths.
+     * @param {PathDeleteManyArgs} args - Arguments to filter Paths to delete.
+     * @example
+     * // Delete a few Paths
+     * const { count } = await prisma.path.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PathDeleteManyArgs>(args?: SelectSubset<T, PathDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Paths.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PathUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Paths
+     * const path = await prisma.path.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PathUpdateManyArgs>(args: SelectSubset<T, PathUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Path.
+     * @param {PathUpsertArgs} args - Arguments to update or create a Path.
+     * @example
+     * // Update or create a Path
+     * const path = await prisma.path.upsert({
+     *   create: {
+     *     // ... data to create a Path
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Path we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PathUpsertArgs>(args: SelectSubset<T, PathUpsertArgs<ExtArgs>>): Prisma__PathClient<$Result.GetResult<Prisma.$PathPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Paths.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PathCountArgs} args - Arguments to filter Paths to count.
+     * @example
+     * // Count the number of Paths
+     * const count = await prisma.path.count({
+     *   where: {
+     *     // ... the filter for the Paths we want to count
+     *   }
+     * })
+    **/
+    count<T extends PathCountArgs>(
+      args?: Subset<T, PathCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PathCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Path.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PathAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PathAggregateArgs>(args: Subset<T, PathAggregateArgs>): Prisma.PrismaPromise<GetPathAggregateType<T>>
+
+    /**
+     * Group by Path.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PathGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PathGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PathGroupByArgs['orderBy'] }
+        : { orderBy?: PathGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PathGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPathGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Path model
+   */
+  readonly fields: PathFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Path.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PathClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    milestones<T extends Path$milestonesArgs<ExtArgs> = {}>(args?: Subset<T, Path$milestonesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MilestonePayload<ExtArgs>, T, "findMany"> | Null>
+    courses<T extends Path$coursesArgs<ExtArgs> = {}>(args?: Subset<T, Path$coursesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findMany"> | Null>
+    peers<T extends Path$peersArgs<ExtArgs> = {}>(args?: Subset<T, Path$peersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Path model
+   */ 
+  interface PathFieldRefs {
+    readonly id: FieldRef<"Path", 'String'>
+    readonly title: FieldRef<"Path", 'String'>
+    readonly description: FieldRef<"Path", 'String'>
+    readonly level: FieldRef<"Path", 'String'>
+    readonly completedTasks: FieldRef<"Path", 'Int'>
+    readonly remainingTime: FieldRef<"Path", 'Int'>
+    readonly studyTime: FieldRef<"Path", 'Int'>
+    readonly totalTasks: FieldRef<"Path", 'Int'>
+    readonly progress: FieldRef<"Path", 'Float'>
+    readonly engagement: FieldRef<"Path", 'Float'>
+    readonly createdAt: FieldRef<"Path", 'DateTime'>
+    readonly updatedAt: FieldRef<"Path", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Path findUnique
+   */
+  export type PathFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Path
+     */
+    select?: PathSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathInclude<ExtArgs> | null
+    /**
+     * Filter, which Path to fetch.
+     */
+    where: PathWhereUniqueInput
+  }
+
+  /**
+   * Path findUniqueOrThrow
+   */
+  export type PathFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Path
+     */
+    select?: PathSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathInclude<ExtArgs> | null
+    /**
+     * Filter, which Path to fetch.
+     */
+    where: PathWhereUniqueInput
+  }
+
+  /**
+   * Path findFirst
+   */
+  export type PathFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Path
+     */
+    select?: PathSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathInclude<ExtArgs> | null
+    /**
+     * Filter, which Path to fetch.
+     */
+    where?: PathWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Paths to fetch.
+     */
+    orderBy?: PathOrderByWithRelationInput | PathOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Paths.
+     */
+    cursor?: PathWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Paths from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Paths.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Paths.
+     */
+    distinct?: PathScalarFieldEnum | PathScalarFieldEnum[]
+  }
+
+  /**
+   * Path findFirstOrThrow
+   */
+  export type PathFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Path
+     */
+    select?: PathSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathInclude<ExtArgs> | null
+    /**
+     * Filter, which Path to fetch.
+     */
+    where?: PathWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Paths to fetch.
+     */
+    orderBy?: PathOrderByWithRelationInput | PathOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Paths.
+     */
+    cursor?: PathWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Paths from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Paths.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Paths.
+     */
+    distinct?: PathScalarFieldEnum | PathScalarFieldEnum[]
+  }
+
+  /**
+   * Path findMany
+   */
+  export type PathFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Path
+     */
+    select?: PathSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathInclude<ExtArgs> | null
+    /**
+     * Filter, which Paths to fetch.
+     */
+    where?: PathWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Paths to fetch.
+     */
+    orderBy?: PathOrderByWithRelationInput | PathOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Paths.
+     */
+    cursor?: PathWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Paths from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Paths.
+     */
+    skip?: number
+    distinct?: PathScalarFieldEnum | PathScalarFieldEnum[]
+  }
+
+  /**
+   * Path create
+   */
+  export type PathCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Path
+     */
+    select?: PathSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Path.
+     */
+    data: XOR<PathCreateInput, PathUncheckedCreateInput>
+  }
+
+  /**
+   * Path createMany
+   */
+  export type PathCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Paths.
+     */
+    data: PathCreateManyInput | PathCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Path createManyAndReturn
+   */
+  export type PathCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Path
+     */
+    select?: PathSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Paths.
+     */
+    data: PathCreateManyInput | PathCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Path update
+   */
+  export type PathUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Path
+     */
+    select?: PathSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Path.
+     */
+    data: XOR<PathUpdateInput, PathUncheckedUpdateInput>
+    /**
+     * Choose, which Path to update.
+     */
+    where: PathWhereUniqueInput
+  }
+
+  /**
+   * Path updateMany
+   */
+  export type PathUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Paths.
+     */
+    data: XOR<PathUpdateManyMutationInput, PathUncheckedUpdateManyInput>
+    /**
+     * Filter which Paths to update
+     */
+    where?: PathWhereInput
+  }
+
+  /**
+   * Path upsert
+   */
+  export type PathUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Path
+     */
+    select?: PathSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Path to update in case it exists.
+     */
+    where: PathWhereUniqueInput
+    /**
+     * In case the Path found by the `where` argument doesn't exist, create a new Path with this data.
+     */
+    create: XOR<PathCreateInput, PathUncheckedCreateInput>
+    /**
+     * In case the Path was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PathUpdateInput, PathUncheckedUpdateInput>
+  }
+
+  /**
+   * Path delete
+   */
+  export type PathDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Path
+     */
+    select?: PathSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathInclude<ExtArgs> | null
+    /**
+     * Filter which Path to delete.
+     */
+    where: PathWhereUniqueInput
+  }
+
+  /**
+   * Path deleteMany
+   */
+  export type PathDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Paths to delete
+     */
+    where?: PathWhereInput
+  }
+
+  /**
+   * Path.milestones
+   */
+  export type Path$milestonesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Milestone
+     */
+    select?: MilestoneSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MilestoneInclude<ExtArgs> | null
+    where?: MilestoneWhereInput
+    orderBy?: MilestoneOrderByWithRelationInput | MilestoneOrderByWithRelationInput[]
+    cursor?: MilestoneWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MilestoneScalarFieldEnum | MilestoneScalarFieldEnum[]
+  }
+
+  /**
+   * Path.courses
+   */
+  export type Path$coursesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: CourseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourseInclude<ExtArgs> | null
+    where?: CourseWhereInput
+    orderBy?: CourseOrderByWithRelationInput | CourseOrderByWithRelationInput[]
+    cursor?: CourseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CourseScalarFieldEnum | CourseScalarFieldEnum[]
+  }
+
+  /**
+   * Path.peers
+   */
+  export type Path$peersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * Path without action
+   */
+  export type PathDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Path
+     */
+    select?: PathSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PathInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Milestone
+   */
+
+  export type AggregateMilestone = {
+    _count: MilestoneCountAggregateOutputType | null
+    _min: MilestoneMinAggregateOutputType | null
+    _max: MilestoneMaxAggregateOutputType | null
+  }
+
+  export type MilestoneMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    status: $Enums.MilestoneStatus | null
+    pathId: string | null
+    createdAt: Date | null
+  }
+
+  export type MilestoneMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    status: $Enums.MilestoneStatus | null
+    pathId: string | null
+    createdAt: Date | null
+  }
+
+  export type MilestoneCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    status: number
+    pathId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type MilestoneMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    status?: true
+    pathId?: true
+    createdAt?: true
+  }
+
+  export type MilestoneMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    status?: true
+    pathId?: true
+    createdAt?: true
+  }
+
+  export type MilestoneCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    status?: true
+    pathId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type MilestoneAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Milestone to aggregate.
+     */
+    where?: MilestoneWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Milestones to fetch.
+     */
+    orderBy?: MilestoneOrderByWithRelationInput | MilestoneOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MilestoneWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Milestones from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Milestones.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Milestones
+    **/
+    _count?: true | MilestoneCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MilestoneMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MilestoneMaxAggregateInputType
+  }
+
+  export type GetMilestoneAggregateType<T extends MilestoneAggregateArgs> = {
+        [P in keyof T & keyof AggregateMilestone]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMilestone[P]>
+      : GetScalarType<T[P], AggregateMilestone[P]>
+  }
+
+
+
+
+  export type MilestoneGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MilestoneWhereInput
+    orderBy?: MilestoneOrderByWithAggregationInput | MilestoneOrderByWithAggregationInput[]
+    by: MilestoneScalarFieldEnum[] | MilestoneScalarFieldEnum
+    having?: MilestoneScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MilestoneCountAggregateInputType | true
+    _min?: MilestoneMinAggregateInputType
+    _max?: MilestoneMaxAggregateInputType
+  }
+
+  export type MilestoneGroupByOutputType = {
+    id: string
+    title: string
+    description: string | null
+    status: $Enums.MilestoneStatus
+    pathId: string
+    createdAt: Date
+    _count: MilestoneCountAggregateOutputType | null
+    _min: MilestoneMinAggregateOutputType | null
+    _max: MilestoneMaxAggregateOutputType | null
+  }
+
+  type GetMilestoneGroupByPayload<T extends MilestoneGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MilestoneGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MilestoneGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MilestoneGroupByOutputType[P]>
+            : GetScalarType<T[P], MilestoneGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MilestoneSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    status?: boolean
+    pathId?: boolean
+    createdAt?: boolean
+    path?: boolean | PathDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["milestone"]>
+
+  export type MilestoneSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    status?: boolean
+    pathId?: boolean
+    createdAt?: boolean
+    path?: boolean | PathDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["milestone"]>
+
+  export type MilestoneSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    status?: boolean
+    pathId?: boolean
+    createdAt?: boolean
+  }
+
+  export type MilestoneInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    path?: boolean | PathDefaultArgs<ExtArgs>
+  }
+  export type MilestoneIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    path?: boolean | PathDefaultArgs<ExtArgs>
+  }
+
+  export type $MilestonePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Milestone"
+    objects: {
+      path: Prisma.$PathPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      description: string | null
+      status: $Enums.MilestoneStatus
+      pathId: string
+      createdAt: Date
+    }, ExtArgs["result"]["milestone"]>
+    composites: {}
+  }
+
+  type MilestoneGetPayload<S extends boolean | null | undefined | MilestoneDefaultArgs> = $Result.GetResult<Prisma.$MilestonePayload, S>
+
+  type MilestoneCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<MilestoneFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: MilestoneCountAggregateInputType | true
+    }
+
+  export interface MilestoneDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Milestone'], meta: { name: 'Milestone' } }
+    /**
+     * Find zero or one Milestone that matches the filter.
+     * @param {MilestoneFindUniqueArgs} args - Arguments to find a Milestone
+     * @example
+     * // Get one Milestone
+     * const milestone = await prisma.milestone.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MilestoneFindUniqueArgs>(args: SelectSubset<T, MilestoneFindUniqueArgs<ExtArgs>>): Prisma__MilestoneClient<$Result.GetResult<Prisma.$MilestonePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Milestone that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {MilestoneFindUniqueOrThrowArgs} args - Arguments to find a Milestone
+     * @example
+     * // Get one Milestone
+     * const milestone = await prisma.milestone.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MilestoneFindUniqueOrThrowArgs>(args: SelectSubset<T, MilestoneFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MilestoneClient<$Result.GetResult<Prisma.$MilestonePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Milestone that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MilestoneFindFirstArgs} args - Arguments to find a Milestone
+     * @example
+     * // Get one Milestone
+     * const milestone = await prisma.milestone.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MilestoneFindFirstArgs>(args?: SelectSubset<T, MilestoneFindFirstArgs<ExtArgs>>): Prisma__MilestoneClient<$Result.GetResult<Prisma.$MilestonePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Milestone that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MilestoneFindFirstOrThrowArgs} args - Arguments to find a Milestone
+     * @example
+     * // Get one Milestone
+     * const milestone = await prisma.milestone.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MilestoneFindFirstOrThrowArgs>(args?: SelectSubset<T, MilestoneFindFirstOrThrowArgs<ExtArgs>>): Prisma__MilestoneClient<$Result.GetResult<Prisma.$MilestonePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Milestones that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MilestoneFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Milestones
+     * const milestones = await prisma.milestone.findMany()
+     * 
+     * // Get first 10 Milestones
+     * const milestones = await prisma.milestone.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const milestoneWithIdOnly = await prisma.milestone.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MilestoneFindManyArgs>(args?: SelectSubset<T, MilestoneFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MilestonePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Milestone.
+     * @param {MilestoneCreateArgs} args - Arguments to create a Milestone.
+     * @example
+     * // Create one Milestone
+     * const Milestone = await prisma.milestone.create({
+     *   data: {
+     *     // ... data to create a Milestone
+     *   }
+     * })
+     * 
+     */
+    create<T extends MilestoneCreateArgs>(args: SelectSubset<T, MilestoneCreateArgs<ExtArgs>>): Prisma__MilestoneClient<$Result.GetResult<Prisma.$MilestonePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Milestones.
+     * @param {MilestoneCreateManyArgs} args - Arguments to create many Milestones.
+     * @example
+     * // Create many Milestones
+     * const milestone = await prisma.milestone.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MilestoneCreateManyArgs>(args?: SelectSubset<T, MilestoneCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Milestones and returns the data saved in the database.
+     * @param {MilestoneCreateManyAndReturnArgs} args - Arguments to create many Milestones.
+     * @example
+     * // Create many Milestones
+     * const milestone = await prisma.milestone.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Milestones and only return the `id`
+     * const milestoneWithIdOnly = await prisma.milestone.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MilestoneCreateManyAndReturnArgs>(args?: SelectSubset<T, MilestoneCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MilestonePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Milestone.
+     * @param {MilestoneDeleteArgs} args - Arguments to delete one Milestone.
+     * @example
+     * // Delete one Milestone
+     * const Milestone = await prisma.milestone.delete({
+     *   where: {
+     *     // ... filter to delete one Milestone
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MilestoneDeleteArgs>(args: SelectSubset<T, MilestoneDeleteArgs<ExtArgs>>): Prisma__MilestoneClient<$Result.GetResult<Prisma.$MilestonePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Milestone.
+     * @param {MilestoneUpdateArgs} args - Arguments to update one Milestone.
+     * @example
+     * // Update one Milestone
+     * const milestone = await prisma.milestone.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MilestoneUpdateArgs>(args: SelectSubset<T, MilestoneUpdateArgs<ExtArgs>>): Prisma__MilestoneClient<$Result.GetResult<Prisma.$MilestonePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Milestones.
+     * @param {MilestoneDeleteManyArgs} args - Arguments to filter Milestones to delete.
+     * @example
+     * // Delete a few Milestones
+     * const { count } = await prisma.milestone.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MilestoneDeleteManyArgs>(args?: SelectSubset<T, MilestoneDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Milestones.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MilestoneUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Milestones
+     * const milestone = await prisma.milestone.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MilestoneUpdateManyArgs>(args: SelectSubset<T, MilestoneUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Milestone.
+     * @param {MilestoneUpsertArgs} args - Arguments to update or create a Milestone.
+     * @example
+     * // Update or create a Milestone
+     * const milestone = await prisma.milestone.upsert({
+     *   create: {
+     *     // ... data to create a Milestone
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Milestone we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MilestoneUpsertArgs>(args: SelectSubset<T, MilestoneUpsertArgs<ExtArgs>>): Prisma__MilestoneClient<$Result.GetResult<Prisma.$MilestonePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Milestones.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MilestoneCountArgs} args - Arguments to filter Milestones to count.
+     * @example
+     * // Count the number of Milestones
+     * const count = await prisma.milestone.count({
+     *   where: {
+     *     // ... the filter for the Milestones we want to count
+     *   }
+     * })
+    **/
+    count<T extends MilestoneCountArgs>(
+      args?: Subset<T, MilestoneCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MilestoneCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Milestone.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MilestoneAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MilestoneAggregateArgs>(args: Subset<T, MilestoneAggregateArgs>): Prisma.PrismaPromise<GetMilestoneAggregateType<T>>
+
+    /**
+     * Group by Milestone.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MilestoneGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MilestoneGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MilestoneGroupByArgs['orderBy'] }
+        : { orderBy?: MilestoneGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MilestoneGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMilestoneGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Milestone model
+   */
+  readonly fields: MilestoneFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Milestone.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MilestoneClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    path<T extends PathDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PathDefaultArgs<ExtArgs>>): Prisma__PathClient<$Result.GetResult<Prisma.$PathPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Milestone model
+   */ 
+  interface MilestoneFieldRefs {
+    readonly id: FieldRef<"Milestone", 'String'>
+    readonly title: FieldRef<"Milestone", 'String'>
+    readonly description: FieldRef<"Milestone", 'String'>
+    readonly status: FieldRef<"Milestone", 'MilestoneStatus'>
+    readonly pathId: FieldRef<"Milestone", 'String'>
+    readonly createdAt: FieldRef<"Milestone", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Milestone findUnique
+   */
+  export type MilestoneFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Milestone
+     */
+    select?: MilestoneSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MilestoneInclude<ExtArgs> | null
+    /**
+     * Filter, which Milestone to fetch.
+     */
+    where: MilestoneWhereUniqueInput
+  }
+
+  /**
+   * Milestone findUniqueOrThrow
+   */
+  export type MilestoneFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Milestone
+     */
+    select?: MilestoneSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MilestoneInclude<ExtArgs> | null
+    /**
+     * Filter, which Milestone to fetch.
+     */
+    where: MilestoneWhereUniqueInput
+  }
+
+  /**
+   * Milestone findFirst
+   */
+  export type MilestoneFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Milestone
+     */
+    select?: MilestoneSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MilestoneInclude<ExtArgs> | null
+    /**
+     * Filter, which Milestone to fetch.
+     */
+    where?: MilestoneWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Milestones to fetch.
+     */
+    orderBy?: MilestoneOrderByWithRelationInput | MilestoneOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Milestones.
+     */
+    cursor?: MilestoneWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Milestones from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Milestones.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Milestones.
+     */
+    distinct?: MilestoneScalarFieldEnum | MilestoneScalarFieldEnum[]
+  }
+
+  /**
+   * Milestone findFirstOrThrow
+   */
+  export type MilestoneFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Milestone
+     */
+    select?: MilestoneSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MilestoneInclude<ExtArgs> | null
+    /**
+     * Filter, which Milestone to fetch.
+     */
+    where?: MilestoneWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Milestones to fetch.
+     */
+    orderBy?: MilestoneOrderByWithRelationInput | MilestoneOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Milestones.
+     */
+    cursor?: MilestoneWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Milestones from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Milestones.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Milestones.
+     */
+    distinct?: MilestoneScalarFieldEnum | MilestoneScalarFieldEnum[]
+  }
+
+  /**
+   * Milestone findMany
+   */
+  export type MilestoneFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Milestone
+     */
+    select?: MilestoneSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MilestoneInclude<ExtArgs> | null
+    /**
+     * Filter, which Milestones to fetch.
+     */
+    where?: MilestoneWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Milestones to fetch.
+     */
+    orderBy?: MilestoneOrderByWithRelationInput | MilestoneOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Milestones.
+     */
+    cursor?: MilestoneWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Milestones from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Milestones.
+     */
+    skip?: number
+    distinct?: MilestoneScalarFieldEnum | MilestoneScalarFieldEnum[]
+  }
+
+  /**
+   * Milestone create
+   */
+  export type MilestoneCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Milestone
+     */
+    select?: MilestoneSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MilestoneInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Milestone.
+     */
+    data: XOR<MilestoneCreateInput, MilestoneUncheckedCreateInput>
+  }
+
+  /**
+   * Milestone createMany
+   */
+  export type MilestoneCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Milestones.
+     */
+    data: MilestoneCreateManyInput | MilestoneCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Milestone createManyAndReturn
+   */
+  export type MilestoneCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Milestone
+     */
+    select?: MilestoneSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Milestones.
+     */
+    data: MilestoneCreateManyInput | MilestoneCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MilestoneIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Milestone update
+   */
+  export type MilestoneUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Milestone
+     */
+    select?: MilestoneSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MilestoneInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Milestone.
+     */
+    data: XOR<MilestoneUpdateInput, MilestoneUncheckedUpdateInput>
+    /**
+     * Choose, which Milestone to update.
+     */
+    where: MilestoneWhereUniqueInput
+  }
+
+  /**
+   * Milestone updateMany
+   */
+  export type MilestoneUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Milestones.
+     */
+    data: XOR<MilestoneUpdateManyMutationInput, MilestoneUncheckedUpdateManyInput>
+    /**
+     * Filter which Milestones to update
+     */
+    where?: MilestoneWhereInput
+  }
+
+  /**
+   * Milestone upsert
+   */
+  export type MilestoneUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Milestone
+     */
+    select?: MilestoneSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MilestoneInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Milestone to update in case it exists.
+     */
+    where: MilestoneWhereUniqueInput
+    /**
+     * In case the Milestone found by the `where` argument doesn't exist, create a new Milestone with this data.
+     */
+    create: XOR<MilestoneCreateInput, MilestoneUncheckedCreateInput>
+    /**
+     * In case the Milestone was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MilestoneUpdateInput, MilestoneUncheckedUpdateInput>
+  }
+
+  /**
+   * Milestone delete
+   */
+  export type MilestoneDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Milestone
+     */
+    select?: MilestoneSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MilestoneInclude<ExtArgs> | null
+    /**
+     * Filter which Milestone to delete.
+     */
+    where: MilestoneWhereUniqueInput
+  }
+
+  /**
+   * Milestone deleteMany
+   */
+  export type MilestoneDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Milestones to delete
+     */
+    where?: MilestoneWhereInput
+  }
+
+  /**
+   * Milestone without action
+   */
+  export type MilestoneDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Milestone
+     */
+    select?: MilestoneSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MilestoneInclude<ExtArgs> | null
   }
 
 
@@ -35739,10 +40402,42 @@ export namespace Prisma {
     avatar: 'avatar',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    academyId: 'academyId'
+    academyId: 'academyId',
+    isOnline: 'isOnline',
+    isVerified: 'isVerified',
+    age: 'age'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const LoginHistoryScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    success: 'success',
+    ip: 'ip',
+    device: 'device',
+    location: 'location',
+    browser: 'browser',
+    os: 'os',
+    createdAt: 'createdAt'
+  };
+
+  export type LoginHistoryScalarFieldEnum = (typeof LoginHistoryScalarFieldEnum)[keyof typeof LoginHistoryScalarFieldEnum]
+
+
+  export const TwoFactorScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    email: 'email',
+    sms: 'sms',
+    authenticator: 'authenticator',
+    secret: 'secret',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TwoFactorScalarFieldEnum = (typeof TwoFactorScalarFieldEnum)[keyof typeof TwoFactorScalarFieldEnum]
 
 
   export const ProfileScalarFieldEnum: {
@@ -35784,11 +40479,42 @@ export namespace Prisma {
     title: 'title',
     description: 'description',
     academyId: 'academyId',
+    image: 'image',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
+
+
+  export const PathScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    level: 'level',
+    completedTasks: 'completedTasks',
+    remainingTime: 'remainingTime',
+    studyTime: 'studyTime',
+    totalTasks: 'totalTasks',
+    progress: 'progress',
+    engagement: 'engagement',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PathScalarFieldEnum = (typeof PathScalarFieldEnum)[keyof typeof PathScalarFieldEnum]
+
+
+  export const MilestoneScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    status: 'status',
+    pathId: 'pathId',
+    createdAt: 'createdAt'
+  };
+
+  export type MilestoneScalarFieldEnum = (typeof MilestoneScalarFieldEnum)[keyof typeof MilestoneScalarFieldEnum]
 
 
   export const LessonScalarFieldEnum: {
@@ -36226,6 +40952,41 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'LoginDevice'
+   */
+  export type EnumLoginDeviceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LoginDevice'>
+    
+
+
+  /**
+   * Reference to a field of type 'LoginDevice[]'
+   */
+  export type ListEnumLoginDeviceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LoginDevice[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -36247,23 +41008,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'MilestoneStatus'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type EnumMilestoneStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MilestoneStatus'>
     
 
 
   /**
-   * Reference to a field of type 'Int[]'
+   * Reference to a field of type 'MilestoneStatus[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+  export type ListEnumMilestoneStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MilestoneStatus[]'>
     
 
 
@@ -36300,6 +41054,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     academyId?: StringNullableFilter<"User"> | string | null
+    isOnline?: BoolFilter<"User"> | boolean
+    isVerified?: BoolFilter<"User"> | boolean
+    age?: IntNullableFilter<"User"> | number | null
     academy?: XOR<AcademyNullableScalarRelationFilter, AcademyWhereInput> | null
     profile?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
     enrollments?: EnrollmentListRelationFilter
@@ -36323,6 +41080,9 @@ export namespace Prisma {
     Community?: CommunityListRelationFilter
     LiveRoom?: LiveRoomListRelationFilter
     NotificationSettings?: NotificationSettingsListRelationFilter
+    Path?: PathListRelationFilter
+    LoginHistory?: LoginHistoryListRelationFilter
+    TwoFactor?: TwoFactorListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -36338,6 +41098,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     academyId?: SortOrderInput | SortOrder
+    isOnline?: SortOrder
+    isVerified?: SortOrder
+    age?: SortOrderInput | SortOrder
     academy?: AcademyOrderByWithRelationInput
     profile?: ProfileOrderByWithRelationInput
     enrollments?: EnrollmentOrderByRelationAggregateInput
@@ -36361,6 +41124,9 @@ export namespace Prisma {
     Community?: CommunityOrderByRelationAggregateInput
     LiveRoom?: LiveRoomOrderByRelationAggregateInput
     NotificationSettings?: NotificationSettingsOrderByRelationAggregateInput
+    Path?: PathOrderByRelationAggregateInput
+    LoginHistory?: LoginHistoryOrderByRelationAggregateInput
+    TwoFactor?: TwoFactorOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -36379,6 +41145,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     academyId?: StringNullableFilter<"User"> | string | null
+    isOnline?: BoolFilter<"User"> | boolean
+    isVerified?: BoolFilter<"User"> | boolean
+    age?: IntNullableFilter<"User"> | number | null
     academy?: XOR<AcademyNullableScalarRelationFilter, AcademyWhereInput> | null
     profile?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
     enrollments?: EnrollmentListRelationFilter
@@ -36402,6 +41171,9 @@ export namespace Prisma {
     Community?: CommunityListRelationFilter
     LiveRoom?: LiveRoomListRelationFilter
     NotificationSettings?: NotificationSettingsListRelationFilter
+    Path?: PathListRelationFilter
+    LoginHistory?: LoginHistoryListRelationFilter
+    TwoFactor?: TwoFactorListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -36417,9 +41189,14 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     academyId?: SortOrderInput | SortOrder
+    isOnline?: SortOrder
+    isVerified?: SortOrder
+    age?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
@@ -36438,6 +41215,154 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     academyId?: StringNullableWithAggregatesFilter<"User"> | string | null
+    isOnline?: BoolWithAggregatesFilter<"User"> | boolean
+    isVerified?: BoolWithAggregatesFilter<"User"> | boolean
+    age?: IntNullableWithAggregatesFilter<"User"> | number | null
+  }
+
+  export type LoginHistoryWhereInput = {
+    AND?: LoginHistoryWhereInput | LoginHistoryWhereInput[]
+    OR?: LoginHistoryWhereInput[]
+    NOT?: LoginHistoryWhereInput | LoginHistoryWhereInput[]
+    id?: StringFilter<"LoginHistory"> | string
+    userId?: StringFilter<"LoginHistory"> | string
+    success?: BoolFilter<"LoginHistory"> | boolean
+    ip?: StringNullableFilter<"LoginHistory"> | string | null
+    device?: EnumLoginDeviceNullableFilter<"LoginHistory"> | $Enums.LoginDevice | null
+    location?: StringNullableFilter<"LoginHistory"> | string | null
+    browser?: StringNullableFilter<"LoginHistory"> | string | null
+    os?: StringNullableFilter<"LoginHistory"> | string | null
+    createdAt?: DateTimeFilter<"LoginHistory"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type LoginHistoryOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    success?: SortOrder
+    ip?: SortOrderInput | SortOrder
+    device?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
+    browser?: SortOrderInput | SortOrder
+    os?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type LoginHistoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: LoginHistoryWhereInput | LoginHistoryWhereInput[]
+    OR?: LoginHistoryWhereInput[]
+    NOT?: LoginHistoryWhereInput | LoginHistoryWhereInput[]
+    userId?: StringFilter<"LoginHistory"> | string
+    success?: BoolFilter<"LoginHistory"> | boolean
+    ip?: StringNullableFilter<"LoginHistory"> | string | null
+    device?: EnumLoginDeviceNullableFilter<"LoginHistory"> | $Enums.LoginDevice | null
+    location?: StringNullableFilter<"LoginHistory"> | string | null
+    browser?: StringNullableFilter<"LoginHistory"> | string | null
+    os?: StringNullableFilter<"LoginHistory"> | string | null
+    createdAt?: DateTimeFilter<"LoginHistory"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type LoginHistoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    success?: SortOrder
+    ip?: SortOrderInput | SortOrder
+    device?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
+    browser?: SortOrderInput | SortOrder
+    os?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: LoginHistoryCountOrderByAggregateInput
+    _max?: LoginHistoryMaxOrderByAggregateInput
+    _min?: LoginHistoryMinOrderByAggregateInput
+  }
+
+  export type LoginHistoryScalarWhereWithAggregatesInput = {
+    AND?: LoginHistoryScalarWhereWithAggregatesInput | LoginHistoryScalarWhereWithAggregatesInput[]
+    OR?: LoginHistoryScalarWhereWithAggregatesInput[]
+    NOT?: LoginHistoryScalarWhereWithAggregatesInput | LoginHistoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"LoginHistory"> | string
+    userId?: StringWithAggregatesFilter<"LoginHistory"> | string
+    success?: BoolWithAggregatesFilter<"LoginHistory"> | boolean
+    ip?: StringNullableWithAggregatesFilter<"LoginHistory"> | string | null
+    device?: EnumLoginDeviceNullableWithAggregatesFilter<"LoginHistory"> | $Enums.LoginDevice | null
+    location?: StringNullableWithAggregatesFilter<"LoginHistory"> | string | null
+    browser?: StringNullableWithAggregatesFilter<"LoginHistory"> | string | null
+    os?: StringNullableWithAggregatesFilter<"LoginHistory"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"LoginHistory"> | Date | string
+  }
+
+  export type TwoFactorWhereInput = {
+    AND?: TwoFactorWhereInput | TwoFactorWhereInput[]
+    OR?: TwoFactorWhereInput[]
+    NOT?: TwoFactorWhereInput | TwoFactorWhereInput[]
+    id?: StringFilter<"TwoFactor"> | string
+    userId?: StringFilter<"TwoFactor"> | string
+    email?: BoolFilter<"TwoFactor"> | boolean
+    sms?: BoolFilter<"TwoFactor"> | boolean
+    authenticator?: BoolFilter<"TwoFactor"> | boolean
+    secret?: StringNullableFilter<"TwoFactor"> | string | null
+    createdAt?: DateTimeFilter<"TwoFactor"> | Date | string
+    updatedAt?: DateTimeFilter<"TwoFactor"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type TwoFactorOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    email?: SortOrder
+    sms?: SortOrder
+    authenticator?: SortOrder
+    secret?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type TwoFactorWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: TwoFactorWhereInput | TwoFactorWhereInput[]
+    OR?: TwoFactorWhereInput[]
+    NOT?: TwoFactorWhereInput | TwoFactorWhereInput[]
+    userId?: StringFilter<"TwoFactor"> | string
+    email?: BoolFilter<"TwoFactor"> | boolean
+    sms?: BoolFilter<"TwoFactor"> | boolean
+    authenticator?: BoolFilter<"TwoFactor"> | boolean
+    secret?: StringNullableFilter<"TwoFactor"> | string | null
+    createdAt?: DateTimeFilter<"TwoFactor"> | Date | string
+    updatedAt?: DateTimeFilter<"TwoFactor"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type TwoFactorOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    email?: SortOrder
+    sms?: SortOrder
+    authenticator?: SortOrder
+    secret?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TwoFactorCountOrderByAggregateInput
+    _max?: TwoFactorMaxOrderByAggregateInput
+    _min?: TwoFactorMinOrderByAggregateInput
+  }
+
+  export type TwoFactorScalarWhereWithAggregatesInput = {
+    AND?: TwoFactorScalarWhereWithAggregatesInput | TwoFactorScalarWhereWithAggregatesInput[]
+    OR?: TwoFactorScalarWhereWithAggregatesInput[]
+    NOT?: TwoFactorScalarWhereWithAggregatesInput | TwoFactorScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TwoFactor"> | string
+    userId?: StringWithAggregatesFilter<"TwoFactor"> | string
+    email?: BoolWithAggregatesFilter<"TwoFactor"> | boolean
+    sms?: BoolWithAggregatesFilter<"TwoFactor"> | boolean
+    authenticator?: BoolWithAggregatesFilter<"TwoFactor"> | boolean
+    secret?: StringNullableWithAggregatesFilter<"TwoFactor"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"TwoFactor"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TwoFactor"> | Date | string
   }
 
   export type ProfileWhereInput = {
@@ -36633,6 +41558,7 @@ export namespace Prisma {
     title?: StringFilter<"Course"> | string
     description?: StringFilter<"Course"> | string
     academyId?: StringFilter<"Course"> | string
+    image?: StringNullableFilter<"Course"> | string | null
     createdAt?: DateTimeFilter<"Course"> | Date | string
     updatedAt?: DateTimeFilter<"Course"> | Date | string
     academy?: XOR<AcademyScalarRelationFilter, AcademyWhereInput>
@@ -36641,6 +41567,7 @@ export namespace Prisma {
     quizzes?: QuizListRelationFilter
     instructors?: InstructorListRelationFilter
     liveRoom?: LiveRoomListRelationFilter
+    Path?: PathListRelationFilter
   }
 
   export type CourseOrderByWithRelationInput = {
@@ -36648,6 +41575,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     academyId?: SortOrder
+    image?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     academy?: AcademyOrderByWithRelationInput
@@ -36656,6 +41584,7 @@ export namespace Prisma {
     quizzes?: QuizOrderByRelationAggregateInput
     instructors?: InstructorOrderByRelationAggregateInput
     liveRoom?: LiveRoomOrderByRelationAggregateInput
+    Path?: PathOrderByRelationAggregateInput
   }
 
   export type CourseWhereUniqueInput = Prisma.AtLeast<{
@@ -36666,6 +41595,7 @@ export namespace Prisma {
     title?: StringFilter<"Course"> | string
     description?: StringFilter<"Course"> | string
     academyId?: StringFilter<"Course"> | string
+    image?: StringNullableFilter<"Course"> | string | null
     createdAt?: DateTimeFilter<"Course"> | Date | string
     updatedAt?: DateTimeFilter<"Course"> | Date | string
     academy?: XOR<AcademyScalarRelationFilter, AcademyWhereInput>
@@ -36674,6 +41604,7 @@ export namespace Prisma {
     quizzes?: QuizListRelationFilter
     instructors?: InstructorListRelationFilter
     liveRoom?: LiveRoomListRelationFilter
+    Path?: PathListRelationFilter
   }, "id">
 
   export type CourseOrderByWithAggregationInput = {
@@ -36681,6 +41612,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     academyId?: SortOrder
+    image?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CourseCountOrderByAggregateInput
@@ -36696,8 +41628,167 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Course"> | string
     description?: StringWithAggregatesFilter<"Course"> | string
     academyId?: StringWithAggregatesFilter<"Course"> | string
+    image?: StringNullableWithAggregatesFilter<"Course"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
+  }
+
+  export type PathWhereInput = {
+    AND?: PathWhereInput | PathWhereInput[]
+    OR?: PathWhereInput[]
+    NOT?: PathWhereInput | PathWhereInput[]
+    id?: StringFilter<"Path"> | string
+    title?: StringFilter<"Path"> | string
+    description?: StringNullableFilter<"Path"> | string | null
+    level?: StringFilter<"Path"> | string
+    completedTasks?: IntFilter<"Path"> | number
+    remainingTime?: IntFilter<"Path"> | number
+    studyTime?: IntFilter<"Path"> | number
+    totalTasks?: IntFilter<"Path"> | number
+    progress?: FloatFilter<"Path"> | number
+    engagement?: FloatFilter<"Path"> | number
+    createdAt?: DateTimeFilter<"Path"> | Date | string
+    updatedAt?: DateTimeFilter<"Path"> | Date | string
+    milestones?: MilestoneListRelationFilter
+    courses?: CourseListRelationFilter
+    peers?: UserListRelationFilter
+  }
+
+  export type PathOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    level?: SortOrder
+    completedTasks?: SortOrder
+    remainingTime?: SortOrder
+    studyTime?: SortOrder
+    totalTasks?: SortOrder
+    progress?: SortOrder
+    engagement?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    milestones?: MilestoneOrderByRelationAggregateInput
+    courses?: CourseOrderByRelationAggregateInput
+    peers?: UserOrderByRelationAggregateInput
+  }
+
+  export type PathWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PathWhereInput | PathWhereInput[]
+    OR?: PathWhereInput[]
+    NOT?: PathWhereInput | PathWhereInput[]
+    title?: StringFilter<"Path"> | string
+    description?: StringNullableFilter<"Path"> | string | null
+    level?: StringFilter<"Path"> | string
+    completedTasks?: IntFilter<"Path"> | number
+    remainingTime?: IntFilter<"Path"> | number
+    studyTime?: IntFilter<"Path"> | number
+    totalTasks?: IntFilter<"Path"> | number
+    progress?: FloatFilter<"Path"> | number
+    engagement?: FloatFilter<"Path"> | number
+    createdAt?: DateTimeFilter<"Path"> | Date | string
+    updatedAt?: DateTimeFilter<"Path"> | Date | string
+    milestones?: MilestoneListRelationFilter
+    courses?: CourseListRelationFilter
+    peers?: UserListRelationFilter
+  }, "id">
+
+  export type PathOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    level?: SortOrder
+    completedTasks?: SortOrder
+    remainingTime?: SortOrder
+    studyTime?: SortOrder
+    totalTasks?: SortOrder
+    progress?: SortOrder
+    engagement?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PathCountOrderByAggregateInput
+    _avg?: PathAvgOrderByAggregateInput
+    _max?: PathMaxOrderByAggregateInput
+    _min?: PathMinOrderByAggregateInput
+    _sum?: PathSumOrderByAggregateInput
+  }
+
+  export type PathScalarWhereWithAggregatesInput = {
+    AND?: PathScalarWhereWithAggregatesInput | PathScalarWhereWithAggregatesInput[]
+    OR?: PathScalarWhereWithAggregatesInput[]
+    NOT?: PathScalarWhereWithAggregatesInput | PathScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Path"> | string
+    title?: StringWithAggregatesFilter<"Path"> | string
+    description?: StringNullableWithAggregatesFilter<"Path"> | string | null
+    level?: StringWithAggregatesFilter<"Path"> | string
+    completedTasks?: IntWithAggregatesFilter<"Path"> | number
+    remainingTime?: IntWithAggregatesFilter<"Path"> | number
+    studyTime?: IntWithAggregatesFilter<"Path"> | number
+    totalTasks?: IntWithAggregatesFilter<"Path"> | number
+    progress?: FloatWithAggregatesFilter<"Path"> | number
+    engagement?: FloatWithAggregatesFilter<"Path"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Path"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Path"> | Date | string
+  }
+
+  export type MilestoneWhereInput = {
+    AND?: MilestoneWhereInput | MilestoneWhereInput[]
+    OR?: MilestoneWhereInput[]
+    NOT?: MilestoneWhereInput | MilestoneWhereInput[]
+    id?: StringFilter<"Milestone"> | string
+    title?: StringFilter<"Milestone"> | string
+    description?: StringNullableFilter<"Milestone"> | string | null
+    status?: EnumMilestoneStatusFilter<"Milestone"> | $Enums.MilestoneStatus
+    pathId?: StringFilter<"Milestone"> | string
+    createdAt?: DateTimeFilter<"Milestone"> | Date | string
+    path?: XOR<PathScalarRelationFilter, PathWhereInput>
+  }
+
+  export type MilestoneOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    status?: SortOrder
+    pathId?: SortOrder
+    createdAt?: SortOrder
+    path?: PathOrderByWithRelationInput
+  }
+
+  export type MilestoneWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MilestoneWhereInput | MilestoneWhereInput[]
+    OR?: MilestoneWhereInput[]
+    NOT?: MilestoneWhereInput | MilestoneWhereInput[]
+    title?: StringFilter<"Milestone"> | string
+    description?: StringNullableFilter<"Milestone"> | string | null
+    status?: EnumMilestoneStatusFilter<"Milestone"> | $Enums.MilestoneStatus
+    pathId?: StringFilter<"Milestone"> | string
+    createdAt?: DateTimeFilter<"Milestone"> | Date | string
+    path?: XOR<PathScalarRelationFilter, PathWhereInput>
+  }, "id">
+
+  export type MilestoneOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    status?: SortOrder
+    pathId?: SortOrder
+    createdAt?: SortOrder
+    _count?: MilestoneCountOrderByAggregateInput
+    _max?: MilestoneMaxOrderByAggregateInput
+    _min?: MilestoneMinOrderByAggregateInput
+  }
+
+  export type MilestoneScalarWhereWithAggregatesInput = {
+    AND?: MilestoneScalarWhereWithAggregatesInput | MilestoneScalarWhereWithAggregatesInput[]
+    OR?: MilestoneScalarWhereWithAggregatesInput[]
+    NOT?: MilestoneScalarWhereWithAggregatesInput | MilestoneScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Milestone"> | string
+    title?: StringWithAggregatesFilter<"Milestone"> | string
+    description?: StringNullableWithAggregatesFilter<"Milestone"> | string | null
+    status?: EnumMilestoneStatusWithAggregatesFilter<"Milestone"> | $Enums.MilestoneStatus
+    pathId?: StringWithAggregatesFilter<"Milestone"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Milestone"> | Date | string
   }
 
   export type LessonWhereInput = {
@@ -38514,6 +43605,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -38537,6 +43631,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -38552,6 +43649,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -38574,6 +43674,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -38588,6 +43691,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -38611,6 +43717,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -38626,6 +43735,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -38648,6 +43760,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -38663,6 +43778,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -38677,6 +43795,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -38692,6 +43813,168 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type LoginHistoryCreateInput = {
+    id?: string
+    success?: boolean
+    ip?: string | null
+    device?: $Enums.LoginDevice | null
+    location?: string | null
+    browser?: string | null
+    os?: string | null
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutLoginHistoryInput
+  }
+
+  export type LoginHistoryUncheckedCreateInput = {
+    id?: string
+    userId: string
+    success?: boolean
+    ip?: string | null
+    device?: $Enums.LoginDevice | null
+    location?: string | null
+    browser?: string | null
+    os?: string | null
+    createdAt?: Date | string
+  }
+
+  export type LoginHistoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    success?: BoolFieldUpdateOperationsInput | boolean
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    device?: NullableEnumLoginDeviceFieldUpdateOperationsInput | $Enums.LoginDevice | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutLoginHistoryNestedInput
+  }
+
+  export type LoginHistoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    success?: BoolFieldUpdateOperationsInput | boolean
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    device?: NullableEnumLoginDeviceFieldUpdateOperationsInput | $Enums.LoginDevice | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LoginHistoryCreateManyInput = {
+    id?: string
+    userId: string
+    success?: boolean
+    ip?: string | null
+    device?: $Enums.LoginDevice | null
+    location?: string | null
+    browser?: string | null
+    os?: string | null
+    createdAt?: Date | string
+  }
+
+  export type LoginHistoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    success?: BoolFieldUpdateOperationsInput | boolean
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    device?: NullableEnumLoginDeviceFieldUpdateOperationsInput | $Enums.LoginDevice | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LoginHistoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    success?: BoolFieldUpdateOperationsInput | boolean
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    device?: NullableEnumLoginDeviceFieldUpdateOperationsInput | $Enums.LoginDevice | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TwoFactorCreateInput = {
+    id?: string
+    email?: boolean
+    sms?: boolean
+    authenticator?: boolean
+    secret?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutTwoFactorInput
+  }
+
+  export type TwoFactorUncheckedCreateInput = {
+    id?: string
+    userId: string
+    email?: boolean
+    sms?: boolean
+    authenticator?: boolean
+    secret?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TwoFactorUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: BoolFieldUpdateOperationsInput | boolean
+    sms?: BoolFieldUpdateOperationsInput | boolean
+    authenticator?: BoolFieldUpdateOperationsInput | boolean
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutTwoFactorNestedInput
+  }
+
+  export type TwoFactorUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    email?: BoolFieldUpdateOperationsInput | boolean
+    sms?: BoolFieldUpdateOperationsInput | boolean
+    authenticator?: BoolFieldUpdateOperationsInput | boolean
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TwoFactorCreateManyInput = {
+    id?: string
+    userId: string
+    email?: boolean
+    sms?: boolean
+    authenticator?: boolean
+    secret?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TwoFactorUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: BoolFieldUpdateOperationsInput | boolean
+    sms?: BoolFieldUpdateOperationsInput | boolean
+    authenticator?: BoolFieldUpdateOperationsInput | boolean
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TwoFactorUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    email?: BoolFieldUpdateOperationsInput | boolean
+    sms?: BoolFieldUpdateOperationsInput | boolean
+    authenticator?: BoolFieldUpdateOperationsInput | boolean
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProfileCreateInput = {
@@ -38890,6 +44173,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     academy: AcademyCreateNestedOneWithoutCoursesInput
@@ -38898,6 +44182,7 @@ export namespace Prisma {
     quizzes?: QuizCreateNestedManyWithoutCourseInput
     instructors?: InstructorCreateNestedManyWithoutCoursesInput
     liveRoom?: LiveRoomCreateNestedManyWithoutCourseInput
+    Path?: PathCreateNestedManyWithoutCoursesInput
   }
 
   export type CourseUncheckedCreateInput = {
@@ -38905,6 +44190,7 @@ export namespace Prisma {
     title: string
     description: string
     academyId: string
+    image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
@@ -38912,12 +44198,14 @@ export namespace Prisma {
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutCoursesInput
     liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCourseInput
+    Path?: PathUncheckedCreateNestedManyWithoutCoursesInput
   }
 
   export type CourseUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academy?: AcademyUpdateOneRequiredWithoutCoursesNestedInput
@@ -38926,6 +44214,7 @@ export namespace Prisma {
     quizzes?: QuizUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUpdateManyWithoutCoursesNestedInput
     liveRoom?: LiveRoomUpdateManyWithoutCourseNestedInput
+    Path?: PathUpdateManyWithoutCoursesNestedInput
   }
 
   export type CourseUncheckedUpdateInput = {
@@ -38933,6 +44222,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     academyId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
@@ -38940,6 +44230,7 @@ export namespace Prisma {
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutCoursesNestedInput
     liveRoom?: LiveRoomUncheckedUpdateManyWithoutCourseNestedInput
+    Path?: PathUncheckedUpdateManyWithoutCoursesNestedInput
   }
 
   export type CourseCreateManyInput = {
@@ -38947,6 +44238,7 @@ export namespace Prisma {
     title: string
     description: string
     academyId: string
+    image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -38955,6 +44247,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -38964,8 +44257,188 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     academyId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PathCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    level: string
+    completedTasks?: number
+    remainingTime?: number
+    studyTime?: number
+    totalTasks?: number
+    progress?: number
+    engagement?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    milestones?: MilestoneCreateNestedManyWithoutPathInput
+    courses?: CourseCreateNestedManyWithoutPathInput
+    peers?: UserCreateNestedManyWithoutPathInput
+  }
+
+  export type PathUncheckedCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    level: string
+    completedTasks?: number
+    remainingTime?: number
+    studyTime?: number
+    totalTasks?: number
+    progress?: number
+    engagement?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    milestones?: MilestoneUncheckedCreateNestedManyWithoutPathInput
+    courses?: CourseUncheckedCreateNestedManyWithoutPathInput
+    peers?: UserUncheckedCreateNestedManyWithoutPathInput
+  }
+
+  export type PathUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    completedTasks?: IntFieldUpdateOperationsInput | number
+    remainingTime?: IntFieldUpdateOperationsInput | number
+    studyTime?: IntFieldUpdateOperationsInput | number
+    totalTasks?: IntFieldUpdateOperationsInput | number
+    progress?: FloatFieldUpdateOperationsInput | number
+    engagement?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    milestones?: MilestoneUpdateManyWithoutPathNestedInput
+    courses?: CourseUpdateManyWithoutPathNestedInput
+    peers?: UserUpdateManyWithoutPathNestedInput
+  }
+
+  export type PathUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    completedTasks?: IntFieldUpdateOperationsInput | number
+    remainingTime?: IntFieldUpdateOperationsInput | number
+    studyTime?: IntFieldUpdateOperationsInput | number
+    totalTasks?: IntFieldUpdateOperationsInput | number
+    progress?: FloatFieldUpdateOperationsInput | number
+    engagement?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    milestones?: MilestoneUncheckedUpdateManyWithoutPathNestedInput
+    courses?: CourseUncheckedUpdateManyWithoutPathNestedInput
+    peers?: UserUncheckedUpdateManyWithoutPathNestedInput
+  }
+
+  export type PathCreateManyInput = {
+    id?: string
+    title: string
+    description?: string | null
+    level: string
+    completedTasks?: number
+    remainingTime?: number
+    studyTime?: number
+    totalTasks?: number
+    progress?: number
+    engagement?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PathUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    completedTasks?: IntFieldUpdateOperationsInput | number
+    remainingTime?: IntFieldUpdateOperationsInput | number
+    studyTime?: IntFieldUpdateOperationsInput | number
+    totalTasks?: IntFieldUpdateOperationsInput | number
+    progress?: FloatFieldUpdateOperationsInput | number
+    engagement?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PathUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    completedTasks?: IntFieldUpdateOperationsInput | number
+    remainingTime?: IntFieldUpdateOperationsInput | number
+    studyTime?: IntFieldUpdateOperationsInput | number
+    totalTasks?: IntFieldUpdateOperationsInput | number
+    progress?: FloatFieldUpdateOperationsInput | number
+    engagement?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MilestoneCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    status?: $Enums.MilestoneStatus
+    createdAt?: Date | string
+    path: PathCreateNestedOneWithoutMilestonesInput
+  }
+
+  export type MilestoneUncheckedCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    status?: $Enums.MilestoneStatus
+    pathId: string
+    createdAt?: Date | string
+  }
+
+  export type MilestoneUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMilestoneStatusFieldUpdateOperationsInput | $Enums.MilestoneStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    path?: PathUpdateOneRequiredWithoutMilestonesNestedInput
+  }
+
+  export type MilestoneUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMilestoneStatusFieldUpdateOperationsInput | $Enums.MilestoneStatus
+    pathId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MilestoneCreateManyInput = {
+    id?: string
+    title: string
+    description?: string | null
+    status?: $Enums.MilestoneStatus
+    pathId: string
+    createdAt?: Date | string
+  }
+
+  export type MilestoneUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMilestoneStatusFieldUpdateOperationsInput | $Enums.MilestoneStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MilestoneUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMilestoneStatusFieldUpdateOperationsInput | $Enums.MilestoneStatus
+    pathId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LessonCreateInput = {
@@ -40913,6 +46386,22 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type AcademyNullableScalarRelationFilter = {
     is?: AcademyWhereInput | null
     isNot?: AcademyWhereInput | null
@@ -41049,6 +46538,24 @@ export namespace Prisma {
     none?: NotificationSettingsWhereInput
   }
 
+  export type PathListRelationFilter = {
+    every?: PathWhereInput
+    some?: PathWhereInput
+    none?: PathWhereInput
+  }
+
+  export type LoginHistoryListRelationFilter = {
+    every?: LoginHistoryWhereInput
+    some?: LoginHistoryWhereInput
+    none?: LoginHistoryWhereInput
+  }
+
+  export type TwoFactorListRelationFilter = {
+    every?: TwoFactorWhereInput
+    some?: TwoFactorWhereInput
+    none?: TwoFactorWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -41138,6 +46645,18 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type PathOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LoginHistoryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TwoFactorOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
@@ -41151,6 +46670,13 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     academyId?: SortOrder
+    isOnline?: SortOrder
+    isVerified?: SortOrder
+    age?: SortOrder
+  }
+
+  export type UserAvgOrderByAggregateInput = {
+    age?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -41166,6 +46692,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     academyId?: SortOrder
+    isOnline?: SortOrder
+    isVerified?: SortOrder
+    age?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -41181,6 +46710,13 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     academyId?: SortOrder
+    isOnline?: SortOrder
+    isVerified?: SortOrder
+    age?: SortOrder
+  }
+
+  export type UserSumOrderByAggregateInput = {
+    age?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -41242,6 +46778,121 @@ export namespace Prisma {
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type EnumLoginDeviceNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.LoginDevice | EnumLoginDeviceFieldRefInput<$PrismaModel> | null
+    in?: $Enums.LoginDevice[] | ListEnumLoginDeviceFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.LoginDevice[] | ListEnumLoginDeviceFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumLoginDeviceNullableFilter<$PrismaModel> | $Enums.LoginDevice | null
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type LoginHistoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    success?: SortOrder
+    ip?: SortOrder
+    device?: SortOrder
+    location?: SortOrder
+    browser?: SortOrder
+    os?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type LoginHistoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    success?: SortOrder
+    ip?: SortOrder
+    device?: SortOrder
+    location?: SortOrder
+    browser?: SortOrder
+    os?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type LoginHistoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    success?: SortOrder
+    ip?: SortOrder
+    device?: SortOrder
+    location?: SortOrder
+    browser?: SortOrder
+    os?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnumLoginDeviceNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LoginDevice | EnumLoginDeviceFieldRefInput<$PrismaModel> | null
+    in?: $Enums.LoginDevice[] | ListEnumLoginDeviceFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.LoginDevice[] | ListEnumLoginDeviceFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumLoginDeviceNullableWithAggregatesFilter<$PrismaModel> | $Enums.LoginDevice | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumLoginDeviceNullableFilter<$PrismaModel>
+    _max?: NestedEnumLoginDeviceNullableFilter<$PrismaModel>
+  }
+
+  export type TwoFactorCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    email?: SortOrder
+    sms?: SortOrder
+    authenticator?: SortOrder
+    secret?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TwoFactorMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    email?: SortOrder
+    sms?: SortOrder
+    authenticator?: SortOrder
+    secret?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TwoFactorMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    email?: SortOrder
+    sms?: SortOrder
+    authenticator?: SortOrder
+    secret?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
   export type JsonNullableFilter<$PrismaModel = never> = 
     | PatchUndefined<
         Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -41263,11 +46914,6 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
   }
 
   export type ProfileCountOrderByAggregateInput = {
@@ -41416,6 +47062,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     academyId?: SortOrder
+    image?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41425,6 +47072,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     academyId?: SortOrder
+    image?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41434,8 +47082,185 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     academyId?: SortOrder
+    image?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type MilestoneListRelationFilter = {
+    every?: MilestoneWhereInput
+    some?: MilestoneWhereInput
+    none?: MilestoneWhereInput
+  }
+
+  export type MilestoneOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PathCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    level?: SortOrder
+    completedTasks?: SortOrder
+    remainingTime?: SortOrder
+    studyTime?: SortOrder
+    totalTasks?: SortOrder
+    progress?: SortOrder
+    engagement?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PathAvgOrderByAggregateInput = {
+    completedTasks?: SortOrder
+    remainingTime?: SortOrder
+    studyTime?: SortOrder
+    totalTasks?: SortOrder
+    progress?: SortOrder
+    engagement?: SortOrder
+  }
+
+  export type PathMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    level?: SortOrder
+    completedTasks?: SortOrder
+    remainingTime?: SortOrder
+    studyTime?: SortOrder
+    totalTasks?: SortOrder
+    progress?: SortOrder
+    engagement?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PathMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    level?: SortOrder
+    completedTasks?: SortOrder
+    remainingTime?: SortOrder
+    studyTime?: SortOrder
+    totalTasks?: SortOrder
+    progress?: SortOrder
+    engagement?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PathSumOrderByAggregateInput = {
+    completedTasks?: SortOrder
+    remainingTime?: SortOrder
+    studyTime?: SortOrder
+    totalTasks?: SortOrder
+    progress?: SortOrder
+    engagement?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type EnumMilestoneStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.MilestoneStatus | EnumMilestoneStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MilestoneStatus[] | ListEnumMilestoneStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MilestoneStatus[] | ListEnumMilestoneStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMilestoneStatusFilter<$PrismaModel> | $Enums.MilestoneStatus
+  }
+
+  export type PathScalarRelationFilter = {
+    is?: PathWhereInput
+    isNot?: PathWhereInput
+  }
+
+  export type MilestoneCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    pathId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MilestoneMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    pathId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MilestoneMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    pathId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnumMilestoneStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MilestoneStatus | EnumMilestoneStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MilestoneStatus[] | ListEnumMilestoneStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MilestoneStatus[] | ListEnumMilestoneStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMilestoneStatusWithAggregatesFilter<$PrismaModel> | $Enums.MilestoneStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMilestoneStatusFilter<$PrismaModel>
+    _max?: NestedEnumMilestoneStatusFilter<$PrismaModel>
   }
 
   export type CourseScalarRelationFilter = {
@@ -41515,17 +47340,6 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
   export type EnrollmentCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -41562,38 +47376,6 @@ export namespace Prisma {
 
   export type EnrollmentSumOrderByAggregateInput = {
     progress?: SortOrder
-  }
-
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type QuestionListRelationFilter = {
@@ -41654,30 +47436,6 @@ export namespace Prisma {
     timeLimit?: SortOrder
     passingScore?: SortOrder
   }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
   export type JsonFilter<$PrismaModel = never> = 
     | PatchUndefined<
         Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
@@ -41699,17 +47457,6 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type QuizScalarRelationFilter = {
@@ -41780,22 +47527,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedJsonFilter<$PrismaModel>
     _max?: NestedJsonFilter<$PrismaModel>
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type FloatNullableFilter<$PrismaModel = never> = {
@@ -42736,6 +48467,26 @@ export namespace Prisma {
     connect?: NotificationSettingsWhereUniqueInput | NotificationSettingsWhereUniqueInput[]
   }
 
+  export type PathCreateNestedManyWithoutPeersInput = {
+    create?: XOR<PathCreateWithoutPeersInput, PathUncheckedCreateWithoutPeersInput> | PathCreateWithoutPeersInput[] | PathUncheckedCreateWithoutPeersInput[]
+    connectOrCreate?: PathCreateOrConnectWithoutPeersInput | PathCreateOrConnectWithoutPeersInput[]
+    connect?: PathWhereUniqueInput | PathWhereUniqueInput[]
+  }
+
+  export type LoginHistoryCreateNestedManyWithoutUserInput = {
+    create?: XOR<LoginHistoryCreateWithoutUserInput, LoginHistoryUncheckedCreateWithoutUserInput> | LoginHistoryCreateWithoutUserInput[] | LoginHistoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LoginHistoryCreateOrConnectWithoutUserInput | LoginHistoryCreateOrConnectWithoutUserInput[]
+    createMany?: LoginHistoryCreateManyUserInputEnvelope
+    connect?: LoginHistoryWhereUniqueInput | LoginHistoryWhereUniqueInput[]
+  }
+
+  export type TwoFactorCreateNestedManyWithoutUserInput = {
+    create?: XOR<TwoFactorCreateWithoutUserInput, TwoFactorUncheckedCreateWithoutUserInput> | TwoFactorCreateWithoutUserInput[] | TwoFactorUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TwoFactorCreateOrConnectWithoutUserInput | TwoFactorCreateOrConnectWithoutUserInput[]
+    createMany?: TwoFactorCreateManyUserInputEnvelope
+    connect?: TwoFactorWhereUniqueInput | TwoFactorWhereUniqueInput[]
+  }
+
   export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -42884,6 +48635,26 @@ export namespace Prisma {
     connect?: NotificationSettingsWhereUniqueInput | NotificationSettingsWhereUniqueInput[]
   }
 
+  export type PathUncheckedCreateNestedManyWithoutPeersInput = {
+    create?: XOR<PathCreateWithoutPeersInput, PathUncheckedCreateWithoutPeersInput> | PathCreateWithoutPeersInput[] | PathUncheckedCreateWithoutPeersInput[]
+    connectOrCreate?: PathCreateOrConnectWithoutPeersInput | PathCreateOrConnectWithoutPeersInput[]
+    connect?: PathWhereUniqueInput | PathWhereUniqueInput[]
+  }
+
+  export type LoginHistoryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<LoginHistoryCreateWithoutUserInput, LoginHistoryUncheckedCreateWithoutUserInput> | LoginHistoryCreateWithoutUserInput[] | LoginHistoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LoginHistoryCreateOrConnectWithoutUserInput | LoginHistoryCreateOrConnectWithoutUserInput[]
+    createMany?: LoginHistoryCreateManyUserInputEnvelope
+    connect?: LoginHistoryWhereUniqueInput | LoginHistoryWhereUniqueInput[]
+  }
+
+  export type TwoFactorUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<TwoFactorCreateWithoutUserInput, TwoFactorUncheckedCreateWithoutUserInput> | TwoFactorCreateWithoutUserInput[] | TwoFactorUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TwoFactorCreateOrConnectWithoutUserInput | TwoFactorCreateOrConnectWithoutUserInput[]
+    createMany?: TwoFactorCreateManyUserInputEnvelope
+    connect?: TwoFactorWhereUniqueInput | TwoFactorWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -42898,6 +48669,18 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type AcademyUpdateOneWithoutUsersNestedInput = {
@@ -43209,6 +48992,47 @@ export namespace Prisma {
     deleteMany?: NotificationSettingsScalarWhereInput | NotificationSettingsScalarWhereInput[]
   }
 
+  export type PathUpdateManyWithoutPeersNestedInput = {
+    create?: XOR<PathCreateWithoutPeersInput, PathUncheckedCreateWithoutPeersInput> | PathCreateWithoutPeersInput[] | PathUncheckedCreateWithoutPeersInput[]
+    connectOrCreate?: PathCreateOrConnectWithoutPeersInput | PathCreateOrConnectWithoutPeersInput[]
+    upsert?: PathUpsertWithWhereUniqueWithoutPeersInput | PathUpsertWithWhereUniqueWithoutPeersInput[]
+    set?: PathWhereUniqueInput | PathWhereUniqueInput[]
+    disconnect?: PathWhereUniqueInput | PathWhereUniqueInput[]
+    delete?: PathWhereUniqueInput | PathWhereUniqueInput[]
+    connect?: PathWhereUniqueInput | PathWhereUniqueInput[]
+    update?: PathUpdateWithWhereUniqueWithoutPeersInput | PathUpdateWithWhereUniqueWithoutPeersInput[]
+    updateMany?: PathUpdateManyWithWhereWithoutPeersInput | PathUpdateManyWithWhereWithoutPeersInput[]
+    deleteMany?: PathScalarWhereInput | PathScalarWhereInput[]
+  }
+
+  export type LoginHistoryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<LoginHistoryCreateWithoutUserInput, LoginHistoryUncheckedCreateWithoutUserInput> | LoginHistoryCreateWithoutUserInput[] | LoginHistoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LoginHistoryCreateOrConnectWithoutUserInput | LoginHistoryCreateOrConnectWithoutUserInput[]
+    upsert?: LoginHistoryUpsertWithWhereUniqueWithoutUserInput | LoginHistoryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: LoginHistoryCreateManyUserInputEnvelope
+    set?: LoginHistoryWhereUniqueInput | LoginHistoryWhereUniqueInput[]
+    disconnect?: LoginHistoryWhereUniqueInput | LoginHistoryWhereUniqueInput[]
+    delete?: LoginHistoryWhereUniqueInput | LoginHistoryWhereUniqueInput[]
+    connect?: LoginHistoryWhereUniqueInput | LoginHistoryWhereUniqueInput[]
+    update?: LoginHistoryUpdateWithWhereUniqueWithoutUserInput | LoginHistoryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: LoginHistoryUpdateManyWithWhereWithoutUserInput | LoginHistoryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: LoginHistoryScalarWhereInput | LoginHistoryScalarWhereInput[]
+  }
+
+  export type TwoFactorUpdateManyWithoutUserNestedInput = {
+    create?: XOR<TwoFactorCreateWithoutUserInput, TwoFactorUncheckedCreateWithoutUserInput> | TwoFactorCreateWithoutUserInput[] | TwoFactorUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TwoFactorCreateOrConnectWithoutUserInput | TwoFactorCreateOrConnectWithoutUserInput[]
+    upsert?: TwoFactorUpsertWithWhereUniqueWithoutUserInput | TwoFactorUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: TwoFactorCreateManyUserInputEnvelope
+    set?: TwoFactorWhereUniqueInput | TwoFactorWhereUniqueInput[]
+    disconnect?: TwoFactorWhereUniqueInput | TwoFactorWhereUniqueInput[]
+    delete?: TwoFactorWhereUniqueInput | TwoFactorWhereUniqueInput[]
+    connect?: TwoFactorWhereUniqueInput | TwoFactorWhereUniqueInput[]
+    update?: TwoFactorUpdateWithWhereUniqueWithoutUserInput | TwoFactorUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: TwoFactorUpdateManyWithWhereWithoutUserInput | TwoFactorUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: TwoFactorScalarWhereInput | TwoFactorScalarWhereInput[]
+  }
+
   export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -43508,6 +49332,79 @@ export namespace Prisma {
     deleteMany?: NotificationSettingsScalarWhereInput | NotificationSettingsScalarWhereInput[]
   }
 
+  export type PathUncheckedUpdateManyWithoutPeersNestedInput = {
+    create?: XOR<PathCreateWithoutPeersInput, PathUncheckedCreateWithoutPeersInput> | PathCreateWithoutPeersInput[] | PathUncheckedCreateWithoutPeersInput[]
+    connectOrCreate?: PathCreateOrConnectWithoutPeersInput | PathCreateOrConnectWithoutPeersInput[]
+    upsert?: PathUpsertWithWhereUniqueWithoutPeersInput | PathUpsertWithWhereUniqueWithoutPeersInput[]
+    set?: PathWhereUniqueInput | PathWhereUniqueInput[]
+    disconnect?: PathWhereUniqueInput | PathWhereUniqueInput[]
+    delete?: PathWhereUniqueInput | PathWhereUniqueInput[]
+    connect?: PathWhereUniqueInput | PathWhereUniqueInput[]
+    update?: PathUpdateWithWhereUniqueWithoutPeersInput | PathUpdateWithWhereUniqueWithoutPeersInput[]
+    updateMany?: PathUpdateManyWithWhereWithoutPeersInput | PathUpdateManyWithWhereWithoutPeersInput[]
+    deleteMany?: PathScalarWhereInput | PathScalarWhereInput[]
+  }
+
+  export type LoginHistoryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<LoginHistoryCreateWithoutUserInput, LoginHistoryUncheckedCreateWithoutUserInput> | LoginHistoryCreateWithoutUserInput[] | LoginHistoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LoginHistoryCreateOrConnectWithoutUserInput | LoginHistoryCreateOrConnectWithoutUserInput[]
+    upsert?: LoginHistoryUpsertWithWhereUniqueWithoutUserInput | LoginHistoryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: LoginHistoryCreateManyUserInputEnvelope
+    set?: LoginHistoryWhereUniqueInput | LoginHistoryWhereUniqueInput[]
+    disconnect?: LoginHistoryWhereUniqueInput | LoginHistoryWhereUniqueInput[]
+    delete?: LoginHistoryWhereUniqueInput | LoginHistoryWhereUniqueInput[]
+    connect?: LoginHistoryWhereUniqueInput | LoginHistoryWhereUniqueInput[]
+    update?: LoginHistoryUpdateWithWhereUniqueWithoutUserInput | LoginHistoryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: LoginHistoryUpdateManyWithWhereWithoutUserInput | LoginHistoryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: LoginHistoryScalarWhereInput | LoginHistoryScalarWhereInput[]
+  }
+
+  export type TwoFactorUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<TwoFactorCreateWithoutUserInput, TwoFactorUncheckedCreateWithoutUserInput> | TwoFactorCreateWithoutUserInput[] | TwoFactorUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TwoFactorCreateOrConnectWithoutUserInput | TwoFactorCreateOrConnectWithoutUserInput[]
+    upsert?: TwoFactorUpsertWithWhereUniqueWithoutUserInput | TwoFactorUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: TwoFactorCreateManyUserInputEnvelope
+    set?: TwoFactorWhereUniqueInput | TwoFactorWhereUniqueInput[]
+    disconnect?: TwoFactorWhereUniqueInput | TwoFactorWhereUniqueInput[]
+    delete?: TwoFactorWhereUniqueInput | TwoFactorWhereUniqueInput[]
+    connect?: TwoFactorWhereUniqueInput | TwoFactorWhereUniqueInput[]
+    update?: TwoFactorUpdateWithWhereUniqueWithoutUserInput | TwoFactorUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: TwoFactorUpdateManyWithWhereWithoutUserInput | TwoFactorUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: TwoFactorScalarWhereInput | TwoFactorScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutLoginHistoryInput = {
+    create?: XOR<UserCreateWithoutLoginHistoryInput, UserUncheckedCreateWithoutLoginHistoryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLoginHistoryInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type NullableEnumLoginDeviceFieldUpdateOperationsInput = {
+    set?: $Enums.LoginDevice | null
+  }
+
+  export type UserUpdateOneRequiredWithoutLoginHistoryNestedInput = {
+    create?: XOR<UserCreateWithoutLoginHistoryInput, UserUncheckedCreateWithoutLoginHistoryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLoginHistoryInput
+    upsert?: UserUpsertWithoutLoginHistoryInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutLoginHistoryInput, UserUpdateWithoutLoginHistoryInput>, UserUncheckedUpdateWithoutLoginHistoryInput>
+  }
+
+  export type UserCreateNestedOneWithoutTwoFactorInput = {
+    create?: XOR<UserCreateWithoutTwoFactorInput, UserUncheckedCreateWithoutTwoFactorInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTwoFactorInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutTwoFactorNestedInput = {
+    create?: XOR<UserCreateWithoutTwoFactorInput, UserUncheckedCreateWithoutTwoFactorInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTwoFactorInput
+    upsert?: UserUpsertWithoutTwoFactorInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTwoFactorInput, UserUpdateWithoutTwoFactorInput>, UserUncheckedUpdateWithoutTwoFactorInput>
+  }
+
   export type UserCreateNestedOneWithoutProfileInput = {
     create?: XOR<UserCreateWithoutProfileInput, UserUncheckedCreateWithoutProfileInput>
     connectOrCreate?: UserCreateOrConnectWithoutProfileInput
@@ -43795,6 +49692,12 @@ export namespace Prisma {
     connect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
   }
 
+  export type PathCreateNestedManyWithoutCoursesInput = {
+    create?: XOR<PathCreateWithoutCoursesInput, PathUncheckedCreateWithoutCoursesInput> | PathCreateWithoutCoursesInput[] | PathUncheckedCreateWithoutCoursesInput[]
+    connectOrCreate?: PathCreateOrConnectWithoutCoursesInput | PathCreateOrConnectWithoutCoursesInput[]
+    connect?: PathWhereUniqueInput | PathWhereUniqueInput[]
+  }
+
   export type LessonUncheckedCreateNestedManyWithoutCourseInput = {
     create?: XOR<LessonCreateWithoutCourseInput, LessonUncheckedCreateWithoutCourseInput> | LessonCreateWithoutCourseInput[] | LessonUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: LessonCreateOrConnectWithoutCourseInput | LessonCreateOrConnectWithoutCourseInput[]
@@ -43826,6 +49729,12 @@ export namespace Prisma {
     connectOrCreate?: LiveRoomCreateOrConnectWithoutCourseInput | LiveRoomCreateOrConnectWithoutCourseInput[]
     createMany?: LiveRoomCreateManyCourseInputEnvelope
     connect?: LiveRoomWhereUniqueInput | LiveRoomWhereUniqueInput[]
+  }
+
+  export type PathUncheckedCreateNestedManyWithoutCoursesInput = {
+    create?: XOR<PathCreateWithoutCoursesInput, PathUncheckedCreateWithoutCoursesInput> | PathCreateWithoutCoursesInput[] | PathUncheckedCreateWithoutCoursesInput[]
+    connectOrCreate?: PathCreateOrConnectWithoutCoursesInput | PathCreateOrConnectWithoutCoursesInput[]
+    connect?: PathWhereUniqueInput | PathWhereUniqueInput[]
   }
 
   export type AcademyUpdateOneRequiredWithoutCoursesNestedInput = {
@@ -43904,6 +49813,19 @@ export namespace Prisma {
     deleteMany?: LiveRoomScalarWhereInput | LiveRoomScalarWhereInput[]
   }
 
+  export type PathUpdateManyWithoutCoursesNestedInput = {
+    create?: XOR<PathCreateWithoutCoursesInput, PathUncheckedCreateWithoutCoursesInput> | PathCreateWithoutCoursesInput[] | PathUncheckedCreateWithoutCoursesInput[]
+    connectOrCreate?: PathCreateOrConnectWithoutCoursesInput | PathCreateOrConnectWithoutCoursesInput[]
+    upsert?: PathUpsertWithWhereUniqueWithoutCoursesInput | PathUpsertWithWhereUniqueWithoutCoursesInput[]
+    set?: PathWhereUniqueInput | PathWhereUniqueInput[]
+    disconnect?: PathWhereUniqueInput | PathWhereUniqueInput[]
+    delete?: PathWhereUniqueInput | PathWhereUniqueInput[]
+    connect?: PathWhereUniqueInput | PathWhereUniqueInput[]
+    update?: PathUpdateWithWhereUniqueWithoutCoursesInput | PathUpdateWithWhereUniqueWithoutCoursesInput[]
+    updateMany?: PathUpdateManyWithWhereWithoutCoursesInput | PathUpdateManyWithWhereWithoutCoursesInput[]
+    deleteMany?: PathScalarWhereInput | PathScalarWhereInput[]
+  }
+
   export type LessonUncheckedUpdateManyWithoutCourseNestedInput = {
     create?: XOR<LessonCreateWithoutCourseInput, LessonUncheckedCreateWithoutCourseInput> | LessonCreateWithoutCourseInput[] | LessonUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: LessonCreateOrConnectWithoutCourseInput | LessonCreateOrConnectWithoutCourseInput[]
@@ -43970,6 +49892,171 @@ export namespace Prisma {
     update?: LiveRoomUpdateWithWhereUniqueWithoutCourseInput | LiveRoomUpdateWithWhereUniqueWithoutCourseInput[]
     updateMany?: LiveRoomUpdateManyWithWhereWithoutCourseInput | LiveRoomUpdateManyWithWhereWithoutCourseInput[]
     deleteMany?: LiveRoomScalarWhereInput | LiveRoomScalarWhereInput[]
+  }
+
+  export type PathUncheckedUpdateManyWithoutCoursesNestedInput = {
+    create?: XOR<PathCreateWithoutCoursesInput, PathUncheckedCreateWithoutCoursesInput> | PathCreateWithoutCoursesInput[] | PathUncheckedCreateWithoutCoursesInput[]
+    connectOrCreate?: PathCreateOrConnectWithoutCoursesInput | PathCreateOrConnectWithoutCoursesInput[]
+    upsert?: PathUpsertWithWhereUniqueWithoutCoursesInput | PathUpsertWithWhereUniqueWithoutCoursesInput[]
+    set?: PathWhereUniqueInput | PathWhereUniqueInput[]
+    disconnect?: PathWhereUniqueInput | PathWhereUniqueInput[]
+    delete?: PathWhereUniqueInput | PathWhereUniqueInput[]
+    connect?: PathWhereUniqueInput | PathWhereUniqueInput[]
+    update?: PathUpdateWithWhereUniqueWithoutCoursesInput | PathUpdateWithWhereUniqueWithoutCoursesInput[]
+    updateMany?: PathUpdateManyWithWhereWithoutCoursesInput | PathUpdateManyWithWhereWithoutCoursesInput[]
+    deleteMany?: PathScalarWhereInput | PathScalarWhereInput[]
+  }
+
+  export type MilestoneCreateNestedManyWithoutPathInput = {
+    create?: XOR<MilestoneCreateWithoutPathInput, MilestoneUncheckedCreateWithoutPathInput> | MilestoneCreateWithoutPathInput[] | MilestoneUncheckedCreateWithoutPathInput[]
+    connectOrCreate?: MilestoneCreateOrConnectWithoutPathInput | MilestoneCreateOrConnectWithoutPathInput[]
+    createMany?: MilestoneCreateManyPathInputEnvelope
+    connect?: MilestoneWhereUniqueInput | MilestoneWhereUniqueInput[]
+  }
+
+  export type CourseCreateNestedManyWithoutPathInput = {
+    create?: XOR<CourseCreateWithoutPathInput, CourseUncheckedCreateWithoutPathInput> | CourseCreateWithoutPathInput[] | CourseUncheckedCreateWithoutPathInput[]
+    connectOrCreate?: CourseCreateOrConnectWithoutPathInput | CourseCreateOrConnectWithoutPathInput[]
+    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedManyWithoutPathInput = {
+    create?: XOR<UserCreateWithoutPathInput, UserUncheckedCreateWithoutPathInput> | UserCreateWithoutPathInput[] | UserUncheckedCreateWithoutPathInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutPathInput | UserCreateOrConnectWithoutPathInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type MilestoneUncheckedCreateNestedManyWithoutPathInput = {
+    create?: XOR<MilestoneCreateWithoutPathInput, MilestoneUncheckedCreateWithoutPathInput> | MilestoneCreateWithoutPathInput[] | MilestoneUncheckedCreateWithoutPathInput[]
+    connectOrCreate?: MilestoneCreateOrConnectWithoutPathInput | MilestoneCreateOrConnectWithoutPathInput[]
+    createMany?: MilestoneCreateManyPathInputEnvelope
+    connect?: MilestoneWhereUniqueInput | MilestoneWhereUniqueInput[]
+  }
+
+  export type CourseUncheckedCreateNestedManyWithoutPathInput = {
+    create?: XOR<CourseCreateWithoutPathInput, CourseUncheckedCreateWithoutPathInput> | CourseCreateWithoutPathInput[] | CourseUncheckedCreateWithoutPathInput[]
+    connectOrCreate?: CourseCreateOrConnectWithoutPathInput | CourseCreateOrConnectWithoutPathInput[]
+    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutPathInput = {
+    create?: XOR<UserCreateWithoutPathInput, UserUncheckedCreateWithoutPathInput> | UserCreateWithoutPathInput[] | UserUncheckedCreateWithoutPathInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutPathInput | UserCreateOrConnectWithoutPathInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type MilestoneUpdateManyWithoutPathNestedInput = {
+    create?: XOR<MilestoneCreateWithoutPathInput, MilestoneUncheckedCreateWithoutPathInput> | MilestoneCreateWithoutPathInput[] | MilestoneUncheckedCreateWithoutPathInput[]
+    connectOrCreate?: MilestoneCreateOrConnectWithoutPathInput | MilestoneCreateOrConnectWithoutPathInput[]
+    upsert?: MilestoneUpsertWithWhereUniqueWithoutPathInput | MilestoneUpsertWithWhereUniqueWithoutPathInput[]
+    createMany?: MilestoneCreateManyPathInputEnvelope
+    set?: MilestoneWhereUniqueInput | MilestoneWhereUniqueInput[]
+    disconnect?: MilestoneWhereUniqueInput | MilestoneWhereUniqueInput[]
+    delete?: MilestoneWhereUniqueInput | MilestoneWhereUniqueInput[]
+    connect?: MilestoneWhereUniqueInput | MilestoneWhereUniqueInput[]
+    update?: MilestoneUpdateWithWhereUniqueWithoutPathInput | MilestoneUpdateWithWhereUniqueWithoutPathInput[]
+    updateMany?: MilestoneUpdateManyWithWhereWithoutPathInput | MilestoneUpdateManyWithWhereWithoutPathInput[]
+    deleteMany?: MilestoneScalarWhereInput | MilestoneScalarWhereInput[]
+  }
+
+  export type CourseUpdateManyWithoutPathNestedInput = {
+    create?: XOR<CourseCreateWithoutPathInput, CourseUncheckedCreateWithoutPathInput> | CourseCreateWithoutPathInput[] | CourseUncheckedCreateWithoutPathInput[]
+    connectOrCreate?: CourseCreateOrConnectWithoutPathInput | CourseCreateOrConnectWithoutPathInput[]
+    upsert?: CourseUpsertWithWhereUniqueWithoutPathInput | CourseUpsertWithWhereUniqueWithoutPathInput[]
+    set?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    disconnect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    delete?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    update?: CourseUpdateWithWhereUniqueWithoutPathInput | CourseUpdateWithWhereUniqueWithoutPathInput[]
+    updateMany?: CourseUpdateManyWithWhereWithoutPathInput | CourseUpdateManyWithWhereWithoutPathInput[]
+    deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
+  }
+
+  export type UserUpdateManyWithoutPathNestedInput = {
+    create?: XOR<UserCreateWithoutPathInput, UserUncheckedCreateWithoutPathInput> | UserCreateWithoutPathInput[] | UserUncheckedCreateWithoutPathInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutPathInput | UserCreateOrConnectWithoutPathInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutPathInput | UserUpsertWithWhereUniqueWithoutPathInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutPathInput | UserUpdateWithWhereUniqueWithoutPathInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutPathInput | UserUpdateManyWithWhereWithoutPathInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type MilestoneUncheckedUpdateManyWithoutPathNestedInput = {
+    create?: XOR<MilestoneCreateWithoutPathInput, MilestoneUncheckedCreateWithoutPathInput> | MilestoneCreateWithoutPathInput[] | MilestoneUncheckedCreateWithoutPathInput[]
+    connectOrCreate?: MilestoneCreateOrConnectWithoutPathInput | MilestoneCreateOrConnectWithoutPathInput[]
+    upsert?: MilestoneUpsertWithWhereUniqueWithoutPathInput | MilestoneUpsertWithWhereUniqueWithoutPathInput[]
+    createMany?: MilestoneCreateManyPathInputEnvelope
+    set?: MilestoneWhereUniqueInput | MilestoneWhereUniqueInput[]
+    disconnect?: MilestoneWhereUniqueInput | MilestoneWhereUniqueInput[]
+    delete?: MilestoneWhereUniqueInput | MilestoneWhereUniqueInput[]
+    connect?: MilestoneWhereUniqueInput | MilestoneWhereUniqueInput[]
+    update?: MilestoneUpdateWithWhereUniqueWithoutPathInput | MilestoneUpdateWithWhereUniqueWithoutPathInput[]
+    updateMany?: MilestoneUpdateManyWithWhereWithoutPathInput | MilestoneUpdateManyWithWhereWithoutPathInput[]
+    deleteMany?: MilestoneScalarWhereInput | MilestoneScalarWhereInput[]
+  }
+
+  export type CourseUncheckedUpdateManyWithoutPathNestedInput = {
+    create?: XOR<CourseCreateWithoutPathInput, CourseUncheckedCreateWithoutPathInput> | CourseCreateWithoutPathInput[] | CourseUncheckedCreateWithoutPathInput[]
+    connectOrCreate?: CourseCreateOrConnectWithoutPathInput | CourseCreateOrConnectWithoutPathInput[]
+    upsert?: CourseUpsertWithWhereUniqueWithoutPathInput | CourseUpsertWithWhereUniqueWithoutPathInput[]
+    set?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    disconnect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    delete?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    update?: CourseUpdateWithWhereUniqueWithoutPathInput | CourseUpdateWithWhereUniqueWithoutPathInput[]
+    updateMany?: CourseUpdateManyWithWhereWithoutPathInput | CourseUpdateManyWithWhereWithoutPathInput[]
+    deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutPathNestedInput = {
+    create?: XOR<UserCreateWithoutPathInput, UserUncheckedCreateWithoutPathInput> | UserCreateWithoutPathInput[] | UserUncheckedCreateWithoutPathInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutPathInput | UserCreateOrConnectWithoutPathInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutPathInput | UserUpsertWithWhereUniqueWithoutPathInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutPathInput | UserUpdateWithWhereUniqueWithoutPathInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutPathInput | UserUpdateManyWithWhereWithoutPathInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type PathCreateNestedOneWithoutMilestonesInput = {
+    create?: XOR<PathCreateWithoutMilestonesInput, PathUncheckedCreateWithoutMilestonesInput>
+    connectOrCreate?: PathCreateOrConnectWithoutMilestonesInput
+    connect?: PathWhereUniqueInput
+  }
+
+  export type EnumMilestoneStatusFieldUpdateOperationsInput = {
+    set?: $Enums.MilestoneStatus
+  }
+
+  export type PathUpdateOneRequiredWithoutMilestonesNestedInput = {
+    create?: XOR<PathCreateWithoutMilestonesInput, PathUncheckedCreateWithoutMilestonesInput>
+    connectOrCreate?: PathCreateOrConnectWithoutMilestonesInput
+    upsert?: PathUpsertWithoutMilestonesInput
+    connect?: PathWhereUniqueInput
+    update?: XOR<XOR<PathUpdateToOneWithWhereWithoutMilestonesInput, PathUpdateWithoutMilestonesInput>, PathUncheckedUpdateWithoutMilestonesInput>
   }
 
   export type CourseCreateNestedOneWithoutLessonsInput = {
@@ -44176,14 +50263,6 @@ export namespace Prisma {
     connect?: CourseWhereUniqueInput
   }
 
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type UserUpdateOneRequiredWithoutEnrollmentsNestedInput = {
     create?: XOR<UserCreateWithoutEnrollmentsInput, UserUncheckedCreateWithoutEnrollmentsInput>
     connectOrCreate?: UserCreateOrConnectWithoutEnrollmentsInput
@@ -44244,18 +50323,6 @@ export namespace Prisma {
     create?: XOR<CourseCreateWithoutQuizzesInput, CourseUncheckedCreateWithoutQuizzesInput> | CourseCreateWithoutQuizzesInput[] | CourseUncheckedCreateWithoutQuizzesInput[]
     connectOrCreate?: CourseCreateOrConnectWithoutQuizzesInput | CourseCreateOrConnectWithoutQuizzesInput[]
     connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type LessonUpdateOneRequiredWithoutQuizzesNestedInput = {
@@ -44352,14 +50419,6 @@ export namespace Prisma {
     create?: XOR<QuizCreateWithoutQuestionsInput, QuizUncheckedCreateWithoutQuestionsInput>
     connectOrCreate?: QuizCreateOrConnectWithoutQuestionsInput
     connect?: QuizWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type QuizUpdateOneRequiredWithoutQuestionsNestedInput = {
@@ -45480,6 +51539,22 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -45525,17 +51600,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedEnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
     in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
@@ -45558,6 +51622,58 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumLoginDeviceNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.LoginDevice | EnumLoginDeviceFieldRefInput<$PrismaModel> | null
+    in?: $Enums.LoginDevice[] | ListEnumLoginDeviceFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.LoginDevice[] | ListEnumLoginDeviceFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumLoginDeviceNullableFilter<$PrismaModel> | $Enums.LoginDevice | null
+  }
+
+  export type NestedEnumLoginDeviceNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LoginDevice | EnumLoginDeviceFieldRefInput<$PrismaModel> | null
+    in?: $Enums.LoginDevice[] | ListEnumLoginDeviceFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.LoginDevice[] | ListEnumLoginDeviceFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumLoginDeviceNullableWithAggregatesFilter<$PrismaModel> | $Enums.LoginDevice | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumLoginDeviceNullableFilter<$PrismaModel>
+    _max?: NestedEnumLoginDeviceNullableFilter<$PrismaModel>
   }
   export type NestedJsonNullableFilter<$PrismaModel = never> = 
     | PatchUndefined<
@@ -45593,6 +51709,22 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -45609,44 +51741,21 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type NestedEnumMilestoneStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.MilestoneStatus | EnumMilestoneStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MilestoneStatus[] | ListEnumMilestoneStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MilestoneStatus[] | ListEnumMilestoneStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMilestoneStatusFilter<$PrismaModel> | $Enums.MilestoneStatus
   }
 
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+  export type NestedEnumMilestoneStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MilestoneStatus | EnumMilestoneStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MilestoneStatus[] | ListEnumMilestoneStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MilestoneStatus[] | ListEnumMilestoneStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMilestoneStatusWithAggregatesFilter<$PrismaModel> | $Enums.MilestoneStatus
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+    _min?: NestedEnumMilestoneStatusFilter<$PrismaModel>
+    _max?: NestedEnumMilestoneStatusFilter<$PrismaModel>
   }
   export type NestedJsonFilter<$PrismaModel = never> = 
     | PatchUndefined<
@@ -45669,22 +51778,6 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type NestedBoolNullableFilter<$PrismaModel = never> = {
@@ -46388,6 +52481,107 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PathCreateWithoutPeersInput = {
+    id?: string
+    title: string
+    description?: string | null
+    level: string
+    completedTasks?: number
+    remainingTime?: number
+    studyTime?: number
+    totalTasks?: number
+    progress?: number
+    engagement?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    milestones?: MilestoneCreateNestedManyWithoutPathInput
+    courses?: CourseCreateNestedManyWithoutPathInput
+  }
+
+  export type PathUncheckedCreateWithoutPeersInput = {
+    id?: string
+    title: string
+    description?: string | null
+    level: string
+    completedTasks?: number
+    remainingTime?: number
+    studyTime?: number
+    totalTasks?: number
+    progress?: number
+    engagement?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    milestones?: MilestoneUncheckedCreateNestedManyWithoutPathInput
+    courses?: CourseUncheckedCreateNestedManyWithoutPathInput
+  }
+
+  export type PathCreateOrConnectWithoutPeersInput = {
+    where: PathWhereUniqueInput
+    create: XOR<PathCreateWithoutPeersInput, PathUncheckedCreateWithoutPeersInput>
+  }
+
+  export type LoginHistoryCreateWithoutUserInput = {
+    id?: string
+    success?: boolean
+    ip?: string | null
+    device?: $Enums.LoginDevice | null
+    location?: string | null
+    browser?: string | null
+    os?: string | null
+    createdAt?: Date | string
+  }
+
+  export type LoginHistoryUncheckedCreateWithoutUserInput = {
+    id?: string
+    success?: boolean
+    ip?: string | null
+    device?: $Enums.LoginDevice | null
+    location?: string | null
+    browser?: string | null
+    os?: string | null
+    createdAt?: Date | string
+  }
+
+  export type LoginHistoryCreateOrConnectWithoutUserInput = {
+    where: LoginHistoryWhereUniqueInput
+    create: XOR<LoginHistoryCreateWithoutUserInput, LoginHistoryUncheckedCreateWithoutUserInput>
+  }
+
+  export type LoginHistoryCreateManyUserInputEnvelope = {
+    data: LoginHistoryCreateManyUserInput | LoginHistoryCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TwoFactorCreateWithoutUserInput = {
+    id?: string
+    email?: boolean
+    sms?: boolean
+    authenticator?: boolean
+    secret?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TwoFactorUncheckedCreateWithoutUserInput = {
+    id?: string
+    email?: boolean
+    sms?: boolean
+    authenticator?: boolean
+    secret?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TwoFactorCreateOrConnectWithoutUserInput = {
+    where: TwoFactorWhereUniqueInput
+    create: XOR<TwoFactorCreateWithoutUserInput, TwoFactorUncheckedCreateWithoutUserInput>
+  }
+
+  export type TwoFactorCreateManyUserInputEnvelope = {
+    data: TwoFactorCreateManyUserInput | TwoFactorCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AcademyUpsertWithoutUsersInput = {
     update: XOR<AcademyUpdateWithoutUsersInput, AcademyUncheckedUpdateWithoutUsersInput>
     create: XOR<AcademyCreateWithoutUsersInput, AcademyUncheckedCreateWithoutUsersInput>
@@ -47058,6 +53252,469 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"NotificationSettings"> | Date | string
   }
 
+  export type PathUpsertWithWhereUniqueWithoutPeersInput = {
+    where: PathWhereUniqueInput
+    update: XOR<PathUpdateWithoutPeersInput, PathUncheckedUpdateWithoutPeersInput>
+    create: XOR<PathCreateWithoutPeersInput, PathUncheckedCreateWithoutPeersInput>
+  }
+
+  export type PathUpdateWithWhereUniqueWithoutPeersInput = {
+    where: PathWhereUniqueInput
+    data: XOR<PathUpdateWithoutPeersInput, PathUncheckedUpdateWithoutPeersInput>
+  }
+
+  export type PathUpdateManyWithWhereWithoutPeersInput = {
+    where: PathScalarWhereInput
+    data: XOR<PathUpdateManyMutationInput, PathUncheckedUpdateManyWithoutPeersInput>
+  }
+
+  export type PathScalarWhereInput = {
+    AND?: PathScalarWhereInput | PathScalarWhereInput[]
+    OR?: PathScalarWhereInput[]
+    NOT?: PathScalarWhereInput | PathScalarWhereInput[]
+    id?: StringFilter<"Path"> | string
+    title?: StringFilter<"Path"> | string
+    description?: StringNullableFilter<"Path"> | string | null
+    level?: StringFilter<"Path"> | string
+    completedTasks?: IntFilter<"Path"> | number
+    remainingTime?: IntFilter<"Path"> | number
+    studyTime?: IntFilter<"Path"> | number
+    totalTasks?: IntFilter<"Path"> | number
+    progress?: FloatFilter<"Path"> | number
+    engagement?: FloatFilter<"Path"> | number
+    createdAt?: DateTimeFilter<"Path"> | Date | string
+    updatedAt?: DateTimeFilter<"Path"> | Date | string
+  }
+
+  export type LoginHistoryUpsertWithWhereUniqueWithoutUserInput = {
+    where: LoginHistoryWhereUniqueInput
+    update: XOR<LoginHistoryUpdateWithoutUserInput, LoginHistoryUncheckedUpdateWithoutUserInput>
+    create: XOR<LoginHistoryCreateWithoutUserInput, LoginHistoryUncheckedCreateWithoutUserInput>
+  }
+
+  export type LoginHistoryUpdateWithWhereUniqueWithoutUserInput = {
+    where: LoginHistoryWhereUniqueInput
+    data: XOR<LoginHistoryUpdateWithoutUserInput, LoginHistoryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type LoginHistoryUpdateManyWithWhereWithoutUserInput = {
+    where: LoginHistoryScalarWhereInput
+    data: XOR<LoginHistoryUpdateManyMutationInput, LoginHistoryUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type LoginHistoryScalarWhereInput = {
+    AND?: LoginHistoryScalarWhereInput | LoginHistoryScalarWhereInput[]
+    OR?: LoginHistoryScalarWhereInput[]
+    NOT?: LoginHistoryScalarWhereInput | LoginHistoryScalarWhereInput[]
+    id?: StringFilter<"LoginHistory"> | string
+    userId?: StringFilter<"LoginHistory"> | string
+    success?: BoolFilter<"LoginHistory"> | boolean
+    ip?: StringNullableFilter<"LoginHistory"> | string | null
+    device?: EnumLoginDeviceNullableFilter<"LoginHistory"> | $Enums.LoginDevice | null
+    location?: StringNullableFilter<"LoginHistory"> | string | null
+    browser?: StringNullableFilter<"LoginHistory"> | string | null
+    os?: StringNullableFilter<"LoginHistory"> | string | null
+    createdAt?: DateTimeFilter<"LoginHistory"> | Date | string
+  }
+
+  export type TwoFactorUpsertWithWhereUniqueWithoutUserInput = {
+    where: TwoFactorWhereUniqueInput
+    update: XOR<TwoFactorUpdateWithoutUserInput, TwoFactorUncheckedUpdateWithoutUserInput>
+    create: XOR<TwoFactorCreateWithoutUserInput, TwoFactorUncheckedCreateWithoutUserInput>
+  }
+
+  export type TwoFactorUpdateWithWhereUniqueWithoutUserInput = {
+    where: TwoFactorWhereUniqueInput
+    data: XOR<TwoFactorUpdateWithoutUserInput, TwoFactorUncheckedUpdateWithoutUserInput>
+  }
+
+  export type TwoFactorUpdateManyWithWhereWithoutUserInput = {
+    where: TwoFactorScalarWhereInput
+    data: XOR<TwoFactorUpdateManyMutationInput, TwoFactorUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type TwoFactorScalarWhereInput = {
+    AND?: TwoFactorScalarWhereInput | TwoFactorScalarWhereInput[]
+    OR?: TwoFactorScalarWhereInput[]
+    NOT?: TwoFactorScalarWhereInput | TwoFactorScalarWhereInput[]
+    id?: StringFilter<"TwoFactor"> | string
+    userId?: StringFilter<"TwoFactor"> | string
+    email?: BoolFilter<"TwoFactor"> | boolean
+    sms?: BoolFilter<"TwoFactor"> | boolean
+    authenticator?: BoolFilter<"TwoFactor"> | boolean
+    secret?: StringNullableFilter<"TwoFactor"> | string | null
+    createdAt?: DateTimeFilter<"TwoFactor"> | Date | string
+    updatedAt?: DateTimeFilter<"TwoFactor"> | Date | string
+  }
+
+  export type UserCreateWithoutLoginHistoryInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
+    academy?: AcademyCreateNestedOneWithoutUsersInput
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    groups?: GroupCreateNestedManyWithoutMembersInput
+    channels?: ChannelCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    Submission?: SubmissionCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorCreateNestedManyWithoutUserInput
+    Owner?: OwnerCreateNestedManyWithoutUserInput
+    Admin?: AdminCreateNestedManyWithoutUserInput
+    Lesson?: LessonCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentCreateNestedManyWithoutUserInput
+    Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutLoginHistoryInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    groups?: GroupUncheckedCreateNestedManyWithoutMembersInput
+    channels?: ChannelUncheckedCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
+    Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
+    Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
+    Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutLoginHistoryInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutLoginHistoryInput, UserUncheckedCreateWithoutLoginHistoryInput>
+  }
+
+  export type UserUpsertWithoutLoginHistoryInput = {
+    update: XOR<UserUpdateWithoutLoginHistoryInput, UserUncheckedUpdateWithoutLoginHistoryInput>
+    create: XOR<UserCreateWithoutLoginHistoryInput, UserUncheckedCreateWithoutLoginHistoryInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutLoginHistoryInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutLoginHistoryInput, UserUncheckedUpdateWithoutLoginHistoryInput>
+  }
+
+  export type UserUpdateWithoutLoginHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    academy?: AcademyUpdateOneWithoutUsersNestedInput
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUpdateManyWithoutUserNestedInput
+    Admin?: AdminUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUpdateManyWithoutUserNestedInput
+    Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutLoginHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUncheckedUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUncheckedUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
+    Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutTwoFactorInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
+    academy?: AcademyCreateNestedOneWithoutUsersInput
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    groups?: GroupCreateNestedManyWithoutMembersInput
+    channels?: ChannelCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    Submission?: SubmissionCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorCreateNestedManyWithoutUserInput
+    Owner?: OwnerCreateNestedManyWithoutUserInput
+    Admin?: AdminCreateNestedManyWithoutUserInput
+    Lesson?: LessonCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentCreateNestedManyWithoutUserInput
+    Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutTwoFactorInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    groups?: GroupUncheckedCreateNestedManyWithoutMembersInput
+    channels?: ChannelUncheckedCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
+    Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
+    Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
+    Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutTwoFactorInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutTwoFactorInput, UserUncheckedCreateWithoutTwoFactorInput>
+  }
+
+  export type UserUpsertWithoutTwoFactorInput = {
+    update: XOR<UserUpdateWithoutTwoFactorInput, UserUncheckedUpdateWithoutTwoFactorInput>
+    create: XOR<UserCreateWithoutTwoFactorInput, UserUncheckedCreateWithoutTwoFactorInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutTwoFactorInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutTwoFactorInput, UserUncheckedUpdateWithoutTwoFactorInput>
+  }
+
+  export type UserUpdateWithoutTwoFactorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    academy?: AcademyUpdateOneWithoutUsersNestedInput
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUpdateManyWithoutUserNestedInput
+    Admin?: AdminUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUpdateManyWithoutUserNestedInput
+    Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutTwoFactorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUncheckedUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUncheckedUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
+    Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type UserCreateWithoutProfileInput = {
     id?: string
     email: string
@@ -47070,6 +53727,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
     achievements?: AchievementCreateNestedManyWithoutUserInput
@@ -47092,6 +53752,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProfileInput = {
@@ -47107,6 +53770,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -47128,6 +53794,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProfileInput = {
@@ -47158,6 +53827,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
     achievements?: AchievementUpdateManyWithoutUserNestedInput
@@ -47180,6 +53852,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfileInput = {
@@ -47195,6 +53870,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -47216,6 +53894,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAcademyInput = {
@@ -47230,6 +53911,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
     achievements?: AchievementCreateNestedManyWithoutUserInput
@@ -47252,6 +53936,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAcademyInput = {
@@ -47266,6 +53953,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -47288,6 +53978,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAcademyInput = {
@@ -47304,6 +53997,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lessons?: LessonCreateNestedManyWithoutCourseInput
@@ -47311,12 +54005,14 @@ export namespace Prisma {
     quizzes?: QuizCreateNestedManyWithoutCourseInput
     instructors?: InstructorCreateNestedManyWithoutCoursesInput
     liveRoom?: LiveRoomCreateNestedManyWithoutCourseInput
+    Path?: PathCreateNestedManyWithoutCoursesInput
   }
 
   export type CourseUncheckedCreateWithoutAcademyInput = {
     id?: string
     title: string
     description: string
+    image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
@@ -47324,6 +54020,7 @@ export namespace Prisma {
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutCoursesInput
     liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCourseInput
+    Path?: PathUncheckedCreateNestedManyWithoutCoursesInput
   }
 
   export type CourseCreateOrConnectWithoutAcademyInput = {
@@ -47420,6 +54117,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     academyId?: StringNullableFilter<"User"> | string | null
+    isOnline?: BoolFilter<"User"> | boolean
+    isVerified?: BoolFilter<"User"> | boolean
+    age?: IntNullableFilter<"User"> | number | null
   }
 
   export type CourseUpsertWithWhereUniqueWithoutAcademyInput = {
@@ -47446,6 +54146,7 @@ export namespace Prisma {
     title?: StringFilter<"Course"> | string
     description?: StringFilter<"Course"> | string
     academyId?: StringFilter<"Course"> | string
+    image?: StringNullableFilter<"Course"> | string | null
     createdAt?: DateTimeFilter<"Course"> | Date | string
     updatedAt?: DateTimeFilter<"Course"> | Date | string
   }
@@ -47508,6 +54209,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -47530,6 +54234,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutInstructorInput = {
@@ -47545,6 +54252,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -47566,6 +54276,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutInstructorInput = {
@@ -47608,6 +54321,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     academy: AcademyCreateNestedOneWithoutCoursesInput
@@ -47615,6 +54329,7 @@ export namespace Prisma {
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
     quizzes?: QuizCreateNestedManyWithoutCourseInput
     liveRoom?: LiveRoomCreateNestedManyWithoutCourseInput
+    Path?: PathCreateNestedManyWithoutCoursesInput
   }
 
   export type CourseUncheckedCreateWithoutInstructorsInput = {
@@ -47622,12 +54337,14 @@ export namespace Prisma {
     title: string
     description: string
     academyId: string
+    image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
     liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCourseInput
+    Path?: PathUncheckedCreateNestedManyWithoutCoursesInput
   }
 
   export type CourseCreateOrConnectWithoutInstructorsInput = {
@@ -47658,6 +54375,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -47680,6 +54400,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInstructorInput = {
@@ -47695,6 +54418,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -47716,6 +54442,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AcademyUpsertWithoutInstructorsInput = {
@@ -47960,6 +54689,45 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PathCreateWithoutCoursesInput = {
+    id?: string
+    title: string
+    description?: string | null
+    level: string
+    completedTasks?: number
+    remainingTime?: number
+    studyTime?: number
+    totalTasks?: number
+    progress?: number
+    engagement?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    milestones?: MilestoneCreateNestedManyWithoutPathInput
+    peers?: UserCreateNestedManyWithoutPathInput
+  }
+
+  export type PathUncheckedCreateWithoutCoursesInput = {
+    id?: string
+    title: string
+    description?: string | null
+    level: string
+    completedTasks?: number
+    remainingTime?: number
+    studyTime?: number
+    totalTasks?: number
+    progress?: number
+    engagement?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    milestones?: MilestoneUncheckedCreateNestedManyWithoutPathInput
+    peers?: UserUncheckedCreateNestedManyWithoutPathInput
+  }
+
+  export type PathCreateOrConnectWithoutCoursesInput = {
+    where: PathWhereUniqueInput
+    create: XOR<PathCreateWithoutCoursesInput, PathUncheckedCreateWithoutCoursesInput>
+  }
+
   export type AcademyUpsertWithoutCoursesInput = {
     update: XOR<AcademyUpdateWithoutCoursesInput, AcademyUncheckedUpdateWithoutCoursesInput>
     create: XOR<AcademyCreateWithoutCoursesInput, AcademyUncheckedCreateWithoutCoursesInput>
@@ -48093,10 +54861,321 @@ export namespace Prisma {
     data: XOR<LiveRoomUpdateManyMutationInput, LiveRoomUncheckedUpdateManyWithoutCourseInput>
   }
 
+  export type PathUpsertWithWhereUniqueWithoutCoursesInput = {
+    where: PathWhereUniqueInput
+    update: XOR<PathUpdateWithoutCoursesInput, PathUncheckedUpdateWithoutCoursesInput>
+    create: XOR<PathCreateWithoutCoursesInput, PathUncheckedCreateWithoutCoursesInput>
+  }
+
+  export type PathUpdateWithWhereUniqueWithoutCoursesInput = {
+    where: PathWhereUniqueInput
+    data: XOR<PathUpdateWithoutCoursesInput, PathUncheckedUpdateWithoutCoursesInput>
+  }
+
+  export type PathUpdateManyWithWhereWithoutCoursesInput = {
+    where: PathScalarWhereInput
+    data: XOR<PathUpdateManyMutationInput, PathUncheckedUpdateManyWithoutCoursesInput>
+  }
+
+  export type MilestoneCreateWithoutPathInput = {
+    id?: string
+    title: string
+    description?: string | null
+    status?: $Enums.MilestoneStatus
+    createdAt?: Date | string
+  }
+
+  export type MilestoneUncheckedCreateWithoutPathInput = {
+    id?: string
+    title: string
+    description?: string | null
+    status?: $Enums.MilestoneStatus
+    createdAt?: Date | string
+  }
+
+  export type MilestoneCreateOrConnectWithoutPathInput = {
+    where: MilestoneWhereUniqueInput
+    create: XOR<MilestoneCreateWithoutPathInput, MilestoneUncheckedCreateWithoutPathInput>
+  }
+
+  export type MilestoneCreateManyPathInputEnvelope = {
+    data: MilestoneCreateManyPathInput | MilestoneCreateManyPathInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CourseCreateWithoutPathInput = {
+    id?: string
+    title: string
+    description: string
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academy: AcademyCreateNestedOneWithoutCoursesInput
+    lessons?: LessonCreateNestedManyWithoutCourseInput
+    enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
+    quizzes?: QuizCreateNestedManyWithoutCourseInput
+    instructors?: InstructorCreateNestedManyWithoutCoursesInput
+    liveRoom?: LiveRoomCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateWithoutPathInput = {
+    id?: string
+    title: string
+    description: string
+    academyId: string
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
+    quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
+    instructors?: InstructorUncheckedCreateNestedManyWithoutCoursesInput
+    liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseCreateOrConnectWithoutPathInput = {
+    where: CourseWhereUniqueInput
+    create: XOR<CourseCreateWithoutPathInput, CourseUncheckedCreateWithoutPathInput>
+  }
+
+  export type UserCreateWithoutPathInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
+    academy?: AcademyCreateNestedOneWithoutUsersInput
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    groups?: GroupCreateNestedManyWithoutMembersInput
+    channels?: ChannelCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    Submission?: SubmissionCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorCreateNestedManyWithoutUserInput
+    Owner?: OwnerCreateNestedManyWithoutUserInput
+    Admin?: AdminCreateNestedManyWithoutUserInput
+    Lesson?: LessonCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentCreateNestedManyWithoutUserInput
+    Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPathInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    groups?: GroupUncheckedCreateNestedManyWithoutMembersInput
+    channels?: ChannelUncheckedCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
+    Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
+    Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
+    Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPathInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPathInput, UserUncheckedCreateWithoutPathInput>
+  }
+
+  export type MilestoneUpsertWithWhereUniqueWithoutPathInput = {
+    where: MilestoneWhereUniqueInput
+    update: XOR<MilestoneUpdateWithoutPathInput, MilestoneUncheckedUpdateWithoutPathInput>
+    create: XOR<MilestoneCreateWithoutPathInput, MilestoneUncheckedCreateWithoutPathInput>
+  }
+
+  export type MilestoneUpdateWithWhereUniqueWithoutPathInput = {
+    where: MilestoneWhereUniqueInput
+    data: XOR<MilestoneUpdateWithoutPathInput, MilestoneUncheckedUpdateWithoutPathInput>
+  }
+
+  export type MilestoneUpdateManyWithWhereWithoutPathInput = {
+    where: MilestoneScalarWhereInput
+    data: XOR<MilestoneUpdateManyMutationInput, MilestoneUncheckedUpdateManyWithoutPathInput>
+  }
+
+  export type MilestoneScalarWhereInput = {
+    AND?: MilestoneScalarWhereInput | MilestoneScalarWhereInput[]
+    OR?: MilestoneScalarWhereInput[]
+    NOT?: MilestoneScalarWhereInput | MilestoneScalarWhereInput[]
+    id?: StringFilter<"Milestone"> | string
+    title?: StringFilter<"Milestone"> | string
+    description?: StringNullableFilter<"Milestone"> | string | null
+    status?: EnumMilestoneStatusFilter<"Milestone"> | $Enums.MilestoneStatus
+    pathId?: StringFilter<"Milestone"> | string
+    createdAt?: DateTimeFilter<"Milestone"> | Date | string
+  }
+
+  export type CourseUpsertWithWhereUniqueWithoutPathInput = {
+    where: CourseWhereUniqueInput
+    update: XOR<CourseUpdateWithoutPathInput, CourseUncheckedUpdateWithoutPathInput>
+    create: XOR<CourseCreateWithoutPathInput, CourseUncheckedCreateWithoutPathInput>
+  }
+
+  export type CourseUpdateWithWhereUniqueWithoutPathInput = {
+    where: CourseWhereUniqueInput
+    data: XOR<CourseUpdateWithoutPathInput, CourseUncheckedUpdateWithoutPathInput>
+  }
+
+  export type CourseUpdateManyWithWhereWithoutPathInput = {
+    where: CourseScalarWhereInput
+    data: XOR<CourseUpdateManyMutationInput, CourseUncheckedUpdateManyWithoutPathInput>
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutPathInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutPathInput, UserUncheckedUpdateWithoutPathInput>
+    create: XOR<UserCreateWithoutPathInput, UserUncheckedCreateWithoutPathInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutPathInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutPathInput, UserUncheckedUpdateWithoutPathInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutPathInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutPathInput>
+  }
+
+  export type PathCreateWithoutMilestonesInput = {
+    id?: string
+    title: string
+    description?: string | null
+    level: string
+    completedTasks?: number
+    remainingTime?: number
+    studyTime?: number
+    totalTasks?: number
+    progress?: number
+    engagement?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    courses?: CourseCreateNestedManyWithoutPathInput
+    peers?: UserCreateNestedManyWithoutPathInput
+  }
+
+  export type PathUncheckedCreateWithoutMilestonesInput = {
+    id?: string
+    title: string
+    description?: string | null
+    level: string
+    completedTasks?: number
+    remainingTime?: number
+    studyTime?: number
+    totalTasks?: number
+    progress?: number
+    engagement?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    courses?: CourseUncheckedCreateNestedManyWithoutPathInput
+    peers?: UserUncheckedCreateNestedManyWithoutPathInput
+  }
+
+  export type PathCreateOrConnectWithoutMilestonesInput = {
+    where: PathWhereUniqueInput
+    create: XOR<PathCreateWithoutMilestonesInput, PathUncheckedCreateWithoutMilestonesInput>
+  }
+
+  export type PathUpsertWithoutMilestonesInput = {
+    update: XOR<PathUpdateWithoutMilestonesInput, PathUncheckedUpdateWithoutMilestonesInput>
+    create: XOR<PathCreateWithoutMilestonesInput, PathUncheckedCreateWithoutMilestonesInput>
+    where?: PathWhereInput
+  }
+
+  export type PathUpdateToOneWithWhereWithoutMilestonesInput = {
+    where?: PathWhereInput
+    data: XOR<PathUpdateWithoutMilestonesInput, PathUncheckedUpdateWithoutMilestonesInput>
+  }
+
+  export type PathUpdateWithoutMilestonesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    completedTasks?: IntFieldUpdateOperationsInput | number
+    remainingTime?: IntFieldUpdateOperationsInput | number
+    studyTime?: IntFieldUpdateOperationsInput | number
+    totalTasks?: IntFieldUpdateOperationsInput | number
+    progress?: FloatFieldUpdateOperationsInput | number
+    engagement?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    courses?: CourseUpdateManyWithoutPathNestedInput
+    peers?: UserUpdateManyWithoutPathNestedInput
+  }
+
+  export type PathUncheckedUpdateWithoutMilestonesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    completedTasks?: IntFieldUpdateOperationsInput | number
+    remainingTime?: IntFieldUpdateOperationsInput | number
+    studyTime?: IntFieldUpdateOperationsInput | number
+    totalTasks?: IntFieldUpdateOperationsInput | number
+    progress?: FloatFieldUpdateOperationsInput | number
+    engagement?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    courses?: CourseUncheckedUpdateManyWithoutPathNestedInput
+    peers?: UserUncheckedUpdateManyWithoutPathNestedInput
+  }
+
   export type CourseCreateWithoutLessonsInput = {
     id?: string
     title: string
     description: string
+    image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     academy: AcademyCreateNestedOneWithoutCoursesInput
@@ -48104,6 +55183,7 @@ export namespace Prisma {
     quizzes?: QuizCreateNestedManyWithoutCourseInput
     instructors?: InstructorCreateNestedManyWithoutCoursesInput
     liveRoom?: LiveRoomCreateNestedManyWithoutCourseInput
+    Path?: PathCreateNestedManyWithoutCoursesInput
   }
 
   export type CourseUncheckedCreateWithoutLessonsInput = {
@@ -48111,12 +55191,14 @@ export namespace Prisma {
     title: string
     description: string
     academyId: string
+    image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutCoursesInput
     liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCourseInput
+    Path?: PathUncheckedCreateNestedManyWithoutCoursesInput
   }
 
   export type CourseCreateOrConnectWithoutLessonsInput = {
@@ -48202,6 +55284,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -48224,6 +55309,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLessonInput = {
@@ -48239,6 +55327,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -48260,6 +55351,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLessonInput = {
@@ -48310,6 +55404,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academy?: AcademyUpdateOneRequiredWithoutCoursesNestedInput
@@ -48317,6 +55412,7 @@ export namespace Prisma {
     quizzes?: QuizUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUpdateManyWithoutCoursesNestedInput
     liveRoom?: LiveRoomUpdateManyWithoutCourseNestedInput
+    Path?: PathUpdateManyWithoutCoursesNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutLessonsInput = {
@@ -48324,12 +55420,14 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     academyId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutCoursesNestedInput
     liveRoom?: LiveRoomUncheckedUpdateManyWithoutCourseNestedInput
+    Path?: PathUncheckedUpdateManyWithoutCoursesNestedInput
   }
 
   export type FileUpsertWithWhereUniqueWithoutLessonInput = {
@@ -48488,6 +55586,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     achievements?: AchievementCreateNestedManyWithoutUserInput
@@ -48510,6 +55611,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEnrollmentsInput = {
@@ -48525,6 +55629,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -48546,6 +55653,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEnrollmentsInput = {
@@ -48557,6 +55667,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     academy: AcademyCreateNestedOneWithoutCoursesInput
@@ -48564,6 +55675,7 @@ export namespace Prisma {
     quizzes?: QuizCreateNestedManyWithoutCourseInput
     instructors?: InstructorCreateNestedManyWithoutCoursesInput
     liveRoom?: LiveRoomCreateNestedManyWithoutCourseInput
+    Path?: PathCreateNestedManyWithoutCoursesInput
   }
 
   export type CourseUncheckedCreateWithoutEnrollmentsInput = {
@@ -48571,12 +55683,14 @@ export namespace Prisma {
     title: string
     description: string
     academyId: string
+    image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutCoursesInput
     liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCourseInput
+    Path?: PathUncheckedCreateNestedManyWithoutCoursesInput
   }
 
   export type CourseCreateOrConnectWithoutEnrollmentsInput = {
@@ -48607,6 +55721,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     achievements?: AchievementUpdateManyWithoutUserNestedInput
@@ -48629,6 +55746,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEnrollmentsInput = {
@@ -48644,6 +55764,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -48665,6 +55788,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CourseUpsertWithoutEnrollmentsInput = {
@@ -48682,6 +55808,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academy?: AcademyUpdateOneRequiredWithoutCoursesNestedInput
@@ -48689,6 +55816,7 @@ export namespace Prisma {
     quizzes?: QuizUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUpdateManyWithoutCoursesNestedInput
     liveRoom?: LiveRoomUpdateManyWithoutCourseNestedInput
+    Path?: PathUpdateManyWithoutCoursesNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutEnrollmentsInput = {
@@ -48696,12 +55824,14 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     academyId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutCoursesNestedInput
     liveRoom?: LiveRoomUncheckedUpdateManyWithoutCourseNestedInput
+    Path?: PathUncheckedUpdateManyWithoutCoursesNestedInput
   }
 
   export type LessonCreateWithoutQuizzesInput = {
@@ -48803,6 +55933,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     academy: AcademyCreateNestedOneWithoutCoursesInput
@@ -48810,6 +55941,7 @@ export namespace Prisma {
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
     instructors?: InstructorCreateNestedManyWithoutCoursesInput
     liveRoom?: LiveRoomCreateNestedManyWithoutCourseInput
+    Path?: PathCreateNestedManyWithoutCoursesInput
   }
 
   export type CourseUncheckedCreateWithoutQuizzesInput = {
@@ -48817,12 +55949,14 @@ export namespace Prisma {
     title: string
     description: string
     academyId: string
+    image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutCoursesInput
     liveRoom?: LiveRoomUncheckedCreateNestedManyWithoutCourseInput
+    Path?: PathUncheckedCreateNestedManyWithoutCoursesInput
   }
 
   export type CourseCreateOrConnectWithoutQuizzesInput = {
@@ -49018,6 +56152,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -49040,6 +56177,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSubmissionInput = {
@@ -49055,6 +56195,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -49076,6 +56219,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSubmissionInput = {
@@ -49141,6 +56287,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -49163,6 +56312,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubmissionInput = {
@@ -49178,6 +56330,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -49199,6 +56354,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type QuizUpsertWithoutSubmissionsInput = {
@@ -49254,6 +56412,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -49276,6 +56437,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAchievementsInput = {
@@ -49291,6 +56455,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -49312,6 +56479,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAchievementsInput = {
@@ -49342,6 +56512,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -49364,6 +56537,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAchievementsInput = {
@@ -49379,6 +56555,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -49400,6 +56579,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutNotificationsInput = {
@@ -49414,6 +56596,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -49436,6 +56621,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -49451,6 +56639,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -49472,6 +56663,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -49502,6 +56696,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -49524,6 +56721,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -49539,6 +56739,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -49560,6 +56763,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutNotificationSettingsInput = {
@@ -49574,6 +56780,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -49596,6 +56805,9 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationSettingsInput = {
@@ -49611,6 +56823,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -49632,6 +56847,9 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationSettingsInput = {
@@ -49662,6 +56880,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -49684,6 +56905,9 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationSettingsInput = {
@@ -49699,6 +56923,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -49720,6 +56947,9 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutMessagesInput = {
@@ -49734,6 +56964,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -49756,6 +56989,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMessagesInput = {
@@ -49771,6 +57007,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -49792,6 +57031,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMessagesInput = {
@@ -49843,6 +57085,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -49865,6 +57110,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessagesInput = {
@@ -49880,6 +57128,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -49901,6 +57152,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ChannelUpsertWithWhereUniqueWithoutMessagesInput = {
@@ -49931,6 +57185,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -49953,6 +57210,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -49968,6 +57228,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -49989,6 +57252,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -50131,6 +57397,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -50153,6 +57422,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -50168,6 +57440,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -50189,6 +57464,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CommentUpsertWithWhereUniqueWithoutPostInput = {
@@ -50352,6 +57630,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -50374,6 +57655,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGroupsInput = {
@@ -50389,6 +57673,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -50410,6 +57697,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGroupsInput = {
@@ -50585,6 +57875,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -50607,6 +57900,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAdminInput = {
@@ -50622,6 +57918,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -50643,6 +57942,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAdminInput = {
@@ -50705,6 +58007,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -50727,6 +58032,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdminInput = {
@@ -50742,6 +58050,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -50763,6 +58074,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GroupUpsertWithWhereUniqueWithoutAdminInput = {
@@ -50793,6 +58107,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -50815,6 +58132,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChannelsInput = {
@@ -50830,6 +58150,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -50851,6 +58174,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChannelsInput = {
@@ -50963,6 +58289,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -50985,6 +58314,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOwnerInput = {
@@ -51000,6 +58332,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -51021,6 +58356,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOwnerInput = {
@@ -51077,6 +58415,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -51099,6 +58440,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOwnerInput = {
@@ -51114,6 +58458,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -51135,6 +58482,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ChannelUpsertWithWhereUniqueWithoutOwnerInput = {
@@ -51165,6 +58515,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -51187,6 +58540,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBookmarksInput = {
@@ -51202,6 +58558,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -51223,6 +58582,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBookmarksInput = {
@@ -51253,6 +58615,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -51275,6 +58640,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBookmarksInput = {
@@ -51290,6 +58658,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -51311,6 +58682,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AcademyCreateWithoutEventsInput = {
@@ -51393,6 +58767,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -51415,6 +58792,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAttendanceInput = {
@@ -51430,6 +58810,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -51451,6 +58834,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAttendanceInput = {
@@ -51512,6 +58898,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -51534,6 +58923,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAttendanceInput = {
@@ -51549,6 +58941,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -51570,6 +58965,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type LessonUpsertWithoutAttendanceInput = {
@@ -51621,6 +59019,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -51643,6 +59044,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentInput = {
@@ -51658,6 +59062,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -51679,6 +59086,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentInput = {
@@ -51709,6 +59119,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -51731,6 +59144,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentInput = {
@@ -51746,6 +59162,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -51767,6 +59186,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutReportInput = {
@@ -51781,6 +59203,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -51803,6 +59228,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReportInput = {
@@ -51818,6 +59246,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -51839,6 +59270,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReportInput = {
@@ -51869,6 +59303,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -51891,6 +59328,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReportInput = {
@@ -51906,6 +59346,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -51927,6 +59370,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutBadgeInput = {
@@ -51941,6 +59387,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -51963,6 +59412,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBadgeInput = {
@@ -51978,6 +59430,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -51999,6 +59454,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBadgeInput = {
@@ -52029,6 +59487,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -52051,6 +59512,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBadgeInput = {
@@ -52066,6 +59530,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -52087,6 +59554,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutCertificateInput = {
@@ -52101,6 +59571,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -52123,6 +59596,9 @@ export namespace Prisma {
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCertificateInput = {
@@ -52138,6 +59614,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -52159,6 +59638,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCertificateInput = {
@@ -52189,6 +59671,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -52211,6 +59696,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCertificateInput = {
@@ -52226,6 +59714,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -52247,6 +59738,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GroupCreateWithoutCommunityInput = {
@@ -52330,6 +59824,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -52352,6 +59849,9 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommunityInput = {
@@ -52367,6 +59867,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -52388,6 +59891,9 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommunityInput = {
@@ -52727,6 +60233,9 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     academy?: AcademyCreateNestedOneWithoutUsersInput
     profile?: ProfileCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
@@ -52749,6 +60258,9 @@ export namespace Prisma {
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLiveRoomInput = {
@@ -52764,6 +60276,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
@@ -52785,6 +60300,9 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLiveRoomInput = {
@@ -52796,6 +60314,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     academy: AcademyCreateNestedOneWithoutCoursesInput
@@ -52803,6 +60322,7 @@ export namespace Prisma {
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
     quizzes?: QuizCreateNestedManyWithoutCourseInput
     instructors?: InstructorCreateNestedManyWithoutCoursesInput
+    Path?: PathCreateNestedManyWithoutCoursesInput
   }
 
   export type CourseUncheckedCreateWithoutLiveRoomInput = {
@@ -52810,12 +60330,14 @@ export namespace Prisma {
     title: string
     description: string
     academyId: string
+    image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutCoursesInput
+    Path?: PathUncheckedCreateNestedManyWithoutCoursesInput
   }
 
   export type CourseCreateOrConnectWithoutLiveRoomInput = {
@@ -52899,6 +60421,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academy?: AcademyUpdateOneRequiredWithoutCoursesNestedInput
@@ -52906,6 +60429,7 @@ export namespace Prisma {
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUpdateManyWithoutCoursesNestedInput
+    Path?: PathUpdateManyWithoutCoursesNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutLiveRoomInput = {
@@ -52913,12 +60437,14 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     academyId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutCoursesNestedInput
+    Path?: PathUncheckedUpdateManyWithoutCoursesNestedInput
   }
 
   export type EnrollmentCreateManyUserInput = {
@@ -53055,6 +60581,27 @@ export namespace Prisma {
     email?: boolean
     push?: boolean
     createdAt?: Date | string
+  }
+
+  export type LoginHistoryCreateManyUserInput = {
+    id?: string
+    success?: boolean
+    ip?: string | null
+    device?: $Enums.LoginDevice | null
+    location?: string | null
+    browser?: string | null
+    os?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TwoFactorCreateManyUserInput = {
+    id?: string
+    email?: boolean
+    sms?: boolean
+    authenticator?: boolean
+    secret?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EnrollmentUpdateWithoutUserInput = {
@@ -53666,6 +61213,118 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PathUpdateWithoutPeersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    completedTasks?: IntFieldUpdateOperationsInput | number
+    remainingTime?: IntFieldUpdateOperationsInput | number
+    studyTime?: IntFieldUpdateOperationsInput | number
+    totalTasks?: IntFieldUpdateOperationsInput | number
+    progress?: FloatFieldUpdateOperationsInput | number
+    engagement?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    milestones?: MilestoneUpdateManyWithoutPathNestedInput
+    courses?: CourseUpdateManyWithoutPathNestedInput
+  }
+
+  export type PathUncheckedUpdateWithoutPeersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    completedTasks?: IntFieldUpdateOperationsInput | number
+    remainingTime?: IntFieldUpdateOperationsInput | number
+    studyTime?: IntFieldUpdateOperationsInput | number
+    totalTasks?: IntFieldUpdateOperationsInput | number
+    progress?: FloatFieldUpdateOperationsInput | number
+    engagement?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    milestones?: MilestoneUncheckedUpdateManyWithoutPathNestedInput
+    courses?: CourseUncheckedUpdateManyWithoutPathNestedInput
+  }
+
+  export type PathUncheckedUpdateManyWithoutPeersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    completedTasks?: IntFieldUpdateOperationsInput | number
+    remainingTime?: IntFieldUpdateOperationsInput | number
+    studyTime?: IntFieldUpdateOperationsInput | number
+    totalTasks?: IntFieldUpdateOperationsInput | number
+    progress?: FloatFieldUpdateOperationsInput | number
+    engagement?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LoginHistoryUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    success?: BoolFieldUpdateOperationsInput | boolean
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    device?: NullableEnumLoginDeviceFieldUpdateOperationsInput | $Enums.LoginDevice | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LoginHistoryUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    success?: BoolFieldUpdateOperationsInput | boolean
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    device?: NullableEnumLoginDeviceFieldUpdateOperationsInput | $Enums.LoginDevice | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LoginHistoryUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    success?: BoolFieldUpdateOperationsInput | boolean
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    device?: NullableEnumLoginDeviceFieldUpdateOperationsInput | $Enums.LoginDevice | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TwoFactorUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: BoolFieldUpdateOperationsInput | boolean
+    sms?: BoolFieldUpdateOperationsInput | boolean
+    authenticator?: BoolFieldUpdateOperationsInput | boolean
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TwoFactorUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: BoolFieldUpdateOperationsInput | boolean
+    sms?: BoolFieldUpdateOperationsInput | boolean
+    authenticator?: BoolFieldUpdateOperationsInput | boolean
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TwoFactorUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: BoolFieldUpdateOperationsInput | boolean
+    sms?: BoolFieldUpdateOperationsInput | boolean
+    authenticator?: BoolFieldUpdateOperationsInput | boolean
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateManyAcademyInput = {
     id?: string
     email: string
@@ -53678,12 +61337,16 @@ export namespace Prisma {
     avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
   }
 
   export type CourseCreateManyAcademyInput = {
     id?: string
     title: string
     description: string
+    image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -53715,6 +61378,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
     achievements?: AchievementUpdateManyWithoutUserNestedInput
@@ -53737,6 +61403,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAcademyInput = {
@@ -53751,6 +61420,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -53773,6 +61445,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutAcademyInput = {
@@ -53787,12 +61462,16 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type CourseUpdateWithoutAcademyInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lessons?: LessonUpdateManyWithoutCourseNestedInput
@@ -53800,12 +61479,14 @@ export namespace Prisma {
     quizzes?: QuizUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUpdateManyWithoutCoursesNestedInput
     liveRoom?: LiveRoomUpdateManyWithoutCourseNestedInput
+    Path?: PathUpdateManyWithoutCoursesNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutAcademyInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
@@ -53813,12 +61494,14 @@ export namespace Prisma {
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutCoursesNestedInput
     liveRoom?: LiveRoomUncheckedUpdateManyWithoutCourseNestedInput
+    Path?: PathUncheckedUpdateManyWithoutCoursesNestedInput
   }
 
   export type CourseUncheckedUpdateManyWithoutAcademyInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -53874,6 +61557,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academy?: AcademyUpdateOneRequiredWithoutCoursesNestedInput
@@ -53881,6 +61565,7 @@ export namespace Prisma {
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUpdateManyWithoutCourseNestedInput
     liveRoom?: LiveRoomUpdateManyWithoutCourseNestedInput
+    Path?: PathUpdateManyWithoutCoursesNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutInstructorsInput = {
@@ -53888,12 +61573,14 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     academyId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
     liveRoom?: LiveRoomUncheckedUpdateManyWithoutCourseNestedInput
+    Path?: PathUncheckedUpdateManyWithoutCoursesNestedInput
   }
 
   export type CourseUncheckedUpdateManyWithoutInstructorsInput = {
@@ -53901,6 +61588,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     academyId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -54108,6 +61796,229 @@ export namespace Prisma {
     communityId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type PathUpdateWithoutCoursesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    completedTasks?: IntFieldUpdateOperationsInput | number
+    remainingTime?: IntFieldUpdateOperationsInput | number
+    studyTime?: IntFieldUpdateOperationsInput | number
+    totalTasks?: IntFieldUpdateOperationsInput | number
+    progress?: FloatFieldUpdateOperationsInput | number
+    engagement?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    milestones?: MilestoneUpdateManyWithoutPathNestedInput
+    peers?: UserUpdateManyWithoutPathNestedInput
+  }
+
+  export type PathUncheckedUpdateWithoutCoursesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    completedTasks?: IntFieldUpdateOperationsInput | number
+    remainingTime?: IntFieldUpdateOperationsInput | number
+    studyTime?: IntFieldUpdateOperationsInput | number
+    totalTasks?: IntFieldUpdateOperationsInput | number
+    progress?: FloatFieldUpdateOperationsInput | number
+    engagement?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    milestones?: MilestoneUncheckedUpdateManyWithoutPathNestedInput
+    peers?: UserUncheckedUpdateManyWithoutPathNestedInput
+  }
+
+  export type PathUncheckedUpdateManyWithoutCoursesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    completedTasks?: IntFieldUpdateOperationsInput | number
+    remainingTime?: IntFieldUpdateOperationsInput | number
+    studyTime?: IntFieldUpdateOperationsInput | number
+    totalTasks?: IntFieldUpdateOperationsInput | number
+    progress?: FloatFieldUpdateOperationsInput | number
+    engagement?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MilestoneCreateManyPathInput = {
+    id?: string
+    title: string
+    description?: string | null
+    status?: $Enums.MilestoneStatus
+    createdAt?: Date | string
+  }
+
+  export type MilestoneUpdateWithoutPathInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMilestoneStatusFieldUpdateOperationsInput | $Enums.MilestoneStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MilestoneUncheckedUpdateWithoutPathInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMilestoneStatusFieldUpdateOperationsInput | $Enums.MilestoneStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MilestoneUncheckedUpdateManyWithoutPathInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMilestoneStatusFieldUpdateOperationsInput | $Enums.MilestoneStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CourseUpdateWithoutPathInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academy?: AcademyUpdateOneRequiredWithoutCoursesNestedInput
+    lessons?: LessonUpdateManyWithoutCourseNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
+    quizzes?: QuizUpdateManyWithoutCourseNestedInput
+    instructors?: InstructorUpdateManyWithoutCoursesNestedInput
+    liveRoom?: LiveRoomUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutPathInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    academyId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
+    quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
+    instructors?: InstructorUncheckedUpdateManyWithoutCoursesNestedInput
+    liveRoom?: LiveRoomUncheckedUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateManyWithoutPathInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    academyId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpdateWithoutPathInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    academy?: AcademyUpdateOneWithoutUsersNestedInput
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUpdateManyWithoutUserNestedInput
+    Admin?: AdminUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUpdateManyWithoutUserNestedInput
+    Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPathInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUncheckedUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUncheckedUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
+    Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutPathInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
   export type FileCreateManyLessonInput = {
     id?: string
     name: string
@@ -54215,6 +62126,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -54237,6 +62151,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLessonInput = {
@@ -54252,6 +62169,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -54273,6 +62193,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutLessonInput = {
@@ -54288,6 +62211,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type AttendanceUpdateWithoutLessonInput = {
@@ -54409,6 +62335,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academy?: AcademyUpdateOneRequiredWithoutCoursesNestedInput
@@ -54416,6 +62343,7 @@ export namespace Prisma {
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUpdateManyWithoutCoursesNestedInput
     liveRoom?: LiveRoomUpdateManyWithoutCourseNestedInput
+    Path?: PathUpdateManyWithoutCoursesNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutQuizzesInput = {
@@ -54423,12 +62351,14 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     academyId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutCoursesNestedInput
     liveRoom?: LiveRoomUncheckedUpdateManyWithoutCourseNestedInput
+    Path?: PathUncheckedUpdateManyWithoutCoursesNestedInput
   }
 
   export type CourseUncheckedUpdateManyWithoutQuizzesInput = {
@@ -54436,6 +62366,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     academyId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -54605,6 +62536,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -54627,6 +62561,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGroupsInput = {
@@ -54642,6 +62579,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -54663,6 +62603,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutGroupsInput = {
@@ -54678,6 +62621,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PostUpdateWithoutGroupInput = {
@@ -54810,6 +62756,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -54832,6 +62781,9 @@ export namespace Prisma {
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChannelsInput = {
@@ -54847,6 +62799,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -54868,6 +62823,9 @@ export namespace Prisma {
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutChannelsInput = {
@@ -54883,6 +62841,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type MessageUpdateWithoutChannelInput = {
@@ -55049,6 +63010,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -55071,6 +63035,9 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommunityInput = {
@@ -55086,6 +63053,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -55107,6 +63077,9 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutCommunityInput = {
@@ -55122,6 +63095,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PostUpdateWithoutCommunityInput = {
@@ -55190,6 +63166,9 @@ export namespace Prisma {
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     academy?: AcademyUpdateOneWithoutUsersNestedInput
     profile?: ProfileUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
@@ -55212,6 +63191,9 @@ export namespace Prisma {
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLiveRoomInput = {
@@ -55227,6 +63209,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
@@ -55248,6 +63233,9 @@ export namespace Prisma {
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutLiveRoomInput = {
@@ -55263,6 +63251,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
 
