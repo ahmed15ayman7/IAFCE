@@ -1,11 +1,8 @@
 import React from 'react';
-import { Card } from '@/components/common/Card';
-import { DataGrid } from '@/components/common/DataGrid';
-import { useTranslation } from 'next-i18next';
+import  Card  from '@/components/common/Card';
+import  DataGrid  from '@/components/common/DataGrid';
 
 export default function ParentTeachers() {
-    const { t } = useTranslation();
-
     const teachers = [
         {
             id: 1,
@@ -49,19 +46,19 @@ export default function ParentTeachers() {
     ];
 
     const columns = [
-        { field: 'teacher', headerName: t('المعلم'), width: 150 },
-        { field: 'subject', headerName: t('الموضوع'), width: 200 },
-        { field: 'date', headerName: t('التاريخ'), width: 150 },
-        { field: 'status', headerName: t('الحالة'), width: 100 },
-        { field: 'priority', headerName: t('الأولوية'), width: 100 },
+        { field: 'teacher', headerName: ('المعلم'), width: 150 },
+        { field: 'subject', headerName: ('الموضوع'), width: 200 },
+        { field: 'date', headerName: ('التاريخ'), width: 150 },
+        { field: 'status', headerName: ('الحالة'), width: 100 },
+        { field: 'priority', headerName: ('الأولوية'), width: 100 },
     ];
 
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">{t('التواصل مع المعلمين')}</h1>
+                <h1 className="text-3xl font-bold">{('التواصل مع المعلمين')}</h1>
                 <button className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
-                    {t('رسالة جديدة')}
+                    {('رسالة جديدة')}
                 </button>
             </div>
 
@@ -78,26 +75,26 @@ export default function ParentTeachers() {
                                     {teacher.availability}
                                 </p>
                                 <p className="text-sm text-gray-500">
-                                    {t('آخر اجتماع')}: {teacher.lastMeeting}
+                                    {('آخر اجتماع')}: {teacher.lastMeeting}
                                 </p>
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                             <div>
-                                <h3 className="font-medium mb-1">{t('البريد الإلكتروني')}</h3>
+                                <h3 className="font-medium mb-1">{('البريد الإلكتروني')}</h3>
                                 <p className="text-lg">{teacher.email}</p>
                             </div>
                             <div>
-                                <h3 className="font-medium mb-1">{t('رقم الهاتف')}</h3>
+                                <h3 className="font-medium mb-1">{('رقم الهاتف')}</h3>
                                 <p className="text-lg">{teacher.phone}</p>
                             </div>
                         </div>
                         <div className="mt-4 flex gap-2">
                             <button className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                                {t('إرسال رسالة')}
+                                {('إرسال رسالة')}
                             </button>
                             <button className="px-3 py-1 bg-green-500 text-white rounded-md hover:bg-green-600">
-                                {t('طلب اجتماع')}
+                                {('طلب اجتماع')}
                             </button>
                         </div>
                     </Card>
@@ -105,7 +102,7 @@ export default function ParentTeachers() {
             </div>
 
             <div>
-                <h2 className="text-2xl font-semibold mb-4">{t('الرسائل')}</h2>
+                <h2 className="text-2xl font-semibold mb-4">{('الرسائل')}</h2>
                 <DataGrid
                     columns={columns}
                     rows={messages}

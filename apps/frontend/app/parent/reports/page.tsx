@@ -1,10 +1,8 @@
 import React from 'react';
-import { Card } from '@/components/common/Card';
-import { DataGrid } from '@/components/common/DataGrid';
-import { useTranslation } from 'next-i18next';
+import  Card  from '@/components/common/Card';
+import DataGrid  from '@/components/common/DataGrid';
 
 export default function ParentReports() {
-    const { t } = useTranslation();
 
     const children = [
         {
@@ -60,24 +58,24 @@ export default function ParentReports() {
     ];
 
     const columns = [
-        { field: 'child', headerName: t('الابن/الابنة'), width: 150 },
-        { field: 'subject', headerName: t('المادة'), width: 150 },
-        { field: 'examDate', headerName: t('تاريخ الاختبار'), width: 150 },
-        { field: 'grade', headerName: t('الدرجة'), width: 100 },
-        { field: 'rank', headerName: t('الترتيب'), width: 100 },
-        { field: 'teacherComment', headerName: t('ملاحظات المعلم'), width: 300 },
+        { field: 'child', headerName: ('الابن/الابنة'), width: 150 },
+        { field: 'subject', headerName: ('المادة'), width: 150 },
+        { field: 'examDate', headerName: ('تاريخ الاختبار'), width: 150 },
+        { field: 'grade', headerName: ('الدرجة'), width: 100 },
+        { field: 'rank', headerName: ('الترتيب'), width: 100 },
+        { field: 'teacherComment', headerName: ('ملاحظات المعلم'), width: 300 },
     ];
 
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">{t('تقارير الأداء')}</h1>
+                <h1 className="text-3xl font-bold">{('تقارير الأداء')}</h1>
                 <div className="flex gap-4">
                     <button className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
-                        {t('تصدير التقارير')}
+                        {('تصدير التقارير')}
                     </button>
                     <button className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
-                        {t('طباعة')}
+                        {('طباعة')}
                     </button>
                 </div>
             </div>
@@ -96,19 +94,19 @@ export default function ParentReports() {
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                             <div>
-                                <h3 className="font-medium mb-1">{t('نسبة الحضور')}</h3>
+                                <h3 className="font-medium mb-1">{('نسبة الحضور')}</h3>
                                 <p className="text-lg">{child.attendanceRate}</p>
                             </div>
                             <div>
-                                <h3 className="font-medium mb-1">{t('إنجاز الواجبات')}</h3>
+                                <h3 className="font-medium mb-1">{('إنجاز الواجبات')}</h3>
                                 <p className="text-lg">{child.homeworkCompletion}</p>
                             </div>
                             <div>
-                                <h3 className="font-medium mb-1">{t('متوسط الاختبارات')}</h3>
+                                <h3 className="font-medium mb-1">{('متوسط الاختبارات')}</h3>
                                 <p className="text-lg">{child.examAverage}</p>
                             </div>
                             <div>
-                                <h3 className="font-medium mb-1">{t('السلوك')}</h3>
+                                <h3 className="font-medium mb-1">{('السلوك')}</h3>
                                 <p className="text-lg">{child.behavior}</p>
                             </div>
                         </div>
@@ -117,7 +115,7 @@ export default function ParentReports() {
             </div>
 
             <div>
-                <h2 className="text-2xl font-semibold mb-4">{t('نتائج الاختبارات')}</h2>
+                <h2 className="text-2xl font-semibold mb-4">{('نتائج الاختبارات')}</h2>
                 <DataGrid
                     columns={columns}
                     rows={examResults}

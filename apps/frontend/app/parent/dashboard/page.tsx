@@ -1,10 +1,8 @@
 import React from 'react';
-import { Card } from '@/components/common/Card';
-import { DataGrid } from '@/components/common/DataGrid';
-import { useTranslation } from 'next-i18next';
+import  Card  from '@/components/common/Card';
+import  DataGrid  from '@/components/common/DataGrid';
 
 export default function ParentDashboard() {
-    const { t } = useTranslation();
 
     const children = [
         {
@@ -52,28 +50,28 @@ export default function ParentDashboard() {
     ];
 
     const columns = [
-        { field: 'child', headerName: t('الابن/الابنة'), width: 200 },
-        { field: 'activity', headerName: t('النشاط'), width: 300 },
-        { field: 'date', headerName: t('التاريخ'), width: 150 },
-        { field: 'status', headerName: t('الحالة'), width: 100 },
+        { field: 'child', headerName: ('الابن/الابنة'), width: 200 },
+        { field: 'activity', headerName: ('النشاط'), width: 300 },
+        { field: 'date', headerName: ('التاريخ'), width: 150 },
+        { field: 'status', headerName: ('الحالة'), width: 100 },
     ];
 
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">{t('لوحة التحكم')}</h1>
+                <h1 className="text-3xl font-bold">{('لوحة التحكم')}</h1>
                 <button className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
-                    {t('تواصل مع الإدارة')}
+                    {('تواصل مع الإدارة')}
                 </button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <Card>
-                    <h3 className="text-lg font-medium mb-2">{t('عدد الأبناء')}</h3>
+                    <h3 className="text-lg font-medium mb-2">{('عدد الأبناء')}</h3>
                     <div className="text-4xl font-bold">{children.length}</div>
                 </Card>
                 <Card>
-                    <h3 className="text-lg font-medium mb-2">{t('متوسط الحضور')}</h3>
+                    <h3 className="text-lg font-medium mb-2">{('متوسط الحضور')}</h3>
                     <div className="text-4xl font-bold">
                         {Math.round(
                             children.reduce(
@@ -85,13 +83,13 @@ export default function ParentDashboard() {
                     </div>
                 </Card>
                 <Card>
-                    <h3 className="text-lg font-medium mb-2">{t('الإشعارات غير المقروءة')}</h3>
+                    <h3 className="text-lg font-medium mb-2">{('الإشعارات غير المقروءة')}</h3>
                     <div className="text-4xl font-bold">3</div>
                 </Card>
             </div>
 
             <div className="mb-8">
-                <h2 className="text-2xl font-semibold mb-4">{t('متابعة الأبناء')}</h2>
+                <h2 className="text-2xl font-semibold mb-4">{('متابعة الأبناء')}</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {children.map(child => (
                         <Card key={child.id}>
@@ -101,17 +99,17 @@ export default function ParentDashboard() {
                                     <p className="text-gray-600">{child.grade}</p>
                                 </div>
                                 <div className="text-right">
-                                    <p className="text-green-600">{child.attendance} {t('حضور')}</p>
+                                    <p className="text-green-600">{child.attendance} {('حضور')}</p>
                                     <p className="text-blue-600">{child.performance}</p>
                                 </div>
                             </div>
                             <div className="space-y-2">
                                 <p>
-                                    <span className="font-medium">{t('آخر نشاط')}:</span>{' '}
+                                    <span className="font-medium">{('آخر نشاط')}:</span>{' '}
                                     {child.lastActivity}
                                 </p>
                                 <p>
-                                    <span className="font-medium">{t('الاختبار القادم')}:</span>{' '}
+                                    <span className="font-medium">{('الاختبار القادم')}:</span>{' '}
                                     {child.nextExam}
                                 </p>
                             </div>
@@ -121,7 +119,7 @@ export default function ParentDashboard() {
             </div>
 
             <div>
-                <h2 className="text-2xl font-semibold mb-4">{t('آخر الأنشطة')}</h2>
+                <h2 className="text-2xl font-semibold mb-4">{('آخر الأنشطة')}</h2>
                 <DataGrid
                     columns={columns}
                     rows={recentActivities}

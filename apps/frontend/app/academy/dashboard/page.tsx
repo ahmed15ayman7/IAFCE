@@ -1,36 +1,33 @@
 import React from 'react';
-import { Card } from '@/components/common/Card';
-import { DataGrid } from '@/components/common/DataGrid';
-import { useTranslation } from 'next-i18next';
+import  Card  from '@/components/common/Card';
+import  DataGrid  from '@/components/common/DataGrid';
 
 export default function AcademyDashboard() {
-    const { t } = useTranslation();
-
     const stats = [
         {
             id: 1,
-            title: t('إجمالي المدارس'),
+            title: ('إجمالي المدارس'),
             value: '25',
             change: '+3',
             trend: 'up',
         },
         {
             id: 2,
-            title: t('إجمالي الفرق'),
+            title: ('إجمالي الفرق'),
             value: '120',
             change: '+15',
             trend: 'up',
         },
         {
             id: 3,
-            title: t('الأحداث القادمة'),
+            title: ('الأحداث القادمة'),
             value: '8',
             change: '+2',
             trend: 'up',
         },
         {
             id: 4,
-            title: t('التقارير المعلقة'),
+            title: ('التقارير المعلقة'),
             value: '12',
             change: '-5',
             trend: 'down',
@@ -40,26 +37,26 @@ export default function AcademyDashboard() {
     const teams = [
         {
             id: 1,
-            name: t('فريق الرياض'),
-            school: t('مدرسة الرياض النموذجية'),
+            name: ('فريق الرياض'),
+            school: ('مدرسة الرياض النموذجية'),
             members: '15',
-            status: t('نشط'),
+            status: ('نشط'),
             lastActivity: '2024-04-25',
         },
         {
             id: 2,
-            name: t('فريق جدة'),
-            school: t('مدرسة جدة الدولية'),
+            name: ('فريق جدة'),
+            school: ('مدرسة جدة الدولية'),
             members: '12',
-            status: t('نشط'),
+            status: ('نشط'),
             lastActivity: '2024-04-24',
         },
         {
             id: 3,
-            name: t('فريق الدمام'),
-            school: t('مدرسة الدمام الأهلية'),
+            name: ('فريق الدمام'),
+            school: ('مدرسة الدمام الأهلية'),
             members: '10',
-            status: t('غير نشط'),
+            status: ('غير نشط'),
             lastActivity: '2024-04-20',
         },
     ];
@@ -67,26 +64,26 @@ export default function AcademyDashboard() {
     const events = [
         {
             id: 1,
-            title: t('مسابقة البرمجة'),
+            title: ('مسابقة البرمجة'),
             date: '2024-05-15',
-            location: t('مدرسة الرياض النموذجية'),
-            status: t('قادم'),
+            location: ('مدرسة الرياض النموذجية'),
+            status: ('قادم'),
             participants: '50',
         },
         {
             id: 2,
-            title: t('ورشة عمل الروبوتات'),
+            title: ('ورشة عمل الروبوتات'),
             date: '2024-05-20',
-            location: t('مدرسة جدة الدولية'),
-            status: t('قادم'),
+            location: ('مدرسة جدة الدولية'),
+            status: ('قادم'),
             participants: '30',
         },
         {
             id: 3,
-            title: t('معرض المشاريع'),
+            title: ('معرض المشاريع'),
             date: '2024-05-25',
-            location: t('مدرسة الدمام الأهلية'),
-            status: t('قادم'),
+            location: ('مدرسة الدمام الأهلية'),
+            status: ('قادم'),
             participants: '40',
         },
     ];
@@ -94,47 +91,47 @@ export default function AcademyDashboard() {
     const reports = [
         {
             id: 1,
-            school: t('مدرسة الرياض النموذجية'),
-            type: t('أداء الفرق'),
+            school: ('مدرسة الرياض النموذجية'),
+            type: ('أداء الفرق'),
             date: '2024-04-25',
-            status: t('مكتمل'),
-            actions: t('عرض'),
+            status: ('مكتمل'),
+            actions: ('عرض'),
         },
         {
             id: 2,
-            school: t('مدرسة جدة الدولية'),
-            type: t('تقييم الأحداث'),
+            school: ('مدرسة جدة الدولية'),
+            type: ('تقييم الأحداث'),
             date: '2024-04-24',
-            status: t('مكتمل'),
-            actions: t('عرض'),
+            status: ('مكتمل'),
+            actions: ('عرض'),
         },
         {
             id: 3,
-            school: t('مدرسة الدمام الأهلية'),
-            type: t('تقرير الميزانية'),
+            school: ('مدرسة الدمام الأهلية'),
+            type: ('تقرير الميزانية'),
             date: '2024-04-23',
-            status: t('معلق'),
-            actions: t('مراجعة'),
+            status: ('معلق'),
+            actions: ('مراجعة'),
         },
     ];
 
     const teamColumns = [
-        { field: 'name', headerName: t('اسم الفريق'), width: 200 },
-        { field: 'school', headerName: t('المدرسة'), width: 200 },
-        { field: 'members', headerName: t('عدد الأعضاء'), width: 150 },
-        { field: 'status', headerName: t('الحالة'), width: 150 },
-        { field: 'lastActivity', headerName: t('آخر نشاط'), width: 150 },
+        { field: 'name', headerName: ('اسم الفريق'), width: 200 },
+        { field: 'school', headerName: ('المدرسة'), width: 200 },
+        { field: 'members', headerName: ('عدد الأعضاء'), width: 150 },
+        { field: 'status', headerName: ('الحالة'), width: 150 },
+        { field: 'lastActivity', headerName: ('آخر نشاط'), width: 150 },
         {
             field: 'actions',
-            headerName: t('الإجراءات'),
+            headerName: ('الإجراءات'),
             width: 200,
-            renderCell: (params) => (
+            renderCell: (params:any) => (
                 <div className="flex gap-2">
                     <button className="px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                        {t('عرض')}
+                        {('عرض')}
                     </button>
                     <button className="px-2 py-1 bg-green-500 text-white rounded-md hover:bg-green-600">
-                        {t('تعديل')}
+                        {('تعديل')}
                     </button>
                 </div>
             ),
@@ -142,22 +139,22 @@ export default function AcademyDashboard() {
     ];
 
     const eventColumns = [
-        { field: 'title', headerName: t('العنوان'), width: 200 },
-        { field: 'date', headerName: t('التاريخ'), width: 150 },
-        { field: 'location', headerName: t('المكان'), width: 200 },
-        { field: 'status', headerName: t('الحالة'), width: 150 },
-        { field: 'participants', headerName: t('عدد المشاركين'), width: 150 },
+        { field: 'title', headerName: ('العنوان'), width: 200 },
+        { field: 'date', headerName: ('التاريخ'), width: 150 },
+        { field: 'location', headerName: ('المكان'), width: 200 },
+        { field: 'status', headerName: ('الحالة'), width: 150 },
+        { field: 'participants', headerName: ('عدد المشاركين'), width: 150 },
         {
             field: 'actions',
-            headerName: t('الإجراءات'),
+            headerName: ('الإجراءات'),
             width: 200,
-            renderCell: (params) => (
+            renderCell: (params:any) => (
                 <div className="flex gap-2">
                     <button className="px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                        {t('عرض')}
+                        {('عرض')}
                     </button>
                     <button className="px-2 py-1 bg-green-500 text-white rounded-md hover:bg-green-600">
-                        {t('تعديل')}
+                        {('تعديل')}
                     </button>
                 </div>
             ),
@@ -165,21 +162,21 @@ export default function AcademyDashboard() {
     ];
 
     const reportColumns = [
-        { field: 'school', headerName: t('المدرسة'), width: 200 },
-        { field: 'type', headerName: t('نوع التقرير'), width: 200 },
-        { field: 'date', headerName: t('التاريخ'), width: 150 },
-        { field: 'status', headerName: t('الحالة'), width: 150 },
+        { field: 'school', headerName: ('المدرسة'), width: 200 },
+        { field: 'type', headerName: ('نوع التقرير'), width: 200 },
+        { field: 'date', headerName: ('التاريخ'), width: 150 },
+        { field: 'status', headerName: ('الحالة'), width: 150 },
         {
             field: 'actions',
-            headerName: t('الإجراءات'),
+            headerName: ('الإجراءات'),
             width: 200,
-            renderCell: (params) => (
+            renderCell: (params:any) => (
                 <div className="flex gap-2">
                     <button className="px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                        {t('عرض')}
+                        {('عرض')}
                     </button>
                     <button className="px-2 py-1 bg-green-500 text-white rounded-md hover:bg-green-600">
-                        {t('تحميل')}
+                        {('تحميل')}
                     </button>
                 </div>
             ),
@@ -189,20 +186,20 @@ export default function AcademyDashboard() {
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">{t('لوحة تحكم الأكاديمية')}</h1>
+                <h1 className="text-3xl font-bold">{('لوحة تحكم الأكاديمية')}</h1>
                 <div className="flex gap-4">
                     <button className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
-                        {t('فريق جديد')}
+                        {('فريق جديد')}
                     </button>
                     <button className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
-                        {t('حدث جديد')}
+                        {('حدث جديد')}
                     </button>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 {stats.map(stat => (
-                    <Card key={stat.id}>
+                    <Card key={stat.id} title=''>
                         <div className="flex justify-between items-start">
                             <div>
                                 <h3 className="text-lg font-medium text-gray-600">{stat.title}</h3>
@@ -217,11 +214,11 @@ export default function AcademyDashboard() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                <Card>
+                <Card title=''>
                     <div className="flex justify-between items-center mb-4">
-                        <h2 className="text-2xl font-semibold">{t('الفرق')}</h2>
+                        <h2 className="text-2xl font-semibold">{('الفرق')}</h2>
                         <button className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
-                            {t('إضافة فريق')}
+                            {('إضافة فريق')}
                         </button>
                     </div>
                     <DataGrid
@@ -232,11 +229,11 @@ export default function AcademyDashboard() {
                     />
                 </Card>
 
-                <Card>
+                <Card title=''>
                     <div className="flex justify-between items-center mb-4">
-                        <h2 className="text-2xl font-semibold">{t('الأحداث القادمة')}</h2>
+                        <h2 className="text-2xl font-semibold">{('الأحداث القادمة')}</h2>
                         <button className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
-                            {t('إضافة حدث')}
+                            {('إضافة حدث')}
                         </button>
                     </div>
                     <DataGrid
@@ -248,15 +245,15 @@ export default function AcademyDashboard() {
                 </Card>
             </div>
 
-            <Card>
+            <Card title=''>
                 <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-2xl font-semibold">{t('تقارير المدارس')}</h2>
+                    <h2 className="text-2xl font-semibold">{('تقارير المدارس')}</h2>
                     <div className="flex gap-4">
                         <button className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
-                            {t('تقرير جديد')}
+                            {('تقرير جديد')}
                         </button>
                         <button className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
-                            {t('تصدير الكل')}
+                            {('تصدير الكل')}
                         </button>
                     </div>
                 </div>

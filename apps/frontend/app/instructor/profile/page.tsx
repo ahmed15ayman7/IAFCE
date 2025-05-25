@@ -1,9 +1,7 @@
 import React from 'react';
-import { Card } from '@/components/common/Card';
-import { useTranslation } from 'next-i18next';
+import  Card  from '@/components/common/Card';
 
 export default function InstructorProfile() {
-    const { t } = useTranslation();
 
     const profile = {
         name: 'أحمد محمد',
@@ -51,15 +49,15 @@ export default function InstructorProfile() {
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">{t('الملف الشخصي')}</h1>
+                <h1 className="text-3xl font-bold">{('الملف الشخصي')}</h1>
                 <button className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
-                    {t('تعديل الملف الشخصي')}
+                    {('تعديل الملف الشخصي')}
                 </button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div className="md:col-span-2">
-                    <Card className="mb-6">
+                    <Card className="mb-6" title="">
                         <div className="flex items-center gap-6 mb-6">
                             <div className="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center">
                                 <span className="text-4xl">👨‍🏫</span>
@@ -72,22 +70,21 @@ export default function InstructorProfile() {
                         </div>
                         <div className="space-y-4">
                             <div>
-                                <h3 className="font-medium mb-2">{t('البريد الإلكتروني')}</h3>
+                                <h3 className="font-medium mb-2">{('البريد الإلكتروني')}</h3>
                                 <p>{profile.email}</p>
                             </div>
                             <div>
-                                <h3 className="font-medium mb-2">{t('رقم الهاتف')}</h3>
+                                <h3 className="font-medium mb-2">{('رقم الهاتف')}</h3>
                                 <p>{profile.phone}</p>
                             </div>
                             <div>
-                                <h3 className="font-medium mb-2">{t('نبذة عني')}</h3>
+                                <h3 className="font-medium mb-2">{('نبذة عني')}</h3>
                                 <p>{profile.bio}</p>
                             </div>
                         </div>
                     </Card>
 
-                    <Card>
-                        <h2 className="text-xl font-semibold mb-4">{t('الدورات التدريبية')}</h2>
+                    <Card title='الدورات التدريبية'>
                         <div className="space-y-4">
                             {profile.courses.map(course => (
                                 <div key={course.id} className="border-b pb-4">
@@ -105,8 +102,7 @@ export default function InstructorProfile() {
                 </div>
 
                 <div>
-                    <Card className="mb-6">
-                        <h2 className="text-xl font-semibold mb-4">{t('الشهادات')}</h2>
+                    <Card className="mb-6" title='الشهادات'>
                         <div className="space-y-4">
                             {profile.certificates.map(cert => (
                                 <div key={cert.id} className="border-b pb-4">
@@ -118,17 +114,16 @@ export default function InstructorProfile() {
                         </div>
                     </Card>
 
-                    <Card>
-                        <h2 className="text-xl font-semibold mb-4">{t('الإحصائيات')}</h2>
+                    <Card title='الإحصائيات'>
                         <div className="space-y-4">
                             <div>
-                                <h3 className="font-medium mb-2">{t('إجمالي الطلاب')}</h3>
+                                <h3 className="font-medium mb-2">{('إجمالي الطلاب')}</h3>
                                 <p className="text-2xl font-bold">
                                     {profile.courses.reduce((acc, course) => acc + course.students, 0)}
                                 </p>
                             </div>
                             <div>
-                                <h3 className="font-medium mb-2">{t('متوسط التقييم')}</h3>
+                                <h3 className="font-medium mb-2">{('متوسط التقييم')}</h3>
                                 <p className="text-2xl font-bold">
                                     {Math.round(
                                         profile.courses.reduce((acc, course) => acc + course.rating, 0) /
@@ -137,7 +132,7 @@ export default function InstructorProfile() {
                                 </p>
                             </div>
                             <div>
-                                <h3 className="font-medium mb-2">{t('عدد الدورات')}</h3>
+                                <h3 className="font-medium mb-2">{('عدد الدورات')}</h3>
                                 <p className="text-2xl font-bold">{profile.courses.length}</p>
                             </div>
                         </div>

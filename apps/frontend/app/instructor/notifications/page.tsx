@@ -1,10 +1,8 @@
 import React from 'react';
-import { Card } from '@/components/common/Card';
-import { DataGrid } from '@/components/common/DataGrid';
-import { useTranslation } from 'next-i18next';
+import  Card  from '@/components/common/Card';
+import  DataGrid  from '@/components/common/DataGrid';
 
 export default function InstructorNotifications() {
-    const { t } = useTranslation();
 
     const notifications = [
         {
@@ -50,42 +48,39 @@ export default function InstructorNotifications() {
     ];
 
     const columns = [
-        { field: 'title', headerName: t('العنوان'), width: 200 },
-        { field: 'message', headerName: t('الرسالة'), width: 300 },
-        { field: 'type', headerName: t('النوع'), width: 100 },
-        { field: 'date', headerName: t('التاريخ'), width: 150 },
-        { field: 'time', headerName: t('الوقت'), width: 100 },
-        { field: 'read', headerName: t('تم القراءة'), width: 100 },
-        { field: 'action', headerName: t('الإجراء'), width: 100 },
+        { field: 'title', headerName: ('العنوان'), width: 200 },
+        { field: 'message', headerName: ('الرسالة'), width: 300 },
+        { field: 'type', headerName: ('النوع'), width: 100 },
+        { field: 'date', headerName: ('التاريخ'), width: 150 },
+        { field: 'time', headerName: ('الوقت'), width: 100 },
+        { field: 'read', headerName: ('تم القراءة'), width: 100 },
+        { field: 'action', headerName: ('الإجراء'), width: 100 },
     ];
 
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">{t('الإشعارات')}</h1>
+                <h1 className="text-3xl font-bold">{('الإشعارات')}</h1>
                 <div className="flex gap-4">
                     <button className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
-                        {t('تمييز الكل كمقروء')}
+                        {('تمييز الكل كمقروء')}
                     </button>
                     <button className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50">
-                        {t('حذف الكل')}
+                        {('حذف الكل')}
                     </button>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <Card>
-                    <h3 className="text-lg font-medium mb-2">{t('إجمالي الإشعارات')}</h3>
+                <Card title='إجمالي الإشعارات'>
                     <div className="text-4xl font-bold">{notifications.length}</div>
                 </Card>
-                <Card>
-                    <h3 className="text-lg font-medium mb-2">{t('الإشعارات غير المقروءة')}</h3>
+                <Card title='الإشعارات غير المقروءة'>
                     <div className="text-4xl font-bold">
                         {notifications.filter(n => !n.read).length}
                     </div>
                 </Card>
-                <Card>
-                    <h3 className="text-lg font-medium mb-2">{t('الإشعارات اليوم')}</h3>
+                <Card title='الإشعارات اليوم'>
                     <div className="text-4xl font-bold">
                         {notifications.filter(n => n.date === '2024-04-25').length}
                     </div>
@@ -94,21 +89,21 @@ export default function InstructorNotifications() {
 
             <div className="mb-8">
                 <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-2xl font-semibold">{t('قائمة الإشعارات')}</h2>
+                    <h2 className="text-2xl font-semibold">{('قائمة الإشعارات')}</h2>
                     <div className="flex gap-2">
                         <select className="px-3 py-2 border border-gray-300 rounded-md">
-                            <option value="all">{t('جميع الإشعارات')}</option>
-                            <option value="unread">{t('غير مقروء')}</option>
-                            <option value="today">{t('اليوم')}</option>
-                            <option value="week">{t('الأسبوع')}</option>
-                            <option value="month">{t('الشهر')}</option>
+                            <option value="all">{('جميع الإشعارات')}</option>
+                            <option value="unread">{('غير مقروء')}</option>
+                            <option value="today">{('اليوم')}</option>
+                            <option value="week">{('الأسبوع')}</option>
+                            <option value="month">{('الشهر')}</option>
                         </select>
                         <select className="px-3 py-2 border border-gray-300 rounded-md">
-                            <option value="all">{t('جميع الأنواع')}</option>
-                            <option value="success">{t('نجاح')}</option>
-                            <option value="warning">{t('تحذير')}</option>
-                            <option value="info">{t('معلومات')}</option>
-                            <option value="error">{t('خطأ')}</option>
+                            <option value="all">{('جميع الأنواع')}</option>
+                            <option value="success">{('نجاح')}</option>
+                            <option value="warning">{('تحذير')}</option>
+                            <option value="info">{('معلومات')}</option>
+                            <option value="error">{('خطأ')}</option>
                         </select>
                     </div>
                 </div>

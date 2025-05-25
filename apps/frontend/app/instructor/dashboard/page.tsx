@@ -1,10 +1,8 @@
 import React from 'react';
-import { Card } from '@/components/common/Card';
-import { DataGrid } from '@/components/common/DataGrid';
-import { useTranslation } from 'next-i18next';
+import  {Card}  from '@mui/material';
+import  DataGrid  from '@/components/common/DataGrid';
 
 export default function InstructorDashboard() {
-    const { t } = useTranslation();
 
     const activeCourses = [
         {
@@ -39,37 +37,38 @@ export default function InstructorDashboard() {
     ];
 
     const columns = [
-        { field: 'name', headerName: t('اسم الطالب'), width: 150 },
-        { field: 'course', headerName: t('المادة'), width: 150 },
-        { field: 'lastActivity', headerName: t('آخر نشاط'), width: 150 },
-        { field: 'progress', headerName: t('التقدم'), width: 100 },
+        { field: 'name', headerName: ('اسم الطالب'), width: 150 },
+        { field: 'course', headerName: ('المادة'), width: 150 },
+        { field: 'lastActivity', headerName: ('آخر نشاط'), width: 150 },
+        { field: 'progress', headerName: ('التقدم'), width: 100 },
     ];
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-8">{t('لوحة تحكم المعلم')}</h1>
+            <h1 className="text-3xl font-bold mb-8">{('لوحة تحكم المعلم')}</h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                 <Card
-                    title={t('الكورسات النشطة')}
-                    description={t('عدد الكورسات التي تدرسها حالياً')}
+                    title='الكورسات النشطة'
+                    description='عدد الكورسات التي تدرسها حالياً'
                     value="4"
                     icon="book"
                     color="primary"
+
                 />
 
                 <Card
-                    title={t('إجمالي الطلاب')}
-                    description={t('عدد الطلاب في جميع الكورسات')}
+                    title='إجمالي الطلاب'
+                    description='عدد الطلاب في جميع الكورسات'
                     value="120"
                     icon="users"
                     color="info"
                 />
 
                 <Card
-                    title={t('معدل الإنجاز')}
-                    description={t('متوسط إنجاز الطلاب')}
-                    value="75%"
+                    title='معدل الإنجاز'
+                    description='متوسط إنجاز الطلاب'
+                    value='75%'
                     icon="chart-line"
                     color="success"
                 />
@@ -77,14 +76,14 @@ export default function InstructorDashboard() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-                    <h2 className="text-xl font-semibold mb-4">{t('الكورسات النشطة')}</h2>
+                    <h2 className="text-xl font-semibold mb-4">('الكورسات النشطة')</h2>
                     <div className="space-y-4">
                         {activeCourses.map((course) => (
                             <div key={course.id} className="flex items-center justify-between">
                                 <div>
                                     <h3 className="font-medium">{course.title}</h3>
                                     <p className="text-sm text-gray-500 dark:text-gray-400">
-                                        {t('عدد الطلاب')}: {course.students}
+                                        ('عدد الطلاب'): {course.students}
                                     </p>
                                 </div>
                                 <div className="w-24">
@@ -102,7 +101,7 @@ export default function InstructorDashboard() {
                 </div>
 
                 <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-                    <h2 className="text-xl font-semibold mb-4">{t('آخر نشاطات الطلاب')}</h2>
+                    <h2 className="text-xl font-semibold mb-4">{('آخر نشاطات الطلاب')}</h2>
                     <DataGrid
                         columns={columns}
                         rows={recentStudents}
@@ -113,4 +112,4 @@ export default function InstructorDashboard() {
             </div>
         </div>
     );
-} 
+}
