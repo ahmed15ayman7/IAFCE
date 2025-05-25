@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import Card from '@/components/common/Card';
 import Badge from '@/components/common/Badge';
@@ -21,7 +21,13 @@ import { QRCodeSVG } from 'qrcode.react';
 import { LoginDevice, LoginHistory, Profile, TwoFactor, User, UserRole } from '@shared/prisma';
 import { useUser } from '@/hooks/useUser';
 import { frontendUrl } from '@/constant';
-
+let getProfileData = async (id: string) => {
+    let { success, data } = await userApi.getProfile(id);
+    if (success) {
+        return data;
+    }
+    return null;
+}
 export default function StudentProfile() {
     const [activeTab, setActiveTab] = useState(0);
     const [showPasswordModal, setShowPasswordModal] = useState(false);
@@ -73,7 +79,7 @@ export default function StudentProfile() {
     // استعلامات البيانات
     const { data: profile, isLoading: isLoadingProfile } = useQuery({
         queryKey: ['profile'],
-        queryFn: () => userApi.getProfile(user?.id),
+        queryFn: () => getProfileData(user?.id),
     });
 
     // طلب تحديث البيانات
@@ -92,8 +98,11 @@ export default function StudentProfile() {
         mutationFn: (data: any) => userApi.updateTwoFactor(user?.id, data),
         onSuccess: () => setShow2FAModal(false)
     });
+    useEffect(() => {
+        setProfileData((prev) => ({ ...prev, ...user }));
+    }, [user])
 
-    if (isLoadingProfile || status) {
+    if (isLoadingProfile || status === "loading") {
         return (
             <div className="space-y-6">
                 <Skeleton height={200} />
@@ -122,7 +131,7 @@ export default function StudentProfile() {
                             color={profile?.isOnline ? 'success' : 'primary'}
                             className="absolute -bottom-2 -right-2"
                         >
-                            <span className="text-xs">
+                            <span className="text-xs text-secondary-main ">
                                 {profile?.isOnline ? 'نشط' : 'غير نشط'}
                             </span>
                         </Badge>
@@ -187,20 +196,20 @@ export default function StudentProfile() {
 
                             <Input
                                 label="البريد الإلكتروني"
-                                value={profile?.email}
+                                value={profileData?.email}
                                 onChange={(e) => setProfileData(prev => ({ ...prev, email: e.target.value }))}
                                 required
                                 type="email"
                             />
                             <Input
                                 label="رقم الهاتف"
-                                value={profile?.phone || ''}
+                                value={profileData?.phone || ''}
                                 onChange={(e) => setProfileData(prev => ({ ...prev, phone: e.target.value }))}
                                 type="tel"
                             />
                             <Input
                                 label="العمر"
-                                value={profile?.age?.toString() || ''}
+                                value={profileData?.age?.toString() || ''}
                                 onChange={(e) => setProfileData(prev => ({ ...prev, age: +e.target.value }))}
                                 type="number"
                             />

@@ -26,10 +26,13 @@ import { years } from '@/constant';
 import { Comment, Discussion, Group, LiveRoom, Post, User } from '@shared/prisma';
 const getCourses = async () => {
     let res = await courseApi.getAll();
-    return res.map((course) => ({
-        value: course.id,
-        label: course.title
-    }));
+    if (res.success) {
+        return res.data.map((course) => ({
+            value: course.id,
+            label: course.title
+        }));
+    }
+    return [];
 }
 const initialDiscussions: (Discussion & { post: Post & { author: User, comments: Comment[] } })[] = [{
     id: "1",
@@ -79,6 +82,9 @@ const initialDiscussions: (Discussion & { post: Post & { author: User, comments:
             academyId: "1",
             createdAt: new Date(),
             updatedAt: new Date(),
+            isOnline: true,
+            isVerified: true,
+            age: 20,
         }
     }
 },
@@ -109,6 +115,9 @@ const initialDiscussions: (Discussion & { post: Post & { author: User, comments:
             academyId: "1",
             createdAt: new Date(),
             updatedAt: new Date(),
+            isOnline: true,
+            isVerified: true,
+            age: 20,
         }
     }
 },
@@ -150,6 +159,9 @@ const initialGroups: (Group & { members: User[] })[] = [
                 academyId: "1",
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
             {
                 id: "2",
@@ -164,6 +176,9 @@ const initialGroups: (Group & { members: User[] })[] = [
                 academyId: "1",
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
         ],
     },
@@ -196,6 +211,9 @@ const initialGroups: (Group & { members: User[] })[] = [
                 academyId: "1",
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
             {
                 id: "2",
@@ -210,6 +228,9 @@ const initialGroups: (Group & { members: User[] })[] = [
                 academyId: "1",
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
         ],
     }, {
@@ -233,6 +254,9 @@ const initialGroups: (Group & { members: User[] })[] = [
                 academyId: "1",
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
             {
                 id: "2",
@@ -247,6 +271,9 @@ const initialGroups: (Group & { members: User[] })[] = [
                 academyId: "1",
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
         ],
     },
@@ -283,6 +310,9 @@ const initialMyPosts: (Post & { author: User, comments: Comment[] })[] = [
             academyId: "1",
             createdAt: new Date(),
             updatedAt: new Date(),
+            isOnline: true,
+            isVerified: true,
+            age: 20,
         }
     },
     {
@@ -306,6 +336,9 @@ const initialMyPosts: (Post & { author: User, comments: Comment[] })[] = [
             academyId: "1",
             createdAt: new Date(),
             updatedAt: new Date(),
+            isOnline: true,
+            isVerified: true,
+            age: 20,
         }
     }
 ];

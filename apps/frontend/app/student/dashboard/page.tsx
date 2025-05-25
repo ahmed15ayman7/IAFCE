@@ -18,19 +18,19 @@ import { Achievement, Course, Enrollment, Notification, Quiz, User } from '@shar
 import { Home, Book, Notifications } from '@mui/icons-material';
 let getUser = async (id: string): Promise<User> => {
     let user = await userApi.getProfile(id);
-    return user;
+    return user.data;
 }
 let getCourses = async (userId: string): Promise<(Enrollment & { course: Course & { quizzes: Quiz[] } })[]> => {
     let enrollments = await enrollmentApi.getByUser(userId);
-    return enrollments;
+    return enrollments.data;
 }
 let getNotifications = async (id: string): Promise<Notification[]> => {
     let notifications = await userApi.getNotifications(id);
-    return notifications;
+    return notifications.data;
 }
 let getAchievements = async (id: string): Promise<Achievement[]> => {
     let achievements = await achievementApi.getByUser(id);
-    return achievements;
+    return achievements.data;
 }
 export default function StudentDashboard() {
     const [activeTab, setActiveTab] = useState<number>(0);

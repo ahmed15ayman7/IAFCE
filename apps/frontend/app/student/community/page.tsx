@@ -41,6 +41,9 @@ let initialCommunities: (Community & { participants: User[] })[] = [
                 role: 'STUDENT',
                 subRole: 'STUDENT',
                 academyId: '2999',
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
             {
                 id: "2999",
@@ -55,6 +58,9 @@ let initialCommunities: (Community & { participants: User[] })[] = [
                 role: 'STUDENT',
                 subRole: 'STUDENT',
                 academyId: '2999',
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
             {
                 id: "2999",
@@ -69,6 +75,9 @@ let initialCommunities: (Community & { participants: User[] })[] = [
                 role: 'STUDENT',
                 subRole: 'STUDENT',
                 academyId: '2999',
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
         ],
     },
@@ -110,6 +119,9 @@ let initialCommunities: (Community & { participants: User[] })[] = [
                 role: 'STUDENT',
                 subRole: 'STUDENT',
                 academyId: '2999',
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
             {
                 id: "2999",
@@ -124,6 +136,9 @@ let initialCommunities: (Community & { participants: User[] })[] = [
                 role: 'STUDENT',
                 subRole: 'STUDENT',
                 academyId: '2999',
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
             {
                 id: "2999",
@@ -138,6 +153,9 @@ let initialCommunities: (Community & { participants: User[] })[] = [
                 role: 'STUDENT',
                 subRole: 'STUDENT',
                 academyId: '2999',
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
         ],
     },
@@ -166,6 +184,9 @@ let initialCommunities: (Community & { participants: User[] })[] = [
                 role: 'STUDENT',
                 subRole: 'STUDENT',
                 academyId: '2999',
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
             {
                 id: "2999",
@@ -180,6 +201,9 @@ let initialCommunities: (Community & { participants: User[] })[] = [
                 role: 'STUDENT',
                 subRole: 'STUDENT',
                 academyId: '2999',
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
             {
                 id: "2999",
@@ -194,6 +218,9 @@ let initialCommunities: (Community & { participants: User[] })[] = [
                 role: 'STUDENT',
                 subRole: 'STUDENT',
                 academyId: '2999',
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
         ],
     },
@@ -222,6 +249,9 @@ let initialCommunities: (Community & { participants: User[] })[] = [
                 role: 'STUDENT',
                 subRole: 'STUDENT',
                 academyId: '2999',
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
             {
                 id: "2999",
@@ -236,6 +266,9 @@ let initialCommunities: (Community & { participants: User[] })[] = [
                 role: 'STUDENT',
                 subRole: 'STUDENT',
                 academyId: '2999',
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
             {
                 id: "2999",
@@ -250,15 +283,25 @@ let initialCommunities: (Community & { participants: User[] })[] = [
                 role: 'STUDENT',
                 subRole: 'STUDENT',
                 academyId: '2999',
+                isOnline: true,
+                isVerified: true,
+                age: 20,
             },
         ],
     },
 ]
+let getCommunitiesData = async () => {
+    let { success, data } = await communityApi.getAll();
+    if (success) {
+        return data;
+    }
+    return null;
+}
 export default function StudentCommunitiesPage() {
     const router = useRouter();
     const { data: communities, isLoading: isLoadingCommunities } = useQuery({
         queryKey: ['communities'],
-        queryFn: () => communityApi.getAll(),
+        queryFn: () => getCommunitiesData(),
     });
     const [searchQuery, setSearchQuery] = useState('');
     const filteredCommunities = (communities ?? initialCommunities)?.filter((community) => {

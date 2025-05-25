@@ -1,5 +1,6 @@
 'use server';
 
+import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 
 const ACCESS_TOKEN_KEY = 'accessToken';
@@ -53,4 +54,7 @@ export async function removeTokens(): Promise<void> {
     } catch (error) {
         console.error('خطأ في حذف الكوكيز من الخادم:', error);
     }
-} 
+}
+export async function redirectToLogin() {
+    redirect('/auth/signin');
+}

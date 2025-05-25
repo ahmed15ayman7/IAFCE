@@ -19,6 +19,20 @@ import { motion } from 'framer-motion';
 import { FaPlus } from 'react-icons/fa';
 import { Alert, Badge as MuiBadge } from '@mui/material';
 import { Course, Milestone, Path, User } from '@shared/prisma';
+let getPathsData = async () => {
+    let { success, data } = await pathApi.getAll();
+    if (success) {
+        return data;
+    }
+    return null;
+}
+let getCoursesData = async () => {
+    let { success, data } = await courseApi.getAll();
+    if (success) {
+        return data;
+    }
+    return null;
+}
 let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: User[] })[] = [
     {
         id: '1',
@@ -95,6 +109,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 phone: '123456',
                 role: 'STUDENT',
                 subRole: 'STUDENT',
+                isVerified: true,
+                age: 20,
             },
             {
                 id: '2',
@@ -110,6 +126,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 phone: '123456',
                 role: 'STUDENT',
                 subRole: 'STUDENT',
+                isVerified: true,
+                age: 20,
             },
         ],
     },
@@ -180,6 +198,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 phone: '123456',
                 role: 'STUDENT',
                 subRole: 'STUDENT',
+                isVerified: true,
+                age: 20,
             },
         ],
     },
@@ -258,6 +278,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 phone: '123456',
                 role: 'STUDENT',
                 subRole: 'STUDENT',
+                isVerified: true,
+                age: 20,
             },
             {
                 id: '2',
@@ -273,6 +295,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 phone: '123456',
                 role: 'STUDENT',
                 subRole: 'STUDENT',
+                isVerified: true,
+                age: 20,
             },
         ],
     },
@@ -343,6 +367,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 phone: '123456',
                 role: 'STUDENT',
                 subRole: 'STUDENT',
+                isVerified: true,
+                age: 20,
             },
         ],
     },
@@ -421,6 +447,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 phone: '123456',
                 role: 'STUDENT',
                 subRole: 'STUDENT',
+                isVerified: true,
+                age: 20,
             },
             {
                 id: '2',
@@ -436,6 +464,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 phone: '123456',
                 role: 'STUDENT',
                 subRole: 'STUDENT',
+                isVerified: true,
+                age: 20,
             },
         ],
     },
@@ -506,6 +536,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 phone: '123456',
                 role: 'STUDENT',
                 subRole: 'STUDENT',
+                isVerified: true,
+                age: 20,
             },
         ],
     },
@@ -584,6 +616,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 phone: '123456',
                 role: 'STUDENT',
                 subRole: 'STUDENT',
+                isVerified: true,
+                age: 20,
             },
             {
                 id: '2',
@@ -599,6 +633,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 phone: '123456',
                 role: 'STUDENT',
                 subRole: 'STUDENT',
+                isVerified: true,
+                age: 20,
             },
         ],
     },
@@ -669,6 +705,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 phone: '123456',
                 role: 'STUDENT',
                 subRole: 'STUDENT',
+                isVerified: true,
+                age: 20,
             },
         ],
     },
@@ -680,12 +718,12 @@ export default function StudentPaths() {
     // استعلامات البيانات
     const { data: paths, isLoading: isLoadingPaths } = useQuery({
         queryKey: ['paths'],
-        queryFn: () => pathApi.getAll(),
+        queryFn: () => getPathsData(),
     });
 
     const { data: courses, isLoading: isLoadingCourses } = useQuery({
         queryKey: ['courses'],
-        queryFn: () => courseApi.getAll(),
+        queryFn: () => getCoursesData(),
     });
 
     // تصفية المسارات حسب التبويب النشط

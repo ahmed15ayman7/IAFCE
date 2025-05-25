@@ -1,3 +1,4 @@
+ "use client"
 import React from 'react';
 import  Card  from '@/components/common/Card';
 import  DataGrid  from '@/components/common/DataGrid';
@@ -83,7 +84,7 @@ export default function InstructorCourses() {
                                 </div>
                                 <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                                     <div
-                                        className="bg-primary-500 h-2 rounded-full"
+                                        className="bg-primary-main h-2 rounded-full"
                                         style={{ width: `${course.progress}%` }}
                                     />
                                 </div>

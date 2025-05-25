@@ -1,6 +1,7 @@
+"use client" 
 import React from 'react';
-import  Card  from '@/components/common/Card';
-import  DataGrid  from '@/components/common/DataGrid';
+import Card from '@/components/common/Card';
+import DataGrid from '@/components/common/DataGrid';
 
 export default function InstructorQuizzes() {
 
@@ -56,7 +57,7 @@ export default function InstructorQuizzes() {
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-3xl font-bold">{('إدارة الاختبارات')}</h1>
                 <div className="flex gap-4">
-                    <button className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
+                    <button className="px-4 py-2 bg-primary-main text-white rounded-md hover:bg-primary-600">
                         {('إنشاء اختبار جديد')}
                     </button>
                     <button className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50">
@@ -66,18 +67,15 @@ export default function InstructorQuizzes() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <Card>
-                    <h3 className="text-lg font-medium mb-2">{('إجمالي الاختبارات')}</h3>
+                <Card title={('إجمالي الاختبارات')}>
                     <div className="text-4xl font-bold">{quizzes.length}</div>
                 </Card>
-                <Card>
-                    <h3 className="text-lg font-medium mb-2">{('الاختبارات النشطة')}</h3>
+                <Card title={('الاختبارات النشطة')}>
                     <div className="text-4xl font-bold">
                         {quizzes.filter(q => q.status === 'نشط').length}
                     </div>
                 </Card>
-                <Card>
-                    <h3 className="text-lg font-medium mb-2">{('متوسط الدرجات')}</h3>
+                <Card title={('متوسط الدرجات')}>
                     <div className="text-4xl font-bold">
                         {Math.round(
                             quizzes

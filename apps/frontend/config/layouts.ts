@@ -28,6 +28,11 @@ export const layoutsConfig: UserLayoutConfig = {
                 href: '/student/community',
                 icon: 'users',
             },
+            {
+                label: 'اختباراتي',
+                href: '/student/quizzes',
+                icon: 'clipboard-check',
+            },
         ],
         footerLinks: {
             quickLinks: {
@@ -94,6 +99,16 @@ export const layoutsConfig: UserLayoutConfig = {
                 href: '/instructor/attendance',
                 icon: 'clipboard-check',
             },
+            // {
+            //     label: 'المتابعة اليومية',
+            //     href: '/instructor/daily-tracking',
+            //     icon: 'clipboard-check',
+            // },
+            {
+                label: 'الاختبارات',
+                href: '/instructor/quizzes',
+                icon: 'clipboard-check',
+            },
         ],
         footerLinks: {
             quickLinks: {
@@ -129,10 +144,10 @@ export const layoutsConfig: UserLayoutConfig = {
                 icon: 'home',
             },
             {
-                label: 'متابعة الأبناء',
-                href: '/parent/children',
-                icon: 'users',
-            },
+                label: 'المتابعة اليومية',
+                href: '/parent/daily-tracking',
+                 icon: 'clipboard-check',
+             },
             {
                 label: 'تقارير الأداء',
                 href: '/parent/reports',
@@ -141,6 +156,11 @@ export const layoutsConfig: UserLayoutConfig = {
             {
                 label: 'إشعارات الغياب',
                 href: '/parent/absences',
+                icon: 'bell',
+            },
+            {
+                label: 'المحاضرين',
+                href: '/parent/teachers',
                 icon: 'bell',
             },
             {

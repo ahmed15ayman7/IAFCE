@@ -9,8 +9,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <div className='flex flex-col items-center justify-center h-screen'>
+      {children}
+    </div>
   )
 }

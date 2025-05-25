@@ -31,6 +31,20 @@ import { useRouter } from 'next/navigation';
 import { Notification, NotificationSettings } from '@shared/prisma';
 import { useUser } from '@/hooks/useUser';
 
+let getNotificationsData = async (id: string) => {
+    let { success, data } = await notificationApi.getAllByUserId(id);
+    if (success) {
+        return data;
+    }
+    return null;
+}
+let getNotificationsSettingsData = async (id: string) => {
+    let { success, data } = await notificationApi.getSettingsByUserId(id);
+    if (success) {
+        return data;
+    }
+    return null;
+}
 let initialNotifications: Notification[] = [
     {
         id: '1',
@@ -79,11 +93,11 @@ export default function StudentNotifications() {
     // استعلامات البيانات
     const { data: notifications, isLoading: isLoadingNotifications } = useQuery({
         queryKey: ['notifications'],
-        queryFn: () => notificationApi.getAllByUserId(user?.id || ''),
+        queryFn: () => getNotificationsData(user?.id || ''),
     });
     let { data: notificationsSettings, isLoading: isLoadingNotificationsSettings } = useQuery({
         queryKey: ['notificationsSettings'],
-        queryFn: () => notificationApi.getSettingsByUserId(user?.id || ''),
+        queryFn: () => getNotificationsSettingsData(user?.id || ''),
     });
 
     // طلب تحديث حالة الإشعار
@@ -131,7 +145,7 @@ export default function StudentNotifications() {
             </div>
         );
     }
-   
+
     // تصفية الإشعارات حسب التبويب النشط
     const filteredNotifications = (notifications || initialNotifications)?.filter(notification => {
         switch (activeTab) {

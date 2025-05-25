@@ -117,7 +117,7 @@ export const authApi = {
 
 // User APIs
 export const userApi = {
-    getProfile: (id: string): Promise<User & { loginHistory: LoginHistory[], twoFactor: TwoFactor, createdCourses: Course[], enrollments: Enrollment[], achievements: Achievement[], notifications: Notification[] }> => api.get(`/users/${id}`),
+    getProfile: (id: string): Promise<{ success: boolean, data: User & { loginHistory: LoginHistory[], twoFactor: TwoFactor, createdCourses: Course[], enrollments: Enrollment[], achievements: Achievement[], notifications: Notification[] } }> => api.get(`/users/${id}`),
     updateProfile: (data: {
         firstName?: string;
         lastName?: string;
@@ -129,21 +129,21 @@ export const userApi = {
         newPassword: string;
     }) => api.post('/users/change-password', data),
     getEnrolledCourses: () => api.get('/users/courses'),
-    getAchievements: (id: string): Promise<Achievement[]> => api.get(`/users/achievements/${id}`),
-    getNotifications: (id: string): Promise<Notification[]> => api.get(`/users/notifications/${id}`),
+    getAchievements: (id: string): Promise<{ success: boolean, data: Achievement[] }> => api.get(`/users/achievements/${id}`),
+    getNotifications: (id: string): Promise<{ success: boolean, data: Notification[] }> => api.get(`/notifications/user/${id}`),
     getSubmissions: () => api.get('/users/submissions'),
     getAttendance: () => api.get('/users/attendance'),
-    getTwoFactor: (id: string): Promise<TwoFactor> => api.get(`/users/${id}/two-factor`),
+    getTwoFactor: (id: string): Promise<{ success: boolean, data: TwoFactor }> => api.get(`/users/${id}/two-factor`),
     updateTwoFactor: (id: string, data: TwoFactor) => api.post(`/users/${id}/two-factor`, data),
-    getLoginHistory: (id: string): Promise<LoginHistory[]> => api.get(`/users/${id}/login-history`),
-    getCreatedCourses: (id: string): Promise<Course[]> => api.get(`/users/${id}/created-courses`),
-    getEnrollments: (id: string): Promise<Enrollment[]> => api.get(`/users/${id}/enrollments`),
+    getLoginHistory: (id: string): Promise<{ success: boolean, data: LoginHistory[] }> => api.get(`/users/${id}/login-history`),
+    getCreatedCourses: (id: string): Promise<{ success: boolean, data: Course[] }> => api.get(`/users/${id}/created-courses`),
+    getEnrollments: (id: string): Promise<{ success: boolean, data: Enrollment[] }> => api.get(`/users/${id}/enrollments`),
 };
 
 // Course APIs
 export const courseApi = {
-    getAll: (): Promise<Course[]> => api.get('/courses'),
-    getById: (id: string) => api.get(`/courses/${id}`),
+    getAll: (): Promise<{ success: boolean, data: Course[] }> => api.get('/courses'),
+    getById: (id: string): Promise<{ success: boolean, data: Course }> => api.get(`/courses/${id}`),
     create: (data: {
         title: string;
         description: string;
@@ -240,8 +240,8 @@ export const attendanceApi = {
 
 // Notification APIs
 export const notificationApi = {
-    getAll: (): Promise<Notification[]> => api.get(`/notifications`),
-    getAllByUserId: (userId: string): Promise<Notification[]> => api.get(`/notifications/user/${userId}`),
+    getAll: (): Promise<{ success: boolean, data: Notification[] }> => api.get(`/notifications`),
+    getAllByUserId: (userId: string): Promise<{ success: boolean, data: Notification[] }> => api.get(`/notifications/user/${userId}`),
     getUnread: () => api.get('/notifications/unread'),
     markAsRead: (id: string) => api.patch(`/notifications/${id}/read`),
     markAllAsRead: () => api.patch('/notifications/read-all'),
@@ -263,7 +263,7 @@ export const notificationApi = {
     }) => api.patch(`/notifications/${id}`, data),
     delete: (id: string) => api.delete(`/notifications/${id}`),
     getSettings: () => api.get('/notifications/settings'),
-    getSettingsByUserId: (userId: string): Promise<NotificationSettings> => api.get(`/notifications/settings/user/${userId}`),
+    getSettingsByUserId: (userId: string): Promise<{ success: boolean, data: NotificationSettings }> => api.get(`/notifications/settings/user/${userId}`),
     updateSettings: (data: {
         assignments: boolean;
         grades: boolean;
@@ -402,7 +402,7 @@ export const academyApi = {
 // Achievement APIs
 export const achievementApi = {
     getAll: () => api.get('/achievements'),
-    getByUser: (userId: string): Promise<Achievement[]> => api.get(`/achievements/user/${userId}`),
+    getByUser: (userId: string): Promise<{ success: boolean, data: Achievement[] }> => api.get(`/achievements/user/${userId}`),
     create: (data: {
         userId: string;
         type: string;
@@ -413,9 +413,9 @@ export const achievementApi = {
 
 // Enrollment APIs
 export const enrollmentApi = {
-    getAll: (): Promise<(Enrollment & { course: Course & { quizzes: Quiz[] } })[]> => api.get('/enrollments'),
-    getByUser: (userId: string): Promise<(Enrollment & { course: Course & { quizzes: Quiz[] } })[]> => api.get(`/enrollments/user/${userId}`),
-    getByCourse: (courseId: string): Promise<(Enrollment & { course: Course & { quizzes: Quiz[] } })[]> => api.get(`/enrollments/course/${courseId}`),
+    getAll: (): Promise<{ success: boolean, data: (Enrollment & { course: Course & { quizzes: Quiz[] } })[] }> => api.get('/enrollments'),
+    getByUser: (userId: string): Promise<{ success: boolean, data: (Enrollment & { course: Course & { quizzes: Quiz[] } })[] }> => api.get(`/enrollments/user/${userId}`),
+    getByCourse: (courseId: string): Promise<{ success: boolean, data: (Enrollment & { course: Course & { quizzes: Quiz[] } })[] }> => api.get(`/enrollments/course/${courseId}`),
     create: (data: {
         userId: string;
         courseId: string;
@@ -484,9 +484,9 @@ export const websocketApi = {
 
 // Badge APIs
 export const badgeApi = {
-    getAll: (): Promise<(Badge & { user: User })[]> => api.get('/badges'),
-    getById: (id: string): Promise<(Badge & { user: User })> => api.get(`/badges/${id}`),
-    getByStudent: (): Promise<(Badge & { user: User })[]> => api.get('/badges/student'),
+    getAll: (): Promise<{ success: boolean, data: (Badge & { user: User })[] }> => api.get('/badges'),
+    getById: (id: string): Promise<{ success: boolean, data: (Badge & { user: User }) }> => api.get(`/badges/${id}`),
+    getByStudent: (): Promise<{ success: boolean, data: (Badge & { user: User })[] }> => api.get('/badges/student'),
     create: (data: {
         userId: string;
         title: string;
@@ -509,9 +509,9 @@ export const badgeApi = {
 
 // Certificate APIs
 export const certificateApi = {
-    getAll: (): Promise<(Certificate & { user: User })[]> => api.get('/certificates'),
-    getById: (id: string): Promise<(Certificate & { user: User })> => api.get(`/certificates/${id}`),
-    getByStudent: (): Promise<(Certificate & { user: User })[]> => api.get('/certificates/student'),
+    getAll: (): Promise<{ success: boolean, data: (Certificate & { user: User })[] }> => api.get('/certificates'),
+    getById: (id: string): Promise<{ success: boolean, data: (Certificate & { user: User }) }> => api.get(`/certificates/${id}`),
+    getByStudent: (): Promise<{ success: boolean, data: (Certificate & { user: User })[] }> => api.get('/certificates/student'),
     create: (data: {
         name: string;
         address: string;
@@ -544,7 +544,7 @@ export const certificateApi = {
 
 // Community APIs
 export const communityApi = {
-    getAll: (): Promise<(Community & { participants: User[] })[]> => api.get('/communities'),
+    getAll: (): Promise<{ success: boolean, data: (Community & { participants: User[] })[] }> => api.get('/communities'),
     getById: (id: string) => api.get(`/communities/${id}`),
     create: (data: { name: string; description?: string }) => api.post('/communities', data),
     update: (id: string, data: { name?: string; description?: string }) => api.patch(`/communities/${id}`, data),
@@ -570,9 +570,9 @@ export const communityApi = {
 
 // Path APIs
 export const pathApi = {
-    getAll: (): Promise<(Path & { courses: Course[], milestones: Milestone[], peers: User[] })[]> => api.get('/paths'),
-    getById: (id: string): Promise<(Path & { courses: Course[], milestones: Milestone[], peers: User[] })> => api.get(`/paths/${id}`),
-    getByCourse: (courseId: string): Promise<(Path & { courses: Course[], milestones: Milestone[], peers: User[] })[]> => api.get(`/paths/course/${courseId}`),
+    getAll: (): Promise<{ success: boolean, data: (Path & { courses: Course[], milestones: Milestone[], peers: User[] })[] }> => api.get('/paths'),
+    getById: (id: string): Promise<{ success: boolean, data: (Path & { courses: Course[], milestones: Milestone[], peers: User[] }) }> => api.get(`/paths/${id}`),
+    getByCourse: (courseId: string): Promise<{ success: boolean, data: (Path & { courses: Course[], milestones: Milestone[], peers: User[] })[] }> => api.get(`/paths/course/${courseId}`),
     create: (data: Path) => api.post('/paths', data),
     update: (id: string, data: Path) => api.patch(`/paths/${id}`, data),
     delete: (id: string) => api.delete(`/paths/${id}`),

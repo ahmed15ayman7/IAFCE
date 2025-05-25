@@ -1,7 +1,7 @@
+"use client"
 import React from 'react';
 import  Card  from '@/components/common/Card';
 import  DataGrid  from '@/components/common/DataGrid';
-
 export default function InstructorNotifications() {
 
     const notifications = [

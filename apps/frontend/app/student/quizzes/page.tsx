@@ -20,31 +20,188 @@ import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
 import { Alert } from '@mui/material';
 import { FaCalendar, FaList, FaHistory, FaChartLine } from 'react-icons/fa';
+import { Quiz } from '@shared/prisma';
+interface IQuiz {
+    activeQuiz: Quiz,
+    quizzes: Quiz[],
+    assignments: {
+        id: string;
+        title: string;
+        description: string;
+        courseId: string;
+        courseTitle: string;
+        courseImage: string;
+        questionsCount: number;
+    }[],
+    performance: {
+        strengths: {
+            title: string;
+            description: string;
+        }[],
+        improvements: {
+            title: string;
+            description: string;
+        }[]
+    }
+}
+let initialData: IQuiz = {
+    activeQuiz: {
+        id: '',
+        title: 'امتحان في html',
+        description: 'امتحان في html علي جزئية التصميم',
+        lessonId: '',
+        timeLimit: 10,
+        passingScore: 50,
+        upComing: false,
+        isCompleted: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    },
+    quizzes: [
+        {
+            id: '',
+            title: 'امتحان في css',
+            description: 'امتحان في css علي جزئية التصميم',
+            lessonId: '',
+            timeLimit: 10,
+            passingScore: 50,
+            upComing: false,
+            isCompleted: false,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            id: '',
+            title: 'امتحان في js',
+            description: 'امتحان في js علي جزئية التصميم',
+            lessonId: '',
+            timeLimit: 10,
+            passingScore: 50,
+            upComing: false,
+            isCompleted: false,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            id: '',
+            title: 'امتحان في react',
+            description: 'امتحان في react علي جزئية التصميم',
+            lessonId: '',
+            timeLimit: 10,
+            passingScore: 50,
+            upComing: false,
+            isCompleted: false,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        }
+    ],
+    assignments: [
+        {
+            id: '',
+            title: 'واجب في html',
+            description: 'واجب في html علي جزئية التصميم',
+            courseId: '',
+            courseTitle: '',
+            courseImage: '',
+            questionsCount: 10,
+        },
+        {
+            id: '',
+            title: 'واجب في css',
+            description: 'واجب في css علي جزئية التصميم',
+            courseId: '',
+            courseTitle: '',
+            courseImage: '',
+            questionsCount: 20,
+        },
+        {
+            id: '',
+            title: 'واجب في js',
+            description: 'واجب في js علي جزئية التصميم',
+            courseId: '',
+            courseTitle: '',
+            courseImage: '',
+            questionsCount: 30,
+        }
+    ],
+    performance: {
+        strengths: [
+            {
+                title: 'قوة 1',
+                description: 'وصف قوة 1',
+            },
+
+            {
+
+                title: 'قوة 1',
+                description: 'وصف قوة 1',
+            },
+        ],
+        improvements: [
+            {
+                title: 'تحسين 1',
+                description: 'وصف تحسين 1',
+            },
+            {
+                title: 'تحسين 2',
+                description: 'وصف تحسين 2',
+            },
+        ]
+    }
+}
+let getActiveQuizData = async () => {
+    let { success, data } = await quizApi.getActive();
+    if (success) {
+        return data;
+    }
+    return null;
+}
+let getQuizzesData = async () => {
+    let { success, data } = await quizApi.getByStudent();
+    if (success) {
+        return data;
+    }
+    return null;
+}
+let getAssignmentsData = async () => {
+    let { success, data } = await assignmentApi.getByStudent();
+    if (success) {
+        return data;
+    }
+    return null;
+}
+let getPerformanceData = async () => {
+    let { success, data } = await quizApi.getPerformance();
+    if (success) {
+        return data;
+    }
+    return null;
+}
 
 export default function StudentQuizzes() {
     const [activeTab, setActiveTab] = useState(0);
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [selectedQuiz, setSelectedQuiz] = useState(null);
+    const [selectedQuiz1, setSelectedQuiz] = useState(null);
 
     // استعلامات البيانات
     const { data: activeQuiz, isLoading: isLoadingActiveQuiz } = useQuery({
         queryKey: ['activeQuiz'],
-        queryFn: () => quizApi.getActive(),
+        queryFn: () => getActiveQuizData(),
     });
 
     const { data: quizzes, isLoading: isLoadingQuizzes } = useQuery({
         queryKey: ['quizzes'],
-        queryFn: () => quizApi.getByStudent(),
+        queryFn: () => getQuizzesData(),
     });
 
     const { data: assignments, isLoading: isLoadingAssignments } = useQuery({
         queryKey: ['assignments'],
-        queryFn: () => assignmentApi.getByStudent(),
+        queryFn: () => getAssignmentsData(),
     });
 
     const { data: performance, isLoading: isLoadingPerformance } = useQuery({
         queryKey: ['performance'],
-        queryFn: () => quizApi.getPerformance(),
+        queryFn: () => getPerformanceData(),
     });
 
     if (isLoadingActiveQuiz || isLoadingQuizzes || isLoadingAssignments || isLoadingPerformance) {
@@ -69,6 +226,7 @@ export default function StudentQuizzes() {
     const tasksForSelectedDate = allTasks.filter(task =>
         format(new Date(task.dueDate), 'yyyy-MM-dd') === format(selectedDate, 'yyyy-MM-dd')
     );
+    let selectedQuiz = initialData.activeQuiz || selectedQuiz1;
 
     return (
         <motion.div
@@ -413,7 +571,7 @@ export default function StudentQuizzes() {
                     >
                         <Card title="تحليل الأداء">
                             <div className="space-y-6">
-                                {performance?.strengths.map((strength, index) => (
+                                {(performance?.strengths || initialData.performance.strengths).map((strength: any, index: number) => (
                                     <motion.div
                                         key={index}
                                         initial={{ opacity: 0, y: 20 }}
@@ -437,7 +595,7 @@ export default function StudentQuizzes() {
                     >
                         <Card title="نقاط التحسين">
                             <div className="space-y-6">
-                                {performance?.improvements.map((improvement, index) => (
+                                {(performance?.improvements || initialData.performance.improvements).map((improvement: any, index: number) => (
                                     <motion.div
                                         key={index}
                                         initial={{ opacity: 0, y: 20 }}

@@ -1,7 +1,6 @@
 import { jwtDecode } from 'jwt-decode';
 import { authApi } from '@/lib/api';
-import { redirect } from 'next/navigation';
-import { setTokens, getAccessToken, getRefreshToken, removeTokens } from './server-cookie.service';
+import { setTokens, getAccessToken, getRefreshToken, removeTokens,redirectToLogin } from './server-cookie.service';
 
 interface TokenPayload {
   exp: number;
@@ -49,7 +48,7 @@ class AuthService {
   public async getAccessToken(): Promise<string> {
     console.log("this.accessToken")
     console.log(this.accessToken)
-    
+
     return this.accessToken || (await getAccessToken()) || '';
   }
 
@@ -108,7 +107,14 @@ class AuthService {
     this.refresh_token = '';
     await removeTokens();
     this.stopRefreshTokenTimer();
-    redirect('/auth/signin');
+    redirectToLogin();
+        
+  }
+
+  public async clearTokens() {
+    this.accessToken = '';
+    this.refresh_token = '';
+    await removeTokens();
   }
 }
 

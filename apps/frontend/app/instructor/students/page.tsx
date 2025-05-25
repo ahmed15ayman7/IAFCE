@@ -1,6 +1,7 @@
+"use client"
 import React from 'react';
-import  Card  from '@/components/common/Card';
-import  DataGrid  from '@/components/common/DataGrid';
+import Card from '@/components/common/Card';
+import DataGrid from '@/components/common/DataGrid';
 
 export default function InstructorStudents() {
 
@@ -58,12 +59,11 @@ export default function InstructorStudents() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <Card>
-                    <h3 className="text-lg font-medium mb-2">{('إجمالي الطلاب')}</h3>
+                <Card title={('إجمالي الطلاب')}>
                     <div className="text-4xl font-bold">{students.length}</div>
                 </Card>
-                <Card>
-                    <h3 className="text-lg font-medium mb-2">{('متوسط التقدم')}</h3>
+                <Card title={('متوسط التقدم')}>
+
                     <div className="text-4xl font-bold">
                         {Math.round(
                             students.reduce((acc, student) => acc + student.progress, 0) /
@@ -72,8 +72,8 @@ export default function InstructorStudents() {
                         %
                     </div>
                 </Card>
-                <Card>
-                    <h3 className="text-lg font-medium mb-2">{('متوسط الدرجات')}</h3>
+                <Card title={('متوسط الدرجات')}>
+
                     <div className="text-4xl font-bold">
                         {Math.round(
                             students.reduce(

@@ -1,37 +1,40 @@
-import React from 'react';
-import { useAuth } from '@/contexts/AuthContext';
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
+"use client"
+import React, { useEffect } from 'react';
+import { useUser } from '@/hooks/useUser';
+import  Navbar  from '@/components/layout/Navbar';
+import  Footer  from '@/components/layout/Footer';
 import { layoutsConfig } from '@/config/layouts';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function AcademyLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-    const { user, loading } = useAuth();
-
-    if (loading) {
-        return <div>جاري التحميل...</div>;
-    }
-
-    if (!user || user.role !== 'academy') {
-        redirect('/login');
-    }
+    const { user, status } = useUser();
+    const router = useRouter();
+    useEffect(() => {
+        if ((!user || user.role !== 'ACADEMY') && status === 'authenticated') {
+            router.replace('/auth/signin');
+        }
+    }, [user, status]);
 
     const layoutConfig = layoutsConfig.academy;
 
     return (
         <div className="flex min-h-screen flex-col">
             <Navbar
-                links={layoutConfig.navbarLinks}
-                user={user}
-                showNotifications={layoutConfig.showNotifications}
-                showProfile={layoutConfig.showProfile}
-                showSearch={layoutConfig.showSearch}
-                showLanguageSwitcher={layoutConfig.showLanguageSwitcher}
-                showThemeSwitcher={layoutConfig.showThemeSwitcher}
+                   links={layoutConfig.navbarLinks}
+                   role={user?.role}
+                   isDarkMode={false}
+                   onToggleTheme={() => { }}
+                   onToggleLanguage={() => { }}
+                   user={user}
+                   showNotifications={layoutConfig.showNotifications ?? false}
+                   showProfile={layoutConfig.showProfile ?? false}
+                   showSearch={layoutConfig.showSearch ?? false}
+               // showLanguageSwitcher={layoutConfig.showLanguageSwitcher ?? false}
+               // showThemeSwitcher={layoutConfig.showThemeSwitcher}
             />
             <main className="flex-1">{children}</main>
             <Footer links={layoutConfig.footerLinks} />

@@ -1,6 +1,7 @@
+"use client"
 import React from 'react';
-import  Card  from '@/components/common/Card';
-import  DataGrid  from '@/components/common/DataGrid';
+import Card from '@/components/common/Card';
+import DataGrid from '@/components/common/DataGrid';
 
 export default function ParentDashboard() {
 
@@ -58,20 +59,13 @@ export default function ParentDashboard() {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">{('لوحة التحكم')}</h1>
-                <button className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
-                    {('تواصل مع الإدارة')}
-                </button>
-            </div>
+
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <Card>
-                    <h3 className="text-lg font-medium mb-2">{('عدد الأبناء')}</h3>
+                <Card title="عدد الأبناء">
                     <div className="text-4xl font-bold">{children.length}</div>
                 </Card>
-                <Card>
-                    <h3 className="text-lg font-medium mb-2">{('متوسط الحضور')}</h3>
+                <Card title="متوسط الحضور">
                     <div className="text-4xl font-bold">
                         {Math.round(
                             children.reduce(
@@ -82,8 +76,7 @@ export default function ParentDashboard() {
                         %
                     </div>
                 </Card>
-                <Card>
-                    <h3 className="text-lg font-medium mb-2">{('الإشعارات غير المقروءة')}</h3>
+                <Card title="الإشعارات غير المقروءة">
                     <div className="text-4xl font-bold">3</div>
                 </Card>
             </div>
@@ -92,10 +85,10 @@ export default function ParentDashboard() {
                 <h2 className="text-2xl font-semibold mb-4">{('متابعة الأبناء')}</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {children.map(child => (
-                        <Card key={child.id}>
+                        <Card key={child.id} title={child.name}>
                             <div className="flex justify-between items-start mb-4">
                                 <div>
-                                    <h3 className="text-xl font-bold">{child.name}</h3>
+                                    {/* <h3 className="text-xl font-bold">{child.name}</h3> */}
                                     <p className="text-gray-600">{child.grade}</p>
                                 </div>
                                 <div className="text-right">
@@ -126,6 +119,12 @@ export default function ParentDashboard() {
                     pageSize={10}
                     checkboxSelection={true}
                 />
+            </div>
+            <div className="flex justify-between items-center mt-8">
+                {/* <h1 className="text-3xl font-bold">{('لوحة التحكم')}</h1> */}
+                <button className="px-4 py-2 bg-primary-main text-white rounded-md hover:bg-primary-600">
+                    {('تواصل مع الإدارة')}
+                </button>
             </div>
         </div>
     );

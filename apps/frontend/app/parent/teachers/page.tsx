@@ -1,3 +1,4 @@
+"use client" 
 import React from 'react';
 import  Card  from '@/components/common/Card';
 import  DataGrid  from '@/components/common/DataGrid';
@@ -56,7 +57,7 @@ export default function ParentTeachers() {
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">{('التواصل مع المعلمين')}</h1>
+                <h1 className="text-3xl font-bold">{('التواصل مع المحاضرين')}</h1>
                 <button className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
                     {('رسالة جديدة')}
                 </button>

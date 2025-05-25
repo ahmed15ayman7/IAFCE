@@ -32,6 +32,7 @@ import {
 } from '@mui/icons-material'
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import authService from '@/lib/auth.service';
 interface NavbarProps {
     user?: {
         id: string;
@@ -118,8 +119,10 @@ const Navbar: React.FC<NavbarProps> = ({
         setMessagesAnchor(null);
     };
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         // Handle logout logic
+        await authService.clearTokens();
+        router.push('/auth/signin');
         handleMenuClose();
     };
 
@@ -172,7 +175,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     <img
                         src="/assets/images/logo.png"
                         alt="Logo"
-                        className="h-20 w-auto mr-4"
+                        className="h-24 w-auto mr-4"
                     />
                 </Link>
 
