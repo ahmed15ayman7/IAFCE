@@ -14,14 +14,15 @@ const api = axios.create({
 
 // Interceptor للطلبات
 api.interceptors.request.use(
-    (config) => {
-        const accessToken = authService.getAccessToken();
+    async (config) => {
+        const accessToken = await authService.getAccessToken();
         if (accessToken) {
             config.headers.Authorization = `Bearer ${accessToken}`;
         }
         return config;
     },
     (error) => {
+        console.log(error)
         return Promise.reject(error);
     }
 );
@@ -65,8 +66,6 @@ export const authApi = {
 
             const response = await api.post('/auth/login', credentials);
             const { access_token, refreshToken } = response.data;
-
-            console.log("access_token", access_token, " refreshToken", refreshToken)
             authService.setTokens(access_token, refreshToken);
 
 

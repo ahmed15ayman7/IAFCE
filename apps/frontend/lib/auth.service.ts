@@ -1,7 +1,7 @@
 import { jwtDecode } from 'jwt-decode';
 import { authApi } from '@/lib/api';
 import { redirect } from 'next/navigation';
-import Cookies from 'js-cookie';
+import { setTokens, getAccessToken, getRefreshToken, removeTokens } from './server-cookie.service';
 
 interface TokenPayload {
   exp: number;
@@ -28,7 +28,7 @@ class AuthService {
   }
 
   // تعيين التوكن عند تسجيل الدخول
-  public setTokens(accessToken: string, refreshToken: string) {
+  public async setTokens(accessToken: string, refreshToken: string) {
     if (!accessToken || !refreshToken) {
       console.error('Invalid tokens provided');
       return;
@@ -36,8 +36,7 @@ class AuthService {
 
     this.accessToken = accessToken;
     this.refresh_token = refreshToken;
-    Cookies.set('accessToken', accessToken);
-    Cookies.set('refreshToken', refreshToken, { expires: 7 });
+    await setTokens(accessToken, refreshToken);
 
     try {
       this.startRefreshTokenTimer();
@@ -47,13 +46,16 @@ class AuthService {
   }
 
   // الحصول على التوكن الحالي
-  public getAccessToken(): string {
-    return this.accessToken || Cookies.get('accessToken') || '';
+  public async getAccessToken(): Promise<string> {
+    console.log("this.accessToken")
+    console.log(this.accessToken)
+    
+    return this.accessToken || (await getAccessToken()) || '';
   }
 
   // التحقق من حالة تسجيل الدخول
-  public isAuthenticated(): boolean {
-    const token = this.getAccessToken();
+  public async isAuthenticated(): Promise<boolean> {
+    const token = await this.getAccessToken();
     if (!token) return false;
 
     try {
@@ -87,23 +89,24 @@ class AuthService {
   // تجديد التوكن
   public async refreshToken(): Promise<string> {
     try {
-      const response = await authApi.refreshToken({ refreshToken: this.refresh_token || Cookies.get('refreshToken') || '' });
+      const response = await authApi.refreshToken({
+        refreshToken: this.refresh_token || (await getRefreshToken()) || ''
+      });
 
       const { accessToken, refreshToken } = response.data;
-      this.setTokens(accessToken, refreshToken);
+      await this.setTokens(accessToken, refreshToken);
       return accessToken;
     } catch (error) {
-      this.logout();
+      await this.logout();
       throw new Error('Failed to refresh token');
     }
   }
 
   // تسجيل الخروج
-  public logout() {
+  public async logout() {
     this.accessToken = '';
     this.refresh_token = '';
-    Cookies.remove('accessToken');
-    Cookies.remove('refreshToken');
+    await removeTokens();
     this.stopRefreshTokenTimer();
     redirect('/auth/signin');
   }

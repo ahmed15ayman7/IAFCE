@@ -9,14 +9,12 @@ import {
     IconButton,
     CardActions,
     Button,
-    useTheme,
 } from '@mui/material';
 import {
     Favorite as FavoriteIcon,
     Share as ShareIcon,
     Bookmark as BookmarkIcon,
 } from '@mui/icons-material';
-import { useTranslation } from 'next-i18next';
 
 interface CardProps {
     title: string;
@@ -62,8 +60,6 @@ const Card: React.FC<CardProps> = ({
     children,
     className,
 }) => {
-    const theme = useTheme();
-    const { t } = useTranslation();
 
     const renderCardContent = () => {
         switch (variant) {
