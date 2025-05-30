@@ -3,10 +3,11 @@ import { BookmarksService } from './bookmarks.service';
 import { CreateBookmarkDto } from '../../dtos/Bookmark.create.dto';
 import { UpdateBookmarkDto } from '../../dtos/Bookmark.update.dto';
 import { Bookmark } from '@shared/prisma';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
 @ApiTags('المفضلة')
 @Controller('bookmarks')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class BookmarksController {
     constructor(private readonly bookmarksService: BookmarksService) { }

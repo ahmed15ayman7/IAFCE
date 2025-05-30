@@ -3,10 +3,11 @@ import { BadgesService } from './badges.service';
 import { CreateBadgeDto } from '../../dtos/Badge.create.dto';
 import { UpdateBadgeDto } from '../../dtos/Badge.update.dto';
 import { Badge } from '@shared/prisma';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
 @ApiTags('البطاقات')
 @Controller('badges')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class BadgesController {
     constructor(private readonly badgesService: BadgesService) { }

@@ -167,6 +167,14 @@ exports.Prisma.ProfileScalarFieldEnum = {
   preferences: 'preferences'
 };
 
+exports.Prisma.UserAcademyCEOScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  academyId: 'academyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.AcademyScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -564,6 +572,7 @@ exports.Prisma.ModelName = {
   LoginHistory: 'LoginHistory',
   TwoFactor: 'TwoFactor',
   Profile: 'Profile',
+  UserAcademyCEO: 'UserAcademyCEO',
   Academy: 'Academy',
   Instructor: 'Instructor',
   Course: 'Course',

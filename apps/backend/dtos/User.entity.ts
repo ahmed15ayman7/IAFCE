@@ -25,6 +25,7 @@ import { NotificationSettingsEntity } from "./NotificationSettings.entity";
 import { PathEntity } from "./Path.entity";
 import { LoginHistoryEntity } from "./LoginHistory.entity";
 import { TwoFactorEntity } from "./TwoFactor.entity";
+import { UserAcademyCEOEntity } from "./UserAcademyCEO.entity";
 import {
   UserRole,
   Academy,
@@ -53,6 +54,7 @@ import {
   Path,
   LoginHistory,
   TwoFactor,
+  UserAcademyCEO,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -263,4 +265,9 @@ export class UserEntity {
   // Field: TwoFactor, Type: TwoFactor[]
   @Column()
   TwoFactor: TwoFactor[];
+
+  @ApiProperty({ type: UserAcademyCEOEntity })
+  // Field: UserAcademyCEO, Type: UserAcademyCEO[]
+  @Column()
+  UserAcademyCEO: UserAcademyCEO[];
 }

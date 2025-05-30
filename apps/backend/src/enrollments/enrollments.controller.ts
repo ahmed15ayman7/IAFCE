@@ -5,9 +5,10 @@ import { UpdateEnrollmentDto } from '../../dtos/Enrollment.update.dto';
 import { EnrollmentDto } from '../../dtos/Enrollment.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { Enrollment } from '@shared/prisma';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @ApiTags('التسجيلات')
 @Controller('enrollments')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class EnrollmentsController {
     constructor(private readonly enrollmentsService: EnrollmentsService) { }

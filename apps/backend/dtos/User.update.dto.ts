@@ -27,6 +27,7 @@ import {
   Path,
   LoginHistory,
   TwoFactor,
+  UserAcademyCEO,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";

@@ -3,10 +3,11 @@ import { AchievementsService } from './achievements.service';
 import { CreateAchievementDto } from '../../dtos/Achievement.create.dto';
 import { UpdateAchievementDto } from '../../dtos/Achievement.update.dto';
 import { Achievement } from '@shared/prisma';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
 @ApiTags('الانجازات')
 @Controller('achievements')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class AchievementsController {
     constructor(private readonly achievementsService: AchievementsService) { }

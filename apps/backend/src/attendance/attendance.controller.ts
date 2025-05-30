@@ -3,10 +3,11 @@ import { AttendanceService } from './attendance.service';
 import { CreateAttendanceDto } from '../../dtos/Attendance.create.dto';
 import { UpdateAttendanceDto } from '../../dtos/Attendance.update.dto';
 import { Attendance } from '@shared/prisma';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
 @ApiTags('الحضور والانصراف')
 @Controller('attendance')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class AttendanceController {
     constructor(private readonly attendanceService: AttendanceService) { }

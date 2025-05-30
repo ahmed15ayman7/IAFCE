@@ -5,9 +5,10 @@ import { UpdateGroupDto } from '../../dtos/Group.update.dto';
 import { GroupDto } from '../../dtos/Group.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { Group, Post as PostEntity } from '@shared/prisma';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @ApiTags('المجموعات')
 @Controller('groups')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class GroupsController {
     constructor(private readonly groupsService: GroupsService) { }

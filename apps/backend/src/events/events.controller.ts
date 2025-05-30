@@ -5,9 +5,10 @@ import { UpdateEventDto } from '../../dtos/Event.update.dto';
 import { EventDto } from '../../dtos/Event.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { Event } from '@shared/prisma';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @ApiTags('الفعاليات')
 @Controller('events')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class EventsController {
     constructor(private readonly eventsService: EventsService) { }

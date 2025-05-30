@@ -4,9 +4,10 @@ import { CreateProfileDto } from '../../dtos/Profile.create.dto';
 import { UpdateProfileDto } from '../../dtos/Profile.update.dto';
 import { Profile } from '@shared/prisma';
 import { AuthGuard } from '../auth/auth.guard';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @ApiTags('الملفات الشخصية')
 @Controller('profiles')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class ProfilesController {
     constructor(private readonly profilesService: ProfilesService) { }

@@ -3,10 +3,11 @@ import { CertificateService } from './certificate.service';
 import { CreateCertificateDto } from '../../dtos/Certificate.create.dto';
 import { UpdateCertificateDto } from '../../dtos/Certificate.update.dto';
 import { Certificate } from '@shared/prisma';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
 @ApiTags('الشهادات')
 @Controller('certificates')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class CertificateController {
     constructor(private readonly certificateService: CertificateService) { }

@@ -4,11 +4,12 @@ import { CreateQuizDto } from 'dtos/Quiz.create.dto';
 import { UpdateQuizDto } from 'dtos/Quiz.update.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { Request } from 'express';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateQuestionDto } from 'dtos/Question.create.dto';
 import { CreateOptionDto } from 'dtos/Option.create.dto';
 @ApiTags('الاختبارات')
 @Controller('quizzes')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class QuizzesController {
     constructor(private readonly quizzesService: QuizzesService) { }

@@ -4,10 +4,11 @@ import { CreateChannelDto } from '../../dtos/Channel.create.dto';
 import { UpdateChannelDto } from '../../dtos/Channel.update.dto';
 import { ChannelDto } from '../../dtos/Channel.dto';
 import { Channel } from '@shared/prisma';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
 @ApiTags('القنوات')
 @Controller('channels')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class ChannelsController {
     constructor(private readonly channelsService: ChannelsService) { }

@@ -5,9 +5,10 @@ import { UpdateFileDto } from '../../dtos/File.update.dto';
 import { FileDto } from '../../dtos/File.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { File } from '@shared/prisma';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @ApiTags('الملفات')
 @Controller('files')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class FilesController {
     constructor(private readonly filesService: FilesService) { }

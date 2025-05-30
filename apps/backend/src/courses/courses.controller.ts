@@ -4,9 +4,10 @@ import { CreateCourseDto } from '../../dtos/Course.create.dto';
 import { UpdateCourseDto } from '../../dtos/Course.update.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { Course, Instructor, Lesson, Quiz, User } from '@shared/prisma';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @ApiTags('الكورسات')
 @Controller('courses')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class CoursesController {
     constructor(private readonly coursesService: CoursesService) { }

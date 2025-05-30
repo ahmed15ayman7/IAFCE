@@ -4,9 +4,10 @@ import { CreateLessonDto } from '../../dtos/Lesson.create.dto';
 import { UpdateLessonDto } from '../../dtos/Lesson.update.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { Lesson } from '@shared/prisma';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @ApiTags('الدروس')
 @Controller('lessons')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class LessonsController {
     constructor(private readonly lessonsService: LessonsService) { }

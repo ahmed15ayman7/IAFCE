@@ -34,6 +34,11 @@ export type TwoFactor = $Result.DefaultSelection<Prisma.$TwoFactorPayload>
  */
 export type Profile = $Result.DefaultSelection<Prisma.$ProfilePayload>
 /**
+ * Model UserAcademyCEO
+ * 
+ */
+export type UserAcademyCEO = $Result.DefaultSelection<Prisma.$UserAcademyCEOPayload>
+/**
  * Model Academy
  * 
  */
@@ -446,6 +451,16 @@ export class PrismaClient<
     * ```
     */
   get profile(): Prisma.ProfileDelegate<ExtArgs>;
+
+  /**
+   * `prisma.userAcademyCEO`: Exposes CRUD operations for the **UserAcademyCEO** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserAcademyCEOS
+    * const userAcademyCEOS = await prisma.userAcademyCEO.findMany()
+    * ```
+    */
+  get userAcademyCEO(): Prisma.UserAcademyCEODelegate<ExtArgs>;
 
   /**
    * `prisma.academy`: Exposes CRUD operations for the **Academy** model.
@@ -1210,6 +1225,7 @@ export namespace Prisma {
     LoginHistory: 'LoginHistory',
     TwoFactor: 'TwoFactor',
     Profile: 'Profile',
+    UserAcademyCEO: 'UserAcademyCEO',
     Academy: 'Academy',
     Instructor: 'Instructor',
     Course: 'Course',
@@ -1257,7 +1273,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "loginHistory" | "twoFactor" | "profile" | "academy" | "instructor" | "course" | "path" | "milestone" | "lesson" | "file" | "enrollment" | "quiz" | "question" | "option" | "submission" | "achievement" | "notification" | "notificationSettings" | "message" | "post" | "comment" | "group" | "admin" | "channel" | "owner" | "bookmark" | "event" | "attendance" | "payment" | "report" | "badge" | "certificate" | "community" | "discussion" | "liveRoom"
+      modelProps: "user" | "loginHistory" | "twoFactor" | "profile" | "userAcademyCEO" | "academy" | "instructor" | "course" | "path" | "milestone" | "lesson" | "file" | "enrollment" | "quiz" | "question" | "option" | "submission" | "achievement" | "notification" | "notificationSettings" | "message" | "post" | "comment" | "group" | "admin" | "channel" | "owner" | "bookmark" | "event" | "attendance" | "payment" | "report" | "badge" | "certificate" | "community" | "discussion" | "liveRoom"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1538,6 +1554,76 @@ export namespace Prisma {
           count: {
             args: Prisma.ProfileCountArgs<ExtArgs>
             result: $Utils.Optional<ProfileCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserAcademyCEO: {
+        payload: Prisma.$UserAcademyCEOPayload<ExtArgs>
+        fields: Prisma.UserAcademyCEOFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserAcademyCEOFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademyCEOPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserAcademyCEOFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademyCEOPayload>
+          }
+          findFirst: {
+            args: Prisma.UserAcademyCEOFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademyCEOPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserAcademyCEOFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademyCEOPayload>
+          }
+          findMany: {
+            args: Prisma.UserAcademyCEOFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademyCEOPayload>[]
+          }
+          create: {
+            args: Prisma.UserAcademyCEOCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademyCEOPayload>
+          }
+          createMany: {
+            args: Prisma.UserAcademyCEOCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserAcademyCEOCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademyCEOPayload>[]
+          }
+          delete: {
+            args: Prisma.UserAcademyCEODeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademyCEOPayload>
+          }
+          update: {
+            args: Prisma.UserAcademyCEOUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademyCEOPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserAcademyCEODeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserAcademyCEOUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserAcademyCEOUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademyCEOPayload>
+          }
+          aggregate: {
+            args: Prisma.UserAcademyCEOAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserAcademyCEO>
+          }
+          groupBy: {
+            args: Prisma.UserAcademyCEOGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserAcademyCEOGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserAcademyCEOCountArgs<ExtArgs>
+            result: $Utils.Optional<UserAcademyCEOCountAggregateOutputType> | number
           }
         }
       }
@@ -3966,6 +4052,7 @@ export namespace Prisma {
     Path: number
     LoginHistory: number
     TwoFactor: number
+    UserAcademyCEO: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3993,6 +4080,7 @@ export namespace Prisma {
     Path?: boolean | UserCountOutputTypeCountPathArgs
     LoginHistory?: boolean | UserCountOutputTypeCountLoginHistoryArgs
     TwoFactor?: boolean | UserCountOutputTypeCountTwoFactorArgs
+    UserAcademyCEO?: boolean | UserCountOutputTypeCountUserAcademyCEOArgs
   }
 
   // Custom InputTypes
@@ -4174,6 +4262,13 @@ export namespace Prisma {
     where?: TwoFactorWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUserAcademyCEOArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserAcademyCEOWhereInput
+  }
+
 
   /**
    * Count Type AcademyCountOutputType
@@ -4181,6 +4276,7 @@ export namespace Prisma {
 
   export type AcademyCountOutputType = {
     users: number
+    ceos: number
     courses: number
     instructors: number
     events: number
@@ -4188,6 +4284,7 @@ export namespace Prisma {
 
   export type AcademyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | AcademyCountOutputTypeCountUsersArgs
+    ceos?: boolean | AcademyCountOutputTypeCountCeosArgs
     courses?: boolean | AcademyCountOutputTypeCountCoursesArgs
     instructors?: boolean | AcademyCountOutputTypeCountInstructorsArgs
     events?: boolean | AcademyCountOutputTypeCountEventsArgs
@@ -4209,6 +4306,13 @@ export namespace Prisma {
    */
   export type AcademyCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
+  }
+
+  /**
+   * AcademyCountOutputType without action
+   */
+  export type AcademyCountOutputTypeCountCeosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserAcademyCEOWhereInput
   }
 
   /**
@@ -5173,6 +5277,7 @@ export namespace Prisma {
     Path?: boolean | User$PathArgs<ExtArgs>
     LoginHistory?: boolean | User$LoginHistoryArgs<ExtArgs>
     TwoFactor?: boolean | User$TwoFactorArgs<ExtArgs>
+    UserAcademyCEO?: boolean | User$UserAcademyCEOArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -5240,6 +5345,7 @@ export namespace Prisma {
     Path?: boolean | User$PathArgs<ExtArgs>
     LoginHistory?: boolean | User$LoginHistoryArgs<ExtArgs>
     TwoFactor?: boolean | User$TwoFactorArgs<ExtArgs>
+    UserAcademyCEO?: boolean | User$UserAcademyCEOArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5275,6 +5381,7 @@ export namespace Prisma {
       Path: Prisma.$PathPayload<ExtArgs>[]
       LoginHistory: Prisma.$LoginHistoryPayload<ExtArgs>[]
       TwoFactor: Prisma.$TwoFactorPayload<ExtArgs>[]
+      UserAcademyCEO: Prisma.$UserAcademyCEOPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5682,6 +5789,7 @@ export namespace Prisma {
     Path<T extends User$PathArgs<ExtArgs> = {}>(args?: Subset<T, User$PathArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PathPayload<ExtArgs>, T, "findMany"> | Null>
     LoginHistory<T extends User$LoginHistoryArgs<ExtArgs> = {}>(args?: Subset<T, User$LoginHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LoginHistoryPayload<ExtArgs>, T, "findMany"> | Null>
     TwoFactor<T extends User$TwoFactorArgs<ExtArgs> = {}>(args?: Subset<T, User$TwoFactorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TwoFactorPayload<ExtArgs>, T, "findMany"> | Null>
+    UserAcademyCEO<T extends User$UserAcademyCEOArgs<ExtArgs> = {}>(args?: Subset<T, User$UserAcademyCEOArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAcademyCEOPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6551,6 +6659,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TwoFactorScalarFieldEnum | TwoFactorScalarFieldEnum[]
+  }
+
+  /**
+   * User.UserAcademyCEO
+   */
+  export type User$UserAcademyCEOArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademyCEO
+     */
+    select?: UserAcademyCEOSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademyCEOInclude<ExtArgs> | null
+    where?: UserAcademyCEOWhereInput
+    orderBy?: UserAcademyCEOOrderByWithRelationInput | UserAcademyCEOOrderByWithRelationInput[]
+    cursor?: UserAcademyCEOWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserAcademyCEOScalarFieldEnum | UserAcademyCEOScalarFieldEnum[]
   }
 
   /**
@@ -9460,6 +9588,945 @@ export namespace Prisma {
 
 
   /**
+   * Model UserAcademyCEO
+   */
+
+  export type AggregateUserAcademyCEO = {
+    _count: UserAcademyCEOCountAggregateOutputType | null
+    _min: UserAcademyCEOMinAggregateOutputType | null
+    _max: UserAcademyCEOMaxAggregateOutputType | null
+  }
+
+  export type UserAcademyCEOMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    academyId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserAcademyCEOMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    academyId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserAcademyCEOCountAggregateOutputType = {
+    id: number
+    userId: number
+    academyId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserAcademyCEOMinAggregateInputType = {
+    id?: true
+    userId?: true
+    academyId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserAcademyCEOMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    academyId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserAcademyCEOCountAggregateInputType = {
+    id?: true
+    userId?: true
+    academyId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserAcademyCEOAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserAcademyCEO to aggregate.
+     */
+    where?: UserAcademyCEOWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAcademyCEOS to fetch.
+     */
+    orderBy?: UserAcademyCEOOrderByWithRelationInput | UserAcademyCEOOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserAcademyCEOWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAcademyCEOS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAcademyCEOS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserAcademyCEOS
+    **/
+    _count?: true | UserAcademyCEOCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserAcademyCEOMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserAcademyCEOMaxAggregateInputType
+  }
+
+  export type GetUserAcademyCEOAggregateType<T extends UserAcademyCEOAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserAcademyCEO]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserAcademyCEO[P]>
+      : GetScalarType<T[P], AggregateUserAcademyCEO[P]>
+  }
+
+
+
+
+  export type UserAcademyCEOGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserAcademyCEOWhereInput
+    orderBy?: UserAcademyCEOOrderByWithAggregationInput | UserAcademyCEOOrderByWithAggregationInput[]
+    by: UserAcademyCEOScalarFieldEnum[] | UserAcademyCEOScalarFieldEnum
+    having?: UserAcademyCEOScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserAcademyCEOCountAggregateInputType | true
+    _min?: UserAcademyCEOMinAggregateInputType
+    _max?: UserAcademyCEOMaxAggregateInputType
+  }
+
+  export type UserAcademyCEOGroupByOutputType = {
+    id: string
+    userId: string
+    academyId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: UserAcademyCEOCountAggregateOutputType | null
+    _min: UserAcademyCEOMinAggregateOutputType | null
+    _max: UserAcademyCEOMaxAggregateOutputType | null
+  }
+
+  type GetUserAcademyCEOGroupByPayload<T extends UserAcademyCEOGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserAcademyCEOGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserAcademyCEOGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserAcademyCEOGroupByOutputType[P]>
+            : GetScalarType<T[P], UserAcademyCEOGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserAcademyCEOSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    academyId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    academy?: boolean | AcademyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userAcademyCEO"]>
+
+  export type UserAcademyCEOSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    academyId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    academy?: boolean | AcademyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userAcademyCEO"]>
+
+  export type UserAcademyCEOSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    academyId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UserAcademyCEOInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    academy?: boolean | AcademyDefaultArgs<ExtArgs>
+  }
+  export type UserAcademyCEOIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    academy?: boolean | AcademyDefaultArgs<ExtArgs>
+  }
+
+  export type $UserAcademyCEOPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserAcademyCEO"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      academy: Prisma.$AcademyPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      academyId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["userAcademyCEO"]>
+    composites: {}
+  }
+
+  type UserAcademyCEOGetPayload<S extends boolean | null | undefined | UserAcademyCEODefaultArgs> = $Result.GetResult<Prisma.$UserAcademyCEOPayload, S>
+
+  type UserAcademyCEOCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UserAcademyCEOFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: UserAcademyCEOCountAggregateInputType | true
+    }
+
+  export interface UserAcademyCEODelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserAcademyCEO'], meta: { name: 'UserAcademyCEO' } }
+    /**
+     * Find zero or one UserAcademyCEO that matches the filter.
+     * @param {UserAcademyCEOFindUniqueArgs} args - Arguments to find a UserAcademyCEO
+     * @example
+     * // Get one UserAcademyCEO
+     * const userAcademyCEO = await prisma.userAcademyCEO.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserAcademyCEOFindUniqueArgs>(args: SelectSubset<T, UserAcademyCEOFindUniqueArgs<ExtArgs>>): Prisma__UserAcademyCEOClient<$Result.GetResult<Prisma.$UserAcademyCEOPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one UserAcademyCEO that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {UserAcademyCEOFindUniqueOrThrowArgs} args - Arguments to find a UserAcademyCEO
+     * @example
+     * // Get one UserAcademyCEO
+     * const userAcademyCEO = await prisma.userAcademyCEO.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserAcademyCEOFindUniqueOrThrowArgs>(args: SelectSubset<T, UserAcademyCEOFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserAcademyCEOClient<$Result.GetResult<Prisma.$UserAcademyCEOPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first UserAcademyCEO that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAcademyCEOFindFirstArgs} args - Arguments to find a UserAcademyCEO
+     * @example
+     * // Get one UserAcademyCEO
+     * const userAcademyCEO = await prisma.userAcademyCEO.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserAcademyCEOFindFirstArgs>(args?: SelectSubset<T, UserAcademyCEOFindFirstArgs<ExtArgs>>): Prisma__UserAcademyCEOClient<$Result.GetResult<Prisma.$UserAcademyCEOPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first UserAcademyCEO that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAcademyCEOFindFirstOrThrowArgs} args - Arguments to find a UserAcademyCEO
+     * @example
+     * // Get one UserAcademyCEO
+     * const userAcademyCEO = await prisma.userAcademyCEO.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserAcademyCEOFindFirstOrThrowArgs>(args?: SelectSubset<T, UserAcademyCEOFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserAcademyCEOClient<$Result.GetResult<Prisma.$UserAcademyCEOPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more UserAcademyCEOS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAcademyCEOFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserAcademyCEOS
+     * const userAcademyCEOS = await prisma.userAcademyCEO.findMany()
+     * 
+     * // Get first 10 UserAcademyCEOS
+     * const userAcademyCEOS = await prisma.userAcademyCEO.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userAcademyCEOWithIdOnly = await prisma.userAcademyCEO.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserAcademyCEOFindManyArgs>(args?: SelectSubset<T, UserAcademyCEOFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAcademyCEOPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a UserAcademyCEO.
+     * @param {UserAcademyCEOCreateArgs} args - Arguments to create a UserAcademyCEO.
+     * @example
+     * // Create one UserAcademyCEO
+     * const UserAcademyCEO = await prisma.userAcademyCEO.create({
+     *   data: {
+     *     // ... data to create a UserAcademyCEO
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserAcademyCEOCreateArgs>(args: SelectSubset<T, UserAcademyCEOCreateArgs<ExtArgs>>): Prisma__UserAcademyCEOClient<$Result.GetResult<Prisma.$UserAcademyCEOPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many UserAcademyCEOS.
+     * @param {UserAcademyCEOCreateManyArgs} args - Arguments to create many UserAcademyCEOS.
+     * @example
+     * // Create many UserAcademyCEOS
+     * const userAcademyCEO = await prisma.userAcademyCEO.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserAcademyCEOCreateManyArgs>(args?: SelectSubset<T, UserAcademyCEOCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserAcademyCEOS and returns the data saved in the database.
+     * @param {UserAcademyCEOCreateManyAndReturnArgs} args - Arguments to create many UserAcademyCEOS.
+     * @example
+     * // Create many UserAcademyCEOS
+     * const userAcademyCEO = await prisma.userAcademyCEO.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserAcademyCEOS and only return the `id`
+     * const userAcademyCEOWithIdOnly = await prisma.userAcademyCEO.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserAcademyCEOCreateManyAndReturnArgs>(args?: SelectSubset<T, UserAcademyCEOCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAcademyCEOPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a UserAcademyCEO.
+     * @param {UserAcademyCEODeleteArgs} args - Arguments to delete one UserAcademyCEO.
+     * @example
+     * // Delete one UserAcademyCEO
+     * const UserAcademyCEO = await prisma.userAcademyCEO.delete({
+     *   where: {
+     *     // ... filter to delete one UserAcademyCEO
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserAcademyCEODeleteArgs>(args: SelectSubset<T, UserAcademyCEODeleteArgs<ExtArgs>>): Prisma__UserAcademyCEOClient<$Result.GetResult<Prisma.$UserAcademyCEOPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one UserAcademyCEO.
+     * @param {UserAcademyCEOUpdateArgs} args - Arguments to update one UserAcademyCEO.
+     * @example
+     * // Update one UserAcademyCEO
+     * const userAcademyCEO = await prisma.userAcademyCEO.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserAcademyCEOUpdateArgs>(args: SelectSubset<T, UserAcademyCEOUpdateArgs<ExtArgs>>): Prisma__UserAcademyCEOClient<$Result.GetResult<Prisma.$UserAcademyCEOPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more UserAcademyCEOS.
+     * @param {UserAcademyCEODeleteManyArgs} args - Arguments to filter UserAcademyCEOS to delete.
+     * @example
+     * // Delete a few UserAcademyCEOS
+     * const { count } = await prisma.userAcademyCEO.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserAcademyCEODeleteManyArgs>(args?: SelectSubset<T, UserAcademyCEODeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserAcademyCEOS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAcademyCEOUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserAcademyCEOS
+     * const userAcademyCEO = await prisma.userAcademyCEO.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserAcademyCEOUpdateManyArgs>(args: SelectSubset<T, UserAcademyCEOUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one UserAcademyCEO.
+     * @param {UserAcademyCEOUpsertArgs} args - Arguments to update or create a UserAcademyCEO.
+     * @example
+     * // Update or create a UserAcademyCEO
+     * const userAcademyCEO = await prisma.userAcademyCEO.upsert({
+     *   create: {
+     *     // ... data to create a UserAcademyCEO
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserAcademyCEO we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserAcademyCEOUpsertArgs>(args: SelectSubset<T, UserAcademyCEOUpsertArgs<ExtArgs>>): Prisma__UserAcademyCEOClient<$Result.GetResult<Prisma.$UserAcademyCEOPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of UserAcademyCEOS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAcademyCEOCountArgs} args - Arguments to filter UserAcademyCEOS to count.
+     * @example
+     * // Count the number of UserAcademyCEOS
+     * const count = await prisma.userAcademyCEO.count({
+     *   where: {
+     *     // ... the filter for the UserAcademyCEOS we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserAcademyCEOCountArgs>(
+      args?: Subset<T, UserAcademyCEOCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserAcademyCEOCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserAcademyCEO.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAcademyCEOAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserAcademyCEOAggregateArgs>(args: Subset<T, UserAcademyCEOAggregateArgs>): Prisma.PrismaPromise<GetUserAcademyCEOAggregateType<T>>
+
+    /**
+     * Group by UserAcademyCEO.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAcademyCEOGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserAcademyCEOGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserAcademyCEOGroupByArgs['orderBy'] }
+        : { orderBy?: UserAcademyCEOGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserAcademyCEOGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserAcademyCEOGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserAcademyCEO model
+   */
+  readonly fields: UserAcademyCEOFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserAcademyCEO.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserAcademyCEOClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    academy<T extends AcademyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AcademyDefaultArgs<ExtArgs>>): Prisma__AcademyClient<$Result.GetResult<Prisma.$AcademyPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserAcademyCEO model
+   */ 
+  interface UserAcademyCEOFieldRefs {
+    readonly id: FieldRef<"UserAcademyCEO", 'String'>
+    readonly userId: FieldRef<"UserAcademyCEO", 'String'>
+    readonly academyId: FieldRef<"UserAcademyCEO", 'String'>
+    readonly createdAt: FieldRef<"UserAcademyCEO", 'DateTime'>
+    readonly updatedAt: FieldRef<"UserAcademyCEO", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserAcademyCEO findUnique
+   */
+  export type UserAcademyCEOFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademyCEO
+     */
+    select?: UserAcademyCEOSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademyCEOInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAcademyCEO to fetch.
+     */
+    where: UserAcademyCEOWhereUniqueInput
+  }
+
+  /**
+   * UserAcademyCEO findUniqueOrThrow
+   */
+  export type UserAcademyCEOFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademyCEO
+     */
+    select?: UserAcademyCEOSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademyCEOInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAcademyCEO to fetch.
+     */
+    where: UserAcademyCEOWhereUniqueInput
+  }
+
+  /**
+   * UserAcademyCEO findFirst
+   */
+  export type UserAcademyCEOFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademyCEO
+     */
+    select?: UserAcademyCEOSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademyCEOInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAcademyCEO to fetch.
+     */
+    where?: UserAcademyCEOWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAcademyCEOS to fetch.
+     */
+    orderBy?: UserAcademyCEOOrderByWithRelationInput | UserAcademyCEOOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserAcademyCEOS.
+     */
+    cursor?: UserAcademyCEOWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAcademyCEOS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAcademyCEOS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserAcademyCEOS.
+     */
+    distinct?: UserAcademyCEOScalarFieldEnum | UserAcademyCEOScalarFieldEnum[]
+  }
+
+  /**
+   * UserAcademyCEO findFirstOrThrow
+   */
+  export type UserAcademyCEOFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademyCEO
+     */
+    select?: UserAcademyCEOSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademyCEOInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAcademyCEO to fetch.
+     */
+    where?: UserAcademyCEOWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAcademyCEOS to fetch.
+     */
+    orderBy?: UserAcademyCEOOrderByWithRelationInput | UserAcademyCEOOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserAcademyCEOS.
+     */
+    cursor?: UserAcademyCEOWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAcademyCEOS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAcademyCEOS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserAcademyCEOS.
+     */
+    distinct?: UserAcademyCEOScalarFieldEnum | UserAcademyCEOScalarFieldEnum[]
+  }
+
+  /**
+   * UserAcademyCEO findMany
+   */
+  export type UserAcademyCEOFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademyCEO
+     */
+    select?: UserAcademyCEOSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademyCEOInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAcademyCEOS to fetch.
+     */
+    where?: UserAcademyCEOWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAcademyCEOS to fetch.
+     */
+    orderBy?: UserAcademyCEOOrderByWithRelationInput | UserAcademyCEOOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserAcademyCEOS.
+     */
+    cursor?: UserAcademyCEOWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAcademyCEOS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAcademyCEOS.
+     */
+    skip?: number
+    distinct?: UserAcademyCEOScalarFieldEnum | UserAcademyCEOScalarFieldEnum[]
+  }
+
+  /**
+   * UserAcademyCEO create
+   */
+  export type UserAcademyCEOCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademyCEO
+     */
+    select?: UserAcademyCEOSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademyCEOInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserAcademyCEO.
+     */
+    data: XOR<UserAcademyCEOCreateInput, UserAcademyCEOUncheckedCreateInput>
+  }
+
+  /**
+   * UserAcademyCEO createMany
+   */
+  export type UserAcademyCEOCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserAcademyCEOS.
+     */
+    data: UserAcademyCEOCreateManyInput | UserAcademyCEOCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserAcademyCEO createManyAndReturn
+   */
+  export type UserAcademyCEOCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademyCEO
+     */
+    select?: UserAcademyCEOSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many UserAcademyCEOS.
+     */
+    data: UserAcademyCEOCreateManyInput | UserAcademyCEOCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademyCEOIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserAcademyCEO update
+   */
+  export type UserAcademyCEOUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademyCEO
+     */
+    select?: UserAcademyCEOSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademyCEOInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserAcademyCEO.
+     */
+    data: XOR<UserAcademyCEOUpdateInput, UserAcademyCEOUncheckedUpdateInput>
+    /**
+     * Choose, which UserAcademyCEO to update.
+     */
+    where: UserAcademyCEOWhereUniqueInput
+  }
+
+  /**
+   * UserAcademyCEO updateMany
+   */
+  export type UserAcademyCEOUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserAcademyCEOS.
+     */
+    data: XOR<UserAcademyCEOUpdateManyMutationInput, UserAcademyCEOUncheckedUpdateManyInput>
+    /**
+     * Filter which UserAcademyCEOS to update
+     */
+    where?: UserAcademyCEOWhereInput
+  }
+
+  /**
+   * UserAcademyCEO upsert
+   */
+  export type UserAcademyCEOUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademyCEO
+     */
+    select?: UserAcademyCEOSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademyCEOInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserAcademyCEO to update in case it exists.
+     */
+    where: UserAcademyCEOWhereUniqueInput
+    /**
+     * In case the UserAcademyCEO found by the `where` argument doesn't exist, create a new UserAcademyCEO with this data.
+     */
+    create: XOR<UserAcademyCEOCreateInput, UserAcademyCEOUncheckedCreateInput>
+    /**
+     * In case the UserAcademyCEO was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserAcademyCEOUpdateInput, UserAcademyCEOUncheckedUpdateInput>
+  }
+
+  /**
+   * UserAcademyCEO delete
+   */
+  export type UserAcademyCEODeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademyCEO
+     */
+    select?: UserAcademyCEOSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademyCEOInclude<ExtArgs> | null
+    /**
+     * Filter which UserAcademyCEO to delete.
+     */
+    where: UserAcademyCEOWhereUniqueInput
+  }
+
+  /**
+   * UserAcademyCEO deleteMany
+   */
+  export type UserAcademyCEODeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserAcademyCEOS to delete
+     */
+    where?: UserAcademyCEOWhereInput
+  }
+
+  /**
+   * UserAcademyCEO without action
+   */
+  export type UserAcademyCEODefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademyCEO
+     */
+    select?: UserAcademyCEOSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademyCEOInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Academy
    */
 
@@ -9636,6 +10703,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     users?: boolean | Academy$usersArgs<ExtArgs>
+    ceos?: boolean | Academy$ceosArgs<ExtArgs>
     courses?: boolean | Academy$coursesArgs<ExtArgs>
     instructors?: boolean | Academy$instructorsArgs<ExtArgs>
     events?: boolean | Academy$eventsArgs<ExtArgs>
@@ -9664,6 +10732,7 @@ export namespace Prisma {
 
   export type AcademyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Academy$usersArgs<ExtArgs>
+    ceos?: boolean | Academy$ceosArgs<ExtArgs>
     courses?: boolean | Academy$coursesArgs<ExtArgs>
     instructors?: boolean | Academy$instructorsArgs<ExtArgs>
     events?: boolean | Academy$eventsArgs<ExtArgs>
@@ -9675,6 +10744,7 @@ export namespace Prisma {
     name: "Academy"
     objects: {
       users: Prisma.$UserPayload<ExtArgs>[]
+      ceos: Prisma.$UserAcademyCEOPayload<ExtArgs>[]
       courses: Prisma.$CoursePayload<ExtArgs>[]
       instructors: Prisma.$InstructorPayload<ExtArgs>[]
       events: Prisma.$EventPayload<ExtArgs>[]
@@ -10052,6 +11122,7 @@ export namespace Prisma {
   export interface Prisma__AcademyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     users<T extends Academy$usersArgs<ExtArgs> = {}>(args?: Subset<T, Academy$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany"> | Null>
+    ceos<T extends Academy$ceosArgs<ExtArgs> = {}>(args?: Subset<T, Academy$ceosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAcademyCEOPayload<ExtArgs>, T, "findMany"> | Null>
     courses<T extends Academy$coursesArgs<ExtArgs> = {}>(args?: Subset<T, Academy$coursesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findMany"> | Null>
     instructors<T extends Academy$instructorsArgs<ExtArgs> = {}>(args?: Subset<T, Academy$instructorsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstructorPayload<ExtArgs>, T, "findMany"> | Null>
     events<T extends Academy$eventsArgs<ExtArgs> = {}>(args?: Subset<T, Academy$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany"> | Null>
@@ -10422,6 +11493,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * Academy.ceos
+   */
+  export type Academy$ceosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademyCEO
+     */
+    select?: UserAcademyCEOSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademyCEOInclude<ExtArgs> | null
+    where?: UserAcademyCEOWhereInput
+    orderBy?: UserAcademyCEOOrderByWithRelationInput | UserAcademyCEOOrderByWithRelationInput[]
+    cursor?: UserAcademyCEOWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserAcademyCEOScalarFieldEnum | UserAcademyCEOScalarFieldEnum[]
   }
 
   /**
@@ -41576,6 +42667,17 @@ export namespace Prisma {
   export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum]
 
 
+  export const UserAcademyCEOScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    academyId: 'academyId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserAcademyCEOScalarFieldEnum = (typeof UserAcademyCEOScalarFieldEnum)[keyof typeof UserAcademyCEOScalarFieldEnum]
+
+
   export const AcademyScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -42254,6 +43356,7 @@ export namespace Prisma {
     Path?: PathListRelationFilter
     LoginHistory?: LoginHistoryListRelationFilter
     TwoFactor?: TwoFactorListRelationFilter
+    UserAcademyCEO?: UserAcademyCEOListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -42298,6 +43401,7 @@ export namespace Prisma {
     Path?: PathOrderByRelationAggregateInput
     LoginHistory?: LoginHistoryOrderByRelationAggregateInput
     TwoFactor?: TwoFactorOrderByRelationAggregateInput
+    UserAcademyCEO?: UserAcademyCEOOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -42345,6 +43449,7 @@ export namespace Prisma {
     Path?: PathListRelationFilter
     LoginHistory?: LoginHistoryListRelationFilter
     TwoFactor?: TwoFactorListRelationFilter
+    UserAcademyCEO?: UserAcademyCEOListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -42596,6 +43701,64 @@ export namespace Prisma {
     preferences?: JsonNullableWithAggregatesFilter<"Profile">
   }
 
+  export type UserAcademyCEOWhereInput = {
+    AND?: UserAcademyCEOWhereInput | UserAcademyCEOWhereInput[]
+    OR?: UserAcademyCEOWhereInput[]
+    NOT?: UserAcademyCEOWhereInput | UserAcademyCEOWhereInput[]
+    id?: StringFilter<"UserAcademyCEO"> | string
+    userId?: StringFilter<"UserAcademyCEO"> | string
+    academyId?: StringFilter<"UserAcademyCEO"> | string
+    createdAt?: DateTimeFilter<"UserAcademyCEO"> | Date | string
+    updatedAt?: DateTimeFilter<"UserAcademyCEO"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    academy?: XOR<AcademyScalarRelationFilter, AcademyWhereInput>
+  }
+
+  export type UserAcademyCEOOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    academyId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    academy?: AcademyOrderByWithRelationInput
+  }
+
+  export type UserAcademyCEOWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: UserAcademyCEOWhereInput | UserAcademyCEOWhereInput[]
+    OR?: UserAcademyCEOWhereInput[]
+    NOT?: UserAcademyCEOWhereInput | UserAcademyCEOWhereInput[]
+    userId?: StringFilter<"UserAcademyCEO"> | string
+    academyId?: StringFilter<"UserAcademyCEO"> | string
+    createdAt?: DateTimeFilter<"UserAcademyCEO"> | Date | string
+    updatedAt?: DateTimeFilter<"UserAcademyCEO"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    academy?: XOR<AcademyScalarRelationFilter, AcademyWhereInput>
+  }, "id">
+
+  export type UserAcademyCEOOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    academyId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserAcademyCEOCountOrderByAggregateInput
+    _max?: UserAcademyCEOMaxOrderByAggregateInput
+    _min?: UserAcademyCEOMinOrderByAggregateInput
+  }
+
+  export type UserAcademyCEOScalarWhereWithAggregatesInput = {
+    AND?: UserAcademyCEOScalarWhereWithAggregatesInput | UserAcademyCEOScalarWhereWithAggregatesInput[]
+    OR?: UserAcademyCEOScalarWhereWithAggregatesInput[]
+    NOT?: UserAcademyCEOScalarWhereWithAggregatesInput | UserAcademyCEOScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserAcademyCEO"> | string
+    userId?: StringWithAggregatesFilter<"UserAcademyCEO"> | string
+    academyId?: StringWithAggregatesFilter<"UserAcademyCEO"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"UserAcademyCEO"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UserAcademyCEO"> | Date | string
+  }
+
   export type AcademyWhereInput = {
     AND?: AcademyWhereInput | AcademyWhereInput[]
     OR?: AcademyWhereInput[]
@@ -42608,6 +43771,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Academy"> | Date | string
     updatedAt?: DateTimeFilter<"Academy"> | Date | string
     users?: UserListRelationFilter
+    ceos?: UserAcademyCEOListRelationFilter
     courses?: CourseListRelationFilter
     instructors?: InstructorListRelationFilter
     events?: EventListRelationFilter
@@ -42622,6 +43786,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     users?: UserOrderByRelationAggregateInput
+    ceos?: UserAcademyCEOOrderByRelationAggregateInput
     courses?: CourseOrderByRelationAggregateInput
     instructors?: InstructorOrderByRelationAggregateInput
     events?: EventOrderByRelationAggregateInput
@@ -42639,6 +43804,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Academy"> | Date | string
     updatedAt?: DateTimeFilter<"Academy"> | Date | string
     users?: UserListRelationFilter
+    ceos?: UserAcademyCEOListRelationFilter
     courses?: CourseListRelationFilter
     instructors?: InstructorListRelationFilter
     events?: EventListRelationFilter
@@ -44868,6 +46034,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -44911,6 +46078,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -44954,6 +46122,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -44997,6 +46166,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -45273,6 +46443,60 @@ export namespace Prisma {
     preferences?: NullableJsonNullValueInput | InputJsonValue
   }
 
+  export type UserAcademyCEOCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutUserAcademyCEOInput
+    academy: AcademyCreateNestedOneWithoutCeosInput
+  }
+
+  export type UserAcademyCEOUncheckedCreateInput = {
+    id?: string
+    userId: string
+    academyId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserAcademyCEOUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUserAcademyCEONestedInput
+    academy?: AcademyUpdateOneRequiredWithoutCeosNestedInput
+  }
+
+  export type UserAcademyCEOUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    academyId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAcademyCEOCreateManyInput = {
+    id?: string
+    userId: string
+    academyId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserAcademyCEOUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAcademyCEOUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    academyId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type AcademyCreateInput = {
     id?: string
     name: string
@@ -45282,6 +46506,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutAcademyInput
+    ceos?: UserAcademyCEOCreateNestedManyWithoutAcademyInput
     courses?: CourseCreateNestedManyWithoutAcademyInput
     instructors?: InstructorCreateNestedManyWithoutAcademyInput
     events?: EventCreateNestedManyWithoutAcademyInput
@@ -45296,6 +46521,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutAcademyInput
+    ceos?: UserAcademyCEOUncheckedCreateNestedManyWithoutAcademyInput
     courses?: CourseUncheckedCreateNestedManyWithoutAcademyInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutAcademyInput
     events?: EventUncheckedCreateNestedManyWithoutAcademyInput
@@ -45310,6 +46536,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutAcademyNestedInput
+    ceos?: UserAcademyCEOUpdateManyWithoutAcademyNestedInput
     courses?: CourseUpdateManyWithoutAcademyNestedInput
     instructors?: InstructorUpdateManyWithoutAcademyNestedInput
     events?: EventUpdateManyWithoutAcademyNestedInput
@@ -45324,6 +46551,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutAcademyNestedInput
+    ceos?: UserAcademyCEOUncheckedUpdateManyWithoutAcademyNestedInput
     courses?: CourseUncheckedUpdateManyWithoutAcademyNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutAcademyNestedInput
     events?: EventUncheckedUpdateManyWithoutAcademyNestedInput
@@ -47856,6 +49084,12 @@ export namespace Prisma {
     none?: TwoFactorWhereInput
   }
 
+  export type UserAcademyCEOListRelationFilter = {
+    every?: UserAcademyCEOWhereInput
+    some?: UserAcademyCEOWhereInput
+    none?: UserAcademyCEOWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -47954,6 +49188,10 @@ export namespace Prisma {
   }
 
   export type TwoFactorOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserAcademyCEOOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -48266,6 +49504,35 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
+  export type AcademyScalarRelationFilter = {
+    is?: AcademyWhereInput
+    isNot?: AcademyWhereInput
+  }
+
+  export type UserAcademyCEOCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    academyId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserAcademyCEOMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    academyId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserAcademyCEOMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    academyId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type UserListRelationFilter = {
     every?: UserWhereInput
     some?: UserWhereInput
@@ -48322,11 +49589,6 @@ export namespace Prisma {
     logo?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-  }
-
-  export type AcademyScalarRelationFilter = {
-    is?: AcademyWhereInput
-    isNot?: AcademyWhereInput
   }
 
   export type InstructorCountOrderByAggregateInput = {
@@ -49881,6 +51143,13 @@ export namespace Prisma {
     connect?: TwoFactorWhereUniqueInput | TwoFactorWhereUniqueInput[]
   }
 
+  export type UserAcademyCEOCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserAcademyCEOCreateWithoutUserInput, UserAcademyCEOUncheckedCreateWithoutUserInput> | UserAcademyCEOCreateWithoutUserInput[] | UserAcademyCEOUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserAcademyCEOCreateOrConnectWithoutUserInput | UserAcademyCEOCreateOrConnectWithoutUserInput[]
+    createMany?: UserAcademyCEOCreateManyUserInputEnvelope
+    connect?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+  }
+
   export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -50047,6 +51316,13 @@ export namespace Prisma {
     connectOrCreate?: TwoFactorCreateOrConnectWithoutUserInput | TwoFactorCreateOrConnectWithoutUserInput[]
     createMany?: TwoFactorCreateManyUserInputEnvelope
     connect?: TwoFactorWhereUniqueInput | TwoFactorWhereUniqueInput[]
+  }
+
+  export type UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserAcademyCEOCreateWithoutUserInput, UserAcademyCEOUncheckedCreateWithoutUserInput> | UserAcademyCEOCreateWithoutUserInput[] | UserAcademyCEOUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserAcademyCEOCreateOrConnectWithoutUserInput | UserAcademyCEOCreateOrConnectWithoutUserInput[]
+    createMany?: UserAcademyCEOCreateManyUserInputEnvelope
+    connect?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -50427,6 +51703,20 @@ export namespace Prisma {
     deleteMany?: TwoFactorScalarWhereInput | TwoFactorScalarWhereInput[]
   }
 
+  export type UserAcademyCEOUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserAcademyCEOCreateWithoutUserInput, UserAcademyCEOUncheckedCreateWithoutUserInput> | UserAcademyCEOCreateWithoutUserInput[] | UserAcademyCEOUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserAcademyCEOCreateOrConnectWithoutUserInput | UserAcademyCEOCreateOrConnectWithoutUserInput[]
+    upsert?: UserAcademyCEOUpsertWithWhereUniqueWithoutUserInput | UserAcademyCEOUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserAcademyCEOCreateManyUserInputEnvelope
+    set?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+    disconnect?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+    delete?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+    connect?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+    update?: UserAcademyCEOUpdateWithWhereUniqueWithoutUserInput | UserAcademyCEOUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserAcademyCEOUpdateManyWithWhereWithoutUserInput | UserAcademyCEOUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserAcademyCEOScalarWhereInput | UserAcademyCEOScalarWhereInput[]
+  }
+
   export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -50767,6 +52057,20 @@ export namespace Prisma {
     deleteMany?: TwoFactorScalarWhereInput | TwoFactorScalarWhereInput[]
   }
 
+  export type UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserAcademyCEOCreateWithoutUserInput, UserAcademyCEOUncheckedCreateWithoutUserInput> | UserAcademyCEOCreateWithoutUserInput[] | UserAcademyCEOUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserAcademyCEOCreateOrConnectWithoutUserInput | UserAcademyCEOCreateOrConnectWithoutUserInput[]
+    upsert?: UserAcademyCEOUpsertWithWhereUniqueWithoutUserInput | UserAcademyCEOUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserAcademyCEOCreateManyUserInputEnvelope
+    set?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+    disconnect?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+    delete?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+    connect?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+    update?: UserAcademyCEOUpdateWithWhereUniqueWithoutUserInput | UserAcademyCEOUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserAcademyCEOUpdateManyWithWhereWithoutUserInput | UserAcademyCEOUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserAcademyCEOScalarWhereInput | UserAcademyCEOScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutLoginHistoryInput = {
     create?: XOR<UserCreateWithoutLoginHistoryInput, UserUncheckedCreateWithoutLoginHistoryInput>
     connectOrCreate?: UserCreateOrConnectWithoutLoginHistoryInput
@@ -50813,11 +52117,46 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProfileInput, UserUpdateWithoutProfileInput>, UserUncheckedUpdateWithoutProfileInput>
   }
 
+  export type UserCreateNestedOneWithoutUserAcademyCEOInput = {
+    create?: XOR<UserCreateWithoutUserAcademyCEOInput, UserUncheckedCreateWithoutUserAcademyCEOInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserAcademyCEOInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type AcademyCreateNestedOneWithoutCeosInput = {
+    create?: XOR<AcademyCreateWithoutCeosInput, AcademyUncheckedCreateWithoutCeosInput>
+    connectOrCreate?: AcademyCreateOrConnectWithoutCeosInput
+    connect?: AcademyWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutUserAcademyCEONestedInput = {
+    create?: XOR<UserCreateWithoutUserAcademyCEOInput, UserUncheckedCreateWithoutUserAcademyCEOInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserAcademyCEOInput
+    upsert?: UserUpsertWithoutUserAcademyCEOInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserAcademyCEOInput, UserUpdateWithoutUserAcademyCEOInput>, UserUncheckedUpdateWithoutUserAcademyCEOInput>
+  }
+
+  export type AcademyUpdateOneRequiredWithoutCeosNestedInput = {
+    create?: XOR<AcademyCreateWithoutCeosInput, AcademyUncheckedCreateWithoutCeosInput>
+    connectOrCreate?: AcademyCreateOrConnectWithoutCeosInput
+    upsert?: AcademyUpsertWithoutCeosInput
+    connect?: AcademyWhereUniqueInput
+    update?: XOR<XOR<AcademyUpdateToOneWithWhereWithoutCeosInput, AcademyUpdateWithoutCeosInput>, AcademyUncheckedUpdateWithoutCeosInput>
+  }
+
   export type UserCreateNestedManyWithoutAcademyInput = {
     create?: XOR<UserCreateWithoutAcademyInput, UserUncheckedCreateWithoutAcademyInput> | UserCreateWithoutAcademyInput[] | UserUncheckedCreateWithoutAcademyInput[]
     connectOrCreate?: UserCreateOrConnectWithoutAcademyInput | UserCreateOrConnectWithoutAcademyInput[]
     createMany?: UserCreateManyAcademyInputEnvelope
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserAcademyCEOCreateNestedManyWithoutAcademyInput = {
+    create?: XOR<UserAcademyCEOCreateWithoutAcademyInput, UserAcademyCEOUncheckedCreateWithoutAcademyInput> | UserAcademyCEOCreateWithoutAcademyInput[] | UserAcademyCEOUncheckedCreateWithoutAcademyInput[]
+    connectOrCreate?: UserAcademyCEOCreateOrConnectWithoutAcademyInput | UserAcademyCEOCreateOrConnectWithoutAcademyInput[]
+    createMany?: UserAcademyCEOCreateManyAcademyInputEnvelope
+    connect?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
   }
 
   export type CourseCreateNestedManyWithoutAcademyInput = {
@@ -50846,6 +52185,13 @@ export namespace Prisma {
     connectOrCreate?: UserCreateOrConnectWithoutAcademyInput | UserCreateOrConnectWithoutAcademyInput[]
     createMany?: UserCreateManyAcademyInputEnvelope
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserAcademyCEOUncheckedCreateNestedManyWithoutAcademyInput = {
+    create?: XOR<UserAcademyCEOCreateWithoutAcademyInput, UserAcademyCEOUncheckedCreateWithoutAcademyInput> | UserAcademyCEOCreateWithoutAcademyInput[] | UserAcademyCEOUncheckedCreateWithoutAcademyInput[]
+    connectOrCreate?: UserAcademyCEOCreateOrConnectWithoutAcademyInput | UserAcademyCEOCreateOrConnectWithoutAcademyInput[]
+    createMany?: UserAcademyCEOCreateManyAcademyInputEnvelope
+    connect?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
   }
 
   export type CourseUncheckedCreateNestedManyWithoutAcademyInput = {
@@ -50881,6 +52227,20 @@ export namespace Prisma {
     update?: UserUpdateWithWhereUniqueWithoutAcademyInput | UserUpdateWithWhereUniqueWithoutAcademyInput[]
     updateMany?: UserUpdateManyWithWhereWithoutAcademyInput | UserUpdateManyWithWhereWithoutAcademyInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type UserAcademyCEOUpdateManyWithoutAcademyNestedInput = {
+    create?: XOR<UserAcademyCEOCreateWithoutAcademyInput, UserAcademyCEOUncheckedCreateWithoutAcademyInput> | UserAcademyCEOCreateWithoutAcademyInput[] | UserAcademyCEOUncheckedCreateWithoutAcademyInput[]
+    connectOrCreate?: UserAcademyCEOCreateOrConnectWithoutAcademyInput | UserAcademyCEOCreateOrConnectWithoutAcademyInput[]
+    upsert?: UserAcademyCEOUpsertWithWhereUniqueWithoutAcademyInput | UserAcademyCEOUpsertWithWhereUniqueWithoutAcademyInput[]
+    createMany?: UserAcademyCEOCreateManyAcademyInputEnvelope
+    set?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+    disconnect?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+    delete?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+    connect?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+    update?: UserAcademyCEOUpdateWithWhereUniqueWithoutAcademyInput | UserAcademyCEOUpdateWithWhereUniqueWithoutAcademyInput[]
+    updateMany?: UserAcademyCEOUpdateManyWithWhereWithoutAcademyInput | UserAcademyCEOUpdateManyWithWhereWithoutAcademyInput[]
+    deleteMany?: UserAcademyCEOScalarWhereInput | UserAcademyCEOScalarWhereInput[]
   }
 
   export type CourseUpdateManyWithoutAcademyNestedInput = {
@@ -50937,6 +52297,20 @@ export namespace Prisma {
     update?: UserUpdateWithWhereUniqueWithoutAcademyInput | UserUpdateWithWhereUniqueWithoutAcademyInput[]
     updateMany?: UserUpdateManyWithWhereWithoutAcademyInput | UserUpdateManyWithWhereWithoutAcademyInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type UserAcademyCEOUncheckedUpdateManyWithoutAcademyNestedInput = {
+    create?: XOR<UserAcademyCEOCreateWithoutAcademyInput, UserAcademyCEOUncheckedCreateWithoutAcademyInput> | UserAcademyCEOCreateWithoutAcademyInput[] | UserAcademyCEOUncheckedCreateWithoutAcademyInput[]
+    connectOrCreate?: UserAcademyCEOCreateOrConnectWithoutAcademyInput | UserAcademyCEOCreateOrConnectWithoutAcademyInput[]
+    upsert?: UserAcademyCEOUpsertWithWhereUniqueWithoutAcademyInput | UserAcademyCEOUpsertWithWhereUniqueWithoutAcademyInput[]
+    createMany?: UserAcademyCEOCreateManyAcademyInputEnvelope
+    set?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+    disconnect?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+    delete?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+    connect?: UserAcademyCEOWhereUniqueInput | UserAcademyCEOWhereUniqueInput[]
+    update?: UserAcademyCEOUpdateWithWhereUniqueWithoutAcademyInput | UserAcademyCEOUpdateWithWhereUniqueWithoutAcademyInput[]
+    updateMany?: UserAcademyCEOUpdateManyWithWhereWithoutAcademyInput | UserAcademyCEOUpdateManyWithWhereWithoutAcademyInput[]
+    deleteMany?: UserAcademyCEOScalarWhereInput | UserAcademyCEOScalarWhereInput[]
   }
 
   export type CourseUncheckedUpdateManyWithoutAcademyNestedInput = {
@@ -53335,6 +54709,7 @@ export namespace Prisma {
     settings?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    ceos?: UserAcademyCEOCreateNestedManyWithoutAcademyInput
     courses?: CourseCreateNestedManyWithoutAcademyInput
     instructors?: InstructorCreateNestedManyWithoutAcademyInput
     events?: EventCreateNestedManyWithoutAcademyInput
@@ -53348,6 +54723,7 @@ export namespace Prisma {
     settings?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    ceos?: UserAcademyCEOUncheckedCreateNestedManyWithoutAcademyInput
     courses?: CourseUncheckedCreateNestedManyWithoutAcademyInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutAcademyInput
     events?: EventUncheckedCreateNestedManyWithoutAcademyInput
@@ -54083,6 +55459,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserAcademyCEOCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academy: AcademyCreateNestedOneWithoutCeosInput
+  }
+
+  export type UserAcademyCEOUncheckedCreateWithoutUserInput = {
+    id?: string
+    academyId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserAcademyCEOCreateOrConnectWithoutUserInput = {
+    where: UserAcademyCEOWhereUniqueInput
+    create: XOR<UserAcademyCEOCreateWithoutUserInput, UserAcademyCEOUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserAcademyCEOCreateManyUserInputEnvelope = {
+    data: UserAcademyCEOCreateManyUserInput | UserAcademyCEOCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AcademyUpsertWithoutUsersInput = {
     update: XOR<AcademyUpdateWithoutUsersInput, AcademyUncheckedUpdateWithoutUsersInput>
     create: XOR<AcademyCreateWithoutUsersInput, AcademyUncheckedCreateWithoutUsersInput>
@@ -54102,6 +55502,7 @@ export namespace Prisma {
     settings?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ceos?: UserAcademyCEOUpdateManyWithoutAcademyNestedInput
     courses?: CourseUpdateManyWithoutAcademyNestedInput
     instructors?: InstructorUpdateManyWithoutAcademyNestedInput
     events?: EventUpdateManyWithoutAcademyNestedInput
@@ -54115,6 +55516,7 @@ export namespace Prisma {
     settings?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ceos?: UserAcademyCEOUncheckedUpdateManyWithoutAcademyNestedInput
     courses?: CourseUncheckedUpdateManyWithoutAcademyNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutAcademyNestedInput
     events?: EventUncheckedUpdateManyWithoutAcademyNestedInput
@@ -54848,6 +56250,33 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"TwoFactor"> | Date | string
   }
 
+  export type UserAcademyCEOUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserAcademyCEOWhereUniqueInput
+    update: XOR<UserAcademyCEOUpdateWithoutUserInput, UserAcademyCEOUncheckedUpdateWithoutUserInput>
+    create: XOR<UserAcademyCEOCreateWithoutUserInput, UserAcademyCEOUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserAcademyCEOUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserAcademyCEOWhereUniqueInput
+    data: XOR<UserAcademyCEOUpdateWithoutUserInput, UserAcademyCEOUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserAcademyCEOUpdateManyWithWhereWithoutUserInput = {
+    where: UserAcademyCEOScalarWhereInput
+    data: XOR<UserAcademyCEOUpdateManyMutationInput, UserAcademyCEOUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserAcademyCEOScalarWhereInput = {
+    AND?: UserAcademyCEOScalarWhereInput | UserAcademyCEOScalarWhereInput[]
+    OR?: UserAcademyCEOScalarWhereInput[]
+    NOT?: UserAcademyCEOScalarWhereInput | UserAcademyCEOScalarWhereInput[]
+    id?: StringFilter<"UserAcademyCEO"> | string
+    userId?: StringFilter<"UserAcademyCEO"> | string
+    academyId?: StringFilter<"UserAcademyCEO"> | string
+    createdAt?: DateTimeFilter<"UserAcademyCEO"> | Date | string
+    updatedAt?: DateTimeFilter<"UserAcademyCEO"> | Date | string
+  }
+
   export type UserCreateWithoutLoginHistoryInput = {
     id?: string
     email: string
@@ -54888,6 +56317,7 @@ export namespace Prisma {
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
     Path?: PathCreateNestedManyWithoutPeersInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLoginHistoryInput = {
@@ -54930,6 +56360,7 @@ export namespace Prisma {
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLoginHistoryInput = {
@@ -54988,6 +56419,7 @@ export namespace Prisma {
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
     Path?: PathUpdateManyWithoutPeersNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLoginHistoryInput = {
@@ -55030,6 +56462,7 @@ export namespace Prisma {
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutTwoFactorInput = {
@@ -55072,6 +56505,7 @@ export namespace Prisma {
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTwoFactorInput = {
@@ -55114,6 +56548,7 @@ export namespace Prisma {
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTwoFactorInput = {
@@ -55172,6 +56607,7 @@ export namespace Prisma {
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTwoFactorInput = {
@@ -55214,6 +56650,7 @@ export namespace Prisma {
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutProfileInput = {
@@ -55256,6 +56693,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProfileInput = {
@@ -55298,6 +56736,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProfileInput = {
@@ -55356,6 +56795,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfileInput = {
@@ -55398,6 +56838,267 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutUserAcademyCEOInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
+    academy?: AcademyCreateNestedOneWithoutUsersInput
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    groups?: GroupCreateNestedManyWithoutMembersInput
+    channels?: ChannelCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    Submission?: SubmissionCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorCreateNestedManyWithoutUserInput
+    Owner?: OwnerCreateNestedManyWithoutUserInput
+    Admin?: AdminCreateNestedManyWithoutUserInput
+    Lesson?: LessonCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentCreateNestedManyWithoutUserInput
+    Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUserAcademyCEOInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    groups?: GroupUncheckedCreateNestedManyWithoutMembersInput
+    channels?: ChannelUncheckedCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
+    Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
+    Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
+    Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
+    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUserAcademyCEOInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUserAcademyCEOInput, UserUncheckedCreateWithoutUserAcademyCEOInput>
+  }
+
+  export type AcademyCreateWithoutCeosInput = {
+    id?: string
+    name: string
+    description?: string | null
+    logo?: string | null
+    settings?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutAcademyInput
+    courses?: CourseCreateNestedManyWithoutAcademyInput
+    instructors?: InstructorCreateNestedManyWithoutAcademyInput
+    events?: EventCreateNestedManyWithoutAcademyInput
+  }
+
+  export type AcademyUncheckedCreateWithoutCeosInput = {
+    id?: string
+    name: string
+    description?: string | null
+    logo?: string | null
+    settings?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutAcademyInput
+    courses?: CourseUncheckedCreateNestedManyWithoutAcademyInput
+    instructors?: InstructorUncheckedCreateNestedManyWithoutAcademyInput
+    events?: EventUncheckedCreateNestedManyWithoutAcademyInput
+  }
+
+  export type AcademyCreateOrConnectWithoutCeosInput = {
+    where: AcademyWhereUniqueInput
+    create: XOR<AcademyCreateWithoutCeosInput, AcademyUncheckedCreateWithoutCeosInput>
+  }
+
+  export type UserUpsertWithoutUserAcademyCEOInput = {
+    update: XOR<UserUpdateWithoutUserAcademyCEOInput, UserUncheckedUpdateWithoutUserAcademyCEOInput>
+    create: XOR<UserCreateWithoutUserAcademyCEOInput, UserUncheckedCreateWithoutUserAcademyCEOInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUserAcademyCEOInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUserAcademyCEOInput, UserUncheckedUpdateWithoutUserAcademyCEOInput>
+  }
+
+  export type UserUpdateWithoutUserAcademyCEOInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    academy?: AcademyUpdateOneWithoutUsersNestedInput
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUpdateManyWithoutUserNestedInput
+    Admin?: AdminUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUpdateManyWithoutUserNestedInput
+    Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUserAcademyCEOInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUncheckedUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUncheckedUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
+    Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
+    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type AcademyUpsertWithoutCeosInput = {
+    update: XOR<AcademyUpdateWithoutCeosInput, AcademyUncheckedUpdateWithoutCeosInput>
+    create: XOR<AcademyCreateWithoutCeosInput, AcademyUncheckedCreateWithoutCeosInput>
+    where?: AcademyWhereInput
+  }
+
+  export type AcademyUpdateToOneWithWhereWithoutCeosInput = {
+    where?: AcademyWhereInput
+    data: XOR<AcademyUpdateWithoutCeosInput, AcademyUncheckedUpdateWithoutCeosInput>
+  }
+
+  export type AcademyUpdateWithoutCeosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    settings?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutAcademyNestedInput
+    courses?: CourseUpdateManyWithoutAcademyNestedInput
+    instructors?: InstructorUpdateManyWithoutAcademyNestedInput
+    events?: EventUpdateManyWithoutAcademyNestedInput
+  }
+
+  export type AcademyUncheckedUpdateWithoutCeosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    settings?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutAcademyNestedInput
+    courses?: CourseUncheckedUpdateManyWithoutAcademyNestedInput
+    instructors?: InstructorUncheckedUpdateManyWithoutAcademyNestedInput
+    events?: EventUncheckedUpdateManyWithoutAcademyNestedInput
   }
 
   export type UserCreateWithoutAcademyInput = {
@@ -55440,6 +57141,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAcademyInput = {
@@ -55482,6 +57184,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAcademyInput = {
@@ -55491,6 +57194,30 @@ export namespace Prisma {
 
   export type UserCreateManyAcademyInputEnvelope = {
     data: UserCreateManyAcademyInput | UserCreateManyAcademyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserAcademyCEOCreateWithoutAcademyInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutUserAcademyCEOInput
+  }
+
+  export type UserAcademyCEOUncheckedCreateWithoutAcademyInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserAcademyCEOCreateOrConnectWithoutAcademyInput = {
+    where: UserAcademyCEOWhereUniqueInput
+    create: XOR<UserAcademyCEOCreateWithoutAcademyInput, UserAcademyCEOUncheckedCreateWithoutAcademyInput>
+  }
+
+  export type UserAcademyCEOCreateManyAcademyInputEnvelope = {
+    data: UserAcademyCEOCreateManyAcademyInput | UserAcademyCEOCreateManyAcademyInput[]
     skipDuplicates?: boolean
   }
 
@@ -55625,6 +57352,22 @@ export namespace Prisma {
     age?: IntNullableFilter<"User"> | number | null
   }
 
+  export type UserAcademyCEOUpsertWithWhereUniqueWithoutAcademyInput = {
+    where: UserAcademyCEOWhereUniqueInput
+    update: XOR<UserAcademyCEOUpdateWithoutAcademyInput, UserAcademyCEOUncheckedUpdateWithoutAcademyInput>
+    create: XOR<UserAcademyCEOCreateWithoutAcademyInput, UserAcademyCEOUncheckedCreateWithoutAcademyInput>
+  }
+
+  export type UserAcademyCEOUpdateWithWhereUniqueWithoutAcademyInput = {
+    where: UserAcademyCEOWhereUniqueInput
+    data: XOR<UserAcademyCEOUpdateWithoutAcademyInput, UserAcademyCEOUncheckedUpdateWithoutAcademyInput>
+  }
+
+  export type UserAcademyCEOUpdateManyWithWhereWithoutAcademyInput = {
+    where: UserAcademyCEOScalarWhereInput
+    data: XOR<UserAcademyCEOUpdateManyMutationInput, UserAcademyCEOUncheckedUpdateManyWithoutAcademyInput>
+  }
+
   export type CourseUpsertWithWhereUniqueWithoutAcademyInput = {
     where: CourseWhereUniqueInput
     update: XOR<CourseUpdateWithoutAcademyInput, CourseUncheckedUpdateWithoutAcademyInput>
@@ -55741,6 +57484,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutInstructorInput = {
@@ -55783,6 +57527,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutInstructorInput = {
@@ -55799,6 +57544,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutAcademyInput
+    ceos?: UserAcademyCEOCreateNestedManyWithoutAcademyInput
     courses?: CourseCreateNestedManyWithoutAcademyInput
     events?: EventCreateNestedManyWithoutAcademyInput
   }
@@ -55812,6 +57558,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutAcademyInput
+    ceos?: UserAcademyCEOUncheckedCreateNestedManyWithoutAcademyInput
     courses?: CourseUncheckedCreateNestedManyWithoutAcademyInput
     events?: EventUncheckedCreateNestedManyWithoutAcademyInput
   }
@@ -55909,6 +57656,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInstructorInput = {
@@ -55951,6 +57699,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AcademyUpsertWithoutInstructorsInput = {
@@ -55973,6 +57722,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutAcademyNestedInput
+    ceos?: UserAcademyCEOUpdateManyWithoutAcademyNestedInput
     courses?: CourseUpdateManyWithoutAcademyNestedInput
     events?: EventUpdateManyWithoutAcademyNestedInput
   }
@@ -55986,6 +57736,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutAcademyNestedInput
+    ceos?: UserAcademyCEOUncheckedUpdateManyWithoutAcademyNestedInput
     courses?: CourseUncheckedUpdateManyWithoutAcademyNestedInput
     events?: EventUncheckedUpdateManyWithoutAcademyNestedInput
   }
@@ -56015,6 +57766,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutAcademyInput
+    ceos?: UserAcademyCEOCreateNestedManyWithoutAcademyInput
     instructors?: InstructorCreateNestedManyWithoutAcademyInput
     events?: EventCreateNestedManyWithoutAcademyInput
   }
@@ -56028,6 +57780,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutAcademyInput
+    ceos?: UserAcademyCEOUncheckedCreateNestedManyWithoutAcademyInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutAcademyInput
     events?: EventUncheckedCreateNestedManyWithoutAcademyInput
   }
@@ -56254,6 +58007,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutAcademyNestedInput
+    ceos?: UserAcademyCEOUpdateManyWithoutAcademyNestedInput
     instructors?: InstructorUpdateManyWithoutAcademyNestedInput
     events?: EventUpdateManyWithoutAcademyNestedInput
   }
@@ -56267,6 +58021,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutAcademyNestedInput
+    ceos?: UserAcademyCEOUncheckedUpdateManyWithoutAcademyNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutAcademyNestedInput
     events?: EventUncheckedUpdateManyWithoutAcademyNestedInput
   }
@@ -56486,6 +58241,7 @@ export namespace Prisma {
     NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPathInput = {
@@ -56528,6 +58284,7 @@ export namespace Prisma {
     NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPathInput = {
@@ -56822,6 +58579,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLessonInput = {
@@ -56864,6 +58622,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLessonInput = {
@@ -57126,6 +58885,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEnrollmentsInput = {
@@ -57168,6 +58928,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEnrollmentsInput = {
@@ -57263,6 +59024,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEnrollmentsInput = {
@@ -57305,6 +59067,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CourseUpsertWithoutEnrollmentsInput = {
@@ -57811,6 +59574,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSubmissionInput = {
@@ -57853,6 +59617,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSubmissionInput = {
@@ -57946,6 +59711,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubmissionInput = {
@@ -57988,6 +59754,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type QuizUpsertWithoutSubmissionsInput = {
@@ -58071,6 +59838,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAchievementsInput = {
@@ -58113,6 +59881,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAchievementsInput = {
@@ -58171,6 +59940,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAchievementsInput = {
@@ -58213,6 +59983,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutNotificationsInput = {
@@ -58255,6 +60026,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -58297,6 +60069,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -58355,6 +60128,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -58397,6 +60171,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutNotificationSettingsInput = {
@@ -58439,6 +60214,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationSettingsInput = {
@@ -58481,6 +60257,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationSettingsInput = {
@@ -58539,6 +60316,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationSettingsInput = {
@@ -58581,6 +60359,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutMessagesInput = {
@@ -58623,6 +60402,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMessagesInput = {
@@ -58665,6 +60445,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMessagesInput = {
@@ -58744,6 +60525,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessagesInput = {
@@ -58786,6 +60568,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ChannelUpsertWithWhereUniqueWithoutMessagesInput = {
@@ -58844,6 +60627,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -58886,6 +60670,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -59056,6 +60841,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -59098,6 +60884,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CommentUpsertWithWhereUniqueWithoutPostInput = {
@@ -59289,6 +61076,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGroupsInput = {
@@ -59331,6 +61119,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGroupsInput = {
@@ -59534,6 +61323,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAdminInput = {
@@ -59576,6 +61366,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAdminInput = {
@@ -59666,6 +61457,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdminInput = {
@@ -59708,6 +61500,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GroupUpsertWithWhereUniqueWithoutAdminInput = {
@@ -59766,6 +61559,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChannelsInput = {
@@ -59808,6 +61602,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChannelsInput = {
@@ -59948,6 +61743,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOwnerInput = {
@@ -59990,6 +61786,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOwnerInput = {
@@ -60074,6 +61871,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOwnerInput = {
@@ -60116,6 +61914,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ChannelUpsertWithWhereUniqueWithoutOwnerInput = {
@@ -60174,6 +61973,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBookmarksInput = {
@@ -60216,6 +62016,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBookmarksInput = {
@@ -60274,6 +62075,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBookmarksInput = {
@@ -60316,6 +62118,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AcademyCreateWithoutEventsInput = {
@@ -60327,6 +62130,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutAcademyInput
+    ceos?: UserAcademyCEOCreateNestedManyWithoutAcademyInput
     courses?: CourseCreateNestedManyWithoutAcademyInput
     instructors?: InstructorCreateNestedManyWithoutAcademyInput
   }
@@ -60340,6 +62144,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutAcademyInput
+    ceos?: UserAcademyCEOUncheckedCreateNestedManyWithoutAcademyInput
     courses?: CourseUncheckedCreateNestedManyWithoutAcademyInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutAcademyInput
   }
@@ -60369,6 +62174,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutAcademyNestedInput
+    ceos?: UserAcademyCEOUpdateManyWithoutAcademyNestedInput
     courses?: CourseUpdateManyWithoutAcademyNestedInput
     instructors?: InstructorUpdateManyWithoutAcademyNestedInput
   }
@@ -60382,6 +62188,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutAcademyNestedInput
+    ceos?: UserAcademyCEOUncheckedUpdateManyWithoutAcademyNestedInput
     courses?: CourseUncheckedUpdateManyWithoutAcademyNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutAcademyNestedInput
   }
@@ -60426,6 +62233,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAttendanceInput = {
@@ -60468,6 +62276,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAttendanceInput = {
@@ -60557,6 +62366,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAttendanceInput = {
@@ -60599,6 +62409,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type LessonUpsertWithoutAttendanceInput = {
@@ -60678,6 +62489,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentInput = {
@@ -60720,6 +62532,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentInput = {
@@ -60778,6 +62591,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentInput = {
@@ -60820,6 +62634,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutReportInput = {
@@ -60862,6 +62677,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReportInput = {
@@ -60904,6 +62720,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReportInput = {
@@ -60962,6 +62779,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReportInput = {
@@ -61004,6 +62822,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutBadgeInput = {
@@ -61046,6 +62865,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBadgeInput = {
@@ -61088,6 +62908,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBadgeInput = {
@@ -61146,6 +62967,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBadgeInput = {
@@ -61188,6 +63010,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutCertificateInput = {
@@ -61230,6 +63053,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCertificateInput = {
@@ -61272,6 +63096,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCertificateInput = {
@@ -61330,6 +63155,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCertificateInput = {
@@ -61372,6 +63198,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GroupCreateWithoutCommunityInput = {
@@ -61483,6 +63310,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommunityInput = {
@@ -61525,6 +63353,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommunityInput = {
@@ -61892,6 +63721,7 @@ export namespace Prisma {
     Path?: PathCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLiveRoomInput = {
@@ -61934,6 +63764,7 @@ export namespace Prisma {
     Path?: PathUncheckedCreateNestedManyWithoutPeersInput
     LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
     TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLiveRoomInput = {
@@ -62235,6 +64066,13 @@ export namespace Prisma {
     sms?: boolean
     authenticator?: boolean
     secret?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserAcademyCEOCreateManyUserInput = {
+    id?: string
+    academyId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -62960,6 +64798,27 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserAcademyCEOUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academy?: AcademyUpdateOneRequiredWithoutCeosNestedInput
+  }
+
+  export type UserAcademyCEOUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    academyId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAcademyCEOUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    academyId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateManyAcademyInput = {
     id?: string
     email: string
@@ -62975,6 +64834,13 @@ export namespace Prisma {
     isOnline?: boolean
     isVerified?: boolean
     age?: number | null
+  }
+
+  export type UserAcademyCEOCreateManyAcademyInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CourseCreateManyAcademyInput = {
@@ -63042,6 +64908,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAcademyInput = {
@@ -63084,6 +64951,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutAcademyInput = {
@@ -63101,6 +64969,27 @@ export namespace Prisma {
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     age?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type UserAcademyCEOUpdateWithoutAcademyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUserAcademyCEONestedInput
+  }
+
+  export type UserAcademyCEOUncheckedUpdateWithoutAcademyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAcademyCEOUncheckedUpdateManyWithoutAcademyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CourseUpdateWithoutAcademyInput = {
@@ -63602,6 +65491,7 @@ export namespace Prisma {
     NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPathInput = {
@@ -63644,6 +65534,7 @@ export namespace Prisma {
     NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutPathInput = {
@@ -63799,6 +65690,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLessonInput = {
@@ -63841,6 +65733,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutLessonInput = {
@@ -64242,6 +66135,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGroupsInput = {
@@ -64284,6 +66178,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutGroupsInput = {
@@ -64462,6 +66357,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChannelsInput = {
@@ -64504,6 +66400,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutChannelsInput = {
@@ -64716,6 +66613,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommunityInput = {
@@ -64758,6 +66656,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutCommunityInput = {
@@ -64872,6 +66771,7 @@ export namespace Prisma {
     Path?: PathUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLiveRoomInput = {
@@ -64914,6 +66814,7 @@ export namespace Prisma {
     Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
     LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
     TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutLiveRoomInput = {

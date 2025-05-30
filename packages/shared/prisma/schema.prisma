@@ -71,6 +71,8 @@ model User {
     LoginHistory LoginHistory[]
 
     TwoFactor TwoFactor[]
+
+    UserAcademyCEO UserAcademyCEO[]
 }
 
 model LoginHistory {
@@ -123,19 +125,30 @@ model Profile {
     preferences Json?
 }
 
+model UserAcademyCEO {
+    id        String   @id @default(cuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+    academyId String
+    academy   Academy  @relation(fields: [academyId], references: [id])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
 // Academy Management
 model Academy {
-    id          String       @id @default(cuid())
+    id          String           @id @default(cuid())
     name        String
     description String?
     logo        String?
     settings    Json?
     users       User[]
+    ceos        UserAcademyCEO[]
     courses     Course[]
     instructors Instructor[]
     events      Event[]
-    createdAt   DateTime     @default(now())
-    updatedAt   DateTime     @updatedAt
+    createdAt   DateTime         @default(now())
+    updatedAt   DateTime         @updatedAt
 }
 
 model Instructor {
@@ -278,7 +291,7 @@ model Question {
     text       String
     type       String
     options    Option[]
-    isMultiple Boolean @default(false)
+    isMultiple Boolean  @default(false)
     points     Int
     isAnswered Boolean  @default(false)
     quizId     String

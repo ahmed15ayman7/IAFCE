@@ -4,9 +4,10 @@ import { CreateMessageDto } from '../../dtos/Message.create.dto';
 import { UpdateMessageDto } from '../../dtos/Message.update.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { Message } from '@shared/prisma';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @ApiTags('الرسائل')
 @Controller('messages')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class MessagesController {
     constructor(private readonly messagesService: MessagesService) { }

@@ -1,9 +1,16 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { UserEntity } from "./User.entity";
+import { UserAcademyCEOEntity } from "./UserAcademyCEO.entity";
 import { CourseEntity } from "./Course.entity";
 import { InstructorEntity } from "./Instructor.entity";
 import { EventEntity } from "./Event.entity";
-import { User, Course, Instructor, Event } from "@shared/prisma";
+import {
+  User,
+  UserAcademyCEO,
+  Course,
+  Instructor,
+  Event,
+} from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -38,6 +45,11 @@ export class AcademyDto {
   // Field: users, Type: User[]
   @Column()
   users: User[];
+
+  @ApiProperty({ type: UserAcademyCEOEntity })
+  // Field: ceos, Type: UserAcademyCEO[]
+  @Column()
+  ceos: UserAcademyCEO[];
 
   @ApiProperty({ type: CourseEntity })
   // Field: courses, Type: Course[]

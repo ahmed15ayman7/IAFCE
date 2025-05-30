@@ -8,9 +8,10 @@ import { CreateDiscussionDto } from 'dtos/Discussion.create.dto';
 import { CreateLiveRoomDto } from 'dtos/LiveRoom.create.dto';
 import { UpdateDiscussionDto } from 'dtos/Discussion.update.dto';
 import { UpdateLiveRoomDto } from 'dtos/LiveRoom.update.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @ApiTags('المجتمعات')
 @Controller('communities')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class CommunitiesController {
     constructor(private readonly communitiesService: CommunitiesService) { }

@@ -3,10 +3,11 @@ import { AcademiesService } from './academies.service';
 import { CreateAcademyDto } from '../../dtos/Academy.create.dto';
 import { UpdateAcademyDto } from '../../dtos/Academy.update.dto';
 import { Academy } from '@shared/prisma';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
 @ApiTags('الاكاديميات')
 @Controller('academies')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class AcademiesController {
     constructor(private readonly academiesService: AcademiesService) { }
