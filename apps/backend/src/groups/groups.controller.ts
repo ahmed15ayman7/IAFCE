@@ -3,12 +3,12 @@ import { GroupsService } from './groups.service';
 import { CreateGroupDto } from '../../dtos/Group.create.dto';
 import { UpdateGroupDto } from '../../dtos/Group.update.dto';
 import { GroupDto } from '../../dtos/Group.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { Group, Post as PostEntity } from '@shared/prisma';
 import { ApiTags } from '@nestjs/swagger';
 @ApiTags('المجموعات')
 @Controller('groups')
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard)
 export class GroupsController {
     constructor(private readonly groupsService: GroupsService) { }
 

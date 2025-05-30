@@ -2,12 +2,12 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards } from '@nes
 import { AchievementsService } from './achievements.service';
 import { CreateAchievementDto } from '../../dtos/Achievement.create.dto';
 import { UpdateAchievementDto } from '../../dtos/Achievement.update.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Achievement } from '@shared/prisma';
 import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '../auth/auth.guard';
 @ApiTags('الانجازات')
 @Controller('achievements')
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard)
 export class AchievementsController {
     constructor(private readonly achievementsService: AchievementsService) { }
 

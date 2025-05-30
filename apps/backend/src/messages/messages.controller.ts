@@ -2,12 +2,12 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards } from '@nes
 import { MessagesService } from './messages.service';
 import { CreateMessageDto } from '../../dtos/Message.create.dto';
 import { UpdateMessageDto } from '../../dtos/Message.update.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { Message } from '@shared/prisma';
 import { ApiTags } from '@nestjs/swagger';
 @ApiTags('الرسائل')
 @Controller('messages')
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard)
 export class MessagesController {
     constructor(private readonly messagesService: MessagesService) { }
 

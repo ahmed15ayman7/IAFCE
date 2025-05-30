@@ -1,13 +1,15 @@
-import { Controller, Post, Body, Get, Param, Put, Delete } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Put, Delete, UseGuards } from '@nestjs/common';
 import { QuestionsService } from './questions.service';
 import { CreateQuestionDto } from 'dtos/Question.create.dto';
 import { UpdateQuestionDto } from 'dtos/Question.update.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateOptionDto } from 'dtos/Option.create.dto';
 import { UpdateOptionDto } from 'dtos/Option.update.dto';
+import { AuthGuard } from '../auth/auth.guard';
 
 @ApiTags('الاسئلة')
 @Controller('questions')
+@UseGuards(AuthGuard)
 export class QuestionsController {
     constructor(private readonly questionsService: QuestionsService) { }
 

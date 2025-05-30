@@ -3,13 +3,13 @@ import { PostsService } from './posts.service';
 import { CreatePostDto } from '../../dtos/Post.create.dto';
 import { UpdatePostDto } from '../../dtos/Post.update.dto';
 import { Comment, Post as PostModel } from '@shared/prisma';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { CreateCommentDto } from 'dtos/Comment.create.dto';
 import { UpdateCommentDto } from 'dtos/Comment.update.dto';
 import { ApiTags } from '@nestjs/swagger';
 @ApiTags('المنشورات')
 @Controller('posts')
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard)
 export class PostsController {
     constructor(private readonly postsService: PostsService) { }
 

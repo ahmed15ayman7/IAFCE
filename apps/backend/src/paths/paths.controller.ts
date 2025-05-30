@@ -1,13 +1,13 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, Query } from '@nestjs/common';
 import { PathsService } from './paths.service';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { Path } from '@shared/prisma';
 import { ApiTags } from '@nestjs/swagger';
 import { CreatePathDto } from 'dtos/Path.create.dto';
 import { UpdatePathDto } from 'dtos/Path.update.dto';
 @ApiTags('المسارات')
 @Controller('paths')
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard)
 export class PathsController {
     constructor(private readonly pathsService: PathsService) { }
 

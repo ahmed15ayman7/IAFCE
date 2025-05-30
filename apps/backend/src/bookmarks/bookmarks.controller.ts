@@ -2,12 +2,12 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards } from '@nes
 import { BookmarksService } from './bookmarks.service';
 import { CreateBookmarkDto } from '../../dtos/Bookmark.create.dto';
 import { UpdateBookmarkDto } from '../../dtos/Bookmark.update.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Bookmark } from '@shared/prisma';
 import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '../auth/auth.guard';
 @ApiTags('المفضلة')
 @Controller('bookmarks')
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard)
 export class BookmarksController {
     constructor(private readonly bookmarksService: BookmarksService) { }
 
