@@ -179,7 +179,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     />
                 </Link>
 
-                <Box className="hidden md:flex flex-1 justify-center gap-8 rtl:space-x-reverse">
+                <Box className="hidden md:flex flex-1 justify-center gap-8 max-lg:gap-4 rtl:space-x-reverse">
                     {links.map((link) => (
                         <Link href={link.href} className={`  hover:underline border-2 rounded-lg  px-4 py-2 ${pathname === link.href || (pathname.startsWith(link.href) && link.href !== '/') ? 'bg-secondary-main/80 text-white' : 'border-transparent text-secondary-main hover:text-secondary-light '}`}>
                             {link.label}
@@ -273,8 +273,8 @@ const Navbar: React.FC<NavbarProps> = ({
                     open={Boolean(notificationsAnchor)}
                     onClose={handleCloseNotifications}
                 >
-                    {notifications.map((notification) => (
-                        <MenuItem key={notification.id} onClick={handleCloseNotifications}>
+                    {notifications.map((notification, index) => (
+                        <MenuItem key={index} onClick={handleCloseNotifications}>
                             <ListItemText
                                 primary={notification.title}
                                 secondary={notification.message}
@@ -294,8 +294,8 @@ const Navbar: React.FC<NavbarProps> = ({
                     open={Boolean(messagesAnchor)}
                     onClose={handleCloseMessages}
                 >
-                    {messages.map((message) => (
-                        <MenuItem key={message.id} onClick={handleCloseMessages}>
+                    {messages.map((message, index) => (
+                        <MenuItem key={index} onClick={handleCloseMessages}>
                             <ListItemText
                                 primary={message.sender}
                                 secondary={message.message}

@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Quiz } from "@shared/prisma";
+import { Option, Quiz } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -15,15 +15,10 @@ export class UpdateQuestionDto {
   @Column()
   type: string;
 
-  @ApiProperty({ additionalProperties: true, type: "object", nullable: true })
-  // Field: options, Type: object
+  @ApiProperty({ type: "boolean" })
+  // Field: isMultiple, Type: boolean
   @Column()
-  options?: object;
-
-  @ApiProperty({ additionalProperties: true, type: "object" })
-  // Field: answer, Type: object
-  @Column()
-  answer: object;
+  isMultiple: boolean;
 
   @ApiProperty({ type: "number" })
   // Field: points, Type: number

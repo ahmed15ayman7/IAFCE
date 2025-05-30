@@ -64,6 +64,7 @@ export class CoursesService {
                     },
                 },
                 quizzes: true,
+                lessons: true,
             },
         });
 
@@ -91,6 +92,7 @@ export class CoursesService {
                     },
                 },
                 quizzes: true,
+                lessons: true,
             },
         });
     }
@@ -221,6 +223,7 @@ export class CoursesService {
                     },
                 },
                 lessons: true,
+                quizzes: true,
             },
         });
     }

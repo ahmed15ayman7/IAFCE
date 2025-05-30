@@ -3,12 +3,12 @@ import { EnrollmentsService } from './enrollments.service';
 import { CreateEnrollmentDto } from '../../dtos/Enrollment.create.dto';
 import { UpdateEnrollmentDto } from '../../dtos/Enrollment.update.dto';
 import { EnrollmentDto } from '../../dtos/Enrollment.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { Enrollment } from '@shared/prisma';
 import { ApiTags } from '@nestjs/swagger';
 @ApiTags('التسجيلات')
 @Controller('enrollments')
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard)
 export class EnrollmentsController {
     constructor(private readonly enrollmentsService: EnrollmentsService) { }
 
@@ -39,4 +39,10 @@ export class EnrollmentsController {
     async remove(@Param('id') id: string): Promise<Enrollment> {
         return this.enrollmentsService.remove(id);
     }
+
+    @Get('user/:userId')
+    async findByUserId(@Param('userId') userId: string): Promise<Enrollment[]> {
+        return this.enrollmentsService.findByUserId(userId);
+    }
+
 } 

@@ -2,12 +2,12 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards } from '@nes
 import { AttendanceService } from './attendance.service';
 import { CreateAttendanceDto } from '../../dtos/Attendance.create.dto';
 import { UpdateAttendanceDto } from '../../dtos/Attendance.update.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Attendance } from '@shared/prisma';
 import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '../auth/auth.guard';
 @ApiTags('الحضور والانصراف')
 @Controller('attendance')
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard)
 export class AttendanceController {
     constructor(private readonly attendanceService: AttendanceService) { }
 

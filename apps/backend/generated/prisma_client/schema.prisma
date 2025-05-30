@@ -154,6 +154,7 @@ model Course {
   description String
   academyId   String
   image       String?
+  level       String
   academy     Academy      @relation(fields: [academyId], references: [id])
   lessons     Lesson[]
   enrollments Enrollment[]
@@ -200,16 +201,23 @@ enum MilestoneStatus {
   NOT_STARTED
 }
 
+enum LessonStatus {
+  IN_PROGRESS
+  COMPLETED
+  NOT_STARTED
+}
+
 model Lesson {
   id          String       @id @default(cuid())
   title       String
   content     String
-  videoUrl    String?
+  // videoUrl    String?
   courseId    String
   course      Course       @relation(fields: [courseId], references: [id])
   files       File[]
   quizzes     Quiz[]
   completedBy User[]
+  status      LessonStatus @default(NOT_STARTED)
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   Attendance  Attendance[]
@@ -219,10 +227,18 @@ model File {
   id        String   @id @default(cuid())
   name      String
   url       String
-  type      String
+  type      FileType
   lessonId  String
   lesson    Lesson   @relation(fields: [lessonId], references: [id])
   createdAt DateTime @default(now())
+}
+
+enum FileType {
+  VIDEO
+  PDF
+  DOCUMENT
+  IMAGE
+  AUDIO
 }
 
 // Enrollment and Progress
@@ -261,13 +277,23 @@ model Question {
   id         String   @id @default(cuid())
   text       String
   type       String
-  options    Json?
-  answer     Json
+  options    Option[]
+  isMultiple Boolean  @default(false)
   points     Int
   isAnswered Boolean  @default(false)
   quizId     String
   quiz       Quiz     @relation(fields: [quizId], references: [id])
   createdAt  DateTime @default(now())
+}
+
+model Option {
+  id         String   @id @default(cuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id])
+  text       String
+  isCorrect  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model Submission {
@@ -276,7 +302,7 @@ model Submission {
   user      User     @relation(fields: [userId], references: [id])
   quizId    String
   quiz      Quiz     @relation(fields: [quizId], references: [id])
-  answers   Json
+  answers   Json[]
   score     Float?
   feedback  String?
   passed    Boolean? @default(false)

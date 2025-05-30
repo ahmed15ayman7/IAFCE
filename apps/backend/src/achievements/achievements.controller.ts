@@ -38,4 +38,9 @@ export class AchievementsController {
     async remove(@Param('id') id: string): Promise<Achievement> {
         return this.achievementsService.remove(id);
     }
+
+    @Get('user/:userId')
+    async findByUserId(@Param('userId') userId: string): Promise<Achievement[]> {
+        return this.achievementsService.findByUserId(userId);
+    }
 } 

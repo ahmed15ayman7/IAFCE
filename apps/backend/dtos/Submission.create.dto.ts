@@ -16,9 +16,9 @@ export class CreateSubmissionDto {
   quizId: string;
 
   @ApiProperty({ additionalProperties: true, type: "object" })
-  // Field: answers, Type: object
+  // Field: answers, Type: object[]
   @Column()
-  answers: object;
+  answers: object[];
 
   @ApiProperty({ type: "number" })
   // Field: score, Type: number

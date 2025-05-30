@@ -2,10 +2,11 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, Req } from 
 import { QuizzesService } from './quizzes.service';
 import { CreateQuizDto } from 'dtos/Quiz.create.dto';
 import { UpdateQuizDto } from 'dtos/Quiz.update.dto';
-import { CreateSubmissionDto } from 'dtos/Submission.create.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Request } from 'express';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateQuestionDto } from 'dtos/Question.create.dto';
+import { CreateOptionDto } from 'dtos/Option.create.dto';
 interface UserPayload {
     id: string;
     email: string;
@@ -23,7 +24,7 @@ export class QuizzesController {
     constructor(private readonly quizzesService: QuizzesService) { }
 
     @Post()
-    async create(@Body() createQuizInput: CreateQuizDto) {
+    async create(@Body() createQuizInput: CreateQuizDto & { questions: (CreateQuestionDto & { options: CreateOptionDto[] })[] }) {
         return this.quizzesService.create(createQuizInput);
     }
 
@@ -53,16 +54,16 @@ export class QuizzesController {
 
 
 
-    @Post(':id/submit')
-    async submitQuiz(
-        @Param('id') quizId: string,
-        @Body() submitQuizInput: CreateSubmissionDto,
-        @Req() req: RequestWithUser,
-    ) {
-        return this.quizzesService.submitQuizAttempt(
-            req.user.id,
-            quizId,
-            submitQuizInput.answers as { questionId: string; answer: string }[],
-        );
-    }
+    // @Post(':id/submit')
+    // async submitQuiz(
+    //     @Param('id') quizId: string,
+    //     @Body() submitQuizInput: CreateSubmissionDto,
+    //     @Req() req: RequestWithUser,
+    // ) {
+    //     return this.quizzesService.submitQuizAttempt(
+    //         req.user.id,
+    //         quizId,
+    //         submitQuizInput.answers as { questionId: string; answer: string }[],
+    //     );
+    // }
 } 

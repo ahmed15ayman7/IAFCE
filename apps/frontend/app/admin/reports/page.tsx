@@ -1,37 +1,36 @@
 import React, { useState } from 'react';
-import { Card } from '@/components/common/Card';
-import { DataGrid } from '@/components/common/DataGrid';
-import { useTranslation } from 'next-i18next';
+import Card from '@/components/common/Card';
+import DataGrid from '@/components/common/DataGrid';
 
 export default function AdminReports() {
-    const { t } = useTranslation();
+
     const [showNewReportForm, setShowNewReportForm] = useState(false);
 
     const reportStats = [
         {
             id: 1,
-            title: t('إجمالي التقارير'),
+            title: 'إجمالي التقارير',
             value: '250',
             change: '+15%',
             trend: 'up',
         },
         {
             id: 2,
-            title: t('تقارير هذا الشهر'),
+            title: 'تقارير هذا الشهر',
             value: '45',
             change: '+8%',
             trend: 'up',
         },
         {
             id: 3,
-            title: t('تقارير الطلاب'),
+            title: 'تقارير الطلاب',
             value: '120',
             change: '+12%',
             trend: 'up',
         },
         {
             id: 4,
-            title: t('تقارير المعلمين'),
+            title: 'تقارير المعلمين',
             value: '85',
             change: '+5%',
             trend: 'up',
@@ -41,7 +40,7 @@ export default function AdminReports() {
     const reports = [
         {
             id: 1,
-            title: t('تقرير أداء الطلاب'),
+            title: 'تقرير أداء الطلاب',
             type: 'أداء',
             target: 'طلاب',
             date: '2024-04-25',
@@ -50,7 +49,7 @@ export default function AdminReports() {
         },
         {
             id: 2,
-            title: t('تقرير حضور المعلمين'),
+            title: 'تقرير حضور المعلمين',
             type: 'حضور',
             target: 'معلمون',
             date: '2024-04-24',
@@ -59,7 +58,7 @@ export default function AdminReports() {
         },
         {
             id: 3,
-            title: t('تقرير المالية'),
+            title: 'تقرير المالية',
             type: 'مالية',
             target: 'إدارة',
             date: '2024-04-23',
@@ -69,23 +68,23 @@ export default function AdminReports() {
     ];
 
     const columns = [
-        { field: 'title', headerName: t('العنوان'), width: 200 },
-        { field: 'type', headerName: t('النوع'), width: 100 },
-        { field: 'target', headerName: t('المستهدف'), width: 120 },
-        { field: 'date', headerName: t('التاريخ'), width: 150 },
-        { field: 'status', headerName: t('الحالة'), width: 100 },
-        { field: 'views', headerName: t('عدد المشاهدات'), width: 120 },
+        { field: 'title', headerName: 'العنوان', width: 200 },
+        { field: 'type', headerName: 'النوع', width: 100 },
+        { field: 'target', headerName: 'المستهدف', width: 120 },
+        { field: 'date', headerName: 'التاريخ', width: 150 },
+        { field: 'status', headerName: 'الحالة', width: 100 },
+        { field: 'views', headerName: 'عدد المشاهدات', width: 120 },
         {
             field: 'actions',
-            headerName: t('الإجراءات'),
+            headerName: 'الإجراءات',
             width: 200,
-            renderCell: (params) => (
+            renderCell: (params: any) => (
                 <div className="flex gap-2">
                     <button className="px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                        {t('عرض')}
+                        عرض
                     </button>
                     <button className="px-2 py-1 bg-green-500 text-white rounded-md hover:bg-green-600">
-                        {t('تصدير')}
+                        تصدير
                     </button>
                 </div>
             ),
@@ -95,26 +94,26 @@ export default function AdminReports() {
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">{t('التقارير')}</h1>
+                <h1 className="text-3xl font-bold">التقارير</h1>
                 <div className="flex gap-4">
                     <button
                         className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600"
                         onClick={() => setShowNewReportForm(true)}
                     >
-                        {t('تقرير جديد')}
+                        تقرير جديد
                     </button>
                     <button className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
-                        {t('تصدير الكل')}
+                        تصدير الكل
                     </button>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 {reportStats.map(stat => (
-                    <Card key={stat.id}>
+                    <Card key={stat.id} title={stat.title}>
                         <div className="flex justify-between items-start">
                             <div>
-                                <h3 className="text-lg font-medium text-gray-600">{stat.title}</h3>
+
                                 <p className="text-3xl font-bold mt-2">{stat.value}</p>
                             </div>
                             <div className={`text-${stat.trend === 'up' ? 'green' : 'red'}-500`}>
@@ -126,73 +125,69 @@ export default function AdminReports() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                <Card>
-                    <h2 className="text-2xl font-semibold mb-4">{t('توزيع التقارير حسب النوع')}</h2>
+                <Card title={'توزيع التقارير حسب النوع'}>
                     <div className="space-y-2">
                         <div className="flex justify-between">
-                            <span>{t('أداء')}</span>
+                            <span>أداء</span>
                             <span className="font-medium">40%</span>
                         </div>
                         <div className="flex justify-between">
-                            <span>{t('حضور')}</span>
+                            <span>حضور</span>
                             <span className="font-medium">30%</span>
                         </div>
                         <div className="flex justify-between">
-                            <span>{t('مالية')}</span>
+                            <span>مالية</span>
                             <span className="font-medium">30%</span>
                         </div>
                     </div>
                 </Card>
-                <Card>
-                    <h2 className="text-2xl font-semibold mb-4">{t('توزيع التقارير حسب المستهدف')}</h2>
+                <Card title={'توزيع التقارير حسب المستهدف'}>
                     <div className="space-y-2">
                         <div className="flex justify-between">
-                            <span>{t('طلاب')}</span>
+                            <span>طلاب</span>
                             <span className="font-medium">50%</span>
                         </div>
                         <div className="flex justify-between">
-                            <span>{t('معلمون')}</span>
+                            <span>معلمون</span>
                             <span className="font-medium">30%</span>
                         </div>
                         <div className="flex justify-between">
-                            <span>{t('إدارة')}</span>
+                            <span>إدارة</span>
                             <span className="font-medium">20%</span>
                         </div>
                     </div>
                 </Card>
-                <Card>
-                    <h2 className="text-2xl font-semibold mb-4">{t('إحصائيات المشاهدة')}</h2>
+                <Card title={'إحصائيات المشاهدة'}>
                     <div className="space-y-2">
                         <div className="flex justify-between">
-                            <span>{t('متوسط المشاهدات')}</span>
+                            <span>متوسط المشاهدات</span>
                             <span className="font-medium">540</span>
                         </div>
                         <div className="flex justify-between">
-                            <span>{t('أعلى تقرير مشاهدة')}</span>
+                            <span>أعلى تقرير مشاهدة</span>
                             <span className="font-medium">تقرير أداء الطلاب</span>
                         </div>
                         <div className="flex justify-between">
-                            <span>{t('نسبة التصدير')}</span>
+                            <span>نسبة التصدير</span>
                             <span className="font-medium">75%</span>
                         </div>
                     </div>
                 </Card>
             </div>
 
-            <Card>
+            <Card title={'قائمة التقارير'}>
                 <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-2xl font-semibold">{t('قائمة التقارير')}</h2>
                     <div className="flex gap-2">
                         <input
                             type="text"
-                            placeholder={t('بحث...')}
+                            placeholder={'بحث...'}
                             className="px-4 py-2 border rounded-md"
                         />
                         <select className="px-4 py-2 border rounded-md">
-                            <option value="">{t('جميع الأنواع')}</option>
-                            <option value="performance">{t('أداء')}</option>
-                            <option value="attendance">{t('حضور')}</option>
-                            <option value="finance">{t('مالية')}</option>
+                            <option value="">جميع الأنواع</option>
+                            <option value="performance">أداء</option>
+                            <option value="attendance">حضور</option>
+                            <option value="finance">مالية</option>
                         </select>
                     </div>
                 </div>
@@ -206,41 +201,40 @@ export default function AdminReports() {
 
             {showNewReportForm && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <Card className="w-full max-w-2xl">
-                        <h2 className="text-2xl font-semibold mb-4">{t('تقرير جديد')}</h2>
+                    <Card className="w-full max-w-2xl" title={'تقرير جديد'}>
                         <form className="space-y-4">
                             <div>
-                                <label className="block mb-2">{t('عنوان التقرير')}</label>
+                                <label className="block mb-2">عنوان التقرير</label>
                                 <input
                                     type="text"
                                     className="w-full px-4 py-2 border rounded-md"
-                                    placeholder={t('أدخل عنوان التقرير')}
+                                    placeholder={'أدخل عنوان التقرير'}
                                 />
                             </div>
                             <div>
-                                <label className="block mb-2">{t('نوع التقرير')}</label>
+                                <label className="block mb-2">نوع التقرير</label>
                                 <select className="w-full px-4 py-2 border rounded-md">
-                                    <option value="performance">{t('أداء')}</option>
-                                    <option value="attendance">{t('حضور')}</option>
-                                    <option value="finance">{t('مالية')}</option>
+                                    <option value="performance">أداء</option>
+                                    <option value="attendance">حضور</option>
+                                    <option value="finance">مالية</option>
                                 </select>
                             </div>
                             <div>
-                                <label className="block mb-2">{t('المستهدف')}</label>
+                                <label className="block mb-2">المستهدف</label>
                                 <select className="w-full px-4 py-2 border rounded-md">
-                                    <option value="students">{t('طلاب')}</option>
-                                    <option value="teachers">{t('معلمون')}</option>
-                                    <option value="admin">{t('إدارة')}</option>
+                                    <option value="students">طلاب</option>
+                                    <option value="teachers">معلمون</option>
+                                    <option value="admin">إدارة</option>
                                 </select>
                             </div>
                             <div>
-                                <label className="block mb-2">{t('الفترة الزمنية')}</label>
+                                <label className="block mb-2">الفترة الزمنية</label>
                                 <div className="flex gap-2">
                                     <input
                                         type="date"
                                         className="w-full px-4 py-2 border rounded-md"
                                     />
-                                    <span className="flex items-center">{t('إلى')}</span>
+                                    <span className="flex items-center">إلى</span>
                                     <input
                                         type="date"
                                         className="w-full px-4 py-2 border rounded-md"
@@ -253,13 +247,13 @@ export default function AdminReports() {
                                     className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
                                     onClick={() => setShowNewReportForm(false)}
                                 >
-                                    {t('إلغاء')}
+                                    إلغاء
                                 </button>
                                 <button
                                     type="submit"
                                     className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600"
                                 >
-                                    {t('إنشاء')}
+                                    إنشاء
                                 </button>
                             </div>
                         </form>

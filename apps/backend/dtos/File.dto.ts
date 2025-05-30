@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { LessonEntity } from "./Lesson.entity";
-import { Lesson } from "@shared/prisma";
+import { FileType, Lesson } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -21,10 +21,10 @@ export class FileDto {
   @Column()
   url: string;
 
-  @ApiProperty({ type: "string" })
-  // Field: type, Type: string
+  @ApiProperty({ enum: FileType })
+  // Field: type, Type: FileType
   @Column()
-  type: string;
+  type: FileType;
 
   @ApiProperty({ type: "string" })
   // Field: lessonId, Type: string

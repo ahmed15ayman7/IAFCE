@@ -33,6 +33,11 @@ export class CreateCourseDto {
   @Column()
   image?: string;
 
+  @ApiProperty({ type: "string" })
+  // Field: level, Type: string
+  @Column()
+  level: string;
+
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date
   @Column()

@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
-import { Card } from '@/components/common/Card';
-import { useTranslation } from 'next-i18next';
+import Card from '@/components/common/Card';
 
 export default function AdminSettings() {
-    const { t } = useTranslation();
     const [activeTab, setActiveTab] = useState('general');
 
     const tabs = [
-        { id: 'general', label: t('عام') },
-        { id: 'security', label: t('الأمان') },
-        { id: 'notifications', label: t('الإشعارات') },
-        { id: 'appearance', label: t('المظهر') },
-        { id: 'integrations', label: t('التكاملات') },
+        { id: 'general', label: 'عام' },
+        { id: 'security', label: 'الأمان' },
+        { id: 'notifications', label: 'الإشعارات' },
+        { id: 'appearance', label: 'المظهر' },
+        { id: 'integrations', label: 'التكاملات' },
     ];
 
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">{t('الإعدادات')}</h1>
+                <h1 className="text-3xl font-bold">الإعدادات</h1>
                 <button className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
-                    {t('حفظ التغييرات')}
+                    حفظ التغييرات
                 </button>
             </div>
 
@@ -28,8 +26,8 @@ export default function AdminSettings() {
                     <button
                         key={tab.id}
                         className={`px-4 py-2 rounded-md ${activeTab === tab.id
-                                ? 'bg-primary-500 text-white'
-                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            ? 'bg-primary-500 text-white'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                             }`}
                         onClick={() => setActiveTab(tab.id)}
                     >
@@ -41,11 +39,11 @@ export default function AdminSettings() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {activeTab === 'general' && (
                     <>
-                        <Card>
-                            <h2 className="text-2xl font-semibold mb-4">{t('إعدادات المدرسة')}</h2>
+                        <Card title="إعدادات المدرسة">
+                            <h2 className="text-2xl font-semibold mb-4">إعدادات المدرسة</h2>
                             <div className="space-y-4">
                                 <div>
-                                    <label className="block mb-2">{t('اسم المدرسة')}</label>
+                                    <label className="block mb-2">اسم المدرسة</label>
                                     <input
                                         type="text"
                                         className="w-full px-4 py-2 border rounded-md"
@@ -53,7 +51,7 @@ export default function AdminSettings() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('البريد الإلكتروني')}</label>
+                                    <label className="block mb-2">البريد الإلكتروني</label>
                                     <input
                                         type="email"
                                         className="w-full px-4 py-2 border rounded-md"
@@ -61,7 +59,7 @@ export default function AdminSettings() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('رقم الهاتف')}</label>
+                                    <label className="block mb-2">رقم الهاتف</label>
                                     <input
                                         type="tel"
                                         className="w-full px-4 py-2 border rounded-md"
@@ -69,7 +67,7 @@ export default function AdminSettings() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('العنوان')}</label>
+                                    <label className="block mb-2">العنوان</label>
                                     <textarea
                                         className="w-full px-4 py-2 border rounded-md"
                                         rows={3}
@@ -79,25 +77,24 @@ export default function AdminSettings() {
                             </div>
                         </Card>
 
-                        <Card>
-                            <h2 className="text-2xl font-semibold mb-4">{t('إعدادات النظام')}</h2>
+                        <Card title="إعدادات النظام">
                             <div className="space-y-4">
                                 <div>
-                                    <label className="block mb-2">{t('اللغة الافتراضية')}</label>
+                                    <label className="block mb-2">اللغة الافتراضية</label>
                                     <select className="w-full px-4 py-2 border rounded-md">
                                         <option value="ar">العربية</option>
                                         <option value="en">English</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('التوقيت')}</label>
+                                    <label className="block mb-2">التوقيت</label>
                                     <select className="w-full px-4 py-2 border rounded-md">
                                         <option value="+3">توقيت الرياض (UTC+3)</option>
                                         <option value="+2">توقيت القاهرة (UTC+2)</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('تنسيق التاريخ')}</label>
+                                    <label className="block mb-2">تنسيق التاريخ</label>
                                     <select className="w-full px-4 py-2 border rounded-md">
                                         <option value="dd/mm/yyyy">يوم/شهر/سنة</option>
                                         <option value="mm/dd/yyyy">شهر/يوم/سنة</option>
@@ -105,7 +102,7 @@ export default function AdminSettings() {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('تنسيق العملة')}</label>
+                                    <label className="block mb-2">تنسيق العملة</label>
                                     <select className="w-full px-4 py-2 border rounded-md">
                                         <option value="SAR">ريال سعودي (SAR)</option>
                                         <option value="USD">دولار أمريكي (USD)</option>
@@ -118,11 +115,10 @@ export default function AdminSettings() {
 
                 {activeTab === 'security' && (
                     <>
-                        <Card>
-                            <h2 className="text-2xl font-semibold mb-4">{t('إعدادات الأمان')}</h2>
+                        <Card title="إعدادات الأمان">
                             <div className="space-y-4">
                                 <div>
-                                    <label className="block mb-2">{t('قوة كلمة المرور')}</label>
+                                    <label className="block mb-2">قوة كلمة المرور</label>
                                     <select className="w-full px-4 py-2 border rounded-md">
                                         <option value="low">منخفضة</option>
                                         <option value="medium">متوسطة</option>
@@ -130,7 +126,7 @@ export default function AdminSettings() {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('مدة صلاحية كلمة المرور')}</label>
+                                    <label className="block mb-2">مدة صلاحية كلمة المرور</label>
                                     <select className="w-full px-4 py-2 border rounded-md">
                                         <option value="30">30 يوم</option>
                                         <option value="60">60 يوم</option>
@@ -138,7 +134,7 @@ export default function AdminSettings() {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('عدد محاولات تسجيل الدخول')}</label>
+                                    <label className="block mb-2">عدد محاولات تسجيل الدخول</label>
                                     <input
                                         type="number"
                                         className="w-full px-4 py-2 border rounded-md"
@@ -146,7 +142,7 @@ export default function AdminSettings() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('مدة القفل')}</label>
+                                    <label className="block mb-2">مدة القفل</label>
                                     <select className="w-full px-4 py-2 border rounded-md">
                                         <option value="5">5 دقائق</option>
                                         <option value="15">15 دقيقة</option>
@@ -156,11 +152,10 @@ export default function AdminSettings() {
                             </div>
                         </Card>
 
-                        <Card>
-                            <h2 className="text-2xl font-semibold mb-4">{t('إعدادات النسخ الاحتياطي')}</h2>
+                        <Card title="إعدادات النسخ الاحتياطي">
                             <div className="space-y-4">
                                 <div>
-                                    <label className="block mb-2">{t('تكرر النسخ الاحتياطي')}</label>
+                                    <label className="block mb-2">تكرر النسخ الاحتياطي</label>
                                     <select className="w-full px-4 py-2 border rounded-md">
                                         <option value="daily">يومي</option>
                                         <option value="weekly">أسبوعي</option>
@@ -168,7 +163,7 @@ export default function AdminSettings() {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('وقت النسخ الاحتياطي')}</label>
+                                    <label className="block mb-2">وقت النسخ الاحتياطي</label>
                                     <input
                                         type="time"
                                         className="w-full px-4 py-2 border rounded-md"
@@ -176,7 +171,7 @@ export default function AdminSettings() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('عدد النسخ المحفوظة')}</label>
+                                    <label className="block mb-2">النسخ المحفوظة</label>
                                     <input
                                         type="number"
                                         className="w-full px-4 py-2 border rounded-md"
@@ -184,7 +179,7 @@ export default function AdminSettings() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('موقع النسخ الاحتياطي')}</label>
+                                    <label className="block mb-2">موقع النسخ الاحتياطي</label>
                                     <select className="w-full px-4 py-2 border rounded-md">
                                         <option value="local">محلي</option>
                                         <option value="cloud">سحابي</option>
@@ -197,29 +192,28 @@ export default function AdminSettings() {
 
                 {activeTab === 'notifications' && (
                     <>
-                        <Card>
-                            <h2 className="text-2xl font-semibold mb-4">{t('إعدادات الإشعارات')}</h2>
+                        <Card title="إعدادات الإشعارات">
                             <div className="space-y-4">
                                 <div>
                                     <label className="flex items-center">
                                         <input type="checkbox" className="mr-2" defaultChecked />
-                                        <span>{t('إشعارات البريد الإلكتروني')}</span>
+                                        <span>إشعارات البريد الإلكتروني</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label className="flex items-center">
                                         <input type="checkbox" className="mr-2" defaultChecked />
-                                        <span>{t('إشعارات الهاتف')}</span>
+                                        <span>إشعارات الهاتف</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label className="flex items-center">
                                         <input type="checkbox" className="mr-2" defaultChecked />
-                                        <span>{t('إشعارات النظام')}</span>
+                                        <span>إشعارات النظام</span>
                                     </label>
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('توقيت الإشعارات')}</label>
+                                    <label className="block mb-2">توقيت الإشعارات</label>
                                     <select className="w-full px-4 py-2 border rounded-md">
                                         <option value="immediate">فوري</option>
                                         <option value="daily">يومي</option>
@@ -229,11 +223,10 @@ export default function AdminSettings() {
                             </div>
                         </Card>
 
-                        <Card>
-                            <h2 className="text-2xl font-semibold mb-4">{t('إعدادات البريد الإلكتروني')}</h2>
+                        <Card title="إعدادات البريد الإلكتروني">
                             <div className="space-y-4">
                                 <div>
-                                    <label className="block mb-2">{t('خادم SMTP')}</label>
+                                    <label className="block mb-2">خادم SMTP</label>
                                     <input
                                         type="text"
                                         className="w-full px-4 py-2 border rounded-md"
@@ -241,7 +234,7 @@ export default function AdminSettings() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('البريد الإلكتروني')}</label>
+                                    <label className="block mb-2">البريد الإلكتروني</label>
                                     <input
                                         type="email"
                                         className="w-full px-4 py-2 border rounded-md"
@@ -249,7 +242,7 @@ export default function AdminSettings() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('كلمة المرور')}</label>
+                                    <label className="block mb-2">كلمة المرور</label>
                                     <input
                                         type="password"
                                         className="w-full px-4 py-2 border rounded-md"
@@ -257,7 +250,7 @@ export default function AdminSettings() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('المنفذ')}</label>
+                                    <label className="block mb-2">المنفذ</label>
                                     <input
                                         type="number"
                                         className="w-full px-4 py-2 border rounded-md"
@@ -271,11 +264,10 @@ export default function AdminSettings() {
 
                 {activeTab === 'appearance' && (
                     <>
-                        <Card>
-                            <h2 className="text-2xl font-semibold mb-4">{t('إعدادات المظهر')}</h2>
+                        <Card title="إعدادات المظهر">
                             <div className="space-y-4">
                                 <div>
-                                    <label className="block mb-2">{t('السمة')}</label>
+                                    <label className="block mb-2">السمة</label>
                                     <select className="w-full px-4 py-2 border rounded-md">
                                         <option value="light">فاتح</option>
                                         <option value="dark">داكن</option>
@@ -283,7 +275,7 @@ export default function AdminSettings() {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('اللون الرئيسي')}</label>
+                                    <label className="block mb-2">اللون الرئيسي</label>
                                     <input
                                         type="color"
                                         className="w-full h-10 rounded-md"
@@ -291,7 +283,7 @@ export default function AdminSettings() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('حجم الخط')}</label>
+                                    <label className="block mb-2">حجم الخط</label>
                                     <select className="w-full px-4 py-2 border rounded-md">
                                         <option value="small">صغير</option>
                                         <option value="medium">متوسط</option>
@@ -299,7 +291,7 @@ export default function AdminSettings() {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('نمط الخط')}</label>
+                                    <label className="block mb-2">نمط الخط</label>
                                     <select className="w-full px-4 py-2 border rounded-md">
                                         <option value="normal">عادي</option>
                                         <option value="bold">غامق</option>
@@ -308,29 +300,28 @@ export default function AdminSettings() {
                             </div>
                         </Card>
 
-                        <Card>
-                            <h2 className="text-2xl font-semibold mb-4">{t('إعدادات الواجهة')}</h2>
+                        <Card title="إعدادات الواجهة">
                             <div className="space-y-4">
                                 <div>
                                     <label className="flex items-center">
                                         <input type="checkbox" className="mr-2" defaultChecked />
-                                        <span>{t('إظهار الشريط الجانبي')}</span>
+                                        <span>إظهار الشريط الجانبي</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label className="flex items-center">
                                         <input type="checkbox" className="mr-2" defaultChecked />
-                                        <span>{t('إظهار الشريط العلوي')}</span>
+                                        <span>إظهار الشريط العلوي</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label className="flex items-center">
                                         <input type="checkbox" className="mr-2" defaultChecked />
-                                        <span>{t('إظهار الشريط السفلي')}</span>
+                                        <span>إظهار الشريط السفلي</span>
                                     </label>
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('نمط القائمة')}</label>
+                                    <label className="block mb-2">نمط القائمة</label>
                                     <select className="w-full px-4 py-2 border rounded-md">
                                         <option value="vertical">عمودي</option>
                                         <option value="horizontal">أفقي</option>
@@ -343,41 +334,39 @@ export default function AdminSettings() {
 
                 {activeTab === 'integrations' && (
                     <>
-                        <Card>
-                            <h2 className="text-2xl font-semibold mb-4">{t('إعدادات التكامل')}</h2>
+                        <Card title="إعدادات التكامل">
                             <div className="space-y-4">
                                 <div>
                                     <label className="flex items-center">
                                         <input type="checkbox" className="mr-2" defaultChecked />
-                                        <span>{t('تكامل Google Classroom')}</span>
+                                        <span>تكامل Google Classroom</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label className="flex items-center">
                                         <input type="checkbox" className="mr-2" defaultChecked />
-                                        <span>{t('تكامل Microsoft Teams')}</span>
+                                        <span>تكامل Microsoft Teams</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label className="flex items-center">
                                         <input type="checkbox" className="mr-2" defaultChecked />
-                                        <span>{t('تكامل Zoom')}</span>
+                                        <span>تكامل Zoom</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label className="flex items-center">
                                         <input type="checkbox" className="mr-2" defaultChecked />
-                                        <span>{t('تكامل نظام الدفع')}</span>
+                                        <span>تكامل نظام الدفع</span>
                                     </label>
                                 </div>
                             </div>
                         </Card>
 
-                        <Card>
-                            <h2 className="text-2xl font-semibold mb-4">{t('إعدادات API')}</h2>
+                        <Card title="إعدادات API">
                             <div className="space-y-4">
                                 <div>
-                                    <label className="block mb-2">{t('مفتاح API')}</label>
+                                    <label className="block mb-2">مفتاح API</label>
                                     <input
                                         type="text"
                                         className="w-full px-4 py-2 border rounded-md"
@@ -385,7 +374,7 @@ export default function AdminSettings() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('سر API')}</label>
+                                    <label className="block mb-2">سر API</label>
                                     <input
                                         type="password"
                                         className="w-full px-4 py-2 border rounded-md"
@@ -393,7 +382,7 @@ export default function AdminSettings() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('عنوان API')}</label>
+                                    <label className="block mb-2">عنوان API</label>
                                     <input
                                         type="text"
                                         className="w-full px-4 py-2 border rounded-md"
@@ -401,7 +390,7 @@ export default function AdminSettings() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2">{t('معدل الحد')}</label>
+                                    <label className="block mb-2">معدل الحد</label>
                                     <input
                                         type="number"
                                         className="w-full px-4 py-2 border rounded-md"

@@ -2,12 +2,12 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards } from '@nes
 import { AcademiesService } from './academies.service';
 import { CreateAcademyDto } from '../../dtos/Academy.create.dto';
 import { UpdateAcademyDto } from '../../dtos/Academy.update.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Academy } from '@shared/prisma';
 import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '../auth/auth.guard';
 @ApiTags('الاكاديميات')
 @Controller('academies')
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard)
 export class AcademiesController {
     constructor(private readonly academiesService: AcademiesService) { }
 

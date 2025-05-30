@@ -2,13 +2,15 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateQuizDto } from 'dtos/Quiz.create.dto';
 import { UpdateQuizDto } from 'dtos/Quiz.update.dto';
+import { CreateQuestionDto } from 'dtos/Question.create.dto';
+import { CreateOptionDto } from 'dtos/Option.create.dto';
 
 @Injectable()
 export class QuizzesService {
     constructor(private prisma: PrismaService) { }
 
-    async create(createQuizInput: CreateQuizDto) {
-        return this.prisma.quiz.create({
+    async create(createQuizInput: CreateQuizDto & { questions: (CreateQuestionDto & { options: (CreateOptionDto)[] })[] }) {
+        const createdQuiz = await this.prisma.quiz.create({
             data: {
                 title: createQuizInput.title,
                 description: createQuizInput.description,
@@ -17,9 +19,40 @@ export class QuizzesService {
                 passingScore: createQuizInput.passingScore,
             },
             include: {
-                questions: true,
+                questions: {
+                    include: {
+                        options: true,
+                    }
+                },
             }
         });
+        const createdQuestions = await Promise.all(createQuizInput.questions.map(async (question) => {
+            const createdQuestion = await this.prisma.question.create({
+                data: {
+                    text: question.text,
+                    type: question.type,
+                    points: question.points,
+                    quizId: createdQuiz.id,
+                    options: {
+                        create: question.options.map(option => ({
+                            text: option.text,
+                            questionId: createdQuestion.id,
+                            isCorrect: option.isCorrect,
+                        })),
+                    },
+                },
+                include: {
+                    options: true
+                }
+            });
+            return createdQuestion;
+        }));
+
+        return {
+            quiz: createdQuiz,
+            questions: createdQuestions,
+
+        };
     }
 
     async findAll() {
@@ -34,7 +67,11 @@ export class QuizzesService {
         const quiz = await this.prisma.quiz.findUnique({
             where: { id },
             include: {
-                questions: true,
+                questions: {
+                    include: {
+                        options: true,
+                    }
+                },
             },
         });
 
@@ -67,39 +104,37 @@ export class QuizzesService {
     }
 
 
-    async submitQuizAttempt(userId: string, quizId: string, answers: { questionId: string; answer: string }[]) {
-        const quiz = await this.findOne(quizId);
-        let score = 0;
-        let totalPoints = 0;
+    // async submitQuizAttempt(userId: string, quizId: string, answers: { questionId: string; answer: string }[]) {
+    //     const quiz = await this.findOne(quizId);
+    //     let score = 0;
+    //     let totalPoints = 0;
 
-        for (const question of quiz.questions) {
-            totalPoints += question.points;
-            const userAnswer = answers.find(a => a.questionId === question.id);
-            if (userAnswer) {
-                const answer = question.answer == userAnswer.answer;
-                if (answer) {
-                    score += question.points;
-                }
-            }
-        }
+    //     for (const question of quiz.questions) {
+    //         totalPoints += question.points;
+    //         const userAnswer = answers.find(a => a.questionId === question.id);
+    //         if (userAnswer) {
+    //             const answer = question.answers.find(a => a.id === userAnswer.answer);
+    //             if (answer) {
+    //                 score += question.points;
+    //             }
+    //         }
+    //     }
 
-        const percentage = (score / totalPoints) * 100;
-        const passed = percentage >= quiz.passingScore;
+    //     const percentage = (score / totalPoints) * 100;
+    //     const passed = percentage >= quiz.passingScore;
 
-        return this.prisma.submission.create({
-            data: {
-                userId,
-                quizId,
-                score: percentage,
-                passed,
-                answers: {
-                    create: answers.map(answer => ({
-                        questionId: answer.questionId,
-                        answer: answer.answer,
-                    })),
-                },
-            },
+    //     return this.prisma.submission.create({
+    //         data: {
+    //             userId,
+    //             quizId,
+    //             score: percentage,
+    //             passed,
+    //             answers: answers.map(answer => ({
+    //                 questionId: answer.questionId,
+    //                 optionId: answer.answer,
+    //             })),
+    //         },
 
-        });
-    }
+    //     });
+    // }
 } 

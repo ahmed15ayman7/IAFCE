@@ -2,12 +2,12 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards } from '@nes
 import { CoursesService } from './courses.service';
 import { CreateCourseDto } from '../../dtos/Course.create.dto';
 import { UpdateCourseDto } from '../../dtos/Course.update.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { Course, Instructor, Lesson, Quiz, User } from '@shared/prisma';
 import { ApiTags } from '@nestjs/swagger';
 @ApiTags('الكورسات')
 @Controller('courses')
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard)
 export class CoursesController {
     constructor(private readonly coursesService: CoursesService) { }
 

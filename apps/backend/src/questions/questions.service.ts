@@ -2,6 +2,9 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateQuestionDto } from 'dtos/Question.create.dto';
 import { UpdateQuestionDto } from 'dtos/Question.update.dto';
+import { CreateOptionDto } from 'dtos/Option.create.dto';
+import { UpdateOptionDto } from 'dtos/Option.update.dto';
+
 
 @Injectable()
 export class QuestionsService {
@@ -95,4 +98,31 @@ export class QuestionsService {
             },
         });
     }
+
+    async getQuestionByQuizId(quizId: string) {
+        return this.prisma.question.findMany({
+            where: { quizId },
+            include: {
+                options: true,
+            }
+        });
+    }
+    async createOption(createOptionInput: CreateOptionDto) {
+        return this.prisma.option.create({
+            data: createOptionInput,
+        });
+    }
+    async updateOption(id: string, updateOptionInput: UpdateOptionDto) {
+        return this.prisma.option.update({
+            where: { id },
+            data: updateOptionInput,
+        });
+    }
+    async deleteOption(id: string) {
+        return this.prisma.option.delete({
+            where: { id },
+        });
+    }
+
+
 } 

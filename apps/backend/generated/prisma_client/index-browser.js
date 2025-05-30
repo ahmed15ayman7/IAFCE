@@ -189,6 +189,7 @@ exports.Prisma.CourseScalarFieldEnum = {
   description: 'description',
   academyId: 'academyId',
   image: 'image',
+  level: 'level',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -221,8 +222,8 @@ exports.Prisma.LessonScalarFieldEnum = {
   id: 'id',
   title: 'title',
   content: 'content',
-  videoUrl: 'videoUrl',
   courseId: 'courseId',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -263,12 +264,20 @@ exports.Prisma.QuestionScalarFieldEnum = {
   id: 'id',
   text: 'text',
   type: 'type',
-  options: 'options',
-  answer: 'answer',
+  isMultiple: 'isMultiple',
   points: 'points',
   isAnswered: 'isAnswered',
   quizId: 'quizId',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.OptionScalarFieldEnum = {
+  id: 'id',
+  questionId: 'questionId',
+  text: 'text',
+  isCorrect: 'isCorrect',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SubmissionScalarFieldEnum = {
@@ -528,6 +537,20 @@ exports.MilestoneStatus = exports.$Enums.MilestoneStatus = {
   NOT_STARTED: 'NOT_STARTED'
 };
 
+exports.LessonStatus = exports.$Enums.LessonStatus = {
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  NOT_STARTED: 'NOT_STARTED'
+};
+
+exports.FileType = exports.$Enums.FileType = {
+  VIDEO: 'VIDEO',
+  PDF: 'PDF',
+  DOCUMENT: 'DOCUMENT',
+  IMAGE: 'IMAGE',
+  AUDIO: 'AUDIO'
+};
+
 exports.NotificationType = exports.$Enums.NotificationType = {
   ASSIGNMENT: 'ASSIGNMENT',
   GRADE: 'GRADE',
@@ -551,6 +574,7 @@ exports.Prisma.ModelName = {
   Enrollment: 'Enrollment',
   Quiz: 'Quiz',
   Question: 'Question',
+  Option: 'Option',
   Submission: 'Submission',
   Achievement: 'Achievement',
   Notification: 'Notification',

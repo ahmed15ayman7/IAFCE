@@ -2,12 +2,12 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, Query } fro
 import { BadgesService } from './badges.service';
 import { CreateBadgeDto } from '../../dtos/Badge.create.dto';
 import { UpdateBadgeDto } from '../../dtos/Badge.update.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { Academy, Badge } from '@shared/prisma';
+import { Badge } from '@shared/prisma';
 import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '../auth/auth.guard';
 @ApiTags('البطاقات')
 @Controller('badges')
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard)
 export class BadgesController {
     constructor(private readonly badgesService: BadgesService) { }
 

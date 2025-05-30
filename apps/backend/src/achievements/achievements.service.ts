@@ -95,4 +95,10 @@ export class AchievementsService {
         });
     }
 
+    async findByUserId(userId: string) {
+        return this.prisma.achievement.findMany({
+            where: { userId }
+        });
+    }
+
 } 

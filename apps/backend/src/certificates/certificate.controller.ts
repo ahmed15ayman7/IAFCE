@@ -2,12 +2,12 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, Query } fro
 import { CertificateService } from './certificate.service';
 import { CreateCertificateDto } from '../../dtos/Certificate.create.dto';
 import { UpdateCertificateDto } from '../../dtos/Certificate.update.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Certificate } from '@shared/prisma';
 import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '../auth/auth.guard';
 @ApiTags('الشهادات')
 @Controller('certificates')
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard)
 export class CertificateController {
     constructor(private readonly certificateService: CertificateService) { }
 

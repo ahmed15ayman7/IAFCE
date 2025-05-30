@@ -1,36 +1,34 @@
 import React from 'react';
-import { Card } from '@/components/common/Card';
-import { DataGrid } from '@/components/common/DataGrid';
-import { useTranslation } from 'next-i18next';
+import Card from '@/components/common/Card';
+import DataGrid from '@/components/common/DataGrid';
 
 export default function AdminFinance() {
-    const { t } = useTranslation();
 
     const financialStats = [
         {
             id: 1,
-            title: t('الإيرادات الشهرية'),
+            title: 'الإيرادات الشهرية',
             value: '250,000 ريال',
             change: '+8%',
             trend: 'up',
         },
         {
             id: 2,
-            title: t('المصروفات الشهرية'),
+            title: 'المصروفات الشهرية',
             value: '150,000 ريال',
             change: '+5%',
             trend: 'up',
         },
         {
             id: 3,
-            title: t('صافي الربح'),
+            title: 'صافي الربح',
             value: '100,000 ريال',
             change: '+12%',
             trend: 'up',
         },
         {
             id: 4,
-            title: t('المدفوعات المتأخرة'),
+            title: 'المدفوعات المتأخرة',
             value: '25,000 ريال',
             change: '-3%',
             trend: 'down',
@@ -68,31 +66,31 @@ export default function AdminFinance() {
     ];
 
     const columns = [
-        { field: 'date', headerName: t('التاريخ'), width: 150 },
-        { field: 'type', headerName: t('النوع'), width: 100 },
-        { field: 'description', headerName: t('الوصف'), width: 200 },
-        { field: 'amount', headerName: t('المبلغ'), width: 150 },
-        { field: 'status', headerName: t('الحالة'), width: 100 },
-        { field: 'method', headerName: t('طريقة الدفع'), width: 150 },
+        { field: 'date', headerName: 'التاريخ', width: 150 },
+        { field: 'type', headerName: 'النوع', width: 100 },
+        { field: 'description', headerName: 'الوصف', width: 200 },
+        { field: 'amount', headerName: 'المبلغ', width: 150 },
+        { field: 'status', headerName: 'الحالة', width: 100 },
+        { field: 'method', headerName: 'طريقة الدفع', width: 150 },
     ];
 
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">{t('الإدارة المالية')}</h1>
+                <h1 className="text-3xl font-bold">الإدارة المالية</h1>
                 <div className="flex gap-4">
                     <button className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
-                        {t('تقرير مالي')}
+                        تقرير مالي
                     </button>
                     <button className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
-                        {t('تصدير البيانات')}
+                        تصدير البيانات
                     </button>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 {financialStats.map(stat => (
-                    <Card key={stat.id}>
+                    <Card key={stat.id} title={stat.title}>
                         <div className="flex justify-between items-start">
                             <div>
                                 <h3 className="text-lg font-medium text-gray-600">{stat.title}</h3>
@@ -107,67 +105,66 @@ export default function AdminFinance() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                <Card>
-                    <h2 className="text-2xl font-semibold mb-4">{t('الإيرادات حسب المصدر')}</h2>
+                <Card title={'الإيرادات حسب المصدر'}>
+
                     <div className="space-y-2">
                         <div className="flex justify-between">
-                            <span>{t('رسوم الطلاب')}</span>
+                            <span>رسوم الطلاب</span>
                             <span className="font-medium">70%</span>
                         </div>
                         <div className="flex justify-between">
-                            <span>{t('الأنشطة')}</span>
+                            <span>الأنشطة</span>
                             <span className="font-medium">20%</span>
                         </div>
                         <div className="flex justify-between">
-                            <span>{t('مصادر أخرى')}</span>
+                            <span>مصادر أخرى</span>
                             <span className="font-medium">10%</span>
                         </div>
                     </div>
                 </Card>
-                <Card>
-                    <h2 className="text-2xl font-semibold mb-4">{t('المصروفات حسب النوع')}</h2>
+                <Card title={'المصروفات حسب النوع'}>
+
                     <div className="space-y-2">
                         <div className="flex justify-between">
-                            <span>{t('رواتب المعلمين')}</span>
+                            <span>رواتب المعلمين</span>
                             <span className="font-medium">50%</span>
                         </div>
                         <div className="flex justify-between">
-                            <span>{t('المصاريف التشغيلية')}</span>
+                            <span>المصاريف التشغيلية</span>
                             <span className="font-medium">30%</span>
                         </div>
                         <div className="flex justify-between">
-                            <span>{t('مصروفات أخرى')}</span>
+                            <span>مصروفات أخرى</span>
                             <span className="font-medium">20%</span>
                         </div>
                     </div>
                 </Card>
-                <Card>
-                    <h2 className="text-2xl font-semibold mb-4">{t('المدفوعات المتأخرة')}</h2>
+                <Card title={'المدفوعات المتأخرة'}>
+
                     <div className="space-y-4">
                         <div className="p-4 bg-red-50 rounded-md">
-                            <p className="font-medium">{t('5 طلاب متأخرين في السداد')}</p>
-                            <p className="text-sm text-gray-600">{t('إجمالي المبلغ: 25,000 ريال')}</p>
+                            <p className="font-medium">5 طلاب متأخرين في السداد</p>
+                            <p className="text-sm text-gray-600">إجمالي المبلغ: 25,000 ريال</p>
                         </div>
                         <button className="w-full px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
-                            {t('إرسال تذكير')}
+                            إرسال تذكير
                         </button>
                     </div>
                 </Card>
             </div>
 
-            <Card>
+            <Card title={'آخر المعاملات'}>
                 <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-2xl font-semibold">{t('آخر المعاملات')}</h2>
                     <div className="flex gap-2">
                         <input
                             type="text"
-                            placeholder={t('بحث...')}
+                            placeholder={'بحث...'}
                             className="px-4 py-2 border rounded-md"
                         />
                         <select className="px-4 py-2 border rounded-md">
-                            <option value="">{t('جميع الأنواع')}</option>
-                            <option value="income">{t('إيرادات')}</option>
-                            <option value="expense">{t('مصروفات')}</option>
+                            <option value="">جميع الأنواع</option>
+                            <option value="income">إيرادات</option>
+                            <option value="expense">مصروفات</option>
                         </select>
                     </div>
                 </div>

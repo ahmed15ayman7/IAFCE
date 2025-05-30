@@ -8,10 +8,10 @@ import { QuizEntity } from 'dtos/Quiz.entity';
 export class QuizzesResolver {
     constructor(private readonly quizzesService: QuizzesService) { }
 
-    @Mutation(() => QuizEntity)
-    create(@Args('createQuizInput') createQuizInput: CreateQuizDto) {
-        return this.quizzesService.create(createQuizInput);
-    }
+    // @Mutation(() => QuizEntity)
+    // create(@Args('createQuizInput') createQuizInput: CreateQuizDto) {
+    //     return this.quizzesService.create(createQuizInput);
+    // }
 
     @Query(() => [QuizEntity])
     findAll() {
@@ -33,12 +33,12 @@ export class QuizzesResolver {
         return this.quizzesService.remove(id);
     }
 
-    @Mutation(() => QuizEntity)
-    submitQuizAttempt(
-        @Args('quizId', { type: () => ID }) quizId: string,
-        @Args('userId', { type: () => ID }) userId: string,
-        @Args('answers', { type: () => [String] }) answers: { questionId: string; answer: string }[],
-    ) {
-        return this.quizzesService.submitQuizAttempt(quizId, userId, answers);
-    }
+    // @Mutation(() => QuizEntity)
+    // submitQuizAttempt(
+    //     @Args('quizId', { type: () => ID }) quizId: string,
+    //     @Args('userId', { type: () => ID }) userId: string,
+    //     @Args('answers', { type: () => [String] }) answers: { questionId: string; answer: string }[],
+    // ) {
+    //     return this.quizzesService.submitQuizAttempt(quizId, userId, answers);
+    // }
 } 

@@ -1,8 +1,5 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { AcademiesModule } from './academies/academies.module';
@@ -12,8 +9,6 @@ import { QuizzesModule } from './quizzes/quizzes.module';
 import { AchievementsModule } from './achievements/achievements.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { WebsocketModule } from './websocket/websocket.module';
-import { APP_GUARD } from '@nestjs/core';
-import { AuthGuard } from './auth/auth.guard';
 import { SubmissionsModule } from './submissions/submissions.module';
 import { ReportsModule } from './reports/reports.module';
 import { AttendanceModule } from './attendance/attendance.module';

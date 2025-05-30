@@ -2,22 +2,52 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateSubmissionDto } from 'dtos/Submission.create.dto';
 import { UpdateSubmissionDto } from 'dtos/Submission.update.dto';
-
+interface Answer {
+    optionId: string;
+    questionId: string
+}
 @Injectable()
 export class SubmissionsService {
     constructor(private prisma: PrismaService) { }
 
     async create(createSubmissionInput: CreateSubmissionDto) {
-        return this.prisma.submission.create({
+        let submission = await this.prisma.submission.create({
             data: {
                 ...createSubmissionInput,
                 createdAt: new Date(),
             },
             include: {
                 user: true,
-                quiz: true,
+                quiz: {
+                    include: {
+                        questions: {
+                            include: {
+                                options: {
+                                    include: {
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+
             },
         });
+        let score = 0;
+        for (let question of submission.quiz.questions) {
+            if (question.options.some(option => option.isCorrect && submission.answers.some((answer: any) => answer.questionId === question.id && answer.optionId === option.id))) {
+                score += question.points;
+            }
+        }
+        await this.prisma.submission.update({
+            where: { id: submission.id },
+            data: {
+                score: score,
+                passed: score >= submission.quiz.passingScore
+            }
+        });
+        return submission
     }
 
     async findAll() {
@@ -25,6 +55,7 @@ export class SubmissionsService {
             include: {
                 user: true,
                 quiz: true,
+
             },
         });
     }
@@ -35,6 +66,7 @@ export class SubmissionsService {
             include: {
                 user: true,
                 quiz: true,
+
             },
         });
 
@@ -60,6 +92,7 @@ export class SubmissionsService {
             include: {
                 user: true,
                 quiz: true,
+
             },
         });
     }
@@ -86,6 +119,7 @@ export class SubmissionsService {
             include: {
                 user: true,
                 quiz: true,
+
             },
         });
     }

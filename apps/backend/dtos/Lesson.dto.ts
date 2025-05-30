@@ -4,7 +4,14 @@ import { FileEntity } from "./File.entity";
 import { QuizEntity } from "./Quiz.entity";
 import { UserEntity } from "./User.entity";
 import { AttendanceEntity } from "./Attendance.entity";
-import { Course, File, Quiz, User, Attendance } from "@shared/prisma";
+import {
+  Course,
+  File,
+  Quiz,
+  User,
+  LessonStatus,
+  Attendance,
+} from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -24,11 +31,6 @@ export class LessonDto {
   // Field: content, Type: string
   @Column()
   content: string;
-
-  @ApiProperty({ type: "string", nullable: true })
-  // Field: videoUrl, Type: string
-  @Column()
-  videoUrl?: string;
 
   @ApiProperty({ type: "string" })
   // Field: courseId, Type: string
@@ -54,6 +56,11 @@ export class LessonDto {
   // Field: completedBy, Type: User[]
   @Column()
   completedBy: User[];
+
+  @ApiProperty({ enum: LessonStatus })
+  // Field: status, Type: LessonStatus
+  @Column()
+  status: LessonStatus;
 
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date

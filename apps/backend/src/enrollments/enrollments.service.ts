@@ -35,4 +35,10 @@ export class EnrollmentsService {
             where: { id }
         });
     }
+
+    async findByUserId(userId: string) {
+        return this.prisma.enrollment.findMany({
+            where: { userId }
+        });
+    }
 } 

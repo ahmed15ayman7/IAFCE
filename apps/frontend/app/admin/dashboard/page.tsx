@@ -1,36 +1,35 @@
 import React from 'react';
-import { Card } from '@/components/common/Card';
-import { DataGrid } from '@/components/common/DataGrid';
-import { useTranslation } from 'next-i18next';
+import Card from '@/components/common/Card';
+import DataGrid from '@/components/common/DataGrid';
+
 
 export default function AdminDashboard() {
-    const { t } = useTranslation();
 
     const statistics = [
         {
             id: 1,
-            title: t('إجمالي الطلاب'),
+            title: ('إجمالي الطلاب'),
             value: '1,250',
             change: '+5%',
             trend: 'up',
         },
         {
             id: 2,
-            title: t('إجمالي المعلمين'),
+            title: ('إجمالي المعلمين'),
             value: '45',
             change: '+2%',
             trend: 'up',
         },
         {
             id: 3,
-            title: t('إجمالي أولياء الأمور'),
+            title: ('إجمالي أولياء الأمور'),
             value: '850',
             change: '+3%',
             trend: 'up',
         },
         {
             id: 4,
-            title: t('إجمالي الإيرادات'),
+            title: ('إجمالي الإيرادات'),
             value: '250,000 ريال',
             change: '+8%',
             trend: 'up',
@@ -62,29 +61,29 @@ export default function AdminDashboard() {
     ];
 
     const columns = [
-        { field: 'type', headerName: t('النوع'), width: 100 },
-        { field: 'description', headerName: t('الوصف'), width: 300 },
-        { field: 'date', headerName: t('التاريخ'), width: 150 },
-        { field: 'time', headerName: t('الوقت'), width: 100 },
+        { field: 'type', headerName: ('النوع'), width: 100 },
+        { field: 'description', headerName: ('الوصف'), width: 300 },
+        { field: 'date', headerName: ('التاريخ'), width: 150 },
+        { field: 'time', headerName: ('الوقت'), width: 100 },
     ];
 
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">{t('لوحة التحكم')}</h1>
+                <h1 className="text-3xl font-bold">{('لوحة التحكم')}</h1>
                 <div className="flex gap-4">
                     <button className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
-                        {t('تقرير جديد')}
+                        {('تقرير جديد')}
                     </button>
                     <button className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
-                        {t('تصدير البيانات')}
+                        {('تصدير البيانات')}
                     </button>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 {statistics.map(stat => (
-                    <Card key={stat.id}>
+                    <Card key={stat.id} title={stat.title}>
                         <div className="flex justify-between items-start">
                             <div>
                                 <h3 className="text-lg font-medium text-gray-600">{stat.title}</h3>
@@ -99,8 +98,8 @@ export default function AdminDashboard() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                <Card>
-                    <h2 className="text-2xl font-semibold mb-4">{t('آخر الأنشطة')}</h2>
+                <Card title={('آخر الأنشطة')}>
+                    <h2 className="text-2xl font-semibold mb-4">{('آخر الأنشطة')}</h2>
                     <DataGrid
                         columns={columns}
                         rows={recentActivities}
@@ -108,48 +107,47 @@ export default function AdminDashboard() {
                         checkboxSelection={true}
                     />
                 </Card>
-                <Card>
-                    <h2 className="text-2xl font-semibold mb-4">{t('التقويم')}</h2>
+                <Card title={('التقويم')}>
+                    <h2 className="text-2xl font-semibold mb-4">{('التقويم')}</h2>
                     <div className="p-4">
                         {/* هنا سيتم إضافة مكون التقويم */}
-                        <p className="text-gray-500 text-center">{t('سيتم إضافة التقويم قريباً')}</p>
+                        <p className="text-gray-500 text-center">{('سيتم إضافة التقويم قريباً')}</p>
                     </div>
                 </Card>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <Card>
-                    <h2 className="text-2xl font-semibold mb-4">{t('الإشعارات المهمة')}</h2>
+                <Card title={('الإشعارات المهمة')}>
+                    <h2 className="text-2xl font-semibold mb-4">{('الإشعارات المهمة')}</h2>
                     <div className="space-y-4">
                         <div className="p-4 bg-yellow-50 rounded-md">
-                            <p className="font-medium">{t('تذكير: موعد تسليم التقارير الشهرية')}</p>
-                            <p className="text-sm text-gray-600">{t('الموعد النهائي: 30 أبريل 2024')}</p>
+                            <p className="font-medium">{('تذكير: موعد تسليم التقارير الشهرية')}</p>
+                            <p className="text-sm text-gray-600">{('الموعد النهائي: 30 أبريل 2024')}</p>
                         </div>
                         <div className="p-4 bg-red-50 rounded-md">
-                            <p className="font-medium">{t('تنبيه: نظام الدفع متوقف حالياً')}</p>
-                            <p className="text-sm text-gray-600">{t('سيتم إصلاحه خلال ساعتين')}</p>
+                            <p className="font-medium">{('تنبيه: نظام الدفع متوقف حالياً')}</p>
+                            <p className="text-sm text-gray-600">{('سيتم إصلاحه خلال ساعتين')}</p>
                         </div>
                     </div>
                 </Card>
-                <Card>
-                    <h2 className="text-2xl font-semibold mb-4">{t('المهام العاجلة')}</h2>
+                <Card title={('المهام العاجلة')}>
                     <div className="space-y-4">
                         <div className="flex items-center justify-between p-4 bg-blue-50 rounded-md">
                             <div>
-                                <p className="font-medium">{t('مراجعة طلبات التسجيل الجديدة')}</p>
-                                <p className="text-sm text-gray-600">{t('5 طلبات في الانتظار')}</p>
+                                <p className="font-medium">{('مراجعة طلبات التسجيل الجديدة')}</p>
+                                <p className="text-sm text-gray-600">{('5 طلبات في الانتظار')}</p>
                             </div>
                             <button className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                                {t('عرض')}
+                                {('عرض')}
                             </button>
                         </div>
                         <div className="flex items-center justify-between p-4 bg-green-50 rounded-md">
                             <div>
-                                <p className="font-medium">{t('تحديث جداول الحصص')}</p>
-                                <p className="text-sm text-gray-600">{t('مطلوب قبل نهاية اليوم')}</p>
+                                <p className="font-medium">{('تحديث جداول الحصص')}</p>
+                                <p className="text-sm text-gray-600">{('مطلوب قبل نهاية اليوم')}</p>
                             </div>
                             <button className="px-3 py-1 bg-green-500 text-white rounded-md hover:bg-green-600">
-                                {t('تحديث')}
+                                {('تحديث')}
                             </button>
                         </div>
                     </div>

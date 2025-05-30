@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 import authService from './auth.service';
-import { Achievement, Badge, Certificate, Community, Course, Discussion, Enrollment, Group, LiveRoom, LoginHistory, Milestone, Notification, NotificationSettings, Path, Post, Quiz, TwoFactor, User } from '@shared/prisma';
+import { Achievement, Badge, Certificate, Community, Course, Discussion, Enrollment, File as FileModel, Group, Lesson, LiveRoom, LoginHistory, Milestone, Notification, NotificationSettings, Option, Path, Post, Question, Quiz, Submission, TwoFactor, User } from '@shared/prisma';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
@@ -15,7 +15,7 @@ const api = axios.create({
 // Interceptor للطلبات
 api.interceptors.request.use(
     async (config) => {
-        const accessToken = await authService.getAccessToken();
+        const accessToken = await authService.getAccessTokenFromCookie();
         if (accessToken) {
             config.headers.Authorization = `Bearer ${accessToken}`;
         }
@@ -66,8 +66,7 @@ export const authApi = {
 
             const response = await api.post('/auth/login', credentials);
             const { access_token, refreshToken } = response.data;
-            authService.setTokens(access_token, refreshToken);
-
+            await authService.setTokens(access_token, refreshToken);
 
             return response.data;
         } catch (error) {
@@ -94,10 +93,10 @@ export const authApi = {
     },
 
     refreshToken: async ({ refreshToken }: { refreshToken: string }) => {
-        const response = await api.post('/auth/refresh', { refreshToken });
-        const { accessToken } = response.data;
-        authService.setTokens(accessToken, refreshToken);
-        return accessToken;
+        const response = await api.post('/auth/refresh-token', { refreshToken });
+        const { access_Token } = response.data;
+        authService.setTokens(access_Token, refreshToken);
+        return access_Token;
     },
 
     register: (data: {
@@ -143,7 +142,7 @@ export const userApi = {
 // Course APIs
 export const courseApi = {
     getAll: (): Promise<{ success: boolean, data: Course[] }> => api.get('/courses'),
-    getById: (id: string): Promise<{ success: boolean, data: Course }> => api.get(`/courses/${id}`),
+    getById: (id: string): Promise<{ success: boolean, data: Course & { lessons: (Lesson & { files: FileModel[], quizzes: Quiz[] })[], quizzes: Quiz[], enrollments: (Enrollment & { user: User })[] } }> => api.get(`/courses/${id}`),
     create: (data: {
         title: string;
         description: string;
@@ -169,19 +168,15 @@ export const courseApi = {
 
 // Lesson APIs
 export const lessonApi = {
-    getByCourse: (courseId: string) => api.get(`/lessons/course/${courseId}`),
-    getById: (id: string) => api.get(`/lessons/${id}`),
+    getByCourse: (courseId: string): Promise<{ success: boolean, data: (Lesson & { files: FileModel[], quizzes: (Quiz & { submissions: Submission[], questions: Question[] })[] })[] }> => api.get(`/lessons/course/${courseId}`),
+    getById: (id: string): Promise<{ success: boolean, data: Lesson & { files: FileModel[], quizzes: (Quiz & { submissions: Submission[], questions: Question[] })[] } }> => api.get(`/lessons/${id}`),
     create: (data: {
         title: string;
         content: string;
         videoUrl?: string;
         courseId: string;
     }) => api.post('/lessons', data),
-    update: (id: string, data: {
-        title?: string;
-        content?: string;
-        videoUrl?: string;
-    }) => api.patch(`/lessons/${id}`, data),
+    update: (id: string, data: Lesson) => api.patch(`/lessons/${id}`, data),
     delete: (id: string) => api.delete(`/lessons/${id}`),
     getFiles: (lessonId: string) => api.get(`/lessons/${lessonId}/files`),
     getQuizzes: (lessonId: string) => api.get(`/lessons/${lessonId}/quizzes`),
@@ -193,17 +188,7 @@ export const lessonApi = {
 export const quizApi = {
     getByLesson: (lessonId: string) => api.get(`/quizzes/lesson/${lessonId}`),
     getById: (id: string) => api.get(`/quizzes/${id}`),
-    create: (data: {
-        title: string;
-        description?: string;
-        lessonId: string;
-        questions: Array<{
-            text: string;
-            type: string;
-            options?: any;
-            answer: any;
-        }>;
-    }) => api.post('/quizzes', data),
+    create: (data: Quiz & { questions: (Question & { options: Option[] })[] }) => api.post('/quizzes', data),
     update: (id: string, data: {
         title?: string;
         description?: string;
@@ -429,7 +414,7 @@ export const enrollmentApi = {
 
 // Question APIs
 export const questionApi = {
-    getByQuiz: (quizId: string) => api.get(`/questions/quiz/${quizId}`),
+    getByQuiz: (quizId: string) => api.get(`/questions/${quizId}/quiz`),
     getById: (id: string) => api.get(`/questions/${id}`),
     create: (data: {
         text: string;
@@ -445,12 +430,15 @@ export const questionApi = {
         answer?: any;
     }) => api.patch(`/questions/${id}`, data),
     delete: (id: string) => api.delete(`/questions/${id}`),
+    createOption: (data: Option) => api.post('/questions/option', data),
+    updateOption: (id: string, data: Option) => api.patch(`/questions/option/${id}`, data),
+    deleteOption: (id: string) => api.delete(`/questions/option/${id}`),
 };
 
 // Submission APIs
 export const submissionApi = {
-    getByQuiz: (quizId: string) => api.get(`/submissions/quiz/${quizId}`),
-    getByUser: (userId: string) => api.get(`/submissions/user/${userId}`),
+    getByQuiz: (quizId: string): Promise<{ success: boolean, data: (Submission & { user: User, quiz: Quiz & { questions: (Question & { options: Option[] })[] } })[] }> => api.get(`/submissions/quiz/${quizId}`),
+    getByUser: (userId: string): Promise<{ success: boolean, data: (Submission & { user: User, quiz: Quiz & { questions: (Question & { options: Option[] })[] } })[] }> => api.get(`/submissions/user/${userId}`),
     create: (data: {
         userId: string;
         quizId: string;

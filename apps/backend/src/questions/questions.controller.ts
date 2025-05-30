@@ -3,6 +3,9 @@ import { QuestionsService } from './questions.service';
 import { CreateQuestionDto } from 'dtos/Question.create.dto';
 import { UpdateQuestionDto } from 'dtos/Question.update.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateOptionDto } from 'dtos/Option.create.dto';
+import { UpdateOptionDto } from 'dtos/Option.update.dto';
+
 @ApiTags('الاسئلة')
 @Controller('questions')
 export class QuestionsController {
@@ -43,4 +46,20 @@ export class QuestionsController {
         return this.questionsService.markAsUnanswered(id);
     }
 
+    @Get(':id/quiz')
+    getQuestionByQuizId(@Param('id') id: string) {
+        return this.questionsService.getQuestionByQuizId(id);
+    }
+    @Post(':id/option')
+    createOption(@Param('id') id: string, @Body() createOptionDto: CreateOptionDto) {
+        return this.questionsService.createOption(createOptionDto);
+    }
+    @Put(':id/option')
+    updateOption(@Param('id') id: string, @Body() updateOptionDto: UpdateOptionDto) {
+        return this.questionsService.updateOption(id, updateOptionDto);
+    }
+    @Delete(':id/option')
+    deleteOption(@Param('id') id: string) {
+        return this.questionsService.deleteOption(id);
+    }
 }

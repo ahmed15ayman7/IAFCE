@@ -3,12 +3,12 @@ import { EventsService } from './events.service';
 import { CreateEventDto } from '../../dtos/Event.create.dto';
 import { UpdateEventDto } from '../../dtos/Event.update.dto';
 import { EventDto } from '../../dtos/Event.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { Event } from '@shared/prisma';
 import { ApiTags } from '@nestjs/swagger';
 @ApiTags('الفعاليات')
 @Controller('events')
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard)
 export class EventsController {
     constructor(private readonly eventsService: EventsService) { }
 

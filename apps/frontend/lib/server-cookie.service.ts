@@ -6,7 +6,7 @@ import { cookies } from 'next/headers';
 const ACCESS_TOKEN_KEY = 'accessToken';
 const REFRESH_TOKEN_KEY = 'refreshToken';
 
-export async function setTokens(accessToken: string, refreshToken: string): Promise<void> {
+export async function setTokensF(accessToken: string, refreshToken: string): Promise<void> {
     try {
         const cookieStore = cookies();
 
@@ -39,7 +39,10 @@ export async function getAccessToken(): Promise<string | undefined> {
 
 export async function getRefreshToken(): Promise<string | undefined> {
     try {
-        return cookies().get(REFRESH_TOKEN_KEY)?.value;
+        let refreshT = cookies().get(REFRESH_TOKEN_KEY)?.value;
+        // console.log("refreshT")
+        // console.log(refreshT)
+        return refreshT
     } catch (error) {
         console.error('خطأ في قراءة الكوكيز من الخادم:', error);
         return undefined;

@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, Query } fro
 import { CommunitiesService } from './communities.service';
 import { CreateCommunityDto } from '../../dtos/Community.create.dto';
 import { UpdateCommunityDto } from '../../dtos/Community.update.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { Community, Discussion, Group, LiveRoom, Post as PrismaPost } from '@shared/prisma';
 import { CreateDiscussionDto } from 'dtos/Discussion.create.dto';
 import { CreateLiveRoomDto } from 'dtos/LiveRoom.create.dto';
@@ -11,7 +11,7 @@ import { UpdateLiveRoomDto } from 'dtos/LiveRoom.update.dto';
 import { ApiTags } from '@nestjs/swagger';
 @ApiTags('المجتمعات')
 @Controller('communities')
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard)
 export class CommunitiesController {
     constructor(private readonly communitiesService: CommunitiesService) { }
 

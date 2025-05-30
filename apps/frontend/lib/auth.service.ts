@@ -1,6 +1,6 @@
 import { jwtDecode } from 'jwt-decode';
 import { authApi } from '@/lib/api';
-import { setTokens, getAccessToken, getRefreshToken, removeTokens,redirectToLogin } from './server-cookie.service';
+import { setTokensF, getAccessToken, getRefreshToken, removeTokens, redirectToLogin } from './server-cookie.service';
 
 interface TokenPayload {
   exp: number;
@@ -35,7 +35,7 @@ class AuthService {
 
     this.accessToken = accessToken;
     this.refresh_token = refreshToken;
-    await setTokens(accessToken, refreshToken);
+    await setTokensF(accessToken, refreshToken);
 
     try {
       this.startRefreshTokenTimer();
@@ -45,16 +45,14 @@ class AuthService {
   }
 
   // الحصول على التوكن الحالي
-  public async getAccessToken(): Promise<string> {
-    console.log("this.accessToken")
-    console.log(this.accessToken)
-
-    return this.accessToken || (await getAccessToken()) || '';
+  public async getAccessTokenFromCookie(): Promise<string> {
+    let token = await getAccessToken()
+    return  token || this.accessToken ||'';
   }
 
   // التحقق من حالة تسجيل الدخول
   public async isAuthenticated(): Promise<boolean> {
-    const token = await this.getAccessToken();
+    const token = await this.getAccessTokenFromCookie();
     if (!token) return false;
 
     try {
@@ -88,16 +86,15 @@ class AuthService {
   // تجديد التوكن
   public async refreshToken(): Promise<string> {
     try {
+      let refreshT = await getRefreshToken()
       const response = await authApi.refreshToken({
-        refreshToken: this.refresh_token || (await getRefreshToken()) || ''
+        refreshToken: refreshT || this.refresh_token || ''
       });
 
-      const { accessToken, refreshToken } = response.data;
-      await this.setTokens(accessToken, refreshToken);
-      return accessToken;
-    } catch (error) {
+      return response;
+    } catch (error: any) {
       await this.logout();
-      throw new Error('Failed to refresh token');
+      throw new Error('Failed to refresh token' + error);
     }
   }
 
@@ -108,7 +105,7 @@ class AuthService {
     await removeTokens();
     this.stopRefreshTokenTimer();
     redirectToLogin();
-        
+
   }
 
   public async clearTokens() {

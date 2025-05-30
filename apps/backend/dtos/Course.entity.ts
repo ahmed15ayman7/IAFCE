@@ -45,6 +45,11 @@ export class CourseEntity {
   @Column()
   image?: string;
 
+  @ApiProperty({ type: "string" })
+  // Field: level, Type: string
+  @Column()
+  level: string;
+
   @ApiProperty({ type: AcademyEntity })
   // Field: academy, Type: Academy
   @Column()
