@@ -28,6 +28,11 @@ import { BadgesModule } from './badges/badges.module';
 import { CertificateModule } from './certificates/certificate.module';
 import { PathsModule } from './paths/paths.module';
 import { CommunitiesModule } from './communities/communities.module';
+import { AccountingModule } from './accounting/accounting.module';
+import { PublicRelationsModule } from './public-relations/public-relations.module';
+import { SecretariatModule } from './secretariat/secretariat.module';
+import { AdministrationModule } from './administration/administration.module';
+import { LegalAffairsModule } from './legal-affairs/legal-affairs.module';
 @Module({
     imports: [
         ConfigModule.forRoot({
@@ -70,6 +75,11 @@ import { CommunitiesModule } from './communities/communities.module';
         CertificateModule,
         PathsModule,
         CommunitiesModule,
+        AccountingModule,
+        PublicRelationsModule,
+        SecretariatModule,
+        AdministrationModule,
+        LegalAffairsModule,
     ],
     // providers: [
     //     {
