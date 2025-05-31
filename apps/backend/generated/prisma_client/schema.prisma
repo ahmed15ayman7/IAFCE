@@ -77,7 +77,10 @@ model User {
 
   TwoFactor TwoFactor[]
 
-  UserAcademyCEO UserAcademyCEO[]
+  UserAcademyCEO     UserAcademyCEO[]
+  SalaryPayment      SalaryPayment[]
+  MeetingParticipant MeetingParticipant[]
+  LegalCase          LegalCase[]
 }
 
 model LoginHistory {
@@ -142,18 +145,22 @@ model UserAcademyCEO {
 
 // Academy Management
 model Academy {
-  id          String           @id @default(cuid())
-  name        String
-  description String?
-  logo        String?
-  settings    Json?
-  users       User[]
-  ceos        UserAcademyCEO[]
-  courses     Course[]
-  instructors Instructor[]
-  events      Event[]
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
+  id                    String                  @id @default(cuid())
+  name                  String
+  description           String?
+  logo                  String?
+  settings              Json?
+  users                 User[]
+  ceos                  UserAcademyCEO[]
+  courses               Course[]
+  instructors           Instructor[]
+  events                Event[]
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  AccountingEntry       AccountingEntry[]
+  PublicRelationsRecord PublicRelationsRecord[]
+  Meeting               Meeting[]
+  LegalCase             LegalCase[]
 }
 
 model Instructor {
@@ -428,12 +435,17 @@ model Group {
 }
 
 model Admin {
-  id        String   @id @default(cuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
-
-  Group Group[]
+  id                String                  @id @default(cuid())
+  userId            String
+  user              User                    @relation(fields: [userId], references: [id])
+  createdAt         DateTime                @default(now())
+  Group             Group[]
+  accountingEntries AccountingEntry[]
+  prRecords         PublicRelationsRecord[]
+  prResponses       PRResponse[]
+  meetings          Meeting[]
+  assignments       AdminAssignment[]
+  legalCases        LegalCase[]
 }
 
 model Channel {
@@ -581,4 +593,190 @@ model LiveRoom {
   User                User[]
   courseId            String?
   course              Course?   @relation(fields: [courseId], references: [id])
+}
+
+// ============ الإدارة الداخلية للأكاديمية ============
+
+// المحاسبة
+enum AccountingType {
+  EXPENSE
+  INCOME
+  SALARY
+  ADVANCE
+  INVOICE
+}
+
+model AccountingEntry {
+  id               String         @id @default(cuid())
+  type             AccountingType
+  amount           Float
+  description      String
+  date             DateTime
+  createdByAdminId String
+  createdByAdmin   Admin          @relation(fields: [createdByAdminId], references: [id])
+  academyId        String
+  academy          Academy        @relation(fields: [academyId], references: [id])
+  invoice          Invoice?
+  salaryPayment    SalaryPayment?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+}
+
+model Invoice {
+  id                String          @id @default(cuid())
+  invoiceNumber     String          @unique
+  amount            Float
+  description       String
+  dueDate           DateTime
+  status            InvoiceStatus   @default(PENDING)
+  accountingEntryId String          @unique
+  accountingEntry   AccountingEntry @relation(fields: [accountingEntryId], references: [id])
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+}
+
+model SalaryPayment {
+  id                String          @id @default(cuid())
+  employeeId        String
+  employee          User            @relation(fields: [employeeId], references: [id])
+  amount            Float
+  month             Int
+  year              Int
+  accountingEntryId String          @unique
+  accountingEntry   AccountingEntry @relation(fields: [accountingEntryId], references: [id])
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+}
+
+enum InvoiceStatus {
+  PENDING
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+// العلاقات العامة
+enum PRRequestStatus {
+  PENDING
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+model PublicRelationsRecord {
+  id               String          @id @default(cuid())
+  message          String
+  senderName       String
+  senderContact    String
+  status           PRRequestStatus @default(PENDING)
+  handledByAdminId String
+  handledByAdmin   Admin           @relation(fields: [handledByAdminId], references: [id])
+  academyId        String
+  academy          Academy         @relation(fields: [academyId], references: [id])
+  responses        PRResponse[]
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+}
+
+model PRResponse {
+  id                 String                @id @default(cuid())
+  response           String
+  prRecordId         String
+  prRecord           PublicRelationsRecord @relation(fields: [prRecordId], references: [id])
+  respondedByAdminId String
+  respondedByAdmin   Admin                 @relation(fields: [respondedByAdminId], references: [id])
+  createdAt          DateTime              @default(now())
+}
+
+// السكرتارية
+model Meeting {
+  id               String               @id @default(cuid())
+  meetingTitle     String
+  meetingDate      DateTime
+  location         String
+  notes            String?
+  createdByAdminId String
+  createdByAdmin   Admin                @relation(fields: [createdByAdminId], references: [id])
+  academyId        String
+  academy          Academy              @relation(fields: [academyId], references: [id])
+  participants     MeetingParticipant[]
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+}
+
+model MeetingParticipant {
+  id         String   @id @default(cuid())
+  meetingId  String
+  meeting    Meeting  @relation(fields: [meetingId], references: [id])
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  isAttended Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// الإدارة العامة
+enum AdminRoleType {
+  DIRECTOR
+  ACCOUNTANT
+  SECRETARY
+  LEGAL_ADVISOR
+  HR_MANAGER
+  IT_MANAGER
+  GENERAL_MANAGER
+}
+
+model AdminRole {
+  id          String            @id @default(cuid())
+  name        AdminRoleType
+  description String?
+  assignments AdminAssignment[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+}
+
+model AdminAssignment {
+  id        String    @id @default(cuid())
+  adminId   String
+  admin     Admin     @relation(fields: [adminId], references: [id])
+  roleId    String
+  role      AdminRole @relation(fields: [roleId], references: [id])
+  startDate DateTime
+  endDate   DateTime?
+  status    String    @default("ACTIVE")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+// الشؤون القانونية
+enum LegalCaseType {
+  CONTRACT
+  DISPUTE
+  INSURANCE
+  EMPLOYMENT
+  INTELLECTUAL_PROPERTY
+}
+
+enum LegalCaseStatus {
+  OPEN
+  IN_PROGRESS
+  CLOSED
+  PENDING
+}
+
+model LegalCase {
+  id               String          @id @default(cuid())
+  caseTitle        String
+  caseType         LegalCaseType
+  status           LegalCaseStatus @default(OPEN)
+  description      String
+  courtDate        DateTime?
+  assignedLawyerId String
+  assignedLawyer   Admin           @relation(fields: [assignedLawyerId], references: [id])
+  academyId        String
+  academy          Academy         @relation(fields: [academyId], references: [id])
+  relatedUserId    String?
+  relatedUser      User?           @relation(fields: [relatedUserId], references: [id])
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
 }

@@ -1,7 +1,22 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { UserEntity } from "./User.entity";
 import { GroupEntity } from "./Group.entity";
-import { User, Group } from "@shared/prisma";
+import { AccountingEntryEntity } from "./AccountingEntry.entity";
+import { PublicRelationsRecordEntity } from "./PublicRelationsRecord.entity";
+import { PRResponseEntity } from "./PRResponse.entity";
+import { MeetingEntity } from "./Meeting.entity";
+import { AdminAssignmentEntity } from "./AdminAssignment.entity";
+import { LegalCaseEntity } from "./LegalCase.entity";
+import {
+  User,
+  Group,
+  AccountingEntry,
+  PublicRelationsRecord,
+  PRResponse,
+  Meeting,
+  AdminAssignment,
+  LegalCase,
+} from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -31,4 +46,34 @@ export class AdminEntity {
   // Field: Group, Type: Group[]
   @Column()
   Group: Group[];
+
+  @ApiProperty({ type: AccountingEntryEntity })
+  // Field: accountingEntries, Type: AccountingEntry[]
+  @Column()
+  accountingEntries: AccountingEntry[];
+
+  @ApiProperty({ type: PublicRelationsRecordEntity })
+  // Field: prRecords, Type: PublicRelationsRecord[]
+  @Column()
+  prRecords: PublicRelationsRecord[];
+
+  @ApiProperty({ type: PRResponseEntity })
+  // Field: prResponses, Type: PRResponse[]
+  @Column()
+  prResponses: PRResponse[];
+
+  @ApiProperty({ type: MeetingEntity })
+  // Field: meetings, Type: Meeting[]
+  @Column()
+  meetings: Meeting[];
+
+  @ApiProperty({ type: AdminAssignmentEntity })
+  // Field: assignments, Type: AdminAssignment[]
+  @Column()
+  assignments: AdminAssignment[];
+
+  @ApiProperty({ type: LegalCaseEntity })
+  // Field: legalCases, Type: LegalCase[]
+  @Column()
+  legalCases: LegalCase[];
 }

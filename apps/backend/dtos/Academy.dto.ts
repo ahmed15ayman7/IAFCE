@@ -4,12 +4,20 @@ import { UserAcademyCEOEntity } from "./UserAcademyCEO.entity";
 import { CourseEntity } from "./Course.entity";
 import { InstructorEntity } from "./Instructor.entity";
 import { EventEntity } from "./Event.entity";
+import { AccountingEntryEntity } from "./AccountingEntry.entity";
+import { PublicRelationsRecordEntity } from "./PublicRelationsRecord.entity";
+import { MeetingEntity } from "./Meeting.entity";
+import { LegalCaseEntity } from "./LegalCase.entity";
 import {
   User,
   UserAcademyCEO,
   Course,
   Instructor,
   Event,
+  AccountingEntry,
+  PublicRelationsRecord,
+  Meeting,
+  LegalCase,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -75,4 +83,24 @@ export class AcademyDto {
   // Field: updatedAt, Type: Date
   @Column()
   updatedAt: Date;
+
+  @ApiProperty({ type: AccountingEntryEntity })
+  // Field: AccountingEntry, Type: AccountingEntry[]
+  @Column()
+  AccountingEntry: AccountingEntry[];
+
+  @ApiProperty({ type: PublicRelationsRecordEntity })
+  // Field: PublicRelationsRecord, Type: PublicRelationsRecord[]
+  @Column()
+  PublicRelationsRecord: PublicRelationsRecord[];
+
+  @ApiProperty({ type: MeetingEntity })
+  // Field: Meeting, Type: Meeting[]
+  @Column()
+  Meeting: Meeting[];
+
+  @ApiProperty({ type: LegalCaseEntity })
+  // Field: LegalCase, Type: LegalCase[]
+  @Column()
+  LegalCase: LegalCase[];
 }

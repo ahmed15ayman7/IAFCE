@@ -495,6 +495,115 @@ exports.Prisma.LiveRoomScalarFieldEnum = {
   courseId: 'courseId'
 };
 
+exports.Prisma.AccountingEntryScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  amount: 'amount',
+  description: 'description',
+  date: 'date',
+  createdByAdminId: 'createdByAdminId',
+  academyId: 'academyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InvoiceScalarFieldEnum = {
+  id: 'id',
+  invoiceNumber: 'invoiceNumber',
+  amount: 'amount',
+  description: 'description',
+  dueDate: 'dueDate',
+  status: 'status',
+  accountingEntryId: 'accountingEntryId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SalaryPaymentScalarFieldEnum = {
+  id: 'id',
+  employeeId: 'employeeId',
+  amount: 'amount',
+  month: 'month',
+  year: 'year',
+  accountingEntryId: 'accountingEntryId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PublicRelationsRecordScalarFieldEnum = {
+  id: 'id',
+  message: 'message',
+  senderName: 'senderName',
+  senderContact: 'senderContact',
+  status: 'status',
+  handledByAdminId: 'handledByAdminId',
+  academyId: 'academyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PRResponseScalarFieldEnum = {
+  id: 'id',
+  response: 'response',
+  prRecordId: 'prRecordId',
+  respondedByAdminId: 'respondedByAdminId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MeetingScalarFieldEnum = {
+  id: 'id',
+  meetingTitle: 'meetingTitle',
+  meetingDate: 'meetingDate',
+  location: 'location',
+  notes: 'notes',
+  createdByAdminId: 'createdByAdminId',
+  academyId: 'academyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MeetingParticipantScalarFieldEnum = {
+  id: 'id',
+  meetingId: 'meetingId',
+  userId: 'userId',
+  isAttended: 'isAttended',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AdminRoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AdminAssignmentScalarFieldEnum = {
+  id: 'id',
+  adminId: 'adminId',
+  roleId: 'roleId',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.LegalCaseScalarFieldEnum = {
+  id: 'id',
+  caseTitle: 'caseTitle',
+  caseType: 'caseType',
+  status: 'status',
+  description: 'description',
+  courtDate: 'courtDate',
+  assignedLawyerId: 'assignedLawyerId',
+  academyId: 'academyId',
+  relatedUserId: 'relatedUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -567,6 +676,53 @@ exports.NotificationType = exports.$Enums.NotificationType = {
   URGENT: 'URGENT'
 };
 
+exports.AccountingType = exports.$Enums.AccountingType = {
+  EXPENSE: 'EXPENSE',
+  INCOME: 'INCOME',
+  SALARY: 'SALARY',
+  ADVANCE: 'ADVANCE',
+  INVOICE: 'INVOICE'
+};
+
+exports.InvoiceStatus = exports.$Enums.InvoiceStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.PRRequestStatus = exports.$Enums.PRRequestStatus = {
+  PENDING: 'PENDING',
+  IN_PROGRESS: 'IN_PROGRESS',
+  RESOLVED: 'RESOLVED',
+  CLOSED: 'CLOSED'
+};
+
+exports.AdminRoleType = exports.$Enums.AdminRoleType = {
+  DIRECTOR: 'DIRECTOR',
+  ACCOUNTANT: 'ACCOUNTANT',
+  SECRETARY: 'SECRETARY',
+  LEGAL_ADVISOR: 'LEGAL_ADVISOR',
+  HR_MANAGER: 'HR_MANAGER',
+  IT_MANAGER: 'IT_MANAGER',
+  GENERAL_MANAGER: 'GENERAL_MANAGER'
+};
+
+exports.LegalCaseType = exports.$Enums.LegalCaseType = {
+  CONTRACT: 'CONTRACT',
+  DISPUTE: 'DISPUTE',
+  INSURANCE: 'INSURANCE',
+  EMPLOYMENT: 'EMPLOYMENT',
+  INTELLECTUAL_PROPERTY: 'INTELLECTUAL_PROPERTY'
+};
+
+exports.LegalCaseStatus = exports.$Enums.LegalCaseStatus = {
+  OPEN: 'OPEN',
+  IN_PROGRESS: 'IN_PROGRESS',
+  CLOSED: 'CLOSED',
+  PENDING: 'PENDING'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   LoginHistory: 'LoginHistory',
@@ -604,7 +760,17 @@ exports.Prisma.ModelName = {
   Certificate: 'Certificate',
   Community: 'Community',
   Discussion: 'Discussion',
-  LiveRoom: 'LiveRoom'
+  LiveRoom: 'LiveRoom',
+  AccountingEntry: 'AccountingEntry',
+  Invoice: 'Invoice',
+  SalaryPayment: 'SalaryPayment',
+  PublicRelationsRecord: 'PublicRelationsRecord',
+  PRResponse: 'PRResponse',
+  Meeting: 'Meeting',
+  MeetingParticipant: 'MeetingParticipant',
+  AdminRole: 'AdminRole',
+  AdminAssignment: 'AdminAssignment',
+  LegalCase: 'LegalCase'
 };
 
 /**

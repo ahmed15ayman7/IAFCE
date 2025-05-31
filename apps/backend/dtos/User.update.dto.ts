@@ -28,6 +28,9 @@ import {
   LoginHistory,
   TwoFactor,
   UserAcademyCEO,
+  SalaryPayment,
+  MeetingParticipant,
+  LegalCase,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";

@@ -5,6 +5,10 @@ import {
   Course,
   Instructor,
   Event,
+  AccountingEntry,
+  PublicRelationsRecord,
+  Meeting,
+  LegalCase,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";

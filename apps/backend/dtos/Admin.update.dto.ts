@@ -1,5 +1,14 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { User, Group } from "@shared/prisma";
+import {
+  User,
+  Group,
+  AccountingEntry,
+  PublicRelationsRecord,
+  PRResponse,
+  Meeting,
+  AdminAssignment,
+  LegalCase,
+} from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()

@@ -26,6 +26,9 @@ import { PathEntity } from "./Path.entity";
 import { LoginHistoryEntity } from "./LoginHistory.entity";
 import { TwoFactorEntity } from "./TwoFactor.entity";
 import { UserAcademyCEOEntity } from "./UserAcademyCEO.entity";
+import { SalaryPaymentEntity } from "./SalaryPayment.entity";
+import { MeetingParticipantEntity } from "./MeetingParticipant.entity";
+import { LegalCaseEntity } from "./LegalCase.entity";
 import {
   UserRole,
   Academy,
@@ -55,6 +58,9 @@ import {
   LoginHistory,
   TwoFactor,
   UserAcademyCEO,
+  SalaryPayment,
+  MeetingParticipant,
+  LegalCase,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -270,4 +276,19 @@ export class UserEntity {
   // Field: UserAcademyCEO, Type: UserAcademyCEO[]
   @Column()
   UserAcademyCEO: UserAcademyCEO[];
+
+  @ApiProperty({ type: SalaryPaymentEntity })
+  // Field: SalaryPayment, Type: SalaryPayment[]
+  @Column()
+  SalaryPayment: SalaryPayment[];
+
+  @ApiProperty({ type: MeetingParticipantEntity })
+  // Field: MeetingParticipant, Type: MeetingParticipant[]
+  @Column()
+  MeetingParticipant: MeetingParticipant[];
+
+  @ApiProperty({ type: LegalCaseEntity })
+  // Field: LegalCase, Type: LegalCase[]
+  @Column()
+  LegalCase: LegalCase[];
 }
