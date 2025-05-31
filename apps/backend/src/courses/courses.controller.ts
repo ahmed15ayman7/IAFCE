@@ -47,9 +47,9 @@ export class CoursesController {
     async unenrollStudent(@Param('id') id: string, @Body() body: { studentId: string }): Promise<Course> {
         return this.coursesService.unenrollStudent(id, body.studentId);
     }
-    @Post(':id/add-instructor')
-    async addInstructor(@Param('id') id: string, @Body() body: { instructorId: string }): Promise<Course> {
-        return this.coursesService.addInstructor(id, body.instructorId);
+    @Post(':id/add-instructor/:instructorId')
+    async addInstructor(@Param('id') id: string, @Param('instructorId') instructorId: string): Promise<Course> {
+        return this.coursesService.addInstructor(id, instructorId);
     }
     @Post(':id/remove-instructor')
     async removeInstructor(@Param('id') id: string, @Body() body: { instructorId: string }): Promise<Course> {

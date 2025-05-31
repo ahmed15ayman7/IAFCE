@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateCourseDto } from 'dtos/Course.create.dto';
 import { UpdateCourseDto } from 'dtos/Course.update.dto';
-import { Course } from '@shared/prisma';
+import { Course, UserRole } from '@shared/prisma';
 
 @Injectable()
 export class CoursesService {
@@ -109,6 +109,15 @@ export class CoursesService {
         if (!course) {
             throw new NotFoundException('Course  no found');
         }
+        let student = await this.prisma.user.findUnique({
+            where: { id: studentId },
+        });
+        if (!student) {
+            throw new NotFoundException('Student not found');
+        }
+        if (student.role !== UserRole.STUDENT) {
+            throw new NotFoundException('Student is not a student');
+        }
         return this.prisma.course.update({
             where: { id: courseId },
             data: {
@@ -146,9 +155,28 @@ export class CoursesService {
         if (!course) {
             throw new NotFoundException('Course not found');
         }
+        let user = await this.prisma.user.findUnique({
+            where: { id: instructorId },
+        });
+        if (!user) {
+            throw new NotFoundException('User not found');
+        }
+        if (user.role !== UserRole.INSTRUCTOR) {
+            throw new NotFoundException('User is not an instructor');
+        }
+        let instructor = await this.prisma.instructor.findFirst({
+            where: { userId: instructorId },
+        });
+        if (!instructor) {
+
+            return this.prisma.course.update({
+                where: { id: courseId },
+                data: { instructors: { create: { userId: instructorId, academyId: course.academyId } } },
+            });
+        }
         return this.prisma.course.update({
             where: { id: courseId },
-            data: { instructors: { connect: { id: instructorId } } },
+            data: { instructors: { connect: { id: instructor.id } } },
         });
     }
     async removeInstructor(courseId: string, instructorId: string) {
