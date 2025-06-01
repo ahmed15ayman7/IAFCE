@@ -1256,6 +1256,10 @@ export const adminAuthApi = {
         const response = await api.post('/admin-auth/login', credentials);
         return response.data;
     },
+    getDashboardStats: async (timeRange: 'day' | 'week' | 'month' | 'year' = 'month') => {
+        const response = await api.get(`/admin-auth/dashboard/stats?timeRange=${timeRange}`);
+        return response.data;
+    },
 };
 
 export default api; 
