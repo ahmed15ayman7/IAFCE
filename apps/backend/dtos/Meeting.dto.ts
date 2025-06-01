@@ -2,7 +2,17 @@ import { ApiProperty } from "@nestjs/swagger";
 import { AdminEntity } from "./Admin.entity";
 import { AcademyEntity } from "./Academy.entity";
 import { MeetingParticipantEntity } from "./MeetingParticipant.entity";
-import { Admin, Academy, MeetingParticipant } from "@shared/prisma";
+import { FileEntity } from "./File.entity";
+import { ReportEntity } from "./Report.entity";
+import { ChannelEntity } from "./Channel.entity";
+import {
+  Admin,
+  Academy,
+  MeetingParticipant,
+  File,
+  Report,
+  Channel,
+} from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -57,6 +67,21 @@ export class MeetingDto {
   // Field: participants, Type: MeetingParticipant[]
   @Column()
   participants: MeetingParticipant[];
+
+  @ApiProperty({ type: FileEntity })
+  // Field: files, Type: File[]
+  @Column()
+  files: File[];
+
+  @ApiProperty({ type: ReportEntity })
+  // Field: reports, Type: Report[]
+  @Column()
+  reports: Report[];
+
+  @ApiProperty({ type: ChannelEntity })
+  // Field: channels, Type: Channel[]
+  @Column()
+  channels: Channel[];
 
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date

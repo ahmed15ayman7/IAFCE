@@ -1,5 +1,14 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { PRRequestStatus, Admin, Academy, PRResponse } from "@shared/prisma";
+import {
+  PRRequestStatus,
+  Admin,
+  Academy,
+  PRResponse,
+  Event,
+  Post,
+  File,
+  Channel,
+} from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()

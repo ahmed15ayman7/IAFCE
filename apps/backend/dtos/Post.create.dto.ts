@@ -1,5 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { User, Comment, Group, Community, Discussion } from "@shared/prisma";
+import {
+  User,
+  Comment,
+  Group,
+  Community,
+  Discussion,
+  PublicRelationsRecord,
+} from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -29,4 +36,9 @@ export class CreatePostDto {
   // Field: likesCount, Type: number
   @Column()
   likesCount: number;
+
+  @ApiProperty({ type: "string" })
+  // Field: publicRelationsRecordId, Type: string
+  @Column()
+  publicRelationsRecordId?: string;
 }

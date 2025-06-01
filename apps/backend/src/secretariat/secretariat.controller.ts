@@ -6,7 +6,7 @@ import { UpdateMeetingDto } from '../../dtos/Meeting.update.dto';
 import { CreateMeetingParticipantDto } from '../../dtos/MeetingParticipant.create.dto';
 import { AuthGuard } from '../auth/auth.guard';
 
-@ApiTags('Secretariat')
+@ApiTags('المكتب المركزي')
 @ApiBearerAuth()
 @UseGuards(AuthGuard)
 @Controller('secretariat')

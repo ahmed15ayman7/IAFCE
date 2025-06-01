@@ -5,7 +5,7 @@ import { CreateLegalCaseDto } from '../../dtos/LegalCase.create.dto';
 import { UpdateLegalCaseDto } from '../../dtos/LegalCase.update.dto';
 import { AuthGuard } from '../auth/auth.guard';
 
-@ApiTags('Legal Affairs')
+@ApiTags('القضايا القانونية')
 @ApiBearerAuth()
 @UseGuards(AuthGuard)
 @Controller('legal-affairs')

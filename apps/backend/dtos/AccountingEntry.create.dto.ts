@@ -5,6 +5,8 @@ import {
   Academy,
   Invoice,
   SalaryPayment,
+  File,
+  Report,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";

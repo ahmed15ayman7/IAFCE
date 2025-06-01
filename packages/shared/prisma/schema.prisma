@@ -249,13 +249,23 @@ model Lesson {
 }
 
 model File {
-    id        String   @id @default(cuid())
-    name      String
-    url       String
-    type      FileType
-    lessonId  String
-    lesson    Lesson   @relation(fields: [lessonId], references: [id])
-    createdAt DateTime @default(now())
+    id                String                 @id @default(cuid())
+    name              String
+    url               String
+    type              FileType
+    lessonId          String?
+    lesson            Lesson?                @relation(fields: [lessonId], references: [id])
+    accountingEntryId String?
+    accountingEntry   AccountingEntry?       @relation(fields: [accountingEntryId], references: [id])
+    prRecordId        String?
+    prRecord          PublicRelationsRecord? @relation(fields: [prRecordId], references: [id])
+    meetingId         String?
+    meeting           Meeting?               @relation(fields: [meetingId], references: [id])
+    adminRoleId       String?
+    adminRole         AdminRole?             @relation(fields: [adminRoleId], references: [id])
+    legalCaseId       String?
+    legalCase         LegalCase?             @relation(fields: [legalCaseId], references: [id])
+    createdAt         DateTime               @default(now())
 }
 
 enum FileType {
@@ -409,7 +419,9 @@ model Post {
 
     Community Community[]
 
-    Discussion Discussion[]
+    Discussion              Discussion[]
+    PublicRelationsRecord   PublicRelationsRecord? @relation(fields: [publicRelationsRecordId], references: [id])
+    publicRelationsRecordId String?
 }
 
 model Comment {
@@ -449,13 +461,21 @@ model Admin {
 }
 
 model Channel {
-    id        String    @id @default(cuid())
-    name      String
-    members   User[]
-    ownerId   String
-    owner     Owner     @relation(fields: [ownerId], references: [id])
-    messages  Message[]
-    createdAt DateTime  @default(now())
+    id          String                 @id @default(cuid())
+    name        String
+    members     User[]
+    ownerId     String
+    owner       Owner                  @relation(fields: [ownerId], references: [id])
+    messages    Message[]
+    prRecordId  String?
+    prRecord    PublicRelationsRecord? @relation(fields: [prRecordId], references: [id])
+    meetingId   String?
+    meeting     Meeting?               @relation(fields: [meetingId], references: [id])
+    adminRoleId String?
+    adminRole   AdminRole?             @relation(fields: [adminRoleId], references: [id])
+    legalCaseId String?
+    legalCase   LegalCase?             @relation(fields: [legalCaseId], references: [id])
+    createdAt   DateTime               @default(now())
 }
 
 model Owner {
@@ -478,15 +498,21 @@ model Bookmark {
 
 // Events and Calendar
 model Event {
-    id          String   @id @default(cuid())
+    id          String                 @id @default(cuid())
     title       String
     description String?
     startTime   DateTime
     endTime     DateTime
     academyId   String
-    academy     Academy  @relation(fields: [academyId], references: [id])
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+    academy     Academy                @relation(fields: [academyId], references: [id])
+    prRecordId  String?
+    prRecord    PublicRelationsRecord? @relation(fields: [prRecordId], references: [id])
+    adminRoleId String?
+    adminRole   AdminRole?             @relation(fields: [adminRoleId], references: [id])
+    legalCaseId String?
+    legalCase   LegalCase?             @relation(fields: [legalCaseId], references: [id])
+    createdAt   DateTime               @default(now())
+    updatedAt   DateTime               @updatedAt
 }
 
 // Attendance Tracking
@@ -503,18 +529,28 @@ model Attendance {
 }
 
 model Payment {
-    id        String   @id @default(cuid())
-    userId    String
-    user      User     @relation(fields: [userId], references: [id])
-    amount    Float
-    createdAt DateTime @default(now())
+    id          String     @id @default(cuid())
+    userId      String
+    user        User       @relation(fields: [userId], references: [id])
+    amount      Float
+    legalCaseId String?
+    legalCase   LegalCase? @relation(fields: [legalCaseId], references: [id])
+    createdAt   DateTime   @default(now())
 }
 
 model Report {
-    id        String   @id @default(cuid())
-    userId    String
-    user      User     @relation(fields: [userId], references: [id])
-    createdAt DateTime @default(now())
+    id                String           @id @default(cuid())
+    userId            String
+    user              User             @relation(fields: [userId], references: [id])
+    accountingEntryId String?
+    accountingEntry   AccountingEntry? @relation(fields: [accountingEntryId], references: [id])
+    meetingId         String?
+    meeting           Meeting?         @relation(fields: [meetingId], references: [id])
+    adminRoleId       String?
+    adminRole         AdminRole?       @relation(fields: [adminRoleId], references: [id])
+    legalCaseId       String?
+    legalCase         LegalCase?       @relation(fields: [legalCaseId], references: [id])
+    createdAt         DateTime         @default(now())
 }
 
 model Badge {
@@ -618,6 +654,8 @@ model AccountingEntry {
     academy          Academy        @relation(fields: [academyId], references: [id])
     invoice          Invoice?
     salaryPayment    SalaryPayment?
+    files            File[]
+    reports          Report[]
     createdAt        DateTime       @default(now())
     updatedAt        DateTime       @updatedAt
 }
@@ -674,6 +712,10 @@ model PublicRelationsRecord {
     academyId        String
     academy          Academy         @relation(fields: [academyId], references: [id])
     responses        PRResponse[]
+    events           Event[]
+    posts            Post[]
+    files            File[]
+    channels         Channel[]
     createdAt        DateTime        @default(now())
     updatedAt        DateTime        @updatedAt
 }
@@ -700,6 +742,9 @@ model Meeting {
     academyId        String
     academy          Academy              @relation(fields: [academyId], references: [id])
     participants     MeetingParticipant[]
+    files            File[]
+    reports          Report[]
+    channels         Channel[]
     createdAt        DateTime             @default(now())
     updatedAt        DateTime             @updatedAt
 }
@@ -731,6 +776,10 @@ model AdminRole {
     name        AdminRoleType
     description String?
     assignments AdminAssignment[]
+    reports     Report[]
+    files       File[]
+    events      Event[]
+    channels    Channel[]
     createdAt   DateTime          @default(now())
     updatedAt   DateTime          @updatedAt
 }
@@ -777,6 +826,11 @@ model LegalCase {
     academy          Academy         @relation(fields: [academyId], references: [id])
     relatedUserId    String?
     relatedUser      User?           @relation(fields: [relatedUserId], references: [id])
+    files            File[]
+    reports          Report[]
+    events           Event[]
+    channels         Channel[]
+    payments         Payment[]
     createdAt        DateTime        @default(now())
     updatedAt        DateTime        @updatedAt
 }

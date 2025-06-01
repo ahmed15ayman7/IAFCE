@@ -2,7 +2,20 @@ import { ApiProperty } from "@nestjs/swagger";
 import { AdminEntity } from "./Admin.entity";
 import { AcademyEntity } from "./Academy.entity";
 import { PRResponseEntity } from "./PRResponse.entity";
-import { PRRequestStatus, Admin, Academy, PRResponse } from "@shared/prisma";
+import { EventEntity } from "./Event.entity";
+import { PostEntity } from "./Post.entity";
+import { FileEntity } from "./File.entity";
+import { ChannelEntity } from "./Channel.entity";
+import {
+  PRRequestStatus,
+  Admin,
+  Academy,
+  PRResponse,
+  Event,
+  Post,
+  File,
+  Channel,
+} from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -57,6 +70,26 @@ export class PublicRelationsRecordDto {
   // Field: responses, Type: PRResponse[]
   @Column()
   responses: PRResponse[];
+
+  @ApiProperty({ type: EventEntity })
+  // Field: events, Type: Event[]
+  @Column()
+  events: Event[];
+
+  @ApiProperty({ type: PostEntity })
+  // Field: posts, Type: Post[]
+  @Column()
+  posts: Post[];
+
+  @ApiProperty({ type: FileEntity })
+  // Field: files, Type: File[]
+  @Column()
+  files: File[];
+
+  @ApiProperty({ type: ChannelEntity })
+  // Field: channels, Type: Channel[]
+  @Column()
+  channels: Channel[];
 
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date

@@ -2,7 +2,6 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards } from '@nes
 import { GroupsService } from './groups.service';
 import { CreateGroupDto } from '../../dtos/Group.create.dto';
 import { UpdateGroupDto } from '../../dtos/Group.update.dto';
-import { GroupDto } from '../../dtos/Group.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { Group, Post as PostEntity } from '@shared/prisma';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';

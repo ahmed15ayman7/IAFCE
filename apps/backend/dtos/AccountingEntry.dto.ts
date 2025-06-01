@@ -3,12 +3,16 @@ import { AdminEntity } from "./Admin.entity";
 import { AcademyEntity } from "./Academy.entity";
 import { InvoiceEntity } from "./Invoice.entity";
 import { SalaryPaymentEntity } from "./SalaryPayment.entity";
+import { FileEntity } from "./File.entity";
+import { ReportEntity } from "./Report.entity";
 import {
   AccountingType,
   Admin,
   Academy,
   Invoice,
   SalaryPayment,
+  File,
+  Report,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -69,6 +73,16 @@ export class AccountingEntryDto {
   // Field: salaryPayment, Type: SalaryPayment
   @Column()
   salaryPayment?: SalaryPayment;
+
+  @ApiProperty({ type: FileEntity })
+  // Field: files, Type: File[]
+  @Column()
+  files: File[];
+
+  @ApiProperty({ type: ReportEntity })
+  // Field: reports, Type: Report[]
+  @Column()
+  reports: Report[];
 
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date

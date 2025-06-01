@@ -242,6 +242,11 @@ exports.Prisma.FileScalarFieldEnum = {
   url: 'url',
   type: 'type',
   lessonId: 'lessonId',
+  accountingEntryId: 'accountingEntryId',
+  prRecordId: 'prRecordId',
+  meetingId: 'meetingId',
+  adminRoleId: 'adminRoleId',
+  legalCaseId: 'legalCaseId',
   createdAt: 'createdAt'
 };
 
@@ -349,7 +354,8 @@ exports.Prisma.PostScalarFieldEnum = {
   content: 'content',
   title: 'title',
   createdAt: 'createdAt',
-  likesCount: 'likesCount'
+  likesCount: 'likesCount',
+  publicRelationsRecordId: 'publicRelationsRecordId'
 };
 
 exports.Prisma.CommentScalarFieldEnum = {
@@ -378,6 +384,10 @@ exports.Prisma.ChannelScalarFieldEnum = {
   id: 'id',
   name: 'name',
   ownerId: 'ownerId',
+  prRecordId: 'prRecordId',
+  meetingId: 'meetingId',
+  adminRoleId: 'adminRoleId',
+  legalCaseId: 'legalCaseId',
   createdAt: 'createdAt'
 };
 
@@ -402,6 +412,9 @@ exports.Prisma.EventScalarFieldEnum = {
   startTime: 'startTime',
   endTime: 'endTime',
   academyId: 'academyId',
+  prRecordId: 'prRecordId',
+  adminRoleId: 'adminRoleId',
+  legalCaseId: 'legalCaseId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -420,12 +433,17 @@ exports.Prisma.PaymentScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   amount: 'amount',
+  legalCaseId: 'legalCaseId',
   createdAt: 'createdAt'
 };
 
 exports.Prisma.ReportScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  accountingEntryId: 'accountingEntryId',
+  meetingId: 'meetingId',
+  adminRoleId: 'adminRoleId',
+  legalCaseId: 'legalCaseId',
   createdAt: 'createdAt'
 };
 

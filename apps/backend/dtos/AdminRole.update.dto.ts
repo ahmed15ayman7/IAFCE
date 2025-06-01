@@ -1,5 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { AdminRoleType, AdminAssignment } from "@shared/prisma";
+import {
+  AdminRoleType,
+  AdminAssignment,
+  Report,
+  File,
+  Event,
+  Channel,
+} from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()

@@ -2,12 +2,22 @@ import { ApiProperty } from "@nestjs/swagger";
 import { AdminEntity } from "./Admin.entity";
 import { AcademyEntity } from "./Academy.entity";
 import { UserEntity } from "./User.entity";
+import { FileEntity } from "./File.entity";
+import { ReportEntity } from "./Report.entity";
+import { EventEntity } from "./Event.entity";
+import { ChannelEntity } from "./Channel.entity";
+import { PaymentEntity } from "./Payment.entity";
 import {
   LegalCaseType,
   LegalCaseStatus,
   Admin,
   Academy,
   User,
+  File,
+  Report,
+  Event,
+  Channel,
+  Payment,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -73,6 +83,31 @@ export class LegalCaseDto {
   // Field: relatedUser, Type: User
   @Column()
   relatedUser?: User;
+
+  @ApiProperty({ type: FileEntity })
+  // Field: files, Type: File[]
+  @Column()
+  files: File[];
+
+  @ApiProperty({ type: ReportEntity })
+  // Field: reports, Type: Report[]
+  @Column()
+  reports: Report[];
+
+  @ApiProperty({ type: EventEntity })
+  // Field: events, Type: Event[]
+  @Column()
+  events: Event[];
+
+  @ApiProperty({ type: ChannelEntity })
+  // Field: channels, Type: Channel[]
+  @Column()
+  channels: Channel[];
+
+  @ApiProperty({ type: PaymentEntity })
+  // Field: payments, Type: Payment[]
+  @Column()
+  payments: Payment[];
 
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date

@@ -1,5 +1,13 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { FileType, Lesson } from "@shared/prisma";
+import {
+  FileType,
+  Lesson,
+  AccountingEntry,
+  PublicRelationsRecord,
+  Meeting,
+  AdminRole,
+  LegalCase,
+} from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -23,7 +31,32 @@ export class CreateFileDto {
   @ApiProperty({ type: "string" })
   // Field: lessonId, Type: string
   @Column()
-  lessonId: string;
+  lessonId?: string;
+
+  @ApiProperty({ type: "string" })
+  // Field: accountingEntryId, Type: string
+  @Column()
+  accountingEntryId?: string;
+
+  @ApiProperty({ type: "string" })
+  // Field: prRecordId, Type: string
+  @Column()
+  prRecordId?: string;
+
+  @ApiProperty({ type: "string" })
+  // Field: meetingId, Type: string
+  @Column()
+  meetingId?: string;
+
+  @ApiProperty({ type: "string" })
+  // Field: adminRoleId, Type: string
+  @Column()
+  adminRoleId?: string;
+
+  @ApiProperty({ type: "string" })
+  // Field: legalCaseId, Type: string
+  @Column()
+  legalCaseId?: string;
 
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date

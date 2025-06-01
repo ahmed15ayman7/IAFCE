@@ -5,6 +5,11 @@ import {
   Admin,
   Academy,
   User,
+  File,
+  Report,
+  Event,
+  Channel,
+  Payment,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";

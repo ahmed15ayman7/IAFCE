@@ -4,7 +4,15 @@ import { CommentEntity } from "./Comment.entity";
 import { GroupEntity } from "./Group.entity";
 import { CommunityEntity } from "./Community.entity";
 import { DiscussionEntity } from "./Discussion.entity";
-import { User, Comment, Group, Community, Discussion } from "@shared/prisma";
+import { PublicRelationsRecordEntity } from "./PublicRelationsRecord.entity";
+import {
+  User,
+  Comment,
+  Group,
+  Community,
+  Discussion,
+  PublicRelationsRecord,
+} from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -64,4 +72,14 @@ export class PostEntity {
   // Field: Discussion, Type: Discussion[]
   @Column()
   Discussion: Discussion[];
+
+  @ApiProperty({ type: PublicRelationsRecordEntity, nullable: true })
+  // Field: PublicRelationsRecord, Type: PublicRelationsRecord
+  @Column()
+  PublicRelationsRecord?: PublicRelationsRecord;
+
+  @ApiProperty({ type: "string", nullable: true })
+  // Field: publicRelationsRecordId, Type: string
+  @Column()
+  publicRelationsRecordId?: string;
 }
