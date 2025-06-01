@@ -366,22 +366,65 @@ export const eventApi = {
 };
 
 // Academy APIs
-export const academyApi = {
-    getAll: () => api.get('/academies'),
-    getById: (id: string) => api.get(`/academies/${id}`),
-    create: (data: {
-        name: string;
-        description?: string;
-        logo?: string;
-        settings?: any;
-    }) => api.post('/academies', data),
-    update: (id: string, data: {
-        name?: string;
-        description?: string;
-        logo?: string;
-        settings?: any;
-    }) => api.patch(`/academies/${id}`, data),
-    delete: (id: string) => api.delete(`/academies/${id}`),
+export const academicApi = {
+    getAll: async (academyId: string) => {
+        const response = await fetch(`/api/academic?academyId=${academyId}`);
+        return response.json();
+    },
+    getById: async (id: string) => {
+        const response = await fetch(`/api/academic/${id}`);
+        return response.json();
+    },
+    create: async (data: {
+        title: string;
+        description: string;
+        type: string;
+        level: string;
+        instructor: string;
+        startDate: string;
+        endDate: string;
+        status: string;
+        academyId: string;
+        createdByAdminId: string;
+    }) => {
+        const response = await fetch('/api/academic', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        return response.json();
+    },
+    update: async (
+        id: string,
+        data: {
+            title?: string;
+            description?: string;
+            type?: string;
+            level?: string;
+            instructor?: string;
+            startDate?: string;
+            endDate?: string;
+            status?: string;
+            updatedByAdminId: string;
+        }
+    ) => {
+        const response = await fetch(`/api/academic/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        return response.json();
+    },
+    delete: async (id: string) => {
+        const response = await fetch(`/api/academic/${id}`, {
+            method: 'DELETE',
+        });
+        return response.json();
+    },
 };
 
 // Achievement APIs
@@ -565,4 +608,632 @@ export const pathApi = {
     update: (id: string, data: Path) => api.patch(`/paths/${id}`, data),
     delete: (id: string) => api.delete(`/paths/${id}`),
 };
+
+// Cases APIs
+export const casesApi = {
+    getAll: (academyId: string): Promise<{ success: boolean, data: any[] }> => api.get(`/cases?academyId=${academyId}`),
+    getById: (id: string): Promise<{ success: boolean, data: any }> => api.get(`/cases/${id}`),
+    create: (data: {
+        caseTitle: string;
+        caseType: string;
+        description: string;
+        courtDate?: Date;
+        assignedLawyerId: string;
+        academyId: string;
+        relatedUserId?: string;
+        userId: string;
+    }) => api.post('/cases', data),
+    update: (id: string, data: {
+        caseTitle?: string;
+        caseType?: string;
+        description?: string;
+        courtDate?: Date;
+        status?: string;
+        assignedLawyerId?: string;
+        relatedUserId?: string;
+    }) => api.patch(`/cases/${id}`, data),
+    delete: (id: string) => api.delete(`/cases/${id}`),
+    getByType: (academyId: string, type: string): Promise<{ success: boolean, data: any[] }> => api.get(`/cases/type/${type}?academyId=${academyId}`),
+    getByStatus: (academyId: string, status: string): Promise<{ success: boolean, data: any[] }> => api.get(`/cases/status/${status}?academyId=${academyId}`),
+};
+
+// Contracts APIs
+export const contractsApi = {
+    getAll: (academyId: string): Promise<{ success: boolean, data: any[] }> => api.get(`/contracts?academyId=${academyId}`),
+    getById: (id: string): Promise<{ success: boolean, data: any }> => api.get(`/contracts/${id}`),
+    create: (data: {
+        caseTitle: string;
+        description: string;
+        assignedLawyerId: string;
+        academyId: string;
+        relatedUserId?: string;
+        userId: string;
+    }) => api.post('/contracts', data),
+    update: (id: string, data: {
+        caseTitle?: string;
+        description?: string;
+        assignedLawyerId?: string;
+        relatedUserId?: string;
+    }) => api.patch(`/contracts/${id}`, data),
+    delete: (id: string) => api.delete(`/contracts/${id}`),
+    getByStatus: (academyId: string, status: string): Promise<{ success: boolean, data: any[] }> => api.get(`/contracts/status/${status}?academyId=${academyId}`),
+};
+
+// Permissions APIs
+export const permissionsApi = {
+    getAll: (): Promise<{ success: boolean, data: any[] }> => api.get('/permissions'),
+    getById: (id: string): Promise<{ success: boolean, data: any }> => api.get(`/permissions/${id}`),
+    create: (data: {
+        name: string;
+        description?: string;
+        userId: string;
+    }) => api.post('/permissions', data),
+    update: (id: string, data: {
+        name?: string;
+        description?: string;
+    }) => api.patch(`/permissions/${id}`, data),
+    delete: (id: string) => api.delete(`/permissions/${id}`),
+    assign: (data: {
+        adminId: string;
+        permissionId: string;
+        startDate: Date;
+        endDate?: Date;
+        userId: string;
+    }) => api.post('/permissions/assign', data),
+};
+
+// Departments APIs
+export const departmentsApi = {
+    getAll: (): Promise<{ success: boolean, data: any[] }> => api.get('/departments'),
+    getById: (id: string): Promise<{ success: boolean, data: any }> => api.get(`/departments/${id}`),
+    create: (data: {
+        name: string;
+        description?: string;
+        managerId: string;
+        userId: string;
+    }) => api.post('/departments', data),
+    update: (id: string, data: {
+        name?: string;
+        description?: string;
+        managerId?: string;
+    }) => api.patch(`/departments/${id}`, data),
+    delete: (id: string) => api.delete(`/departments/${id}`),
+    assignManager: (data: {
+        departmentId: string;
+        managerId: string;
+        startDate: Date;
+        endDate?: Date;
+        userId: string;
+    }) => api.post('/departments/assign-manager', data),
+};
+
+// Accounting APIs
+export const accountingApi = {
+    getAll: async (academyId: string) => {
+        const response = await fetch(`/api/accounting?academyId=${academyId}`);
+        return response.json();
+    },
+    getById: async (id: string) => {
+        const response = await fetch(`/api/accounting/${id}`);
+        return response.json();
+    },
+    create: async (data: {
+        type: string;
+        amount: number;
+        description: string;
+        date: Date;
+        createdByAdminId: string;
+        academyId: string;
+    }) => {
+        const response = await fetch('/api/accounting', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        return response.json();
+    },
+    update: async (
+        id: string,
+        data: {
+            type?: string;
+            amount?: number;
+            description?: string;
+            date?: Date;
+        }
+    ) => {
+        const response = await fetch(`/api/accounting/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        return response.json();
+    },
+    delete: async (id: string) => {
+        const response = await fetch(`/api/accounting/${id}`, {
+            method: 'DELETE',
+        });
+        return response.json();
+    },
+    getMonthlyStats: async (academyId: string) => {
+        const response = await fetch(`/api/accounting/stats/monthly?academyId=${academyId}`);
+        return response.json();
+    },
+};
+
+// Public Relations Models
+export interface PRRecord {
+    id: string;
+    message: string;
+    senderName: string;
+    senderContact: string;
+    status: 'PENDING' | 'IN_PROGRESS' | 'RESOLVED' | 'CLOSED';
+    handledByAdminId: string;
+    academyId: string;
+    responses: PRResponse[];
+    events: Event[];
+    posts: Post[];
+    files: File[];
+    channels: Channel[];
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export interface PRResponse {
+    id: string;
+    response: string;
+    prRecordId: string;
+    respondedByAdminId: string;
+    createdAt: Date;
+}
+
+// Secretariat Models
+export interface Meeting {
+    id: string;
+    meetingTitle: string;
+    meetingDate: Date;
+    location: string;
+    notes?: string;
+    createdByAdminId: string;
+    academyId: string;
+    participants: MeetingParticipant[];
+    files: File[];
+    reports: Report[];
+    channels: Channel[];
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export interface MeetingParticipant {
+    id: string;
+    meetingId: string;
+    userId: string;
+    isAttended: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+// General Administration Models
+export interface AdminRole {
+    id: string;
+    name: 'DIRECTOR' | 'ACCOUNTANT' | 'SECRETARY' | 'LEGAL_ADVISOR' | 'HR_MANAGER' | 'IT_MANAGER' | 'GENERAL_MANAGER';
+    description?: string;
+    assignments: AdminAssignment[];
+    reports: Report[];
+    files: File[];
+    events: Event[];
+    channels: Channel[];
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export interface AdminAssignment {
+    id: string;
+    adminId: string;
+    roleId: string;
+    startDate: Date;
+    endDate?: Date;
+    status: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+// Legal Affairs Models
+export interface LegalCase {
+    id: string;
+    caseTitle: string;
+    caseType: 'CONTRACT' | 'DISPUTE' | 'INSURANCE' | 'EMPLOYMENT' | 'INTELLECTUAL_PROPERTY';
+    status: 'OPEN' | 'IN_PROGRESS' | 'CLOSED' | 'PENDING';
+    description: string;
+    courtDate?: Date;
+    assignedLawyerId: string;
+    academyId: string;
+    relatedUserId?: string;
+    files: File[];
+    reports: Report[];
+    events: Event[];
+    channels: Channel[];
+    payments: Payment[];
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export interface Payment {
+    id: string;
+    userId: string;
+    amount: number;
+    legalCaseId?: string;
+    createdAt: Date;
+}
+
+// Update API interfaces to use the new models
+export const publicRelationsApi = {
+    getAll: (academyId: string): Promise<{ success: boolean, data: PRRecord[] }> => api.get(`/public-relations?academyId=${academyId}`),
+    getById: (id: string): Promise<{ success: boolean, data: PRRecord }> => api.get(`/public-relations/${id}`),
+    create: (data: Omit<PRRecord, 'id' | 'createdAt' | 'updatedAt' | 'responses' | 'events' | 'posts' | 'files' | 'channels'>) => api.post('/public-relations', data),
+    update: (id: string, data: Partial<PRRecord>) => api.patch(`/public-relations/${id}`, data),
+    delete: (id: string) => api.delete(`/public-relations/${id}`),
+    getByStatus: (academyId: string, status: PRRecord['status']): Promise<{ success: boolean, data: PRRecord[] }> => api.get(`/public-relations/status/${status}?academyId=${academyId}`),
+    addResponse: (id: string, data: Omit<PRResponse, 'id' | 'prRecordId' | 'createdAt'>) => api.post(`/public-relations/${id}/response`, data),
+};
+
+export const secretariatApi = {
+    getAll: (academyId: string): Promise<{ success: boolean, data: Meeting[] }> => api.get(`/meetings?academyId=${academyId}`),
+    getById: (id: string): Promise<{ success: boolean, data: Meeting }> => api.get(`/meetings/${id}`),
+    create: (data: Omit<Meeting, 'id' | 'createdAt' | 'updatedAt' | 'participants' | 'files' | 'reports' | 'channels'> & { participants: string[] }) => api.post('/meetings', data),
+    update: (id: string, data: Partial<Meeting>) => api.patch(`/meetings/${id}`, data),
+    delete: (id: string) => api.delete(`/meetings/${id}`),
+    getByDate: (academyId: string, date: string): Promise<{ success: boolean, data: Meeting[] }> => api.get(`/meetings/date/${date}?academyId=${academyId}`),
+    addParticipant: (id: string, userId: string) => api.post(`/meetings/${id}/participants`, { userId }),
+    removeParticipant: (id: string, userId: string) => api.delete(`/meetings/${id}/participants/${userId}`),
+    markAttendance: (id: string, userId: string, isAttended: boolean) => api.patch(`/meetings/${id}/participants/${userId}/attendance`, { isAttended }),
+};
+
+export const adminRoleApi = {
+    getAll: (): Promise<{ success: boolean, data: AdminRole[] }> => api.get('/admin-roles'),
+    getById: (id: string): Promise<{ success: boolean, data: AdminRole }> => api.get(`/admin-roles/${id}`),
+    create: (data: Omit<AdminRole, 'id' | 'createdAt' | 'updatedAt' | 'assignments' | 'reports' | 'files' | 'events' | 'channels'>) => api.post('/admin-roles', data),
+    update: (id: string, data: Partial<AdminRole>) => api.patch(`/admin-roles/${id}`, data),
+    delete: (id: string) => api.delete(`/admin-roles/${id}`),
+    assignRole: (data: Omit<AdminAssignment, 'id' | 'createdAt' | 'updatedAt'>) => api.post('/admin-roles/assign', data),
+    removeRole: (id: string) => api.delete(`/admin-roles/assign/${id}`),
+};
+
+export const legalCaseApi = {
+    getAll: (academyId: string): Promise<{ success: boolean, data: LegalCase[] }> => api.get(`/legal-cases?academyId=${academyId}`),
+    getById: (id: string): Promise<{ success: boolean, data: LegalCase }> => api.get(`/legal-cases/${id}`),
+    create: (data: Omit<LegalCase, 'id' | 'createdAt' | 'updatedAt' | 'files' | 'reports' | 'events' | 'channels' | 'payments'>) => api.post('/legal-cases', data),
+    update: (id: string, data: Partial<LegalCase>) => api.patch(`/legal-cases/${id}`, data),
+    delete: (id: string) => api.delete(`/legal-cases/${id}`),
+    getByType: (academyId: string, type: LegalCase['caseType']): Promise<{ success: boolean, data: LegalCase[] }> => api.get(`/legal-cases/type/${type}?academyId=${academyId}`),
+    getByStatus: (academyId: string, status: LegalCase['status']): Promise<{ success: boolean, data: LegalCase[] }> => api.get(`/legal-cases/status/${status}?academyId=${academyId}`),
+    addPayment: (id: string, data: Omit<Payment, 'id' | 'createdAt'>) => api.post(`/legal-cases/${id}/payments`, data),
+};
+
+// Channel Model
+export interface Channel {
+    id: string;
+    name: string;
+    members: User[];
+    ownerId: string;
+    prRecordId?: string;
+    meetingId?: string;
+    adminRoleId?: string;
+    legalCaseId?: string;
+    createdAt: Date;
+}
+
+// Media Models
+export interface Media {
+    id: string;
+    name: string;
+    url: string;
+    type: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'DOCUMENT';
+    size: number;
+    mimeType: string;
+    userId: string;
+    createdAt: Date;
+}
+
+// Document Models
+export interface Document {
+    id: string;
+    title: string;
+    description?: string;
+    fileUrl: string;
+    fileType: string;
+    fileSize: number;
+    category: string;
+    tags: string[];
+    userId: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+// Role Models
+export interface Role {
+    id: string;
+    name: string;
+    description?: string;
+    permissions: string[];
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+// Social Media Models
+export interface SocialMediaPost {
+    id: string;
+    platform: 'FACEBOOK' | 'TWITTER' | 'INSTAGRAM' | 'LINKEDIN';
+    content: string;
+    mediaUrls?: string[];
+    scheduledTime?: Date;
+    status: 'DRAFT' | 'SCHEDULED' | 'PUBLISHED' | 'FAILED';
+    analytics?: {
+        likes: number;
+        shares: number;
+        comments: number;
+        reach: number;
+    };
+    userId: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+// Calendar Models
+export interface CalendarEvent {
+    id: string;
+    title: string;
+    description?: string;
+    startTime: Date;
+    endTime: Date;
+    location?: string;
+    type: 'MEETING' | 'TASK' | 'REMINDER' | 'EVENT';
+    status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
+    participants: string[];
+    userId: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+// Media APIs
+export const mediaApi = {
+    getAll: (): Promise<{ success: boolean, data: Media[] }> => api.get('/media'),
+    getById: (id: string): Promise<{ success: boolean, data: Media }> => api.get(`/media/${id}`),
+    upload: (file: File): Promise<{ success: boolean, data: Media }> => {
+        const formData = new FormData();
+        formData.append('file', file);
+        return api.post('/media/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+    },
+    delete: (id: string) => api.delete(`/media/${id}`),
+    getByType: (type: Media['type']): Promise<{ success: boolean, data: Media[] }> => api.get(`/media/type/${type}`),
+};
+
+// Document APIs
+export const documentApi = {
+    getAll: (): Promise<{ success: boolean, data: Document[] }> => api.get('/documents'),
+    getById: (id: string): Promise<{ success: boolean, data: Document }> => api.get(`/documents/${id}`),
+    create: (data: Omit<Document, 'id' | 'createdAt' | 'updatedAt'>) => api.post('/documents', data),
+    update: (id: string, data: Partial<Document>) => api.patch(`/documents/${id}`, data),
+    delete: (id: string) => api.delete(`/documents/${id}`),
+    getByCategory: (category: string): Promise<{ success: boolean, data: Document[] }> => api.get(`/documents/category/${category}`),
+    getByTag: (tag: string): Promise<{ success: boolean, data: Document[] }> => api.get(`/documents/tag/${tag}`),
+    download: (id: string) => api.get(`/documents/${id}/download`, {
+        responseType: 'blob',
+    }),
+};
+
+// Role APIs
+export const roleApi = {
+    getAll: (): Promise<{ success: boolean, data: Role[] }> => api.get('/roles'),
+    getById: (id: string): Promise<{ success: boolean, data: Role }> => api.get(`/roles/${id}`),
+    create: (data: Omit<Role, 'id' | 'createdAt' | 'updatedAt'>) => api.post('/roles', data),
+    update: (id: string, data: Partial<Role>) => api.patch(`/roles/${id}`, data),
+    delete: (id: string) => api.delete(`/roles/${id}`),
+    assignPermissions: (id: string, permissions: string[]) => api.post(`/roles/${id}/permissions`, { permissions }),
+    removePermissions: (id: string, permissions: string[]) => api.delete(`/roles/${id}/permissions`, { data: { permissions } }),
+};
+
+// Social Media APIs
+export const socialMediaApi = {
+    getAll: (): Promise<{ success: boolean, data: SocialMediaPost[] }> => api.get('/social-media'),
+    getById: (id: string): Promise<{ success: boolean, data: SocialMediaPost }> => api.get(`/social-media/${id}`),
+    create: (data: Omit<SocialMediaPost, 'id' | 'createdAt' | 'updatedAt'>) => api.post('/social-media', data),
+    update: (id: string, data: Partial<SocialMediaPost>) => api.patch(`/social-media/${id}`, data),
+    delete: (id: string) => api.delete(`/social-media/${id}`),
+    getByPlatform: (platform: SocialMediaPost['platform']): Promise<{ success: boolean, data: SocialMediaPost[] }> => api.get(`/social-media/platform/${platform}`),
+    getByStatus: (status: SocialMediaPost['status']): Promise<{ success: boolean, data: SocialMediaPost[] }> => api.get(`/social-media/status/${status}`),
+    schedule: (id: string, scheduledTime: Date) => api.post(`/social-media/${id}/schedule`, { scheduledTime }),
+    publish: (id: string) => api.post(`/social-media/${id}/publish`),
+    getAnalytics: (id: string): Promise<{ success: boolean, data: SocialMediaPost['analytics'] }> => api.get(`/social-media/${id}/analytics`),
+};
+
+// Calendar APIs
+export const calendarApi = {
+    getAll: (): Promise<{ success: boolean, data: CalendarEvent[] }> => api.get('/calendar'),
+    getById: (id: string): Promise<{ success: boolean, data: CalendarEvent }> => api.get(`/calendar/${id}`),
+    create: (data: Omit<CalendarEvent, 'id' | 'createdAt' | 'updatedAt'>) => api.post('/calendar', data),
+    update: (id: string, data: Partial<CalendarEvent>) => api.patch(`/calendar/${id}`, data),
+    delete: (id: string) => api.delete(`/calendar/${id}`),
+    getByDate: (date: string): Promise<{ success: boolean, data: CalendarEvent[] }> => api.get(`/calendar/date/${date}`),
+    getByType: (type: CalendarEvent['type']): Promise<{ success: boolean, data: CalendarEvent[] }> => api.get(`/calendar/type/${type}`),
+    getByStatus: (status: CalendarEvent['status']): Promise<{ success: boolean, data: CalendarEvent[] }> => api.get(`/calendar/status/${status}`),
+    addParticipant: (id: string, userId: string) => api.post(`/calendar/${id}/participants`, { userId }),
+    removeParticipant: (id: string, userId: string) => api.delete(`/calendar/${id}/participants/${userId}`),
+    updateStatus: (id: string, status: CalendarEvent['status']) => api.patch(`/calendar/${id}/status`, { status }),
+};
+
+export const communicationsApi = {
+    getAll: async (academyId: string) => {
+        const response = await fetch(`/api/communications?academyId=${academyId}`);
+        return response.json();
+    },
+    getById: async (id: string) => {
+        const response = await fetch(`/api/communications/${id}`);
+        return response.json();
+    },
+    create: async (data: {
+        title: string;
+        content: string;
+        type: string;
+        status: string;
+        academyId: string;
+        createdByAdminId: string;
+    }) => {
+        const response = await fetch('/api/communications', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        return response.json();
+    },
+    update: async (
+        id: string,
+        data: {
+            title?: string;
+            content?: string;
+            type?: string;
+            status?: string;
+            updatedByAdminId: string;
+        }
+    ) => {
+        const response = await fetch(`/api/communications/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        return response.json();
+    },
+    delete: async (id: string) => {
+        const response = await fetch(`/api/communications/${id}`, {
+            method: 'DELETE',
+        });
+        return response.json();
+    },
+};
+
+export const secretaryApi = {
+    getAllTasks: async (academyId: string) => {
+        const response = await fetch(`/api/secretary/tasks?academyId=${academyId}`);
+        return response.json();
+    },
+    getTaskById: async (id: string) => {
+        const response = await fetch(`/api/secretary/tasks/${id}`);
+        return response.json();
+    },
+    createTask: async (data: {
+        title: string;
+        description: string;
+        type: string;
+        status: string;
+        priority: string;
+        dueDate: string;
+        academyId: string;
+        createdByAdminId: string;
+    }) => {
+        const response = await fetch('/api/secretary/tasks', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        return response.json();
+    },
+    updateTask: async (
+        id: string,
+        data: {
+            title?: string;
+            description?: string;
+            type?: string;
+            status?: string;
+            priority?: string;
+            dueDate?: string;
+            updatedByAdminId: string;
+        }
+    ) => {
+        const response = await fetch(`/api/secretary/tasks/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        return response.json();
+    },
+    deleteTask: async (id: string) => {
+        const response = await fetch(`/api/secretary/tasks/${id}`, {
+            method: 'DELETE',
+        });
+        return response.json();
+    },
+};
+
+export const legalApi = {
+    getAll: async (academyId: string) => {
+        const response = await fetch(`/api/legal?academyId=${academyId}`);
+        return response.json();
+    },
+    getById: async (id: string) => {
+        const response = await fetch(`/api/legal/${id}`);
+        return response.json();
+    },
+    create: async (data: {
+        title: string;
+        description: string;
+        type: string;
+        status: string;
+        dueDate: string;
+        assignedTo: string;
+        academyId: string;
+        createdByAdminId: string;
+    }) => {
+        const response = await fetch('/api/legal', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        return response.json();
+    },
+    update: async (
+        id: string,
+        data: {
+            title?: string;
+            description?: string;
+            type?: string;
+            status?: string;
+            dueDate?: string;
+            assignedTo?: string;
+            updatedByAdminId: string;
+        }
+    ) => {
+        const response = await fetch(`/api/legal/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        return response.json();
+    },
+    delete: async (id: string) => {
+        const response = await fetch(`/api/legal/${id}`, {
+            method: 'DELETE',
+        });
+        return response.json();
+    },
+};
+
 export default api; 

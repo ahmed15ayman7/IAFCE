@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { AdminAssignmentEntity } from "./AdminAssignment.entity";
+import { PermissionEntity } from "./Permission.entity";
 import { ReportEntity } from "./Report.entity";
 import { FileEntity } from "./File.entity";
 import { EventEntity } from "./Event.entity";
@@ -7,6 +8,7 @@ import { ChannelEntity } from "./Channel.entity";
 import {
   AdminRoleType,
   AdminAssignment,
+  Permission,
   Report,
   File,
   Event,
@@ -36,6 +38,11 @@ export class AdminRoleEntity {
   // Field: assignments, Type: AdminAssignment[]
   @Column()
   assignments: AdminAssignment[];
+
+  @ApiProperty({ type: PermissionEntity })
+  // Field: permissions, Type: Permission[]
+  @Column()
+  permissions: Permission[];
 
   @ApiProperty({ type: ReportEntity })
   // Field: reports, Type: Report[]

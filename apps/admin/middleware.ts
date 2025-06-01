@@ -1,26 +1,58 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
-import { getRefreshToken } from './lib/server-cookie.service';
 
-const publicPaths = ['/auth/signin', '/auth/signup', '/auth/forgot-password', "/auth/reset-password"];
+// تعريف المسارات المحمية وصلاحياتها
+const protectedRoutes = {
+    '/admin/finance': {
+        roles: ['SUPER_ADMIN', 'ADMIN', 'ACCOUNTANT'],
+        permissions: ['viewFinance', 'manageFinance'],
+    },
+    '/admin/communications': {
+        roles: ['SUPER_ADMIN', 'ADMIN', 'PR_MANAGER'],
+        permissions: ['viewCommunications', 'manageCommunications'],
+    },
+    '/admin/secretary': {
+        roles: ['SUPER_ADMIN', 'ADMIN', 'SECRETARY'],
+        permissions: ['viewSecretary', 'manageSecretary'],
+    },
+    '/admin/staff': {
+        roles: ['SUPER_ADMIN', 'ADMIN', 'HR_MANAGER'],
+        permissions: ['viewStaff', 'manageStaff'],
+    },
+    '/admin/legal': {
+        roles: ['SUPER_ADMIN', 'ADMIN', 'LEGAL_ADVISOR'],
+        permissions: ['viewLegal', 'manageLegal'],
+    },
+};
 
 export async function middleware(request: NextRequest) {
-    const { pathname } = request.nextUrl;
-    const isRefreshToken = await getRefreshToken();
+    const token = await getToken({ req: request });
 
-    // Use next-auth to validate the JWT token
-    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
-    // If the path is public, let it pass
-    if (publicPaths.includes(pathname)) {
-        return NextResponse.next();
+    // إذا لم يكن المستخدم مسجل الدخول
+    if (!token) {
+        return NextResponse.redirect(new URL('/auth/login', request.url));
     }
 
-    // If no token and path is not public, redirect to login
-    if (!token && !publicPaths.includes(pathname)) {
-        const url = new URL('/auth/signin', request.url);
-        url.searchParams.set('redirect', pathname);
-        return NextResponse.redirect(url);
+    const path = request.nextUrl.pathname;
+    const route = Object.entries(protectedRoutes).find(([route]) =>
+        path.startsWith(route)
+    );
+
+    if (route) {
+        const [, { roles, permissions }] = route;
+        const userRole = token.role as string;
+        const userPermissions = token.permissions as Record<string, boolean>;
+
+        // التحقق من الدور
+        if (!roles.includes(userRole)) {
+            return NextResponse.redirect(new URL('/admin/unauthorized', request.url));
+        }
+
+        // التحقق من الصلاحيات
+        if (!permissions.some((permission) => userPermissions[permission])) {
+            return NextResponse.redirect(new URL('/admin/unauthorized', request.url));
+        }
     }
 
     return NextResponse.next();
@@ -28,6 +60,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
     matcher: [
-        '/((?!api|_next/static|_next/image|favicon.ico|public).*)',
+        '/admin/:path*',
     ],
 };

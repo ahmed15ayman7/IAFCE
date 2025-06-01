@@ -589,6 +589,14 @@ exports.Prisma.MeetingParticipantScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PermissionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.AdminRoleScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -723,7 +731,9 @@ exports.AdminRoleType = exports.$Enums.AdminRoleType = {
   LEGAL_ADVISOR: 'LEGAL_ADVISOR',
   HR_MANAGER: 'HR_MANAGER',
   IT_MANAGER: 'IT_MANAGER',
-  GENERAL_MANAGER: 'GENERAL_MANAGER'
+  GENERAL_MANAGER: 'GENERAL_MANAGER',
+  ADMIN: 'ADMIN',
+  SUPER_ADMIN: 'SUPER_ADMIN'
 };
 
 exports.LegalCaseType = exports.$Enums.LegalCaseType = {
@@ -786,6 +796,7 @@ exports.Prisma.ModelName = {
   PRResponse: 'PRResponse',
   Meeting: 'Meeting',
   MeetingParticipant: 'MeetingParticipant',
+  Permission: 'Permission',
   AdminRole: 'AdminRole',
   AdminAssignment: 'AdminAssignment',
   LegalCase: 'LegalCase'

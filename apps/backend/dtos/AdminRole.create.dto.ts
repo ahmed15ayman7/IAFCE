@@ -2,6 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import {
   AdminRoleType,
   AdminAssignment,
+  Permission,
   Report,
   File,
   Event,

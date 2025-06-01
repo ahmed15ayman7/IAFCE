@@ -1,7 +1,11 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, Req } from '@nestjs/common';
 import { PermissionsService } from './permissions.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
+import { CreateAdminRoleDto } from 'dtos/AdminRole.create.dto';
+import { CreatePermissionDto } from 'dtos/Permission.create.dto';
+import { UpdateAdminRoleDto } from 'dtos/AdminRole.update.dto';
+import { UpdatePermissionDto } from 'dtos/Permission.update.dto';
 
 @ApiTags('الصلاحيات')
 @Controller('permissions')
@@ -11,12 +15,8 @@ export class PermissionsController {
     constructor(private readonly permissionsService: PermissionsService) { }
 
     @Post()
-    async createPermission(@Body() data: {
-        name: string;
-        description?: string;
-        userId: string;
-    }) {
-        return this.permissionsService.createPermission(data);
+    async createPermission(@Body() data: CreateAdminRoleDto, @Param('userId') userId: string) {
+        return this.permissionsService.createPermission(data, userId);
     }
 
     @Get(':id')
@@ -27,10 +27,7 @@ export class PermissionsController {
     @Put(':id')
     async updatePermission(
         @Param('id') id: string,
-        @Body() data: {
-            name?: string;
-            description?: string;
-        },
+        @Body() data: UpdateAdminRoleDto & { permission: CreatePermissionDto | UpdatePermissionDto },
     ) {
         return this.permissionsService.updatePermission(id, data);
     }

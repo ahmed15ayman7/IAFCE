@@ -769,6 +769,18 @@ enum AdminRoleType {
     HR_MANAGER
     IT_MANAGER
     GENERAL_MANAGER
+    ADMIN
+    SUPER_ADMIN
+}
+
+model Permission {
+    id          String   @id @default(cuid())
+    name        String
+    description String?
+    isActive    Boolean  @default(true)
+    createdAt   DateTime @default(now())
+
+    AdminRole AdminRole[]
 }
 
 model AdminRole {
@@ -776,6 +788,7 @@ model AdminRole {
     name        AdminRoleType
     description String?
     assignments AdminAssignment[]
+    permissions Permission[]
     reports     Report[]
     files       File[]
     events      Event[]

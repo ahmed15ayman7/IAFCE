@@ -1,7 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { NotificationsService } from '../notifications/notifications.service';
 import { NotificationType } from '@shared/prisma';
+import { CreateAdminRoleDto } from '../../dtos/AdminRole.create.dto';
+import { UpdateAdminRoleDto } from 'dtos/AdminRole.update.dto';
+import { CreatePermissionDto } from 'dtos/Permission.create.dto';
+import { UpdatePermissionDto } from 'dtos/Permission.update.dto';
 
 @Injectable()
 export class PermissionsService {
@@ -10,20 +14,15 @@ export class PermissionsService {
         private notificationsService: NotificationsService,
     ) { }
 
-    async createPermission(data: {
-        name: string;
-        description?: string;
-        userId: string;
-    }) {
+    async createPermission(data: CreateAdminRoleDto, userId: string) {
         const permission = await this.prisma.adminRole.create({
             data: {
-                name: data.name as any,
-                description: data.description,
+                ...data,
             },
         });
 
         await this.notificationsService.create({
-            userId: data.userId,
+            userId,
             type: NotificationType.MESSAGE,
             isImportant: false,
             urgent: false,
@@ -51,16 +50,63 @@ export class PermissionsService {
 
     async updatePermission(
         id: string,
-        data: {
-            name?: string;
-            description?: string;
-        },
+        data: UpdateAdminRoleDto & { permission: (CreatePermissionDto | UpdatePermissionDto) },
     ) {
+        const permission = await this.prisma.adminRole.findUnique({
+            where: { id },
+        });
+
+        if (!permission) {
+            throw new NotFoundException('Permission not found');
+        }
+        const lastPermission = await this.prisma.permission.findFirst({
+            where: {
+                AdminRole: {
+                    some: {
+                        id: id,
+                    },
+                },
+                name: data.permission.name,
+            },
+        });
+
+        if (lastPermission) {
+            await this.prisma.permission.update({
+                where: { id: lastPermission.id },
+                data: {
+                    description: data.permission.description,
+                    isActive: data.permission.isActive,
+                },
+            });
+            return this.prisma.adminRole.update({
+                where: { id },
+                data: {
+                    ...data,
+                },
+            });
+        }
+
+        const newPermission = await this.prisma.permission.create({
+            data: {
+                ...data.permission,
+            },
+        });
+
+        await this.prisma.adminRole.update({
+            where: { id },
+            data: {
+                permissions: {
+                    connect: {
+                        id: newPermission.id,
+                    },
+                },
+            }
+        });
+
         return this.prisma.adminRole.update({
             where: { id },
             data: {
-                name: data.name as any,
-                description: data.description,
+                ...data,
             },
         });
     }
