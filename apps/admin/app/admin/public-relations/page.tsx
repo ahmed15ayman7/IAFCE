@@ -41,7 +41,7 @@ import {
     Public as PublicIcon,
     Message as MessageIcon,
     Event as EventIcon,
-    Post as PostIcon,
+    PostAdd as PostIcon,
 } from '@mui/icons-material';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { publicRelationsApi } from '@/lib/api';

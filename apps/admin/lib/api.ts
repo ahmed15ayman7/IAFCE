@@ -891,6 +891,20 @@ export const secretariatApi = {
     removeParticipant: (id: string, userId: string) => api.delete(`/meetings/${id}/participants/${userId}`),
     markAttendance: (id: string, userId: string, isAttended: boolean) => api.patch(`/meetings/${id}/participants/${userId}/attendance`, { isAttended }),
 };
+export const paymentApi = {
+    getAll: (academyId: string): Promise<{ success: boolean, data: Payment[] }> => api.get(`/payments?academyId=${academyId}`),
+    getById: (id: string): Promise<{ success: boolean, data: Payment }> => api.get(`/payments/${id}`),
+    create: (data: Omit<Payment, 'id' | 'createdAt' | 'updatedAt'>) => api.post('/payments', data),
+    update: (id: string, data: Partial<Payment>) => api.patch(`/payments/${id}`, data),
+    delete: (id: string) => api.delete(`/payments/${id}`),
+};
+export const administrationApi = {
+    getAll: (academyId: string): Promise<{ success: boolean, data: AdminAssignment[] }> => api.get(`/admin-assignments?academyId=${academyId}`),
+    getById: (id: string): Promise<{ success: boolean, data: AdminAssignment }> => api.get(`/admin-assignments/${id}`),
+    create: (data: Omit<AdminAssignment, 'id' | 'createdAt' | 'updatedAt'>) => api.post('/admin-assignments', data),
+    update: (id: string, data: Partial<AdminAssignment>) => api.patch(`/admin-assignments/${id}`, data),
+    delete: (id: string) => api.delete(`/administrations/${id}`),
+};
 
 export const adminRoleApi = {
     getAll: (): Promise<{ success: boolean, data: AdminRole[] }> => api.get('/admin-roles'),
@@ -1233,6 +1247,14 @@ export const legalApi = {
             method: 'DELETE',
         });
         return response.json();
+    },
+};
+
+// Admin Auth APIs
+export const adminAuthApi = {
+    login: async (credentials: { email: string; password: string }) => {
+        const response = await api.post('/admin-auth/login', credentials);
+        return response.data;
     },
 };
 

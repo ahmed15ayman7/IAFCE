@@ -127,7 +127,7 @@ export default function PermissionsPage() {
     });
 
     const updateMutation = useMutation({
-        mutationFn: (data: any) => permissionsApi.update(selectedItem?.id, data),
+        mutationFn: (data: any) => permissionsApi.update(selectedItem?.id || '', data),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['permissions'] });
             setOpen(false);
