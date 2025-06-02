@@ -33,6 +33,17 @@ import { PublicRelationsModule } from './public-relations/public-relations.modul
 import { SecretariatModule } from './secretariat/secretariat.module';
 import { AdministrationModule } from './administration/administration.module';
 import { LegalAffairsModule } from './legal-affairs/legal-affairs.module';
+import { AdminAuthModule } from './admin-auth/admin-auth.module';
+import { CalendarModule } from './calendar/calendar.module';
+import { CasesModule } from './cases/cases.module';
+import { ContractsModule } from './contracts/contracts.module';
+import { DepartmentsModule } from './departments/departments.module';
+import { DocumentsModule } from './documents/documents.module';
+import { MediaModule } from './media/media.module';
+import { MeetingsModule } from './meetings/meetings.module';
+import { PermissionsModule } from './permissions/permissions.module';
+import { RolesModule } from './roles/roles.module';
+import { SocialMediaModule } from './social-media/social-media.module';
 @Module({
     imports: [
         ConfigModule.forRoot({
@@ -80,6 +91,19 @@ import { LegalAffairsModule } from './legal-affairs/legal-affairs.module';
         SecretariatModule,
         AdministrationModule,
         LegalAffairsModule,
+        AdminAuthModule,
+        AccountingModule,
+        CalendarModule,
+        CasesModule,
+        ContractsModule,
+        DepartmentsModule,
+        DocumentsModule,
+        MediaModule,
+        MeetingsModule,
+        PermissionsModule,
+        RolesModule,
+        SecretariatModule,
+        SocialMediaModule
     ],
     // providers: [
     //     {

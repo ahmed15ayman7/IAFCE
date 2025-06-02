@@ -188,8 +188,14 @@ model Course {
   liveRoom    LiveRoom[]
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
+  status      CourseStatus @default(PENDING)
+  Path        Path[]
+}
 
-  Path Path[]
+enum CourseStatus {
+  PENDING
+  ACTIVE
+  COMPLETED
 }
 
 model Path {

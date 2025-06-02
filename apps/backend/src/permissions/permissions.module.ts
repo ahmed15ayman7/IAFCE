@@ -5,11 +5,13 @@ import { PrismaModule } from '../prisma/prisma.module';
 import { RolesModule } from '../roles/roles.module';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { NotificationsModule } from '../notifications/notifications.module';
 
 @Module({
     imports: [
         PrismaModule,
-        RolesModule, JwtModule.registerAsync({
+        RolesModule,
+        NotificationsModule, JwtModule.registerAsync({
             useFactory: async (configService: ConfigService) => ({
                 secret: configService.get<string>('JWT_ACCESS_SECRET'),
                 signOptions: {

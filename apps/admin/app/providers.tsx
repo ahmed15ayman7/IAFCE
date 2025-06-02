@@ -3,7 +3,7 @@
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { arSD } from 'date-fns/locale';
+import { ar } from 'date-fns/locale';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { SessionProvider } from 'next-auth/react';
 import { CacheProvider } from '@emotion/react';
@@ -88,7 +88,7 @@ export function Providers({ children }: ProvidersProps) {
             <QueryClientProvider client={queryClient}>
                 <CacheProvider value={cacheRtl}>
                     <ThemeProvider theme={theme}>
-                        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={arSD}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ar}>
                             {children}
                         </LocalizationProvider>
                     </ThemeProvider>

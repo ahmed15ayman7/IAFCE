@@ -6,6 +6,7 @@ import {
   Quiz,
   Instructor,
   LiveRoom,
+  CourseStatus,
   Path,
 } from "@shared/prisma";
 
@@ -47,4 +48,9 @@ export class UpdateCourseDto {
   // Field: updatedAt, Type: Date
   @Column()
   updatedAt: Date;
+
+  @ApiProperty({ enum: CourseStatus })
+  // Field: status, Type: CourseStatus
+  @Column()
+  status: CourseStatus;
 }

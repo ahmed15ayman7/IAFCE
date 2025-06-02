@@ -279,6 +279,15 @@ export const UserRole: {
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
 
+export const CourseStatus: {
+  PENDING: 'PENDING',
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED'
+};
+
+export type CourseStatus = (typeof CourseStatus)[keyof typeof CourseStatus]
+
+
 export const MilestoneStatus: {
   IN_PROGRESS: 'IN_PROGRESS',
   COMPLETED: 'COMPLETED',
@@ -394,6 +403,10 @@ export const LoginDevice: typeof $Enums.LoginDevice
 export type UserRole = $Enums.UserRole
 
 export const UserRole: typeof $Enums.UserRole
+
+export type CourseStatus = $Enums.CourseStatus
+
+export const CourseStatus: typeof $Enums.CourseStatus
 
 export type MilestoneStatus = $Enums.MilestoneStatus
 
@@ -14211,6 +14224,7 @@ export namespace Prisma {
     level: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    status: $Enums.CourseStatus | null
   }
 
   export type CourseMaxAggregateOutputType = {
@@ -14222,6 +14236,7 @@ export namespace Prisma {
     level: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    status: $Enums.CourseStatus | null
   }
 
   export type CourseCountAggregateOutputType = {
@@ -14233,6 +14248,7 @@ export namespace Prisma {
     level: number
     createdAt: number
     updatedAt: number
+    status: number
     _all: number
   }
 
@@ -14246,6 +14262,7 @@ export namespace Prisma {
     level?: true
     createdAt?: true
     updatedAt?: true
+    status?: true
   }
 
   export type CourseMaxAggregateInputType = {
@@ -14257,6 +14274,7 @@ export namespace Prisma {
     level?: true
     createdAt?: true
     updatedAt?: true
+    status?: true
   }
 
   export type CourseCountAggregateInputType = {
@@ -14268,6 +14286,7 @@ export namespace Prisma {
     level?: true
     createdAt?: true
     updatedAt?: true
+    status?: true
     _all?: true
   }
 
@@ -14352,6 +14371,7 @@ export namespace Prisma {
     level: string
     createdAt: Date
     updatedAt: Date
+    status: $Enums.CourseStatus
     _count: CourseCountAggregateOutputType | null
     _min: CourseMinAggregateOutputType | null
     _max: CourseMaxAggregateOutputType | null
@@ -14380,6 +14400,7 @@ export namespace Prisma {
     level?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    status?: boolean
     academy?: boolean | AcademyDefaultArgs<ExtArgs>
     lessons?: boolean | Course$lessonsArgs<ExtArgs>
     enrollments?: boolean | Course$enrollmentsArgs<ExtArgs>
@@ -14399,6 +14420,7 @@ export namespace Prisma {
     level?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    status?: boolean
     academy?: boolean | AcademyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
 
@@ -14411,6 +14433,7 @@ export namespace Prisma {
     level?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    status?: boolean
   }
 
   export type CourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14447,6 +14470,7 @@ export namespace Prisma {
       level: string
       createdAt: Date
       updatedAt: Date
+      status: $Enums.CourseStatus
     }, ExtArgs["result"]["course"]>
     composites: {}
   }
@@ -14855,6 +14879,7 @@ export namespace Prisma {
     readonly level: FieldRef<"Course", 'String'>
     readonly createdAt: FieldRef<"Course", 'DateTime'>
     readonly updatedAt: FieldRef<"Course", 'DateTime'>
+    readonly status: FieldRef<"Course", 'CourseStatus'>
   }
     
 
@@ -56492,7 +56517,8 @@ export namespace Prisma {
     image: 'image',
     level: 'level',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    status: 'status'
   };
 
   export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
@@ -57180,6 +57206,20 @@ export namespace Prisma {
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'CourseStatus'
+   */
+  export type EnumCourseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CourseStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'CourseStatus[]'
+   */
+  export type ListEnumCourseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CourseStatus[]'>
     
 
 
@@ -57956,6 +57996,7 @@ export namespace Prisma {
     level?: StringFilter<"Course"> | string
     createdAt?: DateTimeFilter<"Course"> | Date | string
     updatedAt?: DateTimeFilter<"Course"> | Date | string
+    status?: EnumCourseStatusFilter<"Course"> | $Enums.CourseStatus
     academy?: XOR<AcademyScalarRelationFilter, AcademyWhereInput>
     lessons?: LessonListRelationFilter
     enrollments?: EnrollmentListRelationFilter
@@ -57974,6 +58015,7 @@ export namespace Prisma {
     level?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    status?: SortOrder
     academy?: AcademyOrderByWithRelationInput
     lessons?: LessonOrderByRelationAggregateInput
     enrollments?: EnrollmentOrderByRelationAggregateInput
@@ -57995,6 +58037,7 @@ export namespace Prisma {
     level?: StringFilter<"Course"> | string
     createdAt?: DateTimeFilter<"Course"> | Date | string
     updatedAt?: DateTimeFilter<"Course"> | Date | string
+    status?: EnumCourseStatusFilter<"Course"> | $Enums.CourseStatus
     academy?: XOR<AcademyScalarRelationFilter, AcademyWhereInput>
     lessons?: LessonListRelationFilter
     enrollments?: EnrollmentListRelationFilter
@@ -58013,6 +58056,7 @@ export namespace Prisma {
     level?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    status?: SortOrder
     _count?: CourseCountOrderByAggregateInput
     _max?: CourseMaxOrderByAggregateInput
     _min?: CourseMinOrderByAggregateInput
@@ -58030,6 +58074,7 @@ export namespace Prisma {
     level?: StringWithAggregatesFilter<"Course"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
+    status?: EnumCourseStatusWithAggregatesFilter<"Course"> | $Enums.CourseStatus
   }
 
   export type PathWhereInput = {
@@ -61738,6 +61783,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
     academy: AcademyCreateNestedOneWithoutCoursesInput
     lessons?: LessonCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
@@ -61756,6 +61802,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
     lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
@@ -61772,6 +61819,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     academy?: AcademyUpdateOneRequiredWithoutCoursesNestedInput
     lessons?: LessonUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
@@ -61790,6 +61838,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
@@ -61807,6 +61856,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
   }
 
   export type CourseUpdateManyMutationInput = {
@@ -61817,6 +61867,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
   }
 
   export type CourseUncheckedUpdateManyInput = {
@@ -61828,6 +61879,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
   }
 
   export type PathCreateInput = {
@@ -65801,6 +65853,13 @@ export namespace Prisma {
     academyId?: SortOrder
   }
 
+  export type EnumCourseStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.CourseStatus | EnumCourseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.CourseStatus[] | ListEnumCourseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CourseStatus[] | ListEnumCourseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumCourseStatusFilter<$PrismaModel> | $Enums.CourseStatus
+  }
+
   export type QuizListRelationFilter = {
     every?: QuizWhereInput
     some?: QuizWhereInput
@@ -65820,6 +65879,7 @@ export namespace Prisma {
     level?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    status?: SortOrder
   }
 
   export type CourseMaxOrderByAggregateInput = {
@@ -65831,6 +65891,7 @@ export namespace Prisma {
     level?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    status?: SortOrder
   }
 
   export type CourseMinOrderByAggregateInput = {
@@ -65842,6 +65903,17 @@ export namespace Prisma {
     level?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    status?: SortOrder
+  }
+
+  export type EnumCourseStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CourseStatus | EnumCourseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.CourseStatus[] | ListEnumCourseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CourseStatus[] | ListEnumCourseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumCourseStatusWithAggregatesFilter<$PrismaModel> | $Enums.CourseStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCourseStatusFilter<$PrismaModel>
+    _max?: NestedEnumCourseStatusFilter<$PrismaModel>
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -69654,6 +69726,10 @@ export namespace Prisma {
     create?: XOR<PathCreateWithoutCoursesInput, PathUncheckedCreateWithoutCoursesInput> | PathCreateWithoutCoursesInput[] | PathUncheckedCreateWithoutCoursesInput[]
     connectOrCreate?: PathCreateOrConnectWithoutCoursesInput | PathCreateOrConnectWithoutCoursesInput[]
     connect?: PathWhereUniqueInput | PathWhereUniqueInput[]
+  }
+
+  export type EnumCourseStatusFieldUpdateOperationsInput = {
+    set?: $Enums.CourseStatus
   }
 
   export type AcademyUpdateOneRequiredWithoutCoursesNestedInput = {
@@ -73536,6 +73612,23 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedEnumCourseStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.CourseStatus | EnumCourseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.CourseStatus[] | ListEnumCourseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CourseStatus[] | ListEnumCourseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumCourseStatusFilter<$PrismaModel> | $Enums.CourseStatus
+  }
+
+  export type NestedEnumCourseStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CourseStatus | EnumCourseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.CourseStatus[] | ListEnumCourseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CourseStatus[] | ListEnumCourseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumCourseStatusWithAggregatesFilter<$PrismaModel> | $Enums.CourseStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCourseStatusFilter<$PrismaModel>
+    _max?: NestedEnumCourseStatusFilter<$PrismaModel>
+  }
+
   export type NestedFloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -76674,6 +76767,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
     lessons?: LessonCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
     quizzes?: QuizCreateNestedManyWithoutCourseInput
@@ -76690,6 +76784,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
     lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
@@ -77015,6 +77110,7 @@ export namespace Prisma {
     level?: StringFilter<"Course"> | string
     createdAt?: DateTimeFilter<"Course"> | Date | string
     updatedAt?: DateTimeFilter<"Course"> | Date | string
+    status?: EnumCourseStatusFilter<"Course"> | $Enums.CourseStatus
   }
 
   export type InstructorUpsertWithWhereUniqueWithoutAcademyInput = {
@@ -77321,6 +77417,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
     academy: AcademyCreateNestedOneWithoutCoursesInput
     lessons?: LessonCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
@@ -77338,6 +77435,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
     lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
@@ -77947,6 +78045,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
     academy: AcademyCreateNestedOneWithoutCoursesInput
     lessons?: LessonCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
@@ -77964,6 +78063,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
     lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
@@ -78225,6 +78325,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
     academy: AcademyCreateNestedOneWithoutCoursesInput
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
     quizzes?: QuizCreateNestedManyWithoutCourseInput
@@ -78242,6 +78343,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutCoursesInput
@@ -78474,6 +78576,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     academy?: AcademyUpdateOneRequiredWithoutCoursesNestedInput
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUpdateManyWithoutCourseNestedInput
@@ -78491,6 +78594,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutCoursesNestedInput
@@ -79140,6 +79244,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
     academy: AcademyCreateNestedOneWithoutCoursesInput
     lessons?: LessonCreateNestedManyWithoutCourseInput
     quizzes?: QuizCreateNestedManyWithoutCourseInput
@@ -79157,6 +79262,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
     lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutCoursesInput
@@ -79291,6 +79397,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     academy?: AcademyUpdateOneRequiredWithoutCoursesNestedInput
     lessons?: LessonUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUpdateManyWithoutCourseNestedInput
@@ -79308,6 +79415,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutCoursesNestedInput
@@ -79418,6 +79526,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
     academy: AcademyCreateNestedOneWithoutCoursesInput
     lessons?: LessonCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
@@ -79435,6 +79544,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
     lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
     instructors?: InstructorUncheckedCreateNestedManyWithoutCoursesInput
@@ -85609,6 +85719,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
     academy: AcademyCreateNestedOneWithoutCoursesInput
     lessons?: LessonCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
@@ -85626,6 +85737,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
     lessons?: LessonUncheckedCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
     quizzes?: QuizUncheckedCreateNestedManyWithoutCourseInput
@@ -85718,6 +85830,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     academy?: AcademyUpdateOneRequiredWithoutCoursesNestedInput
     lessons?: LessonUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
@@ -85735,6 +85848,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
@@ -89808,6 +89922,7 @@ export namespace Prisma {
     level: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.CourseStatus
   }
 
   export type InstructorCreateManyAcademyInput = {
@@ -90012,6 +90127,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     lessons?: LessonUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUpdateManyWithoutCourseNestedInput
@@ -90028,6 +90144,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
@@ -90044,6 +90161,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
   }
 
   export type InstructorUpdateWithoutAcademyInput = {
@@ -90284,6 +90402,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     academy?: AcademyUpdateOneRequiredWithoutCoursesNestedInput
     lessons?: LessonUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
@@ -90301,6 +90420,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
@@ -90317,6 +90437,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
   }
 
   export type LessonCreateManyCourseInput = {
@@ -90611,6 +90732,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     academy?: AcademyUpdateOneRequiredWithoutCoursesNestedInput
     lessons?: LessonUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
@@ -90628,6 +90750,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     quizzes?: QuizUncheckedUpdateManyWithoutCourseNestedInput
@@ -90644,6 +90767,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
   }
 
   export type UserUpdateWithoutPathInput = {
@@ -91102,6 +91226,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     academy?: AcademyUpdateOneRequiredWithoutCoursesNestedInput
     lessons?: LessonUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
@@ -91119,6 +91244,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     lessons?: LessonUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     instructors?: InstructorUncheckedUpdateManyWithoutCoursesNestedInput
@@ -91135,6 +91261,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
   }
 
   export type OptionCreateManyQuestionInput = {

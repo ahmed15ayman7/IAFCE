@@ -13,6 +13,7 @@ import {
   Quiz,
   Instructor,
   LiveRoom,
+  CourseStatus,
   Path,
 } from "@shared/prisma";
 
@@ -89,6 +90,11 @@ export class CourseEntity {
   // Field: updatedAt, Type: Date
   @Column()
   updatedAt: Date;
+
+  @ApiProperty({ enum: CourseStatus })
+  // Field: status, Type: CourseStatus
+  @Column()
+  status: CourseStatus;
 
   @ApiProperty({ type: PathEntity })
   // Field: Path, Type: Path[]

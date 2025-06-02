@@ -199,7 +199,8 @@ exports.Prisma.CourseScalarFieldEnum = {
   image: 'image',
   level: 'level',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  status: 'status'
 };
 
 exports.Prisma.PathScalarFieldEnum = {
@@ -672,6 +673,12 @@ exports.LoginDevice = exports.$Enums.LoginDevice = {
   MOBILE: 'MOBILE',
   TABLET: 'TABLET',
   LAPTOP: 'LAPTOP'
+};
+
+exports.CourseStatus = exports.$Enums.CourseStatus = {
+  PENDING: 'PENDING',
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED'
 };
 
 exports.MilestoneStatus = exports.$Enums.MilestoneStatus = {
