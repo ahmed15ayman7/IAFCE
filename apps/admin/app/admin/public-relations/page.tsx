@@ -50,6 +50,73 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { format } from 'date-fns';
 import { arSA } from 'date-fns/locale';
 
+let initialpublicRelationsData = [
+    {
+        id: '1',
+        senderName: 'محمد حسين',
+        senderContact: '0599999999',
+        message: 'الرسالة',
+        status: 'PENDING',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '2',
+        senderName: 'محمد حسين',
+        senderContact: '0599999999',
+        message: 'الرسالة',
+        status: 'PENDING',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '3',
+        senderName: 'محمد حسين',
+        senderContact: '0599999999',
+        message: 'الرسالة',
+        status: 'PENDING',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '4',
+        senderName: 'محمد حسين',
+        senderContact: '0599999999',
+        message: 'الرسالة',
+        status: 'PENDING',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+]
+
+
+
+
+
 interface TabPanelProps {
     children?: React.ReactNode;
     index: number;
@@ -245,7 +312,7 @@ export default function PublicRelationsPage() {
                                     </TableHead>
                                     <TableBody>
                                         <AnimatePresence>
-                                            {prData?.data?.map((item: any) => (
+                                            {(prData?.data ?? initialpublicRelationsData).map((item: any) => (
                                                 <motion.tr
                                                     key={item.id}
                                                     initial={{ opacity: 0 }}
@@ -302,7 +369,7 @@ export default function PublicRelationsPage() {
 
                         <TabPanel value={tabValue} index={1}>
                             <Grid container spacing={3}>
-                                {prData?.data?.map((item: any) => (
+                                {(prData?.data ?? initialpublicRelationsData).map((item: any) => (
                                     <Grid item xs={12} key={item.id}>
                                         <Card elevation={2}>
                                             <CardContent>
@@ -330,7 +397,7 @@ export default function PublicRelationsPage() {
 
                         <TabPanel value={tabValue} index={2}>
                             <Grid container spacing={3}>
-                                {prData?.data?.map((item: any) => (
+                                {(prData?.data ?? initialpublicRelationsData).map((item: any) => (
                                     <Grid item xs={12} md={6} lg={4} key={item.id}>
                                         <Card elevation={2}>
                                             <CardContent>
@@ -355,7 +422,7 @@ export default function PublicRelationsPage() {
 
                         <TabPanel value={tabValue} index={3}>
                             <Grid container spacing={3}>
-                                {prData?.data?.map((item: any) => (
+                                {(prData?.data ?? initialpublicRelationsData).map((item: any) => (
                                     <Grid item xs={12} md={6} lg={4} key={item.id}>
                                         <Card elevation={2}>
                                             <CardContent>

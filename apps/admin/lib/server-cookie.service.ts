@@ -58,6 +58,6 @@ export async function removeTokens(): Promise<void> {
         console.error('خطأ في حذف الكوكيز من الخادم:', error);
     }
 }
-export async function redirectToLogin() {
-    redirect('/auth/signin');
-}
+// export async function redirectToLogin() {
+//     redirect('/auth/signin');
+// }

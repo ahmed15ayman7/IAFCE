@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import {
   AdminRoleType,
+  Admin,
   AdminAssignment,
   Permission,
   Report,
@@ -22,6 +23,11 @@ export class CreateAdminRoleDto {
   // Field: description, Type: string
   @Column()
   description?: string;
+
+  @ApiProperty({ type: "string" })
+  // Field: adminId, Type: string
+  @Column()
+  adminId: string;
 
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date

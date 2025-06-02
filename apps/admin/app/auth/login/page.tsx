@@ -12,25 +12,39 @@ import {
     Typography,
     Alert,
     CircularProgress,
+    Container,
+    Paper,
 } from '@mui/material';
+import { signInSchema, type SignInInput } from '@/lib/validations/auth';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { FormInput } from '@/components/ui/FormInput';
+import { CustomPhoneInput } from '@/components/ui/PhoneInput';
+
+
 
 export default function LoginPage() {
     const router = useRouter();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const { control, handleSubmit, formState: { errors } } = useForm<SignInInput>({
+        resolver: zodResolver(signInSchema),
+    });
+
+    const onSubmit = async (data: SignInInput) => {
         setError('');
         setLoading(true);
 
         try {
+            console.log(data);
             const result = await signIn('credentials', {
-                email,
-                password,
+                email: data.identifier,
+                password: data.password,
                 redirect: false,
             });
 
@@ -47,91 +61,137 @@ export default function LoginPage() {
     };
 
     return (
-        <Box
-            sx={{
-                minHeight: '100vh',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                bgcolor: 'background.default',
-                py: 4,
-            }}
-        >
+        <Container maxWidth="sm">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                <Card
+                <Paper
                     elevation={3}
                     sx={{
-                        maxWidth: 400,
-                        width: '100%',
+                        p: 4,
+                        mt: 8,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        background: 'linear-gradient(145deg, #ffffff 0%, #f5f5f5 100%)',
                         borderRadius: 2,
                     }}
                 >
-                    <CardContent sx={{ p: 4 }}>
+                    <Box sx={{ mb: 3, textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <Image
+                            src="/assets/images/logo.png"
+                            alt="IAFCE Logo"
+                            width={120}
+                            height={120}
+                            style={{ marginBottom: '1rem', textAlign: 'center' }}
+                        />
                         <Typography
-                            variant="h4"
                             component="h1"
-                            align="center"
+                            variant="h4"
                             gutterBottom
-                            sx={{ mb: 4 }}
+                            sx={{
+                                fontWeight: 'bold',
+                                color: 'primary',
+                                textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
+                            }}
                         >
-                            تسجيل الدخول
+                            IAFCE
                         </Typography>
+                        <Typography
+                            variant="subtitle1"
+                            sx={{ color: 'primary', mb: 2 }}
+                        >
+                            الأكاديمية الدولية للتعليم المستمر - لوحة التحكم
+                        </Typography>
+                    </Box>
+
+
+                    <Box
+                        component="form"
+                        onSubmit={handleSubmit(onSubmit)}
+                        sx={{ width: '100%', mt: 2 }}
+                    >
+
+                        <Controller
+                            control={control}
+                            name="identifier"
+                            render={({ field }) => (
+                                <FormInput
+                                    {...field}
+                                    label="البريد الإلكتروني"
+                                    type="email"
+                                    error={!!errors.identifier}
+                                    helperText={errors.identifier?.message}
+                                    onChange={field.onChange}
+                                    sx={{ mb: 2 }}
+                                />
+                            )}
+                        />
+
+
+                        <Controller
+                            control={control}
+                            name="password"
+                            render={({ field }) => (
+                                <FormInput
+                                    {...field}
+                                    label="كلمة المرور"
+                                    type="password"
+                                    error={!!errors.password}
+                                    helperText={errors.password?.message}
+                                    sx={{ mb: 2 }}
+                                />
+                            )}
+                        />
 
                         {error && (
-                            <Alert severity="error" sx={{ mb: 2 }}>
+                            <Alert
+                                severity="error"
+                                sx={{ mb: 2, borderRadius: 1 }}
+                            >
                                 {error}
                             </Alert>
                         )}
 
-                        <form onSubmit={handleSubmit}>
-                            <TextField
-                                fullWidth
-                                label="البريد الإلكتروني"
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                                sx={{ mb: 2 }}
-                            />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            className='bg-primary-DEFAULT hover:bg-primary-dark'
+                            variant="contained"
+                            disabled={loading}
+                            sx={{
+                                mt: 3,
+                                mb: 2,
+                                py: 1.5,
+                                boxShadow: '0 3px 5px 2px rgba(26, 35, 126, .3)',
+                            }}
+                        >
+                            {loading ? 'جاري تسجيل الدخول...' : 'تسجيل الدخول'}
+                        </Button>
 
-                            <TextField
-                                fullWidth
-                                label="كلمة المرور"
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                                sx={{ mb: 3 }}
-                            />
-
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                size="large"
-                                disabled={loading}
-                                sx={{
-                                    height: 48,
-                                    backgroundColor: 'primary.main',
-                                    '&:hover': {
-                                        backgroundColor: 'primary.dark',
-                                    },
-                                }}
+                        {/* <Box sx={{ textAlign: 'center', mt: 2 }}>
+                            <Link
+                                href="/auth/forgot-password"
+                                style={{ textDecoration: 'none' }}
                             >
-                                {loading ? (
-                                    <CircularProgress size={24} color="inherit" />
-                                ) : (
-                                    'تسجيل الدخول'
-                                )}
-                            </Button>
-                        </form>
-                    </CardContent>
-                </Card>
+                                <Typography
+                                    color="primary"
+                                    sx={{
+                                        '&:hover': {
+                                            textDecoration: 'underline',
+                                        },
+                                    }}
+                                >
+                                    نسيت كلمة المرور؟
+                                </Typography>
+                            </Link>
+                        </Box> */}
+
+                    </Box>
+                </Paper>
             </motion.div>
-        </Box>
+        </Container>
     );
 } 

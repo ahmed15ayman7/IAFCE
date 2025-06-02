@@ -7,6 +7,7 @@ import { PRResponseEntity } from "./PRResponse.entity";
 import { MeetingEntity } from "./Meeting.entity";
 import { AdminAssignmentEntity } from "./AdminAssignment.entity";
 import { LegalCaseEntity } from "./LegalCase.entity";
+import { AdminRoleEntity } from "./AdminRole.entity";
 import {
   User,
   Group,
@@ -16,6 +17,7 @@ import {
   Meeting,
   AdminAssignment,
   LegalCase,
+  AdminRole,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -76,4 +78,9 @@ export class AdminDto {
   // Field: legalCases, Type: LegalCase[]
   @Column()
   legalCases: LegalCase[];
+
+  @ApiProperty({ type: AdminRoleEntity })
+  // Field: AdminRole, Type: AdminRole[]
+  @Column()
+  AdminRole: AdminRole[];
 }

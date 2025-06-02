@@ -51,6 +51,118 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { format } from 'date-fns';
 import { arSA } from 'date-fns/locale';
 
+let initialfinanceData = [
+    {
+        id: '1',
+        type: 'INCOME',
+        amount: 1000,
+        description: 'الراتب',
+        date: '2025-01-01',
+        academyId: '1',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+        updatedByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '2',
+        type: 'EXPENSE',
+        amount: 1000,
+        description: 'الراتب',
+        date: '2025-01-01',
+        academyId: '1',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+        updatedByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+
+    {
+        id: '3',
+        type: 'INCOME',
+        amount: 1000,
+        description: 'الراتب',
+        date: '2025-01-01',
+        academyId: '1',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+        updatedByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '4',
+        type: 'INCOME',
+        amount: 1000,
+        description: 'الراتب',
+        date: '2025-01-01',
+        academyId: '1',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+        updatedByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+
+    {
+        id: '5',
+        type: 'INCOME',
+        amount: 1000,
+        description: 'الراتب',
+        date: '2025-01-01',
+        academyId: '1',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+        updatedByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+]
+
+
+
+
+
+
+
+
 interface TabPanelProps {
     children?: React.ReactNode;
     index: number;
@@ -251,7 +363,7 @@ export default function FinancePage() {
                                     </TableHead>
                                     <TableBody>
                                         <AnimatePresence>
-                                            {accountingData?.data?.map((item: any) => (
+                                            {(accountingData?.data ?? initialfinanceData).map((item: any) => (
                                                 <motion.tr
                                                     key={item.id}
                                                     initial={{ opacity: 0 }}
@@ -309,7 +421,7 @@ export default function FinancePage() {
 
                         <TabPanel value={tabValue} index={1}>
                             <Grid container spacing={3}>
-                                {accountingData?.data?.filter((item: any) => item.type === 'INVOICE').map((invoice: any) => (
+                                {(accountingData?.data ?? initialfinanceData).filter((item: any) => item.type === 'INVOICE').map((invoice: any) => (
                                     <Grid item xs={12} md={6} lg={4} key={invoice.id}>
                                         <Card elevation={2}>
                                             <CardContent>
@@ -334,7 +446,7 @@ export default function FinancePage() {
 
                         <TabPanel value={tabValue} index={2}>
                             <Grid container spacing={3}>
-                                {accountingData?.data?.filter((item: any) => item.type === 'SALARY').map((salary: any) => (
+                                {(accountingData?.data ?? initialfinanceData).filter((item: any) => item.type === 'SALARY').map((salary: any) => (
                                     <Grid item xs={12} md={6} lg={4} key={salary.id}>
                                         <Card elevation={2}>
                                             <CardContent>
@@ -368,14 +480,14 @@ export default function FinancePage() {
                                             <Box sx={{ display: 'flex', justifyContent: 'space-around', mt: 2 }}>
                                                 <Box sx={{ textAlign: 'center' }}>
                                                     <Typography variant="h4" color="success.main">
-                                                        {accountingData?.data?.filter((i: any) => i.type === 'INCOME')
+                                                        {(accountingData?.data ?? initialfinanceData).filter((i: any) => i.type === 'INCOME')
                                                             .reduce((sum: number, i: any) => sum + i.amount, 0)} ريال
                                                     </Typography>
                                                     <Typography variant="body2">إجمالي الدخل</Typography>
                                                 </Box>
                                                 <Box sx={{ textAlign: 'center' }}>
                                                     <Typography variant="h4" color="error.main">
-                                                        {accountingData?.data?.filter((i: any) => i.type === 'EXPENSE')
+                                                        {(accountingData?.data ?? initialfinanceData).filter((i: any) => i.type === 'EXPENSE')
                                                             .reduce((sum: number, i: any) => sum + i.amount, 0)} ريال
                                                     </Typography>
                                                     <Typography variant="body2">إجمالي المصروفات</Typography>

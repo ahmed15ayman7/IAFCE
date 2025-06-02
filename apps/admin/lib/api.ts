@@ -1253,8 +1253,16 @@ export const legalApi = {
 // Admin Auth APIs
 export const adminAuthApi = {
     login: async (credentials: { email: string; password: string }) => {
-        const response = await api.post('/admin-auth/login', credentials);
-        return response.data;
+        try {
+            const response = await api.post('/admin-auth/login', credentials);
+            const { access_token, refreshToken } = response.data;
+            await authService.setTokens(access_token, refreshToken);
+
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
     },
     getDashboardStats: async (timeRange: 'day' | 'week' | 'month' | 'year' = 'month') => {
         const response = await api.get(`/admin-auth/dashboard/stats?timeRange=${timeRange}`);

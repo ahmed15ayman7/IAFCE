@@ -464,6 +464,8 @@ model Admin {
     meetings          Meeting[]
     assignments       AdminAssignment[]
     legalCases        LegalCase[]
+
+    AdminRole AdminRole[]
 }
 
 model Channel {
@@ -793,6 +795,8 @@ model AdminRole {
     id          String            @id @default(cuid())
     name        AdminRoleType
     description String?
+    adminId     String
+    admin       Admin               @relation(fields: [adminId], references: [id])
     assignments AdminAssignment[]
     permissions Permission[]
     reports     Report[]

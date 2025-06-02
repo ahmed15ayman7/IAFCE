@@ -5894,6 +5894,7 @@ export namespace Prisma {
     meetings: number
     assignments: number
     legalCases: number
+    AdminRole: number
   }
 
   export type AdminCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5904,6 +5905,7 @@ export namespace Prisma {
     meetings?: boolean | AdminCountOutputTypeCountMeetingsArgs
     assignments?: boolean | AdminCountOutputTypeCountAssignmentsArgs
     legalCases?: boolean | AdminCountOutputTypeCountLegalCasesArgs
+    AdminRole?: boolean | AdminCountOutputTypeCountAdminRoleArgs
   }
 
   // Custom InputTypes
@@ -5964,6 +5966,13 @@ export namespace Prisma {
    */
   export type AdminCountOutputTypeCountLegalCasesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LegalCaseWhereInput
+  }
+
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountAdminRoleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdminRoleWhereInput
   }
 
 
@@ -31776,6 +31785,7 @@ export namespace Prisma {
     meetings?: boolean | Admin$meetingsArgs<ExtArgs>
     assignments?: boolean | Admin$assignmentsArgs<ExtArgs>
     legalCases?: boolean | Admin$legalCasesArgs<ExtArgs>
+    AdminRole?: boolean | Admin$AdminRoleArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["admin"]>
 
@@ -31801,6 +31811,7 @@ export namespace Prisma {
     meetings?: boolean | Admin$meetingsArgs<ExtArgs>
     assignments?: boolean | Admin$assignmentsArgs<ExtArgs>
     legalCases?: boolean | Admin$legalCasesArgs<ExtArgs>
+    AdminRole?: boolean | Admin$AdminRoleArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AdminIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -31818,6 +31829,7 @@ export namespace Prisma {
       meetings: Prisma.$MeetingPayload<ExtArgs>[]
       assignments: Prisma.$AdminAssignmentPayload<ExtArgs>[]
       legalCases: Prisma.$LegalCasePayload<ExtArgs>[]
+      AdminRole: Prisma.$AdminRolePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -32195,6 +32207,7 @@ export namespace Prisma {
     meetings<T extends Admin$meetingsArgs<ExtArgs> = {}>(args?: Subset<T, Admin$meetingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "findMany"> | Null>
     assignments<T extends Admin$assignmentsArgs<ExtArgs> = {}>(args?: Subset<T, Admin$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminAssignmentPayload<ExtArgs>, T, "findMany"> | Null>
     legalCases<T extends Admin$legalCasesArgs<ExtArgs> = {}>(args?: Subset<T, Admin$legalCasesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LegalCasePayload<ExtArgs>, T, "findMany"> | Null>
+    AdminRole<T extends Admin$AdminRoleArgs<ExtArgs> = {}>(args?: Subset<T, Admin$AdminRoleArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminRolePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -32682,6 +32695,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: LegalCaseScalarFieldEnum | LegalCaseScalarFieldEnum[]
+  }
+
+  /**
+   * Admin.AdminRole
+   */
+  export type Admin$AdminRoleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminRole
+     */
+    select?: AdminRoleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminRoleInclude<ExtArgs> | null
+    where?: AdminRoleWhereInput
+    orderBy?: AdminRoleOrderByWithRelationInput | AdminRoleOrderByWithRelationInput[]
+    cursor?: AdminRoleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdminRoleScalarFieldEnum | AdminRoleScalarFieldEnum[]
   }
 
   /**
@@ -53217,6 +53250,7 @@ export namespace Prisma {
     id: string | null
     name: $Enums.AdminRoleType | null
     description: string | null
+    adminId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -53225,6 +53259,7 @@ export namespace Prisma {
     id: string | null
     name: $Enums.AdminRoleType | null
     description: string | null
+    adminId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -53233,6 +53268,7 @@ export namespace Prisma {
     id: number
     name: number
     description: number
+    adminId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -53243,6 +53279,7 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
+    adminId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -53251,6 +53288,7 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
+    adminId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -53259,6 +53297,7 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
+    adminId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -53340,6 +53379,7 @@ export namespace Prisma {
     id: string
     name: $Enums.AdminRoleType
     description: string | null
+    adminId: string
     createdAt: Date
     updatedAt: Date
     _count: AdminRoleCountAggregateOutputType | null
@@ -53365,8 +53405,10 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
+    adminId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
     assignments?: boolean | AdminRole$assignmentsArgs<ExtArgs>
     permissions?: boolean | AdminRole$permissionsArgs<ExtArgs>
     reports?: boolean | AdminRole$reportsArgs<ExtArgs>
@@ -53380,19 +53422,23 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
+    adminId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["adminRole"]>
 
   export type AdminRoleSelectScalar = {
     id?: boolean
     name?: boolean
     description?: boolean
+    adminId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
   export type AdminRoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
     assignments?: boolean | AdminRole$assignmentsArgs<ExtArgs>
     permissions?: boolean | AdminRole$permissionsArgs<ExtArgs>
     reports?: boolean | AdminRole$reportsArgs<ExtArgs>
@@ -53401,11 +53447,14 @@ export namespace Prisma {
     channels?: boolean | AdminRole$channelsArgs<ExtArgs>
     _count?: boolean | AdminRoleCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type AdminRoleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AdminRoleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }
 
   export type $AdminRolePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "AdminRole"
     objects: {
+      admin: Prisma.$AdminPayload<ExtArgs>
       assignments: Prisma.$AdminAssignmentPayload<ExtArgs>[]
       permissions: Prisma.$PermissionPayload<ExtArgs>[]
       reports: Prisma.$ReportPayload<ExtArgs>[]
@@ -53417,6 +53466,7 @@ export namespace Prisma {
       id: string
       name: $Enums.AdminRoleType
       description: string | null
+      adminId: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["adminRole"]>
@@ -53783,6 +53833,7 @@ export namespace Prisma {
    */
   export interface Prisma__AdminRoleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    admin<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     assignments<T extends AdminRole$assignmentsArgs<ExtArgs> = {}>(args?: Subset<T, AdminRole$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminAssignmentPayload<ExtArgs>, T, "findMany"> | Null>
     permissions<T extends AdminRole$permissionsArgs<ExtArgs> = {}>(args?: Subset<T, AdminRole$permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findMany"> | Null>
     reports<T extends AdminRole$reportsArgs<ExtArgs> = {}>(args?: Subset<T, AdminRole$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany"> | Null>
@@ -53821,6 +53872,7 @@ export namespace Prisma {
     readonly id: FieldRef<"AdminRole", 'String'>
     readonly name: FieldRef<"AdminRole", 'AdminRoleType'>
     readonly description: FieldRef<"AdminRole", 'String'>
+    readonly adminId: FieldRef<"AdminRole", 'String'>
     readonly createdAt: FieldRef<"AdminRole", 'DateTime'>
     readonly updatedAt: FieldRef<"AdminRole", 'DateTime'>
   }
@@ -54044,6 +54096,10 @@ export namespace Prisma {
      */
     data: AdminRoleCreateManyInput | AdminRoleCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminRoleIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -57034,6 +57090,7 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     description: 'description',
+    adminId: 'adminId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -59282,6 +59339,7 @@ export namespace Prisma {
     meetings?: MeetingListRelationFilter
     assignments?: AdminAssignmentListRelationFilter
     legalCases?: LegalCaseListRelationFilter
+    AdminRole?: AdminRoleListRelationFilter
   }
 
   export type AdminOrderByWithRelationInput = {
@@ -59296,6 +59354,7 @@ export namespace Prisma {
     meetings?: MeetingOrderByRelationAggregateInput
     assignments?: AdminAssignmentOrderByRelationAggregateInput
     legalCases?: LegalCaseOrderByRelationAggregateInput
+    AdminRole?: AdminRoleOrderByRelationAggregateInput
   }
 
   export type AdminWhereUniqueInput = Prisma.AtLeast<{
@@ -59313,6 +59372,7 @@ export namespace Prisma {
     meetings?: MeetingListRelationFilter
     assignments?: AdminAssignmentListRelationFilter
     legalCases?: LegalCaseListRelationFilter
+    AdminRole?: AdminRoleListRelationFilter
   }, "id">
 
   export type AdminOrderByWithAggregationInput = {
@@ -60867,8 +60927,10 @@ export namespace Prisma {
     id?: StringFilter<"AdminRole"> | string
     name?: EnumAdminRoleTypeFilter<"AdminRole"> | $Enums.AdminRoleType
     description?: StringNullableFilter<"AdminRole"> | string | null
+    adminId?: StringFilter<"AdminRole"> | string
     createdAt?: DateTimeFilter<"AdminRole"> | Date | string
     updatedAt?: DateTimeFilter<"AdminRole"> | Date | string
+    admin?: XOR<AdminScalarRelationFilter, AdminWhereInput>
     assignments?: AdminAssignmentListRelationFilter
     permissions?: PermissionListRelationFilter
     reports?: ReportListRelationFilter
@@ -60881,8 +60943,10 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
+    adminId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    admin?: AdminOrderByWithRelationInput
     assignments?: AdminAssignmentOrderByRelationAggregateInput
     permissions?: PermissionOrderByRelationAggregateInput
     reports?: ReportOrderByRelationAggregateInput
@@ -60898,8 +60962,10 @@ export namespace Prisma {
     NOT?: AdminRoleWhereInput | AdminRoleWhereInput[]
     name?: EnumAdminRoleTypeFilter<"AdminRole"> | $Enums.AdminRoleType
     description?: StringNullableFilter<"AdminRole"> | string | null
+    adminId?: StringFilter<"AdminRole"> | string
     createdAt?: DateTimeFilter<"AdminRole"> | Date | string
     updatedAt?: DateTimeFilter<"AdminRole"> | Date | string
+    admin?: XOR<AdminScalarRelationFilter, AdminWhereInput>
     assignments?: AdminAssignmentListRelationFilter
     permissions?: PermissionListRelationFilter
     reports?: ReportListRelationFilter
@@ -60912,6 +60978,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
+    adminId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AdminRoleCountOrderByAggregateInput
@@ -60926,6 +60993,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"AdminRole"> | string
     name?: EnumAdminRoleTypeWithAggregatesFilter<"AdminRole"> | $Enums.AdminRoleType
     description?: StringNullableWithAggregatesFilter<"AdminRole"> | string | null
+    adminId?: StringWithAggregatesFilter<"AdminRole"> | string
     createdAt?: DateTimeWithAggregatesFilter<"AdminRole"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AdminRole"> | Date | string
   }
@@ -63150,6 +63218,7 @@ export namespace Prisma {
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
   export type AdminUncheckedCreateInput = {
@@ -63163,6 +63232,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
   export type AdminUpdateInput = {
@@ -63176,6 +63246,7 @@ export namespace Prisma {
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminUncheckedUpdateInput = {
@@ -63189,6 +63260,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminCreateManyInput = {
@@ -64786,6 +64858,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    admin: AdminCreateNestedOneWithoutAdminRoleInput
     assignments?: AdminAssignmentCreateNestedManyWithoutRoleInput
     permissions?: PermissionCreateNestedManyWithoutAdminRoleInput
     reports?: ReportCreateNestedManyWithoutAdminRoleInput
@@ -64798,6 +64871,7 @@ export namespace Prisma {
     id?: string
     name: $Enums.AdminRoleType
     description?: string | null
+    adminId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutRoleInput
@@ -64814,6 +64888,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUpdateOneRequiredWithoutAdminRoleNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutRoleNestedInput
     permissions?: PermissionUpdateManyWithoutAdminRoleNestedInput
     reports?: ReportUpdateManyWithoutAdminRoleNestedInput
@@ -64826,6 +64901,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: EnumAdminRoleTypeFieldUpdateOperationsInput | $Enums.AdminRoleType
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutRoleNestedInput
@@ -64840,6 +64916,7 @@ export namespace Prisma {
     id?: string
     name: $Enums.AdminRoleType
     description?: string | null
+    adminId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -64856,6 +64933,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: EnumAdminRoleTypeFieldUpdateOperationsInput | $Enums.AdminRoleType
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -66848,11 +66926,21 @@ export namespace Prisma {
     none?: AdminAssignmentWhereInput
   }
 
+  export type AdminRoleListRelationFilter = {
+    every?: AdminRoleWhereInput
+    some?: AdminRoleWhereInput
+    none?: AdminRoleWhereInput
+  }
+
   export type PRResponseOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type AdminAssignmentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AdminRoleOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -67669,16 +67757,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type AdminRoleListRelationFilter = {
-    every?: AdminRoleWhereInput
-    some?: AdminRoleWhereInput
-    none?: AdminRoleWhereInput
-  }
-
-  export type AdminRoleOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type PermissionCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -67724,6 +67802,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    adminId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67732,6 +67811,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    adminId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67740,6 +67820,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    adminId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -71104,6 +71185,13 @@ export namespace Prisma {
     connect?: LegalCaseWhereUniqueInput | LegalCaseWhereUniqueInput[]
   }
 
+  export type AdminRoleCreateNestedManyWithoutAdminInput = {
+    create?: XOR<AdminRoleCreateWithoutAdminInput, AdminRoleUncheckedCreateWithoutAdminInput> | AdminRoleCreateWithoutAdminInput[] | AdminRoleUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: AdminRoleCreateOrConnectWithoutAdminInput | AdminRoleCreateOrConnectWithoutAdminInput[]
+    createMany?: AdminRoleCreateManyAdminInputEnvelope
+    connect?: AdminRoleWhereUniqueInput | AdminRoleWhereUniqueInput[]
+  }
+
   export type GroupUncheckedCreateNestedManyWithoutAdminInput = {
     create?: XOR<GroupCreateWithoutAdminInput, GroupUncheckedCreateWithoutAdminInput> | GroupCreateWithoutAdminInput[] | GroupUncheckedCreateWithoutAdminInput[]
     connectOrCreate?: GroupCreateOrConnectWithoutAdminInput | GroupCreateOrConnectWithoutAdminInput[]
@@ -71151,6 +71239,13 @@ export namespace Prisma {
     connectOrCreate?: LegalCaseCreateOrConnectWithoutAssignedLawyerInput | LegalCaseCreateOrConnectWithoutAssignedLawyerInput[]
     createMany?: LegalCaseCreateManyAssignedLawyerInputEnvelope
     connect?: LegalCaseWhereUniqueInput | LegalCaseWhereUniqueInput[]
+  }
+
+  export type AdminRoleUncheckedCreateNestedManyWithoutAdminInput = {
+    create?: XOR<AdminRoleCreateWithoutAdminInput, AdminRoleUncheckedCreateWithoutAdminInput> | AdminRoleCreateWithoutAdminInput[] | AdminRoleUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: AdminRoleCreateOrConnectWithoutAdminInput | AdminRoleCreateOrConnectWithoutAdminInput[]
+    createMany?: AdminRoleCreateManyAdminInputEnvelope
+    connect?: AdminRoleWhereUniqueInput | AdminRoleWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutAdminNestedInput = {
@@ -71259,6 +71354,20 @@ export namespace Prisma {
     deleteMany?: LegalCaseScalarWhereInput | LegalCaseScalarWhereInput[]
   }
 
+  export type AdminRoleUpdateManyWithoutAdminNestedInput = {
+    create?: XOR<AdminRoleCreateWithoutAdminInput, AdminRoleUncheckedCreateWithoutAdminInput> | AdminRoleCreateWithoutAdminInput[] | AdminRoleUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: AdminRoleCreateOrConnectWithoutAdminInput | AdminRoleCreateOrConnectWithoutAdminInput[]
+    upsert?: AdminRoleUpsertWithWhereUniqueWithoutAdminInput | AdminRoleUpsertWithWhereUniqueWithoutAdminInput[]
+    createMany?: AdminRoleCreateManyAdminInputEnvelope
+    set?: AdminRoleWhereUniqueInput | AdminRoleWhereUniqueInput[]
+    disconnect?: AdminRoleWhereUniqueInput | AdminRoleWhereUniqueInput[]
+    delete?: AdminRoleWhereUniqueInput | AdminRoleWhereUniqueInput[]
+    connect?: AdminRoleWhereUniqueInput | AdminRoleWhereUniqueInput[]
+    update?: AdminRoleUpdateWithWhereUniqueWithoutAdminInput | AdminRoleUpdateWithWhereUniqueWithoutAdminInput[]
+    updateMany?: AdminRoleUpdateManyWithWhereWithoutAdminInput | AdminRoleUpdateManyWithWhereWithoutAdminInput[]
+    deleteMany?: AdminRoleScalarWhereInput | AdminRoleScalarWhereInput[]
+  }
+
   export type GroupUncheckedUpdateManyWithoutAdminNestedInput = {
     create?: XOR<GroupCreateWithoutAdminInput, GroupUncheckedCreateWithoutAdminInput> | GroupCreateWithoutAdminInput[] | GroupUncheckedCreateWithoutAdminInput[]
     connectOrCreate?: GroupCreateOrConnectWithoutAdminInput | GroupCreateOrConnectWithoutAdminInput[]
@@ -71355,6 +71464,20 @@ export namespace Prisma {
     update?: LegalCaseUpdateWithWhereUniqueWithoutAssignedLawyerInput | LegalCaseUpdateWithWhereUniqueWithoutAssignedLawyerInput[]
     updateMany?: LegalCaseUpdateManyWithWhereWithoutAssignedLawyerInput | LegalCaseUpdateManyWithWhereWithoutAssignedLawyerInput[]
     deleteMany?: LegalCaseScalarWhereInput | LegalCaseScalarWhereInput[]
+  }
+
+  export type AdminRoleUncheckedUpdateManyWithoutAdminNestedInput = {
+    create?: XOR<AdminRoleCreateWithoutAdminInput, AdminRoleUncheckedCreateWithoutAdminInput> | AdminRoleCreateWithoutAdminInput[] | AdminRoleUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: AdminRoleCreateOrConnectWithoutAdminInput | AdminRoleCreateOrConnectWithoutAdminInput[]
+    upsert?: AdminRoleUpsertWithWhereUniqueWithoutAdminInput | AdminRoleUpsertWithWhereUniqueWithoutAdminInput[]
+    createMany?: AdminRoleCreateManyAdminInputEnvelope
+    set?: AdminRoleWhereUniqueInput | AdminRoleWhereUniqueInput[]
+    disconnect?: AdminRoleWhereUniqueInput | AdminRoleWhereUniqueInput[]
+    delete?: AdminRoleWhereUniqueInput | AdminRoleWhereUniqueInput[]
+    connect?: AdminRoleWhereUniqueInput | AdminRoleWhereUniqueInput[]
+    update?: AdminRoleUpdateWithWhereUniqueWithoutAdminInput | AdminRoleUpdateWithWhereUniqueWithoutAdminInput[]
+    updateMany?: AdminRoleUpdateManyWithWhereWithoutAdminInput | AdminRoleUpdateManyWithWhereWithoutAdminInput[]
+    deleteMany?: AdminRoleScalarWhereInput | AdminRoleScalarWhereInput[]
   }
 
   export type UserCreateNestedManyWithoutChannelsInput = {
@@ -72861,6 +72984,12 @@ export namespace Prisma {
     deleteMany?: AdminRoleScalarWhereInput | AdminRoleScalarWhereInput[]
   }
 
+  export type AdminCreateNestedOneWithoutAdminRoleInput = {
+    create?: XOR<AdminCreateWithoutAdminRoleInput, AdminUncheckedCreateWithoutAdminRoleInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutAdminRoleInput
+    connect?: AdminWhereUniqueInput
+  }
+
   export type AdminAssignmentCreateNestedManyWithoutRoleInput = {
     create?: XOR<AdminAssignmentCreateWithoutRoleInput, AdminAssignmentUncheckedCreateWithoutRoleInput> | AdminAssignmentCreateWithoutRoleInput[] | AdminAssignmentUncheckedCreateWithoutRoleInput[]
     connectOrCreate?: AdminAssignmentCreateOrConnectWithoutRoleInput | AdminAssignmentCreateOrConnectWithoutRoleInput[]
@@ -72945,6 +73074,14 @@ export namespace Prisma {
 
   export type EnumAdminRoleTypeFieldUpdateOperationsInput = {
     set?: $Enums.AdminRoleType
+  }
+
+  export type AdminUpdateOneRequiredWithoutAdminRoleNestedInput = {
+    create?: XOR<AdminCreateWithoutAdminRoleInput, AdminUncheckedCreateWithoutAdminRoleInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutAdminRoleInput
+    upsert?: AdminUpsertWithoutAdminRoleInput
+    connect?: AdminWhereUniqueInput
+    update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutAdminRoleInput, AdminUpdateWithoutAdminRoleInput>, AdminUncheckedUpdateWithoutAdminRoleInput>
   }
 
   export type AdminAssignmentUpdateManyWithoutRoleNestedInput = {
@@ -74324,6 +74461,7 @@ export namespace Prisma {
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
   export type AdminUncheckedCreateWithoutUserInput = {
@@ -74336,6 +74474,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
   export type AdminCreateOrConnectWithoutUserInput = {
@@ -78827,6 +78966,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    admin: AdminCreateNestedOneWithoutAdminRoleInput
     assignments?: AdminAssignmentCreateNestedManyWithoutRoleInput
     permissions?: PermissionCreateNestedManyWithoutAdminRoleInput
     reports?: ReportCreateNestedManyWithoutAdminRoleInput
@@ -78838,6 +78978,7 @@ export namespace Prisma {
     id?: string
     name: $Enums.AdminRoleType
     description?: string | null
+    adminId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutRoleInput
@@ -79072,6 +79213,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUpdateOneRequiredWithoutAdminRoleNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutRoleNestedInput
     permissions?: PermissionUpdateManyWithoutAdminRoleNestedInput
     reports?: ReportUpdateManyWithoutAdminRoleNestedInput
@@ -79083,6 +79225,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: EnumAdminRoleTypeFieldUpdateOperationsInput | $Enums.AdminRoleType
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutRoleNestedInput
@@ -81650,6 +81793,7 @@ export namespace Prisma {
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
   export type AdminUncheckedCreateWithoutGroupInput = {
@@ -81662,6 +81806,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
   export type AdminCreateOrConnectWithoutGroupInput = {
@@ -81761,6 +81906,7 @@ export namespace Prisma {
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutGroupInput = {
@@ -81773,6 +81919,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
   export type CommunityUpsertWithWhereUniqueWithoutGroupsInput = {
@@ -82142,6 +82289,44 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AdminRoleCreateWithoutAdminInput = {
+    id?: string
+    name: $Enums.AdminRoleType
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignments?: AdminAssignmentCreateNestedManyWithoutRoleInput
+    permissions?: PermissionCreateNestedManyWithoutAdminRoleInput
+    reports?: ReportCreateNestedManyWithoutAdminRoleInput
+    files?: FileCreateNestedManyWithoutAdminRoleInput
+    events?: EventCreateNestedManyWithoutAdminRoleInput
+    channels?: ChannelCreateNestedManyWithoutAdminRoleInput
+  }
+
+  export type AdminRoleUncheckedCreateWithoutAdminInput = {
+    id?: string
+    name: $Enums.AdminRoleType
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutRoleInput
+    permissions?: PermissionUncheckedCreateNestedManyWithoutAdminRoleInput
+    reports?: ReportUncheckedCreateNestedManyWithoutAdminRoleInput
+    files?: FileUncheckedCreateNestedManyWithoutAdminRoleInput
+    events?: EventUncheckedCreateNestedManyWithoutAdminRoleInput
+    channels?: ChannelUncheckedCreateNestedManyWithoutAdminRoleInput
+  }
+
+  export type AdminRoleCreateOrConnectWithoutAdminInput = {
+    where: AdminRoleWhereUniqueInput
+    create: XOR<AdminRoleCreateWithoutAdminInput, AdminRoleUncheckedCreateWithoutAdminInput>
+  }
+
+  export type AdminRoleCreateManyAdminInputEnvelope = {
+    data: AdminRoleCreateManyAdminInput | AdminRoleCreateManyAdminInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutAdminInput = {
     update: XOR<UserUpdateWithoutAdminInput, UserUncheckedUpdateWithoutAdminInput>
     create: XOR<UserCreateWithoutAdminInput, UserUncheckedCreateWithoutAdminInput>
@@ -82382,6 +82567,34 @@ export namespace Prisma {
     data: XOR<LegalCaseUpdateManyMutationInput, LegalCaseUncheckedUpdateManyWithoutAssignedLawyerInput>
   }
 
+  export type AdminRoleUpsertWithWhereUniqueWithoutAdminInput = {
+    where: AdminRoleWhereUniqueInput
+    update: XOR<AdminRoleUpdateWithoutAdminInput, AdminRoleUncheckedUpdateWithoutAdminInput>
+    create: XOR<AdminRoleCreateWithoutAdminInput, AdminRoleUncheckedCreateWithoutAdminInput>
+  }
+
+  export type AdminRoleUpdateWithWhereUniqueWithoutAdminInput = {
+    where: AdminRoleWhereUniqueInput
+    data: XOR<AdminRoleUpdateWithoutAdminInput, AdminRoleUncheckedUpdateWithoutAdminInput>
+  }
+
+  export type AdminRoleUpdateManyWithWhereWithoutAdminInput = {
+    where: AdminRoleScalarWhereInput
+    data: XOR<AdminRoleUpdateManyMutationInput, AdminRoleUncheckedUpdateManyWithoutAdminInput>
+  }
+
+  export type AdminRoleScalarWhereInput = {
+    AND?: AdminRoleScalarWhereInput | AdminRoleScalarWhereInput[]
+    OR?: AdminRoleScalarWhereInput[]
+    NOT?: AdminRoleScalarWhereInput | AdminRoleScalarWhereInput[]
+    id?: StringFilter<"AdminRole"> | string
+    name?: EnumAdminRoleTypeFilter<"AdminRole"> | $Enums.AdminRoleType
+    description?: StringNullableFilter<"AdminRole"> | string | null
+    adminId?: StringFilter<"AdminRole"> | string
+    createdAt?: DateTimeFilter<"AdminRole"> | Date | string
+    updatedAt?: DateTimeFilter<"AdminRole"> | Date | string
+  }
+
   export type UserCreateWithoutChannelsInput = {
     id?: string
     email: string
@@ -82595,6 +82808,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    admin: AdminCreateNestedOneWithoutAdminRoleInput
     assignments?: AdminAssignmentCreateNestedManyWithoutRoleInput
     permissions?: PermissionCreateNestedManyWithoutAdminRoleInput
     reports?: ReportCreateNestedManyWithoutAdminRoleInput
@@ -82606,6 +82820,7 @@ export namespace Prisma {
     id?: string
     name: $Enums.AdminRoleType
     description?: string | null
+    adminId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutRoleInput
@@ -82817,6 +83032,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUpdateOneRequiredWithoutAdminRoleNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutRoleNestedInput
     permissions?: PermissionUpdateManyWithoutAdminRoleNestedInput
     reports?: ReportUpdateManyWithoutAdminRoleNestedInput
@@ -82828,6 +83044,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: EnumAdminRoleTypeFieldUpdateOperationsInput | $Enums.AdminRoleType
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutRoleNestedInput
@@ -83418,6 +83635,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    admin: AdminCreateNestedOneWithoutAdminRoleInput
     assignments?: AdminAssignmentCreateNestedManyWithoutRoleInput
     permissions?: PermissionCreateNestedManyWithoutAdminRoleInput
     reports?: ReportCreateNestedManyWithoutAdminRoleInput
@@ -83429,6 +83647,7 @@ export namespace Prisma {
     id?: string
     name: $Enums.AdminRoleType
     description?: string | null
+    adminId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutRoleInput
@@ -83591,6 +83810,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUpdateOneRequiredWithoutAdminRoleNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutRoleNestedInput
     permissions?: PermissionUpdateManyWithoutAdminRoleNestedInput
     reports?: ReportUpdateManyWithoutAdminRoleNestedInput
@@ -83602,6 +83822,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: EnumAdminRoleTypeFieldUpdateOperationsInput | $Enums.AdminRoleType
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutRoleNestedInput
@@ -84387,6 +84608,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    admin: AdminCreateNestedOneWithoutAdminRoleInput
     assignments?: AdminAssignmentCreateNestedManyWithoutRoleInput
     permissions?: PermissionCreateNestedManyWithoutAdminRoleInput
     files?: FileCreateNestedManyWithoutAdminRoleInput
@@ -84398,6 +84620,7 @@ export namespace Prisma {
     id?: string
     name: $Enums.AdminRoleType
     description?: string | null
+    adminId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutRoleInput
@@ -84655,6 +84878,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUpdateOneRequiredWithoutAdminRoleNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutRoleNestedInput
     permissions?: PermissionUpdateManyWithoutAdminRoleNestedInput
     files?: FileUpdateManyWithoutAdminRoleNestedInput
@@ -84666,6 +84890,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: EnumAdminRoleTypeFieldUpdateOperationsInput | $Enums.AdminRoleType
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutRoleNestedInput
@@ -85866,6 +86091,7 @@ export namespace Prisma {
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
   export type AdminUncheckedCreateWithoutAccountingEntriesInput = {
@@ -85878,6 +86104,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
   export type AdminCreateOrConnectWithoutAccountingEntriesInput = {
@@ -86063,6 +86290,7 @@ export namespace Prisma {
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutAccountingEntriesInput = {
@@ -86075,6 +86303,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
   export type AcademyUpsertWithoutAccountingEntryInput = {
@@ -86582,6 +86811,7 @@ export namespace Prisma {
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
   export type AdminUncheckedCreateWithoutPrRecordsInput = {
@@ -86594,6 +86824,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
   export type AdminCreateOrConnectWithoutPrRecordsInput = {
@@ -86829,6 +87060,7 @@ export namespace Prisma {
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutPrRecordsInput = {
@@ -86841,6 +87073,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
   export type AcademyUpsertWithoutPublicRelationsRecordInput = {
@@ -87017,6 +87250,7 @@ export namespace Prisma {
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
   export type AdminUncheckedCreateWithoutPrResponsesInput = {
@@ -87029,6 +87263,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
   export type AdminCreateOrConnectWithoutPrResponsesInput = {
@@ -87100,6 +87335,7 @@ export namespace Prisma {
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutPrResponsesInput = {
@@ -87112,6 +87348,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminCreateWithoutMeetingsInput = {
@@ -87124,6 +87361,7 @@ export namespace Prisma {
     prResponses?: PRResponseCreateNestedManyWithoutRespondedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
   export type AdminUncheckedCreateWithoutMeetingsInput = {
@@ -87136,6 +87374,7 @@ export namespace Prisma {
     prResponses?: PRResponseUncheckedCreateNestedManyWithoutRespondedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
   export type AdminCreateOrConnectWithoutMeetingsInput = {
@@ -87329,6 +87568,7 @@ export namespace Prisma {
     prResponses?: PRResponseUpdateManyWithoutRespondedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutMeetingsInput = {
@@ -87341,6 +87581,7 @@ export namespace Prisma {
     prResponses?: PRResponseUncheckedUpdateManyWithoutRespondedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
   export type AcademyUpsertWithoutMeetingInput = {
@@ -87736,6 +87977,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    admin: AdminCreateNestedOneWithoutAdminRoleInput
     assignments?: AdminAssignmentCreateNestedManyWithoutRoleInput
     reports?: ReportCreateNestedManyWithoutAdminRoleInput
     files?: FileCreateNestedManyWithoutAdminRoleInput
@@ -87747,6 +87989,7 @@ export namespace Prisma {
     id?: string
     name: $Enums.AdminRoleType
     description?: string | null
+    adminId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutRoleInput
@@ -87777,15 +88020,35 @@ export namespace Prisma {
     data: XOR<AdminRoleUpdateManyMutationInput, AdminRoleUncheckedUpdateManyWithoutPermissionsInput>
   }
 
-  export type AdminRoleScalarWhereInput = {
-    AND?: AdminRoleScalarWhereInput | AdminRoleScalarWhereInput[]
-    OR?: AdminRoleScalarWhereInput[]
-    NOT?: AdminRoleScalarWhereInput | AdminRoleScalarWhereInput[]
-    id?: StringFilter<"AdminRole"> | string
-    name?: EnumAdminRoleTypeFilter<"AdminRole"> | $Enums.AdminRoleType
-    description?: StringNullableFilter<"AdminRole"> | string | null
-    createdAt?: DateTimeFilter<"AdminRole"> | Date | string
-    updatedAt?: DateTimeFilter<"AdminRole"> | Date | string
+  export type AdminCreateWithoutAdminRoleInput = {
+    id?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutAdminInput
+    Group?: GroupCreateNestedManyWithoutAdminInput
+    accountingEntries?: AccountingEntryCreateNestedManyWithoutCreatedByAdminInput
+    prRecords?: PublicRelationsRecordCreateNestedManyWithoutHandledByAdminInput
+    prResponses?: PRResponseCreateNestedManyWithoutRespondedByAdminInput
+    meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
+    assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
+    legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+  }
+
+  export type AdminUncheckedCreateWithoutAdminRoleInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+    Group?: GroupUncheckedCreateNestedManyWithoutAdminInput
+    accountingEntries?: AccountingEntryUncheckedCreateNestedManyWithoutCreatedByAdminInput
+    prRecords?: PublicRelationsRecordUncheckedCreateNestedManyWithoutHandledByAdminInput
+    prResponses?: PRResponseUncheckedCreateNestedManyWithoutRespondedByAdminInput
+    meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
+    assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
+    legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+  }
+
+  export type AdminCreateOrConnectWithoutAdminRoleInput = {
+    where: AdminWhereUniqueInput
+    create: XOR<AdminCreateWithoutAdminRoleInput, AdminUncheckedCreateWithoutAdminRoleInput>
   }
 
   export type AdminAssignmentCreateWithoutRoleInput = {
@@ -87973,6 +88236,43 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AdminUpsertWithoutAdminRoleInput = {
+    update: XOR<AdminUpdateWithoutAdminRoleInput, AdminUncheckedUpdateWithoutAdminRoleInput>
+    create: XOR<AdminCreateWithoutAdminRoleInput, AdminUncheckedCreateWithoutAdminRoleInput>
+    where?: AdminWhereInput
+  }
+
+  export type AdminUpdateToOneWithWhereWithoutAdminRoleInput = {
+    where?: AdminWhereInput
+    data: XOR<AdminUpdateWithoutAdminRoleInput, AdminUncheckedUpdateWithoutAdminRoleInput>
+  }
+
+  export type AdminUpdateWithoutAdminRoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAdminNestedInput
+    Group?: GroupUpdateManyWithoutAdminNestedInput
+    accountingEntries?: AccountingEntryUpdateManyWithoutCreatedByAdminNestedInput
+    prRecords?: PublicRelationsRecordUpdateManyWithoutHandledByAdminNestedInput
+    prResponses?: PRResponseUpdateManyWithoutRespondedByAdminNestedInput
+    meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
+    assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
+    legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+  }
+
+  export type AdminUncheckedUpdateWithoutAdminRoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Group?: GroupUncheckedUpdateManyWithoutAdminNestedInput
+    accountingEntries?: AccountingEntryUncheckedUpdateManyWithoutCreatedByAdminNestedInput
+    prRecords?: PublicRelationsRecordUncheckedUpdateManyWithoutHandledByAdminNestedInput
+    prResponses?: PRResponseUncheckedUpdateManyWithoutRespondedByAdminNestedInput
+    meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
+    assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
+    legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+  }
+
   export type AdminAssignmentUpsertWithWhereUniqueWithoutRoleInput = {
     where: AdminAssignmentWhereUniqueInput
     update: XOR<AdminAssignmentUpdateWithoutRoleInput, AdminAssignmentUncheckedUpdateWithoutRoleInput>
@@ -88090,6 +88390,7 @@ export namespace Prisma {
     prResponses?: PRResponseCreateNestedManyWithoutRespondedByAdminInput
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
   export type AdminUncheckedCreateWithoutAssignmentsInput = {
@@ -88102,6 +88403,7 @@ export namespace Prisma {
     prResponses?: PRResponseUncheckedCreateNestedManyWithoutRespondedByAdminInput
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
   export type AdminCreateOrConnectWithoutAssignmentsInput = {
@@ -88115,6 +88417,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    admin: AdminCreateNestedOneWithoutAdminRoleInput
     permissions?: PermissionCreateNestedManyWithoutAdminRoleInput
     reports?: ReportCreateNestedManyWithoutAdminRoleInput
     files?: FileCreateNestedManyWithoutAdminRoleInput
@@ -88126,6 +88429,7 @@ export namespace Prisma {
     id?: string
     name: $Enums.AdminRoleType
     description?: string | null
+    adminId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     permissions?: PermissionUncheckedCreateNestedManyWithoutAdminRoleInput
@@ -88161,6 +88465,7 @@ export namespace Prisma {
     prResponses?: PRResponseUpdateManyWithoutRespondedByAdminNestedInput
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutAssignmentsInput = {
@@ -88173,6 +88478,7 @@ export namespace Prisma {
     prResponses?: PRResponseUncheckedUpdateManyWithoutRespondedByAdminNestedInput
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminRoleUpsertWithoutAssignmentsInput = {
@@ -88192,6 +88498,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUpdateOneRequiredWithoutAdminRoleNestedInput
     permissions?: PermissionUpdateManyWithoutAdminRoleNestedInput
     reports?: ReportUpdateManyWithoutAdminRoleNestedInput
     files?: FileUpdateManyWithoutAdminRoleNestedInput
@@ -88203,6 +88510,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: EnumAdminRoleTypeFieldUpdateOperationsInput | $Enums.AdminRoleType
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     permissions?: PermissionUncheckedUpdateManyWithoutAdminRoleNestedInput
@@ -88222,6 +88530,7 @@ export namespace Prisma {
     prResponses?: PRResponseCreateNestedManyWithoutRespondedByAdminInput
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
+    AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
   export type AdminUncheckedCreateWithoutLegalCasesInput = {
@@ -88234,6 +88543,7 @@ export namespace Prisma {
     prResponses?: PRResponseUncheckedCreateNestedManyWithoutRespondedByAdminInput
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
+    AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
   export type AdminCreateOrConnectWithoutLegalCasesInput = {
@@ -88558,6 +88868,7 @@ export namespace Prisma {
     prResponses?: PRResponseUpdateManyWithoutRespondedByAdminNestedInput
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
+    AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutLegalCasesInput = {
@@ -88570,6 +88881,7 @@ export namespace Prisma {
     prResponses?: PRResponseUncheckedUpdateManyWithoutRespondedByAdminNestedInput
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
+    AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
   export type AcademyUpsertWithoutLegalCaseInput = {
@@ -89339,6 +89651,7 @@ export namespace Prisma {
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutUserInput = {
@@ -89351,6 +89664,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminUncheckedUpdateManyWithoutUserInput = {
@@ -91725,6 +92039,14 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type AdminRoleCreateManyAdminInput = {
+    id?: string
+    name: $Enums.AdminRoleType
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type GroupUpdateWithoutAdminInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -91976,6 +92298,42 @@ export namespace Prisma {
     courtDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     academyId?: StringFieldUpdateOperationsInput | string
     relatedUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminRoleUpdateWithoutAdminInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: EnumAdminRoleTypeFieldUpdateOperationsInput | $Enums.AdminRoleType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignments?: AdminAssignmentUpdateManyWithoutRoleNestedInput
+    permissions?: PermissionUpdateManyWithoutAdminRoleNestedInput
+    reports?: ReportUpdateManyWithoutAdminRoleNestedInput
+    files?: FileUpdateManyWithoutAdminRoleNestedInput
+    events?: EventUpdateManyWithoutAdminRoleNestedInput
+    channels?: ChannelUpdateManyWithoutAdminRoleNestedInput
+  }
+
+  export type AdminRoleUncheckedUpdateWithoutAdminInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: EnumAdminRoleTypeFieldUpdateOperationsInput | $Enums.AdminRoleType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignments?: AdminAssignmentUncheckedUpdateManyWithoutRoleNestedInput
+    permissions?: PermissionUncheckedUpdateManyWithoutAdminRoleNestedInput
+    reports?: ReportUncheckedUpdateManyWithoutAdminRoleNestedInput
+    files?: FileUncheckedUpdateManyWithoutAdminRoleNestedInput
+    events?: EventUncheckedUpdateManyWithoutAdminRoleNestedInput
+    channels?: ChannelUncheckedUpdateManyWithoutAdminRoleNestedInput
+  }
+
+  export type AdminRoleUncheckedUpdateManyWithoutAdminInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: EnumAdminRoleTypeFieldUpdateOperationsInput | $Enums.AdminRoleType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -93013,6 +93371,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUpdateOneRequiredWithoutAdminRoleNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutRoleNestedInput
     reports?: ReportUpdateManyWithoutAdminRoleNestedInput
     files?: FileUpdateManyWithoutAdminRoleNestedInput
@@ -93024,6 +93383,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: EnumAdminRoleTypeFieldUpdateOperationsInput | $Enums.AdminRoleType
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutRoleNestedInput
@@ -93037,6 +93397,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: EnumAdminRoleTypeFieldUpdateOperationsInput | $Enums.AdminRoleType
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

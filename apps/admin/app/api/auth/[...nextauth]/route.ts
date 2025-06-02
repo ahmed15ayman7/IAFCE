@@ -18,7 +18,8 @@ const handler = NextAuth({
                         password: credentials?.password || '',
                     });
 
-                    const { access_token, admin } = response.data;
+                    const { access_token, admin, refreshToken } = response;
+                    console.log(response);
 
                     if (admin) {
                         return {
@@ -26,12 +27,14 @@ const handler = NextAuth({
                             email: admin.email,
                             name: `${admin.firstName} ${admin.lastName}`,
                             accessToken: access_token,
+                            refreshToken: refreshToken,
                             permissions: admin.permissions,
                             roles: admin.roles,
                         };
                     }
                     return null;
                 } catch (error) {
+                    console.log(error);
                     return null;
                 }
             },

@@ -21,6 +21,10 @@ import {
     Gavel as LegalIcon,
     ExpandLess,
     ExpandMore,
+    Settings as PermissionsIcon,
+    AdminPanelSettings as AdminIcon,
+    School as SchoolIcon,
+    Public as PublicIcon,
 } from '@mui/icons-material';
 import { usePathname, useRouter } from 'next/navigation';
 import { PermissionGuard } from './PermissionGuard';
@@ -57,6 +61,30 @@ const menuItems = [
         path: '/admin/legal',
         icon: <LegalIcon />,
         permissions: ['viewLegal'],
+    },
+    {
+        title: 'الصلاحيات',
+        path: '/admin/permissions',
+        icon: <PermissionsIcon />,
+        permissions: ['managePermissions'],
+    },
+    {
+        title: 'الإدارة',
+        path: '/admin/administration',
+        icon: <AdminIcon />,
+        permissions: ['manageAdministration'],
+    },
+    {
+        title: 'الأكاديمية',
+        path: '/admin/academic',
+        icon: <SchoolIcon />,
+        permissions: ['viewAcademic'],
+    },
+    {
+        title: 'الإدارة العامة',
+        path: '/admin/public-relations',
+        icon: <PublicIcon />,
+        permissions: ['viewPublicRelations'],
     },
 ];
 

@@ -8,6 +8,7 @@ import {
   Meeting,
   AdminAssignment,
   LegalCase,
+  AdminRole,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";

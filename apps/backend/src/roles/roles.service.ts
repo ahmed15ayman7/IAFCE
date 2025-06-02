@@ -1,7 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { NotificationsService } from '../notifications/notifications.service';
 import { AdminRoleType, NotificationType } from '@shared/prisma';
+import { CreateAdminRoleDto } from 'dtos/AdminRole.create.dto';
+import { UpdateAdminRoleDto } from 'dtos/AdminRole.update.dto';
 
 @Injectable()
 export class RolesService {
@@ -10,20 +12,34 @@ export class RolesService {
         private notificationsService: NotificationsService,
     ) { }
 
-    async createRole(data: {
-        name: AdminRoleType;
-        description?: string;
-        userId: string;
-    }) {
+    async createRole(data: CreateAdminRoleDto) {
+        const admin = await this.prisma.admin.findUnique({
+            where: {
+                id: data.adminId,
+            },
+            include: {
+                user: true,
+            },
+        });
+
+        if (!admin) {
+            throw new NotFoundException('Admin not found');
+        }
+
         const role = await this.prisma.adminRole.create({
             data: {
                 name: data.name,
                 description: data.description,
+                admin: {
+                    connect: {
+                        id: admin.id,
+                    },
+                },
             },
         });
 
         await this.notificationsService.create({
-            userId: data.userId,
+            userId: admin.user.id,
             type: NotificationType.MESSAGE,
             isImportant: false,
             urgent: false,
@@ -51,11 +67,29 @@ export class RolesService {
 
     async updateRole(
         id: string,
-        data: {
-            name?: AdminRoleType;
-            description?: string;
-        },
+        data: UpdateAdminRoleDto
     ) {
+        const role = await this.prisma.adminRole.findUnique({
+            where: { id },
+        });
+
+        if (!role) {
+            throw new NotFoundException('Role not found');
+        }
+
+        const admin = await this.prisma.admin.findUnique({
+            where: {
+                id: role.adminId,
+            },
+            include: {
+                user: true,
+            },
+        });
+
+        if (!admin) {
+            throw new NotFoundException('Admin not found');
+        }
+
         return this.prisma.adminRole.update({
             where: { id },
             data,

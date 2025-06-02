@@ -602,6 +602,7 @@ exports.Prisma.AdminRoleScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
+  adminId: 'adminId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

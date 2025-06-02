@@ -1,6 +1,6 @@
 import { jwtDecode } from 'jwt-decode';
 import { authApi } from '@/lib/api';
-import { setTokensF, getAccessToken, getRefreshToken, removeTokens, redirectToLogin } from './server-cookie.service';
+import { setTokensF, getAccessToken, getRefreshToken, removeTokens } from './server-cookie.service';
 
 interface TokenPayload {
   exp: number;
@@ -47,7 +47,7 @@ class AuthService {
   // الحصول على التوكن الحالي
   public async getAccessTokenFromCookie(): Promise<string> {
     let token = await getAccessToken()
-    return  token || this.accessToken ||'';
+    return token || this.accessToken || '';
   }
 
   // التحقق من حالة تسجيل الدخول
@@ -104,7 +104,7 @@ class AuthService {
     this.refresh_token = '';
     await removeTokens();
     this.stopRefreshTokenTimer();
-    redirectToLogin();
+    // redirectToLogin();
 
   }
 

@@ -52,10 +52,107 @@ ChartJS.register(
 );
 
 type TimeRange = 'day' | 'week' | 'month' | 'year';
-
+let initialStats = {
+    users: {
+        total: 4,
+        students: 6,
+        instructors: 7,
+        admins: 8,
+    },
+    courses: {
+        total: 9,
+        active: 4,
+        completed: 5,
+        pending: 6,
+    },
+    attendance: {
+        present: 3,
+        absent: 7,
+        late: 1,
+    },
+    paths: {
+        total: 3,
+        milestones: 1,
+        completedTasks: {
+            _sum: {
+                completedTasks: 22,
+            },
+        },
+        totalTasks: {
+            _sum: {
+                totalTasks: 29,
+            },
+        },
+    },
+    community: {
+        total: 60,
+        groups: 10,
+        posts: 30,
+        discussions: 20,
+        liveRooms: 10,
+    },
+    assessments: {
+        quizzes: 10,
+        questions: 10,
+        submissions: 10,
+        passed: 10,
+    },
+    finance: {
+        totalAmount: {
+            _sum: {
+                amount: 10000,
+            },
+        },
+        totalPayments: 10,
+        salaryAmount: {
+            _sum: {
+                amount: 1000,
+            },
+        },
+        salaryPayments: 10,
+    },
+    publicRelations: {
+        records: 10,
+        responses: 10,
+        events: 10,
+        pending: 10,
+    },
+    secretariat: {
+        meetings: 10,
+        participants: 10,
+        attended: 10,
+    },
+    legal: {
+        activeCases: 10,
+        cases: 10,
+        contracts: 10,
+    },
+    marketing: {
+        campaigns: 10,
+        leads: 10,
+        conversions: 10,
+        revenue: 10,
+    },
+    operations: {
+        total: 10,
+        active: 10,
+        completed: 10,
+        pending: 10,
+    },
+    support: {
+        tickets: 10,
+        resolved: 10,
+        pending: 10,
+    },
+    settings: {
+        users: 10,
+        roles: 10,
+        permissions: 10,
+    },
+};
 export default function DashboardPage() {
     const { data: session } = useSession();
-    const [stats, setStats] = useState<any>(null);
+    const [stats, setStats] = useState<any>(initialStats);
     const [loading, setLoading] = useState(true);
     const [timeRange, setTimeRange] = useState<TimeRange>('month');
     const [loadingSections, setLoadingSections] = useState<{ [key: string]: boolean }>({});
@@ -178,7 +275,7 @@ export default function DashboardPage() {
                             <>
                                 <Grid item xs={12} sm={6} md={3}>
                                     <StatCard
-                                        title="إجمالي المستخدمين"
+                                        title="المستخدمين"
                                         value={stats.users.total}
                                         icon={<PeopleIcon />}
                                     />
@@ -192,7 +289,7 @@ export default function DashboardPage() {
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={3}>
                                     <StatCard
-                                        title="المدربين"
+                                        title="المحاضريين"
                                         value={stats.users.instructors}
                                         icon={<PersonIcon />}
                                     />

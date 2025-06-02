@@ -29,7 +29,81 @@ import { format } from 'date-fns';
 import { arSA } from 'date-fns/locale';
 
 const MotionCard = motion(Card);
+let initialData = {
+    data: [
+        {
+            id: '1',
+            status: 'DRAFT',
+            title: 'test',
+            content: 'test',
+            type: 'test',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            createdByAdminId: '1',
+        },
+        {
+            id: '2',
+            status: 'PUBLISHED',
+            title: 'test2',
+            content: 'test2',
+            type: 'test2',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            createdByAdminId: '1',
+        },
+        {
+            id: '3',
+            status: 'ARCHIVED',
+            title: 'test3',
+            content: 'test3',
+            type: 'test3',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            createdByAdminId: '1',
+        },
+        {
+            id: '4',
+            status: 'DRAFT',
+            title: 'test4',
+            content: 'test4',
+            type: 'test4',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            createdByAdminId: '1',
+        },
+        {
+            id: '5',
+            status: 'PUBLISHED',
+            title: 'test5',
+            content: 'test5',
+            type: 'test5',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            createdByAdminId: '1',
+        },
+        {
+            id: '6',
+            status: 'ARCHIVED',
+            title: 'test6',
+            content: 'test6',
+            type: 'test6',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            createdByAdminId: '1',
+        },
+        {
+            id: '7',
+            status: 'DRAFT',
+            title: 'test7',
+            content: 'test7',
+            type: 'test7',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            createdByAdminId: '1',
+        },
 
+    ]
+}
 export default function CommunicationsPage() {
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState<any>(null);

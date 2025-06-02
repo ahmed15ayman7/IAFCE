@@ -55,7 +55,9 @@
   font-weight: 100 900;
   font-display: swap;
 }
-
+.muirtl-i4bv87-MuiSvgIcon-root{
+  color: #e08e1a !important;
+}
 
 @layer base {
   * {

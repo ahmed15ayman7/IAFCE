@@ -64,6 +64,7 @@ interface Permissions {
     manageStaff: boolean;
     viewLegal: boolean;
     manageLegal: boolean;
+    managePermissions: boolean;
 }
 
 interface PermissionItem {
@@ -73,6 +74,45 @@ interface PermissionItem {
     permissions: Permissions;
     createdAt: string;
 }
+
+let initialpermissionsData = [
+
+    {
+        id: '1',
+        name: 'الصلاحية',
+        description: 'الوصف',
+        permissions: {
+            viewFinance: false,
+            manageFinance: false,
+            viewCommunications: false,
+            manageCommunications: false,
+        },
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+        updatedByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '2',
+        name: 'الصلاحية',
+        description: 'الوصف',
+        permissions: {
+            viewFinance: false,
+            manageFinance: false,
+            viewCommunications: false,
+            manageCommunications: false,
+        },
+        createdAt: new Date(),
+    },
+]
 
 export default function PermissionsPage() {
     const [open, setOpen] = useState(false);
@@ -92,6 +132,7 @@ export default function PermissionsPage() {
             manageStaff: false,
             viewLegal: false,
             manageLegal: false,
+            managePermissions: false,
         } as Permissions,
     });
     const queryClient = useQueryClient();
@@ -120,6 +161,7 @@ export default function PermissionsPage() {
                     manageStaff: false,
                     viewLegal: false,
                     manageLegal: false,
+                    managePermissions: false,
                 },
             });
             setSnackbar({ open: true, message: 'تم إضافة الصلاحية بنجاح', severity: 'success' });
@@ -146,6 +188,7 @@ export default function PermissionsPage() {
                     manageStaff: false,
                     viewLegal: false,
                     manageLegal: false,
+                    managePermissions: false,
                 },
             });
             setSnackbar({ open: true, message: 'تم تحديث الصلاحية بنجاح', severity: 'success' });
@@ -237,6 +280,7 @@ export default function PermissionsPage() {
                                                 manageStaff: false,
                                                 viewLegal: false,
                                                 manageLegal: false,
+                                                managePermissions: false,
                                             },
                                         });
                                         setOpen(true);
@@ -268,7 +312,7 @@ export default function PermissionsPage() {
                         </TableHead>
                         <TableBody>
                             <AnimatePresence>
-                                {permissionsData?.data?.map((item: any) => (
+                                {(permissionsData?.data ?? initialpermissionsData).map((item: any) => (
                                     <motion.tr
                                         key={item.id}
                                         initial={{ opacity: 0 }}
@@ -530,6 +574,26 @@ export default function PermissionsPage() {
                                                         />
                                                     }
                                                     label="إدارة الشؤون القانونية"
+                                                />
+                                            </Card>
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <Card elevation={2} sx={{ p: 2 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                                                    <LegalIcon color="primary" sx={{ mr: 1 }} />
+                                                    <Typography variant="subtitle1" color="primary">
+                                                        الصلاحيات المخصصة
+                                                    </Typography>
+                                                </Box>
+                                                <FormControlLabel
+                                                    control={
+                                                        <Switch
+                                                            checked={formData.permissions.managePermissions}
+                                                            onChange={() => handlePermissionChange('managePermissions')}
+                                                            color="primary"
+                                                        />
+                                                    }
+                                                    label="إدارة الصلاحيات المخصصة"
                                                 />
                                             </Card>
                                         </Grid>

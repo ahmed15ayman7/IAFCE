@@ -80,10 +80,10 @@ export function AdminHeader() {
                         onClick={handleMenu}
                         color="inherit"
                     >
-                        {session?.user?.image ? (
+                        {session?.user?.avatar ? (
                             <Avatar
-                                src={session.user.image}
-                                alt={session.user.name || ''}
+                                src={session.user.avatar}
+                                alt={session.user.firstName + ' ' + session.user.lastName || ''}
                                 sx={{ width: 32, height: 32 }}
                             />
                         ) : (

@@ -71,6 +71,117 @@ function TabPanel(props: TabPanelProps) {
     );
 }
 
+let initialmeetingsData = [
+    {
+        id: '1',
+        meetingTitle: 'الاجتماع الاول',
+        meetingDate: new Date(),
+        location: 'الموقع',
+        notes: 'الملاحظات',
+        participants: [
+            {
+                id: '1',
+                name: 'محمد حسين',
+                isAttended: true,
+                user: {
+                    id: '1',
+                    firstName: 'محمد',
+                    lastName: 'حسين',
+                },
+            },
+        ],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '1',
+        meetingTitle: 'الاجتماع الاول',
+        meetingDate: new Date(),
+        location: 'الموقع',
+        notes: 'الملاحظات',
+        participants: [
+            {
+                id: '1',
+                name: 'محمد حسين',
+                isAttended: true,
+                user: {
+                    id: '1',
+                    firstName: 'محمد',
+                    lastName: 'حسين',
+                },
+            },
+        ],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '1',
+        meetingTitle: 'الاجتماع الاول',
+        meetingDate: new Date(),
+        location: 'الموقع',
+        notes: 'الملاحظات',
+        participants: [
+            {
+                id: '1',
+                name: 'محمد حسين',
+                isAttended: true,
+                user: {
+                    id: '1',
+                    firstName: 'محمد',
+                    lastName: 'حسين',
+                },
+            },
+        ],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '1',
+        meetingTitle: 'الاجتماع الاول',
+        meetingDate: new Date(),
+        location: 'الموقع',
+        notes: 'الملاحظات',
+        participants: [
+            {
+                id: '1',
+                name: 'محمد حسين',
+                isAttended: true,
+                user: {
+                    id: '1',
+                    firstName: 'محمد',
+                    lastName: 'حسين',
+                },
+            },
+        ],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+]
+
 export default function SecretariatPage() {
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState<any>(null);
@@ -218,7 +329,7 @@ export default function SecretariatPage() {
                                     </TableHead>
                                     <TableBody>
                                         <AnimatePresence>
-                                            {meetingsData?.data?.map((item: any) => (
+                                            {(meetingsData?.data ?? initialmeetingsData).map((item: any) => (
                                                 <motion.tr
                                                     key={item.id}
                                                     initial={{ opacity: 0 }}
@@ -268,7 +379,7 @@ export default function SecretariatPage() {
 
                         <TabPanel value={tabValue} index={1}>
                             <Grid container spacing={3}>
-                                {meetingsData?.data?.map((meeting: any) => (
+                                {(meetingsData?.data ?? initialmeetingsData).map((meeting: any) => (
                                     <Grid item xs={12} md={6} lg={4} key={meeting.id}>
                                         <Card elevation={2}>
                                             <CardContent>
@@ -298,7 +409,7 @@ export default function SecretariatPage() {
 
                         <TabPanel value={tabValue} index={2}>
                             <Grid container spacing={3}>
-                                {meetingsData?.data?.map((meeting: any) => (
+                                {(meetingsData?.data ?? initialmeetingsData).map((meeting: any) => (
                                     <Grid item xs={12} md={6} lg={4} key={meeting.id}>
                                         <Card elevation={2}>
                                             <CardContent>
@@ -326,7 +437,7 @@ export default function SecretariatPage() {
 
                         <TabPanel value={tabValue} index={3}>
                             <Grid container spacing={3}>
-                                {meetingsData?.data?.map((meeting: any) => (
+                                {(meetingsData?.data ?? initialmeetingsData).map((meeting: any) => (
                                     <Grid item xs={12} md={6} lg={4} key={meeting.id}>
                                         <Card elevation={2}>
                                             <CardContent>

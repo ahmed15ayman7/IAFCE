@@ -38,7 +38,165 @@ import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import { arSA } from 'date-fns/locale';
 
-const MotionCard = motion(Card);
+let initialadministrationData = [
+    {
+        id: '1',
+        title: 'اجتماع المديرية',
+        description: 'اجتماع المديرية',
+        type: 'MEETING',
+        priority: 'HIGH',
+        assignedTo: 'محمد حسين',
+        dueDate: '2025-01-01',
+        status: 'PENDING',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        academyId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+        updatedByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+
+    {
+        id: '2',
+        title: 'اجتماع المديرية',
+        description: 'اجتماع المديرية',
+        type: 'MEETING',
+        priority: 'HIGH',
+        assignedTo: 'محمد حسين',
+        dueDate: '2025-01-01',
+        status: 'PENDING',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        academyId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+        updatedByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+
+    {
+        id: '3',
+        title: 'اجتماع المديرية',
+        description: 'اجتماع المديرية',
+        type: 'MEETING',
+        priority: 'HIGH',
+        assignedTo: 'محمد حسين',
+        dueDate: '2025-01-01',
+        status: 'PENDING',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        academyId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+        updatedByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+
+    {
+        id: '4',
+        title: 'اجتماع المديرية',
+        description: 'اجتماع المديرية',
+        type: 'MEETING',
+        priority: 'HIGH',
+        assignedTo: 'محمد حسين',
+        dueDate: '2025-01-01',
+        status: 'PENDING',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        academyId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+        updatedByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+
+    {
+        id: '5',
+        title: 'اجتماع المديرية',
+        description: 'اجتماع المديرية',
+        type: 'MEETING',
+        priority: 'HIGH',
+        assignedTo: 'محمد حسين',
+        dueDate: '2025-01-01',
+        status: 'PENDING',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        academyId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+        updatedByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+
+    {
+        id: '6',
+        title: 'اجتماع المديرية',
+        description: 'اجتماع المديرية',
+        type: 'MEETING',
+        priority: 'HIGH',
+        assignedTo: 'محمد حسين',
+        dueDate: '2025-01-01',
+        status: 'PENDING',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        academyId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+        updatedByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -236,7 +394,7 @@ export default function AdministrationPage() {
         }
     };
 
-    const filteredItems = administrationData?.data?.filter((item: any) => {
+    const filteredItems = (administrationData?.data ?? initialadministrationData).filter((item: any) => {
         switch (tabValue) {
             case 0:
                 return item.status === 'PENDING';

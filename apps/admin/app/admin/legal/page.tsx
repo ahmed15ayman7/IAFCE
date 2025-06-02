@@ -51,6 +51,173 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { format } from 'date-fns';
 import { arSA } from 'date-fns/locale';
 
+let initiallegalData = [
+    {
+        id: '1',
+        caseTitle: 'القضية',
+        caseType: 'النوع',
+        description: 'الوصف',
+        courtDate: '2025-01-01',
+
+        assignedLawyerId: '1',
+        relatedUserId: '1',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '1',
+        caseTitle: 'القضية',
+        caseType: 'النوع',
+        description: 'الوصف',
+        courtDate: '2025-01-01',
+
+        assignedLawyerId: '1',
+        relatedUserId: '1',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '1',
+        caseTitle: 'القضية',
+        caseType: 'النوع',
+        description: 'الوصف',
+        courtDate: '2025-01-01',
+
+        assignedLawyerId: '1',
+        relatedUserId: '1',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '1',
+        caseTitle: 'القضية',
+        caseType: 'النوع',
+        description: 'الوصف',
+        courtDate: '2025-01-01',
+
+        assignedLawyerId: '1',
+        relatedUserId: '1',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '1',
+        caseTitle: 'القضية',
+        caseType: 'النوع',
+        description: 'الوصف',
+        courtDate: '2025-01-01',
+
+        assignedLawyerId: '1',
+        relatedUserId: '1',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+]
+
+let initialpaymentsData = [
+
+    {
+        id: '1',
+        amount: 1000,
+        description: 'الوصف',
+        date: '2025-01-01',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '1',
+        amount: 1000,
+        description: 'الوصف',
+        date: '2025-01-01',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '1',
+        amount: 1000,
+        description: 'الوصف',
+        date: '2025-01-01',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '1',
+        amount: 1000,
+        description: 'الوصف',
+        date: '2025-01-01',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+    {
+        id: '1',
+        amount: 1000,
+        description: 'الوصف',
+        date: '2025-01-01',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdByAdminId: '1',
+        updatedByAdminId: '1',
+        createdByAdmin: {
+            id: '1',
+            name: 'محمد حسين',
+        },
+    },
+]
+
 interface TabPanelProps {
     children?: React.ReactNode;
     index: number;
@@ -228,7 +395,7 @@ export default function LegalPage() {
                                     </TableHead>
                                     <TableBody>
                                         <AnimatePresence>
-                                            {casesData?.data?.map((item: any) => (
+                                            {(casesData?.data ?? initiallegalData).map((item: any) => (
                                                 <motion.tr
                                                     key={item.id}
                                                     initial={{ opacity: 0 }}
@@ -296,7 +463,7 @@ export default function LegalPage() {
 
                         <TabPanel value={tabValue} index={1}>
                             <Grid container spacing={3}>
-                                {paymentsData?.data?.map((payment: any) => (
+                                {(paymentsData?.data ?? initialpaymentsData).map((payment: any) => (
                                     <Grid item xs={12} md={6} lg={4} key={payment.id}>
                                         <Card elevation={2}>
                                             <CardContent>
@@ -318,7 +485,7 @@ export default function LegalPage() {
 
                         <TabPanel value={tabValue} index={2}>
                             <Grid container spacing={3}>
-                                {casesData?.data?.map((item: any) => (
+                                {(casesData?.data ?? initiallegalData).map((item: any) => (
                                     <Grid item xs={12} md={6} lg={4} key={item.id}>
                                         <Card elevation={2}>
                                             <CardContent>
@@ -366,19 +533,19 @@ export default function LegalPage() {
                                             <Box sx={{ display: 'flex', justifyContent: 'space-around', mt: 2 }}>
                                                 <Box sx={{ textAlign: 'center' }}>
                                                     <Typography variant="h4" color="error.main">
-                                                        {casesData?.data?.filter((c: any) => c.status === 'OPEN').length}
+                                                        {(casesData?.data ?? initiallegalData).filter((c: any) => c.status === 'OPEN').length}
                                                     </Typography>
                                                     <Typography variant="body2">قضايا مفتوحة</Typography>
                                                 </Box>
                                                 <Box sx={{ textAlign: 'center' }}>
                                                     <Typography variant="h4" color="warning.main">
-                                                        {casesData?.data?.filter((c: any) => c.status === 'IN_PROGRESS').length}
+                                                        {(casesData?.data ?? initiallegalData).filter((c: any) => c.status === 'IN_PROGRESS').length}
                                                     </Typography>
                                                     <Typography variant="body2">قضايا قيد التنفيذ</Typography>
                                                 </Box>
                                                 <Box sx={{ textAlign: 'center' }}>
                                                     <Typography variant="h4" color="success.main">
-                                                        {casesData?.data?.filter((c: any) => c.status === 'CLOSED').length}
+                                                        {(casesData?.data ?? initiallegalData).filter((c: any) => c.status === 'CLOSED').length}
                                                     </Typography>
                                                     <Typography variant="body2">قضايا مغلقة</Typography>
                                                 </Box>
@@ -395,13 +562,13 @@ export default function LegalPage() {
                                             <Box sx={{ display: 'flex', justifyContent: 'space-around', mt: 2 }}>
                                                 <Box sx={{ textAlign: 'center' }}>
                                                     <Typography variant="h4" color="primary.main">
-                                                        {paymentsData?.data?.reduce((sum: number, p: any) => sum + p.amount, 0)} ريال
+                                                        {(paymentsData?.data ?? initialpaymentsData).reduce((sum: number, p: any) => sum + p.amount, 0)} ريال
                                                     </Typography>
                                                     <Typography variant="body2">إجمالي المدفوعات</Typography>
                                                 </Box>
                                                 <Box sx={{ textAlign: 'center' }}>
                                                     <Typography variant="h4" color="primary.main">
-                                                        {paymentsData?.data?.length}
+                                                        {(paymentsData?.data ?? initialpaymentsData).length}
                                                     </Typography>
                                                     <Typography variant="body2">عدد المدفوعات</Typography>
                                                 </Box>

@@ -3,6 +3,8 @@ import { RolesService } from './roles.service';
 import { AdminRoleType } from '@shared/prisma';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
+import { CreateAdminRoleDto } from '../../dtos/AdminRole.create.dto';
+import { UpdateAdminRoleDto } from '../../dtos/AdminRole.update.dto';
 
 @ApiTags('الأدوار')
 @Controller('roles')
@@ -12,11 +14,7 @@ export class RolesController {
     constructor(private readonly rolesService: RolesService) { }
 
     @Post()
-    async createRole(@Body() data: {
-        name: AdminRoleType;
-        description?: string;
-        userId: string;
-    }) {
+    async createRole(@Body() data: CreateAdminRoleDto) {
         return this.rolesService.createRole(data);
     }
 
@@ -28,10 +26,7 @@ export class RolesController {
     @Put(':id')
     async updateRole(
         @Param('id') id: string,
-        @Body() data: {
-            name?: AdminRoleType;
-            description?: string;
-        },
+        @Body() data: UpdateAdminRoleDto,
     ) {
         return this.rolesService.updateRole(id, data);
     }

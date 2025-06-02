@@ -41,8 +41,9 @@ export async function middleware(request: NextRequest) {
 
     if (route) {
         const [, { roles, permissions }] = route;
-        const userRole = token.role as string;
-        const userPermissions = token.permissions as Record<string, boolean>;
+        const userRole = (token as any)?.roles?.[0]?.name as string;
+        console.log("userRole", userRole);
+        const userPermissions = (token as any)?.permissions as Record<string, boolean>;
 
         // التحقق من الدور
         if (!roles.includes(userRole)) {
@@ -50,7 +51,7 @@ export async function middleware(request: NextRequest) {
         }
 
         // التحقق من الصلاحيات
-        if (!permissions.some((permission) => userPermissions[permission])) {
+        if (!permissions.some((permission) => userPermissions[permission]) && userRole !== 'SUPER_ADMIN') {
             return NextResponse.redirect(new URL('/admin/unauthorized', request.url));
         }
     }

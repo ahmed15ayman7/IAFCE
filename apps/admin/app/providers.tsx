@@ -11,7 +11,12 @@ import createCache from '@emotion/cache';
 import rtlPlugin from 'stylis-plugin-rtl';
 import { prefixer } from 'stylis';
 import { ReactNode } from 'react';
-
+import { Cairo } from 'next/font/google';
+const cairo = Cairo({
+    subsets: ['arabic'],
+    variable: '--font-cairo',
+    weight: ['300', '400', '500', '600', '700'],
+});
 // إنشاء كاش للـ RTL
 const cacheRtl = createCache({
     key: 'muirtl',
@@ -23,51 +28,77 @@ const theme = createTheme({
     direction: 'rtl',
     palette: {
         primary: {
-            main: '#2563eb', // blue-600
-            light: '#60a5fa', // blue-400
-            dark: '#1d4ed8', // blue-700
+            main: '#FBB34C',
+            light: '#FFD699',
+            dark: '#002D32',
+            contrastText: '#FFFFFF',
         },
         secondary: {
-            main: '#7c3aed', // violet-600
-            light: '#a78bfa', // violet-400
-            dark: '#5b21b6', // violet-700
+            main: '#002D32',
+            light: '#004A52',
+            dark: '#001A1D',
+            contrastText: '#FFFFFF',
+        },
+        background: {
+            default: '#FFFFFF',
+            paper: '#F5F5F5',
+        },
+        text: {
+            primary: '#002D32',
+            secondary: '#666666',
         },
     },
     typography: {
-        fontFamily: 'Cairo, sans-serif',
+        fontFamily: cairo.style.fontFamily,
+        h1: {
+            fontSize: '2.5rem',
+            fontWeight: 700,
+        },
+        h2: {
+            fontSize: '2rem',
+            fontWeight: 600,
+        },
+        h3: {
+            fontSize: '1.75rem',
+            fontWeight: 600,
+        },
+        body1: {
+            fontSize: '1rem',
+            lineHeight: 1.6,
+        },
+        button: {
+            textTransform: 'none',
+            fontWeight: 500,
+        },
     },
     components: {
-        MuiCssBaseline: {
+        MuiButton: {
             styleOverrides: {
-                body: {
-                    scrollbarColor: '#6b6b6b #2b2b2b',
-                    '&::-webkit-scrollbar, & *::-webkit-scrollbar': {
-                        backgroundColor: '#2b2b2b',
+                root: {
+                    borderRadius: '0.5rem',
+                    padding: '0.5rem 1.5rem',
+                },
+            },
+        },
+        MuiTextField: {
+            styleOverrides: {
+                root: {
+                    '& .MuiOutlinedInput-root': {
+                        borderRadius: '0.5rem',
                     },
-                    '&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb': {
-                        borderRadius: 8,
-                        backgroundColor: '#6b6b6b',
-                        minHeight: 24,
-                        border: '3px solid #2b2b2b',
-                    },
-                    '&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus': {
-                        backgroundColor: '#959595',
-                    },
-                    '&::-webkit-scrollbar-thumb:active, & *::-webkit-scrollbar-thumb:active': {
-                        backgroundColor: '#959595',
-                    },
-                    '&::-webkit-scrollbar-thumb:hover, & *::-webkit-scrollbar-thumb:hover': {
-                        backgroundColor: '#959595',
-                    },
-                    '&::-webkit-scrollbar-corner, & *::-webkit-scrollbar-corner': {
-                        backgroundColor: '#2b2b2b',
-                    },
+                },
+            },
+        },
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    borderRadius: '0.5rem',
+                    boxShadow: '0 4px 6px -1px rgba(0, 45, 50, 0.1), 0 2px 4px -1px rgba(0, 45, 50, 0.06)',
                 },
             },
         },
     },
 });
-
 // إنشاء QueryClient
 const queryClient = new QueryClient({
     defaultOptions: {

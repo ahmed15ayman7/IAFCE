@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { useSession } from 'next-auth/react';
-import { Permission } from '@shared/prisma';
+import { AdminRoleType, Permission } from '@shared/prisma';
 
 export interface EmployeePermissions {
     // المحاسبة
@@ -52,13 +52,13 @@ export function PermissionGuard({
     const { data: session } = useSession();
     const userPermissions = session?.user?.permissions as Permission[];
 
-    if (!userPermissions) {
+    if (!userPermissions && session?.user?.roles?.some((role) => role.name !== AdminRoleType.SUPER_ADMIN)) {
         return fallback;
     }
 
     const hasPermission = requireAll
-        ? requiredPermissions.every((permission) => userPermissions.some((p) => p.name === permission && p.isActive))
-        : requiredPermissions.some((permission) => userPermissions.some((p) => p.name === permission && p.isActive));
+        ? requiredPermissions.every((permission) => userPermissions?.some((p) => p.name === permission && p.isActive))
+        : requiredPermissions.some((permission) => userPermissions?.some((p) => p.name === permission && p.isActive));
 
-    return hasPermission ? <>{children}</> : <>{fallback}</>;
+    return hasPermission || session?.user?.roles?.some((role) => role.name === AdminRoleType.SUPER_ADMIN) ? <>{children}</> : <>{fallback}</>;
 } 

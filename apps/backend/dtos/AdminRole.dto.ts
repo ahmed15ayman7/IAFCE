@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { AdminEntity } from "./Admin.entity";
 import { AdminAssignmentEntity } from "./AdminAssignment.entity";
 import { PermissionEntity } from "./Permission.entity";
 import { ReportEntity } from "./Report.entity";
@@ -7,6 +8,7 @@ import { EventEntity } from "./Event.entity";
 import { ChannelEntity } from "./Channel.entity";
 import {
   AdminRoleType,
+  Admin,
   AdminAssignment,
   Permission,
   Report,
@@ -33,6 +35,16 @@ export class AdminRoleDto {
   // Field: description, Type: string
   @Column()
   description?: string;
+
+  @ApiProperty({ type: "string" })
+  // Field: adminId, Type: string
+  @Column()
+  adminId: string;
+
+  @ApiProperty({ type: AdminEntity })
+  // Field: admin, Type: Admin
+  @Column()
+  admin: Admin;
 
   @ApiProperty({ type: AdminAssignmentEntity })
   // Field: assignments, Type: AdminAssignment[]
