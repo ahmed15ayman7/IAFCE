@@ -10,11 +10,21 @@ import { UpdateOptionDto } from 'dtos/Option.update.dto';
 export class QuestionsService {
     constructor(private prisma: PrismaService) { }
 
-    async create(createQuestionInput: CreateQuestionDto) {
+    async create(createQuestionInput: CreateQuestionDto & { options: CreateOptionDto[] }, quizId: string) {
         return this.prisma.question.create({
-            data: createQuestionInput,
+            data: {
+                ...createQuestionInput,
+                quizId,
+                options: {
+                    create: createQuestionInput.options.map(option => ({
+                        isCorrect: option.isCorrect,
+                        text: option.text,
+                    })),
+                },
+            },
             include: {
                 quiz: true,
+                options: true,
             },
         });
     }

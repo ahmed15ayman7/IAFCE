@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import {
     Box,
@@ -24,6 +24,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { FormInput } from '@/components/ui/FormInput';
 import { CustomPhoneInput } from '@/components/ui/PhoneInput';
+import { AdminRole } from '@shared/prisma';
 
 
 
@@ -31,7 +32,7 @@ export default function LoginPage() {
     const router = useRouter();
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
-
+    const { data: session } = useSession();
     const { control, handleSubmit, formState: { errors } } = useForm<SignInInput>({
         resolver: zodResolver(signInSchema),
     });
@@ -50,8 +51,15 @@ export default function LoginPage() {
 
             if (result?.error) {
                 setError(result.error);
-            } else {
-                router.push('/admin/dashboard');
+            }
+            else {
+                if ((session?.user as any)?.roles.some((role: AdminRole) => role.name === 'ADMIN')) {
+                    router.push('/admin/dashboard');
+                } else if ((session?.user as any)?.roles.some((role: AdminRole) => role.name === 'ACCOUNTANT')) {
+                    router.push('/admin/finance/');
+                } else {
+                    router.push('/admin/dashboard');
+                }
             }
         } catch (error) {
             setError('حدث خطأ أثناء تسجيل الدخول');

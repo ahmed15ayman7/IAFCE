@@ -22,7 +22,7 @@ export class AuthService {
             if (!user) {
                 throw new UnauthorizedException();
             }
-            return this.login(user);
+            return this.login(user, token);
         } catch {
             throw new UnauthorizedException();
         }
@@ -45,11 +45,11 @@ export class AuthService {
         return null;
     }
 
-    async login(user: User) {
+    async login(user: User, refreshToken?: string) {
         const payload = { email: user.email, sub: user.id, role: user.role };
         return {
             access_token: this.jwtService.sign(payload),
-            refreshToken: this.generateRefreshToken(payload),
+            refreshToken: refreshToken ?? this.generateRefreshToken(payload),
             user: {
                 id: user.id,
                 email: user.email,

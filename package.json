@@ -14,7 +14,9 @@
     "backend:prod": "cd apps/backend && npm run start:prod",
     "backend:dev": "cd apps/backend && npm run start:dev",
     "frontend:dev": "cd apps/frontend && npm run dev",
+    "frontend:build": "cd apps/frontend && npm run build",
     "admin:dev": "cd apps/admin && npm run dev",
+    "admin:build": "cd apps/admin && npm run build",
     "dtos": "cd apps/backend && node ./generate-dtos.js && cd ../..",
     "dev": "pnpm prisma:generate && pnpm prisma:migrate && pnpm prisma:push && pnpm backend:dev && pnpm frontend:dev"
   },

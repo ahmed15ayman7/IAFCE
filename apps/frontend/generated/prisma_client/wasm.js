@@ -434,8 +434,12 @@ exports.Prisma.PaymentScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   amount: 'amount',
+  method: 'method',
+  paidAt: 'paidAt',
+  branchId: 'branchId',
   legalCaseId: 'legalCaseId',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ReportScalarFieldEnum = {
@@ -632,6 +636,51 @@ exports.Prisma.LegalCaseScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.InstallmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  amount: 'amount',
+  dueDate: 'dueDate',
+  status: 'status',
+  paymentId: 'paymentId',
+  branchId: 'branchId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ExpenseScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  amount: 'amount',
+  description: 'description',
+  paidAt: 'paidAt',
+  branchId: 'branchId',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BranchScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  address: 'address',
+  phone: 'phone',
+  email: 'email',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BranchFinanceScalarFieldEnum = {
+  id: 'id',
+  branchId: 'branchId',
+  totalIncome: 'totalIncome',
+  totalExpenses: 'totalExpenses',
+  balance: 'balance',
+  lastUpdated: 'lastUpdated',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -710,6 +759,13 @@ exports.NotificationType = exports.$Enums.NotificationType = {
   URGENT: 'URGENT'
 };
 
+exports.PaymentMethod = exports.$Enums.PaymentMethod = {
+  CASH: 'CASH',
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  ELECTRONIC: 'ELECTRONIC',
+  INSTALLMENT: 'INSTALLMENT'
+};
+
 exports.AccountingType = exports.$Enums.AccountingType = {
   EXPENSE: 'EXPENSE',
   INCOME: 'INCOME',
@@ -757,6 +813,22 @@ exports.LegalCaseStatus = exports.$Enums.LegalCaseStatus = {
   IN_PROGRESS: 'IN_PROGRESS',
   CLOSED: 'CLOSED',
   PENDING: 'PENDING'
+};
+
+exports.InstallmentStatus = exports.$Enums.InstallmentStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.ExpenseType = exports.$Enums.ExpenseType = {
+  SALARY: 'SALARY',
+  RENT: 'RENT',
+  UTILITIES: 'UTILITIES',
+  MAINTENANCE: 'MAINTENANCE',
+  MARKETING: 'MARKETING',
+  OTHER: 'OTHER'
 };
 
 exports.Prisma.ModelName = {
@@ -807,7 +879,11 @@ exports.Prisma.ModelName = {
   Permission: 'Permission',
   AdminRole: 'AdminRole',
   AdminAssignment: 'AdminAssignment',
-  LegalCase: 'LegalCase'
+  LegalCase: 'LegalCase',
+  Installment: 'Installment',
+  Expense: 'Expense',
+  Branch: 'Branch',
+  BranchFinance: 'BranchFinance'
 };
 
 /**

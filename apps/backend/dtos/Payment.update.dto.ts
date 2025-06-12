@@ -1,5 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { User, LegalCase } from "@shared/prisma";
+import {
+  User,
+  PaymentMethod,
+  Branch,
+  Installment,
+  LegalCase,
+} from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -15,6 +21,21 @@ export class UpdatePaymentDto {
   @Column()
   amount: number;
 
+  @ApiProperty({ enum: PaymentMethod })
+  // Field: method, Type: PaymentMethod
+  @Column()
+  method: PaymentMethod;
+
+  @ApiProperty({ type: "string", format: "date-time" })
+  // Field: paidAt, Type: Date
+  @Column()
+  paidAt: Date;
+
+  @ApiProperty({ type: "string" })
+  // Field: branchId, Type: string
+  @Column()
+  branchId: string;
+
   @ApiProperty({ type: "string", nullable: true })
   // Field: legalCaseId, Type: string
   @Column()
@@ -24,4 +45,9 @@ export class UpdatePaymentDto {
   // Field: createdAt, Type: Date
   @Column()
   createdAt: Date;
+
+  @ApiProperty({ type: "string", format: "date-time" })
+  // Field: updatedAt, Type: Date
+  @Column()
+  updatedAt: Date;
 }

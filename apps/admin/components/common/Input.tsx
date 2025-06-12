@@ -4,16 +4,14 @@ import {
     InputAdornment,
     IconButton,
     Box,
-    useTheme,
 } from '@mui/material';
-import { useTranslation } from 'next-i18next';
 
 interface InputProps {
     label?: string;
     placeholder?: string;
     value?: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search';
+    type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search' | 'date';
     error?: boolean;
     helperText?: string;
     required?: boolean;
@@ -67,8 +65,6 @@ const Input: React.FC<InputProps> = ({
     variant = 'outlined',
     color = 'primary',
 }) => {
-    const theme = useTheme();
-    const { t } = useTranslation();
 
     const getColorClasses = () => {
         switch (color) {

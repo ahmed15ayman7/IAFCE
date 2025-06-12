@@ -48,6 +48,8 @@ model User {
     bookmarks     Bookmark[]
     Submission    Submission[]
     Attendance    Attendance[]
+    payments      Payment[]
+    installments  Installment[]
 
     Instructor Instructor[]
 
@@ -56,8 +58,6 @@ model User {
     Admin Admin[]
 
     Lesson Lesson[]
-
-    Payment Payment[]
 
     Report Report[]
 
@@ -464,6 +464,7 @@ model Admin {
     meetings          Meeting[]
     assignments       AdminAssignment[]
     legalCases        LegalCase[]
+    expenses          Expense[]
 
     AdminRole AdminRole[]
 }
@@ -537,13 +538,19 @@ model Attendance {
 }
 
 model Payment {
-    id          String     @id @default(cuid())
-    userId      String
-    user        User       @relation(fields: [userId], references: [id])
-    amount      Float
-    legalCaseId String?
-    legalCase   LegalCase? @relation(fields: [legalCaseId], references: [id])
-    createdAt   DateTime   @default(now())
+    id           String        @id @default(cuid())
+    userId       String
+    user         User          @relation(fields: [userId], references: [id])
+    amount       Float
+    method       PaymentMethod
+    paidAt       DateTime      @default(now())
+    branchId     String
+    branch       Branch        @relation(fields: [branchId], references: [id])
+    installments Installment[]
+    legalCaseId  String?
+    legalCase    LegalCase?    @relation(fields: [legalCaseId], references: [id])
+    createdAt    DateTime      @default(now())
+    updatedAt    DateTime      @updatedAt
 }
 
 model Report {
@@ -796,7 +803,7 @@ model AdminRole {
     name        AdminRoleType
     description String?
     adminId     String
-    admin       Admin               @relation(fields: [adminId], references: [id])
+    admin       Admin             @relation(fields: [adminId], references: [id])
     assignments AdminAssignment[]
     permissions Permission[]
     reports     Report[]
@@ -856,4 +863,82 @@ model LegalCase {
     payments         Payment[]
     createdAt        DateTime        @default(now())
     updatedAt        DateTime        @updatedAt
+}
+
+enum PaymentMethod {
+    CASH
+    BANK_TRANSFER
+    ELECTRONIC
+    INSTALLMENT
+}
+
+enum InstallmentStatus {
+    PENDING
+    PAID
+    OVERDUE
+    CANCELLED
+}
+
+enum ExpenseType {
+    SALARY
+    RENT
+    UTILITIES
+    MAINTENANCE
+    MARKETING
+    OTHER
+}
+
+model Installment {
+    id        String            @id @default(cuid())
+    userId    String
+    user      User              @relation(fields: [userId], references: [id])
+    amount    Float
+    dueDate   DateTime
+    status    InstallmentStatus @default(PENDING)
+    paymentId String?
+    payment   Payment?          @relation(fields: [paymentId], references: [id])
+    branchId  String
+    branch    Branch            @relation(fields: [branchId], references: [id])
+    createdAt DateTime          @default(now())
+    updatedAt DateTime          @updatedAt
+}
+
+model Expense {
+    id             String      @id @default(cuid())
+    type           ExpenseType
+    amount         Float
+    description    String?
+    paidAt         DateTime    @default(now())
+    branchId       String
+    branch         Branch      @relation(fields: [branchId], references: [id])
+    createdBy      String
+    createdByAdmin Admin       @relation(fields: [createdBy], references: [id])
+    createdAt      DateTime    @default(now())
+    updatedAt      DateTime    @updatedAt
+}
+
+model Branch {
+    id           String         @id @default(cuid())
+    name         String
+    address      String?
+    phone        String?
+    email        String?
+    payments     Payment[]
+    installments Installment[]
+    expenses     Expense[]
+    finance      BranchFinance?
+    createdAt    DateTime       @default(now())
+    updatedAt    DateTime       @updatedAt
+}
+
+model BranchFinance {
+    id            String   @id @default(cuid())
+    branchId      String   @unique
+    branch        Branch   @relation(fields: [branchId], references: [id])
+    totalIncome   Float    @default(0)
+    totalExpenses Float    @default(0)
+    balance       Float    @default(0)
+    lastUpdated   DateTime @default(now())
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
 }

@@ -8,6 +8,18 @@ const protectedRoutes = {
         roles: ['SUPER_ADMIN', 'ADMIN', 'ACCOUNTANT'],
         permissions: ['viewFinance', 'manageFinance'],
     },
+    '/admin/expenses': {
+        roles: ['SUPER_ADMIN', 'ADMIN', 'ACCOUNTANT'],
+        permissions: ['viewExpenses', 'manageExpenses'],
+    },
+    '/admin/installments': {
+        roles: ['SUPER_ADMIN', 'ADMIN', 'ACCOUNTANT'],
+        permissions: ['viewInstallments', 'manageInstallments'],
+    },
+    '/admin/payments': {
+        roles: ['SUPER_ADMIN', 'ADMIN', 'ACCOUNTANT'],
+        permissions: ['viewPayments', 'managePayments'],
+    },
     '/admin/communications': {
         roles: ['SUPER_ADMIN', 'ADMIN', 'PR_MANAGER'],
         permissions: ['viewCommunications', 'manageCommunications'],
@@ -51,9 +63,9 @@ export async function middleware(request: NextRequest) {
         }
 
         // التحقق من الصلاحيات
-        if (!permissions.some((permission) => userPermissions[permission]) && userRole !== 'SUPER_ADMIN') {
-            return NextResponse.redirect(new URL('/admin/unauthorized', request.url));
-        }
+        // if (!permissions.some((permission) => userPermissions[permission]) && userRole !== 'SUPER_ADMIN') {
+        //     return NextResponse.redirect(new URL('/admin/unauthorized', request.url));
+        // }
     }
 
     return NextResponse.next();

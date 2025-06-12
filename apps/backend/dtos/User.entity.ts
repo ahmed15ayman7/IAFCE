@@ -11,11 +11,12 @@ import { ChannelEntity } from "./Channel.entity";
 import { BookmarkEntity } from "./Bookmark.entity";
 import { SubmissionEntity } from "./Submission.entity";
 import { AttendanceEntity } from "./Attendance.entity";
+import { PaymentEntity } from "./Payment.entity";
+import { InstallmentEntity } from "./Installment.entity";
 import { InstructorEntity } from "./Instructor.entity";
 import { OwnerEntity } from "./Owner.entity";
 import { AdminEntity } from "./Admin.entity";
 import { LessonEntity } from "./Lesson.entity";
-import { PaymentEntity } from "./Payment.entity";
 import { ReportEntity } from "./Report.entity";
 import { BadgeEntity } from "./Badge.entity";
 import { CertificateEntity } from "./Certificate.entity";
@@ -43,11 +44,12 @@ import {
   Bookmark,
   Submission,
   Attendance,
+  Payment,
+  Installment,
   Instructor,
   Owner,
   Admin,
   Lesson,
-  Payment,
   Report,
   Badge,
   Certificate,
@@ -202,6 +204,16 @@ export class UserEntity {
   @Column()
   Attendance: Attendance[];
 
+  @ApiProperty({ type: PaymentEntity })
+  // Field: payments, Type: Payment[]
+  @Column()
+  payments: Payment[];
+
+  @ApiProperty({ type: InstallmentEntity })
+  // Field: installments, Type: Installment[]
+  @Column()
+  installments: Installment[];
+
   @ApiProperty({ type: InstructorEntity })
   // Field: Instructor, Type: Instructor[]
   @Column()
@@ -221,11 +233,6 @@ export class UserEntity {
   // Field: Lesson, Type: Lesson[]
   @Column()
   Lesson: Lesson[];
-
-  @ApiProperty({ type: PaymentEntity })
-  // Field: Payment, Type: Payment[]
-  @Column()
-  Payment: Payment[];
 
   @ApiProperty({ type: ReportEntity })
   // Field: Report, Type: Report[]

@@ -8,6 +8,7 @@ import {
   Meeting,
   AdminAssignment,
   LegalCase,
+  Expense,
   AdminRole,
 } from "@shared/prisma";
 

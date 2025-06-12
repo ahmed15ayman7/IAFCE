@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Put, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Put, Delete, UseGuards, Query } from '@nestjs/common';
 import { QuestionsService } from './questions.service';
 import { CreateQuestionDto } from 'dtos/Question.create.dto';
 import { UpdateQuestionDto } from 'dtos/Question.update.dto';
@@ -15,8 +15,8 @@ export class QuestionsController {
     constructor(private readonly questionsService: QuestionsService) { }
 
     @Post()
-    create(@Body() createQuestionDto: CreateQuestionDto) {
-        return this.questionsService.create(createQuestionDto);
+    create(@Body() createQuestionDto: CreateQuestionDto, @Query('quizId') quizId: string) {
+        return this.questionsService.create({ ...createQuestionDto, options: [] }, quizId);
     }
 
     @Get()

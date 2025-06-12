@@ -1,13 +1,16 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateQuizDto } from 'dtos/Quiz.create.dto';
 import { UpdateQuizDto } from 'dtos/Quiz.update.dto';
 import { CreateQuestionDto } from 'dtos/Question.create.dto';
 import { CreateOptionDto } from 'dtos/Option.create.dto';
+import { QuestionsService } from 'src/questions/questions.service';
 
 @Injectable()
 export class QuizzesService {
-    constructor(private prisma: PrismaService) { }
+    constructor(private prisma: PrismaService,
+        private questionsService: QuestionsService
+    ) { }
 
     async create(createQuizInput: CreateQuizDto & { questions: (CreateQuestionDto & { options: (CreateOptionDto)[] })[] }) {
         const createdQuiz = await this.prisma.quiz.create({
@@ -27,25 +30,16 @@ export class QuizzesService {
             }
         });
         const createdQuestions = await Promise.all(createQuizInput.questions.map(async (question) => {
-            const createdQuestion = await this.prisma.question.create({
-                data: {
-                    text: question.text,
-                    type: question.type,
-                    points: question.points,
-                    quizId: createdQuiz.id,
-                    options: {
-                        create: question.options.map(option => ({
-                            text: option.text,
-                            questionId: createdQuestion.id,
-                            isCorrect: option.isCorrect,
-                        })),
-                    },
-                },
-                include: {
-                    options: true
-                }
-            });
-            return createdQuestion;
+            try {
+                const createdQuestion = await this.questionsService.create({
+                    ...question,
+
+                }, createdQuiz.id);
+                return createdQuestion;
+            } catch (error) {
+                console.error(error);
+                throw new BadRequestException('Failed to create question' + error.message);
+            }
         }));
 
         return {
@@ -98,9 +92,19 @@ export class QuizzesService {
     }
 
     async remove(id: string) {
-        return this.prisma.quiz.delete({
-            where: { id },
-        });
+        try {
+
+            const quiz = await this.findOne(id);
+            if (!quiz) {
+                throw new NotFoundException(`Quiz with ID ${id} not found`);
+            }
+            return this.prisma.quiz.delete({
+                where: { id },
+            });
+        } catch (error) {
+            console.error(error);
+            throw new BadRequestException('Failed to delete quiz' + error.message);
+        }
     }
 
 

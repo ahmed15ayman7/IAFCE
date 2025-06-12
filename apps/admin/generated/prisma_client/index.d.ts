@@ -253,6 +253,26 @@ export type AdminAssignment = $Result.DefaultSelection<Prisma.$AdminAssignmentPa
  * 
  */
 export type LegalCase = $Result.DefaultSelection<Prisma.$LegalCasePayload>
+/**
+ * Model Installment
+ * 
+ */
+export type Installment = $Result.DefaultSelection<Prisma.$InstallmentPayload>
+/**
+ * Model Expense
+ * 
+ */
+export type Expense = $Result.DefaultSelection<Prisma.$ExpensePayload>
+/**
+ * Model Branch
+ * 
+ */
+export type Branch = $Result.DefaultSelection<Prisma.$BranchPayload>
+/**
+ * Model BranchFinance
+ * 
+ */
+export type BranchFinance = $Result.DefaultSelection<Prisma.$BranchFinancePayload>
 
 /**
  * Enums
@@ -394,6 +414,38 @@ export const LegalCaseStatus: {
 
 export type LegalCaseStatus = (typeof LegalCaseStatus)[keyof typeof LegalCaseStatus]
 
+
+export const PaymentMethod: {
+  CASH: 'CASH',
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  ELECTRONIC: 'ELECTRONIC',
+  INSTALLMENT: 'INSTALLMENT'
+};
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const InstallmentStatus: {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  CANCELLED: 'CANCELLED'
+};
+
+export type InstallmentStatus = (typeof InstallmentStatus)[keyof typeof InstallmentStatus]
+
+
+export const ExpenseType: {
+  SALARY: 'SALARY',
+  RENT: 'RENT',
+  UTILITIES: 'UTILITIES',
+  MAINTENANCE: 'MAINTENANCE',
+  MARKETING: 'MARKETING',
+  OTHER: 'OTHER'
+};
+
+export type ExpenseType = (typeof ExpenseType)[keyof typeof ExpenseType]
+
 }
 
 export type LoginDevice = $Enums.LoginDevice
@@ -447,6 +499,18 @@ export const LegalCaseType: typeof $Enums.LegalCaseType
 export type LegalCaseStatus = $Enums.LegalCaseStatus
 
 export const LegalCaseStatus: typeof $Enums.LegalCaseStatus
+
+export type PaymentMethod = $Enums.PaymentMethod
+
+export const PaymentMethod: typeof $Enums.PaymentMethod
+
+export type InstallmentStatus = $Enums.InstallmentStatus
+
+export const InstallmentStatus: typeof $Enums.InstallmentStatus
+
+export type ExpenseType = $Enums.ExpenseType
+
+export const ExpenseType: typeof $Enums.ExpenseType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1050,6 +1114,46 @@ export class PrismaClient<
     * ```
     */
   get legalCase(): Prisma.LegalCaseDelegate<ExtArgs>;
+
+  /**
+   * `prisma.installment`: Exposes CRUD operations for the **Installment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Installments
+    * const installments = await prisma.installment.findMany()
+    * ```
+    */
+  get installment(): Prisma.InstallmentDelegate<ExtArgs>;
+
+  /**
+   * `prisma.expense`: Exposes CRUD operations for the **Expense** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Expenses
+    * const expenses = await prisma.expense.findMany()
+    * ```
+    */
+  get expense(): Prisma.ExpenseDelegate<ExtArgs>;
+
+  /**
+   * `prisma.branch`: Exposes CRUD operations for the **Branch** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Branches
+    * const branches = await prisma.branch.findMany()
+    * ```
+    */
+  get branch(): Prisma.BranchDelegate<ExtArgs>;
+
+  /**
+   * `prisma.branchFinance`: Exposes CRUD operations for the **BranchFinance** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BranchFinances
+    * const branchFinances = await prisma.branchFinance.findMany()
+    * ```
+    */
+  get branchFinance(): Prisma.BranchFinanceDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -1537,7 +1641,11 @@ export namespace Prisma {
     Permission: 'Permission',
     AdminRole: 'AdminRole',
     AdminAssignment: 'AdminAssignment',
-    LegalCase: 'LegalCase'
+    LegalCase: 'LegalCase',
+    Installment: 'Installment',
+    Expense: 'Expense',
+    Branch: 'Branch',
+    BranchFinance: 'BranchFinance'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1553,7 +1661,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "loginHistory" | "twoFactor" | "profile" | "userAcademyCEO" | "academy" | "instructor" | "course" | "path" | "milestone" | "lesson" | "file" | "enrollment" | "quiz" | "question" | "option" | "submission" | "achievement" | "notification" | "notificationSettings" | "message" | "post" | "comment" | "group" | "admin" | "channel" | "owner" | "bookmark" | "event" | "attendance" | "payment" | "report" | "badge" | "certificate" | "community" | "discussion" | "liveRoom" | "accountingEntry" | "invoice" | "salaryPayment" | "publicRelationsRecord" | "pRResponse" | "meeting" | "meetingParticipant" | "permission" | "adminRole" | "adminAssignment" | "legalCase"
+      modelProps: "user" | "loginHistory" | "twoFactor" | "profile" | "userAcademyCEO" | "academy" | "instructor" | "course" | "path" | "milestone" | "lesson" | "file" | "enrollment" | "quiz" | "question" | "option" | "submission" | "achievement" | "notification" | "notificationSettings" | "message" | "post" | "comment" | "group" | "admin" | "channel" | "owner" | "bookmark" | "event" | "attendance" | "payment" | "report" | "badge" | "certificate" | "community" | "discussion" | "liveRoom" | "accountingEntry" | "invoice" | "salaryPayment" | "publicRelationsRecord" | "pRResponse" | "meeting" | "meetingParticipant" | "permission" | "adminRole" | "adminAssignment" | "legalCase" | "installment" | "expense" | "branch" | "branchFinance"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -4917,6 +5025,286 @@ export namespace Prisma {
           }
         }
       }
+      Installment: {
+        payload: Prisma.$InstallmentPayload<ExtArgs>
+        fields: Prisma.InstallmentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InstallmentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InstallmentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload>
+          }
+          findFirst: {
+            args: Prisma.InstallmentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InstallmentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload>
+          }
+          findMany: {
+            args: Prisma.InstallmentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload>[]
+          }
+          create: {
+            args: Prisma.InstallmentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload>
+          }
+          createMany: {
+            args: Prisma.InstallmentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InstallmentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload>[]
+          }
+          delete: {
+            args: Prisma.InstallmentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload>
+          }
+          update: {
+            args: Prisma.InstallmentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload>
+          }
+          deleteMany: {
+            args: Prisma.InstallmentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InstallmentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.InstallmentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload>
+          }
+          aggregate: {
+            args: Prisma.InstallmentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInstallment>
+          }
+          groupBy: {
+            args: Prisma.InstallmentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InstallmentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InstallmentCountArgs<ExtArgs>
+            result: $Utils.Optional<InstallmentCountAggregateOutputType> | number
+          }
+        }
+      }
+      Expense: {
+        payload: Prisma.$ExpensePayload<ExtArgs>
+        fields: Prisma.ExpenseFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ExpenseFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ExpenseFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>
+          }
+          findFirst: {
+            args: Prisma.ExpenseFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ExpenseFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>
+          }
+          findMany: {
+            args: Prisma.ExpenseFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>[]
+          }
+          create: {
+            args: Prisma.ExpenseCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>
+          }
+          createMany: {
+            args: Prisma.ExpenseCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ExpenseCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>[]
+          }
+          delete: {
+            args: Prisma.ExpenseDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>
+          }
+          update: {
+            args: Prisma.ExpenseUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>
+          }
+          deleteMany: {
+            args: Prisma.ExpenseDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ExpenseUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ExpenseUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>
+          }
+          aggregate: {
+            args: Prisma.ExpenseAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateExpense>
+          }
+          groupBy: {
+            args: Prisma.ExpenseGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ExpenseGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ExpenseCountArgs<ExtArgs>
+            result: $Utils.Optional<ExpenseCountAggregateOutputType> | number
+          }
+        }
+      }
+      Branch: {
+        payload: Prisma.$BranchPayload<ExtArgs>
+        fields: Prisma.BranchFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BranchFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BranchFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchPayload>
+          }
+          findFirst: {
+            args: Prisma.BranchFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BranchFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchPayload>
+          }
+          findMany: {
+            args: Prisma.BranchFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchPayload>[]
+          }
+          create: {
+            args: Prisma.BranchCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchPayload>
+          }
+          createMany: {
+            args: Prisma.BranchCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BranchCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchPayload>[]
+          }
+          delete: {
+            args: Prisma.BranchDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchPayload>
+          }
+          update: {
+            args: Prisma.BranchUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchPayload>
+          }
+          deleteMany: {
+            args: Prisma.BranchDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BranchUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.BranchUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchPayload>
+          }
+          aggregate: {
+            args: Prisma.BranchAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBranch>
+          }
+          groupBy: {
+            args: Prisma.BranchGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BranchGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BranchCountArgs<ExtArgs>
+            result: $Utils.Optional<BranchCountAggregateOutputType> | number
+          }
+        }
+      }
+      BranchFinance: {
+        payload: Prisma.$BranchFinancePayload<ExtArgs>
+        fields: Prisma.BranchFinanceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BranchFinanceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchFinancePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BranchFinanceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchFinancePayload>
+          }
+          findFirst: {
+            args: Prisma.BranchFinanceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchFinancePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BranchFinanceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchFinancePayload>
+          }
+          findMany: {
+            args: Prisma.BranchFinanceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchFinancePayload>[]
+          }
+          create: {
+            args: Prisma.BranchFinanceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchFinancePayload>
+          }
+          createMany: {
+            args: Prisma.BranchFinanceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BranchFinanceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchFinancePayload>[]
+          }
+          delete: {
+            args: Prisma.BranchFinanceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchFinancePayload>
+          }
+          update: {
+            args: Prisma.BranchFinanceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchFinancePayload>
+          }
+          deleteMany: {
+            args: Prisma.BranchFinanceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BranchFinanceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.BranchFinanceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BranchFinancePayload>
+          }
+          aggregate: {
+            args: Prisma.BranchFinanceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBranchFinance>
+          }
+          groupBy: {
+            args: Prisma.BranchFinanceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BranchFinanceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BranchFinanceCountArgs<ExtArgs>
+            result: $Utils.Optional<BranchFinanceCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -5088,11 +5476,12 @@ export namespace Prisma {
     bookmarks: number
     Submission: number
     Attendance: number
+    payments: number
+    installments: number
     Instructor: number
     Owner: number
     Admin: number
     Lesson: number
-    Payment: number
     Report: number
     Badge: number
     Certificate: number
@@ -5119,11 +5508,12 @@ export namespace Prisma {
     bookmarks?: boolean | UserCountOutputTypeCountBookmarksArgs
     Submission?: boolean | UserCountOutputTypeCountSubmissionArgs
     Attendance?: boolean | UserCountOutputTypeCountAttendanceArgs
+    payments?: boolean | UserCountOutputTypeCountPaymentsArgs
+    installments?: boolean | UserCountOutputTypeCountInstallmentsArgs
     Instructor?: boolean | UserCountOutputTypeCountInstructorArgs
     Owner?: boolean | UserCountOutputTypeCountOwnerArgs
     Admin?: boolean | UserCountOutputTypeCountAdminArgs
     Lesson?: boolean | UserCountOutputTypeCountLessonArgs
-    Payment?: boolean | UserCountOutputTypeCountPaymentArgs
     Report?: boolean | UserCountOutputTypeCountReportArgs
     Badge?: boolean | UserCountOutputTypeCountBadgeArgs
     Certificate?: boolean | UserCountOutputTypeCountCertificateArgs
@@ -5223,6 +5613,20 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountInstallmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InstallmentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountInstructorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: InstructorWhereInput
   }
@@ -5246,13 +5650,6 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountLessonArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LessonWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountPaymentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PaymentWhereInput
   }
 
   /**
@@ -5894,6 +6291,7 @@ export namespace Prisma {
     meetings: number
     assignments: number
     legalCases: number
+    expenses: number
     AdminRole: number
   }
 
@@ -5905,6 +6303,7 @@ export namespace Prisma {
     meetings?: boolean | AdminCountOutputTypeCountMeetingsArgs
     assignments?: boolean | AdminCountOutputTypeCountAssignmentsArgs
     legalCases?: boolean | AdminCountOutputTypeCountLegalCasesArgs
+    expenses?: boolean | AdminCountOutputTypeCountExpensesArgs
     AdminRole?: boolean | AdminCountOutputTypeCountAdminRoleArgs
   }
 
@@ -5966,6 +6365,13 @@ export namespace Prisma {
    */
   export type AdminCountOutputTypeCountLegalCasesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LegalCaseWhereInput
+  }
+
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountExpensesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExpenseWhereInput
   }
 
   /**
@@ -6044,6 +6450,37 @@ export namespace Prisma {
    */
   export type OwnerCountOutputTypeCountChannelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ChannelWhereInput
+  }
+
+
+  /**
+   * Count Type PaymentCountOutputType
+   */
+
+  export type PaymentCountOutputType = {
+    installments: number
+  }
+
+  export type PaymentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    installments?: boolean | PaymentCountOutputTypeCountInstallmentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PaymentCountOutputType without action
+   */
+  export type PaymentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentCountOutputType
+     */
+    select?: PaymentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PaymentCountOutputType without action
+   */
+  export type PaymentCountOutputTypeCountInstallmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InstallmentWhereInput
   }
 
 
@@ -6485,6 +6922,55 @@ export namespace Prisma {
 
 
   /**
+   * Count Type BranchCountOutputType
+   */
+
+  export type BranchCountOutputType = {
+    payments: number
+    installments: number
+    expenses: number
+  }
+
+  export type BranchCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    payments?: boolean | BranchCountOutputTypeCountPaymentsArgs
+    installments?: boolean | BranchCountOutputTypeCountInstallmentsArgs
+    expenses?: boolean | BranchCountOutputTypeCountExpensesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BranchCountOutputType without action
+   */
+  export type BranchCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BranchCountOutputType
+     */
+    select?: BranchCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BranchCountOutputType without action
+   */
+  export type BranchCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentWhereInput
+  }
+
+  /**
+   * BranchCountOutputType without action
+   */
+  export type BranchCountOutputTypeCountInstallmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InstallmentWhereInput
+  }
+
+  /**
+   * BranchCountOutputType without action
+   */
+  export type BranchCountOutputTypeCountExpensesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExpenseWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -6778,11 +7264,12 @@ export namespace Prisma {
     bookmarks?: boolean | User$bookmarksArgs<ExtArgs>
     Submission?: boolean | User$SubmissionArgs<ExtArgs>
     Attendance?: boolean | User$AttendanceArgs<ExtArgs>
+    payments?: boolean | User$paymentsArgs<ExtArgs>
+    installments?: boolean | User$installmentsArgs<ExtArgs>
     Instructor?: boolean | User$InstructorArgs<ExtArgs>
     Owner?: boolean | User$OwnerArgs<ExtArgs>
     Admin?: boolean | User$AdminArgs<ExtArgs>
     Lesson?: boolean | User$LessonArgs<ExtArgs>
-    Payment?: boolean | User$PaymentArgs<ExtArgs>
     Report?: boolean | User$ReportArgs<ExtArgs>
     Badge?: boolean | User$BadgeArgs<ExtArgs>
     Certificate?: boolean | User$CertificateArgs<ExtArgs>
@@ -6849,11 +7336,12 @@ export namespace Prisma {
     bookmarks?: boolean | User$bookmarksArgs<ExtArgs>
     Submission?: boolean | User$SubmissionArgs<ExtArgs>
     Attendance?: boolean | User$AttendanceArgs<ExtArgs>
+    payments?: boolean | User$paymentsArgs<ExtArgs>
+    installments?: boolean | User$installmentsArgs<ExtArgs>
     Instructor?: boolean | User$InstructorArgs<ExtArgs>
     Owner?: boolean | User$OwnerArgs<ExtArgs>
     Admin?: boolean | User$AdminArgs<ExtArgs>
     Lesson?: boolean | User$LessonArgs<ExtArgs>
-    Payment?: boolean | User$PaymentArgs<ExtArgs>
     Report?: boolean | User$ReportArgs<ExtArgs>
     Badge?: boolean | User$BadgeArgs<ExtArgs>
     Certificate?: boolean | User$CertificateArgs<ExtArgs>
@@ -6888,11 +7376,12 @@ export namespace Prisma {
       bookmarks: Prisma.$BookmarkPayload<ExtArgs>[]
       Submission: Prisma.$SubmissionPayload<ExtArgs>[]
       Attendance: Prisma.$AttendancePayload<ExtArgs>[]
+      payments: Prisma.$PaymentPayload<ExtArgs>[]
+      installments: Prisma.$InstallmentPayload<ExtArgs>[]
       Instructor: Prisma.$InstructorPayload<ExtArgs>[]
       Owner: Prisma.$OwnerPayload<ExtArgs>[]
       Admin: Prisma.$AdminPayload<ExtArgs>[]
       Lesson: Prisma.$LessonPayload<ExtArgs>[]
-      Payment: Prisma.$PaymentPayload<ExtArgs>[]
       Report: Prisma.$ReportPayload<ExtArgs>[]
       Badge: Prisma.$BadgePayload<ExtArgs>[]
       Certificate: Prisma.$CertificatePayload<ExtArgs>[]
@@ -7299,11 +7788,12 @@ export namespace Prisma {
     bookmarks<T extends User$bookmarksArgs<ExtArgs> = {}>(args?: Subset<T, User$bookmarksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookmarkPayload<ExtArgs>, T, "findMany"> | Null>
     Submission<T extends User$SubmissionArgs<ExtArgs> = {}>(args?: Subset<T, User$SubmissionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany"> | Null>
     Attendance<T extends User$AttendanceArgs<ExtArgs> = {}>(args?: Subset<T, User$AttendanceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany"> | Null>
+    payments<T extends User$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, User$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany"> | Null>
+    installments<T extends User$installmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$installmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, "findMany"> | Null>
     Instructor<T extends User$InstructorArgs<ExtArgs> = {}>(args?: Subset<T, User$InstructorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstructorPayload<ExtArgs>, T, "findMany"> | Null>
     Owner<T extends User$OwnerArgs<ExtArgs> = {}>(args?: Subset<T, User$OwnerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OwnerPayload<ExtArgs>, T, "findMany"> | Null>
     Admin<T extends User$AdminArgs<ExtArgs> = {}>(args?: Subset<T, User$AdminArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findMany"> | Null>
     Lesson<T extends User$LessonArgs<ExtArgs> = {}>(args?: Subset<T, User$LessonArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "findMany"> | Null>
-    Payment<T extends User$PaymentArgs<ExtArgs> = {}>(args?: Subset<T, User$PaymentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany"> | Null>
     Report<T extends User$ReportArgs<ExtArgs> = {}>(args?: Subset<T, User$ReportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany"> | Null>
     Badge<T extends User$BadgeArgs<ExtArgs> = {}>(args?: Subset<T, User$BadgeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BadgePayload<ExtArgs>, T, "findMany"> | Null>
     Certificate<T extends User$CertificateArgs<ExtArgs> = {}>(args?: Subset<T, User$CertificateArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findMany"> | Null>
@@ -7909,6 +8399,46 @@ export namespace Prisma {
   }
 
   /**
+   * User.payments
+   */
+  export type User$paymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    where?: PaymentWhereInput
+    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
+    cursor?: PaymentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
+  }
+
+  /**
+   * User.installments
+   */
+  export type User$installmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstallmentInclude<ExtArgs> | null
+    where?: InstallmentWhereInput
+    orderBy?: InstallmentOrderByWithRelationInput | InstallmentOrderByWithRelationInput[]
+    cursor?: InstallmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InstallmentScalarFieldEnum | InstallmentScalarFieldEnum[]
+  }
+
+  /**
    * User.Instructor
    */
   export type User$InstructorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7986,26 +8516,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: LessonScalarFieldEnum | LessonScalarFieldEnum[]
-  }
-
-  /**
-   * User.Payment
-   */
-  export type User$PaymentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Payment
-     */
-    select?: PaymentSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PaymentInclude<ExtArgs> | null
-    where?: PaymentWhereInput
-    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
-    cursor?: PaymentWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
   }
 
   /**
@@ -31785,6 +32295,7 @@ export namespace Prisma {
     meetings?: boolean | Admin$meetingsArgs<ExtArgs>
     assignments?: boolean | Admin$assignmentsArgs<ExtArgs>
     legalCases?: boolean | Admin$legalCasesArgs<ExtArgs>
+    expenses?: boolean | Admin$expensesArgs<ExtArgs>
     AdminRole?: boolean | Admin$AdminRoleArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["admin"]>
@@ -31811,6 +32322,7 @@ export namespace Prisma {
     meetings?: boolean | Admin$meetingsArgs<ExtArgs>
     assignments?: boolean | Admin$assignmentsArgs<ExtArgs>
     legalCases?: boolean | Admin$legalCasesArgs<ExtArgs>
+    expenses?: boolean | Admin$expensesArgs<ExtArgs>
     AdminRole?: boolean | Admin$AdminRoleArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -31829,6 +32341,7 @@ export namespace Prisma {
       meetings: Prisma.$MeetingPayload<ExtArgs>[]
       assignments: Prisma.$AdminAssignmentPayload<ExtArgs>[]
       legalCases: Prisma.$LegalCasePayload<ExtArgs>[]
+      expenses: Prisma.$ExpensePayload<ExtArgs>[]
       AdminRole: Prisma.$AdminRolePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -32207,6 +32720,7 @@ export namespace Prisma {
     meetings<T extends Admin$meetingsArgs<ExtArgs> = {}>(args?: Subset<T, Admin$meetingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "findMany"> | Null>
     assignments<T extends Admin$assignmentsArgs<ExtArgs> = {}>(args?: Subset<T, Admin$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminAssignmentPayload<ExtArgs>, T, "findMany"> | Null>
     legalCases<T extends Admin$legalCasesArgs<ExtArgs> = {}>(args?: Subset<T, Admin$legalCasesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LegalCasePayload<ExtArgs>, T, "findMany"> | Null>
+    expenses<T extends Admin$expensesArgs<ExtArgs> = {}>(args?: Subset<T, Admin$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany"> | Null>
     AdminRole<T extends Admin$AdminRoleArgs<ExtArgs> = {}>(args?: Subset<T, Admin$AdminRoleArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminRolePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -32695,6 +33209,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: LegalCaseScalarFieldEnum | LegalCaseScalarFieldEnum[]
+  }
+
+  /**
+   * Admin.expenses
+   */
+  export type Admin$expensesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    where?: ExpenseWhereInput
+    orderBy?: ExpenseOrderByWithRelationInput | ExpenseOrderByWithRelationInput[]
+    cursor?: ExpenseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExpenseScalarFieldEnum | ExpenseScalarFieldEnum[]
   }
 
   /**
@@ -37758,24 +38292,36 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     amount: number | null
+    method: $Enums.PaymentMethod | null
+    paidAt: Date | null
+    branchId: string | null
     legalCaseId: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type PaymentMaxAggregateOutputType = {
     id: string | null
     userId: string | null
     amount: number | null
+    method: $Enums.PaymentMethod | null
+    paidAt: Date | null
+    branchId: string | null
     legalCaseId: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type PaymentCountAggregateOutputType = {
     id: number
     userId: number
     amount: number
+    method: number
+    paidAt: number
+    branchId: number
     legalCaseId: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -37792,24 +38338,36 @@ export namespace Prisma {
     id?: true
     userId?: true
     amount?: true
+    method?: true
+    paidAt?: true
+    branchId?: true
     legalCaseId?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type PaymentMaxAggregateInputType = {
     id?: true
     userId?: true
     amount?: true
+    method?: true
+    paidAt?: true
+    branchId?: true
     legalCaseId?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type PaymentCountAggregateInputType = {
     id?: true
     userId?: true
     amount?: true
+    method?: true
+    paidAt?: true
+    branchId?: true
     legalCaseId?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -37903,8 +38461,12 @@ export namespace Prisma {
     id: string
     userId: string
     amount: number
+    method: $Enums.PaymentMethod
+    paidAt: Date
+    branchId: string
     legalCaseId: string | null
     createdAt: Date
+    updatedAt: Date
     _count: PaymentCountAggregateOutputType | null
     _avg: PaymentAvgAggregateOutputType | null
     _sum: PaymentSumAggregateOutputType | null
@@ -37930,19 +38492,31 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     amount?: boolean
+    method?: boolean
+    paidAt?: boolean
+    branchId?: boolean
     legalCaseId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    branch?: boolean | BranchDefaultArgs<ExtArgs>
+    installments?: boolean | Payment$installmentsArgs<ExtArgs>
     legalCase?: boolean | Payment$legalCaseArgs<ExtArgs>
+    _count?: boolean | PaymentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["payment"]>
 
   export type PaymentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     amount?: boolean
+    method?: boolean
+    paidAt?: boolean
+    branchId?: boolean
     legalCaseId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    branch?: boolean | BranchDefaultArgs<ExtArgs>
     legalCase?: boolean | Payment$legalCaseArgs<ExtArgs>
   }, ExtArgs["result"]["payment"]>
 
@@ -37950,16 +38524,24 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     amount?: boolean
+    method?: boolean
+    paidAt?: boolean
+    branchId?: boolean
     legalCaseId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
   export type PaymentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    branch?: boolean | BranchDefaultArgs<ExtArgs>
+    installments?: boolean | Payment$installmentsArgs<ExtArgs>
     legalCase?: boolean | Payment$legalCaseArgs<ExtArgs>
+    _count?: boolean | PaymentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PaymentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    branch?: boolean | BranchDefaultArgs<ExtArgs>
     legalCase?: boolean | Payment$legalCaseArgs<ExtArgs>
   }
 
@@ -37967,14 +38549,20 @@ export namespace Prisma {
     name: "Payment"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      branch: Prisma.$BranchPayload<ExtArgs>
+      installments: Prisma.$InstallmentPayload<ExtArgs>[]
       legalCase: Prisma.$LegalCasePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
       amount: number
+      method: $Enums.PaymentMethod
+      paidAt: Date
+      branchId: string
       legalCaseId: string | null
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["payment"]>
     composites: {}
   }
@@ -38340,6 +38928,8 @@ export namespace Prisma {
   export interface Prisma__PaymentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    branch<T extends BranchDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BranchDefaultArgs<ExtArgs>>): Prisma__BranchClient<$Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    installments<T extends Payment$installmentsArgs<ExtArgs> = {}>(args?: Subset<T, Payment$installmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, "findMany"> | Null>
     legalCase<T extends Payment$legalCaseArgs<ExtArgs> = {}>(args?: Subset<T, Payment$legalCaseArgs<ExtArgs>>): Prisma__LegalCaseClient<$Result.GetResult<Prisma.$LegalCasePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -38373,8 +38963,12 @@ export namespace Prisma {
     readonly id: FieldRef<"Payment", 'String'>
     readonly userId: FieldRef<"Payment", 'String'>
     readonly amount: FieldRef<"Payment", 'Float'>
+    readonly method: FieldRef<"Payment", 'PaymentMethod'>
+    readonly paidAt: FieldRef<"Payment", 'DateTime'>
+    readonly branchId: FieldRef<"Payment", 'String'>
     readonly legalCaseId: FieldRef<"Payment", 'String'>
     readonly createdAt: FieldRef<"Payment", 'DateTime'>
+    readonly updatedAt: FieldRef<"Payment", 'DateTime'>
   }
     
 
@@ -38690,6 +39284,26 @@ export namespace Prisma {
      * Filter which Payments to delete
      */
     where?: PaymentWhereInput
+  }
+
+  /**
+   * Payment.installments
+   */
+  export type Payment$installmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstallmentInclude<ExtArgs> | null
+    where?: InstallmentWhereInput
+    orderBy?: InstallmentOrderByWithRelationInput | InstallmentOrderByWithRelationInput[]
+    cursor?: InstallmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InstallmentScalarFieldEnum | InstallmentScalarFieldEnum[]
   }
 
   /**
@@ -56457,6 +57071,4119 @@ export namespace Prisma {
 
 
   /**
+   * Model Installment
+   */
+
+  export type AggregateInstallment = {
+    _count: InstallmentCountAggregateOutputType | null
+    _avg: InstallmentAvgAggregateOutputType | null
+    _sum: InstallmentSumAggregateOutputType | null
+    _min: InstallmentMinAggregateOutputType | null
+    _max: InstallmentMaxAggregateOutputType | null
+  }
+
+  export type InstallmentAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type InstallmentSumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type InstallmentMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    amount: number | null
+    dueDate: Date | null
+    status: $Enums.InstallmentStatus | null
+    paymentId: string | null
+    branchId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InstallmentMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    amount: number | null
+    dueDate: Date | null
+    status: $Enums.InstallmentStatus | null
+    paymentId: string | null
+    branchId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InstallmentCountAggregateOutputType = {
+    id: number
+    userId: number
+    amount: number
+    dueDate: number
+    status: number
+    paymentId: number
+    branchId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type InstallmentAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type InstallmentSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type InstallmentMinAggregateInputType = {
+    id?: true
+    userId?: true
+    amount?: true
+    dueDate?: true
+    status?: true
+    paymentId?: true
+    branchId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InstallmentMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    amount?: true
+    dueDate?: true
+    status?: true
+    paymentId?: true
+    branchId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InstallmentCountAggregateInputType = {
+    id?: true
+    userId?: true
+    amount?: true
+    dueDate?: true
+    status?: true
+    paymentId?: true
+    branchId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type InstallmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Installment to aggregate.
+     */
+    where?: InstallmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Installments to fetch.
+     */
+    orderBy?: InstallmentOrderByWithRelationInput | InstallmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InstallmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Installments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Installments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Installments
+    **/
+    _count?: true | InstallmentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InstallmentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InstallmentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InstallmentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InstallmentMaxAggregateInputType
+  }
+
+  export type GetInstallmentAggregateType<T extends InstallmentAggregateArgs> = {
+        [P in keyof T & keyof AggregateInstallment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInstallment[P]>
+      : GetScalarType<T[P], AggregateInstallment[P]>
+  }
+
+
+
+
+  export type InstallmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InstallmentWhereInput
+    orderBy?: InstallmentOrderByWithAggregationInput | InstallmentOrderByWithAggregationInput[]
+    by: InstallmentScalarFieldEnum[] | InstallmentScalarFieldEnum
+    having?: InstallmentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InstallmentCountAggregateInputType | true
+    _avg?: InstallmentAvgAggregateInputType
+    _sum?: InstallmentSumAggregateInputType
+    _min?: InstallmentMinAggregateInputType
+    _max?: InstallmentMaxAggregateInputType
+  }
+
+  export type InstallmentGroupByOutputType = {
+    id: string
+    userId: string
+    amount: number
+    dueDate: Date
+    status: $Enums.InstallmentStatus
+    paymentId: string | null
+    branchId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: InstallmentCountAggregateOutputType | null
+    _avg: InstallmentAvgAggregateOutputType | null
+    _sum: InstallmentSumAggregateOutputType | null
+    _min: InstallmentMinAggregateOutputType | null
+    _max: InstallmentMaxAggregateOutputType | null
+  }
+
+  type GetInstallmentGroupByPayload<T extends InstallmentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InstallmentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InstallmentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InstallmentGroupByOutputType[P]>
+            : GetScalarType<T[P], InstallmentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InstallmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    amount?: boolean
+    dueDate?: boolean
+    status?: boolean
+    paymentId?: boolean
+    branchId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    payment?: boolean | Installment$paymentArgs<ExtArgs>
+    branch?: boolean | BranchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["installment"]>
+
+  export type InstallmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    amount?: boolean
+    dueDate?: boolean
+    status?: boolean
+    paymentId?: boolean
+    branchId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    payment?: boolean | Installment$paymentArgs<ExtArgs>
+    branch?: boolean | BranchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["installment"]>
+
+  export type InstallmentSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    amount?: boolean
+    dueDate?: boolean
+    status?: boolean
+    paymentId?: boolean
+    branchId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type InstallmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    payment?: boolean | Installment$paymentArgs<ExtArgs>
+    branch?: boolean | BranchDefaultArgs<ExtArgs>
+  }
+  export type InstallmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    payment?: boolean | Installment$paymentArgs<ExtArgs>
+    branch?: boolean | BranchDefaultArgs<ExtArgs>
+  }
+
+  export type $InstallmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Installment"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      payment: Prisma.$PaymentPayload<ExtArgs> | null
+      branch: Prisma.$BranchPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      amount: number
+      dueDate: Date
+      status: $Enums.InstallmentStatus
+      paymentId: string | null
+      branchId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["installment"]>
+    composites: {}
+  }
+
+  type InstallmentGetPayload<S extends boolean | null | undefined | InstallmentDefaultArgs> = $Result.GetResult<Prisma.$InstallmentPayload, S>
+
+  type InstallmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<InstallmentFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: InstallmentCountAggregateInputType | true
+    }
+
+  export interface InstallmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Installment'], meta: { name: 'Installment' } }
+    /**
+     * Find zero or one Installment that matches the filter.
+     * @param {InstallmentFindUniqueArgs} args - Arguments to find a Installment
+     * @example
+     * // Get one Installment
+     * const installment = await prisma.installment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InstallmentFindUniqueArgs>(args: SelectSubset<T, InstallmentFindUniqueArgs<ExtArgs>>): Prisma__InstallmentClient<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Installment that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {InstallmentFindUniqueOrThrowArgs} args - Arguments to find a Installment
+     * @example
+     * // Get one Installment
+     * const installment = await prisma.installment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InstallmentFindUniqueOrThrowArgs>(args: SelectSubset<T, InstallmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InstallmentClient<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Installment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstallmentFindFirstArgs} args - Arguments to find a Installment
+     * @example
+     * // Get one Installment
+     * const installment = await prisma.installment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InstallmentFindFirstArgs>(args?: SelectSubset<T, InstallmentFindFirstArgs<ExtArgs>>): Prisma__InstallmentClient<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Installment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstallmentFindFirstOrThrowArgs} args - Arguments to find a Installment
+     * @example
+     * // Get one Installment
+     * const installment = await prisma.installment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InstallmentFindFirstOrThrowArgs>(args?: SelectSubset<T, InstallmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__InstallmentClient<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Installments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstallmentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Installments
+     * const installments = await prisma.installment.findMany()
+     * 
+     * // Get first 10 Installments
+     * const installments = await prisma.installment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const installmentWithIdOnly = await prisma.installment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InstallmentFindManyArgs>(args?: SelectSubset<T, InstallmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Installment.
+     * @param {InstallmentCreateArgs} args - Arguments to create a Installment.
+     * @example
+     * // Create one Installment
+     * const Installment = await prisma.installment.create({
+     *   data: {
+     *     // ... data to create a Installment
+     *   }
+     * })
+     * 
+     */
+    create<T extends InstallmentCreateArgs>(args: SelectSubset<T, InstallmentCreateArgs<ExtArgs>>): Prisma__InstallmentClient<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Installments.
+     * @param {InstallmentCreateManyArgs} args - Arguments to create many Installments.
+     * @example
+     * // Create many Installments
+     * const installment = await prisma.installment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InstallmentCreateManyArgs>(args?: SelectSubset<T, InstallmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Installments and returns the data saved in the database.
+     * @param {InstallmentCreateManyAndReturnArgs} args - Arguments to create many Installments.
+     * @example
+     * // Create many Installments
+     * const installment = await prisma.installment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Installments and only return the `id`
+     * const installmentWithIdOnly = await prisma.installment.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InstallmentCreateManyAndReturnArgs>(args?: SelectSubset<T, InstallmentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Installment.
+     * @param {InstallmentDeleteArgs} args - Arguments to delete one Installment.
+     * @example
+     * // Delete one Installment
+     * const Installment = await prisma.installment.delete({
+     *   where: {
+     *     // ... filter to delete one Installment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InstallmentDeleteArgs>(args: SelectSubset<T, InstallmentDeleteArgs<ExtArgs>>): Prisma__InstallmentClient<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Installment.
+     * @param {InstallmentUpdateArgs} args - Arguments to update one Installment.
+     * @example
+     * // Update one Installment
+     * const installment = await prisma.installment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InstallmentUpdateArgs>(args: SelectSubset<T, InstallmentUpdateArgs<ExtArgs>>): Prisma__InstallmentClient<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Installments.
+     * @param {InstallmentDeleteManyArgs} args - Arguments to filter Installments to delete.
+     * @example
+     * // Delete a few Installments
+     * const { count } = await prisma.installment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InstallmentDeleteManyArgs>(args?: SelectSubset<T, InstallmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Installments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstallmentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Installments
+     * const installment = await prisma.installment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InstallmentUpdateManyArgs>(args: SelectSubset<T, InstallmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Installment.
+     * @param {InstallmentUpsertArgs} args - Arguments to update or create a Installment.
+     * @example
+     * // Update or create a Installment
+     * const installment = await prisma.installment.upsert({
+     *   create: {
+     *     // ... data to create a Installment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Installment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InstallmentUpsertArgs>(args: SelectSubset<T, InstallmentUpsertArgs<ExtArgs>>): Prisma__InstallmentClient<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Installments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstallmentCountArgs} args - Arguments to filter Installments to count.
+     * @example
+     * // Count the number of Installments
+     * const count = await prisma.installment.count({
+     *   where: {
+     *     // ... the filter for the Installments we want to count
+     *   }
+     * })
+    **/
+    count<T extends InstallmentCountArgs>(
+      args?: Subset<T, InstallmentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InstallmentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Installment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstallmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InstallmentAggregateArgs>(args: Subset<T, InstallmentAggregateArgs>): Prisma.PrismaPromise<GetInstallmentAggregateType<T>>
+
+    /**
+     * Group by Installment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstallmentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InstallmentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InstallmentGroupByArgs['orderBy'] }
+        : { orderBy?: InstallmentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InstallmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInstallmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Installment model
+   */
+  readonly fields: InstallmentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Installment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InstallmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    payment<T extends Installment$paymentArgs<ExtArgs> = {}>(args?: Subset<T, Installment$paymentArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    branch<T extends BranchDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BranchDefaultArgs<ExtArgs>>): Prisma__BranchClient<$Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Installment model
+   */ 
+  interface InstallmentFieldRefs {
+    readonly id: FieldRef<"Installment", 'String'>
+    readonly userId: FieldRef<"Installment", 'String'>
+    readonly amount: FieldRef<"Installment", 'Float'>
+    readonly dueDate: FieldRef<"Installment", 'DateTime'>
+    readonly status: FieldRef<"Installment", 'InstallmentStatus'>
+    readonly paymentId: FieldRef<"Installment", 'String'>
+    readonly branchId: FieldRef<"Installment", 'String'>
+    readonly createdAt: FieldRef<"Installment", 'DateTime'>
+    readonly updatedAt: FieldRef<"Installment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Installment findUnique
+   */
+  export type InstallmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstallmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Installment to fetch.
+     */
+    where: InstallmentWhereUniqueInput
+  }
+
+  /**
+   * Installment findUniqueOrThrow
+   */
+  export type InstallmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstallmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Installment to fetch.
+     */
+    where: InstallmentWhereUniqueInput
+  }
+
+  /**
+   * Installment findFirst
+   */
+  export type InstallmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstallmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Installment to fetch.
+     */
+    where?: InstallmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Installments to fetch.
+     */
+    orderBy?: InstallmentOrderByWithRelationInput | InstallmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Installments.
+     */
+    cursor?: InstallmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Installments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Installments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Installments.
+     */
+    distinct?: InstallmentScalarFieldEnum | InstallmentScalarFieldEnum[]
+  }
+
+  /**
+   * Installment findFirstOrThrow
+   */
+  export type InstallmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstallmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Installment to fetch.
+     */
+    where?: InstallmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Installments to fetch.
+     */
+    orderBy?: InstallmentOrderByWithRelationInput | InstallmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Installments.
+     */
+    cursor?: InstallmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Installments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Installments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Installments.
+     */
+    distinct?: InstallmentScalarFieldEnum | InstallmentScalarFieldEnum[]
+  }
+
+  /**
+   * Installment findMany
+   */
+  export type InstallmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstallmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Installments to fetch.
+     */
+    where?: InstallmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Installments to fetch.
+     */
+    orderBy?: InstallmentOrderByWithRelationInput | InstallmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Installments.
+     */
+    cursor?: InstallmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Installments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Installments.
+     */
+    skip?: number
+    distinct?: InstallmentScalarFieldEnum | InstallmentScalarFieldEnum[]
+  }
+
+  /**
+   * Installment create
+   */
+  export type InstallmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstallmentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Installment.
+     */
+    data: XOR<InstallmentCreateInput, InstallmentUncheckedCreateInput>
+  }
+
+  /**
+   * Installment createMany
+   */
+  export type InstallmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Installments.
+     */
+    data: InstallmentCreateManyInput | InstallmentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Installment createManyAndReturn
+   */
+  export type InstallmentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Installments.
+     */
+    data: InstallmentCreateManyInput | InstallmentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstallmentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Installment update
+   */
+  export type InstallmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstallmentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Installment.
+     */
+    data: XOR<InstallmentUpdateInput, InstallmentUncheckedUpdateInput>
+    /**
+     * Choose, which Installment to update.
+     */
+    where: InstallmentWhereUniqueInput
+  }
+
+  /**
+   * Installment updateMany
+   */
+  export type InstallmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Installments.
+     */
+    data: XOR<InstallmentUpdateManyMutationInput, InstallmentUncheckedUpdateManyInput>
+    /**
+     * Filter which Installments to update
+     */
+    where?: InstallmentWhereInput
+  }
+
+  /**
+   * Installment upsert
+   */
+  export type InstallmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstallmentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Installment to update in case it exists.
+     */
+    where: InstallmentWhereUniqueInput
+    /**
+     * In case the Installment found by the `where` argument doesn't exist, create a new Installment with this data.
+     */
+    create: XOR<InstallmentCreateInput, InstallmentUncheckedCreateInput>
+    /**
+     * In case the Installment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InstallmentUpdateInput, InstallmentUncheckedUpdateInput>
+  }
+
+  /**
+   * Installment delete
+   */
+  export type InstallmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstallmentInclude<ExtArgs> | null
+    /**
+     * Filter which Installment to delete.
+     */
+    where: InstallmentWhereUniqueInput
+  }
+
+  /**
+   * Installment deleteMany
+   */
+  export type InstallmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Installments to delete
+     */
+    where?: InstallmentWhereInput
+  }
+
+  /**
+   * Installment.payment
+   */
+  export type Installment$paymentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    where?: PaymentWhereInput
+  }
+
+  /**
+   * Installment without action
+   */
+  export type InstallmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstallmentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Expense
+   */
+
+  export type AggregateExpense = {
+    _count: ExpenseCountAggregateOutputType | null
+    _avg: ExpenseAvgAggregateOutputType | null
+    _sum: ExpenseSumAggregateOutputType | null
+    _min: ExpenseMinAggregateOutputType | null
+    _max: ExpenseMaxAggregateOutputType | null
+  }
+
+  export type ExpenseAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type ExpenseSumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type ExpenseMinAggregateOutputType = {
+    id: string | null
+    type: $Enums.ExpenseType | null
+    amount: number | null
+    description: string | null
+    paidAt: Date | null
+    branchId: string | null
+    createdBy: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ExpenseMaxAggregateOutputType = {
+    id: string | null
+    type: $Enums.ExpenseType | null
+    amount: number | null
+    description: string | null
+    paidAt: Date | null
+    branchId: string | null
+    createdBy: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ExpenseCountAggregateOutputType = {
+    id: number
+    type: number
+    amount: number
+    description: number
+    paidAt: number
+    branchId: number
+    createdBy: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ExpenseAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type ExpenseSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type ExpenseMinAggregateInputType = {
+    id?: true
+    type?: true
+    amount?: true
+    description?: true
+    paidAt?: true
+    branchId?: true
+    createdBy?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ExpenseMaxAggregateInputType = {
+    id?: true
+    type?: true
+    amount?: true
+    description?: true
+    paidAt?: true
+    branchId?: true
+    createdBy?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ExpenseCountAggregateInputType = {
+    id?: true
+    type?: true
+    amount?: true
+    description?: true
+    paidAt?: true
+    branchId?: true
+    createdBy?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ExpenseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Expense to aggregate.
+     */
+    where?: ExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Expenses to fetch.
+     */
+    orderBy?: ExpenseOrderByWithRelationInput | ExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Expenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Expenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Expenses
+    **/
+    _count?: true | ExpenseCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ExpenseAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ExpenseSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ExpenseMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ExpenseMaxAggregateInputType
+  }
+
+  export type GetExpenseAggregateType<T extends ExpenseAggregateArgs> = {
+        [P in keyof T & keyof AggregateExpense]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateExpense[P]>
+      : GetScalarType<T[P], AggregateExpense[P]>
+  }
+
+
+
+
+  export type ExpenseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExpenseWhereInput
+    orderBy?: ExpenseOrderByWithAggregationInput | ExpenseOrderByWithAggregationInput[]
+    by: ExpenseScalarFieldEnum[] | ExpenseScalarFieldEnum
+    having?: ExpenseScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ExpenseCountAggregateInputType | true
+    _avg?: ExpenseAvgAggregateInputType
+    _sum?: ExpenseSumAggregateInputType
+    _min?: ExpenseMinAggregateInputType
+    _max?: ExpenseMaxAggregateInputType
+  }
+
+  export type ExpenseGroupByOutputType = {
+    id: string
+    type: $Enums.ExpenseType
+    amount: number
+    description: string | null
+    paidAt: Date
+    branchId: string
+    createdBy: string
+    createdAt: Date
+    updatedAt: Date
+    _count: ExpenseCountAggregateOutputType | null
+    _avg: ExpenseAvgAggregateOutputType | null
+    _sum: ExpenseSumAggregateOutputType | null
+    _min: ExpenseMinAggregateOutputType | null
+    _max: ExpenseMaxAggregateOutputType | null
+  }
+
+  type GetExpenseGroupByPayload<T extends ExpenseGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ExpenseGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ExpenseGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ExpenseGroupByOutputType[P]>
+            : GetScalarType<T[P], ExpenseGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ExpenseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    amount?: boolean
+    description?: boolean
+    paidAt?: boolean
+    branchId?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    branch?: boolean | BranchDefaultArgs<ExtArgs>
+    createdByAdmin?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["expense"]>
+
+  export type ExpenseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    amount?: boolean
+    description?: boolean
+    paidAt?: boolean
+    branchId?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    branch?: boolean | BranchDefaultArgs<ExtArgs>
+    createdByAdmin?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["expense"]>
+
+  export type ExpenseSelectScalar = {
+    id?: boolean
+    type?: boolean
+    amount?: boolean
+    description?: boolean
+    paidAt?: boolean
+    branchId?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ExpenseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    branch?: boolean | BranchDefaultArgs<ExtArgs>
+    createdByAdmin?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type ExpenseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    branch?: boolean | BranchDefaultArgs<ExtArgs>
+    createdByAdmin?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+
+  export type $ExpensePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Expense"
+    objects: {
+      branch: Prisma.$BranchPayload<ExtArgs>
+      createdByAdmin: Prisma.$AdminPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      type: $Enums.ExpenseType
+      amount: number
+      description: string | null
+      paidAt: Date
+      branchId: string
+      createdBy: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["expense"]>
+    composites: {}
+  }
+
+  type ExpenseGetPayload<S extends boolean | null | undefined | ExpenseDefaultArgs> = $Result.GetResult<Prisma.$ExpensePayload, S>
+
+  type ExpenseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ExpenseFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ExpenseCountAggregateInputType | true
+    }
+
+  export interface ExpenseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Expense'], meta: { name: 'Expense' } }
+    /**
+     * Find zero or one Expense that matches the filter.
+     * @param {ExpenseFindUniqueArgs} args - Arguments to find a Expense
+     * @example
+     * // Get one Expense
+     * const expense = await prisma.expense.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ExpenseFindUniqueArgs>(args: SelectSubset<T, ExpenseFindUniqueArgs<ExtArgs>>): Prisma__ExpenseClient<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Expense that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {ExpenseFindUniqueOrThrowArgs} args - Arguments to find a Expense
+     * @example
+     * // Get one Expense
+     * const expense = await prisma.expense.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ExpenseFindUniqueOrThrowArgs>(args: SelectSubset<T, ExpenseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ExpenseClient<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Expense that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseFindFirstArgs} args - Arguments to find a Expense
+     * @example
+     * // Get one Expense
+     * const expense = await prisma.expense.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ExpenseFindFirstArgs>(args?: SelectSubset<T, ExpenseFindFirstArgs<ExtArgs>>): Prisma__ExpenseClient<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Expense that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseFindFirstOrThrowArgs} args - Arguments to find a Expense
+     * @example
+     * // Get one Expense
+     * const expense = await prisma.expense.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ExpenseFindFirstOrThrowArgs>(args?: SelectSubset<T, ExpenseFindFirstOrThrowArgs<ExtArgs>>): Prisma__ExpenseClient<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Expenses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Expenses
+     * const expenses = await prisma.expense.findMany()
+     * 
+     * // Get first 10 Expenses
+     * const expenses = await prisma.expense.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const expenseWithIdOnly = await prisma.expense.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ExpenseFindManyArgs>(args?: SelectSubset<T, ExpenseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Expense.
+     * @param {ExpenseCreateArgs} args - Arguments to create a Expense.
+     * @example
+     * // Create one Expense
+     * const Expense = await prisma.expense.create({
+     *   data: {
+     *     // ... data to create a Expense
+     *   }
+     * })
+     * 
+     */
+    create<T extends ExpenseCreateArgs>(args: SelectSubset<T, ExpenseCreateArgs<ExtArgs>>): Prisma__ExpenseClient<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Expenses.
+     * @param {ExpenseCreateManyArgs} args - Arguments to create many Expenses.
+     * @example
+     * // Create many Expenses
+     * const expense = await prisma.expense.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ExpenseCreateManyArgs>(args?: SelectSubset<T, ExpenseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Expenses and returns the data saved in the database.
+     * @param {ExpenseCreateManyAndReturnArgs} args - Arguments to create many Expenses.
+     * @example
+     * // Create many Expenses
+     * const expense = await prisma.expense.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Expenses and only return the `id`
+     * const expenseWithIdOnly = await prisma.expense.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ExpenseCreateManyAndReturnArgs>(args?: SelectSubset<T, ExpenseCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Expense.
+     * @param {ExpenseDeleteArgs} args - Arguments to delete one Expense.
+     * @example
+     * // Delete one Expense
+     * const Expense = await prisma.expense.delete({
+     *   where: {
+     *     // ... filter to delete one Expense
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ExpenseDeleteArgs>(args: SelectSubset<T, ExpenseDeleteArgs<ExtArgs>>): Prisma__ExpenseClient<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Expense.
+     * @param {ExpenseUpdateArgs} args - Arguments to update one Expense.
+     * @example
+     * // Update one Expense
+     * const expense = await prisma.expense.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ExpenseUpdateArgs>(args: SelectSubset<T, ExpenseUpdateArgs<ExtArgs>>): Prisma__ExpenseClient<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Expenses.
+     * @param {ExpenseDeleteManyArgs} args - Arguments to filter Expenses to delete.
+     * @example
+     * // Delete a few Expenses
+     * const { count } = await prisma.expense.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ExpenseDeleteManyArgs>(args?: SelectSubset<T, ExpenseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Expenses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Expenses
+     * const expense = await prisma.expense.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ExpenseUpdateManyArgs>(args: SelectSubset<T, ExpenseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Expense.
+     * @param {ExpenseUpsertArgs} args - Arguments to update or create a Expense.
+     * @example
+     * // Update or create a Expense
+     * const expense = await prisma.expense.upsert({
+     *   create: {
+     *     // ... data to create a Expense
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Expense we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ExpenseUpsertArgs>(args: SelectSubset<T, ExpenseUpsertArgs<ExtArgs>>): Prisma__ExpenseClient<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Expenses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseCountArgs} args - Arguments to filter Expenses to count.
+     * @example
+     * // Count the number of Expenses
+     * const count = await prisma.expense.count({
+     *   where: {
+     *     // ... the filter for the Expenses we want to count
+     *   }
+     * })
+    **/
+    count<T extends ExpenseCountArgs>(
+      args?: Subset<T, ExpenseCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ExpenseCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Expense.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ExpenseAggregateArgs>(args: Subset<T, ExpenseAggregateArgs>): Prisma.PrismaPromise<GetExpenseAggregateType<T>>
+
+    /**
+     * Group by Expense.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ExpenseGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ExpenseGroupByArgs['orderBy'] }
+        : { orderBy?: ExpenseGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ExpenseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetExpenseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Expense model
+   */
+  readonly fields: ExpenseFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Expense.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ExpenseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    branch<T extends BranchDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BranchDefaultArgs<ExtArgs>>): Prisma__BranchClient<$Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    createdByAdmin<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Expense model
+   */ 
+  interface ExpenseFieldRefs {
+    readonly id: FieldRef<"Expense", 'String'>
+    readonly type: FieldRef<"Expense", 'ExpenseType'>
+    readonly amount: FieldRef<"Expense", 'Float'>
+    readonly description: FieldRef<"Expense", 'String'>
+    readonly paidAt: FieldRef<"Expense", 'DateTime'>
+    readonly branchId: FieldRef<"Expense", 'String'>
+    readonly createdBy: FieldRef<"Expense", 'String'>
+    readonly createdAt: FieldRef<"Expense", 'DateTime'>
+    readonly updatedAt: FieldRef<"Expense", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Expense findUnique
+   */
+  export type ExpenseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which Expense to fetch.
+     */
+    where: ExpenseWhereUniqueInput
+  }
+
+  /**
+   * Expense findUniqueOrThrow
+   */
+  export type ExpenseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which Expense to fetch.
+     */
+    where: ExpenseWhereUniqueInput
+  }
+
+  /**
+   * Expense findFirst
+   */
+  export type ExpenseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which Expense to fetch.
+     */
+    where?: ExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Expenses to fetch.
+     */
+    orderBy?: ExpenseOrderByWithRelationInput | ExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Expenses.
+     */
+    cursor?: ExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Expenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Expenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Expenses.
+     */
+    distinct?: ExpenseScalarFieldEnum | ExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * Expense findFirstOrThrow
+   */
+  export type ExpenseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which Expense to fetch.
+     */
+    where?: ExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Expenses to fetch.
+     */
+    orderBy?: ExpenseOrderByWithRelationInput | ExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Expenses.
+     */
+    cursor?: ExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Expenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Expenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Expenses.
+     */
+    distinct?: ExpenseScalarFieldEnum | ExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * Expense findMany
+   */
+  export type ExpenseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which Expenses to fetch.
+     */
+    where?: ExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Expenses to fetch.
+     */
+    orderBy?: ExpenseOrderByWithRelationInput | ExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Expenses.
+     */
+    cursor?: ExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Expenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Expenses.
+     */
+    skip?: number
+    distinct?: ExpenseScalarFieldEnum | ExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * Expense create
+   */
+  export type ExpenseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Expense.
+     */
+    data: XOR<ExpenseCreateInput, ExpenseUncheckedCreateInput>
+  }
+
+  /**
+   * Expense createMany
+   */
+  export type ExpenseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Expenses.
+     */
+    data: ExpenseCreateManyInput | ExpenseCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Expense createManyAndReturn
+   */
+  export type ExpenseCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Expenses.
+     */
+    data: ExpenseCreateManyInput | ExpenseCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Expense update
+   */
+  export type ExpenseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Expense.
+     */
+    data: XOR<ExpenseUpdateInput, ExpenseUncheckedUpdateInput>
+    /**
+     * Choose, which Expense to update.
+     */
+    where: ExpenseWhereUniqueInput
+  }
+
+  /**
+   * Expense updateMany
+   */
+  export type ExpenseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Expenses.
+     */
+    data: XOR<ExpenseUpdateManyMutationInput, ExpenseUncheckedUpdateManyInput>
+    /**
+     * Filter which Expenses to update
+     */
+    where?: ExpenseWhereInput
+  }
+
+  /**
+   * Expense upsert
+   */
+  export type ExpenseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Expense to update in case it exists.
+     */
+    where: ExpenseWhereUniqueInput
+    /**
+     * In case the Expense found by the `where` argument doesn't exist, create a new Expense with this data.
+     */
+    create: XOR<ExpenseCreateInput, ExpenseUncheckedCreateInput>
+    /**
+     * In case the Expense was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ExpenseUpdateInput, ExpenseUncheckedUpdateInput>
+  }
+
+  /**
+   * Expense delete
+   */
+  export type ExpenseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * Filter which Expense to delete.
+     */
+    where: ExpenseWhereUniqueInput
+  }
+
+  /**
+   * Expense deleteMany
+   */
+  export type ExpenseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Expenses to delete
+     */
+    where?: ExpenseWhereInput
+  }
+
+  /**
+   * Expense without action
+   */
+  export type ExpenseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Branch
+   */
+
+  export type AggregateBranch = {
+    _count: BranchCountAggregateOutputType | null
+    _min: BranchMinAggregateOutputType | null
+    _max: BranchMaxAggregateOutputType | null
+  }
+
+  export type BranchMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    address: string | null
+    phone: string | null
+    email: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BranchMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    address: string | null
+    phone: string | null
+    email: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BranchCountAggregateOutputType = {
+    id: number
+    name: number
+    address: number
+    phone: number
+    email: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BranchMinAggregateInputType = {
+    id?: true
+    name?: true
+    address?: true
+    phone?: true
+    email?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BranchMaxAggregateInputType = {
+    id?: true
+    name?: true
+    address?: true
+    phone?: true
+    email?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BranchCountAggregateInputType = {
+    id?: true
+    name?: true
+    address?: true
+    phone?: true
+    email?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BranchAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Branch to aggregate.
+     */
+    where?: BranchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Branches to fetch.
+     */
+    orderBy?: BranchOrderByWithRelationInput | BranchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BranchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Branches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Branches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Branches
+    **/
+    _count?: true | BranchCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BranchMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BranchMaxAggregateInputType
+  }
+
+  export type GetBranchAggregateType<T extends BranchAggregateArgs> = {
+        [P in keyof T & keyof AggregateBranch]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBranch[P]>
+      : GetScalarType<T[P], AggregateBranch[P]>
+  }
+
+
+
+
+  export type BranchGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BranchWhereInput
+    orderBy?: BranchOrderByWithAggregationInput | BranchOrderByWithAggregationInput[]
+    by: BranchScalarFieldEnum[] | BranchScalarFieldEnum
+    having?: BranchScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BranchCountAggregateInputType | true
+    _min?: BranchMinAggregateInputType
+    _max?: BranchMaxAggregateInputType
+  }
+
+  export type BranchGroupByOutputType = {
+    id: string
+    name: string
+    address: string | null
+    phone: string | null
+    email: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: BranchCountAggregateOutputType | null
+    _min: BranchMinAggregateOutputType | null
+    _max: BranchMaxAggregateOutputType | null
+  }
+
+  type GetBranchGroupByPayload<T extends BranchGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BranchGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BranchGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BranchGroupByOutputType[P]>
+            : GetScalarType<T[P], BranchGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BranchSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    address?: boolean
+    phone?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    payments?: boolean | Branch$paymentsArgs<ExtArgs>
+    installments?: boolean | Branch$installmentsArgs<ExtArgs>
+    expenses?: boolean | Branch$expensesArgs<ExtArgs>
+    finance?: boolean | Branch$financeArgs<ExtArgs>
+    _count?: boolean | BranchCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["branch"]>
+
+  export type BranchSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    address?: boolean
+    phone?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["branch"]>
+
+  export type BranchSelectScalar = {
+    id?: boolean
+    name?: boolean
+    address?: boolean
+    phone?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BranchInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    payments?: boolean | Branch$paymentsArgs<ExtArgs>
+    installments?: boolean | Branch$installmentsArgs<ExtArgs>
+    expenses?: boolean | Branch$expensesArgs<ExtArgs>
+    finance?: boolean | Branch$financeArgs<ExtArgs>
+    _count?: boolean | BranchCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type BranchIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $BranchPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Branch"
+    objects: {
+      payments: Prisma.$PaymentPayload<ExtArgs>[]
+      installments: Prisma.$InstallmentPayload<ExtArgs>[]
+      expenses: Prisma.$ExpensePayload<ExtArgs>[]
+      finance: Prisma.$BranchFinancePayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      address: string | null
+      phone: string | null
+      email: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["branch"]>
+    composites: {}
+  }
+
+  type BranchGetPayload<S extends boolean | null | undefined | BranchDefaultArgs> = $Result.GetResult<Prisma.$BranchPayload, S>
+
+  type BranchCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<BranchFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: BranchCountAggregateInputType | true
+    }
+
+  export interface BranchDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Branch'], meta: { name: 'Branch' } }
+    /**
+     * Find zero or one Branch that matches the filter.
+     * @param {BranchFindUniqueArgs} args - Arguments to find a Branch
+     * @example
+     * // Get one Branch
+     * const branch = await prisma.branch.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BranchFindUniqueArgs>(args: SelectSubset<T, BranchFindUniqueArgs<ExtArgs>>): Prisma__BranchClient<$Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Branch that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {BranchFindUniqueOrThrowArgs} args - Arguments to find a Branch
+     * @example
+     * // Get one Branch
+     * const branch = await prisma.branch.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BranchFindUniqueOrThrowArgs>(args: SelectSubset<T, BranchFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BranchClient<$Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Branch that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BranchFindFirstArgs} args - Arguments to find a Branch
+     * @example
+     * // Get one Branch
+     * const branch = await prisma.branch.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BranchFindFirstArgs>(args?: SelectSubset<T, BranchFindFirstArgs<ExtArgs>>): Prisma__BranchClient<$Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Branch that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BranchFindFirstOrThrowArgs} args - Arguments to find a Branch
+     * @example
+     * // Get one Branch
+     * const branch = await prisma.branch.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BranchFindFirstOrThrowArgs>(args?: SelectSubset<T, BranchFindFirstOrThrowArgs<ExtArgs>>): Prisma__BranchClient<$Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Branches that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BranchFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Branches
+     * const branches = await prisma.branch.findMany()
+     * 
+     * // Get first 10 Branches
+     * const branches = await prisma.branch.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const branchWithIdOnly = await prisma.branch.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BranchFindManyArgs>(args?: SelectSubset<T, BranchFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Branch.
+     * @param {BranchCreateArgs} args - Arguments to create a Branch.
+     * @example
+     * // Create one Branch
+     * const Branch = await prisma.branch.create({
+     *   data: {
+     *     // ... data to create a Branch
+     *   }
+     * })
+     * 
+     */
+    create<T extends BranchCreateArgs>(args: SelectSubset<T, BranchCreateArgs<ExtArgs>>): Prisma__BranchClient<$Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Branches.
+     * @param {BranchCreateManyArgs} args - Arguments to create many Branches.
+     * @example
+     * // Create many Branches
+     * const branch = await prisma.branch.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BranchCreateManyArgs>(args?: SelectSubset<T, BranchCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Branches and returns the data saved in the database.
+     * @param {BranchCreateManyAndReturnArgs} args - Arguments to create many Branches.
+     * @example
+     * // Create many Branches
+     * const branch = await prisma.branch.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Branches and only return the `id`
+     * const branchWithIdOnly = await prisma.branch.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BranchCreateManyAndReturnArgs>(args?: SelectSubset<T, BranchCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Branch.
+     * @param {BranchDeleteArgs} args - Arguments to delete one Branch.
+     * @example
+     * // Delete one Branch
+     * const Branch = await prisma.branch.delete({
+     *   where: {
+     *     // ... filter to delete one Branch
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BranchDeleteArgs>(args: SelectSubset<T, BranchDeleteArgs<ExtArgs>>): Prisma__BranchClient<$Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Branch.
+     * @param {BranchUpdateArgs} args - Arguments to update one Branch.
+     * @example
+     * // Update one Branch
+     * const branch = await prisma.branch.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BranchUpdateArgs>(args: SelectSubset<T, BranchUpdateArgs<ExtArgs>>): Prisma__BranchClient<$Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Branches.
+     * @param {BranchDeleteManyArgs} args - Arguments to filter Branches to delete.
+     * @example
+     * // Delete a few Branches
+     * const { count } = await prisma.branch.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BranchDeleteManyArgs>(args?: SelectSubset<T, BranchDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Branches.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BranchUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Branches
+     * const branch = await prisma.branch.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BranchUpdateManyArgs>(args: SelectSubset<T, BranchUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Branch.
+     * @param {BranchUpsertArgs} args - Arguments to update or create a Branch.
+     * @example
+     * // Update or create a Branch
+     * const branch = await prisma.branch.upsert({
+     *   create: {
+     *     // ... data to create a Branch
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Branch we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BranchUpsertArgs>(args: SelectSubset<T, BranchUpsertArgs<ExtArgs>>): Prisma__BranchClient<$Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Branches.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BranchCountArgs} args - Arguments to filter Branches to count.
+     * @example
+     * // Count the number of Branches
+     * const count = await prisma.branch.count({
+     *   where: {
+     *     // ... the filter for the Branches we want to count
+     *   }
+     * })
+    **/
+    count<T extends BranchCountArgs>(
+      args?: Subset<T, BranchCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BranchCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Branch.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BranchAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BranchAggregateArgs>(args: Subset<T, BranchAggregateArgs>): Prisma.PrismaPromise<GetBranchAggregateType<T>>
+
+    /**
+     * Group by Branch.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BranchGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BranchGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BranchGroupByArgs['orderBy'] }
+        : { orderBy?: BranchGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BranchGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBranchGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Branch model
+   */
+  readonly fields: BranchFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Branch.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BranchClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    payments<T extends Branch$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, Branch$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany"> | Null>
+    installments<T extends Branch$installmentsArgs<ExtArgs> = {}>(args?: Subset<T, Branch$installmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, "findMany"> | Null>
+    expenses<T extends Branch$expensesArgs<ExtArgs> = {}>(args?: Subset<T, Branch$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany"> | Null>
+    finance<T extends Branch$financeArgs<ExtArgs> = {}>(args?: Subset<T, Branch$financeArgs<ExtArgs>>): Prisma__BranchFinanceClient<$Result.GetResult<Prisma.$BranchFinancePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Branch model
+   */ 
+  interface BranchFieldRefs {
+    readonly id: FieldRef<"Branch", 'String'>
+    readonly name: FieldRef<"Branch", 'String'>
+    readonly address: FieldRef<"Branch", 'String'>
+    readonly phone: FieldRef<"Branch", 'String'>
+    readonly email: FieldRef<"Branch", 'String'>
+    readonly createdAt: FieldRef<"Branch", 'DateTime'>
+    readonly updatedAt: FieldRef<"Branch", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Branch findUnique
+   */
+  export type BranchFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Branch
+     */
+    select?: BranchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchInclude<ExtArgs> | null
+    /**
+     * Filter, which Branch to fetch.
+     */
+    where: BranchWhereUniqueInput
+  }
+
+  /**
+   * Branch findUniqueOrThrow
+   */
+  export type BranchFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Branch
+     */
+    select?: BranchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchInclude<ExtArgs> | null
+    /**
+     * Filter, which Branch to fetch.
+     */
+    where: BranchWhereUniqueInput
+  }
+
+  /**
+   * Branch findFirst
+   */
+  export type BranchFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Branch
+     */
+    select?: BranchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchInclude<ExtArgs> | null
+    /**
+     * Filter, which Branch to fetch.
+     */
+    where?: BranchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Branches to fetch.
+     */
+    orderBy?: BranchOrderByWithRelationInput | BranchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Branches.
+     */
+    cursor?: BranchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Branches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Branches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Branches.
+     */
+    distinct?: BranchScalarFieldEnum | BranchScalarFieldEnum[]
+  }
+
+  /**
+   * Branch findFirstOrThrow
+   */
+  export type BranchFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Branch
+     */
+    select?: BranchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchInclude<ExtArgs> | null
+    /**
+     * Filter, which Branch to fetch.
+     */
+    where?: BranchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Branches to fetch.
+     */
+    orderBy?: BranchOrderByWithRelationInput | BranchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Branches.
+     */
+    cursor?: BranchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Branches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Branches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Branches.
+     */
+    distinct?: BranchScalarFieldEnum | BranchScalarFieldEnum[]
+  }
+
+  /**
+   * Branch findMany
+   */
+  export type BranchFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Branch
+     */
+    select?: BranchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchInclude<ExtArgs> | null
+    /**
+     * Filter, which Branches to fetch.
+     */
+    where?: BranchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Branches to fetch.
+     */
+    orderBy?: BranchOrderByWithRelationInput | BranchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Branches.
+     */
+    cursor?: BranchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Branches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Branches.
+     */
+    skip?: number
+    distinct?: BranchScalarFieldEnum | BranchScalarFieldEnum[]
+  }
+
+  /**
+   * Branch create
+   */
+  export type BranchCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Branch
+     */
+    select?: BranchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Branch.
+     */
+    data: XOR<BranchCreateInput, BranchUncheckedCreateInput>
+  }
+
+  /**
+   * Branch createMany
+   */
+  export type BranchCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Branches.
+     */
+    data: BranchCreateManyInput | BranchCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Branch createManyAndReturn
+   */
+  export type BranchCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Branch
+     */
+    select?: BranchSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Branches.
+     */
+    data: BranchCreateManyInput | BranchCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Branch update
+   */
+  export type BranchUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Branch
+     */
+    select?: BranchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Branch.
+     */
+    data: XOR<BranchUpdateInput, BranchUncheckedUpdateInput>
+    /**
+     * Choose, which Branch to update.
+     */
+    where: BranchWhereUniqueInput
+  }
+
+  /**
+   * Branch updateMany
+   */
+  export type BranchUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Branches.
+     */
+    data: XOR<BranchUpdateManyMutationInput, BranchUncheckedUpdateManyInput>
+    /**
+     * Filter which Branches to update
+     */
+    where?: BranchWhereInput
+  }
+
+  /**
+   * Branch upsert
+   */
+  export type BranchUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Branch
+     */
+    select?: BranchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Branch to update in case it exists.
+     */
+    where: BranchWhereUniqueInput
+    /**
+     * In case the Branch found by the `where` argument doesn't exist, create a new Branch with this data.
+     */
+    create: XOR<BranchCreateInput, BranchUncheckedCreateInput>
+    /**
+     * In case the Branch was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BranchUpdateInput, BranchUncheckedUpdateInput>
+  }
+
+  /**
+   * Branch delete
+   */
+  export type BranchDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Branch
+     */
+    select?: BranchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchInclude<ExtArgs> | null
+    /**
+     * Filter which Branch to delete.
+     */
+    where: BranchWhereUniqueInput
+  }
+
+  /**
+   * Branch deleteMany
+   */
+  export type BranchDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Branches to delete
+     */
+    where?: BranchWhereInput
+  }
+
+  /**
+   * Branch.payments
+   */
+  export type Branch$paymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    where?: PaymentWhereInput
+    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
+    cursor?: PaymentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
+  }
+
+  /**
+   * Branch.installments
+   */
+  export type Branch$installmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstallmentInclude<ExtArgs> | null
+    where?: InstallmentWhereInput
+    orderBy?: InstallmentOrderByWithRelationInput | InstallmentOrderByWithRelationInput[]
+    cursor?: InstallmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InstallmentScalarFieldEnum | InstallmentScalarFieldEnum[]
+  }
+
+  /**
+   * Branch.expenses
+   */
+  export type Branch$expensesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    where?: ExpenseWhereInput
+    orderBy?: ExpenseOrderByWithRelationInput | ExpenseOrderByWithRelationInput[]
+    cursor?: ExpenseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExpenseScalarFieldEnum | ExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * Branch.finance
+   */
+  export type Branch$financeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BranchFinance
+     */
+    select?: BranchFinanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchFinanceInclude<ExtArgs> | null
+    where?: BranchFinanceWhereInput
+  }
+
+  /**
+   * Branch without action
+   */
+  export type BranchDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Branch
+     */
+    select?: BranchSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BranchFinance
+   */
+
+  export type AggregateBranchFinance = {
+    _count: BranchFinanceCountAggregateOutputType | null
+    _avg: BranchFinanceAvgAggregateOutputType | null
+    _sum: BranchFinanceSumAggregateOutputType | null
+    _min: BranchFinanceMinAggregateOutputType | null
+    _max: BranchFinanceMaxAggregateOutputType | null
+  }
+
+  export type BranchFinanceAvgAggregateOutputType = {
+    totalIncome: number | null
+    totalExpenses: number | null
+    balance: number | null
+  }
+
+  export type BranchFinanceSumAggregateOutputType = {
+    totalIncome: number | null
+    totalExpenses: number | null
+    balance: number | null
+  }
+
+  export type BranchFinanceMinAggregateOutputType = {
+    id: string | null
+    branchId: string | null
+    totalIncome: number | null
+    totalExpenses: number | null
+    balance: number | null
+    lastUpdated: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BranchFinanceMaxAggregateOutputType = {
+    id: string | null
+    branchId: string | null
+    totalIncome: number | null
+    totalExpenses: number | null
+    balance: number | null
+    lastUpdated: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BranchFinanceCountAggregateOutputType = {
+    id: number
+    branchId: number
+    totalIncome: number
+    totalExpenses: number
+    balance: number
+    lastUpdated: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BranchFinanceAvgAggregateInputType = {
+    totalIncome?: true
+    totalExpenses?: true
+    balance?: true
+  }
+
+  export type BranchFinanceSumAggregateInputType = {
+    totalIncome?: true
+    totalExpenses?: true
+    balance?: true
+  }
+
+  export type BranchFinanceMinAggregateInputType = {
+    id?: true
+    branchId?: true
+    totalIncome?: true
+    totalExpenses?: true
+    balance?: true
+    lastUpdated?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BranchFinanceMaxAggregateInputType = {
+    id?: true
+    branchId?: true
+    totalIncome?: true
+    totalExpenses?: true
+    balance?: true
+    lastUpdated?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BranchFinanceCountAggregateInputType = {
+    id?: true
+    branchId?: true
+    totalIncome?: true
+    totalExpenses?: true
+    balance?: true
+    lastUpdated?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BranchFinanceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BranchFinance to aggregate.
+     */
+    where?: BranchFinanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BranchFinances to fetch.
+     */
+    orderBy?: BranchFinanceOrderByWithRelationInput | BranchFinanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BranchFinanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BranchFinances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BranchFinances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BranchFinances
+    **/
+    _count?: true | BranchFinanceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BranchFinanceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BranchFinanceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BranchFinanceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BranchFinanceMaxAggregateInputType
+  }
+
+  export type GetBranchFinanceAggregateType<T extends BranchFinanceAggregateArgs> = {
+        [P in keyof T & keyof AggregateBranchFinance]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBranchFinance[P]>
+      : GetScalarType<T[P], AggregateBranchFinance[P]>
+  }
+
+
+
+
+  export type BranchFinanceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BranchFinanceWhereInput
+    orderBy?: BranchFinanceOrderByWithAggregationInput | BranchFinanceOrderByWithAggregationInput[]
+    by: BranchFinanceScalarFieldEnum[] | BranchFinanceScalarFieldEnum
+    having?: BranchFinanceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BranchFinanceCountAggregateInputType | true
+    _avg?: BranchFinanceAvgAggregateInputType
+    _sum?: BranchFinanceSumAggregateInputType
+    _min?: BranchFinanceMinAggregateInputType
+    _max?: BranchFinanceMaxAggregateInputType
+  }
+
+  export type BranchFinanceGroupByOutputType = {
+    id: string
+    branchId: string
+    totalIncome: number
+    totalExpenses: number
+    balance: number
+    lastUpdated: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: BranchFinanceCountAggregateOutputType | null
+    _avg: BranchFinanceAvgAggregateOutputType | null
+    _sum: BranchFinanceSumAggregateOutputType | null
+    _min: BranchFinanceMinAggregateOutputType | null
+    _max: BranchFinanceMaxAggregateOutputType | null
+  }
+
+  type GetBranchFinanceGroupByPayload<T extends BranchFinanceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BranchFinanceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BranchFinanceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BranchFinanceGroupByOutputType[P]>
+            : GetScalarType<T[P], BranchFinanceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BranchFinanceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    branchId?: boolean
+    totalIncome?: boolean
+    totalExpenses?: boolean
+    balance?: boolean
+    lastUpdated?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    branch?: boolean | BranchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["branchFinance"]>
+
+  export type BranchFinanceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    branchId?: boolean
+    totalIncome?: boolean
+    totalExpenses?: boolean
+    balance?: boolean
+    lastUpdated?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    branch?: boolean | BranchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["branchFinance"]>
+
+  export type BranchFinanceSelectScalar = {
+    id?: boolean
+    branchId?: boolean
+    totalIncome?: boolean
+    totalExpenses?: boolean
+    balance?: boolean
+    lastUpdated?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BranchFinanceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    branch?: boolean | BranchDefaultArgs<ExtArgs>
+  }
+  export type BranchFinanceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    branch?: boolean | BranchDefaultArgs<ExtArgs>
+  }
+
+  export type $BranchFinancePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BranchFinance"
+    objects: {
+      branch: Prisma.$BranchPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      branchId: string
+      totalIncome: number
+      totalExpenses: number
+      balance: number
+      lastUpdated: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["branchFinance"]>
+    composites: {}
+  }
+
+  type BranchFinanceGetPayload<S extends boolean | null | undefined | BranchFinanceDefaultArgs> = $Result.GetResult<Prisma.$BranchFinancePayload, S>
+
+  type BranchFinanceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<BranchFinanceFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: BranchFinanceCountAggregateInputType | true
+    }
+
+  export interface BranchFinanceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BranchFinance'], meta: { name: 'BranchFinance' } }
+    /**
+     * Find zero or one BranchFinance that matches the filter.
+     * @param {BranchFinanceFindUniqueArgs} args - Arguments to find a BranchFinance
+     * @example
+     * // Get one BranchFinance
+     * const branchFinance = await prisma.branchFinance.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BranchFinanceFindUniqueArgs>(args: SelectSubset<T, BranchFinanceFindUniqueArgs<ExtArgs>>): Prisma__BranchFinanceClient<$Result.GetResult<Prisma.$BranchFinancePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one BranchFinance that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {BranchFinanceFindUniqueOrThrowArgs} args - Arguments to find a BranchFinance
+     * @example
+     * // Get one BranchFinance
+     * const branchFinance = await prisma.branchFinance.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BranchFinanceFindUniqueOrThrowArgs>(args: SelectSubset<T, BranchFinanceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BranchFinanceClient<$Result.GetResult<Prisma.$BranchFinancePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first BranchFinance that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BranchFinanceFindFirstArgs} args - Arguments to find a BranchFinance
+     * @example
+     * // Get one BranchFinance
+     * const branchFinance = await prisma.branchFinance.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BranchFinanceFindFirstArgs>(args?: SelectSubset<T, BranchFinanceFindFirstArgs<ExtArgs>>): Prisma__BranchFinanceClient<$Result.GetResult<Prisma.$BranchFinancePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first BranchFinance that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BranchFinanceFindFirstOrThrowArgs} args - Arguments to find a BranchFinance
+     * @example
+     * // Get one BranchFinance
+     * const branchFinance = await prisma.branchFinance.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BranchFinanceFindFirstOrThrowArgs>(args?: SelectSubset<T, BranchFinanceFindFirstOrThrowArgs<ExtArgs>>): Prisma__BranchFinanceClient<$Result.GetResult<Prisma.$BranchFinancePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more BranchFinances that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BranchFinanceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BranchFinances
+     * const branchFinances = await prisma.branchFinance.findMany()
+     * 
+     * // Get first 10 BranchFinances
+     * const branchFinances = await prisma.branchFinance.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const branchFinanceWithIdOnly = await prisma.branchFinance.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BranchFinanceFindManyArgs>(args?: SelectSubset<T, BranchFinanceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BranchFinancePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a BranchFinance.
+     * @param {BranchFinanceCreateArgs} args - Arguments to create a BranchFinance.
+     * @example
+     * // Create one BranchFinance
+     * const BranchFinance = await prisma.branchFinance.create({
+     *   data: {
+     *     // ... data to create a BranchFinance
+     *   }
+     * })
+     * 
+     */
+    create<T extends BranchFinanceCreateArgs>(args: SelectSubset<T, BranchFinanceCreateArgs<ExtArgs>>): Prisma__BranchFinanceClient<$Result.GetResult<Prisma.$BranchFinancePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many BranchFinances.
+     * @param {BranchFinanceCreateManyArgs} args - Arguments to create many BranchFinances.
+     * @example
+     * // Create many BranchFinances
+     * const branchFinance = await prisma.branchFinance.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BranchFinanceCreateManyArgs>(args?: SelectSubset<T, BranchFinanceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BranchFinances and returns the data saved in the database.
+     * @param {BranchFinanceCreateManyAndReturnArgs} args - Arguments to create many BranchFinances.
+     * @example
+     * // Create many BranchFinances
+     * const branchFinance = await prisma.branchFinance.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BranchFinances and only return the `id`
+     * const branchFinanceWithIdOnly = await prisma.branchFinance.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BranchFinanceCreateManyAndReturnArgs>(args?: SelectSubset<T, BranchFinanceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BranchFinancePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a BranchFinance.
+     * @param {BranchFinanceDeleteArgs} args - Arguments to delete one BranchFinance.
+     * @example
+     * // Delete one BranchFinance
+     * const BranchFinance = await prisma.branchFinance.delete({
+     *   where: {
+     *     // ... filter to delete one BranchFinance
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BranchFinanceDeleteArgs>(args: SelectSubset<T, BranchFinanceDeleteArgs<ExtArgs>>): Prisma__BranchFinanceClient<$Result.GetResult<Prisma.$BranchFinancePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one BranchFinance.
+     * @param {BranchFinanceUpdateArgs} args - Arguments to update one BranchFinance.
+     * @example
+     * // Update one BranchFinance
+     * const branchFinance = await prisma.branchFinance.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BranchFinanceUpdateArgs>(args: SelectSubset<T, BranchFinanceUpdateArgs<ExtArgs>>): Prisma__BranchFinanceClient<$Result.GetResult<Prisma.$BranchFinancePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more BranchFinances.
+     * @param {BranchFinanceDeleteManyArgs} args - Arguments to filter BranchFinances to delete.
+     * @example
+     * // Delete a few BranchFinances
+     * const { count } = await prisma.branchFinance.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BranchFinanceDeleteManyArgs>(args?: SelectSubset<T, BranchFinanceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BranchFinances.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BranchFinanceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BranchFinances
+     * const branchFinance = await prisma.branchFinance.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BranchFinanceUpdateManyArgs>(args: SelectSubset<T, BranchFinanceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one BranchFinance.
+     * @param {BranchFinanceUpsertArgs} args - Arguments to update or create a BranchFinance.
+     * @example
+     * // Update or create a BranchFinance
+     * const branchFinance = await prisma.branchFinance.upsert({
+     *   create: {
+     *     // ... data to create a BranchFinance
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BranchFinance we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BranchFinanceUpsertArgs>(args: SelectSubset<T, BranchFinanceUpsertArgs<ExtArgs>>): Prisma__BranchFinanceClient<$Result.GetResult<Prisma.$BranchFinancePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of BranchFinances.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BranchFinanceCountArgs} args - Arguments to filter BranchFinances to count.
+     * @example
+     * // Count the number of BranchFinances
+     * const count = await prisma.branchFinance.count({
+     *   where: {
+     *     // ... the filter for the BranchFinances we want to count
+     *   }
+     * })
+    **/
+    count<T extends BranchFinanceCountArgs>(
+      args?: Subset<T, BranchFinanceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BranchFinanceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BranchFinance.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BranchFinanceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BranchFinanceAggregateArgs>(args: Subset<T, BranchFinanceAggregateArgs>): Prisma.PrismaPromise<GetBranchFinanceAggregateType<T>>
+
+    /**
+     * Group by BranchFinance.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BranchFinanceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BranchFinanceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BranchFinanceGroupByArgs['orderBy'] }
+        : { orderBy?: BranchFinanceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BranchFinanceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBranchFinanceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BranchFinance model
+   */
+  readonly fields: BranchFinanceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BranchFinance.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BranchFinanceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    branch<T extends BranchDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BranchDefaultArgs<ExtArgs>>): Prisma__BranchClient<$Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BranchFinance model
+   */ 
+  interface BranchFinanceFieldRefs {
+    readonly id: FieldRef<"BranchFinance", 'String'>
+    readonly branchId: FieldRef<"BranchFinance", 'String'>
+    readonly totalIncome: FieldRef<"BranchFinance", 'Float'>
+    readonly totalExpenses: FieldRef<"BranchFinance", 'Float'>
+    readonly balance: FieldRef<"BranchFinance", 'Float'>
+    readonly lastUpdated: FieldRef<"BranchFinance", 'DateTime'>
+    readonly createdAt: FieldRef<"BranchFinance", 'DateTime'>
+    readonly updatedAt: FieldRef<"BranchFinance", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BranchFinance findUnique
+   */
+  export type BranchFinanceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BranchFinance
+     */
+    select?: BranchFinanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchFinanceInclude<ExtArgs> | null
+    /**
+     * Filter, which BranchFinance to fetch.
+     */
+    where: BranchFinanceWhereUniqueInput
+  }
+
+  /**
+   * BranchFinance findUniqueOrThrow
+   */
+  export type BranchFinanceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BranchFinance
+     */
+    select?: BranchFinanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchFinanceInclude<ExtArgs> | null
+    /**
+     * Filter, which BranchFinance to fetch.
+     */
+    where: BranchFinanceWhereUniqueInput
+  }
+
+  /**
+   * BranchFinance findFirst
+   */
+  export type BranchFinanceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BranchFinance
+     */
+    select?: BranchFinanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchFinanceInclude<ExtArgs> | null
+    /**
+     * Filter, which BranchFinance to fetch.
+     */
+    where?: BranchFinanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BranchFinances to fetch.
+     */
+    orderBy?: BranchFinanceOrderByWithRelationInput | BranchFinanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BranchFinances.
+     */
+    cursor?: BranchFinanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BranchFinances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BranchFinances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BranchFinances.
+     */
+    distinct?: BranchFinanceScalarFieldEnum | BranchFinanceScalarFieldEnum[]
+  }
+
+  /**
+   * BranchFinance findFirstOrThrow
+   */
+  export type BranchFinanceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BranchFinance
+     */
+    select?: BranchFinanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchFinanceInclude<ExtArgs> | null
+    /**
+     * Filter, which BranchFinance to fetch.
+     */
+    where?: BranchFinanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BranchFinances to fetch.
+     */
+    orderBy?: BranchFinanceOrderByWithRelationInput | BranchFinanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BranchFinances.
+     */
+    cursor?: BranchFinanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BranchFinances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BranchFinances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BranchFinances.
+     */
+    distinct?: BranchFinanceScalarFieldEnum | BranchFinanceScalarFieldEnum[]
+  }
+
+  /**
+   * BranchFinance findMany
+   */
+  export type BranchFinanceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BranchFinance
+     */
+    select?: BranchFinanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchFinanceInclude<ExtArgs> | null
+    /**
+     * Filter, which BranchFinances to fetch.
+     */
+    where?: BranchFinanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BranchFinances to fetch.
+     */
+    orderBy?: BranchFinanceOrderByWithRelationInput | BranchFinanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BranchFinances.
+     */
+    cursor?: BranchFinanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BranchFinances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BranchFinances.
+     */
+    skip?: number
+    distinct?: BranchFinanceScalarFieldEnum | BranchFinanceScalarFieldEnum[]
+  }
+
+  /**
+   * BranchFinance create
+   */
+  export type BranchFinanceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BranchFinance
+     */
+    select?: BranchFinanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchFinanceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BranchFinance.
+     */
+    data: XOR<BranchFinanceCreateInput, BranchFinanceUncheckedCreateInput>
+  }
+
+  /**
+   * BranchFinance createMany
+   */
+  export type BranchFinanceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BranchFinances.
+     */
+    data: BranchFinanceCreateManyInput | BranchFinanceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BranchFinance createManyAndReturn
+   */
+  export type BranchFinanceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BranchFinance
+     */
+    select?: BranchFinanceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many BranchFinances.
+     */
+    data: BranchFinanceCreateManyInput | BranchFinanceCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchFinanceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BranchFinance update
+   */
+  export type BranchFinanceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BranchFinance
+     */
+    select?: BranchFinanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchFinanceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BranchFinance.
+     */
+    data: XOR<BranchFinanceUpdateInput, BranchFinanceUncheckedUpdateInput>
+    /**
+     * Choose, which BranchFinance to update.
+     */
+    where: BranchFinanceWhereUniqueInput
+  }
+
+  /**
+   * BranchFinance updateMany
+   */
+  export type BranchFinanceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BranchFinances.
+     */
+    data: XOR<BranchFinanceUpdateManyMutationInput, BranchFinanceUncheckedUpdateManyInput>
+    /**
+     * Filter which BranchFinances to update
+     */
+    where?: BranchFinanceWhereInput
+  }
+
+  /**
+   * BranchFinance upsert
+   */
+  export type BranchFinanceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BranchFinance
+     */
+    select?: BranchFinanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchFinanceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BranchFinance to update in case it exists.
+     */
+    where: BranchFinanceWhereUniqueInput
+    /**
+     * In case the BranchFinance found by the `where` argument doesn't exist, create a new BranchFinance with this data.
+     */
+    create: XOR<BranchFinanceCreateInput, BranchFinanceUncheckedCreateInput>
+    /**
+     * In case the BranchFinance was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BranchFinanceUpdateInput, BranchFinanceUncheckedUpdateInput>
+  }
+
+  /**
+   * BranchFinance delete
+   */
+  export type BranchFinanceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BranchFinance
+     */
+    select?: BranchFinanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchFinanceInclude<ExtArgs> | null
+    /**
+     * Filter which BranchFinance to delete.
+     */
+    where: BranchFinanceWhereUniqueInput
+  }
+
+  /**
+   * BranchFinance deleteMany
+   */
+  export type BranchFinanceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BranchFinances to delete
+     */
+    where?: BranchFinanceWhereInput
+  }
+
+  /**
+   * BranchFinance without action
+   */
+  export type BranchFinanceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BranchFinance
+     */
+    select?: BranchFinanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BranchFinanceInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -56877,8 +61604,12 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     amount: 'amount',
+    method: 'method',
+    paidAt: 'paidAt',
+    branchId: 'branchId',
     legalCaseId: 'legalCaseId',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
@@ -57129,6 +61860,63 @@ export namespace Prisma {
   export type LegalCaseScalarFieldEnum = (typeof LegalCaseScalarFieldEnum)[keyof typeof LegalCaseScalarFieldEnum]
 
 
+  export const InstallmentScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    amount: 'amount',
+    dueDate: 'dueDate',
+    status: 'status',
+    paymentId: 'paymentId',
+    branchId: 'branchId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type InstallmentScalarFieldEnum = (typeof InstallmentScalarFieldEnum)[keyof typeof InstallmentScalarFieldEnum]
+
+
+  export const ExpenseScalarFieldEnum: {
+    id: 'id',
+    type: 'type',
+    amount: 'amount',
+    description: 'description',
+    paidAt: 'paidAt',
+    branchId: 'branchId',
+    createdBy: 'createdBy',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
+
+
+  export const BranchScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    address: 'address',
+    phone: 'phone',
+    email: 'email',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BranchScalarFieldEnum = (typeof BranchScalarFieldEnum)[keyof typeof BranchScalarFieldEnum]
+
+
+  export const BranchFinanceScalarFieldEnum: {
+    id: 'id',
+    branchId: 'branchId',
+    totalIncome: 'totalIncome',
+    totalExpenses: 'totalExpenses',
+    balance: 'balance',
+    lastUpdated: 'lastUpdated',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BranchFinanceScalarFieldEnum = (typeof BranchFinanceScalarFieldEnum)[keyof typeof BranchFinanceScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -57358,6 +62146,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'PaymentMethod'
+   */
+  export type EnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentMethod'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentMethod[]'
+   */
+  export type ListEnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentMethod[]'>
+    
+
+
+  /**
    * Reference to a field of type 'AccountingType'
    */
   export type EnumAccountingTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountingType'>
@@ -57439,6 +62241,34 @@ export namespace Prisma {
    */
   export type ListEnumLegalCaseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LegalCaseStatus[]'>
     
+
+
+  /**
+   * Reference to a field of type 'InstallmentStatus'
+   */
+  export type EnumInstallmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InstallmentStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'InstallmentStatus[]'
+   */
+  export type ListEnumInstallmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InstallmentStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ExpenseType'
+   */
+  export type EnumExpenseTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExpenseType'>
+    
+
+
+  /**
+   * Reference to a field of type 'ExpenseType[]'
+   */
+  export type ListEnumExpenseTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExpenseType[]'>
+    
   /**
    * Deep Input Types
    */
@@ -57475,11 +62305,12 @@ export namespace Prisma {
     bookmarks?: BookmarkListRelationFilter
     Submission?: SubmissionListRelationFilter
     Attendance?: AttendanceListRelationFilter
+    payments?: PaymentListRelationFilter
+    installments?: InstallmentListRelationFilter
     Instructor?: InstructorListRelationFilter
     Owner?: OwnerListRelationFilter
     Admin?: AdminListRelationFilter
     Lesson?: LessonListRelationFilter
-    Payment?: PaymentListRelationFilter
     Report?: ReportListRelationFilter
     Badge?: BadgeListRelationFilter
     Certificate?: CertificateListRelationFilter
@@ -57523,11 +62354,12 @@ export namespace Prisma {
     bookmarks?: BookmarkOrderByRelationAggregateInput
     Submission?: SubmissionOrderByRelationAggregateInput
     Attendance?: AttendanceOrderByRelationAggregateInput
+    payments?: PaymentOrderByRelationAggregateInput
+    installments?: InstallmentOrderByRelationAggregateInput
     Instructor?: InstructorOrderByRelationAggregateInput
     Owner?: OwnerOrderByRelationAggregateInput
     Admin?: AdminOrderByRelationAggregateInput
     Lesson?: LessonOrderByRelationAggregateInput
-    Payment?: PaymentOrderByRelationAggregateInput
     Report?: ReportOrderByRelationAggregateInput
     Badge?: BadgeOrderByRelationAggregateInput
     Certificate?: CertificateOrderByRelationAggregateInput
@@ -57574,11 +62406,12 @@ export namespace Prisma {
     bookmarks?: BookmarkListRelationFilter
     Submission?: SubmissionListRelationFilter
     Attendance?: AttendanceListRelationFilter
+    payments?: PaymentListRelationFilter
+    installments?: InstallmentListRelationFilter
     Instructor?: InstructorListRelationFilter
     Owner?: OwnerListRelationFilter
     Admin?: AdminListRelationFilter
     Lesson?: LessonListRelationFilter
-    Payment?: PaymentListRelationFilter
     Report?: ReportListRelationFilter
     Badge?: BadgeListRelationFilter
     Certificate?: CertificateListRelationFilter
@@ -59339,6 +64172,7 @@ export namespace Prisma {
     meetings?: MeetingListRelationFilter
     assignments?: AdminAssignmentListRelationFilter
     legalCases?: LegalCaseListRelationFilter
+    expenses?: ExpenseListRelationFilter
     AdminRole?: AdminRoleListRelationFilter
   }
 
@@ -59354,6 +64188,7 @@ export namespace Prisma {
     meetings?: MeetingOrderByRelationAggregateInput
     assignments?: AdminAssignmentOrderByRelationAggregateInput
     legalCases?: LegalCaseOrderByRelationAggregateInput
+    expenses?: ExpenseOrderByRelationAggregateInput
     AdminRole?: AdminRoleOrderByRelationAggregateInput
   }
 
@@ -59372,6 +64207,7 @@ export namespace Prisma {
     meetings?: MeetingListRelationFilter
     assignments?: AdminAssignmentListRelationFilter
     legalCases?: LegalCaseListRelationFilter
+    expenses?: ExpenseListRelationFilter
     AdminRole?: AdminRoleListRelationFilter
   }, "id">
 
@@ -59753,9 +64589,15 @@ export namespace Prisma {
     id?: StringFilter<"Payment"> | string
     userId?: StringFilter<"Payment"> | string
     amount?: FloatFilter<"Payment"> | number
+    method?: EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
+    paidAt?: DateTimeFilter<"Payment"> | Date | string
+    branchId?: StringFilter<"Payment"> | string
     legalCaseId?: StringNullableFilter<"Payment"> | string | null
     createdAt?: DateTimeFilter<"Payment"> | Date | string
+    updatedAt?: DateTimeFilter<"Payment"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    branch?: XOR<BranchScalarRelationFilter, BranchWhereInput>
+    installments?: InstallmentListRelationFilter
     legalCase?: XOR<LegalCaseNullableScalarRelationFilter, LegalCaseWhereInput> | null
   }
 
@@ -59763,9 +64605,15 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     amount?: SortOrder
+    method?: SortOrder
+    paidAt?: SortOrder
+    branchId?: SortOrder
     legalCaseId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
+    branch?: BranchOrderByWithRelationInput
+    installments?: InstallmentOrderByRelationAggregateInput
     legalCase?: LegalCaseOrderByWithRelationInput
   }
 
@@ -59776,9 +64624,15 @@ export namespace Prisma {
     NOT?: PaymentWhereInput | PaymentWhereInput[]
     userId?: StringFilter<"Payment"> | string
     amount?: FloatFilter<"Payment"> | number
+    method?: EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
+    paidAt?: DateTimeFilter<"Payment"> | Date | string
+    branchId?: StringFilter<"Payment"> | string
     legalCaseId?: StringNullableFilter<"Payment"> | string | null
     createdAt?: DateTimeFilter<"Payment"> | Date | string
+    updatedAt?: DateTimeFilter<"Payment"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    branch?: XOR<BranchScalarRelationFilter, BranchWhereInput>
+    installments?: InstallmentListRelationFilter
     legalCase?: XOR<LegalCaseNullableScalarRelationFilter, LegalCaseWhereInput> | null
   }, "id">
 
@@ -59786,8 +64640,12 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     amount?: SortOrder
+    method?: SortOrder
+    paidAt?: SortOrder
+    branchId?: SortOrder
     legalCaseId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: PaymentCountOrderByAggregateInput
     _avg?: PaymentAvgOrderByAggregateInput
     _max?: PaymentMaxOrderByAggregateInput
@@ -59802,8 +64660,12 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Payment"> | string
     userId?: StringWithAggregatesFilter<"Payment"> | string
     amount?: FloatWithAggregatesFilter<"Payment"> | number
+    method?: EnumPaymentMethodWithAggregatesFilter<"Payment"> | $Enums.PaymentMethod
+    paidAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
+    branchId?: StringWithAggregatesFilter<"Payment"> | string
     legalCaseId?: StringNullableWithAggregatesFilter<"Payment"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
   }
 
   export type ReportWhereInput = {
@@ -61177,6 +66039,315 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"LegalCase"> | Date | string
   }
 
+  export type InstallmentWhereInput = {
+    AND?: InstallmentWhereInput | InstallmentWhereInput[]
+    OR?: InstallmentWhereInput[]
+    NOT?: InstallmentWhereInput | InstallmentWhereInput[]
+    id?: StringFilter<"Installment"> | string
+    userId?: StringFilter<"Installment"> | string
+    amount?: FloatFilter<"Installment"> | number
+    dueDate?: DateTimeFilter<"Installment"> | Date | string
+    status?: EnumInstallmentStatusFilter<"Installment"> | $Enums.InstallmentStatus
+    paymentId?: StringNullableFilter<"Installment"> | string | null
+    branchId?: StringFilter<"Installment"> | string
+    createdAt?: DateTimeFilter<"Installment"> | Date | string
+    updatedAt?: DateTimeFilter<"Installment"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    payment?: XOR<PaymentNullableScalarRelationFilter, PaymentWhereInput> | null
+    branch?: XOR<BranchScalarRelationFilter, BranchWhereInput>
+  }
+
+  export type InstallmentOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    dueDate?: SortOrder
+    status?: SortOrder
+    paymentId?: SortOrderInput | SortOrder
+    branchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    payment?: PaymentOrderByWithRelationInput
+    branch?: BranchOrderByWithRelationInput
+  }
+
+  export type InstallmentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: InstallmentWhereInput | InstallmentWhereInput[]
+    OR?: InstallmentWhereInput[]
+    NOT?: InstallmentWhereInput | InstallmentWhereInput[]
+    userId?: StringFilter<"Installment"> | string
+    amount?: FloatFilter<"Installment"> | number
+    dueDate?: DateTimeFilter<"Installment"> | Date | string
+    status?: EnumInstallmentStatusFilter<"Installment"> | $Enums.InstallmentStatus
+    paymentId?: StringNullableFilter<"Installment"> | string | null
+    branchId?: StringFilter<"Installment"> | string
+    createdAt?: DateTimeFilter<"Installment"> | Date | string
+    updatedAt?: DateTimeFilter<"Installment"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    payment?: XOR<PaymentNullableScalarRelationFilter, PaymentWhereInput> | null
+    branch?: XOR<BranchScalarRelationFilter, BranchWhereInput>
+  }, "id">
+
+  export type InstallmentOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    dueDate?: SortOrder
+    status?: SortOrder
+    paymentId?: SortOrderInput | SortOrder
+    branchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: InstallmentCountOrderByAggregateInput
+    _avg?: InstallmentAvgOrderByAggregateInput
+    _max?: InstallmentMaxOrderByAggregateInput
+    _min?: InstallmentMinOrderByAggregateInput
+    _sum?: InstallmentSumOrderByAggregateInput
+  }
+
+  export type InstallmentScalarWhereWithAggregatesInput = {
+    AND?: InstallmentScalarWhereWithAggregatesInput | InstallmentScalarWhereWithAggregatesInput[]
+    OR?: InstallmentScalarWhereWithAggregatesInput[]
+    NOT?: InstallmentScalarWhereWithAggregatesInput | InstallmentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Installment"> | string
+    userId?: StringWithAggregatesFilter<"Installment"> | string
+    amount?: FloatWithAggregatesFilter<"Installment"> | number
+    dueDate?: DateTimeWithAggregatesFilter<"Installment"> | Date | string
+    status?: EnumInstallmentStatusWithAggregatesFilter<"Installment"> | $Enums.InstallmentStatus
+    paymentId?: StringNullableWithAggregatesFilter<"Installment"> | string | null
+    branchId?: StringWithAggregatesFilter<"Installment"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Installment"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Installment"> | Date | string
+  }
+
+  export type ExpenseWhereInput = {
+    AND?: ExpenseWhereInput | ExpenseWhereInput[]
+    OR?: ExpenseWhereInput[]
+    NOT?: ExpenseWhereInput | ExpenseWhereInput[]
+    id?: StringFilter<"Expense"> | string
+    type?: EnumExpenseTypeFilter<"Expense"> | $Enums.ExpenseType
+    amount?: FloatFilter<"Expense"> | number
+    description?: StringNullableFilter<"Expense"> | string | null
+    paidAt?: DateTimeFilter<"Expense"> | Date | string
+    branchId?: StringFilter<"Expense"> | string
+    createdBy?: StringFilter<"Expense"> | string
+    createdAt?: DateTimeFilter<"Expense"> | Date | string
+    updatedAt?: DateTimeFilter<"Expense"> | Date | string
+    branch?: XOR<BranchScalarRelationFilter, BranchWhereInput>
+    createdByAdmin?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }
+
+  export type ExpenseOrderByWithRelationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    amount?: SortOrder
+    description?: SortOrderInput | SortOrder
+    paidAt?: SortOrder
+    branchId?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    branch?: BranchOrderByWithRelationInput
+    createdByAdmin?: AdminOrderByWithRelationInput
+  }
+
+  export type ExpenseWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ExpenseWhereInput | ExpenseWhereInput[]
+    OR?: ExpenseWhereInput[]
+    NOT?: ExpenseWhereInput | ExpenseWhereInput[]
+    type?: EnumExpenseTypeFilter<"Expense"> | $Enums.ExpenseType
+    amount?: FloatFilter<"Expense"> | number
+    description?: StringNullableFilter<"Expense"> | string | null
+    paidAt?: DateTimeFilter<"Expense"> | Date | string
+    branchId?: StringFilter<"Expense"> | string
+    createdBy?: StringFilter<"Expense"> | string
+    createdAt?: DateTimeFilter<"Expense"> | Date | string
+    updatedAt?: DateTimeFilter<"Expense"> | Date | string
+    branch?: XOR<BranchScalarRelationFilter, BranchWhereInput>
+    createdByAdmin?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }, "id">
+
+  export type ExpenseOrderByWithAggregationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    amount?: SortOrder
+    description?: SortOrderInput | SortOrder
+    paidAt?: SortOrder
+    branchId?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ExpenseCountOrderByAggregateInput
+    _avg?: ExpenseAvgOrderByAggregateInput
+    _max?: ExpenseMaxOrderByAggregateInput
+    _min?: ExpenseMinOrderByAggregateInput
+    _sum?: ExpenseSumOrderByAggregateInput
+  }
+
+  export type ExpenseScalarWhereWithAggregatesInput = {
+    AND?: ExpenseScalarWhereWithAggregatesInput | ExpenseScalarWhereWithAggregatesInput[]
+    OR?: ExpenseScalarWhereWithAggregatesInput[]
+    NOT?: ExpenseScalarWhereWithAggregatesInput | ExpenseScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Expense"> | string
+    type?: EnumExpenseTypeWithAggregatesFilter<"Expense"> | $Enums.ExpenseType
+    amount?: FloatWithAggregatesFilter<"Expense"> | number
+    description?: StringNullableWithAggregatesFilter<"Expense"> | string | null
+    paidAt?: DateTimeWithAggregatesFilter<"Expense"> | Date | string
+    branchId?: StringWithAggregatesFilter<"Expense"> | string
+    createdBy?: StringWithAggregatesFilter<"Expense"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Expense"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Expense"> | Date | string
+  }
+
+  export type BranchWhereInput = {
+    AND?: BranchWhereInput | BranchWhereInput[]
+    OR?: BranchWhereInput[]
+    NOT?: BranchWhereInput | BranchWhereInput[]
+    id?: StringFilter<"Branch"> | string
+    name?: StringFilter<"Branch"> | string
+    address?: StringNullableFilter<"Branch"> | string | null
+    phone?: StringNullableFilter<"Branch"> | string | null
+    email?: StringNullableFilter<"Branch"> | string | null
+    createdAt?: DateTimeFilter<"Branch"> | Date | string
+    updatedAt?: DateTimeFilter<"Branch"> | Date | string
+    payments?: PaymentListRelationFilter
+    installments?: InstallmentListRelationFilter
+    expenses?: ExpenseListRelationFilter
+    finance?: XOR<BranchFinanceNullableScalarRelationFilter, BranchFinanceWhereInput> | null
+  }
+
+  export type BranchOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    address?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    payments?: PaymentOrderByRelationAggregateInput
+    installments?: InstallmentOrderByRelationAggregateInput
+    expenses?: ExpenseOrderByRelationAggregateInput
+    finance?: BranchFinanceOrderByWithRelationInput
+  }
+
+  export type BranchWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BranchWhereInput | BranchWhereInput[]
+    OR?: BranchWhereInput[]
+    NOT?: BranchWhereInput | BranchWhereInput[]
+    name?: StringFilter<"Branch"> | string
+    address?: StringNullableFilter<"Branch"> | string | null
+    phone?: StringNullableFilter<"Branch"> | string | null
+    email?: StringNullableFilter<"Branch"> | string | null
+    createdAt?: DateTimeFilter<"Branch"> | Date | string
+    updatedAt?: DateTimeFilter<"Branch"> | Date | string
+    payments?: PaymentListRelationFilter
+    installments?: InstallmentListRelationFilter
+    expenses?: ExpenseListRelationFilter
+    finance?: XOR<BranchFinanceNullableScalarRelationFilter, BranchFinanceWhereInput> | null
+  }, "id">
+
+  export type BranchOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    address?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BranchCountOrderByAggregateInput
+    _max?: BranchMaxOrderByAggregateInput
+    _min?: BranchMinOrderByAggregateInput
+  }
+
+  export type BranchScalarWhereWithAggregatesInput = {
+    AND?: BranchScalarWhereWithAggregatesInput | BranchScalarWhereWithAggregatesInput[]
+    OR?: BranchScalarWhereWithAggregatesInput[]
+    NOT?: BranchScalarWhereWithAggregatesInput | BranchScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Branch"> | string
+    name?: StringWithAggregatesFilter<"Branch"> | string
+    address?: StringNullableWithAggregatesFilter<"Branch"> | string | null
+    phone?: StringNullableWithAggregatesFilter<"Branch"> | string | null
+    email?: StringNullableWithAggregatesFilter<"Branch"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Branch"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Branch"> | Date | string
+  }
+
+  export type BranchFinanceWhereInput = {
+    AND?: BranchFinanceWhereInput | BranchFinanceWhereInput[]
+    OR?: BranchFinanceWhereInput[]
+    NOT?: BranchFinanceWhereInput | BranchFinanceWhereInput[]
+    id?: StringFilter<"BranchFinance"> | string
+    branchId?: StringFilter<"BranchFinance"> | string
+    totalIncome?: FloatFilter<"BranchFinance"> | number
+    totalExpenses?: FloatFilter<"BranchFinance"> | number
+    balance?: FloatFilter<"BranchFinance"> | number
+    lastUpdated?: DateTimeFilter<"BranchFinance"> | Date | string
+    createdAt?: DateTimeFilter<"BranchFinance"> | Date | string
+    updatedAt?: DateTimeFilter<"BranchFinance"> | Date | string
+    branch?: XOR<BranchScalarRelationFilter, BranchWhereInput>
+  }
+
+  export type BranchFinanceOrderByWithRelationInput = {
+    id?: SortOrder
+    branchId?: SortOrder
+    totalIncome?: SortOrder
+    totalExpenses?: SortOrder
+    balance?: SortOrder
+    lastUpdated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    branch?: BranchOrderByWithRelationInput
+  }
+
+  export type BranchFinanceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    branchId?: string
+    AND?: BranchFinanceWhereInput | BranchFinanceWhereInput[]
+    OR?: BranchFinanceWhereInput[]
+    NOT?: BranchFinanceWhereInput | BranchFinanceWhereInput[]
+    totalIncome?: FloatFilter<"BranchFinance"> | number
+    totalExpenses?: FloatFilter<"BranchFinance"> | number
+    balance?: FloatFilter<"BranchFinance"> | number
+    lastUpdated?: DateTimeFilter<"BranchFinance"> | Date | string
+    createdAt?: DateTimeFilter<"BranchFinance"> | Date | string
+    updatedAt?: DateTimeFilter<"BranchFinance"> | Date | string
+    branch?: XOR<BranchScalarRelationFilter, BranchWhereInput>
+  }, "id" | "branchId">
+
+  export type BranchFinanceOrderByWithAggregationInput = {
+    id?: SortOrder
+    branchId?: SortOrder
+    totalIncome?: SortOrder
+    totalExpenses?: SortOrder
+    balance?: SortOrder
+    lastUpdated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BranchFinanceCountOrderByAggregateInput
+    _avg?: BranchFinanceAvgOrderByAggregateInput
+    _max?: BranchFinanceMaxOrderByAggregateInput
+    _min?: BranchFinanceMinOrderByAggregateInput
+    _sum?: BranchFinanceSumOrderByAggregateInput
+  }
+
+  export type BranchFinanceScalarWhereWithAggregatesInput = {
+    AND?: BranchFinanceScalarWhereWithAggregatesInput | BranchFinanceScalarWhereWithAggregatesInput[]
+    OR?: BranchFinanceScalarWhereWithAggregatesInput[]
+    NOT?: BranchFinanceScalarWhereWithAggregatesInput | BranchFinanceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BranchFinance"> | string
+    branchId?: StringWithAggregatesFilter<"BranchFinance"> | string
+    totalIncome?: FloatWithAggregatesFilter<"BranchFinance"> | number
+    totalExpenses?: FloatWithAggregatesFilter<"BranchFinance"> | number
+    balance?: FloatWithAggregatesFilter<"BranchFinance"> | number
+    lastUpdated?: DateTimeWithAggregatesFilter<"BranchFinance"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"BranchFinance"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BranchFinance"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -61204,11 +66375,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -61251,11 +66423,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -61298,11 +66471,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -61345,11 +66519,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -63218,6 +68393,7 @@ export namespace Prisma {
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
@@ -63232,6 +68408,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
@@ -63246,6 +68423,7 @@ export namespace Prisma {
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
@@ -63260,6 +68438,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
@@ -63625,8 +68804,13 @@ export namespace Prisma {
   export type PaymentCreateInput = {
     id?: string
     amount: number
+    method: $Enums.PaymentMethod
+    paidAt?: Date | string
     createdAt?: Date | string
-    user: UserCreateNestedOneWithoutPaymentInput
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPaymentsInput
+    branch: BranchCreateNestedOneWithoutPaymentsInput
+    installments?: InstallmentCreateNestedManyWithoutPaymentInput
     legalCase?: LegalCaseCreateNestedOneWithoutPaymentsInput
   }
 
@@ -63634,15 +68818,25 @@ export namespace Prisma {
     id?: string
     userId: string
     amount: number
+    method: $Enums.PaymentMethod
+    paidAt?: Date | string
+    branchId: string
     legalCaseId?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
+    installments?: InstallmentUncheckedCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutPaymentNestedInput
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
+    branch?: BranchUpdateOneRequiredWithoutPaymentsNestedInput
+    installments?: InstallmentUpdateManyWithoutPaymentNestedInput
     legalCase?: LegalCaseUpdateOneWithoutPaymentsNestedInput
   }
 
@@ -63650,30 +68844,46 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branchId?: StringFieldUpdateOperationsInput | string
     legalCaseId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    installments?: InstallmentUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentCreateManyInput = {
     id?: string
     userId: string
     amount: number
+    method: $Enums.PaymentMethod
+    paidAt?: Date | string
+    branchId: string
     legalCaseId?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PaymentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branchId?: StringFieldUpdateOperationsInput | string
     legalCaseId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReportCreateInput = {
@@ -65128,6 +70338,331 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type InstallmentCreateInput = {
+    id?: string
+    amount: number
+    dueDate: Date | string
+    status?: $Enums.InstallmentStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutInstallmentsInput
+    payment?: PaymentCreateNestedOneWithoutInstallmentsInput
+    branch: BranchCreateNestedOneWithoutInstallmentsInput
+  }
+
+  export type InstallmentUncheckedCreateInput = {
+    id?: string
+    userId: string
+    amount: number
+    dueDate: Date | string
+    status?: $Enums.InstallmentStatus
+    paymentId?: string | null
+    branchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstallmentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumInstallmentStatusFieldUpdateOperationsInput | $Enums.InstallmentStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutInstallmentsNestedInput
+    payment?: PaymentUpdateOneWithoutInstallmentsNestedInput
+    branch?: BranchUpdateOneRequiredWithoutInstallmentsNestedInput
+  }
+
+  export type InstallmentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumInstallmentStatusFieldUpdateOperationsInput | $Enums.InstallmentStatus
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    branchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstallmentCreateManyInput = {
+    id?: string
+    userId: string
+    amount: number
+    dueDate: Date | string
+    status?: $Enums.InstallmentStatus
+    paymentId?: string | null
+    branchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstallmentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumInstallmentStatusFieldUpdateOperationsInput | $Enums.InstallmentStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstallmentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumInstallmentStatusFieldUpdateOperationsInput | $Enums.InstallmentStatus
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    branchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseCreateInput = {
+    id?: string
+    type: $Enums.ExpenseType
+    amount: number
+    description?: string | null
+    paidAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branch: BranchCreateNestedOneWithoutExpensesInput
+    createdByAdmin: AdminCreateNestedOneWithoutExpensesInput
+  }
+
+  export type ExpenseUncheckedCreateInput = {
+    id?: string
+    type: $Enums.ExpenseType
+    amount: number
+    description?: string | null
+    paidAt?: Date | string
+    branchId: string
+    createdBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExpenseUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseTypeFieldUpdateOperationsInput | $Enums.ExpenseType
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branch?: BranchUpdateOneRequiredWithoutExpensesNestedInput
+    createdByAdmin?: AdminUpdateOneRequiredWithoutExpensesNestedInput
+  }
+
+  export type ExpenseUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseTypeFieldUpdateOperationsInput | $Enums.ExpenseType
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branchId?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseCreateManyInput = {
+    id?: string
+    type: $Enums.ExpenseType
+    amount: number
+    description?: string | null
+    paidAt?: Date | string
+    branchId: string
+    createdBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExpenseUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseTypeFieldUpdateOperationsInput | $Enums.ExpenseType
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseTypeFieldUpdateOperationsInput | $Enums.ExpenseType
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branchId?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BranchCreateInput = {
+    id?: string
+    name: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payments?: PaymentCreateNestedManyWithoutBranchInput
+    installments?: InstallmentCreateNestedManyWithoutBranchInput
+    expenses?: ExpenseCreateNestedManyWithoutBranchInput
+    finance?: BranchFinanceCreateNestedOneWithoutBranchInput
+  }
+
+  export type BranchUncheckedCreateInput = {
+    id?: string
+    name: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payments?: PaymentUncheckedCreateNestedManyWithoutBranchInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutBranchInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutBranchInput
+    finance?: BranchFinanceUncheckedCreateNestedOneWithoutBranchInput
+  }
+
+  export type BranchUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PaymentUpdateManyWithoutBranchNestedInput
+    installments?: InstallmentUpdateManyWithoutBranchNestedInput
+    expenses?: ExpenseUpdateManyWithoutBranchNestedInput
+    finance?: BranchFinanceUpdateOneWithoutBranchNestedInput
+  }
+
+  export type BranchUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PaymentUncheckedUpdateManyWithoutBranchNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutBranchNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+    finance?: BranchFinanceUncheckedUpdateOneWithoutBranchNestedInput
+  }
+
+  export type BranchCreateManyInput = {
+    id?: string
+    name: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BranchUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BranchUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BranchFinanceCreateInput = {
+    id?: string
+    totalIncome?: number
+    totalExpenses?: number
+    balance?: number
+    lastUpdated?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branch: BranchCreateNestedOneWithoutFinanceInput
+  }
+
+  export type BranchFinanceUncheckedCreateInput = {
+    id?: string
+    branchId: string
+    totalIncome?: number
+    totalExpenses?: number
+    balance?: number
+    lastUpdated?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BranchFinanceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalIncome?: FloatFieldUpdateOperationsInput | number
+    totalExpenses?: FloatFieldUpdateOperationsInput | number
+    balance?: FloatFieldUpdateOperationsInput | number
+    lastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branch?: BranchUpdateOneRequiredWithoutFinanceNestedInput
+  }
+
+  export type BranchFinanceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    branchId?: StringFieldUpdateOperationsInput | string
+    totalIncome?: FloatFieldUpdateOperationsInput | number
+    totalExpenses?: FloatFieldUpdateOperationsInput | number
+    balance?: FloatFieldUpdateOperationsInput | number
+    lastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BranchFinanceCreateManyInput = {
+    id?: string
+    branchId: string
+    totalIncome?: number
+    totalExpenses?: number
+    balance?: number
+    lastUpdated?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BranchFinanceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalIncome?: FloatFieldUpdateOperationsInput | number
+    totalExpenses?: FloatFieldUpdateOperationsInput | number
+    balance?: FloatFieldUpdateOperationsInput | number
+    lastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BranchFinanceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    branchId?: StringFieldUpdateOperationsInput | string
+    totalIncome?: FloatFieldUpdateOperationsInput | number
+    totalExpenses?: FloatFieldUpdateOperationsInput | number
+    balance?: FloatFieldUpdateOperationsInput | number
+    lastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -65262,6 +70797,18 @@ export namespace Prisma {
     none?: AttendanceWhereInput
   }
 
+  export type PaymentListRelationFilter = {
+    every?: PaymentWhereInput
+    some?: PaymentWhereInput
+    none?: PaymentWhereInput
+  }
+
+  export type InstallmentListRelationFilter = {
+    every?: InstallmentWhereInput
+    some?: InstallmentWhereInput
+    none?: InstallmentWhereInput
+  }
+
   export type InstructorListRelationFilter = {
     every?: InstructorWhereInput
     some?: InstructorWhereInput
@@ -65284,12 +70831,6 @@ export namespace Prisma {
     every?: LessonWhereInput
     some?: LessonWhereInput
     none?: LessonWhereInput
-  }
-
-  export type PaymentListRelationFilter = {
-    every?: PaymentWhereInput
-    some?: PaymentWhereInput
-    none?: PaymentWhereInput
   }
 
   export type ReportListRelationFilter = {
@@ -65415,6 +70956,14 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type PaymentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InstallmentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type InstructorOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -65428,10 +70977,6 @@ export namespace Prisma {
   }
 
   export type LessonOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type PaymentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -66926,6 +72471,12 @@ export namespace Prisma {
     none?: AdminAssignmentWhereInput
   }
 
+  export type ExpenseListRelationFilter = {
+    every?: ExpenseWhereInput
+    some?: ExpenseWhereInput
+    none?: ExpenseWhereInput
+  }
+
   export type AdminRoleListRelationFilter = {
     every?: AdminRoleWhereInput
     some?: AdminRoleWhereInput
@@ -66937,6 +72488,10 @@ export namespace Prisma {
   }
 
   export type AdminAssignmentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ExpenseOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -67114,12 +72669,28 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type EnumPaymentMethodFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentMethodFilter<$PrismaModel> | $Enums.PaymentMethod
+  }
+
+  export type BranchScalarRelationFilter = {
+    is?: BranchWhereInput
+    isNot?: BranchWhereInput
+  }
+
   export type PaymentCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     amount?: SortOrder
+    method?: SortOrder
+    paidAt?: SortOrder
+    branchId?: SortOrder
     legalCaseId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PaymentAvgOrderByAggregateInput = {
@@ -67130,20 +72701,38 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     amount?: SortOrder
+    method?: SortOrder
+    paidAt?: SortOrder
+    branchId?: SortOrder
     legalCaseId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PaymentMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     amount?: SortOrder
+    method?: SortOrder
+    paidAt?: SortOrder
+    branchId?: SortOrder
     legalCaseId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PaymentSumOrderByAggregateInput = {
     amount?: SortOrder
+  }
+
+  export type EnumPaymentMethodWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentMethodWithAggregatesFilter<$PrismaModel> | $Enums.PaymentMethod
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentMethodFilter<$PrismaModel>
+    _max?: NestedEnumPaymentMethodFilter<$PrismaModel>
   }
 
   export type ReportCountOrderByAggregateInput = {
@@ -67979,6 +73568,213 @@ export namespace Prisma {
     _max?: NestedEnumLegalCaseStatusFilter<$PrismaModel>
   }
 
+  export type EnumInstallmentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.InstallmentStatus | EnumInstallmentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InstallmentStatus[] | ListEnumInstallmentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InstallmentStatus[] | ListEnumInstallmentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInstallmentStatusFilter<$PrismaModel> | $Enums.InstallmentStatus
+  }
+
+  export type PaymentNullableScalarRelationFilter = {
+    is?: PaymentWhereInput | null
+    isNot?: PaymentWhereInput | null
+  }
+
+  export type InstallmentCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    dueDate?: SortOrder
+    status?: SortOrder
+    paymentId?: SortOrder
+    branchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InstallmentAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type InstallmentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    dueDate?: SortOrder
+    status?: SortOrder
+    paymentId?: SortOrder
+    branchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InstallmentMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    dueDate?: SortOrder
+    status?: SortOrder
+    paymentId?: SortOrder
+    branchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InstallmentSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type EnumInstallmentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InstallmentStatus | EnumInstallmentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InstallmentStatus[] | ListEnumInstallmentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InstallmentStatus[] | ListEnumInstallmentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInstallmentStatusWithAggregatesFilter<$PrismaModel> | $Enums.InstallmentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInstallmentStatusFilter<$PrismaModel>
+    _max?: NestedEnumInstallmentStatusFilter<$PrismaModel>
+  }
+
+  export type EnumExpenseTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExpenseType | EnumExpenseTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ExpenseType[] | ListEnumExpenseTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ExpenseType[] | ListEnumExpenseTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumExpenseTypeFilter<$PrismaModel> | $Enums.ExpenseType
+  }
+
+  export type ExpenseCountOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    amount?: SortOrder
+    description?: SortOrder
+    paidAt?: SortOrder
+    branchId?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExpenseAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type ExpenseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    amount?: SortOrder
+    description?: SortOrder
+    paidAt?: SortOrder
+    branchId?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExpenseMinOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    amount?: SortOrder
+    description?: SortOrder
+    paidAt?: SortOrder
+    branchId?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExpenseSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type EnumExpenseTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExpenseType | EnumExpenseTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ExpenseType[] | ListEnumExpenseTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ExpenseType[] | ListEnumExpenseTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumExpenseTypeWithAggregatesFilter<$PrismaModel> | $Enums.ExpenseType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumExpenseTypeFilter<$PrismaModel>
+    _max?: NestedEnumExpenseTypeFilter<$PrismaModel>
+  }
+
+  export type BranchFinanceNullableScalarRelationFilter = {
+    is?: BranchFinanceWhereInput | null
+    isNot?: BranchFinanceWhereInput | null
+  }
+
+  export type BranchCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    address?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BranchMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    address?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BranchMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    address?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BranchFinanceCountOrderByAggregateInput = {
+    id?: SortOrder
+    branchId?: SortOrder
+    totalIncome?: SortOrder
+    totalExpenses?: SortOrder
+    balance?: SortOrder
+    lastUpdated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BranchFinanceAvgOrderByAggregateInput = {
+    totalIncome?: SortOrder
+    totalExpenses?: SortOrder
+    balance?: SortOrder
+  }
+
+  export type BranchFinanceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    branchId?: SortOrder
+    totalIncome?: SortOrder
+    totalExpenses?: SortOrder
+    balance?: SortOrder
+    lastUpdated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BranchFinanceMinOrderByAggregateInput = {
+    id?: SortOrder
+    branchId?: SortOrder
+    totalIncome?: SortOrder
+    totalExpenses?: SortOrder
+    balance?: SortOrder
+    lastUpdated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BranchFinanceSumOrderByAggregateInput = {
+    totalIncome?: SortOrder
+    totalExpenses?: SortOrder
+    balance?: SortOrder
+  }
+
   export type AcademyCreateNestedOneWithoutUsersInput = {
     create?: XOR<AcademyCreateWithoutUsersInput, AcademyUncheckedCreateWithoutUsersInput>
     connectOrCreate?: AcademyCreateOrConnectWithoutUsersInput
@@ -68059,6 +73855,20 @@ export namespace Prisma {
     connect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
   }
 
+  export type PaymentCreateNestedManyWithoutUserInput = {
+    create?: XOR<PaymentCreateWithoutUserInput, PaymentUncheckedCreateWithoutUserInput> | PaymentCreateWithoutUserInput[] | PaymentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutUserInput | PaymentCreateOrConnectWithoutUserInput[]
+    createMany?: PaymentCreateManyUserInputEnvelope
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
+  export type InstallmentCreateNestedManyWithoutUserInput = {
+    create?: XOR<InstallmentCreateWithoutUserInput, InstallmentUncheckedCreateWithoutUserInput> | InstallmentCreateWithoutUserInput[] | InstallmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InstallmentCreateOrConnectWithoutUserInput | InstallmentCreateOrConnectWithoutUserInput[]
+    createMany?: InstallmentCreateManyUserInputEnvelope
+    connect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+  }
+
   export type InstructorCreateNestedManyWithoutUserInput = {
     create?: XOR<InstructorCreateWithoutUserInput, InstructorUncheckedCreateWithoutUserInput> | InstructorCreateWithoutUserInput[] | InstructorUncheckedCreateWithoutUserInput[]
     connectOrCreate?: InstructorCreateOrConnectWithoutUserInput | InstructorCreateOrConnectWithoutUserInput[]
@@ -68084,13 +73894,6 @@ export namespace Prisma {
     create?: XOR<LessonCreateWithoutCompletedByInput, LessonUncheckedCreateWithoutCompletedByInput> | LessonCreateWithoutCompletedByInput[] | LessonUncheckedCreateWithoutCompletedByInput[]
     connectOrCreate?: LessonCreateOrConnectWithoutCompletedByInput | LessonCreateOrConnectWithoutCompletedByInput[]
     connect?: LessonWhereUniqueInput | LessonWhereUniqueInput[]
-  }
-
-  export type PaymentCreateNestedManyWithoutUserInput = {
-    create?: XOR<PaymentCreateWithoutUserInput, PaymentUncheckedCreateWithoutUserInput> | PaymentCreateWithoutUserInput[] | PaymentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PaymentCreateOrConnectWithoutUserInput | PaymentCreateOrConnectWithoutUserInput[]
-    createMany?: PaymentCreateManyUserInputEnvelope
-    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
   }
 
   export type ReportCreateNestedManyWithoutUserInput = {
@@ -68255,6 +74058,20 @@ export namespace Prisma {
     connect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
   }
 
+  export type PaymentUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PaymentCreateWithoutUserInput, PaymentUncheckedCreateWithoutUserInput> | PaymentCreateWithoutUserInput[] | PaymentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutUserInput | PaymentCreateOrConnectWithoutUserInput[]
+    createMany?: PaymentCreateManyUserInputEnvelope
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
+  export type InstallmentUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<InstallmentCreateWithoutUserInput, InstallmentUncheckedCreateWithoutUserInput> | InstallmentCreateWithoutUserInput[] | InstallmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InstallmentCreateOrConnectWithoutUserInput | InstallmentCreateOrConnectWithoutUserInput[]
+    createMany?: InstallmentCreateManyUserInputEnvelope
+    connect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+  }
+
   export type InstructorUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<InstructorCreateWithoutUserInput, InstructorUncheckedCreateWithoutUserInput> | InstructorCreateWithoutUserInput[] | InstructorUncheckedCreateWithoutUserInput[]
     connectOrCreate?: InstructorCreateOrConnectWithoutUserInput | InstructorCreateOrConnectWithoutUserInput[]
@@ -68280,13 +74097,6 @@ export namespace Prisma {
     create?: XOR<LessonCreateWithoutCompletedByInput, LessonUncheckedCreateWithoutCompletedByInput> | LessonCreateWithoutCompletedByInput[] | LessonUncheckedCreateWithoutCompletedByInput[]
     connectOrCreate?: LessonCreateOrConnectWithoutCompletedByInput | LessonCreateOrConnectWithoutCompletedByInput[]
     connect?: LessonWhereUniqueInput | LessonWhereUniqueInput[]
-  }
-
-  export type PaymentUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<PaymentCreateWithoutUserInput, PaymentUncheckedCreateWithoutUserInput> | PaymentCreateWithoutUserInput[] | PaymentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PaymentCreateOrConnectWithoutUserInput | PaymentCreateOrConnectWithoutUserInput[]
-    createMany?: PaymentCreateManyUserInputEnvelope
-    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
   }
 
   export type ReportUncheckedCreateNestedManyWithoutUserInput = {
@@ -68563,6 +74373,34 @@ export namespace Prisma {
     deleteMany?: AttendanceScalarWhereInput | AttendanceScalarWhereInput[]
   }
 
+  export type PaymentUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PaymentCreateWithoutUserInput, PaymentUncheckedCreateWithoutUserInput> | PaymentCreateWithoutUserInput[] | PaymentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutUserInput | PaymentCreateOrConnectWithoutUserInput[]
+    upsert?: PaymentUpsertWithWhereUniqueWithoutUserInput | PaymentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PaymentCreateManyUserInputEnvelope
+    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    update?: PaymentUpdateWithWhereUniqueWithoutUserInput | PaymentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PaymentUpdateManyWithWhereWithoutUserInput | PaymentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+  }
+
+  export type InstallmentUpdateManyWithoutUserNestedInput = {
+    create?: XOR<InstallmentCreateWithoutUserInput, InstallmentUncheckedCreateWithoutUserInput> | InstallmentCreateWithoutUserInput[] | InstallmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InstallmentCreateOrConnectWithoutUserInput | InstallmentCreateOrConnectWithoutUserInput[]
+    upsert?: InstallmentUpsertWithWhereUniqueWithoutUserInput | InstallmentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: InstallmentCreateManyUserInputEnvelope
+    set?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    disconnect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    delete?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    connect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    update?: InstallmentUpdateWithWhereUniqueWithoutUserInput | InstallmentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: InstallmentUpdateManyWithWhereWithoutUserInput | InstallmentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: InstallmentScalarWhereInput | InstallmentScalarWhereInput[]
+  }
+
   export type InstructorUpdateManyWithoutUserNestedInput = {
     create?: XOR<InstructorCreateWithoutUserInput, InstructorUncheckedCreateWithoutUserInput> | InstructorCreateWithoutUserInput[] | InstructorUncheckedCreateWithoutUserInput[]
     connectOrCreate?: InstructorCreateOrConnectWithoutUserInput | InstructorCreateOrConnectWithoutUserInput[]
@@ -68616,20 +74454,6 @@ export namespace Prisma {
     update?: LessonUpdateWithWhereUniqueWithoutCompletedByInput | LessonUpdateWithWhereUniqueWithoutCompletedByInput[]
     updateMany?: LessonUpdateManyWithWhereWithoutCompletedByInput | LessonUpdateManyWithWhereWithoutCompletedByInput[]
     deleteMany?: LessonScalarWhereInput | LessonScalarWhereInput[]
-  }
-
-  export type PaymentUpdateManyWithoutUserNestedInput = {
-    create?: XOR<PaymentCreateWithoutUserInput, PaymentUncheckedCreateWithoutUserInput> | PaymentCreateWithoutUserInput[] | PaymentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PaymentCreateOrConnectWithoutUserInput | PaymentCreateOrConnectWithoutUserInput[]
-    upsert?: PaymentUpsertWithWhereUniqueWithoutUserInput | PaymentUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: PaymentCreateManyUserInputEnvelope
-    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
-    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
-    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
-    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
-    update?: PaymentUpdateWithWhereUniqueWithoutUserInput | PaymentUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: PaymentUpdateManyWithWhereWithoutUserInput | PaymentUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
   }
 
   export type ReportUpdateManyWithoutUserNestedInput = {
@@ -68959,6 +74783,34 @@ export namespace Prisma {
     deleteMany?: AttendanceScalarWhereInput | AttendanceScalarWhereInput[]
   }
 
+  export type PaymentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PaymentCreateWithoutUserInput, PaymentUncheckedCreateWithoutUserInput> | PaymentCreateWithoutUserInput[] | PaymentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutUserInput | PaymentCreateOrConnectWithoutUserInput[]
+    upsert?: PaymentUpsertWithWhereUniqueWithoutUserInput | PaymentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PaymentCreateManyUserInputEnvelope
+    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    update?: PaymentUpdateWithWhereUniqueWithoutUserInput | PaymentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PaymentUpdateManyWithWhereWithoutUserInput | PaymentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+  }
+
+  export type InstallmentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<InstallmentCreateWithoutUserInput, InstallmentUncheckedCreateWithoutUserInput> | InstallmentCreateWithoutUserInput[] | InstallmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InstallmentCreateOrConnectWithoutUserInput | InstallmentCreateOrConnectWithoutUserInput[]
+    upsert?: InstallmentUpsertWithWhereUniqueWithoutUserInput | InstallmentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: InstallmentCreateManyUserInputEnvelope
+    set?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    disconnect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    delete?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    connect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    update?: InstallmentUpdateWithWhereUniqueWithoutUserInput | InstallmentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: InstallmentUpdateManyWithWhereWithoutUserInput | InstallmentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: InstallmentScalarWhereInput | InstallmentScalarWhereInput[]
+  }
+
   export type InstructorUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<InstructorCreateWithoutUserInput, InstructorUncheckedCreateWithoutUserInput> | InstructorCreateWithoutUserInput[] | InstructorUncheckedCreateWithoutUserInput[]
     connectOrCreate?: InstructorCreateOrConnectWithoutUserInput | InstructorCreateOrConnectWithoutUserInput[]
@@ -69012,20 +74864,6 @@ export namespace Prisma {
     update?: LessonUpdateWithWhereUniqueWithoutCompletedByInput | LessonUpdateWithWhereUniqueWithoutCompletedByInput[]
     updateMany?: LessonUpdateManyWithWhereWithoutCompletedByInput | LessonUpdateManyWithWhereWithoutCompletedByInput[]
     deleteMany?: LessonScalarWhereInput | LessonScalarWhereInput[]
-  }
-
-  export type PaymentUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<PaymentCreateWithoutUserInput, PaymentUncheckedCreateWithoutUserInput> | PaymentCreateWithoutUserInput[] | PaymentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PaymentCreateOrConnectWithoutUserInput | PaymentCreateOrConnectWithoutUserInput[]
-    upsert?: PaymentUpsertWithWhereUniqueWithoutUserInput | PaymentUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: PaymentCreateManyUserInputEnvelope
-    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
-    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
-    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
-    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
-    update?: PaymentUpdateWithWhereUniqueWithoutUserInput | PaymentUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: PaymentUpdateManyWithWhereWithoutUserInput | PaymentUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
   }
 
   export type ReportUncheckedUpdateManyWithoutUserNestedInput = {
@@ -71185,6 +77023,13 @@ export namespace Prisma {
     connect?: LegalCaseWhereUniqueInput | LegalCaseWhereUniqueInput[]
   }
 
+  export type ExpenseCreateNestedManyWithoutCreatedByAdminInput = {
+    create?: XOR<ExpenseCreateWithoutCreatedByAdminInput, ExpenseUncheckedCreateWithoutCreatedByAdminInput> | ExpenseCreateWithoutCreatedByAdminInput[] | ExpenseUncheckedCreateWithoutCreatedByAdminInput[]
+    connectOrCreate?: ExpenseCreateOrConnectWithoutCreatedByAdminInput | ExpenseCreateOrConnectWithoutCreatedByAdminInput[]
+    createMany?: ExpenseCreateManyCreatedByAdminInputEnvelope
+    connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+  }
+
   export type AdminRoleCreateNestedManyWithoutAdminInput = {
     create?: XOR<AdminRoleCreateWithoutAdminInput, AdminRoleUncheckedCreateWithoutAdminInput> | AdminRoleCreateWithoutAdminInput[] | AdminRoleUncheckedCreateWithoutAdminInput[]
     connectOrCreate?: AdminRoleCreateOrConnectWithoutAdminInput | AdminRoleCreateOrConnectWithoutAdminInput[]
@@ -71239,6 +77084,13 @@ export namespace Prisma {
     connectOrCreate?: LegalCaseCreateOrConnectWithoutAssignedLawyerInput | LegalCaseCreateOrConnectWithoutAssignedLawyerInput[]
     createMany?: LegalCaseCreateManyAssignedLawyerInputEnvelope
     connect?: LegalCaseWhereUniqueInput | LegalCaseWhereUniqueInput[]
+  }
+
+  export type ExpenseUncheckedCreateNestedManyWithoutCreatedByAdminInput = {
+    create?: XOR<ExpenseCreateWithoutCreatedByAdminInput, ExpenseUncheckedCreateWithoutCreatedByAdminInput> | ExpenseCreateWithoutCreatedByAdminInput[] | ExpenseUncheckedCreateWithoutCreatedByAdminInput[]
+    connectOrCreate?: ExpenseCreateOrConnectWithoutCreatedByAdminInput | ExpenseCreateOrConnectWithoutCreatedByAdminInput[]
+    createMany?: ExpenseCreateManyCreatedByAdminInputEnvelope
+    connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
   }
 
   export type AdminRoleUncheckedCreateNestedManyWithoutAdminInput = {
@@ -71354,6 +77206,20 @@ export namespace Prisma {
     deleteMany?: LegalCaseScalarWhereInput | LegalCaseScalarWhereInput[]
   }
 
+  export type ExpenseUpdateManyWithoutCreatedByAdminNestedInput = {
+    create?: XOR<ExpenseCreateWithoutCreatedByAdminInput, ExpenseUncheckedCreateWithoutCreatedByAdminInput> | ExpenseCreateWithoutCreatedByAdminInput[] | ExpenseUncheckedCreateWithoutCreatedByAdminInput[]
+    connectOrCreate?: ExpenseCreateOrConnectWithoutCreatedByAdminInput | ExpenseCreateOrConnectWithoutCreatedByAdminInput[]
+    upsert?: ExpenseUpsertWithWhereUniqueWithoutCreatedByAdminInput | ExpenseUpsertWithWhereUniqueWithoutCreatedByAdminInput[]
+    createMany?: ExpenseCreateManyCreatedByAdminInputEnvelope
+    set?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    disconnect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    delete?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    update?: ExpenseUpdateWithWhereUniqueWithoutCreatedByAdminInput | ExpenseUpdateWithWhereUniqueWithoutCreatedByAdminInput[]
+    updateMany?: ExpenseUpdateManyWithWhereWithoutCreatedByAdminInput | ExpenseUpdateManyWithWhereWithoutCreatedByAdminInput[]
+    deleteMany?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
+  }
+
   export type AdminRoleUpdateManyWithoutAdminNestedInput = {
     create?: XOR<AdminRoleCreateWithoutAdminInput, AdminRoleUncheckedCreateWithoutAdminInput> | AdminRoleCreateWithoutAdminInput[] | AdminRoleUncheckedCreateWithoutAdminInput[]
     connectOrCreate?: AdminRoleCreateOrConnectWithoutAdminInput | AdminRoleCreateOrConnectWithoutAdminInput[]
@@ -71464,6 +77330,20 @@ export namespace Prisma {
     update?: LegalCaseUpdateWithWhereUniqueWithoutAssignedLawyerInput | LegalCaseUpdateWithWhereUniqueWithoutAssignedLawyerInput[]
     updateMany?: LegalCaseUpdateManyWithWhereWithoutAssignedLawyerInput | LegalCaseUpdateManyWithWhereWithoutAssignedLawyerInput[]
     deleteMany?: LegalCaseScalarWhereInput | LegalCaseScalarWhereInput[]
+  }
+
+  export type ExpenseUncheckedUpdateManyWithoutCreatedByAdminNestedInput = {
+    create?: XOR<ExpenseCreateWithoutCreatedByAdminInput, ExpenseUncheckedCreateWithoutCreatedByAdminInput> | ExpenseCreateWithoutCreatedByAdminInput[] | ExpenseUncheckedCreateWithoutCreatedByAdminInput[]
+    connectOrCreate?: ExpenseCreateOrConnectWithoutCreatedByAdminInput | ExpenseCreateOrConnectWithoutCreatedByAdminInput[]
+    upsert?: ExpenseUpsertWithWhereUniqueWithoutCreatedByAdminInput | ExpenseUpsertWithWhereUniqueWithoutCreatedByAdminInput[]
+    createMany?: ExpenseCreateManyCreatedByAdminInputEnvelope
+    set?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    disconnect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    delete?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    update?: ExpenseUpdateWithWhereUniqueWithoutCreatedByAdminInput | ExpenseUpdateWithWhereUniqueWithoutCreatedByAdminInput[]
+    updateMany?: ExpenseUpdateManyWithWhereWithoutCreatedByAdminInput | ExpenseUpdateManyWithWhereWithoutCreatedByAdminInput[]
+    deleteMany?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
   }
 
   export type AdminRoleUncheckedUpdateManyWithoutAdminNestedInput = {
@@ -71794,10 +77674,23 @@ export namespace Prisma {
     update?: XOR<XOR<LessonUpdateToOneWithWhereWithoutAttendanceInput, LessonUpdateWithoutAttendanceInput>, LessonUncheckedUpdateWithoutAttendanceInput>
   }
 
-  export type UserCreateNestedOneWithoutPaymentInput = {
-    create?: XOR<UserCreateWithoutPaymentInput, UserUncheckedCreateWithoutPaymentInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPaymentInput
+  export type UserCreateNestedOneWithoutPaymentsInput = {
+    create?: XOR<UserCreateWithoutPaymentsInput, UserUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPaymentsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type BranchCreateNestedOneWithoutPaymentsInput = {
+    create?: XOR<BranchCreateWithoutPaymentsInput, BranchUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: BranchCreateOrConnectWithoutPaymentsInput
+    connect?: BranchWhereUniqueInput
+  }
+
+  export type InstallmentCreateNestedManyWithoutPaymentInput = {
+    create?: XOR<InstallmentCreateWithoutPaymentInput, InstallmentUncheckedCreateWithoutPaymentInput> | InstallmentCreateWithoutPaymentInput[] | InstallmentUncheckedCreateWithoutPaymentInput[]
+    connectOrCreate?: InstallmentCreateOrConnectWithoutPaymentInput | InstallmentCreateOrConnectWithoutPaymentInput[]
+    createMany?: InstallmentCreateManyPaymentInputEnvelope
+    connect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
   }
 
   export type LegalCaseCreateNestedOneWithoutPaymentsInput = {
@@ -71806,12 +77699,45 @@ export namespace Prisma {
     connect?: LegalCaseWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutPaymentNestedInput = {
-    create?: XOR<UserCreateWithoutPaymentInput, UserUncheckedCreateWithoutPaymentInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPaymentInput
-    upsert?: UserUpsertWithoutPaymentInput
+  export type InstallmentUncheckedCreateNestedManyWithoutPaymentInput = {
+    create?: XOR<InstallmentCreateWithoutPaymentInput, InstallmentUncheckedCreateWithoutPaymentInput> | InstallmentCreateWithoutPaymentInput[] | InstallmentUncheckedCreateWithoutPaymentInput[]
+    connectOrCreate?: InstallmentCreateOrConnectWithoutPaymentInput | InstallmentCreateOrConnectWithoutPaymentInput[]
+    createMany?: InstallmentCreateManyPaymentInputEnvelope
+    connect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+  }
+
+  export type EnumPaymentMethodFieldUpdateOperationsInput = {
+    set?: $Enums.PaymentMethod
+  }
+
+  export type UserUpdateOneRequiredWithoutPaymentsNestedInput = {
+    create?: XOR<UserCreateWithoutPaymentsInput, UserUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPaymentsInput
+    upsert?: UserUpsertWithoutPaymentsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPaymentInput, UserUpdateWithoutPaymentInput>, UserUncheckedUpdateWithoutPaymentInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPaymentsInput, UserUpdateWithoutPaymentsInput>, UserUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type BranchUpdateOneRequiredWithoutPaymentsNestedInput = {
+    create?: XOR<BranchCreateWithoutPaymentsInput, BranchUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: BranchCreateOrConnectWithoutPaymentsInput
+    upsert?: BranchUpsertWithoutPaymentsInput
+    connect?: BranchWhereUniqueInput
+    update?: XOR<XOR<BranchUpdateToOneWithWhereWithoutPaymentsInput, BranchUpdateWithoutPaymentsInput>, BranchUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type InstallmentUpdateManyWithoutPaymentNestedInput = {
+    create?: XOR<InstallmentCreateWithoutPaymentInput, InstallmentUncheckedCreateWithoutPaymentInput> | InstallmentCreateWithoutPaymentInput[] | InstallmentUncheckedCreateWithoutPaymentInput[]
+    connectOrCreate?: InstallmentCreateOrConnectWithoutPaymentInput | InstallmentCreateOrConnectWithoutPaymentInput[]
+    upsert?: InstallmentUpsertWithWhereUniqueWithoutPaymentInput | InstallmentUpsertWithWhereUniqueWithoutPaymentInput[]
+    createMany?: InstallmentCreateManyPaymentInputEnvelope
+    set?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    disconnect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    delete?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    connect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    update?: InstallmentUpdateWithWhereUniqueWithoutPaymentInput | InstallmentUpdateWithWhereUniqueWithoutPaymentInput[]
+    updateMany?: InstallmentUpdateManyWithWhereWithoutPaymentInput | InstallmentUpdateManyWithWhereWithoutPaymentInput[]
+    deleteMany?: InstallmentScalarWhereInput | InstallmentScalarWhereInput[]
   }
 
   export type LegalCaseUpdateOneWithoutPaymentsNestedInput = {
@@ -71822,6 +77748,20 @@ export namespace Prisma {
     delete?: LegalCaseWhereInput | boolean
     connect?: LegalCaseWhereUniqueInput
     update?: XOR<XOR<LegalCaseUpdateToOneWithWhereWithoutPaymentsInput, LegalCaseUpdateWithoutPaymentsInput>, LegalCaseUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type InstallmentUncheckedUpdateManyWithoutPaymentNestedInput = {
+    create?: XOR<InstallmentCreateWithoutPaymentInput, InstallmentUncheckedCreateWithoutPaymentInput> | InstallmentCreateWithoutPaymentInput[] | InstallmentUncheckedCreateWithoutPaymentInput[]
+    connectOrCreate?: InstallmentCreateOrConnectWithoutPaymentInput | InstallmentCreateOrConnectWithoutPaymentInput[]
+    upsert?: InstallmentUpsertWithWhereUniqueWithoutPaymentInput | InstallmentUpsertWithWhereUniqueWithoutPaymentInput[]
+    createMany?: InstallmentCreateManyPaymentInputEnvelope
+    set?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    disconnect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    delete?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    connect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    update?: InstallmentUpdateWithWhereUniqueWithoutPaymentInput | InstallmentUpdateWithWhereUniqueWithoutPaymentInput[]
+    updateMany?: InstallmentUpdateManyWithWhereWithoutPaymentInput | InstallmentUpdateManyWithWhereWithoutPaymentInput[]
+    deleteMany?: InstallmentScalarWhereInput | InstallmentScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutReportInput = {
@@ -73544,6 +79484,258 @@ export namespace Prisma {
     deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
   }
 
+  export type UserCreateNestedOneWithoutInstallmentsInput = {
+    create?: XOR<UserCreateWithoutInstallmentsInput, UserUncheckedCreateWithoutInstallmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInstallmentsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PaymentCreateNestedOneWithoutInstallmentsInput = {
+    create?: XOR<PaymentCreateWithoutInstallmentsInput, PaymentUncheckedCreateWithoutInstallmentsInput>
+    connectOrCreate?: PaymentCreateOrConnectWithoutInstallmentsInput
+    connect?: PaymentWhereUniqueInput
+  }
+
+  export type BranchCreateNestedOneWithoutInstallmentsInput = {
+    create?: XOR<BranchCreateWithoutInstallmentsInput, BranchUncheckedCreateWithoutInstallmentsInput>
+    connectOrCreate?: BranchCreateOrConnectWithoutInstallmentsInput
+    connect?: BranchWhereUniqueInput
+  }
+
+  export type EnumInstallmentStatusFieldUpdateOperationsInput = {
+    set?: $Enums.InstallmentStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutInstallmentsNestedInput = {
+    create?: XOR<UserCreateWithoutInstallmentsInput, UserUncheckedCreateWithoutInstallmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInstallmentsInput
+    upsert?: UserUpsertWithoutInstallmentsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInstallmentsInput, UserUpdateWithoutInstallmentsInput>, UserUncheckedUpdateWithoutInstallmentsInput>
+  }
+
+  export type PaymentUpdateOneWithoutInstallmentsNestedInput = {
+    create?: XOR<PaymentCreateWithoutInstallmentsInput, PaymentUncheckedCreateWithoutInstallmentsInput>
+    connectOrCreate?: PaymentCreateOrConnectWithoutInstallmentsInput
+    upsert?: PaymentUpsertWithoutInstallmentsInput
+    disconnect?: PaymentWhereInput | boolean
+    delete?: PaymentWhereInput | boolean
+    connect?: PaymentWhereUniqueInput
+    update?: XOR<XOR<PaymentUpdateToOneWithWhereWithoutInstallmentsInput, PaymentUpdateWithoutInstallmentsInput>, PaymentUncheckedUpdateWithoutInstallmentsInput>
+  }
+
+  export type BranchUpdateOneRequiredWithoutInstallmentsNestedInput = {
+    create?: XOR<BranchCreateWithoutInstallmentsInput, BranchUncheckedCreateWithoutInstallmentsInput>
+    connectOrCreate?: BranchCreateOrConnectWithoutInstallmentsInput
+    upsert?: BranchUpsertWithoutInstallmentsInput
+    connect?: BranchWhereUniqueInput
+    update?: XOR<XOR<BranchUpdateToOneWithWhereWithoutInstallmentsInput, BranchUpdateWithoutInstallmentsInput>, BranchUncheckedUpdateWithoutInstallmentsInput>
+  }
+
+  export type BranchCreateNestedOneWithoutExpensesInput = {
+    create?: XOR<BranchCreateWithoutExpensesInput, BranchUncheckedCreateWithoutExpensesInput>
+    connectOrCreate?: BranchCreateOrConnectWithoutExpensesInput
+    connect?: BranchWhereUniqueInput
+  }
+
+  export type AdminCreateNestedOneWithoutExpensesInput = {
+    create?: XOR<AdminCreateWithoutExpensesInput, AdminUncheckedCreateWithoutExpensesInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutExpensesInput
+    connect?: AdminWhereUniqueInput
+  }
+
+  export type EnumExpenseTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ExpenseType
+  }
+
+  export type BranchUpdateOneRequiredWithoutExpensesNestedInput = {
+    create?: XOR<BranchCreateWithoutExpensesInput, BranchUncheckedCreateWithoutExpensesInput>
+    connectOrCreate?: BranchCreateOrConnectWithoutExpensesInput
+    upsert?: BranchUpsertWithoutExpensesInput
+    connect?: BranchWhereUniqueInput
+    update?: XOR<XOR<BranchUpdateToOneWithWhereWithoutExpensesInput, BranchUpdateWithoutExpensesInput>, BranchUncheckedUpdateWithoutExpensesInput>
+  }
+
+  export type AdminUpdateOneRequiredWithoutExpensesNestedInput = {
+    create?: XOR<AdminCreateWithoutExpensesInput, AdminUncheckedCreateWithoutExpensesInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutExpensesInput
+    upsert?: AdminUpsertWithoutExpensesInput
+    connect?: AdminWhereUniqueInput
+    update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutExpensesInput, AdminUpdateWithoutExpensesInput>, AdminUncheckedUpdateWithoutExpensesInput>
+  }
+
+  export type PaymentCreateNestedManyWithoutBranchInput = {
+    create?: XOR<PaymentCreateWithoutBranchInput, PaymentUncheckedCreateWithoutBranchInput> | PaymentCreateWithoutBranchInput[] | PaymentUncheckedCreateWithoutBranchInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutBranchInput | PaymentCreateOrConnectWithoutBranchInput[]
+    createMany?: PaymentCreateManyBranchInputEnvelope
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
+  export type InstallmentCreateNestedManyWithoutBranchInput = {
+    create?: XOR<InstallmentCreateWithoutBranchInput, InstallmentUncheckedCreateWithoutBranchInput> | InstallmentCreateWithoutBranchInput[] | InstallmentUncheckedCreateWithoutBranchInput[]
+    connectOrCreate?: InstallmentCreateOrConnectWithoutBranchInput | InstallmentCreateOrConnectWithoutBranchInput[]
+    createMany?: InstallmentCreateManyBranchInputEnvelope
+    connect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+  }
+
+  export type ExpenseCreateNestedManyWithoutBranchInput = {
+    create?: XOR<ExpenseCreateWithoutBranchInput, ExpenseUncheckedCreateWithoutBranchInput> | ExpenseCreateWithoutBranchInput[] | ExpenseUncheckedCreateWithoutBranchInput[]
+    connectOrCreate?: ExpenseCreateOrConnectWithoutBranchInput | ExpenseCreateOrConnectWithoutBranchInput[]
+    createMany?: ExpenseCreateManyBranchInputEnvelope
+    connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+  }
+
+  export type BranchFinanceCreateNestedOneWithoutBranchInput = {
+    create?: XOR<BranchFinanceCreateWithoutBranchInput, BranchFinanceUncheckedCreateWithoutBranchInput>
+    connectOrCreate?: BranchFinanceCreateOrConnectWithoutBranchInput
+    connect?: BranchFinanceWhereUniqueInput
+  }
+
+  export type PaymentUncheckedCreateNestedManyWithoutBranchInput = {
+    create?: XOR<PaymentCreateWithoutBranchInput, PaymentUncheckedCreateWithoutBranchInput> | PaymentCreateWithoutBranchInput[] | PaymentUncheckedCreateWithoutBranchInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutBranchInput | PaymentCreateOrConnectWithoutBranchInput[]
+    createMany?: PaymentCreateManyBranchInputEnvelope
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
+  export type InstallmentUncheckedCreateNestedManyWithoutBranchInput = {
+    create?: XOR<InstallmentCreateWithoutBranchInput, InstallmentUncheckedCreateWithoutBranchInput> | InstallmentCreateWithoutBranchInput[] | InstallmentUncheckedCreateWithoutBranchInput[]
+    connectOrCreate?: InstallmentCreateOrConnectWithoutBranchInput | InstallmentCreateOrConnectWithoutBranchInput[]
+    createMany?: InstallmentCreateManyBranchInputEnvelope
+    connect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+  }
+
+  export type ExpenseUncheckedCreateNestedManyWithoutBranchInput = {
+    create?: XOR<ExpenseCreateWithoutBranchInput, ExpenseUncheckedCreateWithoutBranchInput> | ExpenseCreateWithoutBranchInput[] | ExpenseUncheckedCreateWithoutBranchInput[]
+    connectOrCreate?: ExpenseCreateOrConnectWithoutBranchInput | ExpenseCreateOrConnectWithoutBranchInput[]
+    createMany?: ExpenseCreateManyBranchInputEnvelope
+    connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+  }
+
+  export type BranchFinanceUncheckedCreateNestedOneWithoutBranchInput = {
+    create?: XOR<BranchFinanceCreateWithoutBranchInput, BranchFinanceUncheckedCreateWithoutBranchInput>
+    connectOrCreate?: BranchFinanceCreateOrConnectWithoutBranchInput
+    connect?: BranchFinanceWhereUniqueInput
+  }
+
+  export type PaymentUpdateManyWithoutBranchNestedInput = {
+    create?: XOR<PaymentCreateWithoutBranchInput, PaymentUncheckedCreateWithoutBranchInput> | PaymentCreateWithoutBranchInput[] | PaymentUncheckedCreateWithoutBranchInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutBranchInput | PaymentCreateOrConnectWithoutBranchInput[]
+    upsert?: PaymentUpsertWithWhereUniqueWithoutBranchInput | PaymentUpsertWithWhereUniqueWithoutBranchInput[]
+    createMany?: PaymentCreateManyBranchInputEnvelope
+    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    update?: PaymentUpdateWithWhereUniqueWithoutBranchInput | PaymentUpdateWithWhereUniqueWithoutBranchInput[]
+    updateMany?: PaymentUpdateManyWithWhereWithoutBranchInput | PaymentUpdateManyWithWhereWithoutBranchInput[]
+    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+  }
+
+  export type InstallmentUpdateManyWithoutBranchNestedInput = {
+    create?: XOR<InstallmentCreateWithoutBranchInput, InstallmentUncheckedCreateWithoutBranchInput> | InstallmentCreateWithoutBranchInput[] | InstallmentUncheckedCreateWithoutBranchInput[]
+    connectOrCreate?: InstallmentCreateOrConnectWithoutBranchInput | InstallmentCreateOrConnectWithoutBranchInput[]
+    upsert?: InstallmentUpsertWithWhereUniqueWithoutBranchInput | InstallmentUpsertWithWhereUniqueWithoutBranchInput[]
+    createMany?: InstallmentCreateManyBranchInputEnvelope
+    set?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    disconnect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    delete?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    connect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    update?: InstallmentUpdateWithWhereUniqueWithoutBranchInput | InstallmentUpdateWithWhereUniqueWithoutBranchInput[]
+    updateMany?: InstallmentUpdateManyWithWhereWithoutBranchInput | InstallmentUpdateManyWithWhereWithoutBranchInput[]
+    deleteMany?: InstallmentScalarWhereInput | InstallmentScalarWhereInput[]
+  }
+
+  export type ExpenseUpdateManyWithoutBranchNestedInput = {
+    create?: XOR<ExpenseCreateWithoutBranchInput, ExpenseUncheckedCreateWithoutBranchInput> | ExpenseCreateWithoutBranchInput[] | ExpenseUncheckedCreateWithoutBranchInput[]
+    connectOrCreate?: ExpenseCreateOrConnectWithoutBranchInput | ExpenseCreateOrConnectWithoutBranchInput[]
+    upsert?: ExpenseUpsertWithWhereUniqueWithoutBranchInput | ExpenseUpsertWithWhereUniqueWithoutBranchInput[]
+    createMany?: ExpenseCreateManyBranchInputEnvelope
+    set?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    disconnect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    delete?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    update?: ExpenseUpdateWithWhereUniqueWithoutBranchInput | ExpenseUpdateWithWhereUniqueWithoutBranchInput[]
+    updateMany?: ExpenseUpdateManyWithWhereWithoutBranchInput | ExpenseUpdateManyWithWhereWithoutBranchInput[]
+    deleteMany?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
+  }
+
+  export type BranchFinanceUpdateOneWithoutBranchNestedInput = {
+    create?: XOR<BranchFinanceCreateWithoutBranchInput, BranchFinanceUncheckedCreateWithoutBranchInput>
+    connectOrCreate?: BranchFinanceCreateOrConnectWithoutBranchInput
+    upsert?: BranchFinanceUpsertWithoutBranchInput
+    disconnect?: BranchFinanceWhereInput | boolean
+    delete?: BranchFinanceWhereInput | boolean
+    connect?: BranchFinanceWhereUniqueInput
+    update?: XOR<XOR<BranchFinanceUpdateToOneWithWhereWithoutBranchInput, BranchFinanceUpdateWithoutBranchInput>, BranchFinanceUncheckedUpdateWithoutBranchInput>
+  }
+
+  export type PaymentUncheckedUpdateManyWithoutBranchNestedInput = {
+    create?: XOR<PaymentCreateWithoutBranchInput, PaymentUncheckedCreateWithoutBranchInput> | PaymentCreateWithoutBranchInput[] | PaymentUncheckedCreateWithoutBranchInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutBranchInput | PaymentCreateOrConnectWithoutBranchInput[]
+    upsert?: PaymentUpsertWithWhereUniqueWithoutBranchInput | PaymentUpsertWithWhereUniqueWithoutBranchInput[]
+    createMany?: PaymentCreateManyBranchInputEnvelope
+    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    update?: PaymentUpdateWithWhereUniqueWithoutBranchInput | PaymentUpdateWithWhereUniqueWithoutBranchInput[]
+    updateMany?: PaymentUpdateManyWithWhereWithoutBranchInput | PaymentUpdateManyWithWhereWithoutBranchInput[]
+    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+  }
+
+  export type InstallmentUncheckedUpdateManyWithoutBranchNestedInput = {
+    create?: XOR<InstallmentCreateWithoutBranchInput, InstallmentUncheckedCreateWithoutBranchInput> | InstallmentCreateWithoutBranchInput[] | InstallmentUncheckedCreateWithoutBranchInput[]
+    connectOrCreate?: InstallmentCreateOrConnectWithoutBranchInput | InstallmentCreateOrConnectWithoutBranchInput[]
+    upsert?: InstallmentUpsertWithWhereUniqueWithoutBranchInput | InstallmentUpsertWithWhereUniqueWithoutBranchInput[]
+    createMany?: InstallmentCreateManyBranchInputEnvelope
+    set?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    disconnect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    delete?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    connect?: InstallmentWhereUniqueInput | InstallmentWhereUniqueInput[]
+    update?: InstallmentUpdateWithWhereUniqueWithoutBranchInput | InstallmentUpdateWithWhereUniqueWithoutBranchInput[]
+    updateMany?: InstallmentUpdateManyWithWhereWithoutBranchInput | InstallmentUpdateManyWithWhereWithoutBranchInput[]
+    deleteMany?: InstallmentScalarWhereInput | InstallmentScalarWhereInput[]
+  }
+
+  export type ExpenseUncheckedUpdateManyWithoutBranchNestedInput = {
+    create?: XOR<ExpenseCreateWithoutBranchInput, ExpenseUncheckedCreateWithoutBranchInput> | ExpenseCreateWithoutBranchInput[] | ExpenseUncheckedCreateWithoutBranchInput[]
+    connectOrCreate?: ExpenseCreateOrConnectWithoutBranchInput | ExpenseCreateOrConnectWithoutBranchInput[]
+    upsert?: ExpenseUpsertWithWhereUniqueWithoutBranchInput | ExpenseUpsertWithWhereUniqueWithoutBranchInput[]
+    createMany?: ExpenseCreateManyBranchInputEnvelope
+    set?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    disconnect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    delete?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    update?: ExpenseUpdateWithWhereUniqueWithoutBranchInput | ExpenseUpdateWithWhereUniqueWithoutBranchInput[]
+    updateMany?: ExpenseUpdateManyWithWhereWithoutBranchInput | ExpenseUpdateManyWithWhereWithoutBranchInput[]
+    deleteMany?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
+  }
+
+  export type BranchFinanceUncheckedUpdateOneWithoutBranchNestedInput = {
+    create?: XOR<BranchFinanceCreateWithoutBranchInput, BranchFinanceUncheckedCreateWithoutBranchInput>
+    connectOrCreate?: BranchFinanceCreateOrConnectWithoutBranchInput
+    upsert?: BranchFinanceUpsertWithoutBranchInput
+    disconnect?: BranchFinanceWhereInput | boolean
+    delete?: BranchFinanceWhereInput | boolean
+    connect?: BranchFinanceWhereUniqueInput
+    update?: XOR<XOR<BranchFinanceUpdateToOneWithWhereWithoutBranchInput, BranchFinanceUpdateWithoutBranchInput>, BranchFinanceUncheckedUpdateWithoutBranchInput>
+  }
+
+  export type BranchCreateNestedOneWithoutFinanceInput = {
+    create?: XOR<BranchCreateWithoutFinanceInput, BranchUncheckedCreateWithoutFinanceInput>
+    connectOrCreate?: BranchCreateOrConnectWithoutFinanceInput
+    connect?: BranchWhereUniqueInput
+  }
+
+  export type BranchUpdateOneRequiredWithoutFinanceNestedInput = {
+    create?: XOR<BranchCreateWithoutFinanceInput, BranchUncheckedCreateWithoutFinanceInput>
+    connectOrCreate?: BranchCreateOrConnectWithoutFinanceInput
+    upsert?: BranchUpsertWithoutFinanceInput
+    connect?: BranchWhereUniqueInput
+    update?: XOR<XOR<BranchUpdateToOneWithWhereWithoutFinanceInput, BranchUpdateWithoutFinanceInput>, BranchUncheckedUpdateWithoutFinanceInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -73928,6 +80120,23 @@ export namespace Prisma {
     _max?: NestedEnumNotificationTypeFilter<$PrismaModel>
   }
 
+  export type NestedEnumPaymentMethodFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentMethodFilter<$PrismaModel> | $Enums.PaymentMethod
+  }
+
+  export type NestedEnumPaymentMethodWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentMethodWithAggregatesFilter<$PrismaModel> | $Enums.PaymentMethod
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentMethodFilter<$PrismaModel>
+    _max?: NestedEnumPaymentMethodFilter<$PrismaModel>
+  }
+
   export type NestedEnumAccountingTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.AccountingType | EnumAccountingTypeFieldRefInput<$PrismaModel>
     in?: $Enums.AccountingType[] | ListEnumAccountingTypeFieldRefInput<$PrismaModel>
@@ -74053,6 +80262,40 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumLegalCaseStatusFilter<$PrismaModel>
     _max?: NestedEnumLegalCaseStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumInstallmentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.InstallmentStatus | EnumInstallmentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InstallmentStatus[] | ListEnumInstallmentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InstallmentStatus[] | ListEnumInstallmentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInstallmentStatusFilter<$PrismaModel> | $Enums.InstallmentStatus
+  }
+
+  export type NestedEnumInstallmentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InstallmentStatus | EnumInstallmentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InstallmentStatus[] | ListEnumInstallmentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InstallmentStatus[] | ListEnumInstallmentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInstallmentStatusWithAggregatesFilter<$PrismaModel> | $Enums.InstallmentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInstallmentStatusFilter<$PrismaModel>
+    _max?: NestedEnumInstallmentStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumExpenseTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExpenseType | EnumExpenseTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ExpenseType[] | ListEnumExpenseTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ExpenseType[] | ListEnumExpenseTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumExpenseTypeFilter<$PrismaModel> | $Enums.ExpenseType
+  }
+
+  export type NestedEnumExpenseTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExpenseType | EnumExpenseTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ExpenseType[] | ListEnumExpenseTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ExpenseType[] | ListEnumExpenseTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumExpenseTypeWithAggregatesFilter<$PrismaModel> | $Enums.ExpenseType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumExpenseTypeFilter<$PrismaModel>
+    _max?: NestedEnumExpenseTypeFilter<$PrismaModel>
   }
 
   export type AcademyCreateWithoutUsersInput = {
@@ -74407,6 +80650,72 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PaymentCreateWithoutUserInput = {
+    id?: string
+    amount: number
+    method: $Enums.PaymentMethod
+    paidAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branch: BranchCreateNestedOneWithoutPaymentsInput
+    installments?: InstallmentCreateNestedManyWithoutPaymentInput
+    legalCase?: LegalCaseCreateNestedOneWithoutPaymentsInput
+  }
+
+  export type PaymentUncheckedCreateWithoutUserInput = {
+    id?: string
+    amount: number
+    method: $Enums.PaymentMethod
+    paidAt?: Date | string
+    branchId: string
+    legalCaseId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    installments?: InstallmentUncheckedCreateNestedManyWithoutPaymentInput
+  }
+
+  export type PaymentCreateOrConnectWithoutUserInput = {
+    where: PaymentWhereUniqueInput
+    create: XOR<PaymentCreateWithoutUserInput, PaymentUncheckedCreateWithoutUserInput>
+  }
+
+  export type PaymentCreateManyUserInputEnvelope = {
+    data: PaymentCreateManyUserInput | PaymentCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InstallmentCreateWithoutUserInput = {
+    id?: string
+    amount: number
+    dueDate: Date | string
+    status?: $Enums.InstallmentStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payment?: PaymentCreateNestedOneWithoutInstallmentsInput
+    branch: BranchCreateNestedOneWithoutInstallmentsInput
+  }
+
+  export type InstallmentUncheckedCreateWithoutUserInput = {
+    id?: string
+    amount: number
+    dueDate: Date | string
+    status?: $Enums.InstallmentStatus
+    paymentId?: string | null
+    branchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstallmentCreateOrConnectWithoutUserInput = {
+    where: InstallmentWhereUniqueInput
+    create: XOR<InstallmentCreateWithoutUserInput, InstallmentUncheckedCreateWithoutUserInput>
+  }
+
+  export type InstallmentCreateManyUserInputEnvelope = {
+    data: InstallmentCreateManyUserInput | InstallmentCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type InstructorCreateWithoutUserInput = {
     id?: string
     academy: AcademyCreateNestedOneWithoutInstructorsInput
@@ -74461,6 +80770,7 @@ export namespace Prisma {
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
@@ -74474,6 +80784,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
@@ -74516,30 +80827,6 @@ export namespace Prisma {
   export type LessonCreateOrConnectWithoutCompletedByInput = {
     where: LessonWhereUniqueInput
     create: XOR<LessonCreateWithoutCompletedByInput, LessonUncheckedCreateWithoutCompletedByInput>
-  }
-
-  export type PaymentCreateWithoutUserInput = {
-    id?: string
-    amount: number
-    createdAt?: Date | string
-    legalCase?: LegalCaseCreateNestedOneWithoutPaymentsInput
-  }
-
-  export type PaymentUncheckedCreateWithoutUserInput = {
-    id?: string
-    amount: number
-    legalCaseId?: string | null
-    createdAt?: Date | string
-  }
-
-  export type PaymentCreateOrConnectWithoutUserInput = {
-    where: PaymentWhereUniqueInput
-    create: XOR<PaymentCreateWithoutUserInput, PaymentUncheckedCreateWithoutUserInput>
-  }
-
-  export type PaymentCreateManyUserInputEnvelope = {
-    data: PaymentCreateManyUserInput | PaymentCreateManyUserInput[]
-    skipDuplicates?: boolean
   }
 
   export type ReportCreateWithoutUserInput = {
@@ -75345,6 +81632,68 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Attendance"> | Date | string
   }
 
+  export type PaymentUpsertWithWhereUniqueWithoutUserInput = {
+    where: PaymentWhereUniqueInput
+    update: XOR<PaymentUpdateWithoutUserInput, PaymentUncheckedUpdateWithoutUserInput>
+    create: XOR<PaymentCreateWithoutUserInput, PaymentUncheckedCreateWithoutUserInput>
+  }
+
+  export type PaymentUpdateWithWhereUniqueWithoutUserInput = {
+    where: PaymentWhereUniqueInput
+    data: XOR<PaymentUpdateWithoutUserInput, PaymentUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PaymentUpdateManyWithWhereWithoutUserInput = {
+    where: PaymentScalarWhereInput
+    data: XOR<PaymentUpdateManyMutationInput, PaymentUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type PaymentScalarWhereInput = {
+    AND?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+    OR?: PaymentScalarWhereInput[]
+    NOT?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+    id?: StringFilter<"Payment"> | string
+    userId?: StringFilter<"Payment"> | string
+    amount?: FloatFilter<"Payment"> | number
+    method?: EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
+    paidAt?: DateTimeFilter<"Payment"> | Date | string
+    branchId?: StringFilter<"Payment"> | string
+    legalCaseId?: StringNullableFilter<"Payment"> | string | null
+    createdAt?: DateTimeFilter<"Payment"> | Date | string
+    updatedAt?: DateTimeFilter<"Payment"> | Date | string
+  }
+
+  export type InstallmentUpsertWithWhereUniqueWithoutUserInput = {
+    where: InstallmentWhereUniqueInput
+    update: XOR<InstallmentUpdateWithoutUserInput, InstallmentUncheckedUpdateWithoutUserInput>
+    create: XOR<InstallmentCreateWithoutUserInput, InstallmentUncheckedCreateWithoutUserInput>
+  }
+
+  export type InstallmentUpdateWithWhereUniqueWithoutUserInput = {
+    where: InstallmentWhereUniqueInput
+    data: XOR<InstallmentUpdateWithoutUserInput, InstallmentUncheckedUpdateWithoutUserInput>
+  }
+
+  export type InstallmentUpdateManyWithWhereWithoutUserInput = {
+    where: InstallmentScalarWhereInput
+    data: XOR<InstallmentUpdateManyMutationInput, InstallmentUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type InstallmentScalarWhereInput = {
+    AND?: InstallmentScalarWhereInput | InstallmentScalarWhereInput[]
+    OR?: InstallmentScalarWhereInput[]
+    NOT?: InstallmentScalarWhereInput | InstallmentScalarWhereInput[]
+    id?: StringFilter<"Installment"> | string
+    userId?: StringFilter<"Installment"> | string
+    amount?: FloatFilter<"Installment"> | number
+    dueDate?: DateTimeFilter<"Installment"> | Date | string
+    status?: EnumInstallmentStatusFilter<"Installment"> | $Enums.InstallmentStatus
+    paymentId?: StringNullableFilter<"Installment"> | string | null
+    branchId?: StringFilter<"Installment"> | string
+    createdAt?: DateTimeFilter<"Installment"> | Date | string
+    updatedAt?: DateTimeFilter<"Installment"> | Date | string
+  }
+
   export type InstructorUpsertWithWhereUniqueWithoutUserInput = {
     where: InstructorWhereUniqueInput
     update: XOR<InstructorUpdateWithoutUserInput, InstructorUncheckedUpdateWithoutUserInput>
@@ -75447,33 +81796,6 @@ export namespace Prisma {
     status?: EnumLessonStatusFilter<"Lesson"> | $Enums.LessonStatus
     createdAt?: DateTimeFilter<"Lesson"> | Date | string
     updatedAt?: DateTimeFilter<"Lesson"> | Date | string
-  }
-
-  export type PaymentUpsertWithWhereUniqueWithoutUserInput = {
-    where: PaymentWhereUniqueInput
-    update: XOR<PaymentUpdateWithoutUserInput, PaymentUncheckedUpdateWithoutUserInput>
-    create: XOR<PaymentCreateWithoutUserInput, PaymentUncheckedCreateWithoutUserInput>
-  }
-
-  export type PaymentUpdateWithWhereUniqueWithoutUserInput = {
-    where: PaymentWhereUniqueInput
-    data: XOR<PaymentUpdateWithoutUserInput, PaymentUncheckedUpdateWithoutUserInput>
-  }
-
-  export type PaymentUpdateManyWithWhereWithoutUserInput = {
-    where: PaymentScalarWhereInput
-    data: XOR<PaymentUpdateManyMutationInput, PaymentUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type PaymentScalarWhereInput = {
-    AND?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
-    OR?: PaymentScalarWhereInput[]
-    NOT?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
-    id?: StringFilter<"Payment"> | string
-    userId?: StringFilter<"Payment"> | string
-    amount?: FloatFilter<"Payment"> | number
-    legalCaseId?: StringNullableFilter<"Payment"> | string | null
-    createdAt?: DateTimeFilter<"Payment"> | Date | string
   }
 
   export type ReportUpsertWithWhereUniqueWithoutUserInput = {
@@ -75911,11 +82233,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -75957,11 +82280,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -76019,11 +82343,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -76065,11 +82390,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -76111,11 +82437,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -76157,11 +82484,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -76219,11 +82547,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -76265,11 +82594,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -76310,11 +82640,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -76356,11 +82687,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -76418,11 +82750,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -76464,11 +82797,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -76511,11 +82845,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -76557,11 +82892,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -76660,11 +82996,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -76706,11 +83043,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -76798,11 +83136,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -76844,11 +83183,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -77437,10 +83777,11 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -77483,10 +83824,11 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -77625,10 +83967,11 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -77671,10 +84014,11 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -78242,11 +84586,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -78288,11 +84633,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -78598,10 +84944,11 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -78644,10 +84991,11 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -79308,11 +85656,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -79354,11 +85703,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -79455,11 +85805,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -79501,11 +85852,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -80015,11 +86367,12 @@ export namespace Prisma {
     channels?: ChannelCreateNestedManyWithoutMembersInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -80061,11 +86414,12 @@ export namespace Prisma {
     channels?: ChannelUncheckedCreateNestedManyWithoutMembersInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -80158,11 +86512,12 @@ export namespace Prisma {
     channels?: ChannelUpdateManyWithoutMembersNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -80204,11 +86559,12 @@ export namespace Prisma {
     channels?: ChannelUncheckedUpdateManyWithoutMembersNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -80291,11 +86647,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -80337,11 +86694,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -80399,11 +86757,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -80445,11 +86804,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -80491,11 +86851,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -80537,11 +86898,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -80599,11 +86961,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -80645,11 +87008,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -80692,11 +87056,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -80738,11 +87103,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -80800,11 +87166,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -80846,11 +87213,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -80891,11 +87259,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -80937,11 +87306,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -81028,11 +87398,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -81074,11 +87445,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -81136,11 +87508,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -81182,11 +87555,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -81393,11 +87767,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -81439,11 +87814,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -81681,11 +88057,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -81727,11 +88104,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -81793,6 +88171,7 @@ export namespace Prisma {
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
@@ -81806,6 +88185,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
@@ -81906,6 +88286,7 @@ export namespace Prisma {
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
@@ -81919,6 +88300,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
@@ -81965,10 +88347,11 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -82011,10 +88394,11 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -82289,6 +88673,38 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ExpenseCreateWithoutCreatedByAdminInput = {
+    id?: string
+    type: $Enums.ExpenseType
+    amount: number
+    description?: string | null
+    paidAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branch: BranchCreateNestedOneWithoutExpensesInput
+  }
+
+  export type ExpenseUncheckedCreateWithoutCreatedByAdminInput = {
+    id?: string
+    type: $Enums.ExpenseType
+    amount: number
+    description?: string | null
+    paidAt?: Date | string
+    branchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExpenseCreateOrConnectWithoutCreatedByAdminInput = {
+    where: ExpenseWhereUniqueInput
+    create: XOR<ExpenseCreateWithoutCreatedByAdminInput, ExpenseUncheckedCreateWithoutCreatedByAdminInput>
+  }
+
+  export type ExpenseCreateManyCreatedByAdminInputEnvelope = {
+    data: ExpenseCreateManyCreatedByAdminInput | ExpenseCreateManyCreatedByAdminInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AdminRoleCreateWithoutAdminInput = {
     id?: string
     name: $Enums.AdminRoleType
@@ -82365,10 +88781,11 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -82411,10 +88828,11 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -82567,6 +88985,37 @@ export namespace Prisma {
     data: XOR<LegalCaseUpdateManyMutationInput, LegalCaseUncheckedUpdateManyWithoutAssignedLawyerInput>
   }
 
+  export type ExpenseUpsertWithWhereUniqueWithoutCreatedByAdminInput = {
+    where: ExpenseWhereUniqueInput
+    update: XOR<ExpenseUpdateWithoutCreatedByAdminInput, ExpenseUncheckedUpdateWithoutCreatedByAdminInput>
+    create: XOR<ExpenseCreateWithoutCreatedByAdminInput, ExpenseUncheckedCreateWithoutCreatedByAdminInput>
+  }
+
+  export type ExpenseUpdateWithWhereUniqueWithoutCreatedByAdminInput = {
+    where: ExpenseWhereUniqueInput
+    data: XOR<ExpenseUpdateWithoutCreatedByAdminInput, ExpenseUncheckedUpdateWithoutCreatedByAdminInput>
+  }
+
+  export type ExpenseUpdateManyWithWhereWithoutCreatedByAdminInput = {
+    where: ExpenseScalarWhereInput
+    data: XOR<ExpenseUpdateManyMutationInput, ExpenseUncheckedUpdateManyWithoutCreatedByAdminInput>
+  }
+
+  export type ExpenseScalarWhereInput = {
+    AND?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
+    OR?: ExpenseScalarWhereInput[]
+    NOT?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
+    id?: StringFilter<"Expense"> | string
+    type?: EnumExpenseTypeFilter<"Expense"> | $Enums.ExpenseType
+    amount?: FloatFilter<"Expense"> | number
+    description?: StringNullableFilter<"Expense"> | string | null
+    paidAt?: DateTimeFilter<"Expense"> | Date | string
+    branchId?: StringFilter<"Expense"> | string
+    createdBy?: StringFilter<"Expense"> | string
+    createdAt?: DateTimeFilter<"Expense"> | Date | string
+    updatedAt?: DateTimeFilter<"Expense"> | Date | string
+  }
+
   export type AdminRoleUpsertWithWhereUniqueWithoutAdminInput = {
     where: AdminRoleWhereUniqueInput
     update: XOR<AdminRoleUpdateWithoutAdminInput, AdminRoleUncheckedUpdateWithoutAdminInput>
@@ -82621,11 +89070,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -82667,11 +89117,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -83128,10 +89579,11 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -83174,10 +89626,11 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -83270,10 +89723,11 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -83316,10 +89770,11 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -83377,11 +89832,12 @@ export namespace Prisma {
     channels?: ChannelCreateNestedManyWithoutMembersInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -83423,11 +89879,12 @@ export namespace Prisma {
     channels?: ChannelUncheckedCreateNestedManyWithoutMembersInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -83485,11 +89942,12 @@ export namespace Prisma {
     channels?: ChannelUpdateManyWithoutMembersNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -83531,11 +89989,12 @@ export namespace Prisma {
     channels?: ChannelUncheckedUpdateManyWithoutMembersNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -83905,11 +90364,12 @@ export namespace Prisma {
     channels?: ChannelCreateNestedManyWithoutMembersInput
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -83951,11 +90411,12 @@ export namespace Prisma {
     channels?: ChannelUncheckedCreateNestedManyWithoutMembersInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -84044,11 +90505,12 @@ export namespace Prisma {
     channels?: ChannelUpdateManyWithoutMembersNestedInput
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -84090,11 +90552,12 @@ export namespace Prisma {
     channels?: ChannelUncheckedUpdateManyWithoutMembersNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -84147,7 +90610,7 @@ export namespace Prisma {
     completedBy?: UserUncheckedUpdateManyWithoutLessonNestedInput
   }
 
-  export type UserCreateWithoutPaymentInput = {
+  export type UserCreateWithoutPaymentsInput = {
     id?: string
     email: string
     password: string
@@ -84174,6 +90637,7 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
@@ -84193,7 +90657,7 @@ export namespace Prisma {
     LegalCase?: LegalCaseCreateNestedManyWithoutRelatedUserInput
   }
 
-  export type UserUncheckedCreateWithoutPaymentInput = {
+  export type UserUncheckedCreateWithoutPaymentsInput = {
     id?: string
     email: string
     password: string
@@ -84220,6 +90684,7 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
@@ -84239,9 +90704,72 @@ export namespace Prisma {
     LegalCase?: LegalCaseUncheckedCreateNestedManyWithoutRelatedUserInput
   }
 
-  export type UserCreateOrConnectWithoutPaymentInput = {
+  export type UserCreateOrConnectWithoutPaymentsInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutPaymentInput, UserUncheckedCreateWithoutPaymentInput>
+    create: XOR<UserCreateWithoutPaymentsInput, UserUncheckedCreateWithoutPaymentsInput>
+  }
+
+  export type BranchCreateWithoutPaymentsInput = {
+    id?: string
+    name: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    installments?: InstallmentCreateNestedManyWithoutBranchInput
+    expenses?: ExpenseCreateNestedManyWithoutBranchInput
+    finance?: BranchFinanceCreateNestedOneWithoutBranchInput
+  }
+
+  export type BranchUncheckedCreateWithoutPaymentsInput = {
+    id?: string
+    name: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    installments?: InstallmentUncheckedCreateNestedManyWithoutBranchInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutBranchInput
+    finance?: BranchFinanceUncheckedCreateNestedOneWithoutBranchInput
+  }
+
+  export type BranchCreateOrConnectWithoutPaymentsInput = {
+    where: BranchWhereUniqueInput
+    create: XOR<BranchCreateWithoutPaymentsInput, BranchUncheckedCreateWithoutPaymentsInput>
+  }
+
+  export type InstallmentCreateWithoutPaymentInput = {
+    id?: string
+    amount: number
+    dueDate: Date | string
+    status?: $Enums.InstallmentStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutInstallmentsInput
+    branch: BranchCreateNestedOneWithoutInstallmentsInput
+  }
+
+  export type InstallmentUncheckedCreateWithoutPaymentInput = {
+    id?: string
+    userId: string
+    amount: number
+    dueDate: Date | string
+    status?: $Enums.InstallmentStatus
+    branchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstallmentCreateOrConnectWithoutPaymentInput = {
+    where: InstallmentWhereUniqueInput
+    create: XOR<InstallmentCreateWithoutPaymentInput, InstallmentUncheckedCreateWithoutPaymentInput>
+  }
+
+  export type InstallmentCreateManyPaymentInputEnvelope = {
+    data: InstallmentCreateManyPaymentInput | InstallmentCreateManyPaymentInput[]
+    skipDuplicates?: boolean
   }
 
   export type LegalCaseCreateWithoutPaymentsInput = {
@@ -84285,18 +90813,18 @@ export namespace Prisma {
     create: XOR<LegalCaseCreateWithoutPaymentsInput, LegalCaseUncheckedCreateWithoutPaymentsInput>
   }
 
-  export type UserUpsertWithoutPaymentInput = {
-    update: XOR<UserUpdateWithoutPaymentInput, UserUncheckedUpdateWithoutPaymentInput>
-    create: XOR<UserCreateWithoutPaymentInput, UserUncheckedCreateWithoutPaymentInput>
+  export type UserUpsertWithoutPaymentsInput = {
+    update: XOR<UserUpdateWithoutPaymentsInput, UserUncheckedUpdateWithoutPaymentsInput>
+    create: XOR<UserCreateWithoutPaymentsInput, UserUncheckedCreateWithoutPaymentsInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutPaymentInput = {
+  export type UserUpdateToOneWithWhereWithoutPaymentsInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutPaymentInput, UserUncheckedUpdateWithoutPaymentInput>
+    data: XOR<UserUpdateWithoutPaymentsInput, UserUncheckedUpdateWithoutPaymentsInput>
   }
 
-  export type UserUpdateWithoutPaymentInput = {
+  export type UserUpdateWithoutPaymentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
@@ -84323,6 +90851,7 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
@@ -84342,7 +90871,7 @@ export namespace Prisma {
     LegalCase?: LegalCaseUpdateManyWithoutRelatedUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutPaymentInput = {
+  export type UserUncheckedUpdateWithoutPaymentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
@@ -84369,6 +90898,7 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
@@ -84386,6 +90916,59 @@ export namespace Prisma {
     SalaryPayment?: SalaryPaymentUncheckedUpdateManyWithoutEmployeeNestedInput
     MeetingParticipant?: MeetingParticipantUncheckedUpdateManyWithoutUserNestedInput
     LegalCase?: LegalCaseUncheckedUpdateManyWithoutRelatedUserNestedInput
+  }
+
+  export type BranchUpsertWithoutPaymentsInput = {
+    update: XOR<BranchUpdateWithoutPaymentsInput, BranchUncheckedUpdateWithoutPaymentsInput>
+    create: XOR<BranchCreateWithoutPaymentsInput, BranchUncheckedCreateWithoutPaymentsInput>
+    where?: BranchWhereInput
+  }
+
+  export type BranchUpdateToOneWithWhereWithoutPaymentsInput = {
+    where?: BranchWhereInput
+    data: XOR<BranchUpdateWithoutPaymentsInput, BranchUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type BranchUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    installments?: InstallmentUpdateManyWithoutBranchNestedInput
+    expenses?: ExpenseUpdateManyWithoutBranchNestedInput
+    finance?: BranchFinanceUpdateOneWithoutBranchNestedInput
+  }
+
+  export type BranchUncheckedUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    installments?: InstallmentUncheckedUpdateManyWithoutBranchNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+    finance?: BranchFinanceUncheckedUpdateOneWithoutBranchNestedInput
+  }
+
+  export type InstallmentUpsertWithWhereUniqueWithoutPaymentInput = {
+    where: InstallmentWhereUniqueInput
+    update: XOR<InstallmentUpdateWithoutPaymentInput, InstallmentUncheckedUpdateWithoutPaymentInput>
+    create: XOR<InstallmentCreateWithoutPaymentInput, InstallmentUncheckedCreateWithoutPaymentInput>
+  }
+
+  export type InstallmentUpdateWithWhereUniqueWithoutPaymentInput = {
+    where: InstallmentWhereUniqueInput
+    data: XOR<InstallmentUpdateWithoutPaymentInput, InstallmentUncheckedUpdateWithoutPaymentInput>
+  }
+
+  export type InstallmentUpdateManyWithWhereWithoutPaymentInput = {
+    where: InstallmentScalarWhereInput
+    data: XOR<InstallmentUpdateManyMutationInput, InstallmentUncheckedUpdateManyWithoutPaymentInput>
   }
 
   export type LegalCaseUpsertWithoutPaymentsInput = {
@@ -84462,11 +91045,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
@@ -84508,11 +91092,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
@@ -84714,11 +91299,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
@@ -84760,11 +91346,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
@@ -84974,11 +91561,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
@@ -85020,11 +91608,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
@@ -85082,11 +91671,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
@@ -85128,11 +91718,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
@@ -85174,11 +91765,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Community?: CommunityCreateNestedManyWithoutParticipantsInput
@@ -85220,11 +91812,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
@@ -85282,11 +91875,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Community?: CommunityUpdateManyWithoutParticipantsNestedInput
@@ -85328,11 +91922,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
@@ -85443,11 +92038,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -85489,11 +92085,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -85866,11 +92463,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -85912,11 +92510,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -86091,6 +92690,7 @@ export namespace Prisma {
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
@@ -86104,6 +92704,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
@@ -86290,6 +92891,7 @@ export namespace Prisma {
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
@@ -86303,6 +92905,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
@@ -86552,11 +93155,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -86598,11 +93202,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -86695,11 +93300,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -86741,11 +93347,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -86811,6 +93418,7 @@ export namespace Prisma {
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
@@ -86824,6 +93432,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
@@ -87060,6 +93669,7 @@ export namespace Prisma {
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
@@ -87073,6 +93683,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
@@ -87250,6 +93861,7 @@ export namespace Prisma {
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
@@ -87263,6 +93875,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
@@ -87335,6 +93948,7 @@ export namespace Prisma {
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
@@ -87348,6 +93962,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
@@ -87361,6 +93976,7 @@ export namespace Prisma {
     prResponses?: PRResponseCreateNestedManyWithoutRespondedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
@@ -87374,6 +93990,7 @@ export namespace Prisma {
     prResponses?: PRResponseUncheckedCreateNestedManyWithoutRespondedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
@@ -87568,6 +94185,7 @@ export namespace Prisma {
     prResponses?: PRResponseUpdateManyWithoutRespondedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
@@ -87581,6 +94199,7 @@ export namespace Prisma {
     prResponses?: PRResponseUncheckedUpdateManyWithoutRespondedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
@@ -87757,11 +94376,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -87803,11 +94423,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -87906,11 +94527,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -87952,11 +94574,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -88031,6 +94654,7 @@ export namespace Prisma {
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseCreateNestedManyWithoutCreatedByAdminInput
   }
 
   export type AdminUncheckedCreateWithoutAdminRoleInput = {
@@ -88044,6 +94668,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutCreatedByAdminInput
   }
 
   export type AdminCreateOrConnectWithoutAdminRoleInput = {
@@ -88258,6 +94883,7 @@ export namespace Prisma {
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUpdateManyWithoutCreatedByAdminNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutAdminRoleInput = {
@@ -88271,6 +94897,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutCreatedByAdminNestedInput
   }
 
   export type AdminAssignmentUpsertWithWhereUniqueWithoutRoleInput = {
@@ -88390,6 +95017,7 @@ export namespace Prisma {
     prResponses?: PRResponseCreateNestedManyWithoutRespondedByAdminInput
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
@@ -88403,6 +95031,7 @@ export namespace Prisma {
     prResponses?: PRResponseUncheckedCreateNestedManyWithoutRespondedByAdminInput
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
@@ -88465,6 +95094,7 @@ export namespace Prisma {
     prResponses?: PRResponseUpdateManyWithoutRespondedByAdminNestedInput
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
@@ -88478,6 +95108,7 @@ export namespace Prisma {
     prResponses?: PRResponseUncheckedUpdateManyWithoutRespondedByAdminNestedInput
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
@@ -88530,6 +95161,7 @@ export namespace Prisma {
     prResponses?: PRResponseCreateNestedManyWithoutRespondedByAdminInput
     meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
+    expenses?: ExpenseCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
   }
 
@@ -88543,6 +95175,7 @@ export namespace Prisma {
     prResponses?: PRResponseUncheckedCreateNestedManyWithoutRespondedByAdminInput
     meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
     assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutCreatedByAdminInput
     AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
   }
 
@@ -88619,11 +95252,12 @@ export namespace Prisma {
     bookmarks?: BookmarkCreateNestedManyWithoutUserInput
     Submission?: SubmissionCreateNestedManyWithoutUserInput
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    installments?: InstallmentCreateNestedManyWithoutUserInput
     Instructor?: InstructorCreateNestedManyWithoutUserInput
     Owner?: OwnerCreateNestedManyWithoutUserInput
     Admin?: AdminCreateNestedManyWithoutUserInput
     Lesson?: LessonCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentCreateNestedManyWithoutUserInput
     Report?: ReportCreateNestedManyWithoutUserInput
     Badge?: BadgeCreateNestedManyWithoutUserInput
     Certificate?: CertificateCreateNestedManyWithoutUserInput
@@ -88665,11 +95299,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
     Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutUserInput
     Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
     Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
     Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
     Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
-    Payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     Report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
     Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
@@ -88826,15 +95461,25 @@ export namespace Prisma {
   export type PaymentCreateWithoutLegalCaseInput = {
     id?: string
     amount: number
+    method: $Enums.PaymentMethod
+    paidAt?: Date | string
     createdAt?: Date | string
-    user: UserCreateNestedOneWithoutPaymentInput
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPaymentsInput
+    branch: BranchCreateNestedOneWithoutPaymentsInput
+    installments?: InstallmentCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentUncheckedCreateWithoutLegalCaseInput = {
     id?: string
     userId: string
     amount: number
+    method: $Enums.PaymentMethod
+    paidAt?: Date | string
+    branchId: string
     createdAt?: Date | string
+    updatedAt?: Date | string
+    installments?: InstallmentUncheckedCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentCreateOrConnectWithoutLegalCaseInput = {
@@ -88868,6 +95513,7 @@ export namespace Prisma {
     prResponses?: PRResponseUpdateManyWithoutRespondedByAdminNestedInput
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
+    expenses?: ExpenseUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
@@ -88881,6 +95527,7 @@ export namespace Prisma {
     prResponses?: PRResponseUncheckedUpdateManyWithoutRespondedByAdminNestedInput
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
@@ -88969,11 +95616,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -89015,11 +95663,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -89114,6 +95763,752 @@ export namespace Prisma {
     data: XOR<PaymentUpdateManyMutationInput, PaymentUncheckedUpdateManyWithoutLegalCaseInput>
   }
 
+  export type UserCreateWithoutInstallmentsInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
+    academy?: AcademyCreateNestedOneWithoutUsersInput
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    groups?: GroupCreateNestedManyWithoutMembersInput
+    channels?: ChannelCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkCreateNestedManyWithoutUserInput
+    Submission?: SubmissionCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    Instructor?: InstructorCreateNestedManyWithoutUserInput
+    Owner?: OwnerCreateNestedManyWithoutUserInput
+    Admin?: AdminCreateNestedManyWithoutUserInput
+    Lesson?: LessonCreateNestedManyWithoutCompletedByInput
+    Report?: ReportCreateNestedManyWithoutUserInput
+    Badge?: BadgeCreateNestedManyWithoutUserInput
+    Certificate?: CertificateCreateNestedManyWithoutUserInput
+    Community?: CommunityCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsCreateNestedManyWithoutUserInput
+    Path?: PathCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOCreateNestedManyWithoutUserInput
+    SalaryPayment?: SalaryPaymentCreateNestedManyWithoutEmployeeInput
+    MeetingParticipant?: MeetingParticipantCreateNestedManyWithoutUserInput
+    LegalCase?: LegalCaseCreateNestedManyWithoutRelatedUserInput
+  }
+
+  export type UserUncheckedCreateWithoutInstallmentsInput = {
+    id?: string
+    email: string
+    password: string
+    phone?: string | null
+    firstName: string
+    lastName: string
+    role?: $Enums.UserRole
+    subRole?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academyId?: string | null
+    isOnline?: boolean
+    isVerified?: boolean
+    age?: number | null
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    groups?: GroupUncheckedCreateNestedManyWithoutMembersInput
+    channels?: ChannelUncheckedCreateNestedManyWithoutMembersInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
+    Submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
+    Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
+    Owner?: OwnerUncheckedCreateNestedManyWithoutUserInput
+    Admin?: AdminUncheckedCreateNestedManyWithoutUserInput
+    Lesson?: LessonUncheckedCreateNestedManyWithoutCompletedByInput
+    Report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Badge?: BadgeUncheckedCreateNestedManyWithoutUserInput
+    Certificate?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    Community?: CommunityUncheckedCreateNestedManyWithoutParticipantsInput
+    LiveRoom?: LiveRoomUncheckedCreateNestedManyWithoutUserInput
+    NotificationSettings?: NotificationSettingsUncheckedCreateNestedManyWithoutUserInput
+    Path?: PathUncheckedCreateNestedManyWithoutPeersInput
+    LoginHistory?: LoginHistoryUncheckedCreateNestedManyWithoutUserInput
+    TwoFactor?: TwoFactorUncheckedCreateNestedManyWithoutUserInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedCreateNestedManyWithoutUserInput
+    SalaryPayment?: SalaryPaymentUncheckedCreateNestedManyWithoutEmployeeInput
+    MeetingParticipant?: MeetingParticipantUncheckedCreateNestedManyWithoutUserInput
+    LegalCase?: LegalCaseUncheckedCreateNestedManyWithoutRelatedUserInput
+  }
+
+  export type UserCreateOrConnectWithoutInstallmentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutInstallmentsInput, UserUncheckedCreateWithoutInstallmentsInput>
+  }
+
+  export type PaymentCreateWithoutInstallmentsInput = {
+    id?: string
+    amount: number
+    method: $Enums.PaymentMethod
+    paidAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPaymentsInput
+    branch: BranchCreateNestedOneWithoutPaymentsInput
+    legalCase?: LegalCaseCreateNestedOneWithoutPaymentsInput
+  }
+
+  export type PaymentUncheckedCreateWithoutInstallmentsInput = {
+    id?: string
+    userId: string
+    amount: number
+    method: $Enums.PaymentMethod
+    paidAt?: Date | string
+    branchId: string
+    legalCaseId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PaymentCreateOrConnectWithoutInstallmentsInput = {
+    where: PaymentWhereUniqueInput
+    create: XOR<PaymentCreateWithoutInstallmentsInput, PaymentUncheckedCreateWithoutInstallmentsInput>
+  }
+
+  export type BranchCreateWithoutInstallmentsInput = {
+    id?: string
+    name: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payments?: PaymentCreateNestedManyWithoutBranchInput
+    expenses?: ExpenseCreateNestedManyWithoutBranchInput
+    finance?: BranchFinanceCreateNestedOneWithoutBranchInput
+  }
+
+  export type BranchUncheckedCreateWithoutInstallmentsInput = {
+    id?: string
+    name: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payments?: PaymentUncheckedCreateNestedManyWithoutBranchInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutBranchInput
+    finance?: BranchFinanceUncheckedCreateNestedOneWithoutBranchInput
+  }
+
+  export type BranchCreateOrConnectWithoutInstallmentsInput = {
+    where: BranchWhereUniqueInput
+    create: XOR<BranchCreateWithoutInstallmentsInput, BranchUncheckedCreateWithoutInstallmentsInput>
+  }
+
+  export type UserUpsertWithoutInstallmentsInput = {
+    update: XOR<UserUpdateWithoutInstallmentsInput, UserUncheckedUpdateWithoutInstallmentsInput>
+    create: XOR<UserCreateWithoutInstallmentsInput, UserUncheckedCreateWithoutInstallmentsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutInstallmentsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutInstallmentsInput, UserUncheckedUpdateWithoutInstallmentsInput>
+  }
+
+  export type UserUpdateWithoutInstallmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    academy?: AcademyUpdateOneWithoutUsersNestedInput
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    Instructor?: InstructorUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUpdateManyWithoutUserNestedInput
+    Admin?: AdminUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
+    Report?: ReportUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUpdateManyWithoutUserNestedInput
+    Community?: CommunityUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUpdateManyWithoutUserNestedInput
+    Path?: PathUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUpdateManyWithoutUserNestedInput
+    SalaryPayment?: SalaryPaymentUpdateManyWithoutEmployeeNestedInput
+    MeetingParticipant?: MeetingParticipantUpdateManyWithoutUserNestedInput
+    LegalCase?: LegalCaseUpdateManyWithoutRelatedUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutInstallmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    subRole?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academyId?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    groups?: GroupUncheckedUpdateManyWithoutMembersNestedInput
+    channels?: ChannelUncheckedUpdateManyWithoutMembersNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
+    Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
+    Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
+    Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
+    Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
+    Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
+    Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
+    Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    Community?: CommunityUncheckedUpdateManyWithoutParticipantsNestedInput
+    LiveRoom?: LiveRoomUncheckedUpdateManyWithoutUserNestedInput
+    NotificationSettings?: NotificationSettingsUncheckedUpdateManyWithoutUserNestedInput
+    Path?: PathUncheckedUpdateManyWithoutPeersNestedInput
+    LoginHistory?: LoginHistoryUncheckedUpdateManyWithoutUserNestedInput
+    TwoFactor?: TwoFactorUncheckedUpdateManyWithoutUserNestedInput
+    UserAcademyCEO?: UserAcademyCEOUncheckedUpdateManyWithoutUserNestedInput
+    SalaryPayment?: SalaryPaymentUncheckedUpdateManyWithoutEmployeeNestedInput
+    MeetingParticipant?: MeetingParticipantUncheckedUpdateManyWithoutUserNestedInput
+    LegalCase?: LegalCaseUncheckedUpdateManyWithoutRelatedUserNestedInput
+  }
+
+  export type PaymentUpsertWithoutInstallmentsInput = {
+    update: XOR<PaymentUpdateWithoutInstallmentsInput, PaymentUncheckedUpdateWithoutInstallmentsInput>
+    create: XOR<PaymentCreateWithoutInstallmentsInput, PaymentUncheckedCreateWithoutInstallmentsInput>
+    where?: PaymentWhereInput
+  }
+
+  export type PaymentUpdateToOneWithWhereWithoutInstallmentsInput = {
+    where?: PaymentWhereInput
+    data: XOR<PaymentUpdateWithoutInstallmentsInput, PaymentUncheckedUpdateWithoutInstallmentsInput>
+  }
+
+  export type PaymentUpdateWithoutInstallmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
+    branch?: BranchUpdateOneRequiredWithoutPaymentsNestedInput
+    legalCase?: LegalCaseUpdateOneWithoutPaymentsNestedInput
+  }
+
+  export type PaymentUncheckedUpdateWithoutInstallmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branchId?: StringFieldUpdateOperationsInput | string
+    legalCaseId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BranchUpsertWithoutInstallmentsInput = {
+    update: XOR<BranchUpdateWithoutInstallmentsInput, BranchUncheckedUpdateWithoutInstallmentsInput>
+    create: XOR<BranchCreateWithoutInstallmentsInput, BranchUncheckedCreateWithoutInstallmentsInput>
+    where?: BranchWhereInput
+  }
+
+  export type BranchUpdateToOneWithWhereWithoutInstallmentsInput = {
+    where?: BranchWhereInput
+    data: XOR<BranchUpdateWithoutInstallmentsInput, BranchUncheckedUpdateWithoutInstallmentsInput>
+  }
+
+  export type BranchUpdateWithoutInstallmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PaymentUpdateManyWithoutBranchNestedInput
+    expenses?: ExpenseUpdateManyWithoutBranchNestedInput
+    finance?: BranchFinanceUpdateOneWithoutBranchNestedInput
+  }
+
+  export type BranchUncheckedUpdateWithoutInstallmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PaymentUncheckedUpdateManyWithoutBranchNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+    finance?: BranchFinanceUncheckedUpdateOneWithoutBranchNestedInput
+  }
+
+  export type BranchCreateWithoutExpensesInput = {
+    id?: string
+    name: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payments?: PaymentCreateNestedManyWithoutBranchInput
+    installments?: InstallmentCreateNestedManyWithoutBranchInput
+    finance?: BranchFinanceCreateNestedOneWithoutBranchInput
+  }
+
+  export type BranchUncheckedCreateWithoutExpensesInput = {
+    id?: string
+    name: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payments?: PaymentUncheckedCreateNestedManyWithoutBranchInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutBranchInput
+    finance?: BranchFinanceUncheckedCreateNestedOneWithoutBranchInput
+  }
+
+  export type BranchCreateOrConnectWithoutExpensesInput = {
+    where: BranchWhereUniqueInput
+    create: XOR<BranchCreateWithoutExpensesInput, BranchUncheckedCreateWithoutExpensesInput>
+  }
+
+  export type AdminCreateWithoutExpensesInput = {
+    id?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutAdminInput
+    Group?: GroupCreateNestedManyWithoutAdminInput
+    accountingEntries?: AccountingEntryCreateNestedManyWithoutCreatedByAdminInput
+    prRecords?: PublicRelationsRecordCreateNestedManyWithoutHandledByAdminInput
+    prResponses?: PRResponseCreateNestedManyWithoutRespondedByAdminInput
+    meetings?: MeetingCreateNestedManyWithoutCreatedByAdminInput
+    assignments?: AdminAssignmentCreateNestedManyWithoutAdminInput
+    legalCases?: LegalCaseCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleCreateNestedManyWithoutAdminInput
+  }
+
+  export type AdminUncheckedCreateWithoutExpensesInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+    Group?: GroupUncheckedCreateNestedManyWithoutAdminInput
+    accountingEntries?: AccountingEntryUncheckedCreateNestedManyWithoutCreatedByAdminInput
+    prRecords?: PublicRelationsRecordUncheckedCreateNestedManyWithoutHandledByAdminInput
+    prResponses?: PRResponseUncheckedCreateNestedManyWithoutRespondedByAdminInput
+    meetings?: MeetingUncheckedCreateNestedManyWithoutCreatedByAdminInput
+    assignments?: AdminAssignmentUncheckedCreateNestedManyWithoutAdminInput
+    legalCases?: LegalCaseUncheckedCreateNestedManyWithoutAssignedLawyerInput
+    AdminRole?: AdminRoleUncheckedCreateNestedManyWithoutAdminInput
+  }
+
+  export type AdminCreateOrConnectWithoutExpensesInput = {
+    where: AdminWhereUniqueInput
+    create: XOR<AdminCreateWithoutExpensesInput, AdminUncheckedCreateWithoutExpensesInput>
+  }
+
+  export type BranchUpsertWithoutExpensesInput = {
+    update: XOR<BranchUpdateWithoutExpensesInput, BranchUncheckedUpdateWithoutExpensesInput>
+    create: XOR<BranchCreateWithoutExpensesInput, BranchUncheckedCreateWithoutExpensesInput>
+    where?: BranchWhereInput
+  }
+
+  export type BranchUpdateToOneWithWhereWithoutExpensesInput = {
+    where?: BranchWhereInput
+    data: XOR<BranchUpdateWithoutExpensesInput, BranchUncheckedUpdateWithoutExpensesInput>
+  }
+
+  export type BranchUpdateWithoutExpensesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PaymentUpdateManyWithoutBranchNestedInput
+    installments?: InstallmentUpdateManyWithoutBranchNestedInput
+    finance?: BranchFinanceUpdateOneWithoutBranchNestedInput
+  }
+
+  export type BranchUncheckedUpdateWithoutExpensesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PaymentUncheckedUpdateManyWithoutBranchNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutBranchNestedInput
+    finance?: BranchFinanceUncheckedUpdateOneWithoutBranchNestedInput
+  }
+
+  export type AdminUpsertWithoutExpensesInput = {
+    update: XOR<AdminUpdateWithoutExpensesInput, AdminUncheckedUpdateWithoutExpensesInput>
+    create: XOR<AdminCreateWithoutExpensesInput, AdminUncheckedCreateWithoutExpensesInput>
+    where?: AdminWhereInput
+  }
+
+  export type AdminUpdateToOneWithWhereWithoutExpensesInput = {
+    where?: AdminWhereInput
+    data: XOR<AdminUpdateWithoutExpensesInput, AdminUncheckedUpdateWithoutExpensesInput>
+  }
+
+  export type AdminUpdateWithoutExpensesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAdminNestedInput
+    Group?: GroupUpdateManyWithoutAdminNestedInput
+    accountingEntries?: AccountingEntryUpdateManyWithoutCreatedByAdminNestedInput
+    prRecords?: PublicRelationsRecordUpdateManyWithoutHandledByAdminNestedInput
+    prResponses?: PRResponseUpdateManyWithoutRespondedByAdminNestedInput
+    meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
+    assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
+    legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
+  }
+
+  export type AdminUncheckedUpdateWithoutExpensesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Group?: GroupUncheckedUpdateManyWithoutAdminNestedInput
+    accountingEntries?: AccountingEntryUncheckedUpdateManyWithoutCreatedByAdminNestedInput
+    prRecords?: PublicRelationsRecordUncheckedUpdateManyWithoutHandledByAdminNestedInput
+    prResponses?: PRResponseUncheckedUpdateManyWithoutRespondedByAdminNestedInput
+    meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
+    assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
+    legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
+  }
+
+  export type PaymentCreateWithoutBranchInput = {
+    id?: string
+    amount: number
+    method: $Enums.PaymentMethod
+    paidAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPaymentsInput
+    installments?: InstallmentCreateNestedManyWithoutPaymentInput
+    legalCase?: LegalCaseCreateNestedOneWithoutPaymentsInput
+  }
+
+  export type PaymentUncheckedCreateWithoutBranchInput = {
+    id?: string
+    userId: string
+    amount: number
+    method: $Enums.PaymentMethod
+    paidAt?: Date | string
+    legalCaseId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    installments?: InstallmentUncheckedCreateNestedManyWithoutPaymentInput
+  }
+
+  export type PaymentCreateOrConnectWithoutBranchInput = {
+    where: PaymentWhereUniqueInput
+    create: XOR<PaymentCreateWithoutBranchInput, PaymentUncheckedCreateWithoutBranchInput>
+  }
+
+  export type PaymentCreateManyBranchInputEnvelope = {
+    data: PaymentCreateManyBranchInput | PaymentCreateManyBranchInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InstallmentCreateWithoutBranchInput = {
+    id?: string
+    amount: number
+    dueDate: Date | string
+    status?: $Enums.InstallmentStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutInstallmentsInput
+    payment?: PaymentCreateNestedOneWithoutInstallmentsInput
+  }
+
+  export type InstallmentUncheckedCreateWithoutBranchInput = {
+    id?: string
+    userId: string
+    amount: number
+    dueDate: Date | string
+    status?: $Enums.InstallmentStatus
+    paymentId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstallmentCreateOrConnectWithoutBranchInput = {
+    where: InstallmentWhereUniqueInput
+    create: XOR<InstallmentCreateWithoutBranchInput, InstallmentUncheckedCreateWithoutBranchInput>
+  }
+
+  export type InstallmentCreateManyBranchInputEnvelope = {
+    data: InstallmentCreateManyBranchInput | InstallmentCreateManyBranchInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ExpenseCreateWithoutBranchInput = {
+    id?: string
+    type: $Enums.ExpenseType
+    amount: number
+    description?: string | null
+    paidAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdByAdmin: AdminCreateNestedOneWithoutExpensesInput
+  }
+
+  export type ExpenseUncheckedCreateWithoutBranchInput = {
+    id?: string
+    type: $Enums.ExpenseType
+    amount: number
+    description?: string | null
+    paidAt?: Date | string
+    createdBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExpenseCreateOrConnectWithoutBranchInput = {
+    where: ExpenseWhereUniqueInput
+    create: XOR<ExpenseCreateWithoutBranchInput, ExpenseUncheckedCreateWithoutBranchInput>
+  }
+
+  export type ExpenseCreateManyBranchInputEnvelope = {
+    data: ExpenseCreateManyBranchInput | ExpenseCreateManyBranchInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BranchFinanceCreateWithoutBranchInput = {
+    id?: string
+    totalIncome?: number
+    totalExpenses?: number
+    balance?: number
+    lastUpdated?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BranchFinanceUncheckedCreateWithoutBranchInput = {
+    id?: string
+    totalIncome?: number
+    totalExpenses?: number
+    balance?: number
+    lastUpdated?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BranchFinanceCreateOrConnectWithoutBranchInput = {
+    where: BranchFinanceWhereUniqueInput
+    create: XOR<BranchFinanceCreateWithoutBranchInput, BranchFinanceUncheckedCreateWithoutBranchInput>
+  }
+
+  export type PaymentUpsertWithWhereUniqueWithoutBranchInput = {
+    where: PaymentWhereUniqueInput
+    update: XOR<PaymentUpdateWithoutBranchInput, PaymentUncheckedUpdateWithoutBranchInput>
+    create: XOR<PaymentCreateWithoutBranchInput, PaymentUncheckedCreateWithoutBranchInput>
+  }
+
+  export type PaymentUpdateWithWhereUniqueWithoutBranchInput = {
+    where: PaymentWhereUniqueInput
+    data: XOR<PaymentUpdateWithoutBranchInput, PaymentUncheckedUpdateWithoutBranchInput>
+  }
+
+  export type PaymentUpdateManyWithWhereWithoutBranchInput = {
+    where: PaymentScalarWhereInput
+    data: XOR<PaymentUpdateManyMutationInput, PaymentUncheckedUpdateManyWithoutBranchInput>
+  }
+
+  export type InstallmentUpsertWithWhereUniqueWithoutBranchInput = {
+    where: InstallmentWhereUniqueInput
+    update: XOR<InstallmentUpdateWithoutBranchInput, InstallmentUncheckedUpdateWithoutBranchInput>
+    create: XOR<InstallmentCreateWithoutBranchInput, InstallmentUncheckedCreateWithoutBranchInput>
+  }
+
+  export type InstallmentUpdateWithWhereUniqueWithoutBranchInput = {
+    where: InstallmentWhereUniqueInput
+    data: XOR<InstallmentUpdateWithoutBranchInput, InstallmentUncheckedUpdateWithoutBranchInput>
+  }
+
+  export type InstallmentUpdateManyWithWhereWithoutBranchInput = {
+    where: InstallmentScalarWhereInput
+    data: XOR<InstallmentUpdateManyMutationInput, InstallmentUncheckedUpdateManyWithoutBranchInput>
+  }
+
+  export type ExpenseUpsertWithWhereUniqueWithoutBranchInput = {
+    where: ExpenseWhereUniqueInput
+    update: XOR<ExpenseUpdateWithoutBranchInput, ExpenseUncheckedUpdateWithoutBranchInput>
+    create: XOR<ExpenseCreateWithoutBranchInput, ExpenseUncheckedCreateWithoutBranchInput>
+  }
+
+  export type ExpenseUpdateWithWhereUniqueWithoutBranchInput = {
+    where: ExpenseWhereUniqueInput
+    data: XOR<ExpenseUpdateWithoutBranchInput, ExpenseUncheckedUpdateWithoutBranchInput>
+  }
+
+  export type ExpenseUpdateManyWithWhereWithoutBranchInput = {
+    where: ExpenseScalarWhereInput
+    data: XOR<ExpenseUpdateManyMutationInput, ExpenseUncheckedUpdateManyWithoutBranchInput>
+  }
+
+  export type BranchFinanceUpsertWithoutBranchInput = {
+    update: XOR<BranchFinanceUpdateWithoutBranchInput, BranchFinanceUncheckedUpdateWithoutBranchInput>
+    create: XOR<BranchFinanceCreateWithoutBranchInput, BranchFinanceUncheckedCreateWithoutBranchInput>
+    where?: BranchFinanceWhereInput
+  }
+
+  export type BranchFinanceUpdateToOneWithWhereWithoutBranchInput = {
+    where?: BranchFinanceWhereInput
+    data: XOR<BranchFinanceUpdateWithoutBranchInput, BranchFinanceUncheckedUpdateWithoutBranchInput>
+  }
+
+  export type BranchFinanceUpdateWithoutBranchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalIncome?: FloatFieldUpdateOperationsInput | number
+    totalExpenses?: FloatFieldUpdateOperationsInput | number
+    balance?: FloatFieldUpdateOperationsInput | number
+    lastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BranchFinanceUncheckedUpdateWithoutBranchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalIncome?: FloatFieldUpdateOperationsInput | number
+    totalExpenses?: FloatFieldUpdateOperationsInput | number
+    balance?: FloatFieldUpdateOperationsInput | number
+    lastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BranchCreateWithoutFinanceInput = {
+    id?: string
+    name: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payments?: PaymentCreateNestedManyWithoutBranchInput
+    installments?: InstallmentCreateNestedManyWithoutBranchInput
+    expenses?: ExpenseCreateNestedManyWithoutBranchInput
+  }
+
+  export type BranchUncheckedCreateWithoutFinanceInput = {
+    id?: string
+    name: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payments?: PaymentUncheckedCreateNestedManyWithoutBranchInput
+    installments?: InstallmentUncheckedCreateNestedManyWithoutBranchInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  }
+
+  export type BranchCreateOrConnectWithoutFinanceInput = {
+    where: BranchWhereUniqueInput
+    create: XOR<BranchCreateWithoutFinanceInput, BranchUncheckedCreateWithoutFinanceInput>
+  }
+
+  export type BranchUpsertWithoutFinanceInput = {
+    update: XOR<BranchUpdateWithoutFinanceInput, BranchUncheckedUpdateWithoutFinanceInput>
+    create: XOR<BranchCreateWithoutFinanceInput, BranchUncheckedCreateWithoutFinanceInput>
+    where?: BranchWhereInput
+  }
+
+  export type BranchUpdateToOneWithWhereWithoutFinanceInput = {
+    where?: BranchWhereInput
+    data: XOR<BranchUpdateWithoutFinanceInput, BranchUncheckedUpdateWithoutFinanceInput>
+  }
+
+  export type BranchUpdateWithoutFinanceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PaymentUpdateManyWithoutBranchNestedInput
+    installments?: InstallmentUpdateManyWithoutBranchNestedInput
+    expenses?: ExpenseUpdateManyWithoutBranchNestedInput
+  }
+
+  export type BranchUncheckedUpdateWithoutFinanceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PaymentUncheckedUpdateManyWithoutBranchNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutBranchNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  }
+
   export type EnrollmentCreateManyUserInput = {
     id?: string
     courseId: string
@@ -89186,6 +96581,28 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type PaymentCreateManyUserInput = {
+    id?: string
+    amount: number
+    method: $Enums.PaymentMethod
+    paidAt?: Date | string
+    branchId: string
+    legalCaseId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstallmentCreateManyUserInput = {
+    id?: string
+    amount: number
+    dueDate: Date | string
+    status?: $Enums.InstallmentStatus
+    paymentId?: string | null
+    branchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type InstructorCreateManyUserInput = {
     id?: string
     academyId: string
@@ -89198,13 +96615,6 @@ export namespace Prisma {
 
   export type AdminCreateManyUserInput = {
     id?: string
-    createdAt?: Date | string
-  }
-
-  export type PaymentCreateManyUserInput = {
-    id?: string
-    amount: number
-    legalCaseId?: string | null
     createdAt?: Date | string
   }
 
@@ -89607,6 +97017,74 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PaymentUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branch?: BranchUpdateOneRequiredWithoutPaymentsNestedInput
+    installments?: InstallmentUpdateManyWithoutPaymentNestedInput
+    legalCase?: LegalCaseUpdateOneWithoutPaymentsNestedInput
+  }
+
+  export type PaymentUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branchId?: StringFieldUpdateOperationsInput | string
+    legalCaseId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    installments?: InstallmentUncheckedUpdateManyWithoutPaymentNestedInput
+  }
+
+  export type PaymentUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branchId?: StringFieldUpdateOperationsInput | string
+    legalCaseId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstallmentUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumInstallmentStatusFieldUpdateOperationsInput | $Enums.InstallmentStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payment?: PaymentUpdateOneWithoutInstallmentsNestedInput
+    branch?: BranchUpdateOneRequiredWithoutInstallmentsNestedInput
+  }
+
+  export type InstallmentUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumInstallmentStatusFieldUpdateOperationsInput | $Enums.InstallmentStatus
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    branchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstallmentUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumInstallmentStatusFieldUpdateOperationsInput | $Enums.InstallmentStatus
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    branchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type InstructorUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     academy?: AcademyUpdateOneRequiredWithoutInstructorsNestedInput
@@ -89651,6 +97129,7 @@ export namespace Prisma {
     meetings?: MeetingUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUpdateManyWithoutAdminNestedInput
   }
 
@@ -89664,6 +97143,7 @@ export namespace Prisma {
     meetings?: MeetingUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     assignments?: AdminAssignmentUncheckedUpdateManyWithoutAdminNestedInput
     legalCases?: LegalCaseUncheckedUpdateManyWithoutAssignedLawyerNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutCreatedByAdminNestedInput
     AdminRole?: AdminRoleUncheckedUpdateManyWithoutAdminNestedInput
   }
 
@@ -89706,27 +97186,6 @@ export namespace Prisma {
     status?: EnumLessonStatusFieldUpdateOperationsInput | $Enums.LessonStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PaymentUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    amount?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    legalCase?: LegalCaseUpdateOneWithoutPaymentsNestedInput
-  }
-
-  export type PaymentUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    amount?: FloatFieldUpdateOperationsInput | number
-    legalCaseId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PaymentUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    amount?: FloatFieldUpdateOperationsInput | number
-    legalCaseId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReportUpdateWithoutUserInput = {
@@ -90329,11 +97788,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -90375,11 +97835,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -91111,11 +98572,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -91157,11 +98619,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -91336,10 +98799,11 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -91382,10 +98846,11 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -91801,11 +99266,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -91847,11 +99313,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -92035,6 +99502,17 @@ export namespace Prisma {
     courtDate?: Date | string | null
     academyId: string
     relatedUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExpenseCreateManyCreatedByAdminInput = {
+    id?: string
+    type: $Enums.ExpenseType
+    amount: number
+    description?: string | null
+    paidAt?: Date | string
+    branchId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -92302,6 +99780,39 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ExpenseUpdateWithoutCreatedByAdminInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseTypeFieldUpdateOperationsInput | $Enums.ExpenseType
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branch?: BranchUpdateOneRequiredWithoutExpensesNestedInput
+  }
+
+  export type ExpenseUncheckedUpdateWithoutCreatedByAdminInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseTypeFieldUpdateOperationsInput | $Enums.ExpenseType
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseUncheckedUpdateManyWithoutCreatedByAdminInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseTypeFieldUpdateOperationsInput | $Enums.ExpenseType
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type AdminRoleUpdateWithoutAdminInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: EnumAdminRoleTypeFieldUpdateOperationsInput | $Enums.AdminRoleType
@@ -92364,11 +99875,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -92410,11 +99922,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -92514,6 +100027,50 @@ export namespace Prisma {
     adminRoleId?: NullableStringFieldUpdateOperationsInput | string | null
     legalCaseId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstallmentCreateManyPaymentInput = {
+    id?: string
+    userId: string
+    amount: number
+    dueDate: Date | string
+    status?: $Enums.InstallmentStatus
+    branchId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstallmentUpdateWithoutPaymentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumInstallmentStatusFieldUpdateOperationsInput | $Enums.InstallmentStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutInstallmentsNestedInput
+    branch?: BranchUpdateOneRequiredWithoutInstallmentsNestedInput
+  }
+
+  export type InstallmentUncheckedUpdateWithoutPaymentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumInstallmentStatusFieldUpdateOperationsInput | $Enums.InstallmentStatus
+    branchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstallmentUncheckedUpdateManyWithoutPaymentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumInstallmentStatusFieldUpdateOperationsInput | $Enums.InstallmentStatus
+    branchId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LiveRoomCreateManyCommunityInput = {
@@ -92643,11 +100200,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -92689,11 +100247,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -92810,11 +100369,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUpdateManyWithoutUserNestedInput
     Owner?: OwnerUpdateManyWithoutUserNestedInput
     Admin?: AdminUpdateManyWithoutUserNestedInput
     Lesson?: LessonUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUpdateManyWithoutUserNestedInput
     Report?: ReportUpdateManyWithoutUserNestedInput
     Badge?: BadgeUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUpdateManyWithoutUserNestedInput
@@ -92856,11 +100416,12 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
     Submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    installments?: InstallmentUncheckedUpdateManyWithoutUserNestedInput
     Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
     Owner?: OwnerUncheckedUpdateManyWithoutUserNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutUserNestedInput
     Lesson?: LessonUncheckedUpdateManyWithoutCompletedByNestedInput
-    Payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     Report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Badge?: BadgeUncheckedUpdateManyWithoutUserNestedInput
     Certificate?: CertificateUncheckedUpdateManyWithoutUserNestedInput
@@ -93699,7 +101260,11 @@ export namespace Prisma {
     id?: string
     userId: string
     amount: number
+    method: $Enums.PaymentMethod
+    paidAt?: Date | string
+    branchId: string
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type FileUpdateWithoutLegalCaseInput = {
@@ -93844,22 +101409,170 @@ export namespace Prisma {
   export type PaymentUpdateWithoutLegalCaseInput = {
     id?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutPaymentNestedInput
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
+    branch?: BranchUpdateOneRequiredWithoutPaymentsNestedInput
+    installments?: InstallmentUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentUncheckedUpdateWithoutLegalCaseInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branchId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    installments?: InstallmentUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentUncheckedUpdateManyWithoutLegalCaseInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branchId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentCreateManyBranchInput = {
+    id?: string
+    userId: string
+    amount: number
+    method: $Enums.PaymentMethod
+    paidAt?: Date | string
+    legalCaseId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstallmentCreateManyBranchInput = {
+    id?: string
+    userId: string
+    amount: number
+    dueDate: Date | string
+    status?: $Enums.InstallmentStatus
+    paymentId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExpenseCreateManyBranchInput = {
+    id?: string
+    type: $Enums.ExpenseType
+    amount: number
+    description?: string | null
+    paidAt?: Date | string
+    createdBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PaymentUpdateWithoutBranchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
+    installments?: InstallmentUpdateManyWithoutPaymentNestedInput
+    legalCase?: LegalCaseUpdateOneWithoutPaymentsNestedInput
+  }
+
+  export type PaymentUncheckedUpdateWithoutBranchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    legalCaseId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    installments?: InstallmentUncheckedUpdateManyWithoutPaymentNestedInput
+  }
+
+  export type PaymentUncheckedUpdateManyWithoutBranchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    legalCaseId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstallmentUpdateWithoutBranchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumInstallmentStatusFieldUpdateOperationsInput | $Enums.InstallmentStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutInstallmentsNestedInput
+    payment?: PaymentUpdateOneWithoutInstallmentsNestedInput
+  }
+
+  export type InstallmentUncheckedUpdateWithoutBranchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumInstallmentStatusFieldUpdateOperationsInput | $Enums.InstallmentStatus
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstallmentUncheckedUpdateManyWithoutBranchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumInstallmentStatusFieldUpdateOperationsInput | $Enums.InstallmentStatus
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseUpdateWithoutBranchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseTypeFieldUpdateOperationsInput | $Enums.ExpenseType
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdByAdmin?: AdminUpdateOneRequiredWithoutExpensesNestedInput
+  }
+
+  export type ExpenseUncheckedUpdateWithoutBranchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseTypeFieldUpdateOperationsInput | $Enums.ExpenseType
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseUncheckedUpdateManyWithoutBranchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseTypeFieldUpdateOperationsInput | $Enums.ExpenseType
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

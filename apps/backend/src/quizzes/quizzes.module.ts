@@ -4,9 +4,11 @@ import { PrismaModule } from '@/prisma/prisma.module';
 import { QuizzesController } from './quizzes.controller';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { QuestionsModule } from '@/questions/questions.module';
 
 @Module({
     imports: [PrismaModule,
+        QuestionsModule,
         JwtModule.registerAsync({
             useFactory: async (configService: ConfigService) => ({
                 secret: configService.get<string>('JWT_ACCESS_SECRET'),

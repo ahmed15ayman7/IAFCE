@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateSubmissionDto } from 'dtos/Submission.create.dto';
 import { UpdateSubmissionDto } from 'dtos/Submission.update.dto';
@@ -11,10 +11,27 @@ export class SubmissionsService {
     constructor(private prisma: PrismaService) { }
 
     async create(createSubmissionInput: CreateSubmissionDto) {
+        let quiz = await this.prisma.quiz.findUnique({
+            where: { id: createSubmissionInput.quizId },
+        });
+        if (!quiz) {
+            throw new NotFoundException(`Quiz with ID ${createSubmissionInput.quizId} not found`);
+        }
+        let user = await this.prisma.user.findUnique({
+            where: { id: createSubmissionInput.userId },
+        });
+        if (!user) {
+            throw new NotFoundException(`User with ID ${createSubmissionInput.userId} not found`);
+        }
+
         let submission = await this.prisma.submission.create({
             data: {
-                ...createSubmissionInput,
-                createdAt: new Date(),
+                userId: user.id,
+                quizId: quiz.id,
+                answers: createSubmissionInput.answers,
+                score: 0,
+                feedback: createSubmissionInput.feedback,
+                passed: false,
             },
             include: {
                 user: true,
@@ -22,11 +39,7 @@ export class SubmissionsService {
                     include: {
                         questions: {
                             include: {
-                                options: {
-                                    include: {
-
-                                    }
-                                }
+                                options: true
                             }
                         }
                     }

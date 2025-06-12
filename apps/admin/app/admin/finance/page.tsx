@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Box,
     Card,
@@ -45,11 +45,28 @@ import {
     TrendingUp as TrendingUpIcon,
 } from '@mui/icons-material';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { accountingApi } from '@/lib/api';
+import { accountingApi, paymentsApi, installmentsApi, expensesApi } from '@/lib/api';
 import { PermissionGuard } from '@/components/PermissionGuard';
 import { motion, AnimatePresence } from 'framer-motion';
 import { format } from 'date-fns';
-import { arSA } from 'date-fns/locale';
+import { arSA, ar } from 'date-fns/locale';
+import {
+    LineChart,
+    Line,
+    BarChart,
+    Bar,
+    PieChart,
+    Pie,
+    Cell,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip as RechartsTooltip,
+    Legend,
+    ResponsiveContainer
+} from 'recharts';
+import { CardHeader } from '@mui/material';
+import Input from '@/components/common/Input';
 
 let initialfinanceData = [
     {
@@ -156,15 +173,9 @@ let initialfinanceData = [
     },
 ]
 
-
-
-
-
-
-
-
 interface TabPanelProps {
     children?: React.ReactNode;
+    className?: string;
     index: number;
     value: number;
 }
@@ -184,6 +195,8 @@ function TabPanel(props: TabPanelProps) {
     );
 }
 
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
+
 export default function FinancePage() {
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState<any>(null);
@@ -194,6 +207,16 @@ export default function FinancePage() {
         amount: '',
         description: '',
         date: '',
+    });
+    const [timeRange, setTimeRange] = useState('daily');
+    const [branchId, setBranchId] = useState<string>();
+    const [statistics, setStatistics] = useState<any>({});
+    const [loading, setLoading] = useState(true);
+    const [activeTab, setActiveTab] = useState(0);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [dateRange, setDateRange] = useState({
+        start: new Date(),
+        end: new Date()
     });
 
     const queryClient = useQueryClient();
@@ -298,6 +321,56 @@ export default function FinancePage() {
             default:
                 return type;
         }
+    };
+
+    useEffect(() => {
+        fetchStatistics();
+    }, [timeRange, branchId, dateRange]);
+
+    const fetchStatistics = async () => {
+        setLoading(true);
+        try {
+            const [payments, installments, expenses] = await Promise.all([
+                timeRange === "daily" ? paymentsApi.getDailyStatistics(branchId) : timeRange === "weekly" ? paymentsApi.getWeeklyStatistics(branchId) : timeRange === "monthly" ? paymentsApi.getMonthlyStatistics(branchId) : paymentsApi.getYearlyStatistics(branchId),
+                timeRange === "daily" ? installmentsApi.getDailyStatistics(branchId) : timeRange === "weekly" ? installmentsApi.getWeeklyStatistics(branchId) : timeRange === "monthly" ? installmentsApi.getMonthlyStatistics(branchId) : installmentsApi.getYearlyStatistics(branchId),
+                timeRange === "daily" ? expensesApi.getDailyStatistics(branchId) : timeRange === "weekly" ? expensesApi.getWeeklyStatistics(branchId) : timeRange === "monthly" ? expensesApi.getMonthlyStatistics(branchId) : expensesApi.getYearlyStatistics(branchId),
+            ]);
+
+            setStatistics({
+                payments: payments.data,
+                installments: installments.data,
+                expenses: expenses.data,
+            });
+        } catch (error) {
+            console.error('Error fetching statistics:', error);
+        }
+        setLoading(false);
+    };
+
+    const formatDate = (date: Date) => {
+        return format(new Date(date), 'dd/MM/yyyy', { locale: ar });
+    };
+
+    const formatCurrency = (amount: number) => {
+        return new Intl.NumberFormat('ar-EG', {
+            style: 'currency',
+            currency: 'EGP',
+        }).format(amount);
+    };
+
+    const handleDateRangeChange = (type: 'start' | 'end', value: string) => {
+        setDateRange(prev => ({
+            ...prev,
+            [type]: new Date(value)
+        }));
+    };
+
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value);
+    };
+
+    const handleTabChange2 = (event: React.SyntheticEvent, newValue: number) => {
+        setActiveTab(newValue);
     };
 
     return (
@@ -641,6 +714,263 @@ export default function FinancePage() {
                     </Alert>
                 </Snackbar>
             </motion.div>
+
+            <div className="container mx-auto p-6">
+                <div className="flex justify-between items-center mb-6">
+                    <h1 className="text-3xl font-bold">لوحة التحكم المالية</h1>
+                    <div className="flex gap-4">
+
+                        <Select value={timeRange} placeholder="اختر الفترة الزمنية" onChange={(e) => setTimeRange(e.target.value)}>
+
+                            <MenuItem value="daily">يومي</MenuItem>
+                            <MenuItem value="weekly">أسبوعي</MenuItem>
+                            <MenuItem value="monthly">شهري</MenuItem>
+                            <MenuItem value="yearly">سنوي</MenuItem>
+                        </Select>
+                        <div className="flex gap-2">
+                            <Input
+                                label="التاريخ البدء"
+                                type="date"
+                                value={format(dateRange.start, 'yyyy-MM-dd')}
+                                onChange={(e) => handleDateRangeChange('start', e.target.value)}
+                            />
+                            <Input
+                                label="التاريخ النهاية"
+                                type="date"
+                                value={format(dateRange.end, 'yyyy-MM-dd')}
+                                onChange={(e) => handleDateRangeChange('end', e.target.value)}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <Card>
+                        <CardHeader>
+                            <Typography variant="h6">إجمالي المدفوعات</Typography>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="text-2xl font-bold">
+                                {formatCurrency(statistics.payments?.totalAmount || 0)}
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                                {statistics.payments?.totalPayments || 0} عملية دفع
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    <Card>
+                        <CardHeader>
+                            <Typography variant="h6">إجمالي الأقساط</Typography>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="text-2xl font-bold">
+                                {formatCurrency(statistics.installments?.totalAmount || 0)}
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                                {statistics.installments?.totalCount || 0} قسط
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    <Card>
+                        <CardHeader>
+                            <Typography variant="h6">إجمالي المصروفات</Typography>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="text-2xl font-bold">
+                                {formatCurrency(statistics.expenses?.totalAmount || 0)}
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                                {statistics.expenses?.totalCount || 0} مصروف
+                            </div>
+                        </CardContent>
+                    </Card>
+                </div>
+
+                <Tabs defaultValue={0} value={activeTab} onChange={handleTabChange2} className="space-y-4">
+                    <Tab value="overview" label="نظرة عامة" />
+                    <Tab value="payments" label="المدفوعات" />
+                    <Tab value="installments" label="الأقساط" />
+                    <Tab value="expenses" label="المصروفات" />
+                </Tabs>
+                <TabPanel value={activeTab} index={0} className="space-y-4">
+                    <Card>
+                        <CardHeader>
+                            <Typography variant="h6">ملخص الأداء المالي</Typography>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="h-[400px]">
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <LineChart data={statistics.payments?.data || []}>
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis
+                                            dataKey="date"
+                                            tickFormatter={formatDate}
+                                            tick={{ fontSize: 12 }}
+                                        />
+                                        <YAxis
+                                            tickFormatter={formatCurrency}
+                                            tick={{ fontSize: 12 }}
+                                        />
+                                        <RechartsTooltip
+                                            formatter={(value: number) => formatCurrency(value)}
+                                            labelFormatter={formatDate}
+                                        />
+                                        <Legend />
+                                        <Line
+                                            type="monotone"
+                                            dataKey="amount"
+                                            stroke="#8884d8"
+                                            name="المدفوعات"
+                                        />
+                                        <Line
+                                            type="monotone"
+                                            dataKey="installments"
+                                            stroke="#82ca9d"
+                                            name="الأقساط"
+                                        />
+                                        <Line
+                                            type="monotone"
+                                            dataKey="expenses"
+                                            stroke="#ffc658"
+                                            name="المصروفات"
+                                        />
+                                    </LineChart>
+                                </ResponsiveContainer>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </TabPanel>
+
+                <TabPanel value={activeTab} index={1} className="space-y-4">
+                    <Card>
+                        <CardHeader>
+                            <Typography variant="h6">المدفوعات عبر الزمن</Typography>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="h-[400px]">
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <LineChart data={statistics.payments?.data || []}>
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis
+                                            dataKey="date"
+                                            tickFormatter={formatDate}
+                                            tick={{ fontSize: 12 }}
+                                        />
+                                        <YAxis
+                                            tickFormatter={formatCurrency}
+                                            tick={{ fontSize: 12 }}
+                                        />
+                                        <RechartsTooltip
+                                            formatter={(value: number) => formatCurrency(value)}
+                                            labelFormatter={formatDate}
+                                        />
+                                        <Legend />
+                                        <Line
+                                            type="monotone"
+                                            dataKey="amount"
+                                            stroke="#8884d8"
+                                            name="المبلغ"
+                                        />
+                                        <Line
+                                            type="monotone"
+                                            dataKey="count"
+                                            stroke="#82ca9d"
+                                            name="العدد"
+                                        />
+                                    </LineChart>
+                                </ResponsiveContainer>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </TabPanel>
+
+                <TabPanel value={activeTab} index={2} className="space-y-4">
+                    <Card>
+                        <CardHeader>
+                            <Typography variant="h6">الأقساط عبر الزمن</Typography>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="h-[400px]">
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <BarChart data={statistics.installments?.data || []}>
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis
+                                            dataKey="date"
+                                            tickFormatter={formatDate}
+                                            tick={{ fontSize: 12 }}
+                                        />
+                                        <YAxis
+                                            tickFormatter={formatCurrency}
+                                            tick={{ fontSize: 12 }}
+                                        />
+                                        <RechartsTooltip
+                                            formatter={(value: number) => formatCurrency(value)}
+                                            labelFormatter={formatDate}
+                                        />
+                                        <Legend />
+                                        <Bar
+                                            dataKey="amount"
+                                            fill="#8884d8"
+                                            name="المبلغ"
+                                        />
+                                        <Bar
+                                            dataKey="count"
+                                            fill="#82ca9d"
+                                            name="العدد"
+                                        />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </TabPanel>
+
+                <TabPanel value={activeTab} index={3} className="space-y-4">
+                    <Card>
+                        <CardHeader>
+                            <Typography variant="h6">المصروفات عبر الزمن</Typography>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="h-[400px]">
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <LineChart data={statistics.expenses?.data || []}>
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis
+                                            dataKey="date"
+                                            tickFormatter={formatDate}
+                                            tick={{ fontSize: 12 }}
+                                        />
+                                        <YAxis
+                                            tickFormatter={formatCurrency}
+                                            tick={{ fontSize: 12 }}
+                                        />
+                                        <RechartsTooltip
+                                            formatter={(value: number) => formatCurrency(value)}
+                                            labelFormatter={formatDate}
+                                        />
+                                        <Legend />
+                                        <Line
+                                            type="monotone"
+                                            dataKey="amount"
+                                            stroke="#8884d8"
+                                            name="المبلغ"
+                                        />
+                                        <Line
+                                            type="monotone"
+                                            dataKey="count"
+                                            stroke="#82ca9d"
+                                            name="العدد"
+                                        />
+                                    </LineChart>
+                                </ResponsiveContainer>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </TabPanel>
+
+            </div>
         </Box>
     );
 } 

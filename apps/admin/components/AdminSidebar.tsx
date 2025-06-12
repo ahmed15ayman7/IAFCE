@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Box,
     Drawer,
@@ -9,11 +9,14 @@ import {
     ListItemButton,
     ListItemIcon,
     ListItemText,
+    IconButton,
     Collapse,
     useTheme,
     useMediaQuery,
 } from '@mui/material';
 import {
+    Menu as MenuIcon,
+    Dashboard as DashboardIcon,
     AccountBalance as FinanceIcon,
     Message as CommunicationsIcon,
     EventNote as SecretaryIcon,
@@ -28,6 +31,7 @@ import {
 } from '@mui/icons-material';
 import { usePathname, useRouter } from 'next/navigation';
 import { PermissionGuard } from './PermissionGuard';
+import { useUser } from '@/hooks/useUser';
 
 const drawerWidth = 240;
 
@@ -37,6 +41,33 @@ const menuItems = [
         path: '/admin/finance',
         icon: <FinanceIcon />,
         permissions: ['viewFinance'],
+        subItems: [
+            {
+                title: 'المدفوعات',
+                path: '/admin/finance/payments',
+                permissions: ['viewPayments'],
+            },
+            {
+                title: 'الأقساط',
+                path: '/admin/finance/installments',
+                permissions: ['viewInstallments'],
+            },
+            {
+                title: 'المصروفات',
+                path: '/admin/finance/expenses',
+                permissions: ['viewExpenses'],
+            },
+            {
+                title: 'الفروع',
+                path: '/admin/finance/branches',
+                permissions: ['viewBranches'],
+            },
+            {
+                title: 'التقارير',
+                path: '/admin/finance/reports',
+                permissions: ['viewFinanceReports'],
+            },
+        ],
     },
     {
         title: 'العلاقات العامة',
@@ -89,34 +120,37 @@ const menuItems = [
 ];
 
 export function AdminSidebar() {
-    const [open, setOpen] = useState(true);
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const [openMenus, setOpenMenus] = useState<{ [key: string]: boolean }>({});
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const pathname = usePathname();
     const router = useRouter();
+    const { user } = useUser();
+
+    useEffect(() => {
+        // تعيين القائمة المفتوحة للمحاسبة إذا كان المستخدم محاسب
+        if (user?.role === 'ACCOUNTANT') {
+            setOpenMenus(prev => ({
+                ...prev,
+                'المحاسبة': true
+            }));
+        }
+    }, [user]);
 
     const handleDrawerToggle = () => {
-        setOpen(!open);
+        setMobileOpen(!mobileOpen);
     };
 
-    return (
-        <Drawer
-            variant={isMobile ? 'temporary' : 'permanent'}
-            open={isMobile ? open : true}
-            onClose={handleDrawerToggle}
-            sx={{
-                width: drawerWidth,
-                flexShrink: 0,
-                '& .MuiDrawer-paper': {
-                    width: drawerWidth,
-                    boxSizing: 'border-box',
-                    mt: 8,
-                    backgroundColor: 'background.paper',
-                    borderRight: '1px solid',
-                    borderColor: 'divider',
-                },
-            }}
-        >
+    const handleMenuClick = (title: string) => {
+        setOpenMenus(prev => ({
+            ...prev,
+            [title]: !prev[title]
+        }));
+    };
+
+    const drawer = (
+        <Box sx={{ overflow: 'auto' }}>
             <List>
                 {menuItems.map((item) => (
                     <PermissionGuard
@@ -126,35 +160,83 @@ export function AdminSidebar() {
                     >
                         <ListItem disablePadding>
                             <ListItemButton
-                                selected={pathname === item.path}
-                                onClick={() => router.push(item.path)}
-                                sx={{
-                                    '&.Mui-selected': {
-                                        backgroundColor: 'primary.light',
-                                        '&:hover': {
-                                            backgroundColor: 'primary.light',
-                                        },
-                                    },
+                                onClick={() => {
+                                    if (item.subItems) {
+                                        handleMenuClick(item.title);
+                                    } else {
+                                        router.push(item.path);
+                                    }
                                 }}
+                                selected={pathname === item.path}
                             >
-                                <ListItemIcon
-                                    sx={{
-                                        color: pathname === item.path ? 'primary.main' : 'inherit',
-                                    }}
-                                >
-                                    {item.icon}
-                                </ListItemIcon>
-                                <ListItemText
-                                    primary={item.title}
-                                    sx={{
-                                        color: pathname === item.path ? 'primary.main' : 'inherit',
-                                    }}
-                                />
+                                <ListItemIcon>{item.icon}</ListItemIcon>
+                                <ListItemText primary={item.title} />
+                                {item.subItems && (
+                                    openMenus[item.title] ? <ExpandLess /> : <ExpandMore />
+                                )}
                             </ListItemButton>
                         </ListItem>
+                        {item.subItems && (
+                            <Collapse in={openMenus[item.title]} timeout="auto" unmountOnExit>
+                                <List component="div" disablePadding>
+                                    {item.subItems.map((subItem) => (
+                                        <PermissionGuard
+                                            key={subItem.path}
+                                            requiredPermissions={subItem.permissions}
+                                            requireAll={false}
+                                        >
+                                            <ListItemButton
+                                                sx={{ pl: 4 }}
+                                                onClick={() => router.push(subItem.path)}
+                                                selected={pathname === subItem.path}
+                                            >
+                                                <ListItemText primary={subItem.title} />
+                                            </ListItemButton>
+                                        </PermissionGuard>
+                                    ))}
+                                </List>
+                            </Collapse>
+                        )}
                     </PermissionGuard>
                 ))}
             </List>
-        </Drawer>
+        </Box>
+    );
+
+    return (
+        <>
+            {isMobile && (
+                <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    edge="start"
+                    onClick={handleDrawerToggle}
+                    sx={{ mr: 2, display: { md: 'none' } }}
+                >
+                    <MenuIcon />
+                </IconButton>
+            )}
+            <Box
+                component="nav"
+                sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
+            >
+                <Drawer
+                    variant={isMobile ? 'temporary' : 'permanent'}
+                    open={isMobile ? mobileOpen : true}
+                    onClose={handleDrawerToggle}
+                    ModalProps={{
+                        keepMounted: true,
+                    }}
+                    sx={{
+                        '& .MuiDrawer-paper': {
+                            boxSizing: 'border-box',
+                            width: drawerWidth,
+                        },
+                    }}
+                >
+                    {drawer}
+                </Drawer>
+            </Box>
+        </>
     );
 } 

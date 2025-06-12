@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 import authService from './auth.service';
-import { Achievement, Badge, Certificate, Community, Course, Discussion, Enrollment, File as FileModel, Group, Lesson, LiveRoom, LoginHistory, Milestone, Notification, NotificationSettings, Option, Path, Post, Question, Quiz, Submission, TwoFactor, User } from '@shared/prisma';
+import { Achievement, Badge, Branch, Certificate, Community, Course, Discussion, Enrollment, Expense, File as FileModel, Group, Installment, InstallmentStatus, Lesson, LiveRoom, LoginHistory, Milestone, Notification, NotificationSettings, Option, Path, Payment, Post, Question, Quiz, Submission, TwoFactor, User } from '@shared/prisma';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
@@ -861,13 +861,6 @@ export interface LegalCase {
     updatedAt: Date;
 }
 
-export interface Payment {
-    id: string;
-    userId: string;
-    amount: number;
-    legalCaseId?: string;
-    createdAt: Date;
-}
 
 // Update API interfaces to use the new models
 export const publicRelationsApi = {
@@ -892,11 +885,26 @@ export const secretariatApi = {
     markAttendance: (id: string, userId: string, isAttended: boolean) => api.patch(`/meetings/${id}/participants/${userId}/attendance`, { isAttended }),
 };
 export const paymentApi = {
-    getAll: (academyId: string): Promise<{ success: boolean, data: Payment[] }> => api.get(`/payments?academyId=${academyId}`),
+    getAll: (skip: number, take: number, where: any, orderBy: any): Promise<{ success: boolean, data: (Payment & { user: User, branch: Branch, installment: Installment })[] }> => api.get(`/payments?skip=${skip}&take=${take}&where=${where}&orderBy=${orderBy}`),
     getById: (id: string): Promise<{ success: boolean, data: Payment }> => api.get(`/payments/${id}`),
     create: (data: Omit<Payment, 'id' | 'createdAt' | 'updatedAt'>) => api.post('/payments', data),
     update: (id: string, data: Partial<Payment>) => api.patch(`/payments/${id}`, data),
     delete: (id: string) => api.delete(`/payments/${id}`),
+    getStatistics: (branchId?: string): Promise<{ success: boolean, data: any }> => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/payments/statistics?${params.toString()}`);
+    },
+    getDailyStatistics: (branchId?: string): Promise<{ success: boolean, data: any }> => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/payments/statistics/daily?${params.toString()}`);
+    },
+    getMonthlyStatistics: (branchId?: string): Promise<{ success: boolean, data: any }> => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/payments/statistics/monthly?${params.toString()}`);
+    },
 };
 export const administrationApi = {
     getAll: (academyId: string): Promise<{ success: boolean, data: AdminAssignment[] }> => api.get(`/admin-assignments?academyId=${academyId}`),
@@ -1267,6 +1275,175 @@ export const adminAuthApi = {
     getDashboardStats: async (timeRange: 'day' | 'week' | 'month' | 'year' = 'month') => {
         const response = await api.get(`/admin-auth/dashboard/stats?timeRange=${timeRange}`);
         return response.data;
+    },
+};
+export const expenseApi = {
+    getAll: async (skip: number, take: number, where: any, orderBy: any) => {
+        const response = await api.get(`/api/expenses?skip=${skip}&take=${take}&where=${where}&orderBy=${orderBy}`);
+        return response.data;
+    },
+    getById: async (id: string) => {
+        const response = await api.get(`/api/expenses/${id}`);
+        return response.data;
+    },
+    create: async (data: Partial<Expense>) => {
+        const response = await api.post('/api/expenses', data);
+        return response.data;
+    },
+    update: async (id: string, data: Partial<Expense>) => {
+        const response = await api.patch(`/api/expenses/${id}`, data);
+        return response.data;
+    },
+    delete: async (id: string) => {
+        const response = await api.delete(`/api/expenses/${id}`);
+        return response.data;
+    },
+    getStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/api/expenses/statistics?${params.toString()}`);
+    },
+    getTypeStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/api/expenses/statistics/type?${params.toString()}`);
+    },
+    getMonthlyStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/api/expenses/statistics/monthly?${params.toString()}`);
+    },
+};
+export const installmentsApi = {
+    getAll: async (skip: number, take: number, where: any, orderBy: any) => {
+        const response = await api.get(`/api/installments?skip=${skip}&take=${take}&where=${where}&orderBy=${orderBy}`);
+        return response.data;
+    },
+    getById: async (id: string) => {
+        const response = await api.get(`/api/installments/${id}`);
+        return response.data;
+    },
+    create: async (data: Partial<Installment>) => {
+        const response = await api.post('/api/installments', data);
+        return response.data;
+    },
+    updateStatus: async (id: string, status: InstallmentStatus) => {
+        const response = await api.patch(`/api/installments/${id}/status`, { status });
+        return response.data;
+    },
+    delete: async (id: string) => {
+        const response = await api.delete(`/api/installments/${id}`);
+        return response.data;
+    },
+    getOverdue: async () => {
+        const response = await api.get(`/api/installments/overdue`);
+        return response.data;
+    },
+    getStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/api/installments/statistics?${params.toString()}`);
+    },
+    getDailyStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/api/installments/statistics/daily?${params.toString()}`);
+    },
+    getWeeklyStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/api/installments/statistics/weekly?${params.toString()}`);
+    },
+    getMonthlyStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/api/installments/statistics/monthly?${params.toString()}`);
+    },
+    getYearlyStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/api/installments/statistics/yearly?${params.toString()}`);
+    },
+};
+
+export const paymentsApi = {
+    getAll: (skip: number, take: number, where: any, orderBy: any): Promise<{ success: boolean, data: (Payment & { user: User, branch: Branch, installment: Installment })[] }> => api.get(`/payments?skip=${skip}&take=${take}&where=${where}&orderBy=${orderBy}`),
+    getById: (id: string): Promise<{ success: boolean, data: Payment }> => api.get(`/payments/${id}`),
+    create: (data: Omit<Payment, 'id' | 'createdAt' | 'updatedAt'>) => api.post('/payments', data),
+    update: (id: string, data: Partial<Payment>) => api.patch(`/payments/${id}`, data),
+    delete: (id: string) => api.delete(`/payments/${id}`),
+    getStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/payments/statistics?${params.toString()}`);
+    },
+    getDailyStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/payments/statistics/daily?${params.toString()}`);
+    },
+    getWeeklyStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/payments/statistics/weekly?${params.toString()}`);
+    },
+    getMonthlyStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/payments/statistics/monthly?${params.toString()}`);
+    },
+    getYearlyStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/payments/statistics/yearly?${params.toString()}`);
+    },
+};
+
+export const expensesApi = {
+    getAll: async (skip: number, take: number, where: any, orderBy: any) => {
+        const response = await api.get(`/api/expenses?skip=${skip}&take=${take}&where=${where}&orderBy=${orderBy}`);
+        return response.data;
+    },
+    getById: async (id: string) => {
+        const response = await api.get(`/api/expenses/${id}`);
+        return response.data;
+    },
+    create: async (data: Partial<Expense>) => {
+        const response = await api.post('/api/expenses', data);
+        return response.data;
+    },
+    update: async (id: string, data: Partial<Expense>) => {
+        const response = await api.patch(`/api/expenses/${id}`, data);
+        return response.data;
+    },
+    delete: async (id: string) => {
+        const response = await api.delete(`/api/expenses/${id}`);
+        return response.data;
+    },
+    getStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/api/expenses/statistics?${params.toString()}`);
+    },
+    getDailyStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/api/expenses/statistics/daily?${params.toString()}`);
+    },
+    getWeeklyStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/api/expenses/statistics/weekly?${params.toString()}`);
+    },
+    getMonthlyStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/api/expenses/statistics/monthly?${params.toString()}`);
+    },
+    getYearlyStatistics: (branchId?: string) => {
+        const params = new URLSearchParams();
+        if (branchId) params.append('branchId', branchId);
+        return api.get(`/api/expenses/statistics/yearly?${params.toString()}`);
     },
 };
 

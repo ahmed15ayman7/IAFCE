@@ -3,10 +3,25 @@ import { QuizzesService } from './quizzes.service';
 import { CreateQuizDto } from 'dtos/Quiz.create.dto';
 import { UpdateQuizDto } from 'dtos/Quiz.update.dto';
 import { AuthGuard } from '../auth/auth.guard';
-import { Request } from 'express';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateQuestionDto } from 'dtos/Question.create.dto';
 import { CreateOptionDto } from 'dtos/Option.create.dto';
+import { IsArray } from 'class-validator';
+import { Type } from 'class-transformer';
+import { ValidateNested } from 'class-validator';
+export class CreateFullQuizDto extends CreateQuizDto {
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => QuestionWithOptionsDto)
+    questions: QuestionWithOptionsDto[];
+}
+
+class QuestionWithOptionsDto extends CreateQuestionDto {
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => CreateOptionDto)
+    options: CreateOptionDto[];
+}
 @ApiTags('الاختبارات')
 @Controller('quizzes')
 @ApiBearerAuth()
@@ -15,7 +30,7 @@ export class QuizzesController {
     constructor(private readonly quizzesService: QuizzesService) { }
 
     @Post()
-    async create(@Body() createQuizInput: CreateQuizDto & { questions: (CreateQuestionDto & { options: CreateOptionDto[] })[] }) {
+    async create(@Body() createQuizInput: CreateFullQuizDto) {
         return this.quizzesService.create(createQuizInput);
     }
 
