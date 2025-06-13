@@ -5,7 +5,6 @@ import {
     Box,
     useTheme,
 } from '@mui/material';
-import { useTranslation } from 'next-i18next';
 
 interface Tab {
     value: number;
@@ -35,7 +34,6 @@ const Tabs: React.FC<TabsProps> = ({
     className = '',
 }) => {
     const theme = useTheme();
-    const { t } = useTranslation();
     const [uncontrolledValue, setUncontrolledValue] = useState(0);
     const value = controlledValue ?? uncontrolledValue;
 
@@ -92,7 +90,7 @@ const Tabs: React.FC<TabsProps> = ({
                 {tabs.map((tab, index) => (
                     <MuiTab
                         key={index}
-                        label={t(tab.label)}
+                        label={tab.label}
                         value={tab.value}
                         icon={tab.icon}
                         disabled={tab.disabled}

@@ -5,7 +5,6 @@ import {
     Box,
     useTheme,
 } from '@mui/material';
-import { useTranslation } from 'next-i18next';
 
 interface ButtonProps {
     children: React.ReactNode;
@@ -43,7 +42,6 @@ const Button: React.FC<ButtonProps> = ({
     rel,
 }) => {
     const theme = useTheme();
-    const { t } = useTranslation();
 
     const getSizeClasses = () => {
         switch (size) {
@@ -131,6 +129,7 @@ const Button: React.FC<ButtonProps> = ({
 
     return (
         <MuiButton
+            component="button"
             variant={variant}
             color={color}
             size={size}
@@ -167,7 +166,7 @@ const Button: React.FC<ButtonProps> = ({
                         size={20}
                         className={`${getLoadingColor()} mr-2 rtl:mr-0 rtl:ml-2`}
                     />
-                    {t('common.loading')}
+                    جاري التحميل
                 </Box>
             ) : (
                 children

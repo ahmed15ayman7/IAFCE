@@ -29,7 +29,7 @@ export class AdminRoleDto {
   @ApiProperty({ enum: AdminRoleType })
   // Field: name, Type: AdminRoleType
   @Column()
-  name: AdminRoleType;
+  name: (typeof AdminRoleType)[keyof typeof AdminRoleType];
 
   @ApiProperty({ type: "string", nullable: true })
   // Field: description, Type: string

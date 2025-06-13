@@ -161,6 +161,7 @@ model Academy {
     PublicRelationsRecord PublicRelationsRecord[]
     Meeting               Meeting[]
     LegalCase             LegalCase[]
+    Testimonial           Testimonial[]
 }
 
 model Instructor {
@@ -174,22 +175,23 @@ model Instructor {
 
 // Course Management
 model Course {
-    id          String       @id @default(cuid())
+    id          String        @id @default(cuid())
     title       String
     description String
     academyId   String
     image       String?
     level       String
-    academy     Academy      @relation(fields: [academyId], references: [id])
+    academy     Academy       @relation(fields: [academyId], references: [id])
     lessons     Lesson[]
     enrollments Enrollment[]
     quizzes     Quiz[]
     instructors Instructor[]
     liveRoom    LiveRoom[]
-    createdAt   DateTime     @default(now())
-    updatedAt   DateTime     @updatedAt
-    status      CourseStatus @default(PENDING)
+    createdAt   DateTime      @default(now())
+    updatedAt   DateTime      @updatedAt
+    status      CourseStatus  @default(PENDING)
     Path        Path[]
+    Testimonial Testimonial[]
 }
 
 enum CourseStatus {
@@ -466,7 +468,14 @@ model Admin {
     legalCases        LegalCase[]
     expenses          Expense[]
 
-    AdminRole AdminRole[]
+    AdminRole           AdminRole[]
+    AboutSection        AboutSection[]
+    NewsEvent           NewsEvent[]
+    SuccessStory        SuccessStory[]
+    ContactMessage      ContactMessage[]
+    BlogPost            BlogPost[]
+    CSRProject          CSRProject[]
+    CrisisCommunication CrisisCommunication[]
 }
 
 model Channel {
@@ -786,6 +795,7 @@ enum AdminRoleType {
     GENERAL_MANAGER
     ADMIN
     SUPER_ADMIN
+    PUBLIC_RELATIONS
 }
 
 model Permission {
@@ -941,4 +951,144 @@ model BranchFinance {
     lastUpdated   DateTime @default(now())
     createdAt     DateTime @default(now())
     updatedAt     DateTime @updatedAt
+}
+
+// من نحن
+model AboutSection {
+    id          String   @id @default(cuid())
+    title       String
+    content     String
+    image       String?
+    type        String // رؤية / رسالة / قيمة / تاريخ / اعتمادات / هيكل / جوائز / شهادات
+    createdById String
+    createdBy   Admin    @relation(fields: [createdById], references: [id])
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+// المركز الإعلامي
+model NewsEvent {
+    id          String   @id @default(cuid())
+    title       String
+    content     String
+    date        DateTime
+    type        String // خبر / فعالية
+    image       String?
+    createdById String
+    createdBy   Admin    @relation(fields: [createdById], references: [id])
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model SuccessStory {
+    id           String   @id @default(cuid())
+    title        String
+    content      String
+    image        String?
+    videoUrl     String?
+    graduateName String
+    position     String
+    createdById  String
+    createdBy    Admin    @relation(fields: [createdById], references: [id])
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+}
+
+model Testimonial {
+    id        String   @id @default(cuid())
+    name      String
+    feedback  String
+    rating    Int
+    image     String?
+    videoUrl  String?
+    courseId  String?
+    course    Course?  @relation(fields: [courseId], references: [id])
+    academyId String
+    academy   Academy  @relation(fields: [academyId], references: [id])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+// تواصل معنا
+model ContactMessage {
+    id            String   @id @default(cuid())
+    name          String
+    email         String
+    phone         String
+    message       String
+    status        String // جديد / تم الرد
+    response      String?
+    respondedById String?
+    respondedBy   Admin?   @relation(fields: [respondedById], references: [id])
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+}
+
+// الأسئلة الشائعة
+model FAQ {
+    id        String   @id @default(cuid())
+    question  String
+    answer    String
+    category  String
+    isActive  Boolean  @default(true)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+// المقالات والمدونات
+model BlogPost {
+    id          String   @id @default(cuid())
+    title       String
+    slug        String   @unique
+    content     String
+    coverImage  String?
+    authorId    String
+    author      Admin    @relation(fields: [authorId], references: [id])
+    tags        String[]
+    publishDate DateTime
+    isPublished Boolean  @default(false)
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+// الشراكات والبروتوكولات
+model Partnership {
+    id          String    @id @default(cuid())
+    partnerName String
+    type        String // محلية / دولية / أكاديمية / مجتمعية
+    description String
+    logo        String?
+    startDate   DateTime
+    endDate     DateTime?
+    status      String
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+}
+
+// المسؤولية المجتمعية
+model CSRProject {
+    id             String   @id @default(cuid())
+    title          String
+    description    String
+    impact         String
+    images         String[]
+    startDate      DateTime
+    status         String
+    assignedTeamId String
+    assignedTeam   Admin    @relation(fields: [assignedTeamId], references: [id])
+    createdAt      DateTime @default(now())
+    updatedAt      DateTime @updatedAt
+}
+
+// إدارة الأزمات والتواصل
+model CrisisCommunication {
+    id           String   @id @default(cuid())
+    title        String
+    type         String
+    summary      String
+    responsePlan String
+    handledById  String
+    handledBy    Admin    @relation(fields: [handledById], references: [id])
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
 }

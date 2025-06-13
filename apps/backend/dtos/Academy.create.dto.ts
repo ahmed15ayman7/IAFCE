@@ -9,6 +9,7 @@ import {
   PublicRelationsRecord,
   Meeting,
   LegalCase,
+  Testimonial,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";

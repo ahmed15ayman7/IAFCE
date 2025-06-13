@@ -8,6 +8,7 @@ import { AccountingEntryEntity } from "./AccountingEntry.entity";
 import { PublicRelationsRecordEntity } from "./PublicRelationsRecord.entity";
 import { MeetingEntity } from "./Meeting.entity";
 import { LegalCaseEntity } from "./LegalCase.entity";
+import { TestimonialEntity } from "./Testimonial.entity";
 import {
   User,
   UserAcademyCEO,
@@ -18,6 +19,7 @@ import {
   PublicRelationsRecord,
   Meeting,
   LegalCase,
+  Testimonial,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -103,4 +105,9 @@ export class AcademyDto {
   // Field: LegalCase, Type: LegalCase[]
   @Column()
   LegalCase: LegalCase[];
+
+  @ApiProperty({ type: TestimonialEntity })
+  // Field: Testimonial, Type: Testimonial[]
+  @Column()
+  Testimonial: Testimonial[];
 }

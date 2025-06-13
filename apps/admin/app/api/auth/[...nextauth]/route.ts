@@ -13,13 +13,13 @@ const handler = NextAuth({
             },
             async authorize(credentials) {
                 try {
+                    
                     const response = await adminAuthApi.login({
                         email: credentials?.email || '',
                         password: credentials?.password || '',
                     });
 
                     const { access_token, admin, refreshToken } = response;
-                    console.log(response);
 
                     if (admin) {
                         return {

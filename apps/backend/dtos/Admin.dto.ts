@@ -9,6 +9,13 @@ import { AdminAssignmentEntity } from "./AdminAssignment.entity";
 import { LegalCaseEntity } from "./LegalCase.entity";
 import { ExpenseEntity } from "./Expense.entity";
 import { AdminRoleEntity } from "./AdminRole.entity";
+import { AboutSectionEntity } from "./AboutSection.entity";
+import { NewsEventEntity } from "./NewsEvent.entity";
+import { SuccessStoryEntity } from "./SuccessStory.entity";
+import { ContactMessageEntity } from "./ContactMessage.entity";
+import { BlogPostEntity } from "./BlogPost.entity";
+import { CSRProjectEntity } from "./CSRProject.entity";
+import { CrisisCommunicationEntity } from "./CrisisCommunication.entity";
 import {
   User,
   Group,
@@ -20,6 +27,13 @@ import {
   LegalCase,
   Expense,
   AdminRole,
+  AboutSection,
+  NewsEvent,
+  SuccessStory,
+  ContactMessage,
+  BlogPost,
+  CSRProject,
+  CrisisCommunication,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -90,4 +104,39 @@ export class AdminDto {
   // Field: AdminRole, Type: AdminRole[]
   @Column()
   AdminRole: AdminRole[];
+
+  @ApiProperty({ type: AboutSectionEntity })
+  // Field: AboutSection, Type: AboutSection[]
+  @Column()
+  AboutSection: AboutSection[];
+
+  @ApiProperty({ type: NewsEventEntity })
+  // Field: NewsEvent, Type: NewsEvent[]
+  @Column()
+  NewsEvent: NewsEvent[];
+
+  @ApiProperty({ type: SuccessStoryEntity })
+  // Field: SuccessStory, Type: SuccessStory[]
+  @Column()
+  SuccessStory: SuccessStory[];
+
+  @ApiProperty({ type: ContactMessageEntity })
+  // Field: ContactMessage, Type: ContactMessage[]
+  @Column()
+  ContactMessage: ContactMessage[];
+
+  @ApiProperty({ type: BlogPostEntity })
+  // Field: BlogPost, Type: BlogPost[]
+  @Column()
+  BlogPost: BlogPost[];
+
+  @ApiProperty({ type: CSRProjectEntity })
+  // Field: CSRProject, Type: CSRProject[]
+  @Column()
+  CSRProject: CSRProject[];
+
+  @ApiProperty({ type: CrisisCommunicationEntity })
+  // Field: CrisisCommunication, Type: CrisisCommunication[]
+  @Column()
+  CrisisCommunication: CrisisCommunication[];
 }

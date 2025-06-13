@@ -112,10 +112,37 @@ const menuItems = [
         permissions: ['viewAcademic'],
     },
     {
-        title: 'الإدارة العامة',
+        title: 'العلاقات العامة',
         path: '/admin/public-relations',
         icon: <PublicIcon />,
         permissions: ['viewPublicRelations'],
+        subItems: [
+            {
+                title: 'الأخبار والفعاليات',
+                path: '/admin/public-relations/media-center',
+                permissions: ['viewNewsEvents'],
+            },
+            {
+                title: 'الأخبار والفعاليات',
+                path: '/admin/public-relations/about',
+                permissions: ['viewAbout'],
+            },
+            {
+                title: 'الرسائل',
+                path: '/admin/public-relations/contact',
+                permissions: ['viewContact'],
+            },
+            {
+                title: 'الأسئلة الشائعة',
+                path: '/admin/public-relations/faq',
+                permissions: ['viewFaq'],
+            },
+            {
+                title: 'التعليقات',
+                path: '/admin/public-relations/testimonials',
+                permissions: ['viewTestimonials'],
+            }
+        ],
     },
 ];
 

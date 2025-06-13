@@ -10,6 +10,13 @@ import {
   LegalCase,
   Expense,
   AdminRole,
+  AboutSection,
+  NewsEvent,
+  SuccessStory,
+  ContactMessage,
+  BlogPost,
+  CSRProject,
+  CrisisCommunication,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";

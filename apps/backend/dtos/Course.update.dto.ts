@@ -8,6 +8,7 @@ import {
   LiveRoom,
   CourseStatus,
   Path,
+  Testimonial,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";

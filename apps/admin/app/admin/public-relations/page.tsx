@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Box,
     Card,
@@ -33,6 +33,7 @@ import {
     Tabs,
     Tab,
     Badge,
+    CircularProgress,
 } from '@mui/material';
 import {
     Add as AddIcon,
@@ -49,6 +50,21 @@ import { PermissionGuard } from '@/components/PermissionGuard';
 import { motion, AnimatePresence } from 'framer-motion';
 import { format } from 'date-fns';
 import { arSA } from 'date-fns/locale';
+import {
+    BarChart,
+    Bar,
+    LineChart,
+    Line,
+    PieChart,
+    Pie,
+    Tooltip as RechartsTooltip,
+    Cell,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    ResponsiveContainer,
+    Legend,
+} from 'recharts';
 
 let initialpublicRelationsData = [
     {
@@ -113,9 +129,8 @@ let initialpublicRelationsData = [
     },
 ]
 
-
-
-
+// ألوان الرسوم البيانية
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -152,9 +167,13 @@ export default function PublicRelationsPage() {
 
     const queryClient = useQueryClient();
 
-    const { data: prData } = useQuery({
-        queryKey: ['public-relations'],
-        queryFn: () => publicRelationsApi.getAll('academy-id'),
+    const { data: prData, isLoading } = useQuery({
+        queryKey: ['prStatistics'],
+        queryFn: async () => {
+            const response = await fetch('/api/public-relations/statistics');
+            if (!response.ok) throw new Error('فشل في جلب البيانات');
+            return response.json();
+        },
     });
 
     const addMutation = useMutation({
@@ -249,315 +268,214 @@ export default function PublicRelationsPage() {
         }
     };
 
+    if (isLoading) {
+        return (
+            <Box className="flex h-screen items-center justify-center">
+                <CircularProgress />
+            </Box>
+        );
+    }
+
     return (
-        <Box sx={{ p: 3 }}>
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-            >
-                <Card elevation={3} sx={{ mb: 4 }}>
-                    <CardContent>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                                <PublicIcon color="primary" sx={{ fontSize: 40 }} />
-                                <Typography variant="h4" component="h1">
-                                    العلاقات العامة
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="p-6"
+        >
+            <Card className="p-6 shadow-lg">
+                <Box className="mb-6">
+                    <Typography variant="h5" className="mb-2 font-bold text-gray-800">
+                        إحصائيات العلاقات العامة
+                    </Typography>
+                    <Typography variant="body2" className="text-gray-600">
+                        نظرة عامة على أداء العلاقات العامة
+                    </Typography>
+                </Box>
+
+                <Tabs value={tabValue} onChange={handleTabChange} className="mb-4">
+                    <Tab label="نظرة عامة" />
+                    <Tab label="الرسائل" />
+                    <Tab label="الأخبار والفعاليات" />
+                    <Tab label="الأسئلة الشائعة" />
+                </Tabs>
+
+                <TabPanel value={tabValue} index={0}>
+                    <Grid container spacing={3}>
+                        {/* إحصائيات عامة */}
+                        <Grid item xs={12} md={3}>
+                            <Paper className="p-4 text-center">
+                                <Typography variant="h6" className="text-gray-600">
+                                    إجمالي الرسائل
                                 </Typography>
-                            </Box>
-                            <PermissionGuard requiredPermissions={['managePR']}>
-                                <Button
-                                    variant="contained"
-                                    startIcon={<AddIcon />}
-                                    onClick={() => {
-                                        setSelectedItem(null);
-                                        setFormData({
-                                            message: '',
-                                            senderName: '',
-                                            senderContact: '',
-                                            status: 'PENDING',
-                                        });
-                                        setOpen(true);
-                                    }}
-                                    sx={{
-                                        backgroundColor: 'primary.main',
-                                        '&:hover': {
-                                            backgroundColor: 'primary.dark',
-                                        },
-                                    }}
-                                >
-                                    إضافة سجل جديد
-                                </Button>
-                            </PermissionGuard>
-                        </Box>
+                                <Typography variant="h4" className="font-bold text-blue-600">
+                                    {prData?.totalMessages || 0}
+                                </Typography>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={3}>
+                            <Paper className="p-4 text-center">
+                                <Typography variant="h6" className="text-gray-600">
+                                    الأخبار والفعاليات
+                                </Typography>
+                                <Typography variant="h4" className="font-bold text-green-600">
+                                    {prData?.totalNewsEvents || 0}
+                                </Typography>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={3}>
+                            <Paper className="p-4 text-center">
+                                <Typography variant="h6" className="text-gray-600">
+                                    الأسئلة الشائعة
+                                </Typography>
+                                <Typography variant="h4" className="font-bold text-purple-600">
+                                    {prData?.totalFaqs || 0}
+                                </Typography>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={3}>
+                            <Paper className="p-4 text-center">
+                                <Typography variant="h6" className="text-gray-600">
+                                    معدل الرد
+                                </Typography>
+                                <Typography variant="h4" className="font-bold text-orange-600">
+                                    {prData?.responseRate || 0}%
+                                </Typography>
+                            </Paper>
+                        </Grid>
 
-                        <Tabs value={tabValue} onChange={handleTabChange} sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                            <Tab label="السجلات" />
-                            <Tab label="الردود" />
-                            <Tab label="الفعاليات" />
-                            <Tab label="المنشورات" />
-                        </Tabs>
-
-                        <TabPanel value={tabValue} index={0}>
-                            <TableContainer component={Paper} elevation={3}>
-                                <Table>
-                                    <TableHead>
-                                        <TableRow sx={{ backgroundColor: 'primary.main' }}>
-                                            <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>المرسل</TableCell>
-                                            <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>الرسالة</TableCell>
-                                            <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>الحالة</TableCell>
-                                            <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>التاريخ</TableCell>
-                                            <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>الإجراءات</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        <AnimatePresence>
-                                            {(prData?.data ?? initialpublicRelationsData).map((item: any) => (
-                                                <motion.tr
-                                                    key={item.id}
-                                                    initial={{ opacity: 0 }}
-                                                    animate={{ opacity: 1 }}
-                                                    exit={{ opacity: 0 }}
-                                                    transition={{ duration: 0.3 }}
-                                                >
-                                                    <TableCell>
-                                                        <Typography variant="subtitle2">{item.senderName}</Typography>
-                                                        <Typography variant="caption" color="text.secondary">
-                                                            {item.senderContact}
-                                                        </Typography>
-                                                    </TableCell>
-                                                    <TableCell>{item.message}</TableCell>
-                                                    <TableCell>
-                                                        <Chip
-                                                            label={getStatusText(item.status)}
-                                                            color={getStatusColor(item.status) as any}
-                                                            size="small"
-                                                        />
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        {format(new Date(item.createdAt), 'PPP', { locale: arSA })}
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        <PermissionGuard requiredPermissions={['managePR']}>
-                                                            <Tooltip title="تعديل">
-                                                                <IconButton
-                                                                    size="small"
-                                                                    onClick={() => handleEdit(item)}
-                                                                    sx={{ color: 'primary.main' }}
-                                                                >
-                                                                    <EditIcon />
-                                                                </IconButton>
-                                                            </Tooltip>
-                                                            <Tooltip title="حذف">
-                                                                <IconButton
-                                                                    size="small"
-                                                                    onClick={() => handleDelete(item.id)}
-                                                                    sx={{ color: 'error.main' }}
-                                                                >
-                                                                    <DeleteIcon />
-                                                                </IconButton>
-                                                            </Tooltip>
-                                                        </PermissionGuard>
-                                                    </TableCell>
-                                                </motion.tr>
-                                            ))}
-                                        </AnimatePresence>
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                        </TabPanel>
-
-                        <TabPanel value={tabValue} index={1}>
-                            <Grid container spacing={3}>
-                                {(prData?.data ?? initialpublicRelationsData).map((item: any) => (
-                                    <Grid item xs={12} key={item.id}>
-                                        <Card elevation={2}>
-                                            <CardContent>
-                                                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                                                    <MessageIcon color="primary" sx={{ mr: 1 }} />
-                                                    <Typography variant="h6">{item.senderName}</Typography>
-                                                </Box>
-                                                <Typography variant="body2" color="text.secondary" paragraph>
-                                                    {item.message}
-                                                </Typography>
-                                                {item.responses?.map((response: any) => (
-                                                    <Box key={response.id} sx={{ mt: 2, p: 2, bgcolor: 'grey.100', borderRadius: 1 }}>
-                                                        <Typography variant="body2">{response.response}</Typography>
-                                                        <Typography variant="caption" color="text.secondary">
-                                                            {format(new Date(response.createdAt), 'PPP', { locale: arSA })}
-                                                        </Typography>
-                                                    </Box>
-                                                ))}
-                                            </CardContent>
-                                        </Card>
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </TabPanel>
-
-                        <TabPanel value={tabValue} index={2}>
-                            <Grid container spacing={3}>
-                                {(prData?.data ?? initialpublicRelationsData).map((item: any) => (
-                                    <Grid item xs={12} md={6} lg={4} key={item.id}>
-                                        <Card elevation={2}>
-                                            <CardContent>
-                                                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                                                    <EventIcon color="primary" sx={{ mr: 1 }} />
-                                                    <Typography variant="h6">الفعاليات المرتبطة</Typography>
-                                                </Box>
-                                                {item.events?.map((event: any) => (
-                                                    <Box key={event.id} sx={{ mt: 2 }}>
-                                                        <Typography variant="subtitle2">{event.title}</Typography>
-                                                        <Typography variant="body2" color="text.secondary">
-                                                            {format(new Date(event.startTime), 'PPP', { locale: arSA })}
-                                                        </Typography>
-                                                    </Box>
-                                                ))}
-                                            </CardContent>
-                                        </Card>
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </TabPanel>
-
-                        <TabPanel value={tabValue} index={3}>
-                            <Grid container spacing={3}>
-                                {(prData?.data ?? initialpublicRelationsData).map((item: any) => (
-                                    <Grid item xs={12} md={6} lg={4} key={item.id}>
-                                        <Card elevation={2}>
-                                            <CardContent>
-                                                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                                                    <PostIcon color="primary" sx={{ mr: 1 }} />
-                                                    <Typography variant="h6">المنشورات المرتبطة</Typography>
-                                                </Box>
-                                                {item.posts?.map((post: any) => (
-                                                    <Box key={post.id} sx={{ mt: 2 }}>
-                                                        <Typography variant="subtitle2">{post.title}</Typography>
-                                                        <Typography variant="body2" color="text.secondary">
-                                                            {format(new Date(post.createdAt), 'PPP', { locale: arSA })}
-                                                        </Typography>
-                                                    </Box>
-                                                ))}
-                                            </CardContent>
-                                        </Card>
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </TabPanel>
-                    </CardContent>
-                </Card>
-
-                <Dialog
-                    open={open}
-                    onClose={() => setOpen(false)}
-                    maxWidth="md"
-                    fullWidth
-                    PaperProps={{
-                        sx: {
-                            borderRadius: 2,
-                            boxShadow: 24,
-                        },
-                    }}
-                >
-                    <DialogTitle sx={{ backgroundColor: 'primary.main', color: 'white' }}>
-                        {selectedItem ? 'تعديل السجل' : 'إضافة سجل جديد'}
-                    </DialogTitle>
-                    <form onSubmit={handleSubmit}>
-                        <DialogContent>
-                            <Grid container spacing={3}>
-                                <Grid item xs={12} md={6}>
-                                    <TextField
-                                        fullWidth
-                                        label="اسم المرسل"
-                                        value={formData.senderName}
-                                        onChange={(e) =>
-                                            setFormData({ ...formData, senderName: e.target.value })
-                                        }
-                                        required
-                                    />
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <TextField
-                                        fullWidth
-                                        label="معلومات الاتصال"
-                                        value={formData.senderContact}
-                                        onChange={(e) =>
-                                            setFormData({ ...formData, senderContact: e.target.value })
-                                        }
-                                        required
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        fullWidth
-                                        label="الرسالة"
-                                        multiline
-                                        rows={4}
-                                        value={formData.message}
-                                        onChange={(e) =>
-                                            setFormData({ ...formData, message: e.target.value })
-                                        }
-                                        required
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <FormControl fullWidth>
-                                        <InputLabel>الحالة</InputLabel>
-                                        <Select
-                                            value={formData.status}
-                                            onChange={(e) =>
-                                                setFormData({ ...formData, status: e.target.value })
-                                            }
-                                            required
-                                            label="الحالة"
+                        {/* رسم بياني دائري لحالة الرسائل */}
+                        <Grid item xs={12} md={6}>
+                            <Card className="p-4">
+                                <Typography variant="h6" className="mb-4 text-center">
+                                    حالة الرسائل
+                                </Typography>
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <PieChart>
+                                        <Pie
+                                            data={prData?.messageStatus || []}
+                                            dataKey="value"
+                                            nameKey="name"
+                                            cx="50%"
+                                            cy="50%"
+                                            outerRadius={80}
+                                            label
                                         >
-                                            <MenuItem value="PENDING">قيد الانتظار</MenuItem>
-                                            <MenuItem value="IN_PROGRESS">قيد التنفيذ</MenuItem>
-                                            <MenuItem value="RESOLVED">تم الحل</MenuItem>
-                                            <MenuItem value="CLOSED">مغلق</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
-                            </Grid>
-                        </DialogContent>
-                        <DialogActions sx={{ p: 3 }}>
-                            <Button
-                                onClick={() => setOpen(false)}
-                                variant="outlined"
-                                sx={{ mr: 1 }}
-                            >
-                                إلغاء
-                            </Button>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                sx={{
-                                    backgroundColor: 'primary.main',
-                                    '&:hover': {
-                                        backgroundColor: 'primary.dark',
-                                    },
-                                }}
-                            >
-                                {selectedItem ? 'تحديث' : 'إضافة'}
-                            </Button>
-                        </DialogActions>
-                    </form>
-                </Dialog>
+                                            {prData?.messageStatus?.map((entry: any, index: number) => (
+                                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                            ))}
+                                        </Pie>
+                                        <RechartsTooltip />
+                                        <Legend />
+                                    </PieChart>
+                                </ResponsiveContainer>
+                            </Card>
+                        </Grid>
 
-                <Snackbar
-                    open={snackbar.open}
-                    autoHideDuration={6000}
-                    onClose={() => setSnackbar({ ...snackbar, open: false })}
-                >
-                    <Alert
-                        onClose={() => setSnackbar({ ...snackbar, open: false })}
-                        severity={snackbar.severity}
-                        sx={{ width: '100%' }}
-                    >
-                        {snackbar.message}
-                    </Alert>
-                </Snackbar>
-            </motion.div>
-        </Box>
+                        {/* رسم بياني خطي للرسائل الشهرية */}
+                        <Grid item xs={12} md={6}>
+                            <Card className="p-4">
+                                <Typography variant="h6" className="mb-4 text-center">
+                                    الرسائل الشهرية
+                                </Typography>
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <LineChart data={prData?.monthlyMessages || []}>
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis dataKey="month" />
+                                        <YAxis />
+                                        <RechartsTooltip />
+                                        <Legend />
+                                        <Line
+                                            type="monotone"
+                                            dataKey="count"
+                                            stroke="#8884d8"
+                                            name="عدد الرسائل"
+                                        />
+                                    </LineChart>
+                                </ResponsiveContainer>
+                            </Card>
+                        </Grid>
+                    </Grid>
+                </TabPanel>
+
+                <TabPanel value={tabValue} index={1}>
+                    <Grid container spacing={3}>
+                        {/* رسم بياني شريطي لأنواع الرسائل */}
+                        <Grid item xs={12}>
+                            <Card className="p-4">
+                                <Typography variant="h6" className="mb-4 text-center">
+                                    توزيع أنواع الرسائل
+                                </Typography>
+                                <ResponsiveContainer width="100%" height={400}>
+                                    <BarChart data={prData?.messageTypes || []}>
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis dataKey="name" />
+                                        <YAxis />
+                                        <RechartsTooltip />
+                                        <Legend />
+                                        <Bar dataKey="value" fill="#8884d8" name="عدد الرسائل" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            </Card>
+                        </Grid>
+                    </Grid>
+                </TabPanel>
+
+                <TabPanel value={tabValue} index={2}>
+                    <Grid container spacing={3}>
+                        {/* رسم بياني شريطي للأخبار والفعاليات */}
+                        <Grid item xs={12}>
+                            <Card className="p-4">
+                                <Typography variant="h6" className="mb-4 text-center">
+                                    توزيع الأخبار والفعاليات
+                                </Typography>
+                                <ResponsiveContainer width="100%" height={400}>
+                                    <BarChart data={prData?.newsEventsDistribution || []}>
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis dataKey="name" />
+                                        <YAxis />
+                                        <RechartsTooltip />
+                                        <Legend />
+                                        <Bar dataKey="value" fill="#00C49F" name="العدد" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            </Card>
+                        </Grid>
+                    </Grid>
+                </TabPanel>
+
+                <TabPanel value={tabValue} index={3}>
+                    <Grid container spacing={3}>
+                        {/* رسم بياني دائري للأسئلة الشائعة */}
+                        <Grid item xs={12}>
+                            <Card className="p-4">
+                                <Typography variant="h6" className="mb-4 text-center">
+                                    توزيع الأسئلة الشائعة حسب الفئة
+                                </Typography>
+                                <ResponsiveContainer width="100%" height={400}>
+                                    <PieChart>
+                                        <Pie
+                                            data={prData?.faqCategories || []}
+                                            dataKey="value"
+                                            nameKey="name"
+                                            cx="50%"
+                                            cy="50%"
+                                            outerRadius={150}
+                                            label
+                                        >
+                                            {prData?.faqCategories?.map((entry: any, index: number) => (
+                                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                            ))}
+                                        </Pie>
+                                        <RechartsTooltip />
+                                        <Legend />
+                                    </PieChart>
+                                </ResponsiveContainer>
+                            </Card>
+                        </Grid>
+                    </Grid>
+                </TabPanel>
+            </Card>
+        </motion.div>
     );
 } 

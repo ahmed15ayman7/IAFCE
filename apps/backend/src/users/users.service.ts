@@ -77,7 +77,10 @@ export class UsersService {
         const user = await this.findOne(id);
         return this.prisma.user.update({
             where: { id },
-            data,
+            data:{
+                ...data,
+                password:await bcrypt.hash(data.password, 10)
+            },
             include: {
                 profile: true,
                 academy: true,

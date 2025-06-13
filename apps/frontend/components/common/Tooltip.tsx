@@ -4,7 +4,6 @@ import {
     TooltipProps as MuiTooltipProps,
     useTheme,
 } from '@mui/material';
-import { useTranslation } from 'next-i18next';
 
 interface TooltipProps extends Omit<MuiTooltipProps, 'title'> {
     title: string;
@@ -22,12 +21,9 @@ const Tooltip: React.FC<TooltipProps> = ({
     className = '',
     ...props
 }) => {
-    const theme = useTheme();
-    const { t } = useTranslation();
-
     return (
         <MuiTooltip
-            title={t(title)}
+            title={title}
             placement={placement}
             arrow={arrow}
             className={`

@@ -2,7 +2,7 @@ import { Injectable, InternalServerErrorException, NotFoundException, Unauthoriz
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcryptjs';
-import { AdminRoleType, CourseStatus } from '@shared/prisma';
+import { AdminRoleType, CourseStatus, UserRole } from '@shared/prisma';
 import { CreateAdminDto } from 'dtos/Admin.create.dto';
 import { ConfigService } from '@nestjs/config';
 
@@ -115,6 +115,10 @@ export class AdminAuthService {
         if (!user) {
             throw new NotFoundException('User not found');
         }
+        if (user.role !== UserRole.ADMIN) {
+            throw new NotFoundException('User not role Admin');
+        }
+
 
         const createdAdmin = await this.prisma.admin.create({
             data: admin,
