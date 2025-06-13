@@ -1005,7 +1005,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/ahmedayman/Documents/MY-COMPNIES/IAFCE/apps/backend/generated/prisma_client",
+      "value": "/root/IAFCE/apps/backend/generated/prisma_client",
       "fromEnvVar": null
     },
     "config": {
@@ -1014,12 +1014,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/ahmedayman/Documents/MY-COMPNIES/IAFCE/packages/shared/prisma/schema.prisma",
+    "sourceFilePath": "/root/IAFCE/packages/shared/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
