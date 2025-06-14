@@ -3,9 +3,8 @@ import {
     Box,
     Typography,
     Button,
-    useTheme,
 } from '@mui/material';
-import { useTranslation } from 'next-i18next';
+
 
 interface EmptyStateProps {
     title?: string;
@@ -32,8 +31,6 @@ const EmptyState: React.FC<EmptyStateProps> = ({
     variant = 'default',
     color = 'primary',
 }) => {
-    const theme = useTheme();
-    const { t } = useTranslation();
 
     const getColorClasses = () => {
         switch (color) {

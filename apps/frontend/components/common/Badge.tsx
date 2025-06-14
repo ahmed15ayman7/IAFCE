@@ -2,12 +2,11 @@ import React from 'react';
 import {
     Badge as MuiBadge,
     BadgeProps as MuiBadgeProps,
-    useTheme,
 } from '@mui/material';
 
 interface BadgeProps extends Omit<MuiBadgeProps, 'color'> {
     children: React.ReactElement;
-    content?: number | string;
+    content?: string;
     max?: number;
     showZero?: boolean;
     variant?: 'standard' | 'dot';
@@ -25,7 +24,6 @@ const Badge: React.FC<BadgeProps> = ({
     className = '',
     ...props
 }) => {
-    const theme = useTheme();
 
     const getColorClass = () => {
         switch (color) {

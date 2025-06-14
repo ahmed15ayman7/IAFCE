@@ -3,12 +3,14 @@ import { UserEntity } from "./User.entity";
 import { BranchEntity } from "./Branch.entity";
 import { InstallmentEntity } from "./Installment.entity";
 import { LegalCaseEntity } from "./LegalCase.entity";
+import { PaymentLogBySecretaryEntity } from "./PaymentLogBySecretary.entity";
 import {
   User,
   PaymentMethod,
   Branch,
   Installment,
   LegalCase,
+  PaymentLogBySecretary,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -79,4 +81,9 @@ export class PaymentEntity {
   // Field: updatedAt, Type: Date
   @Column()
   updatedAt: Date;
+
+  @ApiProperty({ type: PaymentLogBySecretaryEntity })
+  // Field: secretaryLogs, Type: PaymentLogBySecretary[]
+  @Column()
+  secretaryLogs: PaymentLogBySecretary[];
 }

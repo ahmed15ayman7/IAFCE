@@ -10,6 +10,9 @@ import {
   Meeting,
   LegalCase,
   Testimonial,
+  MediaAlert,
+  PartnershipAgreement,
+  CSRProject,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";

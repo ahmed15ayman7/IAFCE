@@ -129,7 +129,7 @@ const Button: React.FC<ButtonProps> = ({
 
     return (
         <MuiButton
-            component="button"
+            component={href ? 'a' : 'button'}
             variant={variant}
             color={color}
             size={size}

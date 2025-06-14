@@ -8,7 +8,6 @@ import {
     IconButton,
     Typography,
     Box,
-    useTheme,
 } from '@mui/material';
 import {
     Close as CloseIcon,
@@ -17,7 +16,6 @@ import {
     Error as ErrorIcon,
     Info as InfoIcon,
 } from '@mui/icons-material';
-import { useTranslation } from 'next-i18next';
 
 interface ModalProps {
     open: boolean;
@@ -56,8 +54,6 @@ const Modal: React.FC<ModalProps> = ({
     showCloseButton = true,
     className = '',
 }) => {
-    const theme = useTheme();
-    const { t } = useTranslation();
 
     const getIcon = () => {
         switch (type) {
@@ -99,7 +95,6 @@ const Modal: React.FC<ModalProps> = ({
             onClose={onClose}
             maxWidth={maxWidth}
             fullWidth={fullWidth}
-            disableBackdropClick={disableBackdropClick}
             disableEscapeKeyDown={disableEscapeKeyDown}
             className={`rtl:font-arabic ${className}`}
             PaperProps={{

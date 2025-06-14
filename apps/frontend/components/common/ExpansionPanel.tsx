@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import {
-    ExpansionPanel as MuiExpansionPanel,
-    ExpansionPanelSummary as MuiExpansionPanelSummary,
-    ExpansionPanelDetails as MuiExpansionPanelDetails,
+    Accordion as MuiAccordion,
+    AccordionSummary as MuiAccordionSummary,
+    AccordionDetails as MuiAccordionDetails,
     Typography,
-    useTheme,
 } from '@mui/material';
 import {
     ExpandMore as ExpandMoreIcon,
 } from '@mui/icons-material';
-import { useTranslation } from 'next-i18next';
 
 interface ExpansionPanelItem {
     id: string;
@@ -38,8 +36,6 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = ({
     color = 'primary',
     className = '',
 }) => {
-    const theme = useTheme();
-    const { t } = useTranslation();
     const [uncontrolledExpanded, setUncontrolledExpanded] = useState<string[]>(
         items.filter((item) => item.defaultExpanded).map((item) => item.id)
     );
@@ -79,7 +75,7 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = ({
     return (
         <div className={className}>
             {items.map((item) => (
-                <MuiExpansionPanel
+                <MuiAccordion
                     key={item.id}
                     expanded={expanded.includes(item.id)}
                     onChange={() => handleChange(item.id)}
@@ -103,7 +99,7 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = ({
             [&_.MuiExpansionPanelDetails-root]:rounded-b-lg
           `}
                 >
-                    <MuiExpansionPanelSummary
+                    <MuiAccordionSummary
                         expandIcon={<ExpandMoreIcon className={getColorClass()} />}
                         className={`
               ${expanded.includes(item.id) ? 'bg-gray-50 dark:bg-gray-700' : ''}
@@ -124,7 +120,7 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = ({
                     dark:text-gray-100
                   `}
                                 >
-                                    {t(item.title)}
+                                    {item.title}
                                 </Typography>
                                 {item.description && (
                                     <Typography
@@ -135,16 +131,16 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = ({
                       mt-1
                     `}
                                     >
-                                        {t(item.description)}
+                                        {item.description}
                                     </Typography>
                                 )}
                             </div>
                         </div>
-                    </MuiExpansionPanelSummary>
-                    <MuiExpansionPanelDetails>
+                    </MuiAccordionSummary>
+                    <MuiAccordionDetails>
                         {item.content}
-                    </MuiExpansionPanelDetails>
-                </MuiExpansionPanel>
+                    </MuiAccordionDetails>
+                </MuiAccordion>
             ))}
         </div>
     );

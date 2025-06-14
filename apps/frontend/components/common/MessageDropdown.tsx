@@ -9,7 +9,6 @@ import {
     Divider,
     Button,
     Avatar,
-    useTheme,
 } from '@mui/material';
 import {
     Chat as ChatIcon,
@@ -17,7 +16,7 @@ import {
     Check as CheckIcon,
     CheckCircle as CheckCircleIcon,
 } from '@mui/icons-material';
-import { useTranslation } from 'next-i18next';
+
 
 interface Message {
     id: string;
@@ -54,8 +53,6 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
     onViewAll,
     className = '',
 }) => {
-    const theme = useTheme();
-    const { t } = useTranslation();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const unreadCount = messages.filter((m) => !m.read).length;
 
@@ -107,7 +104,7 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
                 <Box className="p-4">
                     <Box className="flex items-center justify-between mb-4">
                         <Typography variant="h6" className="font-medium">
-                            {t('messages.title')}
+                            الرسائل
                         </Typography>
                         {unreadCount > 0 && onMarkAllAsRead && (
                             <Button
@@ -118,7 +115,7 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
                                 }}
                                 className="text-primary-main"
                             >
-                                {t('messages.markAllAsRead')}
+                                تحديث الكل
                             </Button>
                         )}
                     </Box>
@@ -128,7 +125,7 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
                             variant="body2"
                             className="text-gray-500 dark:text-gray-400 text-center py-4"
                         >
-                            {t('messages.empty')}
+                            لا يوجد رسائل
                         </Typography>
                     ) : (
                         <Box className="space-y-2">
@@ -200,7 +197,7 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
                                                         variant="caption"
                                                         className="text-gray-500 dark:text-gray-500"
                                                     >
-                                                        {message.attachment.name || t('messages.attachment')}
+                                                        {message.attachment.name || 'مرفق'}
                                                     </Typography>
                                                 </Box>
                                             )}
@@ -224,7 +221,7 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
                                         }}
                                         className="text-gray-600 dark:text-gray-400"
                                     >
-                                        {t('messages.clearAll')}
+                                        مسح الكل
                                     </Button>
                                 )}
                                 {onViewAll && (
@@ -236,7 +233,7 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
                                         }}
                                         className="text-primary-main"
                                     >
-                                        {t('messages.viewAll')}
+                                        عرض الكل
                                     </Button>
                                 )}
                             </Box>

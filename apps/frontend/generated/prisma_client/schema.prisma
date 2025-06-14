@@ -77,10 +77,13 @@ model User {
 
   TwoFactor TwoFactor[]
 
-  UserAcademyCEO     UserAcademyCEO[]
-  SalaryPayment      SalaryPayment[]
-  MeetingParticipant MeetingParticipant[]
-  LegalCase          LegalCase[]
+  UserAcademyCEO         UserAcademyCEO[]
+  SalaryPayment          SalaryPayment[]
+  MeetingParticipant     MeetingParticipant[]
+  LegalCase              LegalCase[]
+  traineeManagement      TraineeManagement[]
+  trainingSchedules      TrainingSchedule[]
+  employeeAttendanceLogs EmployeeAttendanceLog[]
 }
 
 model LoginHistory {
@@ -162,6 +165,9 @@ model Academy {
   Meeting               Meeting[]
   LegalCase             LegalCase[]
   Testimonial           Testimonial[]
+  mediaAlerts           MediaAlert[]
+  partnershipAgreements PartnershipAgreement[]
+  csrProjects           CSRProject[]
 }
 
 model Instructor {
@@ -175,23 +181,24 @@ model Instructor {
 
 // Course Management
 model Course {
-  id          String        @id @default(cuid())
-  title       String
-  description String
-  academyId   String
-  image       String?
-  level       String
-  academy     Academy       @relation(fields: [academyId], references: [id])
-  lessons     Lesson[]
-  enrollments Enrollment[]
-  quizzes     Quiz[]
-  instructors Instructor[]
-  liveRoom    LiveRoom[]
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  status      CourseStatus  @default(PENDING)
-  Path        Path[]
-  Testimonial Testimonial[]
+  id                String             @id @default(cuid())
+  title             String
+  description       String
+  academyId         String
+  image             String?
+  level             String
+  academy           Academy            @relation(fields: [academyId], references: [id])
+  lessons           Lesson[]
+  enrollments       Enrollment[]
+  quizzes           Quiz[]
+  instructors       Instructor[]
+  liveRoom          LiveRoom[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  status            CourseStatus       @default(PENDING)
+  Path              Path[]
+  Testimonial       Testimonial[]
+  trainingSchedules TrainingSchedule[]
 }
 
 enum CourseStatus {
@@ -273,6 +280,8 @@ model File {
   adminRole         AdminRole?             @relation(fields: [adminRoleId], references: [id])
   legalCaseId       String?
   legalCase         LegalCase?             @relation(fields: [legalCaseId], references: [id])
+  secretaryFiles    SecretaryFiles[]
+  traineeManagement TraineeManagement[]
   createdAt         DateTime               @default(now())
 }
 
@@ -286,15 +295,16 @@ enum FileType {
 
 // Enrollment and Progress
 model Enrollment {
-  id        String   @id @default(cuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  courseId  String
-  course    Course   @relation(fields: [courseId], references: [id])
-  progress  Float    @default(0)
-  status    String   @default("ACTIVE")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                String              @id @default(cuid())
+  userId            String
+  user              User                @relation(fields: [userId], references: [id])
+  courseId          String
+  course            Course              @relation(fields: [courseId], references: [id])
+  progress          Float               @default(0)
+  status            String              @default("ACTIVE")
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  traineeManagement TraineeManagement[]
 }
 
 // Assessment and Quizzes
@@ -366,17 +376,19 @@ model Achievement {
 
 // Notifications
 model Notification {
-  id          String           @id @default(cuid())
-  userId      String
-  user        User             @relation(fields: [userId], references: [id])
-  type        NotificationType @default(MESSAGE)
-  message     String
-  isImportant Boolean          @default(false)
-  urgent      Boolean          @default(false)
-  title       String
-  actionUrl   String?
-  read        Boolean          @default(false)
-  createdAt   DateTime         @default(now())
+  id                 String            @id @default(cuid())
+  userId             String
+  user               User              @relation(fields: [userId], references: [id])
+  type               NotificationType  @default(MESSAGE)
+  message            String
+  isImportant        Boolean           @default(false)
+  urgent             Boolean           @default(false)
+  title              String
+  actionUrl          String?
+  read               Boolean           @default(false)
+  trainingScheduleId String?
+  trainingSchedule   TrainingSchedule? @relation(fields: [trainingScheduleId], references: [id])
+  createdAt          DateTime          @default(now())
 }
 
 enum NotificationType {
@@ -385,6 +397,7 @@ enum NotificationType {
   MESSAGE
   ACHIEVEMENT
   URGENT
+  EVENT
 }
 
 model NotificationSettings {
@@ -468,14 +481,19 @@ model Admin {
   legalCases        LegalCase[]
   expenses          Expense[]
 
-  AdminRole           AdminRole[]
-  AboutSection        AboutSection[]
-  NewsEvent           NewsEvent[]
-  SuccessStory        SuccessStory[]
-  ContactMessage      ContactMessage[]
-  BlogPost            BlogPost[]
-  CSRProject          CSRProject[]
-  CrisisCommunication CrisisCommunication[]
+  AdminRole              AdminRole[]
+  AboutSection           AboutSection[]
+  NewsEvent              NewsEvent[]
+  SuccessStory           SuccessStory[]
+  ContactMessage         ContactMessage[]
+  BlogPost               BlogPost[]
+  CSRProject             CSRProject[]
+  CrisisCommunication    CrisisCommunication[]
+  paymentLogs            PaymentLogBySecretary[]
+  secretaryFiles         SecretaryFiles[]
+  employeeAttendanceLogs EmployeeAttendanceLog[]
+  sentMessages           InternalMessage[]       @relation("SentMessages")
+  receivedMessages       InternalMessage[]       @relation("ReceivedMessages")
 }
 
 model Channel {
@@ -547,19 +565,20 @@ model Attendance {
 }
 
 model Payment {
-  id           String        @id @default(cuid())
-  userId       String
-  user         User          @relation(fields: [userId], references: [id])
-  amount       Float
-  method       PaymentMethod
-  paidAt       DateTime      @default(now())
-  branchId     String
-  branch       Branch        @relation(fields: [branchId], references: [id])
-  installments Installment[]
-  legalCaseId  String?
-  legalCase    LegalCase?    @relation(fields: [legalCaseId], references: [id])
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  id            String                  @id @default(cuid())
+  userId        String
+  user          User                    @relation(fields: [userId], references: [id])
+  amount        Float
+  method        PaymentMethod
+  paidAt        DateTime                @default(now())
+  branchId      String
+  branch        Branch                  @relation(fields: [branchId], references: [id])
+  installments  Installment[]
+  legalCaseId   String?
+  legalCase     LegalCase?              @relation(fields: [legalCaseId], references: [id])
+  createdAt     DateTime                @default(now())
+  updatedAt     DateTime                @updatedAt
+  secretaryLogs PaymentLogBySecretary[]
 }
 
 model Report {
@@ -1078,6 +1097,8 @@ model CSRProject {
   assignedTeam   Admin    @relation(fields: [assignedTeamId], references: [id])
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+
+  Academy Academy[]
 }
 
 // إدارة الأزمات والتواصل
@@ -1091,4 +1112,138 @@ model CrisisCommunication {
   handledBy    Admin    @relation(fields: [handledById], references: [id])
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+// العلاقات العامة - نماذج إضافية
+model MediaAlert {
+  id          String   @id @default(cuid())
+  title       String
+  triggerDate DateTime
+  sourceType  String // COURSE, EVENT, INTERNAL
+  sourceId    String
+  generated   Boolean  @default(false)
+  status      String   @default("PENDING") // PENDING, PUBLISHED, ARCHIVED
+  academyId   String
+  academy     Academy  @relation(fields: [academyId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model PartnershipAgreement {
+  id          String    @id @default(cuid())
+  partnerName String
+  description String
+  logo        String?
+  type        String // LOCAL, INTERNATIONAL, ACADEMIC, COMMUNITY
+  startDate   DateTime
+  endDate     DateTime?
+  academyId   String
+  academy     Academy   @relation(fields: [academyId], references: [id])
+  status      String    @default("ACTIVE") // ACTIVE, EXPIRED, TERMINATED
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// السكرتارية - الموديلات الجديدة
+model SecretariatDashboard {
+  id               String   @id @default(cuid())
+  totalStudents    Int      @default(0)
+  activeCourses    Int      @default(0)
+  todayMeetings    Int      @default(0)
+  newNotifications Int      @default(0)
+  totalPayments    Float    @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model TraineeManagement {
+  id           String     @id @default(cuid())
+  userId       String
+  user         User       @relation(fields: [userId], references: [id])
+  enrollmentId String
+  enrollment   Enrollment @relation(fields: [enrollmentId], references: [id])
+  notes        String?
+  documents    File[]
+  status       String     @default("ACTIVE") // ACTIVE, SUSPENDED, COMPLETED
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model TrainingSchedule {
+  id            String         @id @default(cuid())
+  title         String
+  description   String?
+  startTime     DateTime
+  endTime       DateTime
+  type          String // CLASS, MEETING, EXAM
+  courseId      String?
+  course        Course?        @relation(fields: [courseId], references: [id])
+  location      String?
+  participants  User[]
+  notifications Notification[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model QuickActionLink {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  url         String
+  icon        String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model PaymentLogBySecretary {
+  id          String   @id @default(cuid())
+  paymentId   String
+  payment     Payment  @relation(fields: [paymentId], references: [id])
+  secretaryId String
+  secretary   Admin    @relation(fields: [secretaryId], references: [id])
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model InternalMessage {
+  id         String   @id @default(cuid())
+  title      String
+  content    String
+  senderId   String
+  sender     Admin    @relation("SentMessages", fields: [senderId], references: [id])
+  recipients Admin[]  @relation("ReceivedMessages")
+  isRead     Boolean  @default(false)
+  priority   String   @default("NORMAL") // HIGH, NORMAL, LOW
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model SecretaryFiles {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  fileId      String
+  file        File     @relation(fields: [fileId], references: [id])
+  category    String
+  tags        String[]
+  secretaryId String
+  secretary   Admin    @relation(fields: [secretaryId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model EmployeeAttendanceLog {
+  id          String    @id @default(cuid())
+  employeeId  String
+  employee    User      @relation(fields: [employeeId], references: [id])
+  checkIn     DateTime
+  checkOut    DateTime?
+  status      String    @default("PRESENT") // PRESENT, ABSENT, LATE
+  notes       String?
+  secretaryId String
+  secretary   Admin     @relation(fields: [secretaryId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }

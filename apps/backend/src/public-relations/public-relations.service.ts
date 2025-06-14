@@ -3,6 +3,9 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreatePublicRelationsRecordDto } from '../../dtos/PublicRelationsRecord.create.dto';
 import { UpdatePublicRelationsRecordDto } from '../../dtos/PublicRelationsRecord.update.dto';
 import { CreatePRResponseDto } from '../../dtos/PRResponse.create.dto';
+import { CreateMediaAlertDto } from '../../dtos/MediaAlert.create.dto';
+import { CreateCSRProjectDto } from '../../dtos/CSRProject.create.dto';
+import { CreatePartnershipAgreementDto } from '../../dtos/PartnershipAgreement.create.dto';
 
 @Injectable()
 export class PublicRelationsService {
@@ -124,5 +127,138 @@ export class PublicRelationsService {
             acc[curr.status] = curr._count;
             return acc;
         }, {});
+    }
+
+    // Media Alerts
+    async createMediaAlert(dto: CreateMediaAlertDto) {
+        return this.prisma.mediaAlert.create({
+            data: dto,
+        });
+    }
+
+    async getMediaAlerts(academyId: string) {
+        return this.prisma.mediaAlert.findMany({
+            where: { academyId },
+            orderBy: { triggerDate: 'desc' },
+        });
+    }
+
+    async getMediaAlertsBySource(sourceType: string, sourceId: string) {
+        return this.prisma.mediaAlert.findMany({
+            where: { sourceType, sourceId },
+            orderBy: { triggerDate: 'desc' },
+        });
+    }
+
+    // Partnership Agreements
+    async createPartnershipAgreement(dto: CreatePartnershipAgreementDto) {
+        return this.prisma.partnershipAgreement.create({
+            data: dto,
+        });
+    }
+
+    async getPartnershipAgreements(academyId: string) {
+        return this.prisma.partnershipAgreement.findMany({
+            where: { academyId },
+            orderBy: { startDate: 'desc' },
+        });
+    }
+
+    async getActivePartnerships(academyId: string) {
+        return this.prisma.partnershipAgreement.findMany({
+            where: {
+                academyId,
+                status: 'ACTIVE',
+                OR: [
+                    { endDate: null },
+                    { endDate: { gt: new Date() } },
+                ],
+            },
+        });
+    }
+
+    // CSR Projects
+    async createCSRProject(dto: CreateCSRProjectDto) {
+        return this.prisma.cSRProject.create({
+            data: dto,
+        });
+    }
+
+    async getCSRProjects(academyId: string) {
+        return this.prisma.cSRProject.findMany({
+            where: { Academy: { some: { id: academyId } } },
+            orderBy: { startDate: 'desc' },
+        });
+    }
+
+    async getCSRProjectsByStatus(academyId: string, status: string) {
+        return this.prisma.cSRProject.findMany({
+            where: { Academy: { some: { id: academyId } }, status },
+            orderBy: { startDate: 'desc' },
+        });
+    }
+
+    // Analytics
+    async getMediaAnalytics(academyId: string) {
+        const [alertsByType, alertsByDate] = await Promise.all([
+            this.prisma.mediaAlert.groupBy({
+                by: ['sourceType'],
+                where: { academyId },
+                _count: true,
+            }),
+            this.prisma.mediaAlert.groupBy({
+                by: ['triggerDate'],
+                where: { academyId },
+                _count: true,
+            }),
+        ]);
+
+        return {
+            alertsByType,
+            alertsByDate,
+        };
+    }
+
+    async getPartnershipAnalytics(academyId: string) {
+        const [partnershipsByType, activePartnerships] = await Promise.all([
+            this.prisma.partnershipAgreement.groupBy({
+                by: ['type'],
+                where: { academyId },
+                _count: true,
+            }),
+            this.prisma.partnershipAgreement.count({
+                where: {
+                    academyId,
+                    status: 'ACTIVE',
+                    OR: [
+                        { endDate: null },
+                        { endDate: { gt: new Date() } },
+                    ],
+                },
+            }),
+        ]);
+
+        return {
+            partnershipsByType,
+            activePartnerships,
+        };
+    }
+
+    async getCSRAnalytics(academyId: string) {
+        const [projectsByStatus, totalProjects] = await Promise.all([
+            this.prisma.cSRProject.groupBy({
+                by: ['status'],
+                where: { Academy: { some: { id: academyId } } },
+                _count: true,
+            }),
+            this.prisma.cSRProject.count({
+                where: { Academy: { some: { id: academyId } } },
+            }),
+        ]);
+
+        return {
+            projectsByStatus,
+            totalProjects,
+        };
     }
 } 

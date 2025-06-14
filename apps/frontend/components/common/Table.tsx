@@ -9,9 +9,8 @@ import {
     TablePagination as MuiTablePagination,
     TableSortLabel as MuiTableSortLabel,
     Paper,
-    useTheme,
 } from '@mui/material';
-import { useTranslation } from 'next-i18next';
+
 
 interface Column {
     id: string;
@@ -49,8 +48,6 @@ const Table: React.FC<TableProps> = ({
     onSort,
     className = '',
 }) => {
-    const theme = useTheme();
-    const { t } = useTranslation();
 
     const handleChangePage = (_: unknown, newPage: number) => {
         onPageChange?.(newPage);
@@ -104,10 +101,10 @@ const Table: React.FC<TableProps> = ({
                                             onClick={() => handleSort(column.id)}
                                             className="whitespace-nowrap"
                                         >
-                                            {t(column.label)}
+                                            {column.label}
                                         </MuiTableSortLabel>
                                     ) : (
-                                        t(column.label)
+                                        column.label
                                     )}
                                 </MuiTableCell>
                             ))}

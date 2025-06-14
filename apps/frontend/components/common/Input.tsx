@@ -4,9 +4,8 @@ import {
     InputAdornment,
     IconButton,
     Box,
-    useTheme,
 } from '@mui/material';
-import { useTranslation } from 'next-i18next';
+
 
 interface InputProps {
     label?: string;
@@ -67,8 +66,6 @@ const Input: React.FC<InputProps> = ({
     variant = 'outlined',
     color = 'primary',
 }) => {
-    const theme = useTheme();
-    const { t } = useTranslation();
 
     const getColorClasses = () => {
         switch (color) {

@@ -17,6 +17,10 @@ import {
   BlogPost,
   CSRProject,
   CrisisCommunication,
+  PaymentLogBySecretary,
+  SecretaryFiles,
+  EmployeeAttendanceLog,
+  InternalMessage,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";

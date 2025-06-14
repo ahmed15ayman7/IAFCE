@@ -883,6 +883,7 @@ export const secretariatApi = {
     addParticipant: (id: string, userId: string) => api.post(`/meetings/${id}/participants`, { userId }),
     removeParticipant: (id: string, userId: string) => api.delete(`/meetings/${id}/participants/${userId}`),
     markAttendance: (id: string, userId: string, isAttended: boolean) => api.patch(`/meetings/${id}/participants/${userId}/attendance`, { isAttended }),
+    getDashboardStats: (): Promise<{ success: boolean, data: any }> => api.get('/secretariat/dashboard'),
 };
 export const paymentApi = {
     getAll: (skip: number, take: number, where: any, orderBy: any): Promise<{ success: boolean, data: (Payment & { user: User, branch: Branch, installment: Installment })[] }> => api.get(`/payments?skip=${skip}&take=${take}&where=${where}&orderBy=${orderBy}`),
@@ -1264,7 +1265,7 @@ export const adminAuthApi = {
         try {
             const response = await api.post('/admin-auth/login', credentials);
             const { access_token, refreshToken } = response.data;
-            
+
             await authService.setTokens(access_token, refreshToken);
 
             return response.data;

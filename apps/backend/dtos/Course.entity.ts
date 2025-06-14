@@ -7,6 +7,7 @@ import { InstructorEntity } from "./Instructor.entity";
 import { LiveRoomEntity } from "./LiveRoom.entity";
 import { PathEntity } from "./Path.entity";
 import { TestimonialEntity } from "./Testimonial.entity";
+import { TrainingScheduleEntity } from "./TrainingSchedule.entity";
 import {
   Academy,
   Lesson,
@@ -17,6 +18,7 @@ import {
   CourseStatus,
   Path,
   Testimonial,
+  TrainingSchedule,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -107,4 +109,9 @@ export class CourseEntity {
   // Field: Testimonial, Type: Testimonial[]
   @Column()
   Testimonial: Testimonial[];
+
+  @ApiProperty({ type: TrainingScheduleEntity })
+  // Field: trainingSchedules, Type: TrainingSchedule[]
+  @Column()
+  trainingSchedules: TrainingSchedule[];
 }

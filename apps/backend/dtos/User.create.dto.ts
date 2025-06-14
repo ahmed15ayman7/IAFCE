@@ -32,6 +32,9 @@ import {
   SalaryPayment,
   MeetingParticipant,
   LegalCase,
+  TraineeManagement,
+  TrainingSchedule,
+  EmployeeAttendanceLog,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";

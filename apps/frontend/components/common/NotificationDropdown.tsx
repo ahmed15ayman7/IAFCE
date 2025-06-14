@@ -8,7 +8,6 @@ import {
     Typography,
     Divider,
     Button,
-    useTheme,
 } from '@mui/material';
 import {
     Notifications as NotificationsIcon,
@@ -17,7 +16,6 @@ import {
     Info as InfoIcon,
     Warning as WarningIcon,
 } from '@mui/icons-material';
-import { useTranslation } from 'next-i18next';
 
 interface Notification {
     id: string;
@@ -47,8 +45,6 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
     onClearAll,
     className = '',
 }) => {
-    const theme = useTheme();
-    const { t } = useTranslation();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const unreadCount = notifications.filter((n) => !n.read).length;
 
@@ -125,7 +121,7 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
                 <Box className="p-4">
                     <Box className="flex items-center justify-between mb-4">
                         <Typography variant="h6" className="font-medium">
-                            {t('notifications.title')}
+                            الإشعارات
                         </Typography>
                         {unreadCount > 0 && onMarkAllAsRead && (
                             <Button
@@ -136,7 +132,7 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
                                 }}
                                 className="text-primary-main"
                             >
-                                {t('notifications.markAllAsRead')}
+                                تحديث الكل
                             </Button>
                         )}
                     </Box>
@@ -146,7 +142,7 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
                             variant="body2"
                             className="text-gray-500 dark:text-gray-400 text-center py-4"
                         >
-                            {t('notifications.empty')}
+                            لا يوجد إشعارات
                         </Typography>
                     ) : (
                         <Box className="space-y-2">
@@ -211,7 +207,7 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
                                 }}
                                 className="text-gray-600 dark:text-gray-400"
                             >
-                                {t('notifications.clearAll')}
+                                مسح الكل
                             </Button>
                         </>
                     )}

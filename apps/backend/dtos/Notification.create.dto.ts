@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { User, NotificationType } from "@shared/prisma";
+import { User, NotificationType, TrainingSchedule } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -44,6 +44,11 @@ export class CreateNotificationDto {
   // Field: read, Type: boolean
   @Column()
   read: boolean;
+
+  @ApiProperty({ type: "string" })
+  // Field: trainingScheduleId, Type: string
+  @Column()
+  trainingScheduleId?: string;
 
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date

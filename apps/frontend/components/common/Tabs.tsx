@@ -3,7 +3,6 @@ import {
     Tabs as MuiTabs,
     Tab as MuiTab,
     Box,
-    useTheme,
 } from '@mui/material';
 
 interface Tab {
@@ -33,7 +32,6 @@ const Tabs: React.FC<TabsProps> = ({
     color = 'primary',
     className = '',
 }) => {
-    const theme = useTheme();
     const [uncontrolledValue, setUncontrolledValue] = useState(0);
     const value = controlledValue ?? uncontrolledValue;
 

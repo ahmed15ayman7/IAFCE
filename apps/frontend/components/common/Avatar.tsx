@@ -6,7 +6,6 @@ import {
     useTheme,
     Tooltip,
 } from '@mui/material';
-import { useTranslation } from 'next-i18next';
 
 interface AvatarProps {
     src?: string;
@@ -40,7 +39,6 @@ const Avatar: React.FC<AvatarProps> = ({
     badgePosition = 'bottom-right',
 }) => {
     const theme = useTheme();
-    const { t } = useTranslation();
 
     const getSizeClasses = () => {
         switch (size) {

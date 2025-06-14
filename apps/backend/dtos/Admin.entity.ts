@@ -16,6 +16,10 @@ import { ContactMessageEntity } from "./ContactMessage.entity";
 import { BlogPostEntity } from "./BlogPost.entity";
 import { CSRProjectEntity } from "./CSRProject.entity";
 import { CrisisCommunicationEntity } from "./CrisisCommunication.entity";
+import { PaymentLogBySecretaryEntity } from "./PaymentLogBySecretary.entity";
+import { SecretaryFilesEntity } from "./SecretaryFiles.entity";
+import { EmployeeAttendanceLogEntity } from "./EmployeeAttendanceLog.entity";
+import { InternalMessageEntity } from "./InternalMessage.entity";
 import {
   User,
   Group,
@@ -34,6 +38,10 @@ import {
   BlogPost,
   CSRProject,
   CrisisCommunication,
+  PaymentLogBySecretary,
+  SecretaryFiles,
+  EmployeeAttendanceLog,
+  InternalMessage,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -139,4 +147,29 @@ export class AdminEntity {
   // Field: CrisisCommunication, Type: CrisisCommunication[]
   @Column()
   CrisisCommunication: CrisisCommunication[];
+
+  @ApiProperty({ type: PaymentLogBySecretaryEntity })
+  // Field: paymentLogs, Type: PaymentLogBySecretary[]
+  @Column()
+  paymentLogs: PaymentLogBySecretary[];
+
+  @ApiProperty({ type: SecretaryFilesEntity })
+  // Field: secretaryFiles, Type: SecretaryFiles[]
+  @Column()
+  secretaryFiles: SecretaryFiles[];
+
+  @ApiProperty({ type: EmployeeAttendanceLogEntity })
+  // Field: employeeAttendanceLogs, Type: EmployeeAttendanceLog[]
+  @Column()
+  employeeAttendanceLogs: EmployeeAttendanceLog[];
+
+  @ApiProperty({ type: InternalMessageEntity })
+  // Field: sentMessages, Type: InternalMessage[]
+  @Column()
+  sentMessages: InternalMessage[];
+
+  @ApiProperty({ type: InternalMessageEntity })
+  // Field: receivedMessages, Type: InternalMessage[]
+  @Column()
+  receivedMessages: InternalMessage[];
 }

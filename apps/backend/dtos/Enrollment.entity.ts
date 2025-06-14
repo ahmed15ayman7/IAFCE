@@ -1,7 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { UserEntity } from "./User.entity";
 import { CourseEntity } from "./Course.entity";
-import { User, Course } from "@shared/prisma";
+import { TraineeManagementEntity } from "./TraineeManagement.entity";
+import { User, Course, TraineeManagement } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -51,4 +52,9 @@ export class EnrollmentEntity {
   // Field: updatedAt, Type: Date
   @Column()
   updatedAt: Date;
+
+  @ApiProperty({ type: TraineeManagementEntity })
+  // Field: traineeManagement, Type: TraineeManagement[]
+  @Column()
+  traineeManagement: TraineeManagement[];
 }

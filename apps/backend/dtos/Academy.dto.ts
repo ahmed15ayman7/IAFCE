@@ -9,6 +9,9 @@ import { PublicRelationsRecordEntity } from "./PublicRelationsRecord.entity";
 import { MeetingEntity } from "./Meeting.entity";
 import { LegalCaseEntity } from "./LegalCase.entity";
 import { TestimonialEntity } from "./Testimonial.entity";
+import { MediaAlertEntity } from "./MediaAlert.entity";
+import { PartnershipAgreementEntity } from "./PartnershipAgreement.entity";
+import { CSRProjectEntity } from "./CSRProject.entity";
 import {
   User,
   UserAcademyCEO,
@@ -20,6 +23,9 @@ import {
   Meeting,
   LegalCase,
   Testimonial,
+  MediaAlert,
+  PartnershipAgreement,
+  CSRProject,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -110,4 +116,19 @@ export class AcademyDto {
   // Field: Testimonial, Type: Testimonial[]
   @Column()
   Testimonial: Testimonial[];
+
+  @ApiProperty({ type: MediaAlertEntity })
+  // Field: mediaAlerts, Type: MediaAlert[]
+  @Column()
+  mediaAlerts: MediaAlert[];
+
+  @ApiProperty({ type: PartnershipAgreementEntity })
+  // Field: partnershipAgreements, Type: PartnershipAgreement[]
+  @Column()
+  partnershipAgreements: PartnershipAgreement[];
+
+  @ApiProperty({ type: CSRProjectEntity })
+  // Field: csrProjects, Type: CSRProject[]
+  @Column()
+  csrProjects: CSRProject[];
 }

@@ -9,7 +9,7 @@ import {
 import {
     ExpandMore as ExpandMoreIcon,
 } from '@mui/icons-material';
-import { useTranslation } from 'next-i18next';
+
 
 interface AccordionItem {
     id: string;
@@ -37,7 +37,6 @@ const Accordion: React.FC<AccordionProps> = ({
     className = '',
 }) => {
     const theme = useTheme();
-    const { t } = useTranslation();
     const [uncontrolledExpanded, setUncontrolledExpanded] = useState<string[]>([]);
     const expanded = controlledExpanded ?? uncontrolledExpanded;
 
@@ -119,7 +118,7 @@ const Accordion: React.FC<AccordionProps> = ({
                   dark:text-gray-100
                 `}
                             >
-                                {t(item.title)}
+                                {item.title}
                             </Typography>
                         </div>
                     </MuiAccordionSummary>

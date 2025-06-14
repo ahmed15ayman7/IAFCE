@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { User, Course } from "@shared/prisma";
+import { User, Course, TraineeManagement } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()

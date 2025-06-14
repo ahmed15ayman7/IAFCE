@@ -9,6 +9,7 @@ import {
   CourseStatus,
   Path,
   Testimonial,
+  TrainingSchedule,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";

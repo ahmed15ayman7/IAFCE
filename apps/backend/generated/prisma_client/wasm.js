@@ -328,6 +328,7 @@ exports.Prisma.NotificationScalarFieldEnum = {
   title: 'title',
   actionUrl: 'actionUrl',
   read: 'read',
+  trainingScheduleId: 'trainingScheduleId',
   createdAt: 'createdAt'
 };
 
@@ -807,6 +808,122 @@ exports.Prisma.CrisisCommunicationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.MediaAlertScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  triggerDate: 'triggerDate',
+  sourceType: 'sourceType',
+  sourceId: 'sourceId',
+  generated: 'generated',
+  status: 'status',
+  academyId: 'academyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PartnershipAgreementScalarFieldEnum = {
+  id: 'id',
+  partnerName: 'partnerName',
+  description: 'description',
+  logo: 'logo',
+  type: 'type',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  academyId: 'academyId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SecretariatDashboardScalarFieldEnum = {
+  id: 'id',
+  totalStudents: 'totalStudents',
+  activeCourses: 'activeCourses',
+  todayMeetings: 'todayMeetings',
+  newNotifications: 'newNotifications',
+  totalPayments: 'totalPayments',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TraineeManagementScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  enrollmentId: 'enrollmentId',
+  notes: 'notes',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TrainingScheduleScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  type: 'type',
+  courseId: 'courseId',
+  location: 'location',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.QuickActionLinkScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  url: 'url',
+  icon: 'icon',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PaymentLogBySecretaryScalarFieldEnum = {
+  id: 'id',
+  paymentId: 'paymentId',
+  secretaryId: 'secretaryId',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InternalMessageScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  senderId: 'senderId',
+  isRead: 'isRead',
+  priority: 'priority',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SecretaryFilesScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  fileId: 'fileId',
+  category: 'category',
+  tags: 'tags',
+  secretaryId: 'secretaryId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EmployeeAttendanceLogScalarFieldEnum = {
+  id: 'id',
+  employeeId: 'employeeId',
+  checkIn: 'checkIn',
+  checkOut: 'checkOut',
+  status: 'status',
+  notes: 'notes',
+  secretaryId: 'secretaryId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -882,7 +999,8 @@ exports.NotificationType = exports.$Enums.NotificationType = {
   GRADE: 'GRADE',
   MESSAGE: 'MESSAGE',
   ACHIEVEMENT: 'ACHIEVEMENT',
-  URGENT: 'URGENT'
+  URGENT: 'URGENT',
+  EVENT: 'EVENT'
 };
 
 exports.PaymentMethod = exports.$Enums.PaymentMethod = {
@@ -1020,7 +1138,17 @@ exports.Prisma.ModelName = {
   BlogPost: 'BlogPost',
   Partnership: 'Partnership',
   CSRProject: 'CSRProject',
-  CrisisCommunication: 'CrisisCommunication'
+  CrisisCommunication: 'CrisisCommunication',
+  MediaAlert: 'MediaAlert',
+  PartnershipAgreement: 'PartnershipAgreement',
+  SecretariatDashboard: 'SecretariatDashboard',
+  TraineeManagement: 'TraineeManagement',
+  TrainingSchedule: 'TrainingSchedule',
+  QuickActionLink: 'QuickActionLink',
+  PaymentLogBySecretary: 'PaymentLogBySecretary',
+  InternalMessage: 'InternalMessage',
+  SecretaryFiles: 'SecretaryFiles',
+  EmployeeAttendanceLog: 'EmployeeAttendanceLog'
 };
 
 /**

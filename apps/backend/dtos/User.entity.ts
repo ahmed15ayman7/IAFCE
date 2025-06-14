@@ -30,6 +30,9 @@ import { UserAcademyCEOEntity } from "./UserAcademyCEO.entity";
 import { SalaryPaymentEntity } from "./SalaryPayment.entity";
 import { MeetingParticipantEntity } from "./MeetingParticipant.entity";
 import { LegalCaseEntity } from "./LegalCase.entity";
+import { TraineeManagementEntity } from "./TraineeManagement.entity";
+import { TrainingScheduleEntity } from "./TrainingSchedule.entity";
+import { EmployeeAttendanceLogEntity } from "./EmployeeAttendanceLog.entity";
 import {
   UserRole,
   Academy,
@@ -63,6 +66,9 @@ import {
   SalaryPayment,
   MeetingParticipant,
   LegalCase,
+  TraineeManagement,
+  TrainingSchedule,
+  EmployeeAttendanceLog,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -298,4 +304,19 @@ export class UserEntity {
   // Field: LegalCase, Type: LegalCase[]
   @Column()
   LegalCase: LegalCase[];
+
+  @ApiProperty({ type: TraineeManagementEntity })
+  // Field: traineeManagement, Type: TraineeManagement[]
+  @Column()
+  traineeManagement: TraineeManagement[];
+
+  @ApiProperty({ type: TrainingScheduleEntity })
+  // Field: trainingSchedules, Type: TrainingSchedule[]
+  @Column()
+  trainingSchedules: TrainingSchedule[];
+
+  @ApiProperty({ type: EmployeeAttendanceLogEntity })
+  // Field: employeeAttendanceLogs, Type: EmployeeAttendanceLog[]
+  @Column()
+  employeeAttendanceLogs: EmployeeAttendanceLog[];
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Box,
     Card,
@@ -33,6 +33,7 @@ import {
     Tabs,
     Tab,
     Badge,
+    InputAdornment,
 } from '@mui/material';
 import {
     Add as AddIcon,
@@ -42,6 +43,14 @@ import {
     Group as GroupIcon,
     Description as ReportIcon,
     AttachFile as FileIcon,
+    People as PeopleIcon,
+    School as SchoolIcon,
+    Notifications as NotificationsIcon,
+    AttachMoney as MoneyIcon,
+    Search as SearchIcon,
+    Event as EventIcon,
+    AccessTime as AttendanceIcon,
+    Mail as MessageIcon,
 } from '@mui/icons-material';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { secretariatApi } from '@/lib/api';
@@ -49,28 +58,19 @@ import { PermissionGuard } from '@/components/PermissionGuard';
 import { motion, AnimatePresence } from 'framer-motion';
 import { format } from 'date-fns';
 import { arSA } from 'date-fns/locale';
+import { useRouter } from 'next/navigation';
+import TraineesTable from './components/TraineesTable';
+import ScheduleTable from './components/ScheduleTable';
+import PaymentsTable from './components/PaymentsTable';
+import FilesTable from './components/FilesTable';
+import AttendanceTable from './components/AttendanceTable';
+import MessagesTable from './components/MessagesTable';
 
 interface TabPanelProps {
     children?: React.ReactNode;
     index: number;
     value: number;
 }
-
-function TabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`secretariat-tabpanel-${index}`}
-            aria-labelledby={`secretariat-tab-${index}`}
-            {...other}
-        >
-            {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-        </div>
-    );
-}
-
 let initialmeetingsData = [
     {
         id: '1',
@@ -181,8 +181,31 @@ let initialmeetingsData = [
         },
     },
 ]
+function TabPanel(props: TabPanelProps) {
+    const { children, value, index, ...other } = props;
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`secretariat-tabpanel-${index}`}
+            aria-labelledby={`secretariat-tab-${index}`}
+            {...other}
+        >
+            {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+        </div>
+    );
+}
+
+interface DashboardStats {
+    totalStudents: number;
+    activeCourses: number;
+    todayMeetings: number;
+    newNotifications: number;
+    totalPayments: number;
+}
 
 export default function SecretariatPage() {
+    const router = useRouter();
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState<any>(null);
     const [tabValue, setTabValue] = useState(0);
@@ -194,6 +217,15 @@ export default function SecretariatPage() {
         notes: '',
         participants: [] as string[],
     });
+    const [stats, setStats] = useState<DashboardStats>({
+        totalStudents: 0,
+        activeCourses: 0,
+        todayMeetings: 0,
+        newNotifications: 0,
+        totalPayments: 0,
+    });
+    const [activeTab, setActiveTab] = useState(0);
+    const [searchQuery, setSearchQuery] = useState('');
 
     const queryClient = useQueryClient();
 
@@ -262,8 +294,60 @@ export default function SecretariatPage() {
     };
 
     const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
-        setTabValue(newValue);
+        setActiveTab(newValue);
     };
+
+    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(event.target.value);
+    };
+
+    useEffect(() => {
+        fetchDashboardStats();
+    }, []);
+
+    const fetchDashboardStats = async () => {
+        try {
+            const response = await secretariatApi.getDashboardStats();
+            setStats(response.data);
+        } catch (error) {
+            console.error('Error fetching dashboard stats:', error);
+        }
+    };
+
+    const StatCard = ({ title, value, icon, color, onClick }: any) => (
+        <Card
+            sx={{
+                height: '100%',
+                cursor: 'pointer',
+                transition: 'transform 0.2s',
+                '&:hover': {
+                    transform: 'translateY(-4px)',
+                },
+            }}
+            onClick={onClick}
+        >
+            <CardContent>
+                <Box display="flex" alignItems="center" mb={2}>
+                    <Box
+                        sx={{
+                            backgroundColor: `${color}.light`,
+                            borderRadius: '50%',
+                            p: 1,
+                            mr: 2,
+                        }}
+                    >
+                        {icon}
+                    </Box>
+                    <Typography variant="h6" color="text.secondary">
+                        {title}
+                    </Typography>
+                </Box>
+                <Typography variant="h4" component="div">
+                    {value}
+                </Typography>
+            </CardContent>
+        </Card>
+    );
 
     return (
         <Box sx={{ p: 3 }}>
@@ -584,6 +668,127 @@ export default function SecretariatPage() {
                     </Alert>
                 </Snackbar>
             </motion.div>
+
+            <Box sx={{ mb: 4 }}>
+                <Typography variant="h4" gutterBottom>
+                    لوحة تحكم السكرتارية
+                </Typography>
+                <Typography variant="body1" color="text.secondary">
+                    مرحباً بك في لوحة تحكم السكرتارية. هنا يمكنك إدارة المتدربين والمواعيد والدفعات والمزيد.
+                </Typography>
+            </Box>
+
+            <Grid container spacing={3} sx={{ mb: 4 }}>
+                <Grid item xs={12} sm={6} md={4}>
+                    <StatCard
+                        title="إجمالي المتدربين"
+                        value={stats.totalStudents}
+                        icon={<PeopleIcon sx={{ color: 'primary.main' }} />}
+                        color="primary"
+                        onClick={() => router.push('/admin/secretariat/trainees')}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                    <StatCard
+                        title="الدورات النشطة"
+                        value={stats.activeCourses}
+                        icon={<SchoolIcon sx={{ color: 'success.main' }} />}
+                        color="success"
+                        onClick={() => router.push('/admin/secretariat/schedule')}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                    <StatCard
+                        title="مواعيد اليوم"
+                        value={stats.todayMeetings}
+                        icon={<EventIcon sx={{ color: 'warning.main' }} />}
+                        color="warning"
+                        onClick={() => router.push('/admin/secretariat/schedule')}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                    <StatCard
+                        title="إشعارات جديدة"
+                        value={stats.newNotifications}
+                        icon={<NotificationsIcon sx={{ color: 'error.main' }} />}
+                        color="error"
+                        onClick={() => router.push('/admin/secretariat/messages')}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                    <StatCard
+                        title="إجمالي المدفوعات"
+                        value={`${stats.totalPayments} ريال`}
+                        icon={<MoneyIcon sx={{ color: 'info.main' }} />}
+                        color="info"
+                        onClick={() => router.push('/admin/secretariat/payments')}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                    <StatCard
+                        title="الملفات والمستندات"
+                        value="إدارة الملفات"
+                        icon={<FileIcon sx={{ color: 'secondary.main' }} />}
+                        color="secondary"
+                        onClick={() => router.push('/admin/secretariat/files')}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                    <StatCard
+                        title="سجل الحضور"
+                        value="إدارة الحضور"
+                        icon={<AttendanceIcon sx={{ color: 'success.main' }} />}
+                        color="success"
+                        onClick={() => router.push('/admin/secretariat/attendance')}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                    <StatCard
+                        title="الرسائل الداخلية"
+                        value="إدارة الرسائل"
+                        icon={<MessageIcon sx={{ color: 'primary.main' }} />}
+                        color="primary"
+                        onClick={() => router.push('/admin/secretariat/messages')}
+                    />
+                </Grid>
+            </Grid>
+
+            <Box sx={{ mb: 3 }}>
+                <TextField
+                    fullWidth
+                    variant="outlined"
+                    placeholder="بحث..."
+                    value={searchQuery}
+                    onChange={handleSearch}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <SearchIcon />
+                            </InputAdornment>
+                        ),
+                    }}
+                />
+            </Box>
+
+            <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 3 }}>
+                <Tabs value={activeTab} onChange={handleTabChange} aria-label="secretariat tabs">
+                    <Tab label="المتدربين" />
+                    <Tab label="المواعيد" />
+                    <Tab label="الدفعات" />
+                    <Tab label="الملفات" />
+                    <Tab label="الحضور" />
+                    <Tab label="الرسائل" />
+                </Tabs>
+            </Box>
+
+            <Box sx={{ mt: 2 }}>
+                {activeTab === 0 && <TraineesTable />}
+                {activeTab === 1 && <ScheduleTable />}
+                {activeTab === 2 && <PaymentsTable />}
+                {activeTab === 3 && <FilesTable />}
+                {activeTab === 4 && <AttendanceTable />}
+                {activeTab === 5 && <MessagesTable />}
+            </Box>
         </Box>
     );
 } 

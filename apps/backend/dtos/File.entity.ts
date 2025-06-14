@@ -5,6 +5,8 @@ import { PublicRelationsRecordEntity } from "./PublicRelationsRecord.entity";
 import { MeetingEntity } from "./Meeting.entity";
 import { AdminRoleEntity } from "./AdminRole.entity";
 import { LegalCaseEntity } from "./LegalCase.entity";
+import { SecretaryFilesEntity } from "./SecretaryFiles.entity";
+import { TraineeManagementEntity } from "./TraineeManagement.entity";
 import {
   FileType,
   Lesson,
@@ -13,6 +15,8 @@ import {
   Meeting,
   AdminRole,
   LegalCase,
+  SecretaryFiles,
+  TraineeManagement,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
@@ -98,6 +102,16 @@ export class FileEntity {
   // Field: legalCase, Type: LegalCase
   @Column()
   legalCase?: LegalCase;
+
+  @ApiProperty({ type: SecretaryFilesEntity })
+  // Field: secretaryFiles, Type: SecretaryFiles[]
+  @Column()
+  secretaryFiles: SecretaryFiles[];
+
+  @ApiProperty({ type: TraineeManagementEntity })
+  // Field: traineeManagement, Type: TraineeManagement[]
+  @Column()
+  traineeManagement: TraineeManagement[];
 
   @ApiProperty({ type: "string", format: "date-time" })
   // Field: createdAt, Type: Date

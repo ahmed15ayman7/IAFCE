@@ -55,7 +55,9 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 image: 'https://via.placeholder.com/150',
                 createdAt: new Date(),
                 updatedAt: new Date(),
-                academyId: '1'
+                academyId: '1',
+                level: '1',
+                status: 'COMPLETED',
             },
             {
                 id: '2',
@@ -64,7 +66,9 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 image: 'https://via.placeholder.com/150',
                 createdAt: new Date(),
                 updatedAt: new Date(),
-                academyId: '1'
+                academyId: '1',
+                level: '1',
+                status: 'COMPLETED',
             },
             {
                 id: '3',
@@ -73,7 +77,9 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 image: 'https://via.placeholder.com/150',
                 createdAt: new Date(),
                 updatedAt: new Date(),
-                academyId: '1'
+                academyId: '1',
+                level: '1',
+                status: 'COMPLETED',
             },
         ],
         milestones: [
@@ -153,6 +159,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 academyId: '1',
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                level: '1',
+                status: 'COMPLETED',
             },
             {
                 id: '2',
@@ -162,6 +170,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 academyId: '1',
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                level: '1',
+                status: 'COMPLETED',
             },
             {
                 id: '3',
@@ -171,6 +181,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 academyId: '1',
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                level: '1',
+                status: 'COMPLETED',
             },
         ],
         milestones: [
@@ -224,7 +236,9 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 image: 'https://via.placeholder.com/150',
                 createdAt: new Date(),
                 updatedAt: new Date(),
-                academyId: '1'
+                academyId: '1',
+                level: '1',
+                status: 'COMPLETED',
             },
             {
                 id: '2',
@@ -233,7 +247,9 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 image: 'https://via.placeholder.com/150',
                 createdAt: new Date(),
                 updatedAt: new Date(),
-                academyId: '1'
+                academyId: '1',
+                level: '1',
+                status: 'COMPLETED',
             },
             {
                 id: '3',
@@ -242,7 +258,9 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 image: 'https://via.placeholder.com/150',
                 createdAt: new Date(),
                 updatedAt: new Date(),
-                academyId: '1'
+                academyId: '1',
+                level: '1',
+                status: 'COMPLETED',
             },
         ],
         milestones: [
@@ -322,6 +340,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 academyId: '1',
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                level: '1',
+                status: 'COMPLETED',
             },
             {
                 id: '2',
@@ -331,6 +351,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 academyId: '1',
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                level: '1',
+                status: 'COMPLETED',
             },
             {
                 id: '3',
@@ -340,6 +362,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 academyId: '1',
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                level: '1',
+                status: 'COMPLETED',
             },
         ],
         milestones: [
@@ -393,7 +417,9 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 image: 'https://via.placeholder.com/150',
                 createdAt: new Date(),
                 updatedAt: new Date(),
-                academyId: '1'
+                academyId: '1',
+                level: '1',
+                status: 'COMPLETED',
             },
             {
                 id: '2',
@@ -402,7 +428,9 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 image: 'https://via.placeholder.com/150',
                 createdAt: new Date(),
                 updatedAt: new Date(),
-                academyId: '1'
+                academyId: '1',
+                level: '1',
+                status: 'COMPLETED',
             },
             {
                 id: '3',
@@ -411,7 +439,9 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 image: 'https://via.placeholder.com/150',
                 createdAt: new Date(),
                 updatedAt: new Date(),
-                academyId: '1'
+                academyId: '1',
+                level: '1',
+                status: 'COMPLETED',
             },
         ],
         milestones: [
@@ -491,6 +521,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 academyId: '1',
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                level: '1',
+                status: 'COMPLETED',
             },
             {
                 id: '2',
@@ -500,6 +532,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 academyId: '1',
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                level: '1',
+                status: 'COMPLETED',
             },
             {
                 id: '3',
@@ -509,6 +543,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 academyId: '1',
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                level: '1',
+                status: 'COMPLETED',
             },
         ],
         milestones: [
@@ -562,7 +598,9 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 image: 'https://via.placeholder.com/150',
                 createdAt: new Date(),
                 updatedAt: new Date(),
-                academyId: '1'
+                academyId: '1',
+                level: '1',
+                status: 'COMPLETED',
             },
             {
                 id: '2',
@@ -571,7 +609,9 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 image: 'https://via.placeholder.com/150',
                 createdAt: new Date(),
                 updatedAt: new Date(),
-                academyId: '1'
+                academyId: '1',
+                level: '1',
+                status: 'COMPLETED',
             },
             {
                 id: '3',
@@ -580,7 +620,9 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 image: 'https://via.placeholder.com/150',
                 createdAt: new Date(),
                 updatedAt: new Date(),
-                academyId: '1'
+                academyId: '1',
+                level: '1',
+                status: 'COMPLETED',
             },
         ],
         milestones: [
@@ -660,6 +702,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 academyId: '1',
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                level: '1',
+                status: 'COMPLETED',
             },
             {
                 id: '2',
@@ -669,6 +713,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 academyId: '1',
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                level: '1',
+                status: 'COMPLETED',
             },
             {
                 id: '3',
@@ -678,6 +724,8 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
                 academyId: '1',
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                level: '1',
+                status: 'COMPLETED',
             },
         ],
         milestones: [

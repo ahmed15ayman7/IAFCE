@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { AdminEntity } from "./Admin.entity";
-import { Admin } from "@shared/prisma";
+import { AcademyEntity } from "./Academy.entity";
+import { Admin, Academy } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
 @Entity()
@@ -60,4 +61,9 @@ export class CSRProjectDto {
   // Field: updatedAt, Type: Date
   @Column()
   updatedAt: Date;
+
+  @ApiProperty({ type: AcademyEntity })
+  // Field: Academy, Type: Academy[]
+  @Column()
+  Academy: Academy[];
 }

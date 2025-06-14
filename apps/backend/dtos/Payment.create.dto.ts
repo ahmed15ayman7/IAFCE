@@ -5,6 +5,7 @@ import {
   Branch,
   Installment,
   LegalCase,
+  PaymentLogBySecretary,
 } from "@shared/prisma";
 
 import { Entity, Column } from "typeorm";
