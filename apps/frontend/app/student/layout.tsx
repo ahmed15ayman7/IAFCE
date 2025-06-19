@@ -5,6 +5,7 @@ import Footer from '@/components/layout/Footer';
 import { layoutsConfig } from '@/config/layouts';
 import { redirect } from 'next/navigation';
 import { useUser } from '@/hooks/useUser';
+import ChatDialog from '@/components/layout/ChatDialog';
 
 export default function StudentLayout({
     children,
@@ -39,6 +40,7 @@ export default function StudentLayout({
             // showThemeSwitcher={layoutConfig.showThemeSwitcher}
             />
             <main className="flex-1 p-5">{children}</main>
+            <ChatDialog/>
             <Footer
                 links={layoutConfig.footerLinks}
             />

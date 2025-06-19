@@ -44,6 +44,7 @@ let initialSubmissions: (Submission & { user: User, quiz: Quiz & { questions: Qu
                     type: 'multiple_choice',
                     isAnswered: true,
                     quizId: '1',
+                    isMultiple: true,
                 }
             ],
             createdAt: new Date(),

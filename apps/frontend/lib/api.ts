@@ -205,6 +205,26 @@ export const quizApi = {
     getResults: (quizId: string) => api.get(`/quizzes/${quizId}/results`),
     getStudentResults: (quizId: string, studentId: string) =>
         api.get(`/quizzes/${quizId}/student/${studentId}/results`),
+    getByStudent: (studentId: string) => api.get(`/quizzes/student/${studentId}`),
+    getByInstructor: (instructorId: string) => api.get(`/quizzes/instructor/${instructorId}`),
+    getByCourse: (courseId: string) => api.get(`/quizzes/course/${courseId}`),
+    getByDate: (date: string) => api.get(`/quizzes/date/${date}`),
+    getByStatus: (status: string) => api.get(`/quizzes/status/${status}`),
+    getActive: () => api.get(`/quizzes/active`),
+    getPerformance: (studentId: string) => api.get(`/quizzes/performance/${studentId}`),
+};
+
+// Assignment APIs
+export const assignmentApi = {
+    getByCourse: (courseId: string) => api.get(`/assignments/course/${courseId}`),
+    getById: (id: string) => api.get(`/assignments/${id}`),
+    create: (data: any) => api.post('/assignments', data),
+    update: (id: string, data: any) => api.patch(`/assignments/${id}`, data),
+    delete: (id: string) => api.delete(`/assignments/${id}`),
+    getByStudent: (studentId: string) => api.get(`/assignments/student/${studentId}`),
+    getByInstructor: (instructorId: string) => api.get(`/assignments/instructor/${instructorId}`),
+    getByDate: (date: string) => api.get(`/assignments/date/${date}`),
+    getByStatus: (status: string) => api.get(`/assignments/status/${status}`),
 };
 
 // Attendance APIs
@@ -474,7 +494,7 @@ export const websocketApi = {
 export const badgeApi = {
     getAll: (): Promise<{ success: boolean, data: (Badge & { user: User })[] }> => api.get('/badges'),
     getById: (id: string): Promise<{ success: boolean, data: (Badge & { user: User }) }> => api.get(`/badges/${id}`),
-    getByStudent: (): Promise<{ success: boolean, data: (Badge & { user: User })[] }> => api.get('/badges/student'),
+    getByStudent: (studentId: string): Promise<{ success: boolean, data: (Badge & { user: User })[] }> => api.get(`/badges/student/${studentId}`),
     create: (data: {
         userId: string;
         title: string;
@@ -499,7 +519,7 @@ export const badgeApi = {
 export const certificateApi = {
     getAll: (): Promise<{ success: boolean, data: (Certificate & { user: User })[] }> => api.get('/certificates'),
     getById: (id: string): Promise<{ success: boolean, data: (Certificate & { user: User }) }> => api.get(`/certificates/${id}`),
-    getByStudent: (): Promise<{ success: boolean, data: (Certificate & { user: User })[] }> => api.get('/certificates/student'),
+    getByStudent: (studentId: string): Promise<{ success: boolean, data: (Certificate & { user: User })[] }> => api.get(`/certificates/student/${studentId}`),
     create: (data: {
         name: string;
         address: string;

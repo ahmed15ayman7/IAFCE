@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useUser } from '@/hooks/useUser';
 import Card from '@/components/common/Card';
@@ -14,7 +14,7 @@ import Avatar from '@/components/common/Avatar';
 import EmptyState from '@/components/common/EmptyState';
 import Progress from '@/components/common/Progress';
 import DataGrid from '@/components/common/DataGrid';
-import { quizApi, assignmentApi, courseApi } from '@/lib/api';
+import { quizApi, assignmentApi } from '@/lib/api';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
@@ -149,60 +149,69 @@ let initialData: IQuiz = {
         ]
     }
 }
-let getActiveQuizData = async () => {
-    let { success, data } = await quizApi.getActive();
-    if (success) {
+let getActiveQuizData = async (user: any) => {
+    let { status, data } = await quizApi.getActive();
+    if (status >= 200 && status < 300) {
         return data;
     }
     return null;
 }
-let getQuizzesData = async () => {
-    let { success, data } = await quizApi.getByStudent();
-    if (success) {
+let getQuizzesData = async (user: any) => {
+    let { status, data } = await quizApi.getByStudent(user.id);
+    if (status >= 200 && status < 300) {
         return data;
     }
     return null;
 }
-let getAssignmentsData = async () => {
-    let { success, data } = await assignmentApi.getByStudent();
-    if (success) {
+let getAssignmentsData = async (user: any) => {
+    let { status, data } = await assignmentApi.getByStudent(user.id);
+    if (status >= 200 && status < 300) {
         return data;
     }
     return null;
 }
-let getPerformanceData = async () => {
-    let { success, data } = await quizApi.getPerformance();
-    if (success) {
+let getPerformanceData = async (user: any) => {
+    let { status, data } = await quizApi.getPerformance(user.id);
+    if (status >= 200 && status < 300) {
         return data;
     }
     return null;
 }
 
 export default function StudentQuizzes() {
+    const { user ,status} = useUser();
     const [activeTab, setActiveTab] = useState(0);
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [selectedQuiz1, setSelectedQuiz] = useState(null);
+    const [selectedQuiz1, setSelectedQuiz] = useState(initialData.activeQuiz);
 
     // استعلامات البيانات
-    const { data: activeQuiz, isLoading: isLoadingActiveQuiz } = useQuery({
+    const { data: activeQuiz, isLoading: isLoadingActiveQuiz, refetch: refetchActiveQuiz } = useQuery({
         queryKey: ['activeQuiz'],
-        queryFn: () => getActiveQuizData(),
+        queryFn: () => getActiveQuizData(user),
     });
 
-    const { data: quizzes, isLoading: isLoadingQuizzes } = useQuery({
+    const { data: quizzes, isLoading: isLoadingQuizzes, refetch: refetchQuizzes } = useQuery({
         queryKey: ['quizzes'],
-        queryFn: () => getQuizzesData(),
+        queryFn: () => getQuizzesData(user),
     });
 
-    const { data: assignments, isLoading: isLoadingAssignments } = useQuery({
+    const { data: assignments, isLoading: isLoadingAssignments, refetch: refetchAssignments } = useQuery({
         queryKey: ['assignments'],
-        queryFn: () => getAssignmentsData(),
+        queryFn: () => getAssignmentsData(user),
     });
 
-    const { data: performance, isLoading: isLoadingPerformance } = useQuery({
+    const { data: performance, isLoading: isLoadingPerformance, refetch: refetchPerformance } = useQuery({
         queryKey: ['performance'],
-        queryFn: () => getPerformanceData(),
+        queryFn: () => getPerformanceData(user),
     });
+    useEffect(() => {
+        if (status === 'authenticated') {
+            refetchActiveQuiz();
+            refetchQuizzes();
+            refetchAssignments();
+            refetchPerformance();
+        }
+    }, [status]);
 
     if (isLoadingActiveQuiz || isLoadingQuizzes || isLoadingAssignments || isLoadingPerformance) {
         return (
@@ -624,7 +633,7 @@ export default function StudentQuizzes() {
             )}
 
             {/* نافذة الكويز/الواجب */}
-            {selectedQuiz && (
+            {/* {selectedQuiz && (
                 <Modal
                     open={!!selectedQuiz}
                     onClose={() => setSelectedQuiz(null)}
@@ -682,7 +691,7 @@ export default function StudentQuizzes() {
                         )}
                     </div>
                 </Modal>
-            )}
+            )} */}
         </motion.div>
     );
 } 

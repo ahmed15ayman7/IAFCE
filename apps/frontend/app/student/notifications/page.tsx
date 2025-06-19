@@ -57,6 +57,7 @@ let initialNotifications: Notification[] = [
         read: false,
         createdAt: new Date(),
         actionUrl: null,
+        trainingScheduleId: null,
     },
     {
         id: '2',
@@ -69,7 +70,8 @@ let initialNotifications: Notification[] = [
         read: false,
         createdAt: new Date(),
         actionUrl: null,
-    }
+        trainingScheduleId: null,
+        }
 ]
 
 export default function StudentNotifications() {

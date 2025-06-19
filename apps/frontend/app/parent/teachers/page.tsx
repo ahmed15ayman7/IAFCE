@@ -65,10 +65,10 @@ export default function ParentTeachers() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 {teachers.map(teacher => (
-                    <Card key={teacher.id}>
+                    <Card key={teacher.id} title={teacher.name}>
                         <div className="flex justify-between items-start mb-4">
                             <div>
-                                <h2 className="text-2xl font-bold">{teacher.name}</h2>
+                                {/* <h2 className="text-2xl font-bold">{teacher.name}</h2> */}
                                 <p className="text-gray-600">{teacher.subject} - {teacher.grade}</p>
                             </div>
                             <div className="text-right">

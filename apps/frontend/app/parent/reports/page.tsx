@@ -83,10 +83,10 @@ export default function ParentReports() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 {children.map(child => (
-                    <Card key={child.id}>
+                    <Card key={child.id} title={child.name}>
                         <div className="flex justify-between items-start mb-4">
                             <div>
-                                <h2 className="text-2xl font-bold">{child.name}</h2>
+                                {/* <h2 className="text-2xl font-bold">{child.name}</h2> */}
                                 <p className="text-gray-600">{child.grade}</p>
                             </div>
                             <div className="text-right">

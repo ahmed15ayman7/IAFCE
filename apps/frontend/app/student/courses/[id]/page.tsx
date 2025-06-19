@@ -51,6 +51,7 @@ let initialCourse: Course & {
     enrollments: (Enrollment & { user: User })[];
 } = {
     id: 'js-course-1',
+    status: 'COMPLETED',
     createdAt: new Date(),
     updatedAt: new Date(),
     academyId: 'academy-frontend',
@@ -71,6 +72,11 @@ let initialCourse: Course & {
                     type: 'VIDEO',
                     createdAt: new Date(),
                     lessonId: 'lesson-1',
+                    accountingEntryId: null,
+                    prRecordId: null,
+                    meetingId: null,
+                    adminRoleId: null,
+                    legalCaseId: null,
                 },
                 {
                     id: 'pdf-1',
@@ -79,6 +85,11 @@ let initialCourse: Course & {
                     type: 'PDF',
                     createdAt: new Date(),
                     lessonId: 'lesson-1',
+                    accountingEntryId: null,
+                    prRecordId: null,
+                    meetingId: null,
+                    adminRoleId: null,
+                    legalCaseId: null,
                 }
             ],
             quizzes: [
@@ -101,6 +112,7 @@ let initialCourse: Course & {
                             type: 'MULTIPLE_CHOICE',
                             quizId: 'quiz-1',
                             text: 'ما هي اللغة التي تستخدم لبرمجة الويب؟',
+                            isMultiple: true,
                             options: [
                                 {
                                     id: 'option-1',
@@ -159,6 +171,11 @@ let initialCourse: Course & {
                     type: 'VIDEO',
                     createdAt: new Date(),
                     lessonId: 'lesson-2',
+                    accountingEntryId: null,
+                    prRecordId: null,
+                    meetingId: null,
+                    adminRoleId: null,
+                    legalCaseId: null,
                 },
                 {
                     id: 'doc-1',
@@ -167,6 +184,11 @@ let initialCourse: Course & {
                     type: 'DOCUMENT',
                     createdAt: new Date(),
                     lessonId: 'lesson-2',
+                    accountingEntryId: null,
+                    prRecordId: null,
+                    meetingId: null,
+                    adminRoleId: null,
+                    legalCaseId: null,
                 },
                 {
                     id: 'audio-1',
@@ -175,6 +197,11 @@ let initialCourse: Course & {
                     type: 'AUDIO',
                     createdAt: new Date(),
                     lessonId: 'lesson-2',
+                    accountingEntryId: null,
+                    prRecordId: null,
+                    meetingId: null,
+                    adminRoleId: null,
+                    legalCaseId: null,
                 },
                 {
                     id: 'pdf-2',
@@ -183,6 +210,11 @@ let initialCourse: Course & {
                     type: 'PDF',
                     createdAt: new Date(),
                     lessonId: 'lesson-2',
+                    accountingEntryId: null,
+                    prRecordId: null,
+                    meetingId: null,
+                    adminRoleId: null,
+                    legalCaseId: null,
                 }
             ],
             quizzes: [
@@ -209,6 +241,9 @@ let initialCourse: Course & {
 
                             points: 1,
                             isAnswered: false,
+                            isMultiple: true,
+                           
+                            
                         }
                     ],
                 }
@@ -230,6 +265,11 @@ let initialCourse: Course & {
                     type: 'VIDEO',
                     createdAt: new Date(),
                     lessonId: '2',
+                    accountingEntryId: null,
+                    prRecordId: null,
+                    meetingId: null,
+                    adminRoleId: null,
+                    legalCaseId: null,
                 },
                 {
                     id: '5',
@@ -238,6 +278,11 @@ let initialCourse: Course & {
                     type: 'IMAGE',
                     createdAt: new Date(),
                     lessonId: '2',
+                    accountingEntryId: null,
+                    prRecordId: null,
+                    meetingId: null,
+                    adminRoleId: null,
+                    legalCaseId: null,
                 },
                 {
                     id: '6',
@@ -246,6 +291,11 @@ let initialCourse: Course & {
                     type: 'DOCUMENT',
                     createdAt: new Date(),
                     lessonId: '2',
+                    accountingEntryId: null,
+                    prRecordId: null,
+                    meetingId: null,
+                    adminRoleId: null,
+                    legalCaseId: null,
                 },
                 {
                     id: '7',
@@ -254,6 +304,11 @@ let initialCourse: Course & {
                     type: 'AUDIO',
                     createdAt: new Date(),
                     lessonId: '2',
+                    accountingEntryId: null,
+                    prRecordId: null,
+                    meetingId: null,
+                    adminRoleId: null,
+                    legalCaseId: null,
                 },
                 {
                     id: '8',
@@ -262,6 +317,11 @@ let initialCourse: Course & {
                     type: 'PDF',
                     createdAt: new Date(),
                     lessonId: '2',
+                    accountingEntryId: null,
+                    prRecordId: null,
+                    meetingId: null,
+                    adminRoleId: null,
+                    legalCaseId: null,
                 }
             ],
             quizzes: [
@@ -304,6 +364,7 @@ let initialCourse: Course & {
                             ],
                             points: 1,
                             isAnswered: false,
+                            isMultiple: true,
                         }
                     ],
                 }

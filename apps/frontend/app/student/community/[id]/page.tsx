@@ -47,6 +47,7 @@ const initialDiscussions: (Discussion & { post: Post & { author: User, comments:
         createdAt: new Date(),
         authorId: "1",
         likesCount: 0,
+        publicRelationsRecordId: null,
         comments: [
             {
                 id: "1",
@@ -101,6 +102,7 @@ const initialDiscussions: (Discussion & { post: Post & { author: User, comments:
         createdAt: new Date(),
         authorId: "1",
         likesCount: 0,
+        publicRelationsRecordId: null,
         comments: [],
         author: {
             id: "1",
@@ -297,6 +299,7 @@ const initialMyPosts: (Post & { author: User, comments: Comment[] })[] = [
         authorId: "1",
         likesCount: 0,
         comments: [],
+        publicRelationsRecordId: null,
         author: {
             id: "1",
             firstName: "أحمد",
@@ -323,6 +326,7 @@ const initialMyPosts: (Post & { author: User, comments: Comment[] })[] = [
         authorId: "1",
         likesCount: 0,
         comments: [],
+        publicRelationsRecordId: null,
         author: {
             id: "1",
             firstName: "أحمد",

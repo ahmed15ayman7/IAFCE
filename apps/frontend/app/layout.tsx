@@ -2,18 +2,17 @@
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { Cairo } from 'next/font/google';
 import { Providers } from './providers';
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import '../globals.css';
 import useLanguageStore from '@/store/useLanguageStore';
 import Script from 'next/script';
+import Loading from './loading';
+
 const cairo = Cairo({
     subsets: ['arabic'],
     variable: '--font-cairo',
     weight: ['300', '400', '500', '600', '700'],
 });
-
-
-
 
 export default function RootLayout({
     children,
@@ -35,7 +34,7 @@ export default function RootLayout({
     </AppRouterCacheProvider>) : null
 
     return (
-        <html suppressHydrationWarning>
+        <html suppressHydrationWarning lang="ar" dir="rtl">
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <link rel="icon" href="/favicon.ico" />
@@ -51,7 +50,9 @@ export default function RootLayout({
 
             </head>
             <body className={cairo.variable}>
-                {content}
+                <Suspense fallback={<Loading />}>
+                    {content}
+                </Suspense>
             </body>
         </html>
     );

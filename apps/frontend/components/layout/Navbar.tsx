@@ -171,7 +171,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     <MenuIcon />
                 </IconButton>
                 }
-                <Link href="/" className="flex items-center">
+                <Link href="/" prefetch={true} className="flex items-center">
                     <img
                         src="/assets/images/logo.png"
                         alt="Logo"
@@ -181,7 +181,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
                 <Box className="hidden md:flex flex-1 justify-center gap-8 max-lg:gap-4 rtl:space-x-reverse">
                     {links.map((link) => (
-                        <Link href={link.href} className={`  hover:underline border-2 rounded-lg  px-4 py-2 ${pathname === link.href || (pathname.startsWith(link.href) && link.href !== '/') ? 'bg-secondary-main/80 text-white' : 'border-transparent text-secondary-main hover:text-secondary-light '}`}>
+                        <Link href={link.href} prefetch={true} className={`  hover:underline border-2 rounded-lg  px-4 py-2 ${pathname === link.href || (pathname.startsWith(link.href) && link.href !== '/') ? 'bg-secondary-main/80 text-white' : 'border-transparent text-secondary-main hover:text-secondary-light '}`}>
                             {link.label}
                         </Link>
                     ))}
@@ -252,19 +252,19 @@ const Navbar: React.FC<NavbarProps> = ({
                         <ListItemIcon>
                             <PersonIcon fontSize="small" />
                         </ListItemIcon>
-                        {'profile'}
+                        {'الملف الشخصي'}
                     </MenuItem>
                     <MenuItem onClick={handleMenuClose} component={Link} href="/settings">
                         <ListItemIcon>
                             <SettingsIcon fontSize="small" />
                         </ListItemIcon>
-                        {'settings'}
+                        {'الاعدادات'}
                     </MenuItem>
                     <MenuItem onClick={handleLogout}>
                         <ListItemIcon>
                             <LogoutIcon fontSize="small" />
                         </ListItemIcon>
-                        {'logout'}
+                        {'تسجيل الخروج'}
                     </MenuItem>
                 </Menu>
 

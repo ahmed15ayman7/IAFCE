@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import {
     DataGrid as MuiDataGrid,
@@ -52,7 +54,6 @@ const DataGrid: React.FC<DataGridProps> = ({
             <MuiDataGrid
                 apiRef={apiRef}
                 columns={columns}
-
                 rows={rows}
                 rowCount={rowCount}
                 pageSizeOptions={pageSizeOptions}

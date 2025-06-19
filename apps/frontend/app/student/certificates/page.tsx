@@ -16,12 +16,38 @@ import { certificateApi, badgeApi } from '@/lib/api';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
-import { FaLinkedin, FaDownload, FaQrcode, FaMedal, FaTrophy } from 'react-icons/fa';
+import { FaLinkedin, FaDownload, FaQrcode, FaMedal, FaTrophy, FaEye } from 'react-icons/fa';
 import { Description, History } from '@mui/icons-material';
 import Modal from '@/components/common/Modal';
 import { TextareaAutosize } from '@mui/material';
-import { Certificate } from '@shared/prisma';
+import { Certificate, Badge as BadgeType } from '@shared/prisma';
+import { useUser } from '@/hooks/useUser';
+import Image from 'next/image';
 
+let initialBadges: BadgeType[] = [
+    {
+        id: '1',
+        title: 'شهادة المؤهل العلمي',
+        description: 'شهادة المؤهل العلمي',
+        image: 'https://marketplace.canva.com/EAFlVDzb7sA/3/0/1600w/canva-white-gold-elegant-modern-certificate-of-participation-Qn4Rei141MM.jpg',
+        earnedAt: new Date('2021-01-01'),
+        createdAt: new Date('2021-01-01'),
+        userId: '1',
+        type: 'medal',
+        points: 100,
+        },
+    {
+        id: '2',
+        title: 'شهادة المؤهل العلمي',
+        description: 'شهادة المؤهل العلمي',
+        image: 'https://marketplace.canva.com/EAFlVDzb7sA/3/0/1600w/canva-white-gold-elegant-modern-certificate-of-participation-Qn4Rei141MM.jpg',
+        earnedAt: new Date('2021-01-01'),
+        createdAt: new Date('2021-01-01'),
+        userId: '1',
+        type: 'trophy',
+        points: 100,
+    },
+];
 let initialCertificates: Certificate[] = [
     {
         id: '1',
@@ -59,8 +85,11 @@ let initialCertificates: Certificate[] = [
 ];
 
 export default function StudentCertificates() {
+    const { user } = useUser();
     const [activeTab, setActiveTab] = useState(0);
     const [showRequestForm, setShowRequestForm] = useState(false);
+    const [showCertificate, setShowCertificate] = useState(false);
+    const [certificate, setCertificate] = useState("");
     const [requestData, setRequestData] = useState({
         name: '',
         address: '',
@@ -77,12 +106,12 @@ export default function StudentCertificates() {
     // استعلامات البيانات
     const { data: certificates, isLoading: isLoadingCertificates } = useQuery({
         queryKey: ['certificates'],
-        queryFn: () => certificateApi.getByStudent(),
+        queryFn: () => certificateApi.getByStudent(user.id),
     });
 
     const { data: badges, isLoading: isLoadingBadges } = useQuery({
         queryKey: ['badges'],
-        queryFn: () => badgeApi.getByStudent(),
+        queryFn: () => badgeApi.getByStudent(user.id),
     });
 
     // طلب شهادة مطبوعة
@@ -150,7 +179,7 @@ export default function StudentCertificates() {
                 tabs={[
                     {
                         value: 0, label: 'الشهادات', icon: <Description />, content: <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {(certificates ?? initialCertificates)?.map((certificate, index) => (
+                            {(certificates?.data ?? initialCertificates)?.map((certificate, index) => (
                                 <motion.div
                                     key={certificate.id}
                                     initial={{ opacity: 0, y: 20 }}
@@ -162,7 +191,8 @@ export default function StudentCertificates() {
                                             <img
                                                 src={certificate.image || ''}
                                                 alt={certificate.title}
-                                                className="w-full h-full object-cover"
+                                                onClick={()=>setCertificate(certificate.image||"")}
+                                                className="w-full h-full object-cover cursor-pointer"
                                             />
                                         </div>
                                         <h3 className="text-lg font-bold mb-2">{certificate.title}</h3>
@@ -178,6 +208,15 @@ export default function StudentCertificates() {
                                                         onClick={() => certificateApi.download(certificate.id)}
                                                     >
                                                         <FaDownload />
+                                                    </Button>
+                                                </Tooltip>
+                                                <Tooltip title="عرض الشهاده ">
+                                                    <Button
+                                                        variant="outlined"
+                                                        size="small"
+                                                        onClick={() =>setShowCertificate(true)}
+                                                    >
+                                                        <FaEye/>
                                                     </Button>
                                                 </Tooltip>
                                                 <Tooltip title="مشاركة على LinkedIn">
@@ -210,7 +249,7 @@ export default function StudentCertificates() {
                     },
                     {
                         value: 1, label: 'الشارات', icon: <Description />, content: <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {badges?.map((badge, index) => (
+                            {(badges?.data ?? initialBadges)?.map((badge, index) => (
                                 <motion.div
                                     key={badge.id}
                                     initial={{ opacity: 0, y: 20 }}
@@ -247,7 +286,7 @@ export default function StudentCertificates() {
                         >
                             <Card title="سجل الإنجازات">
                                 <div className="space-y-4">
-                                    {[...(certificates || []), ...(badges || [])]
+                                    {[...(certificates?.data || []), ...(badges?.data || [])]
                                         .sort((a, b) => new Date(b.earnedAt).getTime() - new Date(a.earnedAt).getTime())
                                         .map((item, index) => (
                                             <motion.div
@@ -493,6 +532,16 @@ export default function StudentCertificates() {
                             </Button>
                         </div>
                     </div>
+                </Modal>
+            )
+            }
+            {showCertificate && (
+                <Modal
+                    open={true}
+                    onClose={() => setShowCertificate(false)}
+                    title="الشهادة"
+                >
+                    <Image src={certificate} alt='' className='w-full'/>
                 </Modal>
             )
             }
