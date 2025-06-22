@@ -7,7 +7,7 @@ import '../globals.css';
 import useLanguageStore from '@/store/useLanguageStore';
 import Script from 'next/script';
 import Loading from './loading';
-
+import { ToastContainer } from 'react-toastify';
 const cairo = Cairo({
     subsets: ['arabic'],
     variable: '--font-cairo',
@@ -52,6 +52,7 @@ export default function RootLayout({
             <body className={cairo.variable}>
                 <Suspense fallback={<Loading />}>
                     {content}
+                    <ToastContainer />
                 </Suspense>
             </body>
         </html>

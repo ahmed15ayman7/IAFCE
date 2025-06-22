@@ -1,46 +1,260 @@
 "use client"
-import React from 'react';
+import React, { useEffect } from 'react';
 import Card from '@/components/common/Card';
 import DataGrid from '@/components/common/DataGrid';
 import { GridRenderCellParams } from '@mui/x-data-grid';
+import { useQuery } from '@tanstack/react-query';
+import { courseApi } from '@/lib/api';
+import { useUser } from '@/hooks/useUser';
+import { Course,Instructor,Lesson,Quiz,User,File as FileModel } from '@shared/prisma';
+
+let getCoursesData = async (id: string) => {
+    const response = await courseApi.getByStudentId(id);
+    return response.data;
+}
+
 
 export default function StudentCourses() {
-
-    const activeCourses = [
+    let {user} = useUser();
+    const { data: courses, isLoading: isLoadingCourses ,refetch} = useQuery({
+        queryKey: ['courses'],
+        queryFn: () => getCoursesData(user?.id),
+    });
+    useEffect(() => {
+        refetch();
+    }, [user]);
+    const activeCourses: (Course & { instructors: (Instructor & { user: User })[], lessons: (Lesson & { files: FileModel[], quizzes: Quiz[] })[] })[] = [
         {
-            id: 1,
+            id: '1',
             title: 'البرمجة بلغة Python',
-            instructor: 'أحمد محمد',
-            progress: 75,
-            lastAccessed: '2024-04-25',
-            nextLesson: 'الوظائف والدوال',
+            instructors: [
+                {
+                    id: '1',
+                    academyId: '1',
+                    userId: '1',
+                    user: {
+                        id: '1',
+                        firstName: 'أحمد',
+                        lastName: 'محمد',
+                        email: 'ahmed@gmail.com',
+                        phone: '01234567890',
+                        role: 'STUDENT',
+                        subRole: 'STUDENT',
+                        isVerified: true,
+                        age: 20,
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+                        password: '123456',
+                        avatar: 'https://via.placeholder.com/150',
+                        isOnline: true,
+                        academyId: '1',
+                        
+                    },
+                },
+            ],
+            lessons: [
+                {
+                    id: '1',
+                    title: 'الوظائف والدوال',
+                    files: [],
+                    quizzes: [],
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                    status: 'COMPLETED',
+                    content: 'الوظائف والدوال',
+                    courseId: '1',
+                },
+            ],
+            description: 'البرمجة بلغة Python',
+            academyId: '1',
+            image: 'https://via.placeholder.com/150',
+            level: 'مبتدئ',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            status: 'ACTIVE',
         },
         {
-            id: 2,
+            id: '2',
             title: 'تطوير تطبيقات الويب',
-            instructor: 'سارة أحمد',
-            progress: 30,
-            lastAccessed: '2024-04-24',
-            nextLesson: 'CSS المتقدم',
+            instructors: [
+                {
+                    id: '1',
+                    academyId: '1',
+                    userId: '1',
+                    user: {
+                        id: '1',
+                        firstName: 'سارة',
+                        lastName: 'أحمد',
+                        email: 'sara@gmail.com',
+                        phone: '01234567890',
+                        role: 'STUDENT',
+                        subRole: 'STUDENT',
+                        isVerified: true,
+                        age: 20,
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+                        password: '123456',
+                        avatar: 'https://via.placeholder.com/150',
+                        isOnline: true,
+                        academyId: '1',
+                        
+                    },          
+                },
+            ],
+            lessons: [
+                {
+                    id: '1',
+                    title: 'CSS المتقدم',
+                    files: [],
+                    quizzes: [],
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                    status: 'COMPLETED',
+                    content: 'CSS المتقدم',
+                    courseId: '1',
+                },
+            ],
+            description: 'تطوير تطبيقات الويب',
+            academyId: '1',
+            image: 'https://via.placeholder.com/150',
+            level: 'متقدم',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            status: 'ACTIVE',
         },
     ];
 
-    const completedCourses = [
+    const completedCourses: (Course & { instructors: (Instructor & { user: User })[], lessons: (Lesson & { files: FileModel[], quizzes: Quiz[] })[] })[] = [
         {
-            id: 3,
+            id: '3',
             title: 'أساسيات HTML',
-            instructor: 'محمد علي',
-            completionDate: '2024-03-15',
-            grade: '95%',
-            certificate: 'https://marketplace.canva.com/EAFlVDzb7sA/3/0/1600w/canva-white-gold-elegant-modern-certificate-of-participation-Qn4Rei141MM.jpg',
+            instructors: [
+                {
+                    id: '1',
+                    academyId: '1',
+                    userId: '1',
+                    user: {
+                        id: '1',
+                        firstName: 'محمد',
+                        lastName: 'علي',
+                        email: 'mohamed@gmail.com',
+                        phone: '01234567890',
+                        role: 'STUDENT',
+                        subRole: 'STUDENT',
+                        isVerified: true,
+                        age: 20,
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+                        password: '123456',
+                        avatar: 'https://via.placeholder.com/150',
+                        isOnline: true,
+                        academyId: '1',
+                        
+                    },
+                },
+            ],
+            lessons: [
+                {
+                    id: '1',
+                    title: 'HTML المتقدم',
+                    files: [],
+                    quizzes: [],
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                    status: 'COMPLETED',
+                    content: 'HTML المتقدم',
+                    courseId: '1',
+                },
+                {
+                    id: '2',
+                    title: 'CSS المتقدم',
+                    files: [],
+                    quizzes: [],
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                    status: 'COMPLETED',
+                    content: 'CSS المتقدم',
+                    courseId: '1',
+                },
+            ],
+            description: 'أساسيات HTML',
+            academyId: '1',
+            image: 'https://via.placeholder.com/150',
+            level: 'مبتدئ',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            status: 'COMPLETED',
         },
         {
-            id: 4,
+            id: '4',
             title: 'أساسيات CSS',
-            instructor: 'فاطمة حسن',
-            completionDate: '2024-03-30',
-            grade: '88%',
-            certificate: 'https://marketplace.canva.com/EAFlVDzb7sA/3/0/1600w/canva-white-gold-elegant-modern-certificate-of-participation-Qn4Rei141MM.jpg',
+            instructors: [
+                {
+                    id: '1',
+                    academyId: '1',
+                    userId: '1',
+                    user: {
+                        id: '1',
+                        firstName: 'فاطمة',
+                        lastName: 'حسن',
+                        email: 'fatma@gmail.com',
+                        phone: '01234567890',
+                        role: 'STUDENT',
+                        subRole: 'STUDENT',
+                        isVerified: true,
+                        age: 20,
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+                        password: '123456',
+                        avatar: 'https://via.placeholder.com/150',
+                        isOnline: true,
+                        academyId: '1',
+                        
+                    },
+                },
+            ],
+            lessons: [
+                {
+                    id: '1',
+                    title: 'CSS المتقدم',
+                    files: [],
+                    quizzes: [],
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                    status: 'COMPLETED',
+                    content: 'CSS المتقدم',
+                    courseId: '1',
+                },
+                {
+                    id: '2',
+                    title: 'HTML المتقدم',
+                    files: [],
+                    quizzes: [],
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                    status: 'COMPLETED',
+                    content: 'HTML المتقدم',
+                    courseId: '1',
+                },
+                {
+                    id: '3',
+                    title: 'JavaScript المتقدم',
+                    files: [],
+                    quizzes: [],
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                    status: 'COMPLETED',
+                    content: 'JavaScript المتقدم',
+                    courseId: '1',
+                },
+            ],
+            description: 'أساسيات CSS',
+            academyId: '1',
+            image: 'https://via.placeholder.com/150',
+            level: 'مبتدئ',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            status: 'COMPLETED',
         },
     ];
 
@@ -63,7 +277,13 @@ export default function StudentCourses() {
             }
         },
     ];
+    let progress = 0;
 
+    let nextLesson = '';
+    if(courses){
+        progress = courses.reduce((acc, course) => acc + course.lessons.filter((lesson) => lesson.status === 'COMPLETED').length, 0);
+        nextLesson = courses.find((course) => course.lessons.find((lesson) => lesson.status === 'NOT_STARTED'))?.lessons[0].title ?? '';
+    }
     return (
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-3xl font-bold mb-8">كورساتي</h1>
@@ -71,11 +291,11 @@ export default function StudentCourses() {
             <div className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4">الكورسات النشطة</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {activeCourses.map((course) => (
+                    {(courses ?? activeCourses).map((course) => (
                         <Card
                             key={course.id}
                             title={course.title}
-                            description={`المحاضر: ${course.instructor}`}
+                            description={`المحاضر: ${course.instructors[0].user.firstName} ${course.instructors[0].user.lastName}`}
                             className="h-full"
                         >
                             <div className="mt-4 space-y-2">
@@ -83,19 +303,19 @@ export default function StudentCourses() {
                                     <span className="text-sm text-gray-600 dark:text-gray-400">
                                         التقدم
                                     </span>
-                                    <span className="font-medium">{course.progress}%</span>
+                                    <span className="font-medium">{progress}%</span>
                                 </div>
                                 <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                                     <div
                                         className="bg-primary-main h-2 rounded-full"
-                                        style={{ width: `${course.progress}%` }}
+                                        style={{ width: `${progress}%` }}
                                     />
                                 </div>
-                                <div className="text-sm text-gray-600 dark:text-gray-400">
+                                {/* <div className="text-sm text-gray-600 dark:text-gray-400">
                                     آخر دخول: {course.lastAccessed}
-                                </div>
+                                </div> */}
                                 <div className="text-sm text-gray-600 dark:text-gray-400">
-                                    الدرس التالي: {course.nextLesson}
+                                    الدرس التالي: {nextLesson}
                                 </div>
                             </div>
                         </Card>
