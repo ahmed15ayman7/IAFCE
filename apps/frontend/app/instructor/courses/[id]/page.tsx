@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import Skeleton from '@/components/common/Skeleton';
+import dynamic from 'next/dynamic';
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div></div> });
 import {
     Box,
     Container,
@@ -60,8 +61,8 @@ import {
 } from '@mui/icons-material';
 import { courseApi, lessonApi } from '@/lib/api';
 import { Course, Lesson, LessonStatus, User, FileType, Quiz, File as FileModel, Enrollment, Submission, Question, Option } from '@shared/prisma';
-import QuizDialog from './components/QuizDialog';
-import QuizSubmissions from './components/QuizSubmissions';
+const QuizDialog = dynamic(() => import('./components/QuizDialog'), { loading: () => <div></div> });
+const QuizSubmissions = dynamic(() => import('./components/QuizSubmissions'), { loading: () => <div></div> });
 
 
 let initialCourse: Course & {

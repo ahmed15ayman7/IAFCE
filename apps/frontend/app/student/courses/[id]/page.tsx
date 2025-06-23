@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import {
@@ -43,7 +43,8 @@ import {
 } from '@mui/icons-material';
 import { courseApi } from '@/lib/api';
 import { Course, Lesson, FileType, File as FileModel, Enrollment, Quiz, Submission, Question, User, Option } from '@shared/prisma';
-import Skeleton from '@/components/common/Skeleton';
+import dynamic from 'next/dynamic';
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div></div> });
 import QuizSidebar from './components/QuizSidebar';
 
 let initialCourse: Course & {
@@ -763,4 +764,10 @@ const CoursePage = ({ params }: { params: { id: string } }) => {
     );
 };
 
-export default CoursePage; 
+export default function CoursePageS({ params }: { params: { id: string } }) {
+    return (
+        <Suspense fallback={<Skeleton />}>
+            <CoursePage params={params} />
+        </Suspense>
+    );
+}

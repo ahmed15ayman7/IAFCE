@@ -1,8 +1,9 @@
 "use client"
 import React, { useEffect } from 'react';
 import { useUser } from '@/hooks/useUser';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
+import dynamic from 'next/dynamic';
+const Navbar = dynamic(() => import('@/components/layout/Navbar'), { loading: () => <div>جاري التحميل...</div> });
+const Footer = dynamic(() => import('@/components/layout/Footer'), { loading: () => <div>جاري التحميل...</div> });
 import { layoutsConfig } from '@/config/layouts';
 import { useRouter } from 'next/navigation';
 

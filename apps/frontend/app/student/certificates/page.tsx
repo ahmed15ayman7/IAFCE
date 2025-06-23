@@ -1,24 +1,25 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import Card from '@/components/common/Card';
-import Badge from '@/components/common/Badge';
-import Alert from '@/components/common/Alert';
+import dynamic from 'next/dynamic';
+const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div></div> });
+const Badge = dynamic(() => import('@/components/common/Badge'), { loading: () => <div></div> });
+const Alert = dynamic(() => import('@/components/common/Alert'), { loading: () => <div></div> });
 import { Alert as MuiAlert } from '@mui/material';
-import Button from '@/components/common/Button';
-import Tabs from '@/components/common/Tabs';
-import Skeleton from '@/components/common/Skeleton';
-import EmptyState from '@/components/common/EmptyState';
-import Tooltip from '@/components/common/Tooltip';
-import Input from '@/components/common/Input';
+const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div></div> });
+const Tabs = dynamic(() => import('@/components/common/Tabs'), { loading: () => <div></div> });
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div></div> });
+const EmptyState = dynamic(() => import('@/components/common/EmptyState'), { loading: () => <div></div> });
+const Tooltip = dynamic(() => import('@/components/common/Tooltip'), { loading: () => <div></div> });
+const Input = dynamic(() => import('@/components/common/Input'), { loading: () => <div></div> });
 import { certificateApi, badgeApi } from '@/lib/api';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
 import { FaLinkedin, FaDownload, FaQrcode, FaMedal, FaTrophy, FaEye } from 'react-icons/fa';
 import { Description, History } from '@mui/icons-material';
-import Modal from '@/components/common/Modal';
+const Modal = dynamic(() => import('@/components/common/Modal'), { loading: () => <div></div> });
 import { TextareaAutosize } from '@mui/material';
 import { Certificate, Badge as BadgeType } from '@shared/prisma';
 import { useUser } from '@/hooks/useUser';
@@ -84,7 +85,7 @@ let initialCertificates: Certificate[] = [
 
 ];
 
-export default function StudentCertificates() {
+ function StudentCertificates() {
     const { user } = useUser();
     const [activeTab, setActiveTab] = useState(0);
     const [showRequestForm, setShowRequestForm] = useState(false);
@@ -548,3 +549,10 @@ export default function StudentCertificates() {
         </motion.div >
     );
 } 
+export default function StudentCertificatesS() {
+    return (
+        <Suspense fallback={<Skeleton />}>
+            <StudentCertificates />
+        </Suspense>
+    );
+}

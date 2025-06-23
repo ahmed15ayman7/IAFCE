@@ -5,7 +5,8 @@ import Footer from '@/components/layout/Footer';
 import { layoutsConfig } from '@/config/layouts';
 import { redirect } from 'next/navigation';
 import { useUser } from '@/hooks/useUser';
-import ChatDialog from '@/components/layout/ChatDialog';
+import dynamic from 'next/dynamic';
+const ChatDialog = dynamic(() => import('@/components/layout/ChatDialog'), { loading: () => <div>جاري التحميل...</div> });
 
 export default function StudentLayout({
     children,

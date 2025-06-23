@@ -13,8 +13,7 @@ import {
 } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { quizApi, submissionApi } from '@/lib/api';
-import { Option, Question, Quiz, Submission, User, UserRole } from '@/generated/prisma_client';
-import { } from "@shared/prisma"
+import { Option, Question, Quiz, Submission, User, UserRole } from '@shared/prisma';
 
 interface QuizSubmissionsProps {
     quizId: string;

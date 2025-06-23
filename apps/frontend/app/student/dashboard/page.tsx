@@ -1,16 +1,17 @@
 'use client';
-import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
+import React, { Suspense, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import Card from '@/components/common/Card';
-import Progress from '@/components/common/Progress';
-import DataGrid from '@/components/common/DataGrid';
-import Avatar from '@/components/common/Avatar';
-import Badge from '@/components/common/Badge';
-import Alert from '@/components/common/Alert';
-import Button from '@/components/common/Button';
-import Tabs from '@/components/common/Tabs';
-import Skeleton from '@/components/common/Skeleton';
-import Tooltip from '@/components/common/Tooltip';
+const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div></div> });
+const Progress = dynamic(() => import('@/components/common/Progress'), { loading: () => <div></div> });
+const DataGrid = dynamic(() => import('@/components/common/DataGrid'), { loading: () => <div></div> });
+const Avatar = dynamic(() => import('@/components/common/Avatar'), { loading: () => <div></div> });
+const Badge = dynamic(() => import('@/components/common/Badge'), { loading: () => <div></div> });
+const Alert = dynamic(() => import('@/components/common/Alert'), { loading: () => <div></div> });
+const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div></div> });
+const Tabs = dynamic(() => import('@/components/common/Tabs'), { loading: () => <div></div> });
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div></div> });
+const Tooltip = dynamic(() => import('@/components/common/Tooltip'), { loading: () => <div></div> });
 import { userApi, courseApi, notificationApi, achievementApi, enrollmentApi } from '@/lib/api';
 import { motion } from 'framer-motion';
 import { useUser } from '@/hooks/useUser';
@@ -32,7 +33,7 @@ let getAchievements = async (id: string): Promise<Achievement[]> => {
     let achievements = await achievementApi.getByUser(id);
     return achievements.data;
 }
-export default function StudentDashboard() {
+ function StudentDashboard() {
     const [activeTab, setActiveTab] = useState<number>(0);
     let { user, status } = useUser();
 
@@ -313,3 +314,10 @@ export default function StudentDashboard() {
         </motion.div>
     );
 } 
+export default function StudentDashboardS() {
+    return (
+        <Suspense fallback={<Skeleton />}>
+            <StudentDashboard />
+        </Suspense>
+    );
+}

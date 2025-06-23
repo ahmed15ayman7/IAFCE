@@ -2,15 +2,16 @@
 
 import React, { useEffect, useState } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import Card from '@/components/common/Card';
-import Badge from '@/components/common/Badge';
-import Button from '@/components/common/Button';
-import Tabs from '@/components/common/Tabs';
-import Skeleton from '@/components/common/Skeleton';
-import Tooltip from '@/components/common/Tooltip';
-import Modal from '@/components/common/Modal';
-import Input from '@/components/common/Input';
-import Avatar from '@/components/common/Avatar';
+import dynamic from 'next/dynamic';
+const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div>جاري التحميل...</div> });
+const Badge = dynamic(() => import('@/components/common/Badge'), { loading: () => <div>جاري التحميل...</div> });
+const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div>جاري التحميل...</div> });
+const Tabs = dynamic(() => import('@/components/common/Tabs'), { loading: () => <div>جاري التحميل...</div> });
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div>جاري التحميل...</div> });
+const Tooltip = dynamic(() => import('@/components/common/Tooltip'), { loading: () => <div>جاري التحميل...</div> });
+const Modal = dynamic(() => import('@/components/common/Modal'), { loading: () => <div>جاري التحميل...</div> });
+const Input = dynamic(() => import('@/components/common/Input'), { loading: () => <div>جاري التحميل...</div> });
+const Avatar = dynamic(() => import('@/components/common/Avatar'), { loading: () => <div>جاري التحميل...</div> });
 import { Switch, Select, Alert } from "@mui/material"
 
 

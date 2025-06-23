@@ -1,7 +1,8 @@
 "use client" 
 import React from 'react';
-import Card from '@/components/common/Card';
-import DataGrid from '@/components/common/DataGrid';
+import dynamic from 'next/dynamic';
+const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div></div> });
+const DataGrid = dynamic(() => import('@/components/common/DataGrid'), { loading: () => <div></div> });
 
 export default function InstructorQuizzes() {
 

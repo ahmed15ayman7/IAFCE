@@ -1,15 +1,16 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import Card from '@/components/common/Card';
-import Badge from '@/components/common/Badge';
-import Button from '@/components/common/Button';
-import Tabs from '@/components/common/Tabs';
-import Skeleton from '@/components/common/Skeleton';
-import EmptyState from '@/components/common/EmptyState';
-import Tooltip from '@/components/common/Tooltip';
-import Modal from '@/components/common/Modal';
+import dynamic from 'next/dynamic';
+const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div></div> });
+const Badge = dynamic(() => import('@/components/common/Badge'), { loading: () => <div></div> });
+const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div></div> });
+const Tabs = dynamic(() => import('@/components/common/Tabs'), { loading: () => <div></div> });
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div></div> });
+const EmptyState = dynamic(() => import('@/components/common/EmptyState'), { loading: () => <div></div> });
+const Tooltip = dynamic(() => import('@/components/common/Tooltip'), { loading: () => <div></div> });
+const Modal = dynamic(() => import('@/components/common/Modal'), { loading: () => <div></div> });
 import { Switch, Alert } from '@mui/material';
 
 
@@ -74,7 +75,7 @@ let initialNotifications: Notification[] = [
         }
 ]
 
-export default function StudentNotifications() {
+ function StudentNotifications() {
     const [activeTab, setActiveTab] = useState(0);
     const [showSettings, setShowSettings] = useState(false);
     const [settings, setSettings] = useState<NotificationSettings>({
@@ -386,3 +387,10 @@ export default function StudentNotifications() {
         </motion.div>
     );
 } 
+export default function StudentNotificationsS() {
+    return (
+        <Suspense fallback={<Skeleton />}>
+            <StudentNotifications />
+        </Suspense>
+    );
+}

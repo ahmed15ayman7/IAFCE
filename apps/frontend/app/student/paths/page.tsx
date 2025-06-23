@@ -1,15 +1,16 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import Card from '@/components/common/Card';
-import DataGrid from '@/components/common/DataGrid';
-import Modal from '@/components/common/Modal';
-import Tabs from '@/components/common/Tabs';
-import Progress from '@/components/common/Progress';
-import Avatar from '@/components/common/Avatar';
-import Badge from '@/components/common/Badge';
-import Button from '@/components/common/Button';
+import dynamic from 'next/dynamic';
+const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div></div> });
+const DataGrid = dynamic(() => import('@/components/common/DataGrid'), { loading: () => <div></div> });
+const Modal = dynamic(() => import('@/components/common/Modal'), { loading: () => <div></div> });
+const Tabs = dynamic(() => import('@/components/common/Tabs'), { loading: () => <div></div> });
+const Progress = dynamic(() => import('@/components/common/Progress'), { loading: () => <div></div> });
+const Avatar = dynamic(() => import('@/components/common/Avatar'), { loading: () => <div></div> });
+const Badge = dynamic(() => import('@/components/common/Badge'), { loading: () => <div></div> });
+const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div></div> });
 import Stepper from '@/components/common/Stepper';
 import Skeleton from '@/components/common/Skeleton';
 import EmptyState from '@/components/common/EmptyState';
@@ -17,7 +18,7 @@ import Tooltip from '@/components/common/Tooltip';
 import { userApi, courseApi, pathApi } from '@/lib/api';
 import { motion } from 'framer-motion';
 import { FaPlus } from 'react-icons/fa';
-import { Alert, Badge as MuiBadge } from '@mui/material';
+import { Alert } from '@mui/material';
 import { Course, Milestone, Path, User } from '@shared/prisma';
 let getPathsData = async () => {
     let { success, data } = await pathApi.getAll();
@@ -759,19 +760,19 @@ let initialPaths: (Path & { courses: Course[], milestones: Milestone[], peers: U
         ],
     },
 ]
-export default function StudentPaths() {
+ function StudentPaths() {
     const [selectedPath, setSelectedPath] = useState<Path & { courses: Course[], milestones: Milestone[], peers: User[] } | null>(null);
     const [activeTab, setActiveTab] = useState(0);
 
     // استعلامات البيانات
     const { data: paths, isLoading: isLoadingPaths } = useQuery({
         queryKey: ['paths'],
-        queryFn: () => getPathsData(),
+        queryFn: () => getPathsData()
     });
 
     const { data: courses, isLoading: isLoadingCourses } = useQuery({
         queryKey: ['courses'],
-        queryFn: () => getCoursesData(),
+        queryFn: () => getCoursesData()
     });
 
     // تصفية المسارات حسب التبويب النشط
@@ -1019,3 +1020,10 @@ export default function StudentPaths() {
         </motion.div>
     );
 } 
+export default function StudentPathsSkeleton() {
+    return (
+        <Suspense fallback={<Skeleton />}>
+  <StudentPaths />
+</Suspense>
+    );
+}
