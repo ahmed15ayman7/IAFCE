@@ -1,4 +1,5 @@
 export default function Loading() {
+
     return (
       <div className="space-y-6">
         <div className="animate-pulse h-10 w-1/3 bg-gray-200 rounded" />
@@ -10,3 +11,4 @@ export default function Loading() {
       </div>
     );
   } 
+

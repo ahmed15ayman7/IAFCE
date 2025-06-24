@@ -2,19 +2,20 @@
 import { communityApi } from '@/lib/api';
 import { Community, User } from "@shared/prisma"
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
-import Card from '@/components/common/Card';
-import Button from '@/components/common/Button';
-import Tooltip from '@/components/common/Tooltip';
-import Badge from '@/components/common/Badge';
-import { FaDownload, FaLinkedin, FaQrcode, FaUserPlus } from 'react-icons/fa';
+import React, { Suspense, useState } from 'react';
+import dynamic from 'next/dynamic';
+const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div></div> });
+const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div></div> });
+const Tooltip = dynamic(() => import('@/components/common/Tooltip'), { loading: () => <div></div> });
+const Badge = dynamic(() => import('@/components/common/Badge'), { loading: () => <div></div> });
+import { Linkedin, QrCode, UserPlus } from 'lucide-react';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
 import { useRouter } from 'next/navigation';
-import Avatar from '@/components/common/Avatar';
+const Avatar = dynamic(() => import('@/components/common/Avatar'), { loading: () => <div></div> });
 import { motion } from 'framer-motion';
-import SearchBar from '@/components/ui/SearchBar';
-import { Skeleton } from '@mui/material';
+const SearchBar = dynamic(() => import('@/components/ui/SearchBar'), { loading: () => <div></div> });
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div></div> });
 let initialCommunities: (Community & { participants: User[] })[] = [
     {
         id: "2999",
@@ -297,7 +298,7 @@ let getCommunitiesData = async () => {
     }
     return null;
 }
-export default function StudentCommunitiesPage() {
+ function StudentCommunitiesPage() {
     const router = useRouter();
     const { data: communities, isLoading: isLoadingCommunities } = useQuery({
         queryKey: ['communities'],
@@ -350,7 +351,7 @@ export default function StudentCommunitiesPage() {
                                     size="small"
                                     onClick={() => { }}
                                 >
-                                    <FaUserPlus />
+                                    <UserPlus />
                                 </Button>
                             </Tooltip>
                             <Tooltip title="مشاركة على LinkedIn">
@@ -359,7 +360,7 @@ export default function StudentCommunitiesPage() {
                                     size="small"
                                     onClick={() => { }}
                                 >
-                                    <FaLinkedin />
+                                    <Linkedin />
                                 </Button>
                             </Tooltip>
                             <Tooltip title="رمز التحقق">
@@ -368,7 +369,7 @@ export default function StudentCommunitiesPage() {
                                     size="small"
                                     onClick={() => {/* عرض رمز التحقق */ }}
                                 >
-                                    <FaQrcode />
+                                    <QrCode />
                                 </Button>
                             </Tooltip>
                         </div>
@@ -390,4 +391,11 @@ export default function StudentCommunitiesPage() {
             ))}
         </div>
     </motion.div>;
+}
+export default function StudentCommunitiesPageS() {
+    return (
+        <Suspense fallback={<Skeleton />}>
+            <StudentCommunitiesPage />
+        </Suspense>
+    );
 }

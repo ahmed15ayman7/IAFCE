@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 import authService from './auth.service';
-import { Achievement, Badge, Certificate, Community, Course, Discussion, Enrollment, File as FileModel, Group, Lesson, LiveRoom, LoginHistory, Milestone, Notification, NotificationSettings, Option, Path, Post, Question, Quiz, Submission, TwoFactor, User } from '@shared/prisma';
+import { Achievement, Badge, Certificate, Community, Course, Discussion, Enrollment, File as FileModel, Group, Instructor, Lesson, LiveRoom, LoginHistory, Milestone, Notification, NotificationSettings, Option, Path, Post, Question, Quiz, Submission, TwoFactor, User } from '@shared/prisma';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
@@ -161,7 +161,7 @@ export const courseApi = {
     getQuizzes: (courseId: string) => api.get(`/courses/${courseId}/quizzes`),
     getStudents: (courseId: string) => api.get(`/courses/${courseId}/students`),
     getInstructors: (courseId: string) => api.get(`/courses/${courseId}/instructors`),
-    getByStudentId: (studentId: string) => api.get(`/courses/by-student/${studentId}`),
+    getByStudentId: (studentId: string): Promise<{ success: boolean, data: (Course & { instructors: (Instructor & { user: User })[] ,lessons: (Lesson & { files: FileModel[], quizzes: Quiz[] })[] })[] }> => api.get(`/courses/by-student/${studentId}`),
     getByInstructorId: (instructorId: string) => api.get(`/courses/by-instructor/${instructorId}`),
     getByAcademyId: (academyId: string) => api.get(`/courses/by-academy/${academyId}`),
 };

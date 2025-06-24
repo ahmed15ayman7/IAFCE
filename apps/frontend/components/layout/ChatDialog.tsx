@@ -3,12 +3,11 @@
 import { useState } from 'react';
 import {
     TextField,
-    IconButton,
+    Button,
     InputAdornment,
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-import Image from 'next/image';
-import {Message as MessageIcon} from "@mui/icons-material"
+import {MessageCircle as MessageIcon} from "lucide-react"
 type Message = {
     question: string;
     answer: string;
@@ -34,22 +33,22 @@ export default function ChatDialog() {
     return (
         <>
             {/* Chat Button */}
-            <IconButton
+            <Button
                 onClick={() => setOpen(!open)}
                 style={{
                     position: 'fixed',
                     bottom: '50px',
                     right: '20px',
-                    // backgroundColor: 'primary',
+                    backgroundColor: '#FBB34C',
                     color: 'white',
                     borderRadius: '50%',
-                    width: 56,
-                    height: 56,
+                    width: 30,
+                    height: 50,
                     zIndex: 1001,
                 }}
             >
                 <MessageIcon  />
-            </IconButton>
+            </Button>
 
             {/* Chat Container */}
             {open && (
@@ -71,13 +70,13 @@ export default function ChatDialog() {
                 >
                     {/* Header with Image */}
                     <div style={{ padding: 8, backgroundColor: 'primary.main' }}>
-                        <Image
+                        {/* <Image
                             src="/assets/images/logo.png"
                             alt="Header"
                             width={350}
                             height={60}
                             style={{ borderRadius: 12, objectFit: 'cover', width: '100%' }}
-                        />
+                        /> */}
                     </div>
 
                     {/* Chat Messages */}
@@ -91,11 +90,12 @@ export default function ChatDialog() {
                         }}
                     >
                         {messages.length === 0 ? (
-                            <div style={{
+                            <div className='text-secondary-main text-center text-sm' style={{
                                 margin: 'auto',
                                 textAlign: 'center',
-                                color: 'secondary.main',
-                                fontSize: 14,
+                            //     color: 'secondary.main',
+                            //     fontSize: 14,
+                            // 
                             }}>
                                 ✨ اسألني أي شيء يخطر في بالك وسأساعدك!
                             </div>
@@ -104,9 +104,9 @@ export default function ChatDialog() {
                                 <div key={index}>
                                     {/* User message */}
                                     <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 6 }}>
-                                        <div
+                                        <div className='bg-primary-main text-white text-sm rounded-r-lg p-2'
                                             style={{
-                                                background: 'primary.main',
+                                                // background: 'primary.main',
                                                 padding: '8px 12px',
                                                 borderRadius: '16px 16px 0 16px',
                                                 maxWidth: '80%',
@@ -118,9 +118,9 @@ export default function ChatDialog() {
 
                                     {/* Bot message */}
                                     <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: 10 }}>
-                                        <div
+                                        <div className='bg-secondary-main text-white text-sm rounded-l-lg'
                                             style={{
-                                                background: 'secondary.main',
+                                                // background: 'secondary.main',
                                                 padding: '8px 12px',
                                                 borderRadius: '16px 16px 16px 0',
                                                 maxWidth: '80%',
@@ -148,9 +148,9 @@ export default function ChatDialog() {
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
-                                        <IconButton onClick={sendMessage}>
+                                        <Button onClick={sendMessage}>
                                             <SendIcon />
-                                        </IconButton>
+                                        </Button>
                                     </InputAdornment>
                                 ),
                                 style: {

@@ -13,6 +13,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { User } from '@shared/prisma';
+import { toast } from 'react-toastify';
 
 export default function SignIn() {
     let { data: session } = useSession();
@@ -43,6 +44,7 @@ export default function SignIn() {
     const onSubmit = async (data: SignInInput) => {
         setError(null);
         setLoading(true);
+        let toastId = toast.loading('جاري تسجيل الدخول...');
 
         try {
             const result = await signIn('credentials', {
@@ -52,24 +54,32 @@ export default function SignIn() {
             });
 
             if (result?.error) {
+                toast.update(toastId, { render: result.error, type: 'error' ,autoClose: 3000,isLoading: false});
                 setError(result.error);
             } else {
                 if ((session?.user as any)?.role === 'STUDENT') {
+                    toast.update(toastId, { render: 'تم تسجيل الدخول للطالب بنجاح', type: 'success', autoClose: 3000, isLoading: false });
                     console.log("session", session)
                     router.push('/student/dashboard');
                 } else if ((session?.user as any)?.role === 'INSTRUCTOR') {
+                    toast.update(toastId, { render: 'تم تسجيل الدخول للمحاضر بنجاح', type: 'success', autoClose: 3000, isLoading: false });
                     router.push('/instructor/dashboard');
                 } else if ((session?.user as any)?.role === 'ACADEMY') {
+                    toast.update(toastId, { render: 'تم تسجيل الدخول للجامعة بنجاح', type: 'success', autoClose: 3000, isLoading: false });
                     router.push('/academy/dashboard');
                 } else if ((session?.user as any)?.role === 'ADMIN') {
+                        toast.update(toastId, { render: 'تم تسجيل الدخول للمدير بنجاح', type: 'success', autoClose: 3000, isLoading: false });
                     router.push('/admin/dashboard');
                 } else if ((session?.user as any)?.role === 'PARENT') {
+                    toast.update(toastId, { render: 'تم تسجيل الدخول للولي بنجاح', type: 'success', autoClose: 3000, isLoading: false });
                     router.push('/parent/dashboard');
                 } else {
+                    toast.update(toastId, { render: 'حدث خطأ أثناء تسجيل الدخول', type: 'error', autoClose: 3000, isLoading: false });
                     router.push('/auth/signin');
                 }
             }
         } catch (error) {
+            toast.update(toastId, { render: 'حدث خطأ أثناء تسجيل الدخول', type: 'error', autoClose: 3000, isLoading: false });
             setError('حدث خطأ أثناء تسجيل الدخول');
         } finally {
             setLoading(false);

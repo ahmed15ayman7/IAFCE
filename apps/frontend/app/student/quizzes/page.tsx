@@ -3,23 +3,24 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useUser } from '@/hooks/useUser';
-import Card from '@/components/common/Card';
-import Badge from '@/components/common/Badge';
-import Button from '@/components/common/Button';
-import Tabs from '@/components/common/Tabs';
-import Skeleton from '@/components/common/Skeleton';
-import Tooltip from '@/components/common/Tooltip';
-import Modal from '@/components/common/Modal';
-import Avatar from '@/components/common/Avatar';
-import EmptyState from '@/components/common/EmptyState';
-import Progress from '@/components/common/Progress';
-import DataGrid from '@/components/common/DataGrid';
+import dynamic from 'next/dynamic';
+const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div>جاري التحميل...</div> });
+const Badge = dynamic(() => import('@/components/common/Badge'), { loading: () => <div>جاري التحميل...</div> });
+const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div>جاري التحميل...</div> });
+const Tabs = dynamic(() => import('@/components/common/Tabs'), { loading: () => <div>جاري التحميل...</div> });
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div>جاري التحميل...</div> });
+const Tooltip = dynamic(() => import('@/components/common/Tooltip'), { loading: () => <div>جاري التحميل...</div> });
+const Modal = dynamic(() => import('@/components/common/Modal'), { loading: () => <div>جاري التحميل...</div> });
+const Avatar = dynamic(() => import('@/components/common/Avatar'), { loading: () => <div>جاري التحميل...</div> });
+const EmptyState = dynamic(() => import('@/components/common/EmptyState'), { loading: () => <div>جاري التحميل...</div> });
+const Progress = dynamic(() => import('@/components/common/Progress'), { loading: () => <div>جاري التحميل...</div> });
+const DataGrid = dynamic(() => import('@/components/common/DataGrid'), { loading: () => <div>جاري التحميل...</div> });
 import { quizApi, assignmentApi } from '@/lib/api';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
 import { Alert } from '@mui/material';
-import { FaCalendar, FaList, FaHistory, FaChartLine } from 'react-icons/fa';
+import { Calendar, List, History, ChartLine } from 'lucide-react';
 import { Quiz } from '@shared/prisma';
 interface IQuiz {
     activeQuiz: Quiz,
@@ -259,10 +260,10 @@ export default function StudentQuizzes() {
                 value={activeTab}
                 onChange={setActiveTab}
                 tabs={[
-                    { value: 0, label: 'التقويم', icon: <FaCalendar />, content: <></> },
-                    { value: 1, label: 'القائمة', icon: <FaList />, content: <></> },
-                    { value: 2, label: 'السجل', icon: <FaHistory />, content: <></> },
-                    { value: 3, label: 'التحليل', icon: <FaChartLine />, content: <></> },
+                    { value: 0, label: 'التقويم', icon: <Calendar size={16} />, content: <></> },
+                    { value: 1, label: 'القائمة', icon: <List size={16} />, content: <></> },
+                    { value: 2, label: 'السجل', icon: <History size={16} />, content: <></> },
+                    { value: 3, label: 'التحليل', icon: <ChartLine size={16} />, content: <></> },
                 ]}
             />
 
