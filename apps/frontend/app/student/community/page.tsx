@@ -8,7 +8,7 @@ const Card = dynamic(() => import('@/components/common/Card'), { loading: () => 
 const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div></div> });
 const Tooltip = dynamic(() => import('@/components/common/Tooltip'), { loading: () => <div></div> });
 const Badge = dynamic(() => import('@/components/common/Badge'), { loading: () => <div></div> });
-import { FaDownload, FaLinkedin, FaQrcode, FaUserPlus } from 'react-icons/fa';
+import { Linkedin, QrCode, UserPlus } from 'lucide-react';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
 import { useRouter } from 'next/navigation';
@@ -351,7 +351,7 @@ let getCommunitiesData = async () => {
                                     size="small"
                                     onClick={() => { }}
                                 >
-                                    <FaUserPlus />
+                                    <UserPlus />
                                 </Button>
                             </Tooltip>
                             <Tooltip title="مشاركة على LinkedIn">
@@ -360,7 +360,7 @@ let getCommunitiesData = async () => {
                                     size="small"
                                     onClick={() => { }}
                                 >
-                                    <FaLinkedin />
+                                    <Linkedin />
                                 </Button>
                             </Tooltip>
                             <Tooltip title="رمز التحقق">
@@ -369,7 +369,7 @@ let getCommunitiesData = async () => {
                                     size="small"
                                     onClick={() => {/* عرض رمز التحقق */ }}
                                 >
-                                    <FaQrcode />
+                                    <QrCode />
                                 </Button>
                             </Tooltip>
                         </div>

@@ -20,7 +20,7 @@ import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
 import { Alert } from '@mui/material';
-import { FaCalendar, FaList, FaHistory, FaChartLine } from 'react-icons/fa';
+import { Calendar, List, History, ChartLine } from 'lucide-react';
 import { Quiz } from '@shared/prisma';
 interface IQuiz {
     activeQuiz: Quiz,
@@ -260,10 +260,10 @@ export default function StudentQuizzes() {
                 value={activeTab}
                 onChange={setActiveTab}
                 tabs={[
-                    { value: 0, label: 'التقويم', icon: <FaCalendar />, content: <></> },
-                    { value: 1, label: 'القائمة', icon: <FaList />, content: <></> },
-                    { value: 2, label: 'السجل', icon: <FaHistory />, content: <></> },
-                    { value: 3, label: 'التحليل', icon: <FaChartLine />, content: <></> },
+                    { value: 0, label: 'التقويم', icon: <Calendar size={16} />, content: <></> },
+                    { value: 1, label: 'القائمة', icon: <List size={16} />, content: <></> },
+                    { value: 2, label: 'السجل', icon: <History size={16} />, content: <></> },
+                    { value: 3, label: 'التحليل', icon: <ChartLine size={16} />, content: <></> },
                 ]}
             />
 

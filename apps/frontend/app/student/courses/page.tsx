@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import { courseApi } from '@/lib/api';
 import { useUser } from '@/hooks/useUser';
 import { Course,Instructor,Lesson,Quiz,User,File as FileModel } from '@shared/prisma';
+import { redirect } from 'next/navigation';
 
 let getCoursesData = async (id: string) => {
     const response = await courseApi.getByStudentId(id);
@@ -21,6 +22,9 @@ let getCoursesData = async (id: string) => {
     const { data: courses, isLoading: isLoadingCourses ,refetch} = useQuery({
         queryKey: ['courses'],
         queryFn: () => getCoursesData(user?.id),
+        staleTime: 1000 * 60 * 5,
+        gcTime: 1000 * 60 * 10,
+        placeholderData: (previousData) => previousData ?? activeCourses,
     });
     useEffect(() => {
         refetch();
@@ -282,7 +286,7 @@ let getCoursesData = async (id: string) => {
     let progress = 0;
 
     let nextLesson = '';
-    if(courses){
+    if(Array.isArray(courses)){
         progress = courses.reduce((acc, course) => acc + course.lessons.filter((lesson) => lesson.status === 'COMPLETED').length, 0);
         nextLesson = courses.find((course) => course.lessons.find((lesson) => lesson.status === 'NOT_STARTED'))?.lessons[0].title ?? '';
     }
@@ -293,7 +297,7 @@ let getCoursesData = async (id: string) => {
             <div className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4">الكورسات النشطة</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {(courses ?? activeCourses).map((course) => (
+                    {(Array.isArray(courses) ? courses : activeCourses).map((course) => (
                         <Card
                             key={course.id}
                             title={course.title}
@@ -338,9 +342,6 @@ let getCoursesData = async (id: string) => {
     );
 } 
 export default function StudentCoursesS() {
-    return (
-        <Suspense fallback={<Skeleton />}>
-            <StudentCourses />
-        </Suspense>
-    );
+    redirect('/student/courses/overview');
+    // return null;
 }
