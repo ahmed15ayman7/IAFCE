@@ -8,17 +8,11 @@ import useLanguageStore from '@/store/useLanguageStore';
 import Script from 'next/script';
 import Loading from './loading';
 import { ToastContainer } from 'react-toastify';
-import { ReportOpts } from 'web-vitals';
 const cairo = Cairo({
     subsets: ['arabic'],
     variable: '--font-cairo',
     weight: ['300', '400', '500', '600', '700'],
 });
-
-export function reportWebVitals(metric: ReportOpts) {
-  console.log(metric); 
-  // تقدر تبعته لأي أداة تحليل زي Sentry أو LogRocket أو حتى backend خاص بيك
-}
 
 export default function RootLayout({
     children,
