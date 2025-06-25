@@ -12,9 +12,9 @@ import {
     Facebook as FacebookIcon,
     Twitter as TwitterIcon,
     Instagram as InstagramIcon,
-    Linkedin as LinkedInIcon,
-    Youtube as YouTubeIcon,
-} from 'lucide-react';
+    LinkedIn as LinkedInIcon,
+    YouTube as YouTubeIcon,
+} from '@mui/icons-material';
 
 const Footer: React.FC<{ links: { quickLinks: { label: string; links: Array<{ label: string; href: string }> }; support: { label: string; links: Array<{ label: string; href: string }> } } }> = ({ links }) => {
     const theme = useTheme();

@@ -1,19 +1,25 @@
 'use client';
 
-import React, { Suspense, use, useState } from 'react';
+import React, { use, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import dynamic from 'next/dynamic';
-const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div></div> });
-const Avatar = dynamic(() => import('@/components/common/Avatar'), { loading: () => <div></div> });
-const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div></div> });
-const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div></div> });
-const Tabs = dynamic(() => import('@/components/common/Tabs'), { loading: () => <div></div> });
+import Card from '@/components/common/Card';
+import DataGrid from '@/components/common/DataGrid';
+import Progress from '@/components/common/Progress';
+import Avatar from '@/components/common/Avatar';
+import Badge from '@/components/common/Badge';
+import Alert from '@/components/common/Alert';
+import Button from '@/components/common/Button';
+import Tabs from '@/components/common/Tabs';
+import Skeleton from '@/components/common/Skeleton';
+
 import { communityApi, courseApi } from '@/lib/api';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
-import { FaSearch, FaPlus, FaComments, FaUsers, FaVideo, FaThumbsUp, FaComment } from 'react-icons/fa';
+import { FaSearch, FaPlus, FaComments, FaUsers, FaTrophy, FaVideo, FaThumbsUp, FaComment } from 'react-icons/fa';
 import Input from '@/components/common/Input';
+import Select from '@mui/material/Select';
+import Tooltip from '@/components/common/Tooltip';
 import Modal from '@/components/common/Modal';
 import Autocomplete from '@mui/material/Autocomplete';
 import { years } from '@/constant';
@@ -342,7 +348,7 @@ const initialMyPosts: (Post & { author: User, comments: Comment[] })[] = [
 ];
 
 
- function StudentCommunity({ params }: { params: { id: string } }) {
+export default function StudentCommunity({ params }: { params: { id: string } }) {
     const { id } = params;
     const [activeTab, setActiveTab] = useState(0);
     const [showNewQuestionModal, setShowNewQuestionModal] = useState(false);
@@ -738,10 +744,3 @@ const initialMyPosts: (Post & { author: User, comments: Comment[] })[] = [
         </motion.div >
     );
 } 
-export default function StudentCommunityS({ params }: { params: { id: string } }) {
-    return (
-        <Suspense fallback={<Skeleton />}>
-            <StudentCommunity params={params} />
-        </Suspense>
-    );
-}

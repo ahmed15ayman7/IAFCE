@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import {
@@ -26,24 +26,24 @@ import {
     Button,
 } from '@mui/material';
 import {
-    PlayCircle,
-    Clock,
+    PlayCircleOutline,
+    AccessTime,
     School,
     Star,
-    User as UserIcon,
-    Video as VideoIcon,
-    FileText,
-    ChevronDown,
-    ChevronUp,
+    Person,
+    VideoLibrary,
+    Description,
+    ExpandLess,
+    ExpandMore,
+    PictureAsPdf,
     Image,
-    FileAudio,
-    File,
-    Video,
-} from 'lucide-react';
+    AudioFile,
+    Description as DescriptionIcon,
+    VideoFile,
+} from '@mui/icons-material';
 import { courseApi } from '@/lib/api';
 import { Course, Lesson, FileType, File as FileModel, Enrollment, Quiz, Submission, Question, User, Option } from '@shared/prisma';
-import dynamic from 'next/dynamic';
-const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div></div> });
+import Skeleton from '@/components/common/Skeleton';
 import QuizSidebar from './components/QuizSidebar';
 
 let initialCourse: Course & {
@@ -432,17 +432,17 @@ const CoursePage = ({ params }: { params: { id: string } }) => {
     const getFileIcon = (type: FileType) => {
         switch (type) {
             case 'VIDEO':
-                return <VideoIcon />;
+                return <VideoFile />;
             case 'PDF':
-                return <FileText />;
+                return <PictureAsPdf />;
             case 'IMAGE':
                 return <Image />;
             case 'AUDIO':
-                return <FileAudio />;
+                return <AudioFile />;
             case 'DOCUMENT':
-                return <File />;
+                return <DescriptionIcon />;
             default:
-                return <File />;
+                return <DescriptionIcon />;
         }
     };
 
@@ -591,13 +591,13 @@ const CoursePage = ({ params }: { params: { id: string } }) => {
                         </Typography>
                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <VideoIcon color="primary" />
+                                <VideoLibrary color="primary" />
                                 <Typography>
                                     عدد المحاضرات: {course.lessons?.length || 0}
                                 </Typography>
                             </Box>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <UserIcon color="primary" />
+                                <Person color="primary" />
                                 <Typography>
                                     عدد الطلاب: {course.enrollments?.length || 0}
                                 </Typography>
@@ -618,7 +618,7 @@ const CoursePage = ({ params }: { params: { id: string } }) => {
                     >
                         <Paper elevation={3} sx={{ p: 3, mb: 4 }}>
                             <Typography variant="h5" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <FileText /> مقدمة الكورس
+                                <Description /> مقدمة الكورس
                             </Typography>
                             <Typography variant="body1" paragraph>
                                 {course.description}
@@ -634,7 +634,7 @@ const CoursePage = ({ params }: { params: { id: string } }) => {
                     >
                         <Paper elevation={3} sx={{ p: 3 }}>
                             <Typography variant="h5" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <VideoIcon /> المحاضرات
+                                <VideoLibrary /> المحاضرات
                             </Typography>
                             <List>
                                 {course.lessons?.map((lesson) => (
@@ -657,13 +657,13 @@ const CoursePage = ({ params }: { params: { id: string } }) => {
                                             }}
                                         >
                                             <ListItemIcon>
-                                                <PlayCircle />
+                                                <PlayCircleOutline />
                                             </ListItemIcon>
                                             <ListItemText
                                                 primary={lesson.title}
                                                 secondary={
                                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 0.5 }}>
-                                                        <Clock fontSize="small" />
+                                                        <AccessTime fontSize="small" />
                                                         <Typography variant="body2" color="text.secondary">
                                                             {lesson.files?.length || 0} ملفات مرفقة
                                                         </Typography>
@@ -676,7 +676,7 @@ const CoursePage = ({ params }: { params: { id: string } }) => {
                                                 }
                                             />
                                             {/* <IconButton onClick={() => handleLessonExpand(lesson.id)}> */}
-                                            {expandedLessons[lesson.id] ? <ChevronDown /> : <ChevronUp />}
+                                            {expandedLessons[lesson.id] ? <ExpandLess /> : <ExpandMore />}
                                             {/* </IconButton> */}
                                         </ListItem>
                                         <Collapse in={expandedLessons[lesson.id]} timeout="auto" unmountOnExit>
@@ -763,10 +763,4 @@ const CoursePage = ({ params }: { params: { id: string } }) => {
     );
 };
 
-export default function CoursePageS({ params }: { params: { id: string } }) {
-    return (
-        <Suspense fallback={<Skeleton />}>
-            <CoursePage params={params} />
-        </Suspense>
-    );
-}
+export default CoursePage; 

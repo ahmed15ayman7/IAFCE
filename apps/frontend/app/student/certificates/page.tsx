@@ -1,24 +1,25 @@
 'use client';
 
-import React, { Suspense, useState } from 'react';
+import React, { useState } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import dynamic from 'next/dynamic';
-const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div></div> });
-const Badge = dynamic(() => import('@/components/common/Badge'), { loading: () => <div></div> });
-const Alert = dynamic(() => import('@/components/common/Alert'), { loading: () => <div></div> });
+import Card from '@/components/common/Card';
+import Badge from '@/components/common/Badge';
+import Alert from '@/components/common/Alert';
 import { Alert as MuiAlert } from '@mui/material';
-const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div></div> });
-const Tabs = dynamic(() => import('@/components/common/Tabs'), { loading: () => <div></div> });
-const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div></div> });
-const EmptyState = dynamic(() => import('@/components/common/EmptyState'), { loading: () => <div></div> });
-const Tooltip = dynamic(() => import('@/components/common/Tooltip'), { loading: () => <div></div> });
-const Input = dynamic(() => import('@/components/common/Input'), { loading: () => <div></div> });
+import Button from '@/components/common/Button';
+import Tabs from '@/components/common/Tabs';
+import Skeleton from '@/components/common/Skeleton';
+import EmptyState from '@/components/common/EmptyState';
+import Tooltip from '@/components/common/Tooltip';
+import Input from '@/components/common/Input';
 import { certificateApi, badgeApi } from '@/lib/api';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
-import { Linkedin, Download, QrCode, Medal, Trophy, Eye, History as HistoryIcon, FileText as Description } from 'lucide-react';
-const Modal = dynamic(() => import('@/components/common/Modal'), { loading: () => <div></div> });
+import { FaLinkedin, FaDownload, FaQrcode, FaMedal, FaTrophy, FaEye } from 'react-icons/fa';
+import { Description, History } from '@mui/icons-material';
+import Modal from '@/components/common/Modal';
+import { TextareaAutosize } from '@mui/material';
 import { Certificate, Badge as BadgeType } from '@shared/prisma';
 import { useUser } from '@/hooks/useUser';
 import Image from 'next/image';
@@ -83,7 +84,7 @@ let initialCertificates: Certificate[] = [
 
 ];
 
- function StudentCertificates() {
+export default function StudentCertificates() {
     const { user } = useUser();
     const [activeTab, setActiveTab] = useState(0);
     const [showRequestForm, setShowRequestForm] = useState(false);
@@ -206,7 +207,7 @@ let initialCertificates: Certificate[] = [
                                                         size="small"
                                                         onClick={() => certificateApi.download(certificate.id)}
                                                     >
-                                                        <Download />
+                                                        <FaDownload />
                                                     </Button>
                                                 </Tooltip>
                                                 <Tooltip title="عرض الشهاده ">
@@ -215,7 +216,7 @@ let initialCertificates: Certificate[] = [
                                                         size="small"
                                                         onClick={() =>setShowCertificate(true)}
                                                     >
-                                                        <Eye/>
+                                                        <FaEye/>
                                                     </Button>
                                                 </Tooltip>
                                                 <Tooltip title="مشاركة على LinkedIn">
@@ -224,7 +225,7 @@ let initialCertificates: Certificate[] = [
                                                         size="small"
                                                         onClick={() => certificateApi.share(certificate.id, 'linkedin')}
                                                     >
-                                                        <Linkedin />
+                                                        <FaLinkedin />
                                                     </Button>
                                                 </Tooltip>
                                                 <Tooltip title="رمز التحقق">
@@ -233,7 +234,7 @@ let initialCertificates: Certificate[] = [
                                                         size="small"
                                                         onClick={() => {/* عرض رمز التحقق */ }}
                                                     >
-                                                        <QrCode />
+                                                        <FaQrcode />
                                                     </Button>
                                                 </Tooltip>
                                             </div>
@@ -258,9 +259,9 @@ let initialCertificates: Certificate[] = [
                                     <Card title={badge.title} className="h-full text-center">
                                         <div className="w-20 h-20 mx-auto mb-4">
                                             {badge.type === 'medal' ? (
-                                                <Medal className="w-full h-full text-yellow-500" />
+                                                <FaMedal className="w-full h-full text-yellow-500" />
                                             ) : badge.type === 'trophy' ? (
-                                                <Trophy className="w-full h-full text-amber-500" />
+                                                <FaTrophy className="w-full h-full text-amber-500" />
                                             ) : (
                                                 <Badge variant="standard" className="w-full h-full">
                                                     <span className="text-sm">{badge.points}</span>
@@ -278,7 +279,7 @@ let initialCertificates: Certificate[] = [
                         </div>
                     },
                     {
-                        value: 2, label: 'السجل', icon: <HistoryIcon />, content: <motion.div
+                        value: 2, label: 'السجل', icon: <History />, content: <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
@@ -547,10 +548,3 @@ let initialCertificates: Certificate[] = [
         </motion.div >
     );
 } 
-export default function StudentCertificatesS() {
-    return (
-        <Suspense fallback={<Skeleton />}>
-            <StudentCertificates />
-        </Suspense>
-    );
-}

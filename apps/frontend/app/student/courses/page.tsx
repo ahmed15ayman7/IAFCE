@@ -1,15 +1,12 @@
 "use client"
-import React, { Suspense,   useEffect } from 'react';
-import dynamic from 'next/dynamic';
-const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div></div> });
-const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div></div> });
-const DataGrid = dynamic(() => import('@/components/common/DataGrid'), { loading: () => <div></div> });
+import React, { useEffect } from 'react';
+import Card from '@/components/common/Card';
+import DataGrid from '@/components/common/DataGrid';
 import { GridRenderCellParams } from '@mui/x-data-grid';
 import { useQuery } from '@tanstack/react-query';
 import { courseApi } from '@/lib/api';
 import { useUser } from '@/hooks/useUser';
 import { Course,Instructor,Lesson,Quiz,User,File as FileModel } from '@shared/prisma';
-import { redirect } from 'next/navigation';
 
 let getCoursesData = async (id: string) => {
     const response = await courseApi.getByStudentId(id);
@@ -17,14 +14,11 @@ let getCoursesData = async (id: string) => {
 }
 
 
- function StudentCourses() {
+export default function StudentCourses() {
     let {user} = useUser();
     const { data: courses, isLoading: isLoadingCourses ,refetch} = useQuery({
         queryKey: ['courses'],
         queryFn: () => getCoursesData(user?.id),
-        staleTime: 1000 * 60 * 5,
-        gcTime: 1000 * 60 * 10,
-        placeholderData: (previousData) => previousData ?? activeCourses,
     });
     useEffect(() => {
         refetch();
@@ -286,7 +280,7 @@ let getCoursesData = async (id: string) => {
     let progress = 0;
 
     let nextLesson = '';
-    if(Array.isArray(courses)){
+    if(courses){
         progress = courses.reduce((acc, course) => acc + course.lessons.filter((lesson) => lesson.status === 'COMPLETED').length, 0);
         nextLesson = courses.find((course) => course.lessons.find((lesson) => lesson.status === 'NOT_STARTED'))?.lessons[0].title ?? '';
     }
@@ -297,7 +291,7 @@ let getCoursesData = async (id: string) => {
             <div className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4">الكورسات النشطة</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {(Array.isArray(courses) ? courses : activeCourses).map((course) => (
+                    {(courses ?? activeCourses).map((course) => (
                         <Card
                             key={course.id}
                             title={course.title}
@@ -341,7 +335,3 @@ let getCoursesData = async (id: string) => {
         </div>
     );
 } 
-export default function StudentCoursesS() {
-    redirect('/student/courses/overview');
-    // return null;
-}

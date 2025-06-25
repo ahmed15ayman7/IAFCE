@@ -6,6 +6,7 @@ import { Cairo } from 'next/font/google';
 import { CssBaseline } from '@mui/material';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NextIntlClientProvider } from 'next-intl';
+import { useEffect } from 'react';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 const cairo = Cairo({
     subsets: ['arabic'],

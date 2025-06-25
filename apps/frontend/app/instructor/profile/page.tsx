@@ -1,6 +1,5 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
-const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div>جاري التحميل...</div> });
+import  Card  from '@/components/common/Card';
 
 export default function InstructorProfile() {
 

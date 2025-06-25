@@ -20,16 +20,16 @@ import {
     Button,
 } from '@mui/material';
 import {
-    MenuIcon,
-    Bell as NotificationsIcon,
-    MessageCircle as MessageIcon,
-    Languages as LanguageIcon,
-    Moon as DarkModeIcon,
-    Sun as LightModeIcon,
-    User as PersonIcon,
+    Menu as MenuIcon,
+    Notifications as NotificationsIcon,
+    Message as MessageIcon,
+    Language as LanguageIcon,
+    DarkMode as DarkModeIcon,
+    LightMode as LightModeIcon,
+    Person as PersonIcon,
     Settings as SettingsIcon,
-    LogOut as LogoutIcon,
-} from 'lucide-react'
+    Logout as LogoutIcon,
+} from '@mui/icons-material'
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import authService from '@/lib/auth.service';

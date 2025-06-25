@@ -1,22 +1,39 @@
 'use client';
 import dynamic from 'next/dynamic';
-import React, { Suspense, useState } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div></div> });
-const Progress = dynamic(() => import('@/components/common/Progress'), { loading: () => <div></div> });
-const DataGrid = dynamic(() => import('@/components/common/DataGrid'), { loading: () => <div></div> });
-const Avatar = dynamic(() => import('@/components/common/Avatar'), { loading: () => <div></div> });
-const Badge = dynamic(() => import('@/components/common/Badge'), { loading: () => <div></div> });
-const Alert = dynamic(() => import('@/components/common/Alert'), { loading: () => <div></div> });
-const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div></div> });
-const Tabs = dynamic(() => import('@/components/common/Tabs'), { loading: () => <div></div> });
-const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div></div> });
-const Tooltip = dynamic(() => import('@/components/common/Tooltip'), { loading: () => <div></div> });
+const Card = dynamic(() => import('@/components/common/Card'), { ssr: false ,loading:()=>{
+    return <div></div>
+}});
+const Progress = dynamic(() => import('@/components/common/Progress'), { ssr: false ,loading:()=>{
+    return <div></div>
+}});
+const DataGrid = dynamic(() => import('@/components/common/DataGrid'), { ssr: false ,loading:()=>{
+    return <div></div>
+}});
+const Badge = dynamic(() => import('@/components/common/Badge'), { ssr: false ,loading:()=>{
+    return <div></div>
+}});
+const Alert = dynamic(() => import('@/components/common/Alert'), { ssr: false ,loading:()=>{
+    return <div></div>
+}});
+const Button = dynamic(() => import('@/components/common/Button'), { ssr: false ,loading:()=>{
+    return <div></div>
+}});
+const Tabs = dynamic(() => import('@/components/common/Tabs'), { ssr: false ,loading:()=>{
+    return <div></div>
+}});
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { ssr: false ,loading:()=>{
+    return <div></div>
+}});
+  const Tooltip = dynamic(() => import('@/components/common/Tooltip'), { ssr: false ,loading:()=>{
+    return <div></div>
+}});
 import { userApi, courseApi, notificationApi, achievementApi, enrollmentApi } from '@/lib/api';
 import { motion } from 'framer-motion';
 import { useUser } from '@/hooks/useUser';
 import { Achievement, Course, Enrollment, Notification, Quiz, User } from '@shared/prisma';
-import { Home, Book, Bell } from 'lucide-react';
+import { Home, Book, Notifications } from '@mui/icons-material';
 let getUser = async (id: string): Promise<User> => {
     let user = await userApi.getProfile(id);
     return user.data;
@@ -33,7 +50,7 @@ let getAchievements = async (id: string): Promise<Achievement[]> => {
     let achievements = await achievementApi.getByUser(id);
     return achievements.data;
 }
-function StudentDashboard() {
+export default function StudentDashboard() {
     const [activeTab, setActiveTab] = useState<number>(0);
     let { user, status } = useUser();
 
@@ -41,29 +58,21 @@ function StudentDashboard() {
     const { data: profile, isLoading: isLoadingProfile } = useQuery<User>({
         queryKey: ['profile'],
         queryFn: () => getUser(user?.id || ''),
-        staleTime: 1000 * 60 * 5,
-        gcTime: 1000 * 60 * 10,
     });
 
     const { data: courses, isLoading: isLoadingCourses } = useQuery<(Enrollment & { course: Course & { quizzes: Quiz[] } })[]>({
         queryKey: ['courses'],
         queryFn: () => getCourses(user?.id || ''),
-        staleTime: 1000 * 60 * 5,
-        gcTime: 1000 * 60 * 10,
     });
 
     const { data: notifications, isLoading: isLoadingNotifications } = useQuery<Notification[]>({
         queryKey: ['notifications'],
         queryFn: () => getNotifications(user?.id || ''),
-        staleTime: 1000 * 60 * 5,
-        gcTime: 1000 * 60 * 10,
     });
 
     const { data: achievements, isLoading: isLoadingAchievements } = useQuery<Achievement[]>({
         queryKey: ['achievements'],
         queryFn: () => getAchievements(user?.id || ''),
-        staleTime: 1000 * 60 * 5,
-        gcTime: 1000 * 60 * 10,
     });
 
     if (status === 'loading' || isLoadingProfile || isLoadingCourses || isLoadingNotifications || isLoadingAchievements) {
@@ -110,8 +119,8 @@ function StudentDashboard() {
                 tabs={[
                     { value: 0, label: 'نظرة عامة', icon: <Home />, content: <div>نظرة عامة</div> },
                     { value: 1, label: 'دوراتي', icon: <Book />, content: <div>دوراتي</div> },
-                    { value: 2, label: 'إنجازاتي', icon: <Bell />, content: <div>إنجازاتي</div> },
-                    { value: 3, label: 'إشعاراتي', icon: <Bell />, content: <div>إشعاراتي</div> },
+                    { value: 2, label: 'إنجازاتي', icon: <Notifications />, content: <div>إنجازاتي</div> },
+                    { value: 3, label: 'إشعاراتي', icon: <Notifications />, content: <div>إشعاراتي</div> },
                 ]}
             />
 
@@ -320,12 +329,5 @@ function StudentDashboard() {
                 </Card>
             </motion.div>
         </motion.div>
-    );
-} 
-export default function StudentDashboardS() {
-    return (
-        <Suspense fallback={<Skeleton />}>
-            <StudentDashboard />
-        </Suspense>
     );
 } 

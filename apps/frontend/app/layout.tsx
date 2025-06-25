@@ -2,7 +2,7 @@
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { Cairo } from 'next/font/google';
 import { Providers } from './providers';
-import {  Suspense } from 'react';
+import { useEffect, Suspense } from 'react';
 import '../globals.css';
 import useLanguageStore from '@/store/useLanguageStore';
 import Script from 'next/script';

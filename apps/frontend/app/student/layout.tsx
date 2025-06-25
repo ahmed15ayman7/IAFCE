@@ -1,13 +1,18 @@
 "use client"
 import React from 'react';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
+import dynamic from 'next/dynamic';
+const Navbar = dynamic(() => import('@/components/layout/Navbar'), { ssr: false ,loading:()=>{
+    return <div></div>
+}});
+const Footer = dynamic(() => import('@/components/layout/Footer'), { ssr: false ,loading:()=>{
+    return <div></div>
+}});
 import { layoutsConfig } from '@/config/layouts';
 import { redirect } from 'next/navigation';
 import { useUser } from '@/hooks/useUser';
-import dynamic from 'next/dynamic';
-const ChatDialog = dynamic(() => import('@/components/layout/ChatDialog'), { loading: () => <div>جاري التحميل...</div> });
-
+const ChatDialog = dynamic(() => import('@/components/layout/ChatDialog'), { ssr: false ,loading:()=>{
+    return <div></div>
+}});
 export default function StudentLayout({
     children,
 }: {

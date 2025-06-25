@@ -1,8 +1,7 @@
 "use client" 
 import React from 'react';
-import dynamic from 'next/dynamic';
-const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div>جاري التحميل...</div> });
-const DataGrid = dynamic(() => import('@/components/common/DataGrid'), { loading: () => <div>جاري التحميل...</div> });
+import  Card  from '@/components/common/Card';
+import  DataGrid  from '@/components/common/DataGrid';
 
 export default function ParentTeachers() {
     const teachers = [

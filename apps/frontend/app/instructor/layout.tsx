@@ -15,7 +15,7 @@ export default function InstructorLayout({
     let router = useRouter()
 
     // if (loading) {
-    //     return <div></div>;
+    //     return <div>جاري التحميل...</div>;
     // }
     useEffect(() => {
         if ((!user || user.role !== 'INSTRUCTOR') && status === 'authenticated') {

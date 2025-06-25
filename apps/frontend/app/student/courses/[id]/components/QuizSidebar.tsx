@@ -16,7 +16,7 @@ import {
     ListItemIcon,
     Checkbox,
 } from '@mui/material';
-import { CheckCircle, X as Cancel } from 'lucide-react';
+import { CheckCircle, Cancel } from '@mui/icons-material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { quizApi } from '@/lib/api';
 import { useMutation, useQuery } from '@tanstack/react-query';
