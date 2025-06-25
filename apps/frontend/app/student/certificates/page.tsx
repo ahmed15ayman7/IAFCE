@@ -17,10 +17,8 @@ import { certificateApi, badgeApi } from '@/lib/api';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
-import { FaLinkedin, FaDownload, FaQrcode, FaMedal, FaTrophy, FaEye } from 'react-icons/fa';
-import { Description, History } from '@mui/icons-material';
+import { Linkedin, Download, QrCode, Medal, Trophy, Eye, History as HistoryIcon, FileText as Description } from 'lucide-react';
 const Modal = dynamic(() => import('@/components/common/Modal'), { loading: () => <div></div> });
-import { TextareaAutosize } from '@mui/material';
 import { Certificate, Badge as BadgeType } from '@shared/prisma';
 import { useUser } from '@/hooks/useUser';
 import Image from 'next/image';
@@ -208,7 +206,7 @@ let initialCertificates: Certificate[] = [
                                                         size="small"
                                                         onClick={() => certificateApi.download(certificate.id)}
                                                     >
-                                                        <FaDownload />
+                                                        <Download />
                                                     </Button>
                                                 </Tooltip>
                                                 <Tooltip title="عرض الشهاده ">
@@ -217,7 +215,7 @@ let initialCertificates: Certificate[] = [
                                                         size="small"
                                                         onClick={() =>setShowCertificate(true)}
                                                     >
-                                                        <FaEye/>
+                                                        <Eye/>
                                                     </Button>
                                                 </Tooltip>
                                                 <Tooltip title="مشاركة على LinkedIn">
@@ -226,7 +224,7 @@ let initialCertificates: Certificate[] = [
                                                         size="small"
                                                         onClick={() => certificateApi.share(certificate.id, 'linkedin')}
                                                     >
-                                                        <FaLinkedin />
+                                                        <Linkedin />
                                                     </Button>
                                                 </Tooltip>
                                                 <Tooltip title="رمز التحقق">
@@ -235,7 +233,7 @@ let initialCertificates: Certificate[] = [
                                                         size="small"
                                                         onClick={() => {/* عرض رمز التحقق */ }}
                                                     >
-                                                        <FaQrcode />
+                                                        <QrCode />
                                                     </Button>
                                                 </Tooltip>
                                             </div>
@@ -260,9 +258,9 @@ let initialCertificates: Certificate[] = [
                                     <Card title={badge.title} className="h-full text-center">
                                         <div className="w-20 h-20 mx-auto mb-4">
                                             {badge.type === 'medal' ? (
-                                                <FaMedal className="w-full h-full text-yellow-500" />
+                                                <Medal className="w-full h-full text-yellow-500" />
                                             ) : badge.type === 'trophy' ? (
-                                                <FaTrophy className="w-full h-full text-amber-500" />
+                                                <Trophy className="w-full h-full text-amber-500" />
                                             ) : (
                                                 <Badge variant="standard" className="w-full h-full">
                                                     <span className="text-sm">{badge.points}</span>
@@ -280,7 +278,7 @@ let initialCertificates: Certificate[] = [
                         </div>
                     },
                     {
-                        value: 2, label: 'السجل', icon: <History />, content: <motion.div
+                        value: 2, label: 'السجل', icon: <HistoryIcon />, content: <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}

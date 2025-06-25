@@ -7,8 +7,7 @@ import {
     InputAdornment,
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-import Image from 'next/image';
-import {Message as MessageIcon} from "@mui/icons-material"
+import {MessageCircle as MessageIcon} from "lucide-react"
 type Message = {
     question: string;
     answer: string;

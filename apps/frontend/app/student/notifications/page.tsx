@@ -11,7 +11,7 @@ const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading
 const EmptyState = dynamic(() => import('@/components/common/EmptyState'), { loading: () => <div></div> });
 const Tooltip = dynamic(() => import('@/components/common/Tooltip'), { loading: () => <div></div> });
 const Modal = dynamic(() => import('@/components/common/Modal'), { loading: () => <div></div> });
-import { Switch, Alert } from '@mui/material';
+// import { Switch, Alert } from '@mui/material'; // يفضل استبدالهم لاحقاً بمكونات مخصصة
 
 
 import { notificationApi } from '@/lib/api';
@@ -19,15 +19,15 @@ import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
 import {
-    FaBell,
-    FaCheck,
-    FaExclamationTriangle,
-    FaTrophy,
-    FaEnvelope,
-    FaCog,
-    FaArrowRight,
-    FaExclamation
-} from 'react-icons/fa';
+    Bell ,
+    Check,
+    AlertTriangle,
+    Trophy,
+    Mail,
+    Cog,
+    ArrowRight,
+    AlertCircle
+} from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Notification, NotificationSettings } from '@shared/prisma';
 import { useUser } from '@/hooks/useUser';
@@ -97,10 +97,16 @@ let initialNotifications: Notification[] = [
     const { data: notifications, isLoading: isLoadingNotifications } = useQuery({
         queryKey: ['notifications'],
         queryFn: () => getNotificationsData(user?.id || ''),
+        staleTime: 1000 * 60 * 5,
+        gcTime: 1000 * 60 * 10,
+        placeholderData: (previousData) => previousData ?? initialNotifications,
     });
     let { data: notificationsSettings, isLoading: isLoadingNotificationsSettings } = useQuery({
         queryKey: ['notificationsSettings'],
         queryFn: () => getNotificationsSettingsData(user?.id || ''),
+        staleTime: 1000 * 60 * 5,
+        gcTime: 1000 * 60 * 10,
+        placeholderData: (previousData) => previousData ?? null,
     });
 
     // طلب تحديث حالة الإشعار
@@ -168,7 +174,7 @@ let initialNotifications: Notification[] = [
     let filteredNotificationsDesign = <div className="space-y-4">
         {filteredNotifications?.length === 0 ? (
             <EmptyState
-                icon={<FaBell className="text-gray-400 text-4xl" />}
+                icon={<Bell className="text-gray-400 text-4xl" />}
                 title="لا توجد إشعارات"
                 description="لا توجد إشعارات جديدة لعرضها"
             />
@@ -187,10 +193,10 @@ let initialNotifications: Notification[] = [
                                     notification.type === 'MESSAGE' ? 'bg-purple-100' :
                                         'bg-yellow-100'
                                 }`}>
-                                {notification.type === 'ASSIGNMENT' ? <FaExclamationTriangle className="text-blue-500" /> :
-                                    notification.type === 'GRADE' ? <FaTrophy className="text-green-500" /> :
-                                        notification.type === 'MESSAGE' ? <FaEnvelope className="text-purple-500" /> :
-                                            <FaBell className="text-yellow-500" />
+                                {notification.type === 'ASSIGNMENT' ? <AlertTriangle className="text-blue-500" /> :
+                                    notification.type === 'GRADE' ? <Trophy className="text-green-500" /> :
+                                        notification.type === 'MESSAGE' ? <Mail className="text-purple-500" /> :
+                                            <Bell className="text-yellow-500" />
                                 }
                             </div>
                             <div className="flex-1">
@@ -214,7 +220,7 @@ let initialNotifications: Notification[] = [
                                                 size="small"
                                                 onClick={() => markAsRead(notification.id)}
                                             >
-                                                <FaCheck className="ml-2" />
+                                                <Check className="ml-2" />
                                                 تم
                                             </Button>
                                         )}
@@ -225,7 +231,7 @@ let initialNotifications: Notification[] = [
                                                 onClick={() => router.push(notification.actionUrl || '')}
                                             >
                                                 اذهب للمهمة
-                                                <FaArrowRight className="mr-2" />
+                                                <ArrowRight className="mr-2" />
                                             </Button>
                                         )}
                                     </div>
@@ -256,17 +262,17 @@ let initialNotifications: Notification[] = [
                     variant="text"
                     onClick={() => setShowSettings(true)}
                 >
-                    <FaCog className="ml-2" />
+                    <Cog className="ml-2" />
                     إعدادات الإشعارات
                 </Button>
             </div>
 
             {/* الإشعار العاجل */}
             {urgentNotification && (
-                <Alert variant="filled" severity="warning">
+                <div className="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-4 rounded">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
-                            <FaExclamationTriangle className="text-yellow-500 text-xl" />
+                            <AlertTriangle className="text-yellow-500 text-xl" />
                             <div>
                                 <p className="font-medium">{urgentNotification.title}</p>
                                 <p className="text-sm text-gray-600">{urgentNotification.message}</p>
@@ -280,7 +286,7 @@ let initialNotifications: Notification[] = [
                             تم
                         </Button>
                     </div>
-                </Alert>
+                </div>
             )}
 
             {/* التبويبات */}
@@ -288,10 +294,10 @@ let initialNotifications: Notification[] = [
                 value={activeTab}
                 onChange={setActiveTab}
                 tabs={[
-                    { value: 0, label: 'كل الإشعارات', icon: <FaBell className="text-gray-400 text-4xl" />, content: filteredNotificationsDesign },
-                    { value: 1, label: 'غير مقروء', icon: <FaExclamationTriangle className="text-gray-400 text-4xl" />, content: filteredNotificationsDesign },
-                    { value: 2, label: 'تم القراءة', icon: <FaCheck className="text-gray-400 text-4xl" />, content: filteredNotificationsDesign },
-                    { value: 3, label: 'مهم', icon: <FaExclamation className="text-gray-400 text-4xl" />, content: filteredNotificationsDesign },
+                    { value: 0, label: 'كل الإشعارات', icon: <Bell className="text-gray-400 text-4xl" />, content: filteredNotificationsDesign },
+                    { value: 1, label: 'غير مقروء', icon: <AlertTriangle className="text-gray-400 text-4xl" />, content: filteredNotificationsDesign },
+                    { value: 2, label: 'تم القراءة', icon: <Check className="text-gray-400 text-4xl" />, content: filteredNotificationsDesign },
+                    { value: 3, label: 'مهم', icon: <AlertCircle className="text-gray-400 text-4xl" />, content: filteredNotificationsDesign },
                 ]}
             />
 
@@ -311,38 +317,33 @@ let initialNotifications: Notification[] = [
                             <div className="space-y-2">
                                 <div className="flex items-center justify-between">
                                     <span>الواجبات والمواعيد النهائية</span>
-                                    <Switch
-                                        checked={settings.assignments}
-                                        onChange={(checked) => setSettings({ ...settings, assignments: checked.target.checked })}
-                                    />
+                                    <button onClick={() => setSettings({ ...settings, assignments: !settings.assignments })} className="px-2 py-1 border rounded">
+                                        {settings.assignments ? 'تشغيل' : 'إيقاف'}
+                                    </button>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span>الدرجات والنتائج</span>
-                                    <Switch
-                                        checked={settings.grades}
-                                        onChange={(checked) => setSettings({ ...settings, grades: checked.target.checked })}
-                                    />
+                                    <button onClick={() => setSettings({ ...settings, grades: !settings.grades })} className="px-2 py-1 border rounded">
+                                        {settings.grades ? 'تشغيل' : 'إيقاف'}
+                                    </button>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span>الرسائل الإدارية</span>
-                                    <Switch
-                                        checked={settings.messages}
-                                        onChange={(checked) => setSettings({ ...settings, messages: checked.target.checked })}
-                                    />
+                                    <button onClick={() => setSettings({ ...settings, messages: !settings.messages })} className="px-2 py-1 border rounded">
+                                        {settings.messages ? 'تشغيل' : 'إيقاف'}
+                                    </button>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span>الإنجازات والشارات</span>
-                                    <Switch
-                                        checked={settings.achievements}
-                                        onChange={(checked) => setSettings({ ...settings, achievements: checked.target.checked })}
-                                    />
+                                    <button onClick={() => setSettings({ ...settings, achievements: !settings.achievements })} className="px-2 py-1 border rounded">
+                                        {settings.achievements ? 'تشغيل' : 'إيقاف'}
+                                    </button>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span>الإشعارات العاجلة</span>
-                                    <Switch
-                                        checked={settings.urgent}
-                                        onChange={(checked) => setSettings({ ...settings, urgent: checked.target.checked })}
-                                    />
+                                    <button onClick={() => setSettings({ ...settings, urgent: !settings.urgent })} className="px-2 py-1 border rounded">
+                                        {settings.urgent ? 'تشغيل' : 'إيقاف'}
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -352,17 +353,15 @@ let initialNotifications: Notification[] = [
                             <div className="space-y-2">
                                 <div className="flex items-center justify-between">
                                     <span>البريد الإلكتروني</span>
-                                    <Switch
-                                        checked={settings.email}
-                                        onChange={(checked) => setSettings({ ...settings, email: checked.target.checked })}
-                                    />
+                                    <button onClick={() => setSettings({ ...settings, email: !settings.email })} className="px-2 py-1 border rounded">
+                                        {settings.email ? 'تشغيل' : 'إيقاف'}
+                                    </button>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span>إشعارات التطبيق</span>
-                                    <Switch
-                                        checked={settings.push}
-                                        onChange={(checked) => setSettings({ ...settings, push: checked.target.checked })}
-                                    />
+                                    <button onClick={() => setSettings({ ...settings, push: !settings.push })} className="px-2 py-1 border rounded">
+                                        {settings.push ? 'تشغيل' : 'إيقاف'}
+                                    </button>
                                 </div>
                             </div>
                         </div>

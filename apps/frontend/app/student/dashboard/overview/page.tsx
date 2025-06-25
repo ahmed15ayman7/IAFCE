@@ -1,6 +1,6 @@
 'use client';
 import dynamic from 'next/dynamic';
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 const Card = dynamic(() => import('@/components/common/Card'), { ssr: false ,loading:()=>{
     return <div></div>
@@ -33,7 +33,8 @@ import { userApi, courseApi, notificationApi, achievementApi, enrollmentApi } fr
 import { motion } from 'framer-motion';
 import { useUser } from '@/hooks/useUser';
 import { Achievement, Course, Enrollment, Notification, Quiz, User } from '@shared/prisma';
-import { Home, Book, Notifications } from '@mui/icons-material';
+
+import { Home, Book, Bell } from 'lucide-react';
 let getUser = async (id: string): Promise<User> => {
     let user = await userApi.getProfile(id);
     return user.data;
@@ -50,7 +51,8 @@ let getAchievements = async (id: string): Promise<Achievement[]> => {
     let achievements = await achievementApi.getByUser(id);
     return achievements.data;
 }
-export default function StudentDashboard() {
+
+function StudentDashboard() {
     const [activeTab, setActiveTab] = useState<number>(0);
     let { user, status } = useUser();
 
@@ -58,21 +60,29 @@ export default function StudentDashboard() {
     const { data: profile, isLoading: isLoadingProfile } = useQuery<User>({
         queryKey: ['profile'],
         queryFn: () => getUser(user?.id || ''),
+        staleTime: 1000 * 60 * 5,
+        gcTime: 1000 * 60 * 10,
     });
 
     const { data: courses, isLoading: isLoadingCourses } = useQuery<(Enrollment & { course: Course & { quizzes: Quiz[] } })[]>({
         queryKey: ['courses'],
         queryFn: () => getCourses(user?.id || ''),
+        staleTime: 1000 * 60 * 5,
+        gcTime: 1000 * 60 * 10,
     });
 
     const { data: notifications, isLoading: isLoadingNotifications } = useQuery<Notification[]>({
         queryKey: ['notifications'],
         queryFn: () => getNotifications(user?.id || ''),
+        staleTime: 1000 * 60 * 5,
+        gcTime: 1000 * 60 * 10,
     });
 
     const { data: achievements, isLoading: isLoadingAchievements } = useQuery<Achievement[]>({
         queryKey: ['achievements'],
         queryFn: () => getAchievements(user?.id || ''),
+        staleTime: 1000 * 60 * 5,
+        gcTime: 1000 * 60 * 10,
     });
 
     if (status === 'loading' || isLoadingProfile || isLoadingCourses || isLoadingNotifications || isLoadingAchievements) {
@@ -119,8 +129,8 @@ export default function StudentDashboard() {
                 tabs={[
                     { value: 0, label: 'نظرة عامة', icon: <Home />, content: <div>نظرة عامة</div> },
                     { value: 1, label: 'دوراتي', icon: <Book />, content: <div>دوراتي</div> },
-                    { value: 2, label: 'إنجازاتي', icon: <Notifications />, content: <div>إنجازاتي</div> },
-                    { value: 3, label: 'إشعاراتي', icon: <Notifications />, content: <div>إشعاراتي</div> },
+                    { value: 2, label: 'إنجازاتي', icon: <Bell />, content: <div>إنجازاتي</div> },
+                    { value: 3, label: 'إشعاراتي', icon: <Bell />, content: <div>إشعاراتي</div> },
                 ]}
             />
 
@@ -329,5 +339,12 @@ export default function StudentDashboard() {
                 </Card>
             </motion.div>
         </motion.div>
+    );
+} 
+export default function StudentDashboardS() {
+    return (
+        <Suspense fallback={<Skeleton />}>
+            <StudentDashboard />
+        </Suspense>
     );
 } 
