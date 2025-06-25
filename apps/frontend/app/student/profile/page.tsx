@@ -15,6 +15,7 @@ import { redirect } from 'next/navigation';
 // const Avatar = dynamic(() => import('@/components/common/Avatar'), { loading: () => <div>جاري التحميل...</div> });
 // import { Switch, Select, Alert } from "@mui/material"
 
+
 // import { profileApi, userApi } from '@/lib/api';
 // import { motion } from 'framer-motion';
 // import { FaUser, FaLock, FaShieldAlt, FaCog, FaQrcode, FaCheck, FaTimes, FaUpload, FaGlobe, FaMoon, FaSun } from 'react-icons/fa';

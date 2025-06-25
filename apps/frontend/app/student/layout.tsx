@@ -13,6 +13,7 @@ import { useUser } from '@/hooks/useUser';
 const ChatDialog = dynamic(() => import('@/components/layout/ChatDialog'), { ssr: false ,loading:()=>{
     return <div></div>
 }});
+
 export default function StudentLayout({
     children,
 }: {

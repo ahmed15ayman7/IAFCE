@@ -1,7 +1,9 @@
 "use client"
-import React, { useEffect } from 'react';
-import Card from '@/components/common/Card';
-import DataGrid from '@/components/common/DataGrid';
+import React, { Suspense,   useEffect } from 'react';
+import dynamic from 'next/dynamic';
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div></div> });
+const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div></div> });
+const DataGrid = dynamic(() => import('@/components/common/DataGrid'), { loading: () => <div></div> });
 import { GridRenderCellParams } from '@mui/x-data-grid';
 import { useQuery } from '@tanstack/react-query';
 import { courseApi } from '@/lib/api';
@@ -14,7 +16,7 @@ let getCoursesData = async (id: string) => {
 }
 
 
-export default function StudentCourses() {
+ function StudentCourses() {
     let {user} = useUser();
     const { data: courses, isLoading: isLoadingCourses ,refetch} = useQuery({
         queryKey: ['courses'],
@@ -335,3 +337,10 @@ export default function StudentCourses() {
         </div>
     );
 } 
+export default function StudentCoursesS() {
+    return (
+        <Suspense fallback={<Skeleton />}>
+            <StudentCourses />
+        </Suspense>
+    );
+}
