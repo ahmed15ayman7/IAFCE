@@ -15,6 +15,68 @@ import { redirect } from 'next/navigation';
 // const Avatar = dynamic(() => import('@/components/common/Avatar'), { loading: () => <div>جاري التحميل...</div> });
 // import { Switch, Select, Alert } from "@mui/material"
 
+// import { profileApi, userApi } from '@/lib/api';
+// import { motion } from 'framer-motion';
+// import { FaUser, FaLock, FaShieldAlt, FaCog, FaQrcode, FaCheck, FaTimes, FaUpload, FaGlobe, FaMoon, FaSun } from 'react-icons/fa';
+// import { QRCodeSVG } from 'qrcode.react';
+// import { LoginDevice, LoginHistory, Profile, TwoFactor, User, UserRole } from '@shared/prisma';
+// import { useUser } from '@/hooks/useUser';
+// import { frontendUrl } from '@/constant';
+// import { redirect } from 'next/navigation';
+// let getProfileData = async (id: string) => {
+//     let { success, data } = await userApi.getProfile(id);
+//     if (success) {
+//         return data;
+//     }
+//     return null;
+// }
+//  function StudentProfile() {
+//     const [activeTab, setActiveTab] = useState(0);
+//     const [showPasswordModal, setShowPasswordModal] = useState(false);
+//     const [show2FAModal, setShow2FAModal] = useState(false);
+//     const [theme, setTheme] = useState('light');
+//     const [showNightModeTrial, setShowNightModeTrial] = useState(false);
+//     let [profileData, setProfileData] = useState<User & { loginHistory: LoginHistory[], twoFactor: TwoFactor }>({
+//         id: '',
+//         email: '',
+//         password: '',
+//         phone: '',
+//         firstName: '',
+//         lastName: '',
+//         role: UserRole.STUDENT,
+//         subRole: '',
+//         avatar: '',
+//         createdAt: new Date(),
+//         updatedAt: new Date(),
+//         academyId: '',
+//         isOnline: false,
+//         isVerified: false,
+//         age: 0,
+//         loginHistory: [
+//             {
+//                 id: '',
+//                 createdAt: new Date(),
+//                 userId: '',
+//                 ip: '',
+//                 success: false,
+//                 device: LoginDevice.LAPTOP,
+//                 location: 'الرياض',
+//                 browser: 'Chrome',
+//                 os: 'Windows',
+//             }
+//         ],
+//         twoFactor: {
+//             id: '',
+//             createdAt: new Date(),
+//             updatedAt: new Date(),
+//             userId: '',
+//             email: false,
+//             sms: false,
+//             authenticator: false,
+//             secret: '',
+//         },
+//     });
+//     let { user, status } = useUser();
 
 // import { profileApi, userApi } from '@/lib/api';
 // import { motion } from 'framer-motion';
@@ -358,6 +420,7 @@ import { redirect } from 'next/navigation';
 //                             <Button
 //                                 variant="outlined"
 //                                 onClick={() => setShowPasswordModal(false)}
+
 //                             >
 //                                 إلغاء
 //                             </Button>
@@ -414,6 +477,7 @@ import { redirect } from 'next/navigation';
 //                     </div>
 //                 </Modal>
 //             )}
+
 
 //             {/* تجربة الوضع الليلي */}
 //             {showNightModeTrial && (
