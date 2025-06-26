@@ -574,6 +574,13 @@ export const communityApi = {
     removeGroup: (id: string, groupId: string) => api.delete(`/communities/${id}/groups/${groupId}`),
     getGroup: (id: string, groupId: string) => api.get(`/communities/${id}/groups/${groupId}`),
     getPosts: (id: string): Promise<(Post & { author: User, comments: Comment[] })[]> => api.get(`/communities/${id}/posts`),
+    getEvents: (id: string): Promise<(Event & { community: Community })[]> => api.get(`/communities/${id}/events`),
+    getEventsByUser: (userId: string): Promise<(Event & { community: Community })[]> => api.get(`/communities/events/user/${userId}`),
+    getEventById: (id: string, eventId: string) => api.get(`/communities/${id}/events/${eventId}`),
+    createEvent: (id: string, data: { title: string; description?: string }) => api.post(`/communities/${id}/events`, data),
+    updateEvent: (id: string, eventId: string, data: { title?: string; description?: string }) => api.patch(`/communities/${id}/events/${eventId}`, data),
+    deleteEvent: (id: string, eventId: string) => api.delete(`/communities/${id}/events/${eventId}`),
+    getGroupsByUser: (userId: string): Promise<(Group & { members: User[] })[]> => api.get(`/communities/groups/user/${userId}`),
 };
 
 // Path APIs
