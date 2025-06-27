@@ -10,13 +10,13 @@ import { ar } from 'date-fns/locale';
 import { quizApi, assignmentApi } from '@/lib/api';
 
 // Dynamic imports للتحسين
-const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div>جاري التحميل...</div> });
-const Badge = dynamic(() => import('@/components/common/Badge'), { loading: () => <div>جاري التحميل...</div> });
-const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div>جاري التحميل...</div> });
-const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div>جاري التحميل...</div> });
-const DataGrid = dynamic(() => import('@/components/common/DataGrid'), { loading: () => <div>جاري التحميل...</div> });
-const Avatar = dynamic(() => import('@/components/common/Avatar'), { loading: () => <div>جاري التحميل...</div> });
-const Tooltip = dynamic(() => import('@/components/common/Tooltip'), { loading: () => <div>جاري التحميل...</div> });
+const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div> });
+const Badge = dynamic(() => import('@/components/common/Badge'), { loading: () => <div ></div> });
+const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div> });
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div> });
+const DataGrid = dynamic(() => import('@/components/common/DataGrid'), { loading: () => <div className="h-[50vh] w-full bg-gray-200 rounded animate-pulse"></div> });
+const Avatar = dynamic(() => import('@/components/common/Avatar'), { loading: () => <div className="h-20 w-20 bg-gray-200 rounded-full animate-pulse"></div> });
+const Tooltip = dynamic(() => import('@/components/common/Tooltip'), { loading: () => <div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div> });
 
 // API functions
 const getQuizzesData = async (user: any) => {

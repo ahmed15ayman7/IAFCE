@@ -7,11 +7,11 @@ import { useUser } from '@/hooks/useUser';
 import { userApi } from '@/lib/api';
 import { User } from '@shared/prisma';
 
-const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div /> });
+const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div> });
 const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div /> });
 const Badge = dynamic(() => import('@/components/common/Badge'), { loading: () => <div /> });
 const Modal = dynamic(() => import('@/components/common/Modal'), { loading: () => <div /> });
-const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div /> });
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div> });
 
 export default function SecurityTab() {
     const [showPasswordModal, setShowPasswordModal] = useState(false);

@@ -6,8 +6,8 @@ import { useQuery } from '@tanstack/react-query';
 import { notificationApi } from '@/lib/api';
 import { Notification } from '@shared/prisma';
 
-const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div /> });
-const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div /> });
+const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div className="h-200 w-200 bg-gray-200 rounded animate-pulse"></div> });
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div> });
 
 export default function AllNotificationsTab() {
   const { user } = useUser();

@@ -7,12 +7,12 @@ import { useUser } from '@/hooks/useUser';
 import { userApi } from '@/lib/api';
 import { User, LoginHistory, TwoFactor, UserRole } from '@shared/prisma';
 
-const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div /> });
+const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div> });
 const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div /> });
 const Input = dynamic(() => import('@/components/common/Input'), { loading: () => <div /> });
 const Badge = dynamic(() => import('@/components/common/Badge'), { loading: () => <div /> });
 const Avatar = dynamic(() => import('@/components/common/Avatar'), { loading: () => <div /> });
-const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div /> });
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () =><div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div> });
 
 let getProfileData = async (id: string) => {
     let { success, data } = await userApi.getProfile(id);

@@ -24,7 +24,7 @@ const Tabs = dynamic(() => import('@/components/common/Tabs'), { ssr: false ,loa
     return <div></div>
 }});
 const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { ssr: false ,loading:()=>{
-    return <div></div>
+    return <div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div>
 }});
   const Tooltip = dynamic(() => import('@/components/common/Tooltip'), { ssr: false ,loading:()=>{
     return <div></div>

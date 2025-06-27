@@ -1,7 +1,7 @@
 "use client"
 import React, { Suspense,   useEffect } from 'react';
 import dynamic from 'next/dynamic';
-const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div></div> });
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div>});
 const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div></div> });
 const DataGrid = dynamic(() => import('@/components/common/DataGrid'), { loading: () => <div></div> });
 import { GridRenderCellParams } from '@mui/x-data-grid';

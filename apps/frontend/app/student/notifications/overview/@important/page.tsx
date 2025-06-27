@@ -7,7 +7,7 @@ import { notificationApi } from '@/lib/api';
 import { Notification } from '@shared/prisma';
 
 const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div /> });
-const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div /> });
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div> });
 
 export default function ImportantNotificationsTab() {
   const { user } = useUser();

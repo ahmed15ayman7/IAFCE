@@ -43,7 +43,7 @@ import {
 import { courseApi } from '@/lib/api';
 import { Course, Lesson, FileType, File as FileModel, Enrollment, Quiz, Submission, Question, User, Option } from '@shared/prisma';
 import dynamic from 'next/dynamic';
-const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div></div> });
+const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div> });
 import QuizSidebar from './components/QuizSidebar';
 
 let initialCourse: Course & {

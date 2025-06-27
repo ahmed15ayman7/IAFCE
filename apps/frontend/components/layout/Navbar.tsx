@@ -128,8 +128,8 @@ const Navbar: React.FC<NavbarProps> = ({
 
     const drawer = (
         <List>
-            {links.map((link) => (
-                <ListItem button component={Link} href={link.href}>
+            {links.map((link,i) => (
+                <ListItem button component={Link} href={link.href} key={i}>
                     <ListItemText primary={link.label} />
                 </ListItem>
             ))}
@@ -180,8 +180,8 @@ const Navbar: React.FC<NavbarProps> = ({
                 </Link>
 
                 <Box className="hidden md:flex flex-1 justify-center gap-8 max-lg:gap-4 rtl:space-x-reverse">
-                    {links.map((link) => (
-                        <Link href={link.href} prefetch={true} className={`  hover:underline border-2 rounded-lg  px-4 py-2 ${pathname === link.href || (pathname.startsWith(link.href) && link.href !== '/') ? 'bg-secondary-main/80 text-white' : 'border-transparent text-secondary-main hover:text-secondary-light '}`}>
+                        {links.map((link,i) => (
+                        <Link href={link.href} prefetch={true} key={i} className={`  hover:underline border-2 rounded-lg  px-4 py-2 ${pathname === link.href || (pathname.startsWith(link.href) && link.href !== '/') ? 'bg-secondary-main/80 text-white' : 'border-transparent text-secondary-main hover:text-secondary-light '}`}>
                             {link.label}
                         </Link>
                     ))}

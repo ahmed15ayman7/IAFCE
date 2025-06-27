@@ -76,8 +76,8 @@ const Footer: React.FC<{ links: { quickLinks: { label: string; links: Array<{ la
                             {links.quickLinks.label}
                         </Typography>
                         <Box className="flex flex-col space-y-2">
-                            {links.quickLinks.links.map((link) => (
-                                <Link href={link.href} className="text-secondary-dark  hover:text-secondary-main">
+                            {links.quickLinks.links.map((link,i) => (
+                                <Link href={link.href} key={i} className="text-secondary-dark  hover:text-secondary-main">
                                     {link.label}
                                 </Link>
                             ))}
@@ -90,8 +90,8 @@ const Footer: React.FC<{ links: { quickLinks: { label: string; links: Array<{ la
                             {links.support.label}
                         </Typography>
                         <Box className="flex flex-col space-y-2">
-                            {links.support.links.map((link) => (
-                                <Link href={link.href} className="text-secondary-dark  hover:text-secondary-main">
+                            {links.support.links.map((link,i) => (
+                                <Link href={link.href} key={i} className="text-secondary-dark  hover:text-secondary-main">
                                     {link.label}
                                 </Link>
                             ))}
