@@ -8,12 +8,12 @@ import { pathApi } from '@/lib/api';
 import { Path, Course, Milestone, User, CourseStatus } from '@shared/prisma';
 
 const Card = dynamic(() => import('@/components/common/Card'), { loading: () => <div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div> });
-const Progress = dynamic(() => import('@/components/common/Progress'), { loading: () => <div></div> });
-const Badge = dynamic(() => import('@/components/common/Badge'), { loading: () => <div></div> });
-const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div></div> });
+const Progress = dynamic(() => import('@/components/common/Progress'), { loading: () => <div className='h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse'></div> });
+const Badge = dynamic(() => import('@/components/common/Badge'), { loading: () => <div className='h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse'></div> });
+const Button = dynamic(() => import('@/components/common/Button'), { loading: () => <div className='h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse'></div> });
 const Skeleton = dynamic(() => import('@/components/common/Skeleton'), { loading: () => <div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div> });
-const EmptyState = dynamic(() => import('@/components/common/EmptyState'), { loading: () => <div></div> });
-const Stepper = dynamic(() => import('@/components/common/Stepper'), { loading: () => <div></div> });
+const EmptyState = dynamic(() => import('@/components/common/EmptyState'), { loading: () => <div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div> });
+const Stepper = dynamic(() => import('@/components/common/Stepper'), { loading: () => <div className="h-[200px] w-[200px] bg-gray-200 rounded-2xl animate-pulse"></div> });
 
 let getPathsData = async () => {
     let { success, data } = await pathApi.getAll();

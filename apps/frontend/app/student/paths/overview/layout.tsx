@@ -33,17 +33,17 @@ export default function PathsOverviewLayout({
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
-    const activeTab = searchParams.get('type') || '0';
+    // const activeTab = searchParams.get('type') || 0;
     
     // تحديد التبويب النشط بناءً على المسار الحالي
     const getActiveTab = () => {
-        if (pathname.includes('/courses')) return 1;
-        if (pathname.includes('/progress')) return 2;
-        if (pathname.includes('/peers')) return 3;
+        if (searchParams.get('type') === 'courses') return 1;
+        if (searchParams.get('type') === 'progress') return 2;
+        if (searchParams.get('type') === 'peers') return 3;
         return 0;
     };
 
-    // const activeTab = getActiveTab();
+    const activeTab = getActiveTab();
 
     const handleTabChange = (value: number) => {
         const tab = tabs.find(t => t.value === value);
@@ -80,10 +80,10 @@ export default function PathsOverviewLayout({
 
             {/* المحتوى */}
             <div className="min-h-[400px]">
-                {activeTab === '0' && overview}
-                {activeTab === '1' && courses}
-                {activeTab === '2' && progress}
-                {activeTab === '3' && peers}
+                {activeTab === 0 && overview}
+                {activeTab === 1 && courses}
+                {activeTab === 2 && progress}
+                {activeTab === 3 && peers}
             </div>
         </div>
     );
