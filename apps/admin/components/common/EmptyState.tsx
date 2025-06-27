@@ -3,9 +3,7 @@ import {
     Box,
     Typography,
     Button,
-    useTheme,
 } from '@mui/material';
-import { useTranslation } from 'next-i18next';
 
 interface EmptyStateProps {
     title?: string;
@@ -32,8 +30,6 @@ const EmptyState: React.FC<EmptyStateProps> = ({
     variant = 'default',
     color = 'primary',
 }) => {
-    const theme = useTheme();
-    const { t } = useTranslation();
 
     const getColorClasses = () => {
         switch (color) {
@@ -77,7 +73,6 @@ const EmptyState: React.FC<EmptyStateProps> = ({
         ${className}
         rounded-lg
         bg-gray-50
-        dark:bg-gray-800
       `}
         >
             {image && (
@@ -118,7 +113,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
             {description && (
                 <Typography
                     variant="body1"
-                    className="mb-4 text-gray-600 dark:text-gray-400"
+                    className="mb-4 text-gray-600 "
                 >
                     {description}
                 </Typography>

@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import {
-    ExpansionPanel as MuiExpansionPanel,
-    ExpansionPanelSummary as MuiExpansionPanelSummary,
-    ExpansionPanelDetails as MuiExpansionPanelDetails,
+    Accordion as MuiExpansionPanel,
+    AccordionSummary as MuiExpansionPanelSummary,
+    AccordionDetails as MuiExpansionPanelDetails,
     Typography,
-    useTheme,
 } from '@mui/material';
 import {
     ExpandMore as ExpandMoreIcon,
 } from '@mui/icons-material';
-import { useTranslation } from 'next-i18next';
 
 interface ExpansionPanelItem {
     id: string;
@@ -38,8 +36,6 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = ({
     color = 'primary',
     className = '',
 }) => {
-    const theme = useTheme();
-    const { t } = useTranslation();
     const [uncontrolledExpanded, setUncontrolledExpanded] = useState<string[]>(
         items.filter((item) => item.defaultExpanded).map((item) => item.id)
     );
@@ -85,13 +81,12 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = ({
                     onChange={() => handleChange(item.id)}
                     disabled={item.disabled}
                     className={`
-            ${variant === 'outlined' ? 'border border-gray-200 dark:border-gray-700' : ''}
+            ${variant === 'outlined' ? 'border border-gray-200' : ''}
             ${item.disabled ? 'opacity-50 cursor-not-allowed' : ''}
             mb-2
             rounded-lg
             shadow-sm
             bg-white
-            dark:bg-gray-800
             [&_.MuiExpansionPanelSummary-root]:min-h-[56px]
             [&_.MuiExpansionPanelSummary-root]:px-4
             [&_.MuiExpansionPanelSummary-root]:py-2
@@ -99,14 +94,13 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = ({
             [&_.MuiExpansionPanelDetails-root]:px-4
             [&_.MuiExpansionPanelDetails-root]:py-3
             [&_.MuiExpansionPanelDetails-root]:bg-gray-50
-            [&_.MuiExpansionPanelDetails-root]:dark:bg-gray-700
             [&_.MuiExpansionPanelDetails-root]:rounded-b-lg
           `}
                 >
                     <MuiExpansionPanelSummary
                         expandIcon={<ExpandMoreIcon className={getColorClass()} />}
                         className={`
-              ${expanded.includes(item.id) ? 'bg-gray-50 dark:bg-gray-700' : ''}
+              ${expanded.includes(item.id) ? 'bg-gray-50 ' : ''}
             `}
                     >
                         <div className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -121,21 +115,19 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = ({
                                     className={`
                     font-medium
                     text-gray-900
-                    dark:text-gray-100
                   `}
                                 >
-                                    {t(item.title)}
+                                    {item.title}
                                 </Typography>
                                 {item.description && (
                                     <Typography
                                         variant="body2"
                                         className={`
                       text-gray-500
-                      dark:text-gray-400
                       mt-1
                     `}
                                     >
-                                        {t(item.description)}
+                                        {item.description}
                                     </Typography>
                                 )}
                             </div>

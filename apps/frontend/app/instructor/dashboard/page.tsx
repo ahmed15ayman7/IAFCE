@@ -88,12 +88,12 @@ export default function InstructorDashboard() {
                     <div className="flex items-center justify-between">
                         <div>
                             <h3 className="font-medium">{course.title}</h3>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                            <p className="text-sm text-gray-500 ">
                                 عدد الطلاب: {course.students}
                             </p>
                         </div>
                         <div className="w-24">
-                            <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full">
+                            <div className="h-2 bg-gray-200  rounded-full">
                                 <div
                                     className="h-2 bg-primary-main rounded-full"
                                     style={{ width: `${course.completionRate}%` }}
@@ -112,12 +112,12 @@ export default function InstructorDashboard() {
                     <div className="flex items-center justify-between">
                         <div>
                             <h3 className="font-medium">{course.title}</h3>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                                <p className="text-sm text-gray-500 ">
                                 عدد الطلاب: {course.students}
                             </p>
                         </div>
                         <div className="w-24">
-                            <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full">
+                            <div className="h-2 bg-gray-200  rounded-full">
                                 <div
                                     className="h-2 bg-primary-main rounded-full"
                                     style={{ width: `${course.completionRate}%` }}
@@ -136,7 +136,7 @@ export default function InstructorDashboard() {
                     <div className="flex items-center justify-between">
                         <div>
                             <h3 className="font-medium">{course.title}</h3>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                            <p className="text-sm text-gray-500 ">
                                 عدد الطلاب: {course.students}
                             </p>
                         </div>
@@ -145,19 +145,19 @@ export default function InstructorDashboard() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                <div className="bg-white  rounded-lg shadow p-6">
                     <h2 className="text-xl font-semibold mb-4">الكورسات النشطة</h2>
                     <div className="space-y-4">
                         {activeCourses.map((course) => (
                             <div key={course.id} className="flex items-center justify-between">
                                 <div>
                                     <h3 className="font-medium">{course.title}</h3>
-                                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                                    <p className="text-sm text-gray-500 ">
                                         عدد الطلاب: {course.students}
                                     </p>
                                 </div>
                                 <div className="w-24">
-                                    <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full">
+                                    <div className="h-2 bg-gray-200  rounded-full">
                                         <div
                                             className="h-2 bg-primary-main rounded-full"
                                             style={{ width: `${course.completionRate}%` }}
@@ -170,7 +170,7 @@ export default function InstructorDashboard() {
                     </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                <div className="bg-white  rounded-lg shadow p-6">
                     <h2 className="text-xl font-semibold mb-4">{('آخر نشاطات الطلاب')}</h2>
                     <DataGrid
                         columns={columns}

@@ -76,7 +76,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
         ${className}
         rounded-lg
         bg-gray-50
-        dark:bg-gray-800
+
       `}
         >
             {image && (
@@ -117,7 +117,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
             {description && (
                 <Typography
                     variant="body1"
-                    className="mb-4 text-gray-600 dark:text-gray-400"
+                    className="mb-4 text-gray-600 "
                 >
                     {description}
                 </Typography>

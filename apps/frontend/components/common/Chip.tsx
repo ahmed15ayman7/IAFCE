@@ -2,7 +2,7 @@ import React from 'react';
 import {
     Chip as MuiChip,
     ChipProps as MuiChipProps,
-    useTheme,
+    
 } from '@mui/material';
 
 interface ChipProps extends Omit<MuiChipProps, 'color'> {
@@ -25,7 +25,6 @@ const Chip: React.FC<ChipProps> = ({
     className = '',
     ...props
 }) => {
-    const theme = useTheme();
 
     const getColorClass = () => {
         switch (color) {
@@ -75,7 +74,6 @@ const Chip: React.FC<ChipProps> = ({
         focus:outline-none
         focus:ring-2
         focus:ring-offset-2
-        dark:focus:ring-offset-gray-800
         ${variant === 'outlined' ? 'bg-transparent' : ''}
       `}
             {...props}

@@ -78,21 +78,21 @@ export default function InstructorCourses() {
                         >
                             <div className="mt-4 space-y-2">
                                 <div className="flex justify-between items-center">
-                                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                                    <span className="text-sm text-gray-600 ">
                                         {('التقدم')}
                                     </span>
                                     <span className="font-medium">{course.progress}%</span>
                                 </div>
-                                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div className="w-full bg-gray-200  rounded-full h-2">
                                     <div
                                         className="bg-primary-main h-2 rounded-full"
                                         style={{ width: `${course.progress}%` }}
                                     />
                                 </div>
-                                <div className="text-sm text-gray-600 dark:text-gray-400">
+                                    <div className="text-sm text-gray-600 ">
                                     {('آخر نشاط')}: {course.lastActivity}
                                 </div>
-                                <div className="text-sm text-gray-600 dark:text-gray-400">
+                                <div className="text-sm text-gray-600 ">
                                     {('الدرس التالي')}: {course.nextLesson}
                                 </div>
                             </div>

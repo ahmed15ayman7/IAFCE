@@ -9,9 +9,7 @@ import {
     TablePagination as MuiTablePagination,
     TableSortLabel as MuiTableSortLabel,
     Paper,
-    useTheme,
 } from '@mui/material';
-import { useTranslation } from 'next-i18next';
 
 interface Column {
     id: string;
@@ -49,8 +47,6 @@ const Table: React.FC<TableProps> = ({
     onSort,
     className = '',
 }) => {
-    const theme = useTheme();
-    const { t } = useTranslation();
 
     const handleChangePage = (_: unknown, newPage: number) => {
         onPageChange?.(newPage);
@@ -76,16 +72,11 @@ const Table: React.FC<TableProps> = ({
             [&_.MuiTableCell-root]:text-sm
             [&_.MuiTableCell-head]:font-medium
             [&_.MuiTableCell-head]:text-gray-900
-            [&_.MuiTableCell-head]:dark:text-gray-100
             [&_.MuiTableCell-head]:bg-gray-50
-            [&_.MuiTableCell-head]:dark:bg-gray-700
             [&_.MuiTableCell-body]:text-gray-600
-            [&_.MuiTableCell-body]:dark:text-gray-300
             [&_.MuiTableRow-root]:border-b
             [&_.MuiTableRow-root]:border-gray-200
-            [&_.MuiTableRow-root]:dark:border-gray-700
             [&_.MuiTableRow-root:hover]:bg-gray-50
-            [&_.MuiTableRow-root:hover]:dark:bg-gray-700
           `}
                 >
                     <MuiTableHead>
@@ -104,10 +95,10 @@ const Table: React.FC<TableProps> = ({
                                             onClick={() => handleSort(column.id)}
                                             className="whitespace-nowrap"
                                         >
-                                            {t(column.label)}
+                                                {column.label}
                                         </MuiTableSortLabel>
                                     ) : (
-                                        t(column.label)
+                                        column.label
                                     )}
                                 </MuiTableCell>
                             ))}
@@ -148,9 +139,7 @@ const Table: React.FC<TableProps> = ({
           [&_.MuiTablePagination-select]:rounded-md
           [&_.MuiTablePagination-select]:border
           [&_.MuiTablePagination-select]:border-gray-300
-          [&_.MuiTablePagination-select]:dark:border-gray-600
           [&_.MuiTablePagination-select]:bg-white
-          [&_.MuiTablePagination-select]:dark:bg-gray-800
         `}
             />
         </Paper>

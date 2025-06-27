@@ -87,7 +87,7 @@ const Card: React.FC<CardProps> = ({
                                 )}
                             </Box>
                             {description && (
-                                <Typography variant="body2" className="text-gray-600 dark:text-gray-300 mb-4">
+                                <Typography variant="body2" className="text-gray-600  mb-4">
                                     {description}
                                 </Typography>
                             )}
@@ -106,7 +106,7 @@ const Card: React.FC<CardProps> = ({
                                             </Typography>
                                         </Box>
                                     )}
-                                    <Typography variant="body2" className="text-gray-600 dark:text-gray-300">
+                                    <Typography variant="body2" className="text-gray-600 ">
                                         {author.name}
                                     </Typography>
                                 </Box>
@@ -131,7 +131,7 @@ const Card: React.FC<CardProps> = ({
                                 {title}
                             </Typography>
                             {description && (
-                                <Typography variant="body2" className="text-gray-600 dark:text-gray-300 mb-4">
+                                <Typography variant="body2" className="text-gray-600  mb-4">
                                     {description}
                                 </Typography>
                             )}
@@ -161,7 +161,7 @@ const Card: React.FC<CardProps> = ({
                                                 </Typography>
                                             </Box>
                                         )}
-                                        <Typography variant="body2" className="text-gray-600 dark:text-gray-300">
+                                        <Typography variant="body2" className="text-gray-600 ">
                                             {author.name}
                                         </Typography>
                                     </Box>
@@ -192,7 +192,7 @@ const Card: React.FC<CardProps> = ({
                                 {title}
                             </Typography>
                             {description && (
-                                <Typography variant="body2" className="text-gray-600 dark:text-gray-300 mb-4">
+                                <Typography variant="body2" className="text-gray-600  mb-4">
                                     {description}
                                 </Typography>
                             )}
@@ -223,7 +223,7 @@ const Card: React.FC<CardProps> = ({
                             {title}
                         </Typography>
                         {description && (
-                            <Typography variant="body2" className="text-gray-600 dark:text-gray-300">
+                            <Typography variant="body2" className="text-gray-600 ">
                                 {description}
                             </Typography>
                         )}
@@ -235,7 +235,7 @@ const Card: React.FC<CardProps> = ({
 
     return (
         <MuiCard
-            className={`bg-white dark:bg-primary-dark text-primary-dark dark:text-white rounded-lg shadow-card hover:shadow-card-hover transition-shadow duration-300 ${className}`}
+            className={`bg-white  text-primary-dark  rounded-lg shadow-card hover:shadow-card-hover transition-shadow duration-300 ${className}`}
             onClick={onClick}
         >
             {renderCardContent()}

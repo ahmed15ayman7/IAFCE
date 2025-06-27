@@ -77,7 +77,6 @@ const Progress: React.FC<ProgressProps> = ({
           ${getSizeClass()}
           rounded-full
           bg-gray-200
-          dark:bg-gray-700
         `}
                 />
                 {showLabel && <span className="text-sm text-gray-600">{label}</span>}

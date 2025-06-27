@@ -68,13 +68,11 @@ const Stepper: React.FC<StepperProps> = ({
         ${getColorClass()}
         [&_.MuiStepConnector-line]:border-current
         [&_.MuiStepLabel-label]:text-gray-600
-        [&_.MuiStepLabel-label]:dark:text-gray-300
         [&_.MuiStepLabel-label.Mui-active]:text-current
         [&_.MuiStepLabel-label.Mui-completed]:text-current
         [&_.MuiStepLabel-label]:text-sm
         [&_.MuiStepLabel-label]:font-medium
         [&_.MuiStepLabel-optional]:text-gray-400
-        [&_.MuiStepLabel-optional]:dark:text-gray-500
         [&_.MuiStepLabel-optional]:text-xs
         [&_.MuiStepContent-root]:border-l-2
         [&_.MuiStepContent-root]:border-current
@@ -98,7 +96,7 @@ const Stepper: React.FC<StepperProps> = ({
                     >
                         {step.label}
                         {step.description && (
-                            <Box className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                <Box className="text-xs text-gray-500  mt-1">
                                 {step.description}
                             </Box>
                         )}

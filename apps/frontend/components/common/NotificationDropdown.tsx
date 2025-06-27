@@ -74,13 +74,13 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
     const getTypeColor = (type: Notification['type']) => {
         switch (type) {
             case 'success':
-                return 'bg-success-light dark:bg-success-dark';
+                return 'bg-success-light ';
             case 'error':
-                return 'bg-error-light dark:bg-error-dark';
+                return 'bg-error-light ';
             case 'warning':
-                return 'bg-warning-light dark:bg-warning-dark';
+                return 'bg-warning-light ';
             case 'info':
-                return 'bg-info-light dark:bg-info-dark';
+                return 'bg-info-light ';
             default:
                 return '';
         }
@@ -96,7 +96,7 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
                 <Badge
                     badgeContent={unreadCount}
                     color="error"
-                    className="text-gray-600 dark:text-gray-300"
+                    className="text-gray-600 "
                 >
                     <NotificationsIcon />
                 </Badge>
@@ -114,7 +114,6 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
             rounded-lg
             shadow-lg
             bg-white
-            dark:bg-gray-800
           `,
                 }}
             >
@@ -140,7 +139,7 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
                     {notifications.length === 0 ? (
                         <Typography
                             variant="body2"
-                            className="text-gray-500 dark:text-gray-400 text-center py-4"
+                            className="text-gray-500  text-center py-4"
                         >
                             لا يوجد إشعارات
                         </Typography>
@@ -159,7 +158,7 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
                                         handleClose();
                                     }}
                                     className={`
-                    ${!notification.read ? 'bg-gray-50 dark:bg-gray-700' : ''}
+                    ${!notification.read ? 'bg-gray-50 ' : ''}
                     ${getTypeColor(notification.type)}
                     p-3
                     rounded-lg
@@ -179,13 +178,13 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
                                             </Typography>
                                             <Typography
                                                 variant="body2"
-                                                className="text-gray-600 dark:text-gray-400 mb-1"
+                                                className="text-gray-600  mb-1"
                                             >
                                                 {notification.message}
                                             </Typography>
                                             <Typography
                                                 variant="caption"
-                                                className="text-gray-500 dark:text-gray-500"
+                                                className="text-gray-500 "
                                             >
                                                 {notification.timestamp}
                                             </Typography>
@@ -205,7 +204,7 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
                                     onClearAll();
                                     handleClose();
                                 }}
-                                className="text-gray-600 dark:text-gray-400"
+                                    className="text-gray-600 "
                             >
                                 مسح الكل
                             </Button>

@@ -73,7 +73,6 @@ const Tabs: React.FC<TabsProps> = ({
           ${getColorClass()}
           [&_.MuiTabs-indicator]:bg-current
           [&_.MuiTab-root]:text-gray-600
-          [&_.MuiTab-root]:dark:text-gray-300
           [&_.MuiTab-root.Mui-selected]:text-current
           [&_.MuiTab-root.Mui-selected]:font-medium
           [&_.MuiTab-root]:min-h-[48px]

@@ -4,7 +4,6 @@ import {
     ChipProps as MuiChipProps,
     useTheme,
 } from '@mui/material';
-import { useTranslation } from 'next-i18next';
 
 interface ChipProps extends Omit<MuiChipProps, 'color'> {
     label: string;
@@ -27,7 +26,6 @@ const Chip: React.FC<ChipProps> = ({
     ...props
 }) => {
     const theme = useTheme();
-    const { t } = useTranslation();
 
     const getColorClass = () => {
         switch (color) {
@@ -62,7 +60,7 @@ const Chip: React.FC<ChipProps> = ({
 
     return (
         <MuiChip
-            label={t(label)}
+            label={label}
             icon={icon}
             onDelete={onDelete}
             className={`
@@ -77,7 +75,6 @@ const Chip: React.FC<ChipProps> = ({
         focus:outline-none
         focus:ring-2
         focus:ring-offset-2
-        dark:focus:ring-offset-gray-800
         ${variant === 'outlined' ? 'bg-transparent' : ''}
       `}
             {...props}

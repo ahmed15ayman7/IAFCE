@@ -17,7 +17,6 @@ import {
     Check as CheckIcon,
     CheckCircle as CheckCircleIcon,
 } from '@mui/icons-material';
-import { useTranslation } from 'next-i18next';
 
 interface Message {
     id: string;
@@ -55,7 +54,6 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
     className = '',
 }) => {
     const theme = useTheme();
-    const { t } = useTranslation();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const unreadCount = messages.filter((m) => !m.read).length;
 
@@ -82,7 +80,7 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
                 <Badge
                     badgeContent={unreadCount}
                     color="error"
-                    className="text-gray-600 dark:text-gray-300"
+                    className="text-gray-600 "
                 >
                     <ChatIcon />
                 </Badge>
@@ -100,14 +98,13 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
             rounded-lg
             shadow-lg
             bg-white
-            dark:bg-gray-800
           `,
                 }}
             >
                 <Box className="p-4">
                     <Box className="flex items-center justify-between mb-4">
                         <Typography variant="h6" className="font-medium">
-                            {t('messages.title')}
+                            {'الرسائل'}
                         </Typography>
                         {unreadCount > 0 && onMarkAllAsRead && (
                             <Button
@@ -118,7 +115,7 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
                                 }}
                                 className="text-primary-main"
                             >
-                                {t('messages.markAllAsRead')}
+                                {'تحديث الكل'}
                             </Button>
                         )}
                     </Box>
@@ -126,9 +123,9 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
                     {messages.length === 0 ? (
                         <Typography
                             variant="body2"
-                            className="text-gray-500 dark:text-gray-400 text-center py-4"
+                            className="text-gray-500  text-center py-4"
                         >
-                            {t('messages.empty')}
+                            {'لا يوجد رسائل'}
                         </Typography>
                     ) : (
                         <Box className="space-y-2">
@@ -142,7 +139,7 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
                                         handleClose();
                                     }}
                                     className={`
-                    ${!message.read ? 'bg-gray-50 dark:bg-gray-700' : ''}
+                    ${!message.read ? 'bg-gray-50 ' : ''}
                     p-3
                     rounded-lg
                     mb-2
@@ -167,7 +164,7 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
                                                 <Box className="flex items-center space-x-1 rtl:space-x-reverse">
                                                     <Typography
                                                         variant="caption"
-                                                        className="text-gray-500 dark:text-gray-500"
+                                                        className="text-gray-500 "
                                                     >
                                                         {formatTime(message.timestamp)}
                                                     </Typography>
@@ -186,7 +183,7 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
                                             </Box>
                                             <Typography
                                                 variant="body2"
-                                                className="text-gray-600 dark:text-gray-400 mb-1 line-clamp-2"
+                                                className="text-gray-600  mb-1 line-clamp-2"
                                             >
                                                 {message.content}
                                             </Typography>
@@ -198,9 +195,9 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
                                                     />
                                                     <Typography
                                                         variant="caption"
-                                                        className="text-gray-500 dark:text-gray-500"
+                                                        className="text-gray-500 "
                                                     >
-                                                        {message.attachment.name || t('messages.attachment')}
+                                                        {message.attachment.name || 'مرفق'}
                                                     </Typography>
                                                 </Box>
                                             )}
@@ -222,9 +219,9 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
                                             onClearAll();
                                             handleClose();
                                         }}
-                                        className="text-gray-600 dark:text-gray-400"
+                                        className="text-gray-600 "
                                     >
-                                        {t('messages.clearAll')}
+                                        {'مسح الكل'}
                                     </Button>
                                 )}
                                 {onViewAll && (
@@ -236,7 +233,7 @@ const MessageDropdown: React.FC<MessageDropdownProps> = ({
                                         }}
                                         className="text-primary-main"
                                     >
-                                        {t('messages.viewAll')}
+                                        {'عرض الكل'}
                                     </Button>
                                 )}
                             </Box>

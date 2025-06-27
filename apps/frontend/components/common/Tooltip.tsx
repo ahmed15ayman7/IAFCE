@@ -2,7 +2,7 @@ import React from 'react';
 import {
     Tooltip as MuiTooltip,
     TooltipProps as MuiTooltipProps,
-    useTheme,
+    
 } from '@mui/material';
 
 interface TooltipProps extends Omit<MuiTooltipProps, 'title'> {
@@ -36,8 +36,6 @@ const Tooltip: React.FC<TooltipProps> = ({
         [&_.MuiTooltip-tooltip]:rounded-lg
         [&_.MuiTooltip-tooltip]:shadow-lg
         [&_.MuiTooltip-arrow]:text-gray-800
-        dark:[&_.MuiTooltip-tooltip]:bg-gray-700
-        dark:[&_.MuiTooltip-arrow]:text-gray-700
       `}
             {...props}
         >

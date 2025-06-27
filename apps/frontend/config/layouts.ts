@@ -89,21 +89,21 @@ export const layoutsConfig: UserLayoutConfig = {
                 href: '/instructor/students',
                 icon: 'users',
             },
-            {
-                label: 'تجهيز كورس',
-                href: '/instructor/course-builder',
-                icon: 'plus-circle',
-            },
+            // {
+            //     label: 'تجهيز كورس',
+            //     href: '/instructor/course-builder',
+            //     icon: 'plus-circle',
+            // },
             {
                 label: 'تتبع الحضور',
                 href: '/instructor/attendance',
                 icon: 'clipboard-check',
             },
-            // {
-            //     label: 'المتابعة اليومية',
-            //     href: '/instructor/daily-tracking',
-            //     icon: 'clipboard-check',
-            // },
+            {
+                label: 'المتابعة اليومية',
+                href: '/instructor/daily-tracking',
+                icon: 'clipboard-check',
+            },
             {
                 label: 'الاختبارات',
                 href: '/instructor/quizzes',

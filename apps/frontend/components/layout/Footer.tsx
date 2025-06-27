@@ -118,7 +118,7 @@ const Footer: React.FC<{ links: { quickLinks: { label: string; links: Array<{ la
                 </Grid>
 
                 {/* حقوق النشر */}
-                <Box className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+                <Box className="mt-12 pt-8 border-t border-gray-200 ">
                     <Typography variant="body2" className="text-center">
                         © {currentYear} {'copyright'}
                     </Typography>

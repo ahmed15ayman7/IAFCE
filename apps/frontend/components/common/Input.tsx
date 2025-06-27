@@ -107,8 +107,8 @@ const Input: React.FC<InputProps> = ({
     };
 
     const getBackgroundColor = () => {
-        if (disabled) return 'bg-gray-100 dark:bg-gray-800';
-        return 'bg-white dark:bg-gray-900';
+        if (disabled) return 'bg-gray-100 ';
+        return 'bg-white ';
     };
 
     return (

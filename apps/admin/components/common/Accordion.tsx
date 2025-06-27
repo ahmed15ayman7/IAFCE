@@ -9,7 +9,6 @@ import {
 import {
     ExpandMore as ExpandMoreIcon,
 } from '@mui/icons-material';
-import { useTranslation } from 'next-i18next';
 
 interface AccordionItem {
     id: string;
@@ -37,7 +36,6 @@ const Accordion: React.FC<AccordionProps> = ({
     className = '',
 }) => {
     const theme = useTheme();
-    const { t } = useTranslation();
     const [uncontrolledExpanded, setUncontrolledExpanded] = useState<string[]>([]);
     const expanded = controlledExpanded ?? uncontrolledExpanded;
 
@@ -81,13 +79,12 @@ const Accordion: React.FC<AccordionProps> = ({
                     onChange={() => handleChange(item.id)}
                     disabled={item.disabled}
                     className={`
-            ${variant === 'outlined' ? 'border border-gray-200 dark:border-gray-700' : ''}
+            ${variant === 'outlined' ? 'border border-gray-200' : ''}
             ${item.disabled ? 'opacity-50 cursor-not-allowed' : ''}
             mb-2
             rounded-lg
             shadow-sm
             bg-white
-            dark:bg-gray-800
             [&_.MuiAccordionSummary-root]:min-h-[48px]
             [&_.MuiAccordionSummary-root]:px-4
             [&_.MuiAccordionSummary-root]:py-2
@@ -95,14 +92,13 @@ const Accordion: React.FC<AccordionProps> = ({
             [&_.MuiAccordionDetails-root]:px-4
             [&_.MuiAccordionDetails-root]:py-3
             [&_.MuiAccordionDetails-root]:bg-gray-50
-            [&_.MuiAccordionDetails-root]:dark:bg-gray-700
             [&_.MuiAccordionDetails-root]:rounded-b-lg
           `}
                 >
                     <MuiAccordionSummary
                         expandIcon={<ExpandMoreIcon className={getColorClass()} />}
                         className={`
-              ${expanded.includes(item.id) ? 'bg-gray-50 dark:bg-gray-700' : ''}
+              ${expanded.includes(item.id) ? 'bg-gray-50 ' : ''}
             `}
                     >
                         <div className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -116,10 +112,9 @@ const Accordion: React.FC<AccordionProps> = ({
                                 className={`
                   font-medium
                   text-gray-900
-                  dark:text-gray-100
                 `}
                             >
-                                {t(item.title)}
+                                {item.title}
                             </Typography>
                         </div>
                     </MuiAccordionSummary>

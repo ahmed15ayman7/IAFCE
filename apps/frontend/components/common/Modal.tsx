@@ -98,10 +98,10 @@ const Modal: React.FC<ModalProps> = ({
             disableEscapeKeyDown={disableEscapeKeyDown}
             className={`rtl:font-arabic ${className}`}
             PaperProps={{
-                className: 'bg-white dark:bg-primary-dark text-primary-dark dark:text-white rounded-lg',
+                className: 'bg-white  text-primary-dark  rounded-lg',
             }}
         >
-            <DialogTitle className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
+            <DialogTitle className="flex justify-between items-center p-4 border-b border-gray-200 ">
                 <Box className="flex items-center space-x-2 rtl:space-x-reverse">
                     {getIcon()}
                     <Typography variant="h6" className="font-bold">
@@ -114,7 +114,7 @@ const Modal: React.FC<ModalProps> = ({
                         color="inherit"
                         onClick={onClose}
                         aria-label="close"
-                        className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                        className="text-gray-500 hover:text-gray-700 "
                     >
                         <CloseIcon />
                     </IconButton>
@@ -126,7 +126,7 @@ const Modal: React.FC<ModalProps> = ({
             </DialogContent>
 
             {actions.length > 0 && (
-                <DialogActions className="p-4 border-t border-gray-200 dark:border-gray-700">
+                    <DialogActions className="p-4 border-t border-gray-200 ">
                     {actions.map((action, index) => (
                         <Button
                             key={index}

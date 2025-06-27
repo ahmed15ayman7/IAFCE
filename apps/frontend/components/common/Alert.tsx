@@ -61,45 +61,45 @@ const Alert: React.FC<AlertProps> = ({
     const getBackgroundColor = () => {
         switch (severity) {
             case 'success':
-                return 'bg-success-light dark:bg-success-dark';
+                return 'bg-success-light ';
             case 'warning':
-                return 'bg-warning-light dark:bg-warning-dark';
+                return 'bg-warning-light ';
             case 'error':
-                return 'bg-error-light dark:bg-error-dark';
+                return 'bg-error-light ';
             case 'info':
-                return 'bg-info-light dark:bg-info-dark';
+                return 'bg-info-light ';
             default:
-                return 'bg-gray-100 dark:bg-gray-800';
+                return 'bg-gray-100 ';
         }
     };
 
     const getTextColor = () => {
         switch (severity) {
             case 'success':
-                return 'text-success-dark dark:text-success-light';
+                return 'text-success-dark ';
             case 'warning':
-                return 'text-warning-dark dark:text-warning-light';
+                return 'text-warning-dark ';
             case 'error':
-                return 'text-error-dark dark:text-error-light';
+                return 'text-error-dark ';
             case 'info':
-                return 'text-info-dark dark:text-info-light';
+                return 'text-info-dark ';
             default:
-                return 'text-gray-800 dark:text-gray-100';
+                return 'text-gray-800 ';
         }
     };
 
     const getBorderColor = () => {
         switch (severity) {
             case 'success':
-                return 'border-success-main dark:border-success-light';
+                return 'border-success-main ';
             case 'warning':
-                return 'border-warning-main dark:border-warning-light';
+                return 'border-warning-main ';
             case 'error':
-                return 'border-error-main dark:border-error-light';
+                return 'border-error-main ';
             case 'info':
-                return 'border-info-main dark:border-info-light';
+                return 'border-info-main ';
             default:
-                return 'border-gray-300 dark:border-gray-600';
+                return 'border-gray-300 ';
         }
     };
 

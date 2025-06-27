@@ -1,8 +1,7 @@
 import React from 'react';
 import {
     Skeleton as MuiSkeleton,
-    Box,
-    useTheme,
+    Box,    
 } from '@mui/material';
 
 interface SkeletonProps {
@@ -28,24 +27,23 @@ const Skeleton: React.FC<SkeletonProps> = ({
     direction = 'column',
     color = 'primary',
 }) => {
-    const theme = useTheme();
 
     const getColorClasses = () => {
         switch (color) {
             case 'primary':
-                return 'bg-primary-light dark:bg-primary-dark';
+                return 'bg-primary-light ';
             case 'secondary':
-                return 'bg-secondary-light dark:bg-secondary-dark';
+                return 'bg-secondary-light ';
             case 'success':
-                return 'bg-success-light dark:bg-success-dark';
+                return 'bg-success-light ';
             case 'error':
-                return 'bg-error-light dark:bg-error-dark';
+                return 'bg-error-light ';
             case 'warning':
-                return 'bg-warning-light dark:bg-warning-dark';
+                return 'bg-warning-light ';
             case 'info':
-                return 'bg-info-light dark:bg-info-dark';
+                return 'bg-info-light ';
             default:
-                return 'bg-gray-200 dark:bg-gray-700';
+                return 'bg-gray-200 ';
         }
     };
 

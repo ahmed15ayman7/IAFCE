@@ -306,21 +306,21 @@ let getCoursesData = async (id: string) => {
                         >
                             <div className="mt-4 space-y-2">
                                 <div className="flex justify-between items-center">
-                                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                                    <span className="text-sm text-gray-600 ">
                                         التقدم
                                     </span>
                                     <span className="font-medium">{progress}%</span>
                                 </div>
-                                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div className="w-full bg-gray-200  rounded-full h-2">
                                     <div
                                         className="bg-primary-main h-2 rounded-full"
                                         style={{ width: `${progress}%` }}
                                     />
                                 </div>
-                                {/* <div className="text-sm text-gray-600 dark:text-gray-400">
+                                {/* <div className="text-sm text-gray-600 ">
                                     آخر دخول: {course.lastAccessed}
                                 </div> */}
-                                <div className="text-sm text-gray-600 dark:text-gray-400">
+                                <div className="text-sm text-gray-600 ">
                                     الدرس التالي: {nextLesson}
                                 </div>
                             </div>

@@ -4,9 +4,7 @@ import {
     Link,
     Typography,
     Box,
-    useTheme,
 } from '@mui/material';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 
 interface BreadcrumbItem {
@@ -32,8 +30,6 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
     color = 'primary',
     size = 'medium',
 }) => {
-    const theme = useTheme();
-    const { t } = useTranslation();
     const router = useRouter();
 
     const getColorClasses = () => {
@@ -83,7 +79,6 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
         px-4
         rounded-lg
         bg-gray-50
-        dark:bg-gray-800
       `}
             aria-label="breadcrumb"
         >

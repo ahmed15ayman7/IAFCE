@@ -81,13 +81,12 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = ({
                     onChange={() => handleChange(item.id)}
                     disabled={item.disabled}
                     className={`
-            ${variant === 'outlined' ? 'border border-gray-200 dark:border-gray-700' : ''}
+            ${variant === 'outlined' ? 'border border-gray-200 ' : ''}
             ${item.disabled ? 'opacity-50 cursor-not-allowed' : ''}
             mb-2
             rounded-lg
             shadow-sm
             bg-white
-            dark:bg-gray-800
             [&_.MuiExpansionPanelSummary-root]:min-h-[56px]
             [&_.MuiExpansionPanelSummary-root]:px-4
             [&_.MuiExpansionPanelSummary-root]:py-2
@@ -95,14 +94,13 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = ({
             [&_.MuiExpansionPanelDetails-root]:px-4
             [&_.MuiExpansionPanelDetails-root]:py-3
             [&_.MuiExpansionPanelDetails-root]:bg-gray-50
-            [&_.MuiExpansionPanelDetails-root]:dark:bg-gray-700
             [&_.MuiExpansionPanelDetails-root]:rounded-b-lg
           `}
                 >
                     <MuiAccordionSummary
                         expandIcon={<ExpandMoreIcon className={getColorClass()} />}
                         className={`
-              ${expanded.includes(item.id) ? 'bg-gray-50 dark:bg-gray-700' : ''}
+              ${expanded.includes(item.id) ? 'bg-gray-50 ' : ''}
             `}
                     >
                         <div className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -117,7 +115,6 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = ({
                                     className={`
                     font-medium
                     text-gray-900
-                    dark:text-gray-100
                   `}
                                 >
                                     {item.title}
@@ -127,7 +124,6 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = ({
                                         variant="body2"
                                         className={`
                       text-gray-500
-                      dark:text-gray-400
                       mt-1
                     `}
                                     >

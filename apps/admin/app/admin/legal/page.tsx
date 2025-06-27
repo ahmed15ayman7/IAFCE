@@ -262,7 +262,7 @@ export default function LegalPage() {
 
     const { data: paymentsData } = useQuery({
         queryKey: ['legal-payments'],
-        queryFn: () => paymentApi.getAll('academy-id'),
+        queryFn: () => paymentApi.getAll(5, 10, 1, 10),
     });
 
     const addMutation = useMutation({

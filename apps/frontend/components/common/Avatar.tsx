@@ -2,8 +2,7 @@ import React from 'react';
 import {
     Avatar as MuiAvatar,
     Badge,
-    Box,
-    useTheme,
+    Box,    
     Tooltip,
 } from '@mui/material';
 
@@ -38,7 +37,6 @@ const Avatar: React.FC<AvatarProps> = ({
     badgeColor = 'primary',
     badgePosition = 'bottom-right',
 }) => {
-    const theme = useTheme();
 
     const getSizeClasses = () => {
         switch (size) {
@@ -130,8 +128,6 @@ const Avatar: React.FC<AvatarProps> = ({
           hover:opacity-80
           bg-primary-light
           text-primary-dark
-          dark:bg-primary-dark
-          dark:text-primary-light
         `}
             >
                 {!src && getInitials()}
@@ -148,7 +144,6 @@ const Avatar: React.FC<AvatarProps> = ({
             rounded-full
             border-2
             border-white
-            dark:border-gray-900
           `}
                 />
             )}
