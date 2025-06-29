@@ -30,7 +30,7 @@ export default function SignUp() {
         setLoading(true);
 
         try {
-            await authApi.register({
+          const response = await authApi.register({
                 phone: data.identifier,
                 email: data.identifier,
                 password: data.password,
@@ -39,9 +39,13 @@ export default function SignUp() {
                 role: "STUDENT",
                 subRole: ""
             });
-            router.push('/auth/signin?registered=true');
-        } catch (error) {
-            setError('حدث خطأ أثناء التسجيل');
+            if(response.status>=200&&response.status<300){
+                router.push('/auth/signin?registered=true');
+            }else{
+                setError(response.data.message);
+            }
+        } catch (error:any) {
+            setError(error.response.data.message||'حدث خطأ أثناء التسجيل');
         } finally {
             setLoading(false);
         }
